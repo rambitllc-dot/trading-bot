@@ -376,8 +376,12 @@ def run_betting(state):
     b.setdefault("live_from", NOW.strftime("%Y-%m-%dT%H:%M:%SZ"))
     sigs = b.setdefault("signals", {})
     for k in BET_SIGNALS:
-        sigs.setdefault(k, {"bank": START_BUDGET, "peak": START_BUDGET, "mdd": 0.0,
-                            "n": 0, "w": 0, "live_n": 0, "live_w": 0})
+        s = sigs.setdefault(k, {"bank": START_BUDGET, "peak": START_BUDGET, "mdd": 0.0,
+                                "n": 0, "w": 0, "live_n": 0, "live_w": 0})
+        # the live test gets its own fresh $100, separate from the 30-day backtest
+        s.setdefault("live_bank", START_BUDGET)
+        s.setdefault("live_peak", START_BUDGET)
+        s.setdefault("live_mdd", 0.0)
     last = b.get("last_t")
     since = (NOW - dt.timedelta(days=31 if not last else 2)).strftime("%Y-%m-%dT%H:%M:%SZ")
     c = candles_15m(since)
@@ -393,16 +397,16 @@ def run_betting(state):
         live = t >= b["live_from"]
         for k, s in sigs.items():
             side = bet_signal(k, c, i)
-            if side == 0 or s["bank"] < 1:
+            bank, peak, mdd, n, w = (("live_bank", "live_peak", "live_mdd", "live_n", "live_w") if live
+                                     else ("bank", "peak", "mdd", "n", "w"))
+            if side == 0 or s[bank] < 1:
                 continue
-            stake = s["bank"] * BET_FRACTION
+            stake = s[bank] * BET_FRACTION
             won = (side > 0) == up and c[i]["c"] != c[i]["o"]
-            s["bank"] = round(s["bank"] + (stake * BET_PAYOUT if won else -stake), 4)
-            s["n"] += 1; s["w"] += won
-            if live:
-                s["live_n"] += 1; s["live_w"] += won
-            s["peak"] = max(s["peak"], s["bank"])
-            s["mdd"] = min(s["mdd"], s["bank"] / s["peak"] - 1)
+            s[bank] = round(s[bank] + (stake * BET_PAYOUT if won else -stake), 4)
+            s[n] += 1; s[w] += won
+            s[peak] = max(s[peak], s[bank])
+            s[mdd] = min(s[mdd], s[bank] / s[peak] - 1)
         b["last_t"] = t
         scored += 1
     return scored
@@ -415,15 +419,21 @@ def betting_report(state):
     lines = ["", "## 15-minute Bitcoin betting test (paper)", "",
              f"Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so "
              f"**{BREAK_EVEN:.1%} wins are needed just to break even**. Each signal started with $100 "
-             f"and bets 5% of what it has left. Includes 30 days of history before "
-             f"{b['live_from'][:10]}, then live candles.", "",
-             "| Signal | Bets | Win rate | $100 is now | Worst drop | Live bets | Live win rate |",
-             "|---|---:|---:|---:|---:|---:|---:|"]
-    rows = sorted(b["signals"].items(), key=lambda kv: -kv[1]["bank"])
-    for k, s in rows:
-        wr = f"{s['w'] / s['n']:.1%}" if s["n"] else "-"
-        lwr = f"{s['live_w'] / s['live_n']:.1%}" if s["live_n"] else "-"
-        lines.append(f"| {BET_SIGNALS[k]} | {s['n']} | {wr} | ${s['bank']:,.2f}{' (ran out)' if s['bank'] < 1 else ''} | {s['mdd']:.0%} | {s['live_n']} | {lwr} |")
+             f"and bets 5% of what it has left.", "",
+             f"### Live, since {b['live_from'][:10]} (fresh $100 each)", "",
+             "| Signal | Bets | Win rate | $100 is now | Worst drop |", "|---|---:|---:|---:|---:|"]
+    def table(prefix):
+        out = []
+        bank, n, w, mdd = (f"{prefix}bank", f"{prefix}n", f"{prefix}w", f"{prefix}mdd")
+        for k, s in sorted(b["signals"].items(), key=lambda kv: -kv[1].get(bank, 0)):
+            wr = f"{s[w] / s[n]:.1%}" if s[n] else "-"
+            out.append(f"| {BET_SIGNALS[k]} | {s[n]} | {wr} | ${s[bank]:,.2f}"
+                       f"{' (ran out)' if s[bank] < 1 else ''} | {s[mdd]:.0%} |")
+        return out
+    lines += table("live_")
+    lines += ["", "### Backtest: the 30 days before that", "",
+              "| Signal | Bets | Win rate | $100 became | Worst drop |", "|---|---:|---:|---:|---:|"]
+    lines += table("")
     lines += ["", "If a signal can't beat the coin flip by a clear margin over hundreds of bets, it has no real edge."]
     return lines
 
