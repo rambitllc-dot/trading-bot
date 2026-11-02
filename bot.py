@@ -1,5 +1,5 @@
 """
-Paper-trading bot for Alpaca: seven strategies side by side, each with its own $100.
+Paper-trading bot for Alpaca: many strategies side by side, each with its own $100.
 
   1. Bitcoin trend bot     hold BTC when its 5-day average is above its 20-day average
   2. Bitcoin buy & hold    buy BTC once and keep it
@@ -10,6 +10,11 @@ Paper-trading bot for Alpaca: seven strategies side by side, each with its own $
                            rose most over the past 12 months; cash if all of them fell
   7. RSI dip-buying        buy SPY after a sharp 2-day drop (RSI-2 below 10) while it is above its
                            200-day average; sell once it closes back above its 5-day average
+  8. Wide momentum         same as 6, picking from 10 ETFs: US large (SPY), tech (QQQ), small
+                           companies (IWM), international (VXUS), energy (XLE), healthcare (XLV),
+                           banks (XLF), real estate (VNQ), gold (GLD), bonds (BND)
+  9+ Stocks                Apple, Microsoft, Nvidia, Amazon, Tesla: each one twice, once
+                           buy & hold and once with the 200-day trend rule
 
 Bitcoin trades 24/7. Stocks and ETFs (SPY, QQQ, GLD, BND) only trade when the US market is open
 (weekdays 6:30am-1pm Pacific), so those strategies wait until then.
@@ -42,7 +47,22 @@ STRATEGIES = {
     "momentum":  {"name": "Momentum rotation (SPY/QQQ/GLD/BND)", "type": "momentum",
                   "symbols": ["SPY", "QQQ", "GLD", "BND"], "lookback": 252},
     "rsi_dip":   {"name": "RSI dip-buying (S&P 500)", "type": "rsi", "symbol": "SPY"},
+    "momentum_wide": {"name": "Wide momentum (10 ETFs)", "type": "momentum",
+                      "symbols": ["SPY", "QQQ", "IWM", "VXUS", "XLE", "XLV", "XLF", "VNQ", "GLD", "BND"],
+                      "lookback": 252},
 }
+
+# Hold vs trade pairs: each stock gets a buy & hold and a 200-day trend version.
+# Change this list to test other companies (use their ticker symbols).
+STOCKS = {"AAPL": "Apple", "MSFT": "Microsoft", "NVDA": "Nvidia", "AMZN": "Amazon", "TSLA": "Tesla"}
+for _sym, _name in STOCKS.items():
+    STRATEGIES[f"{_sym.lower()}_hold"] = {"name": f"{_name} buy & hold", "type": "hold", "symbol": _sym}
+    STRATEGIES[f"{_sym.lower()}_trend"] = {"name": f"{_name} trend (200 day)", "type": "trend",
+                                           "symbol": _sym, "fast": 1, "slow": 200}
+
+# rows for the "hold vs trade" table: (asset, hold key, trading key)
+PAIRS = [("Bitcoin", "btc_hold", "btc_trend"), ("S&P 500", "spy_hold", "spy_trend")] + \
+        [(n, f"{s.lower()}_hold", f"{s.lower()}_trend") for s, n in STOCKS.items()]
 
 KEY = os.environ["ALPACA_KEY"]
 SECRET = os.environ["ALPACA_SECRET"]
@@ -329,6 +349,12 @@ def write_reports(state, notes):
         p = v - START_BUDGET
         lines.append(f"| {i} | {name} | ${v:,.2f} | {'+' if p >= 0 else '-'}${abs(p):,.2f} ({p / START_BUDGET:+.1%}) | {t} |")
     total = sum(values.values())
+    lines += ["", "## Holding vs trading, same asset", "",
+              "| Asset | Buy & hold | With trading rule | Better so far |", "|---|---:|---:|---|"]
+    for asset, hk, tk in PAIRS:
+        h, tr = values[hk], values[tk]
+        better = "about even" if abs(h - tr) < 0.5 else ("holding" if h > tr else "trading")
+        lines.append(f"| {asset} | ${h:,.2f} | ${tr:,.2f} | {better} |")
     lines += ["", f"**All together:** ${total:,.2f} from ${START_BUDGET * len(STRATEGIES):,.0f} "
                   f"({total - START_BUDGET * len(STRATEGIES):+,.2f})", "", "## What each one is doing", ""]
     for name, _, _, holding, note in rows:
