@@ -1,0 +1,11 @@
+{
+  "cash": 100.0,
+  "btc": 0.0,
+  "last_check_utc": "2026-11-02 02:09",
+  "btc_price": 78371.85,
+  "avg_5_day": 78385.69,
+  "avg_20_day": 80823.58,
+  "signal": "hold cash",
+  "bot_value": 100.0,
+  "profit": 0.0
+}
