@@ -39,7 +39,62 @@
       "cash": 100.0,
       "pos": {},
       "trades": 0
+    },
+    "momentum_wide": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "aapl_hold": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "aapl_trend": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "msft_hold": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "msft_trend": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "nvda_hold": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "nvda_trend": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "amzn_hold": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "amzn_trend": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "tsla_hold": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "tsla_trend": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
     }
   },
-  "last_check_utc": "2026-11-02 03:32"
+  "last_check_utc": "2026-11-02 07:35"
 }

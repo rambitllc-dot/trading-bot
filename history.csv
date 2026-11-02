@@ -1,2 +1,2 @@
-date,btc_trend,btc_hold,spy_hold,spy_trend,mix,momentum,rsi_dip
-2026-11-02,100.00,99.95,100.00,100.00,100.00,100.00,100.00
+date,btc_trend,btc_hold,spy_hold,spy_trend,mix,momentum,rsi_dip,momentum_wide,aapl_hold,aapl_trend,msft_hold,msft_trend,nvda_hold,nvda_trend,amzn_hold,amzn_trend,tsla_hold,tsla_trend
+2026-11-02,100.00,99.20,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00,100.00
