@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 02, 2026 07:35 UTC · Bitcoin $77,956.50 · US stock market closed
+Last update: Nov 02, 2026 09:48 UTC · Bitcoin $78,075.43 · US stock market closed
 
 | Rank | Strategy | Worth now | Profit | Trades |
 |---|---|---:|---:|---:|
@@ -22,13 +22,13 @@ Last update: Nov 02, 2026 07:35 UTC · Bitcoin $77,956.50 · US stock market clo
 | 15 | Amazon trend (200 day) | $100.00 | +$0.00 (+0.0%) | 0 |
 | 16 | Tesla buy & hold | $100.00 | +$0.00 (+0.0%) | 0 |
 | 17 | Tesla trend (200 day) | $100.00 | +$0.00 (+0.0%) | 0 |
-| 18 | Bitcoin buy & hold | $99.20 | -$0.80 (-0.8%) | 1 |
+| 18 | Bitcoin buy & hold | $99.35 | -$0.65 (-0.6%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $99.20 | $100.00 | trading |
+| Bitcoin | $99.35 | $100.00 | trading |
 | S&P 500 | $100.00 | $100.00 | about even |
 | Apple | $100.00 | $100.00 | about even |
 | Microsoft | $100.00 | $100.00 | about even |
@@ -36,7 +36,7 @@ Last update: Nov 02, 2026 07:35 UTC · Bitcoin $77,956.50 · US stock market clo
 | Amazon | $100.00 | $100.00 | about even |
 | Tesla | $100.00 | $100.00 | about even |
 
-**All together:** $1,799.20 from $1,800 (-0.80)
+**All together:** $1,799.35 from $1,800 (-0.65)
 
 ## What each one is doing
 
@@ -57,6 +57,6 @@ Last update: Nov 02, 2026 07:35 UTC · Bitcoin $77,956.50 · US stock market clo
 - **Amazon trend (200 day):** cash $100.00. Signal: in cash (price $240.34 vs 200d avg $243.39).
 - **Tesla buy & hold:** cash $100.00. Waiting for market open.
 - **Tesla trend (200 day):** cash $100.00. Signal: in the market (price $399.80 vs 200d avg $385.27).
-- **Bitcoin buy & hold:** BTC/USD $96.81, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $96.96, cash $2.39. Holding.
 
 Paper money only. Past or paper results do not predict real results.
