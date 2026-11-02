@@ -1,34 +1,60 @@
 name: Paper trading bot
 
+# Always-on version (for a PUBLIC repo, where GitHub minutes are free).
+# One run stays awake ~5.5 hours and runs bot.py every 30 minutes,
+# then starts its own replacement. GitHub's schedule below is only a backup
+# that restarts the chain if it ever stops.
+
 on:
+  workflow_dispatch: {}        # "Run workflow" button, also used to start the next run
   schedule:
-    - cron: "*/30 * * * *"   # every 30 minutes (GitHub may run it a few minutes late)
-  workflow_dispatch: {}       # lets you press "Run workflow" by hand
+    - cron: "17 */6 * * *"     # backup restart every 6 hours
 
 permissions:
-  contents: write
+  contents: write              # save state.json, REPORT.md, trades
+  actions: write               # start the next run
 
 concurrency:
   group: bot
-  cancel-in-progress: false
+  cancel-in-progress: false    # never two bots at once; extra starts wait in line
 
 jobs:
   trade:
     runs-on: ubuntu-latest
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install requests
-      - name: Run bot
+
+      - name: Run bot every 30 minutes for about 5.5 hours
         env:
           ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
-        run: python bot.py
-      - name: Save the bot's memory
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
-          git add -A
-          git diff --cached --quiet || (git commit -m "Bot update" && git push)
+          stop_at=$(( $(date +%s) + 330*60 ))
+          while true; do
+            echo "::group::Bot run at $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git pull --rebase --autostash -q || true      # pick up any bot.py you edited
+            python bot.py || echo "Bot hit an error this round; will try again in 30 minutes."
+            git add -A
+            if ! git diff --cached --quiet; then
+              git commit -q -m "Bot update"
+              git pull --rebase -q && git push -q || echo "Could not save this round; will retry."
+            fi
+            echo "::endgroup::"
+            now=$(date +%s)
+            next=$(( (now / 1800 + 1) * 1800 + 60 ))      # 1 minute after the next :00 or :30
+            if [ "$next" -ge "$stop_at" ]; then break; fi
+            sleep $(( next - now ))
+          done
+
+      - name: Start the next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run bot.yml --ref main --repo "$GITHUB_REPOSITORY"
