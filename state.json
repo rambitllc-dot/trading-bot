@@ -29,7 +29,17 @@
       "cash": 100.0,
       "pos": {},
       "trades": 0
+    },
+    "momentum": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
+    },
+    "rsi_dip": {
+      "cash": 100.0,
+      "pos": {},
+      "trades": 0
     }
   },
-  "last_check_utc": "2026-11-02 02:18"
+  "last_check_utc": "2026-11-02 03:32"
 }
