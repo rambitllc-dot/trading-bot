@@ -1,13 +1,17 @@
 """
-Paper-trading bot for Alpaca: five strategies side by side, each with its own $100.
+Paper-trading bot for Alpaca: seven strategies side by side, each with its own $100.
 
   1. Bitcoin trend bot     hold BTC when its 5-day average is above its 20-day average
   2. Bitcoin buy & hold    buy BTC once and keep it
   3. S&P 500 buy & hold    buy SPY once and keep it
   4. S&P 500 trend         hold SPY when its price is above its 200-day average, else cash
   5. Mixed portfolio       60% SPY, 20% GLD (gold), 10% BTC, 10% cash, rebalanced monthly
+  6. Momentum rotation     each month, hold whichever of SPY / QQQ (tech) / GLD (gold) / BND (bonds)
+                           rose most over the past 12 months; cash if all of them fell
+  7. RSI dip-buying        buy SPY after a sharp 2-day drop (RSI-2 below 10) while it is above its
+                           200-day average; sell once it closes back above its 5-day average
 
-Bitcoin trades 24/7. Stocks (SPY, GLD) only trade when the US market is open
+Bitcoin trades 24/7. Stocks and ETFs (SPY, QQQ, GLD, BND) only trade when the US market is open
 (weekdays 6:30am-1pm Pacific), so those strategies wait until then.
 
 Each run (GitHub Actions calls it every 30 minutes) updates:
@@ -35,6 +39,9 @@ STRATEGIES = {
     "spy_trend": {"name": "S&P 500 trend (200 day)", "type": "trend", "symbol": "SPY", "fast": 1, "slow": 200},
     "mix":       {"name": "Mix 60% stocks / 20% gold / 10% BTC / 10% cash", "type": "mix",
                   "weights": {"SPY": 0.60, "GLD": 0.20, "BTC/USD": 0.10}},
+    "momentum":  {"name": "Momentum rotation (SPY/QQQ/GLD/BND)", "type": "momentum",
+                  "symbols": ["SPY", "QQQ", "GLD", "BND"], "lookback": 252},
+    "rsi_dip":   {"name": "RSI dip-buying (S&P 500)", "type": "rsi", "symbol": "SPY"},
 }
 
 KEY = os.environ["ALPACA_KEY"]
@@ -219,7 +226,65 @@ def run_mix(key, cfg, s):
     return f"rebalanced {month}"
 
 
-RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix}
+def run_momentum(key, cfg, s):
+    month = TODAY[:7]
+    held = [sym for sym, q in s["pos"].items() if q > 0]
+    if s.get("last_rebalance") == month:
+        return f"holding {held[0] if held else 'cash'} until next month's check"
+    if not can_trade("SPY"):
+        return "waiting for market open for the monthly check"
+    n = cfg["lookback"]
+    returns = {}
+    for sym in cfg["symbols"]:
+        c = closes(sym, n + 1)
+        if len(c) > n:
+            returns[sym] = c[-1] / c[-n - 1] - 1
+    if not returns:
+        return "not enough price history"
+    best = max(returns, key=returns.get)
+    target = best if returns[best] > 0 else None
+    for sym in held:
+        if sym != target:
+            sell(key, s, sym, s["pos"][sym])
+    if target and s["pos"].get(target, 0) == 0:
+        buy(key, s, target, s["cash"] * 0.995)
+    s["last_rebalance"] = month
+    ranks = ", ".join(f"{k} {v:+.0%}" for k, v in sorted(returns.items(), key=lambda kv: -kv[1]))
+    return f"picked {target or 'cash'} for {month} (12-month returns: {ranks})"
+
+
+def rsi(c, period=2):
+    """Wilder's RSI on daily closes."""
+    gains = losses = 0.0
+    for i in range(1, period + 1):
+        ch = c[i] - c[i - 1]
+        gains += max(ch, 0); losses += max(-ch, 0)
+    ag, al = gains / period, losses / period
+    for i in range(period + 1, len(c)):
+        ch = c[i] - c[i - 1]
+        ag = (ag * (period - 1) + max(ch, 0)) / period
+        al = (al * (period - 1) + max(-ch, 0)) / period
+    return 100.0 if al == 0 else 100 - 100 / (1 + ag / al)
+
+
+def run_rsi(key, cfg, s):
+    sym = cfg["symbol"]
+    c = closes(sym, 200)
+    if len(c) < 200:
+        return f"not enough price history ({len(c)}/200 days)"
+    r = rsi(c[-60:])
+    avg200, avg5, last = sum(c[-200:]) / 200, sum(c[-5:]) / 5, c[-1]
+    held = s["pos"].get(sym, 0) > 0
+    if can_trade(sym):
+        if not held and r < 10 and last > avg200:
+            buy(key, s, sym, s["cash"] * 0.995)
+        elif held and last > avg5:
+            sell(key, s, sym, s["pos"][sym])
+    state_txt = "holding, waiting for a bounce above the 5-day average" if s["pos"].get(sym, 0) > 0 else "in cash, waiting for a dip"
+    return f"{state_txt} (RSI-2 {r:.0f}, buys below 10)"
+
+
+RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix, "momentum": run_momentum, "rsi": run_rsi}
 
 
 # ---------- state & reports ----------
@@ -264,7 +329,7 @@ def write_reports(state, notes):
         p = v - START_BUDGET
         lines.append(f"| {i} | {name} | ${v:,.2f} | {'+' if p >= 0 else '-'}${abs(p):,.2f} ({p / START_BUDGET:+.1%}) | {t} |")
     total = sum(values.values())
-    lines += ["", f"**All five together:** ${total:,.2f} from ${START_BUDGET * len(STRATEGIES):,.0f} "
+    lines += ["", f"**All together:** ${total:,.2f} from ${START_BUDGET * len(STRATEGIES):,.0f} "
                   f"({total - START_BUDGET * len(STRATEGIES):+,.2f})", "", "## What each one is doing", ""]
     for name, _, _, holding, note in rows:
         lines.append(f"- **{name}:** {holding}. {note[:1].upper() + note[1:]}.")
@@ -277,8 +342,11 @@ def write_reports(state, notes):
     exists = os.path.exists("history.csv")
     if exists:
         with open("history.csv") as f:
-            last = f.read().strip().splitlines()[-1]
-        if last.startswith(TODAY):
+            lines_ = f.read().strip().splitlines()
+        if lines_[0] != ",".join(["date"] + keys):  # strategies changed: start a fresh file
+            os.replace("history.csv", "history_old.csv")
+            exists = False
+        elif lines_[-1].startswith(TODAY):
             return values
     with open("history.csv", "a", newline="") as f:
         w = csv.writer(f)
