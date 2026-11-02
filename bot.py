@@ -327,7 +327,14 @@ BET_SIGNALS = {
     "reversal": "Reversal: bet against unusually big moves",
     "trend":    "Trend: bet with the 1-hour trend when the last candle agrees",
     "session":  "Session momentum: follow the busiest hour's direction",
+    "learning": "Learning: copies whichever method has been winning lately",
 }
+BET_LABELS = {k: "Static (one fixed method)" for k in BET_SIGNALS}
+BET_LABELS["coin"] = "Luck benchmark"
+BET_LABELS["learning"] = "Learning (switches methods)"
+FIXED_METHODS = ["momentum", "reversal", "trend", "session"]
+LEARN_WINDOW = 96      # look back 24 hours of candles
+LEARN_MIN_BETS = 20    # a method needs at least this many recent bets to be trusted
 
 
 def candles_15m(since):
@@ -371,9 +378,28 @@ def bet_signal(name, c, i):
     return 0
 
 
+def learning_pick(dec, ups, i):
+    """Pick the fixed method with the best win rate over the last 24h of candles
+    (only candles before i), if it beats break-even; otherwise skip."""
+    best, best_rate = None, BREAK_EVEN
+    for k in FIXED_METHODS:
+        n = w = 0
+        for j in range(max(0, i - LEARN_WINDOW), i):
+            side = dec[k].get(j, 0)
+            if side and ups.get(j) is not None:
+                n += 1
+                w += (side > 0) == ups[j]
+        if n >= LEARN_MIN_BETS and w / n > best_rate:
+            best, best_rate = k, w / n
+    return dec[best].get(i, 0) if best else 0
+
+
 def run_betting(state):
     b = state.setdefault("bets", {})
     b.setdefault("live_from", NOW.strftime("%Y-%m-%dT%H:%M:%SZ"))
+    if "learning" not in b.get("signals", {}):
+        # new method added: redo the whole test so every method is scored on the same candles
+        b["signals"], b["last_t"] = {}, None
     sigs = b.setdefault("signals", {})
     for k in BET_SIGNALS:
         s = sigs.setdefault(k, {"bank": START_BUDGET, "peak": START_BUDGET, "mdd": 0.0,
@@ -383,11 +409,20 @@ def run_betting(state):
         s.setdefault("live_peak", START_BUDGET)
         s.setdefault("live_mdd", 0.0)
     last = b.get("last_t")
-    since = (NOW - dt.timedelta(days=31 if not last else 2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    since = (NOW - dt.timedelta(days=32 if not last else 4)).strftime("%Y-%m-%dT%H:%M:%SZ")
     c = candles_15m(since)
     done_before = NOW - dt.timedelta(minutes=15)
-    scored = 0
+    # each fixed method's bet on every candle, and which candles went up (flat = no result)
+    dec = {k: {} for k in FIXED_METHODS}
+    ups = {}
     for i in range(97, len(c)):
+        for k in FIXED_METHODS:
+            dec[k][i] = bet_signal(k, c, i)
+        if c[i]["c"] != c[i]["o"]:
+            ups[i] = c[i]["c"] > c[i]["o"]
+    scored = 0
+    first = 97 + LEARN_WINDOW  # leave a day of history for the learning method
+    for i in range(first, len(c)):
         t = c[i]["t"]
         if last and t <= last:
             continue
@@ -396,7 +431,7 @@ def run_betting(state):
         up = c[i]["c"] > c[i]["o"]
         live = t >= b["live_from"]
         for k, s in sigs.items():
-            side = bet_signal(k, c, i)
+            side = learning_pick(dec, ups, i) if k == "learning" else bet_signal(k, c, i)
             bank, peak, mdd, n, w = (("live_bank", "live_peak", "live_mdd", "live_n", "live_w") if live
                                      else ("bank", "peak", "mdd", "n", "w"))
             if side == 0 or s[bank] < 1:
@@ -418,23 +453,27 @@ def betting_report(state):
         return []
     lines = ["", "## 15-minute Bitcoin betting test (paper)", "",
              f"Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so "
-             f"**{BREAK_EVEN:.1%} wins are needed just to break even**. Each signal started with $100 "
+             f"**{BREAK_EVEN:.1%} wins are needed just to break even**. Each method started with $100 "
              f"and bets 5% of what it has left.", "",
+             "**Labels:** *Static* = always uses the same one method, never changes. "
+             "*Learning* = every 15 minutes, checks which static method won the most over the last "
+             "24 hours and copies it, or sits out if none is beating 55.6%. "
+             "*Luck benchmark* = a random coin flip; anything that can't beat it has no real skill.", "",
              f"### Live, since {b['live_from'][:10]} (fresh $100 each)", "",
-             "| Signal | Bets | Win rate | $100 is now | Worst drop |", "|---|---:|---:|---:|---:|"]
+             "| Method | Type | Bets | Win rate | $100 is now | Worst drop |", "|---|---|---:|---:|---:|---:|"]
     def table(prefix):
         out = []
         bank, n, w, mdd = (f"{prefix}bank", f"{prefix}n", f"{prefix}w", f"{prefix}mdd")
         for k, s in sorted(b["signals"].items(), key=lambda kv: -kv[1].get(bank, 0)):
             wr = f"{s[w] / s[n]:.1%}" if s[n] else "-"
-            out.append(f"| {BET_SIGNALS[k]} | {s[n]} | {wr} | ${s[bank]:,.2f}"
+            out.append(f"| {BET_SIGNALS[k]} | {BET_LABELS[k]} | {s[n]} | {wr} | ${s[bank]:,.2f}"
                        f"{' (ran out)' if s[bank] < 1 else ''} | {s[mdd]:.0%} |")
         return out
     lines += table("live_")
     lines += ["", "### Backtest: the 30 days before that", "",
-              "| Signal | Bets | Win rate | $100 became | Worst drop |", "|---|---:|---:|---:|---:|"]
+              "| Method | Type | Bets | Win rate | $100 became | Worst drop |", "|---|---|---:|---:|---:|---:|"]
     lines += table("")
-    lines += ["", "If a signal can't beat the coin flip by a clear margin over hundreds of bets, it has no real edge."]
+    lines += ["", "If a method can't beat the coin flip by a clear margin over hundreds of bets, it has no real edge."]
     return lines
 
 
@@ -459,6 +498,22 @@ def load_state():
     return state
 
 
+def strategy_label(cfg):
+    """(type, market) labels shown in the scoreboard."""
+    kind = {"hold": "Hold", "trend": "Static rule", "mix": "Static rule (rebalance)",
+            "momentum": "Monthly pick", "rsi": "Static rule"}[cfg["type"]]
+    syms = cfg.get("symbols") or list(cfg.get("weights", {})) or [cfg.get("symbol")]
+    if all(is_crypto(s) for s in syms):
+        market = "Bitcoin"
+    elif cfg["type"] == "mix":
+        market = "Mixed"
+    elif all(s in STOCKS for s in syms):
+        market = "Stock"
+    else:
+        market = "ETF"
+    return kind, market
+
+
 def write_reports(state, notes):
     rows, values = [], {}
     for key, cfg in STRATEGIES.items():
@@ -467,7 +522,7 @@ def write_reports(state, notes):
         values[key] = v
         holding = ", ".join(f"{sym} ${q * latest(sym):,.2f}" for sym, q in s["pos"].items() if q * latest(sym) >= 0.01)
         holding = (holding + ", " if holding else "") + f"cash ${s['cash']:,.2f}"
-        rows.append((cfg["name"], v, s["trades"], holding, notes[key]))
+        rows.append((cfg["name"], v, s["trades"], holding, notes[key], strategy_label(cfg)))
     rows.sort(key=lambda r: -r[1])
     lines = [
         "# Paper trading scoreboard",
@@ -476,12 +531,16 @@ def write_reports(state, notes):
         f"Last update: {NOW.strftime('%b %d, %Y %H:%M')} UTC · Bitcoin ${latest('BTC/USD'):,.2f} · "
         f"US stock market {'open' if can_trade('SPY') else 'closed'}",
         "",
-        "| Rank | Strategy | Worth now | Profit | Trades |",
-        "|---|---|---:|---:|---:|",
+        "**Labels:** *Hold* = buys once and never sells (the yardstick). "
+        "*Static rule* = trades by one fixed rule that never changes. "
+        "*Monthly pick* = once a month, switches to whichever investment rose most over the past year.",
+        "",
+        "| Rank | Strategy | Type | Market | Worth now | Profit | Trades |",
+        "|---|---|---|---|---:|---:|---:|",
     ]
-    for i, (name, v, t, _, _) in enumerate(rows, 1):
+    for i, (name, v, t, _, _, (kind, market)) in enumerate(rows, 1):
         p = v - START_BUDGET
-        lines.append(f"| {i} | {name} | ${v:,.2f} | {'+' if p >= 0 else '-'}${abs(p):,.2f} ({p / START_BUDGET:+.1%}) | {t} |")
+        lines.append(f"| {i} | {name} | {kind} | {market} | ${v:,.2f} | {'+' if p >= 0 else '-'}${abs(p):,.2f} ({p / START_BUDGET:+.1%}) | {t} |")
     total = sum(values.values())
     lines += ["", "## Holding vs trading, same asset", "",
               "| Asset | Buy & hold | With trading rule | Better so far |", "|---|---:|---:|---|"]
@@ -491,7 +550,7 @@ def write_reports(state, notes):
         lines.append(f"| {asset} | ${h:,.2f} | ${tr:,.2f} | {better} |")
     lines += ["", f"**All together:** ${total:,.2f} from ${START_BUDGET * len(STRATEGIES):,.0f} "
                   f"({total - START_BUDGET * len(STRATEGIES):+,.2f})", "", "## What each one is doing", ""]
-    for name, _, _, holding, note in rows:
+    for name, _, _, holding, note, _ in rows:
         lines.append(f"- **{name}:** {holding}. {note[:1].upper() + note[1:]}.")
     lines += betting_report(state)
     lines += ["", "Paper money only. Past or paper results do not predict real results.", ""]
