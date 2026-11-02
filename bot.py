@@ -304,6 +304,125 @@ def run_rsi(key, cfg, s):
     return f"{state_txt} (RSI-2 {r:.0f}, buys below 10)"
 
 
+# =====================================================================
+# 15-minute Bitcoin up/down betting test (paper only, no orders placed)
+# =====================================================================
+# Same bet as the "AI bot doubled $100" videos: guess whether the next
+# 15-minute Bitcoin candle closes higher or lower. A win pays 0.8x the
+# stake, a loss costs the whole stake, so you need 55.6% wins to break even.
+# Each signal gets its own $100 and bets 5% of whatever it has left.
+# The first run scores the last 30 days of real candles (a backtest);
+# after that every new candle is scored as it finishes (a live test).
+BET_PAYOUT = 0.80
+BET_FRACTION = 0.05
+BREAK_EVEN = 1 / (1 + BET_PAYOUT)
+BET_SIGNALS = {
+    "coin":     "Coin flip (luck benchmark)",
+    "momentum": "Momentum: bet the last candle repeats",
+    "reversal": "Reversal: bet against unusually big moves",
+    "trend":    "Trend: bet with the 1-hour trend when the last candle agrees",
+    "session":  "Session momentum: follow the busiest hour's direction",
+}
+
+
+def candles_15m(since):
+    out, token = [], None
+    while True:
+        params = {"symbols": "BTC/USD", "timeframe": "15Min", "start": since, "limit": 10000}
+        if token:
+            params["page_token"] = token
+        d = api("GET", f"{DATA_URL}/v1beta3/crypto/us/bars", params=params)
+        out += (d.get("bars") or {}).get("BTC/USD", [])
+        token = d.get("next_page_token")
+        if not token:
+            return out
+
+
+def bet_signal(name, c, i):
+    """Return +1 (up), -1 (down) or 0 (skip) for candle i, using only candles before it."""
+    prev = c[i - 1]
+    move = prev["c"] - prev["o"]
+    if name == "coin":
+        import hashlib
+        return 1 if int(hashlib.md5(c[i]["t"].encode()).hexdigest(), 16) % 2 else -1
+    if move == 0:
+        return 0
+    if name == "momentum":
+        return 1 if move > 0 else -1
+    if name == "reversal":
+        avg = sum(abs(x["c"] - x["o"]) for x in c[i - 21:i - 1]) / 20
+        return (-1 if move > 0 else 1) if avg and abs(move) > 2 * avg else 0
+    if name == "trend":
+        hour_avg = sum(x["c"] for x in c[i - 4:i]) / 4
+        trend = 1 if prev["c"] > hour_avg else -1
+        return trend if (move > 0) == (trend > 0) else 0
+    if name == "session":
+        # busiest 1-hour block in the last 24h (volume as a stand-in for market open)
+        day = c[i - 96:i]
+        blocks = [day[k:k + 4] for k in range(0, 96, 4)]
+        top = max(blocks, key=lambda b: sum(x.get("v", 0) for x in b))
+        d = top[-1]["c"] - top[0]["o"]
+        return 0 if d == 0 else (1 if d > 0 else -1)
+    return 0
+
+
+def run_betting(state):
+    b = state.setdefault("bets", {})
+    b.setdefault("live_from", NOW.strftime("%Y-%m-%dT%H:%M:%SZ"))
+    sigs = b.setdefault("signals", {})
+    for k in BET_SIGNALS:
+        sigs.setdefault(k, {"bank": START_BUDGET, "peak": START_BUDGET, "mdd": 0.0,
+                            "n": 0, "w": 0, "live_n": 0, "live_w": 0})
+    last = b.get("last_t")
+    since = (NOW - dt.timedelta(days=31 if not last else 2)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    c = candles_15m(since)
+    done_before = NOW - dt.timedelta(minutes=15)
+    scored = 0
+    for i in range(97, len(c)):
+        t = c[i]["t"]
+        if last and t <= last:
+            continue
+        if dt.datetime.fromisoformat(t.replace("Z", "+00:00")) > done_before:
+            break  # candle still open
+        up = c[i]["c"] > c[i]["o"]
+        live = t >= b["live_from"]
+        for k, s in sigs.items():
+            side = bet_signal(k, c, i)
+            if side == 0 or s["bank"] < 1:
+                continue
+            stake = s["bank"] * BET_FRACTION
+            won = (side > 0) == up and c[i]["c"] != c[i]["o"]
+            s["bank"] = round(s["bank"] + (stake * BET_PAYOUT if won else -stake), 4)
+            s["n"] += 1; s["w"] += won
+            if live:
+                s["live_n"] += 1; s["live_w"] += won
+            s["peak"] = max(s["peak"], s["bank"])
+            s["mdd"] = min(s["mdd"], s["bank"] / s["peak"] - 1)
+        b["last_t"] = t
+        scored += 1
+    return scored
+
+
+def betting_report(state):
+    b = state.get("bets")
+    if not b:
+        return []
+    lines = ["", "## 15-minute Bitcoin betting test (paper)", "",
+             f"Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so "
+             f"**{BREAK_EVEN:.1%} wins are needed just to break even**. Each signal started with $100 "
+             f"and bets 5% of what it has left. Includes 30 days of history before "
+             f"{b['live_from'][:10]}, then live candles.", "",
+             "| Signal | Bets | Win rate | $100 is now | Worst drop | Live bets | Live win rate |",
+             "|---|---:|---:|---:|---:|---:|---:|"]
+    rows = sorted(b["signals"].items(), key=lambda kv: -kv[1]["bank"])
+    for k, s in rows:
+        wr = f"{s['w'] / s['n']:.1%}" if s["n"] else "-"
+        lwr = f"{s['live_w'] / s['live_n']:.1%}" if s["live_n"] else "-"
+        lines.append(f"| {BET_SIGNALS[k]} | {s['n']} | {wr} | ${s['bank']:,.2f}{' (ran out)' if s['bank'] < 1 else ''} | {s['mdd']:.0%} | {s['live_n']} | {lwr} |")
+    lines += ["", "If a signal can't beat the coin flip by a clear margin over hundreds of bets, it has no real edge."]
+    return lines
+
+
 RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix, "momentum": run_momentum, "rsi": run_rsi}
 
 
@@ -359,6 +478,7 @@ def write_reports(state, notes):
                   f"({total - START_BUDGET * len(STRATEGIES):+,.2f})", "", "## What each one is doing", ""]
     for name, _, _, holding, note in rows:
         lines.append(f"- **{name}:** {holding}. {note[:1].upper() + note[1:]}.")
+    lines += betting_report(state)
     lines += ["", "Paper money only. Past or paper results do not predict real results.", ""]
     with open("REPORT.md", "w") as f:
         f.write("\n".join(lines))
@@ -391,6 +511,11 @@ def main():
         except TradeError as e:
             notes[key] = f"problem this run: {e}"
         print(f"{cfg['name']}: {notes[key]}")
+    try:
+        n = run_betting(state)
+        print(f"\n15-minute betting test: scored {n} new candles")
+    except (TradeError, requests.RequestException) as e:
+        print(f"\n15-minute betting test: problem this run: {e}")
     state["last_check_utc"] = NOW.strftime("%Y-%m-%d %H:%M")
     with open("state.json", "w") as f:
         json.dump(state, f, indent=2)
