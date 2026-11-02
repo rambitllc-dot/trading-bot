@@ -16,69 +16,98 @@
       "trades": 1
     },
     "spy_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "SPY": 0.131252259
+      },
+      "trades": 1
     },
     "spy_trend": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "SPY": 0.131251912
+      },
+      "trades": 1
     },
     "mix": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 20.43,
+      "pos": {
+        "SPY": 0.078751065,
+        "GLD": 0.054830186
+      },
+      "trades": 2
     },
     "momentum": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "SPY": 0.131257107
+      },
+      "trades": 1,
+      "last_rebalance": "2026-11"
     },
     "rsi_dip": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "SPY": 0.131262649
+      },
+      "trades": 1
     },
     "momentum_wide": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "XLE": 1.470049351
+      },
+      "trades": 1,
+      "last_rebalance": "2026-11"
     },
     "aapl_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "AAPL": 0.295789555
+      },
+      "trades": 1
     },
     "aapl_trend": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "AAPL": 0.295786037
+      },
+      "trades": 1
     },
     "msft_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "MSFT": 0.191624678
+      },
+      "trades": 1
     },
     "msft_trend": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "MSFT": 0.191624678
+      },
+      "trades": 1
     },
     "nvda_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "NVDA": 0.482694043
+      },
+      "trades": 1
     },
     "nvda_trend": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "NVDA": 0.482689359
+      },
+      "trades": 1
     },
     "amzn_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "AMZN": 0.398508347
+      },
+      "trades": 1
     },
     "amzn_trend": {
       "cash": 100.0,
@@ -86,15 +115,70 @@
       "trades": 0
     },
     "tsla_hold": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "TSLA": 0.244051415
+      },
+      "trades": 1
     },
     "tsla_trend": {
-      "cash": 100.0,
-      "pos": {},
-      "trades": 0
+      "cash": 0.51,
+      "pos": {
+        "TSLA": 0.244051415
+      },
+      "trades": 1
     }
   },
-  "last_check_utc": "2026-11-02 09:48"
+  "last_check_utc": "2026-11-02 18:40",
+  "bets": {
+    "live_from": "2026-11-02T18:40:20Z",
+    "signals": {
+      "coin": {
+        "bank": 0.9904,
+        "peak": 115.2074,
+        "mdd": -0.9914033299944275,
+        "n": 847,
+        "w": 429,
+        "live_n": 0,
+        "live_w": 0
+      },
+      "momentum": {
+        "bank": 0.9525,
+        "peak": 126.9126,
+        "mdd": -0.9924948350282005,
+        "n": 666,
+        "w": 326,
+        "live_n": 0,
+        "live_w": 0
+      },
+      "reversal": {
+        "bank": 4.4267,
+        "peak": 105.5667,
+        "mdd": -0.9646886755008919,
+        "n": 389,
+        "w": 186,
+        "live_n": 0,
+        "live_w": 0
+      },
+      "trend": {
+        "bank": 0.9584,
+        "peak": 114.1951,
+        "mdd": -0.9916073456742014,
+        "n": 560,
+        "w": 266,
+        "live_n": 0,
+        "live_w": 0
+      },
+      "session": {
+        "bank": 0.9871,
+        "peak": 100.0,
+        "mdd": -0.990129,
+        "n": 810,
+        "w": 408,
+        "live_n": 0,
+        "live_w": 0
+      }
+    },
+    "last_t": "2026-11-02T18:15:00Z"
+  }
 }
