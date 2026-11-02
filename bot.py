@@ -36,6 +36,7 @@ import requests
 
 START_BUDGET = 100.0
 CRYPTO_FEE = 0.0025  # Alpaca crypto fee estimate; stocks have no commission
+CRYPTO_MIN = 10.0    # Alpaca's smallest crypto order, in dollars
 
 STRATEGIES = {
     "btc_trend": {"name": "Bitcoin trend bot (5/20 day)", "type": "trend", "symbol": "BTC/USD", "fast": 5, "slow": 20},
@@ -154,6 +155,10 @@ def wait_for_fill(order_id):
 
 def buy(key, s, sym, dollars):
     dollars = math.floor(min(dollars, s["cash"]) * 100) / 100
+    if is_crypto(sym) and dollars < CRYPTO_MIN:
+        if dollars < CRYPTO_MIN * 0.9 or s["cash"] < CRYPTO_MIN:
+            return  # too small for a crypto order; skip
+        dollars = CRYPTO_MIN  # round a near-$10 order up to the minimum
     if dollars < 1:
         return
     o = api("POST", f"{TRADE_URL}/v2/orders", json={
@@ -170,7 +175,7 @@ def buy(key, s, sym, dollars):
 
 def sell(key, s, sym, qty):
     qty = floor9(min(qty, s["pos"].get(sym, 0.0)))
-    if qty <= 0 or qty * latest(sym) < 1:
+    if qty <= 0 or qty * latest(sym) < (CRYPTO_MIN if is_crypto(sym) else 1):
         return
     o = api("POST", f"{TRADE_URL}/v2/orders", json={
         "symbol": sym, "qty": f"{qty:.9f}", "side": "sell", "type": "market",
