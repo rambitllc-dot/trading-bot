@@ -19,3 +19,14 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-02 19:01,Mix 60% stocks / 20% gold / 10% BTC / 10% cash,BUY,BTC/USD,0.00012717,76946.04,10.62
 2026-11-03 14:31,Nvidia trend (200 day),SELL,NVDA,0.48268936,206.74,100.30
 2026-11-03 14:31,Amazon trend (200 day),BUY,AMZN,0.40002091,248.71,0.51
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,MRNA,0.04272364,232.42,90.07
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,SNDK,0.00886987,1119.52,80.14
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,LITE,0.01473303,674.00,70.21
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,MU,0.01162339,854.31,60.28
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,DELL,0.02435794,407.67,50.35
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,STX,0.01632096,608.42,40.42
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,WDC,0.02855073,347.80,30.49
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,VLO,0.02548899,389.58,20.56
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,APA,0.20632480,48.13,10.63
+2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,MPC,0.02322937,427.48,0.70
+2026-11-03 17:01,S&P 500 equal weight (RSP) buy & hold,BUY,RSP,0.45282830,219.71,0.51
