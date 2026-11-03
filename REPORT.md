@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 03, 2026 10:01 UTC · Bitcoin $76,938.90 · US stock market closed
+Last update: Nov 03, 2026 10:31 UTC · Bitcoin $76,921.09 · US stock market closed
 
 **Labels:** *Hold* = buys once and never sells (the yardstick). *Static rule* = trades by one fixed rule that never changes. *Monthly pick* = once a month, switches to whichever investment rose most over the past year.
 
@@ -22,7 +22,7 @@ Last update: Nov 03, 2026 10:01 UTC · Bitcoin $76,938.90 · US stock market clo
 | 13 | Amazon buy & hold | Hold | Stock | $98.83 | -$1.17 (-1.2%) | 1 |
 | 14 | Nvidia buy & hold | Hold | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
 | 15 | Nvidia trend (200 day) | Static rule | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
-| 16 | Bitcoin buy & hold | Hold | Bitcoin | $97.94 | -$2.06 (-2.1%) | 1 |
+| 16 | Bitcoin buy & hold | Hold | Bitcoin | $97.92 | -$2.08 (-2.1%) | 1 |
 | 17 | Microsoft buy & hold | Hold | Stock | $97.78 | -$2.22 (-2.2%) | 1 |
 | 18 | Microsoft trend (200 day) | Static rule | Stock | $97.78 | -$2.22 (-2.2%) | 1 |
 
@@ -30,7 +30,7 @@ Last update: Nov 03, 2026 10:01 UTC · Bitcoin $76,938.90 · US stock market clo
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $97.94 | $100.00 | trading |
+| Bitcoin | $97.92 | $100.00 | trading |
 | S&P 500 | $99.37 | $99.37 | about even |
 | Apple | $100.77 | $100.77 | about even |
 | Microsoft | $97.78 | $97.78 | about even |
@@ -38,7 +38,7 @@ Last update: Nov 03, 2026 10:01 UTC · Bitcoin $76,938.90 · US stock market clo
 | Amazon | $98.83 | $100.00 | trading |
 | Tesla | $99.03 | $99.03 | about even |
 
-**All together:** $1,784.54 from $1,800 (-15.46)
+**All together:** $1,784.51 from $1,800 (-15.49)
 
 ## What each one is doing
 
@@ -57,7 +57,7 @@ Last update: Nov 03, 2026 10:01 UTC · Bitcoin $76,938.90 · US stock market clo
 - **Amazon buy & hold:** AMZN $98.32, cash $0.51. Holding.
 - **Nvidia buy & hold:** NVDA $97.60, cash $0.51. Holding.
 - **Nvidia trend (200 day):** NVDA $97.60, cash $0.51. Signal: in cash (price $202.21 vs 200d avg $204.17).
-- **Bitcoin buy & hold:** BTC/USD $95.55, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $95.53, cash $2.39. Holding.
 - **Microsoft buy & hold:** MSFT $97.27, cash $0.51. Holding.
 - **Microsoft trend (200 day):** MSFT $97.27, cash $0.51. Signal: in the market (price $507.00 vs 200d avg $437.11).
 
@@ -73,10 +73,10 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 6 | 100.0% | $126.53 | 0% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 0 | - | $100.00 | 0% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 61 | 54.1% | $86.77 | -25% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 48 | 43.8% | $57.05 | -51% |
-| Coin flip (luck benchmark) | Luck benchmark | 61 | 45.9% | $55.18 | -50% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 61 | 42.6% | $46.05 | -65% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 63 | 52.4% | $78.31 | -32% |
+| Coin flip (luck benchmark) | Luck benchmark | 63 | 46.0% | $54.52 | -50% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 49 | 42.9% | $54.20 | -51% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 63 | 41.3% | $41.56 | -65% |
 
 ### Backtest: the 30 days before that
 
