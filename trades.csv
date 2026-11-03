@@ -30,3 +30,4 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,APA,0.20632480,48.13,10.63
 2026-11-03 17:01,Stock momentum (top 10 of the S&P 500),BUY,MPC,0.02322937,427.48,0.70
 2026-11-03 17:01,S&P 500 equal weight (RSP) buy & hold,BUY,RSP,0.45282830,219.71,0.51
+2026-11-03 17:31,SpaceX buy & hold,BUY,SPCX,0.70164180,141.80,0.51
