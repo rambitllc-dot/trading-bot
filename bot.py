@@ -55,11 +55,16 @@ STRATEGIES = {
 
 # Hold vs trade pairs: each stock gets a buy & hold and a 200-day trend version.
 # Change this list to test other companies (use their ticker symbols).
-STOCKS = {"AAPL": "Apple", "MSFT": "Microsoft", "NVDA": "Nvidia", "AMZN": "Amazon", "TSLA": "Tesla"}
+STOCKS = {"AAPL": "Apple", "MSFT": "Microsoft", "NVDA": "Nvidia", "AMZN": "Amazon", "TSLA": "Tesla",
+          "SPCX": "SpaceX"}
+# SpaceX only started trading on June 12, 2026, so it doesn't have 200 days of history yet;
+# its trend rule uses a 50-day average instead.
+TREND_DAYS = {"SPCX": 50}
 for _sym, _name in STOCKS.items():
+    _days = TREND_DAYS.get(_sym, 200)
     STRATEGIES[f"{_sym.lower()}_hold"] = {"name": f"{_name} buy & hold", "type": "hold", "symbol": _sym}
-    STRATEGIES[f"{_sym.lower()}_trend"] = {"name": f"{_name} trend (200 day)", "type": "trend",
-                                           "symbol": _sym, "fast": 1, "slow": 200}
+    STRATEGIES[f"{_sym.lower()}_trend"] = {"name": f"{_name} trend ({_days} day)", "type": "trend",
+                                           "symbol": _sym, "fast": 1, "slow": _days}
 
 # rows for the "hold vs trade" table: (asset, hold key, trading key)
 # Whole-market strategies: scan all S&P 500 stocks with one rule, and an equal-weight yardstick.
