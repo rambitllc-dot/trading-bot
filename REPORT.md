@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 03, 2026 12:31 UTC · Bitcoin $77,222.51 · US stock market closed
+Last update: Nov 03, 2026 13:01 UTC · Bitcoin $77,247.20 · US stock market closed
 
 **Labels:** *Hold* = buys once and never sells (the yardstick). *Static rule* = trades by one fixed rule that never changes. *Monthly pick* = once a month, switches to whichever investment rose most over the past year.
 
@@ -20,7 +20,7 @@ Last update: Nov 03, 2026 12:31 UTC · Bitcoin $77,222.51 · US stock market clo
 | 11 | Tesla buy & hold | Hold | Stock | $99.03 | -$0.97 (-1.0%) | 1 |
 | 12 | Tesla trend (200 day) | Static rule | Stock | $99.03 | -$0.97 (-1.0%) | 1 |
 | 13 | Amazon buy & hold | Hold | Stock | $98.83 | -$1.17 (-1.2%) | 1 |
-| 14 | Bitcoin buy & hold | Hold | Bitcoin | $98.29 | -$1.71 (-1.7%) | 1 |
+| 14 | Bitcoin buy & hold | Hold | Bitcoin | $98.32 | -$1.68 (-1.7%) | 1 |
 | 15 | Nvidia buy & hold | Hold | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
 | 16 | Nvidia trend (200 day) | Static rule | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
 | 17 | Microsoft buy & hold | Hold | Stock | $97.78 | -$2.22 (-2.2%) | 1 |
@@ -30,7 +30,7 @@ Last update: Nov 03, 2026 12:31 UTC · Bitcoin $77,222.51 · US stock market clo
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $98.29 | $100.00 | trading |
+| Bitcoin | $98.32 | $100.00 | trading |
 | S&P 500 | $99.37 | $99.37 | about even |
 | Apple | $100.77 | $100.77 | about even |
 | Microsoft | $97.78 | $97.78 | about even |
@@ -38,7 +38,7 @@ Last update: Nov 03, 2026 12:31 UTC · Bitcoin $77,222.51 · US stock market clo
 | Amazon | $98.83 | $100.00 | trading |
 | Tesla | $99.03 | $99.03 | about even |
 
-**All together:** $1,784.93 from $1,800 (-15.07)
+**All together:** $1,784.96 from $1,800 (-15.04)
 
 ## What each one is doing
 
@@ -55,7 +55,7 @@ Last update: Nov 03, 2026 12:31 UTC · Bitcoin $77,222.51 · US stock market clo
 - **Tesla buy & hold:** TSLA $98.52, cash $0.51. Holding.
 - **Tesla trend (200 day):** TSLA $98.52, cash $0.51. Signal: in the market (price $403.93 vs 200d avg $385.10).
 - **Amazon buy & hold:** AMZN $98.32, cash $0.51. Holding.
-- **Bitcoin buy & hold:** BTC/USD $95.90, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $95.93, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $97.60, cash $0.51. Holding.
 - **Nvidia trend (200 day):** NVDA $97.60, cash $0.51. Signal: in cash (price $202.21 vs 200d avg $204.17).
 - **Microsoft buy & hold:** MSFT $97.27, cash $0.51. Holding.
@@ -71,12 +71,12 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
-| Reversal: bet against unusually big moves | Static (one fixed method) | 6 | 100.0% | $126.53 | 0% |
+| Reversal: bet against unusually big moves | Static (one fixed method) | 7 | 85.7% | $120.21 | -5% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 0 | - | $100.00 | 0% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 71 | 50.7% | $68.16 | -41% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 55 | 45.5% | $57.22 | -51% |
-| Coin flip (luck benchmark) | Luck benchmark | 71 | 46.5% | $51.95 | -53% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 71 | 45.1% | $47.46 | -65% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 57 | 47.4% | $61.89 | -51% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 73 | 49.3% | $61.51 | -47% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 73 | 46.6% | $51.33 | -65% |
+| Coin flip (luck benchmark) | Luck benchmark | 73 | 46.6% | $51.33 | -53% |
 
 ### Backtest: the 30 days before that
 
