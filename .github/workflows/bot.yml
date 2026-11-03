@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write              # save state.json, REPORT.md, trades
   actions: write               # start the next run
+  issues: write                # SpaceX alerts arrive as GitHub notifications
 
 concurrency:
   group: bot
@@ -33,6 +34,7 @@ jobs:
         env:
           ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"

@@ -71,6 +71,8 @@ for _sym, _name in STOCKS.items():
 STRATEGIES["sp500_momentum"] = {"name": "Stock momentum (top 10 of the S&P 500)", "type": "stock_momentum",
                                 "top": 10}
 STRATEGIES["rsp_hold"] = {"name": "S&P 500 equal weight (RSP) buy & hold", "type": "hold", "symbol": "RSP"}
+STRATEGIES["spcx_gradual"] = {"name": "SpaceX gradual buy ($25 a week for 4 weeks)", "type": "gradual",
+                              "symbol": "SPCX", "per_buy": 25.0, "buys": 4, "every_days": 7}
 SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
 
 PAIRS = [("Bitcoin", "btc_hold", "btc_trend"), ("S&P 500", "spy_hold", "spy_trend")] + \
@@ -564,8 +566,134 @@ def run_stock_momentum(key, cfg, s):
     return f"scanned {len(rets)} stocks; top {len(picks)} for {month}: {best}"
 
 
+def run_gradual(key, cfg, s):
+    sym, done = cfg["symbol"], s.get("buys_done", 0)
+    if done >= cfg["buys"]:
+        return f"finished buying ({done} buys), now holding"
+    last = s.get("last_buy")
+    if last and (dt.date.fromisoformat(TODAY) - dt.date.fromisoformat(last)).days < cfg["every_days"]:
+        return f"bought {done} of {cfg['buys']} times; next buy on or after " \
+               f"{dt.date.fromisoformat(last) + dt.timedelta(days=cfg['every_days'])}"
+    if not can_trade(sym):
+        return f"bought {done} of {cfg['buys']} times; next buy when the market opens"
+    amount = s["cash"] * 0.995 if done == cfg["buys"] - 1 else cfg["per_buy"]
+    buy(key, s, sym, amount)
+    s["buys_done"], s["last_buy"] = done + 1, TODAY
+    return f"bought {done + 1} of {cfg['buys']} times"
+
+
+# ---------- SpaceX watch ----------
+SPACEX_IPO_PRICE = 135.0
+SPACEX_IPO_DATE = "2026-06-12"
+# Dates when more pre-IPO shares become allowed to be sold (public reporting; "eligible" doesn't mean sold).
+SPACEX_UNLOCKS = [
+    ("2026-12-08", "end of the 180-day lockup, ~342 million shares"),
+    ("2027-03-18", "~176 million shares"),
+    ("2027-05-17", "~176 million shares"),
+    ("2027-06-12", "Elon Musk's own lockup ends (6.4 billion shares)"),
+]
+SPACEX_EARNINGS_NOTE = ("More shares also unlock 2 trading days after each quarterly earnings report "
+                        "(next: Q4 2026 results, early 2027).")
+SPACEX_LINES = []
+
+
+def spacex_watch(state):
+    """Build the SpaceX section of the report and return alerts worth a phone notification."""
+    global SPACEX_LINES
+    d = api("GET", f"{DATA_URL}/v2/stocks/bars",
+            params={"symbols": "SPCX", "timeframe": "1Day", "start": SPACEX_IPO_DATE + "T00:00:00Z",
+                    "limit": 10000, "feed": "iex", "adjustment": "all"})
+    bars = [b for b in (d.get("bars") or {}).get("SPCX", []) if not b["t"].startswith(TODAY)]
+    if len(bars) < 5:
+        SPACEX_LINES = ["## SpaceX watch", "", "Not enough SpaceX price history yet."]
+        return []
+    closes_ = [b["c"] for b in bars]
+    price = latest("SPCX")
+    prev = closes_[-1]
+    high = max(max(b["h"] for b in bars), price)
+    low = min(min(b["l"] for b in bars), price)
+    avg50 = sum(closes_[-50:]) / min(50, len(closes_))
+    def chg(n):
+        return price / closes_[-n] - 1 if len(closes_) >= n else None
+    daily = [abs(closes_[i] / closes_[i - 1] - 1) for i in range(max(1, len(closes_) - 20), len(closes_))]
+    typical = sum(daily) / len(daily)
+    spy = closes("SPY", 200)
+    w = state.setdefault("spacex_watch", {})
+    w.setdefault("spy_at_ipo", None)
+    if w["spy_at_ipo"] is None:
+        sb = api("GET", f"{DATA_URL}/v2/stocks/bars",
+                 params={"symbols": "SPY", "timeframe": "1Day", "start": SPACEX_IPO_DATE + "T00:00:00Z",
+                         "limit": 1, "feed": "iex", "adjustment": "all"})
+        first = (sb.get("bars") or {}).get("SPY", [])
+        w["spy_at_ipo"] = first[0]["o"] if first else spy[-1]
+    spy_since = latest("SPY") / w["spy_at_ipo"] - 1
+    today = dt.date.fromisoformat(TODAY)
+    upcoming = [(dt.date.fromisoformat(dd), what) for dd, what in SPACEX_UNLOCKS if dt.date.fromisoformat(dd) >= today]
+
+    def pct(x):
+        return "-" if x is None else f"{x:+.1%}"
+    L = ["## SpaceX watch (SPCX)", "",
+         f"**${price:,.2f}** · today {pct(price / prev - 1)} · 1 week {pct(chg(5))} · 1 month {pct(chg(21))}", "",
+         "| | |", "|---|---|",
+         f"| Since the IPO at ${SPACEX_IPO_PRICE:.0f} (Jun 12) | {pct(price / SPACEX_IPO_PRICE - 1)} "
+         f"(S&P 500 in the same time: {pct(spy_since)}) |",
+         f"| Highest / lowest since IPO | ${high:,.2f} / ${low:,.2f} · now {pct(price / high - 1)} from the high |",
+         f"| 50-day average | ${avg50:,.2f} · price is **{'above' if price > avg50 else 'below'}** it "
+         f"({'uptrend' if price > avg50 else 'downtrend'}) |",
+         f"| Typical daily move (last 20 days) | ±{typical:.1%} (the S&P 500 is usually under ±1%) |"]
+    if upcoming:
+        L += ["", "**Upcoming share unlocks** (more pre-IPO shares become sellable, which can push the price down):", ""]
+        L += [f"- {dd.strftime('%b %d, %Y')} ({(dd - today).days} days): {what}" for dd, what in upcoming]
+        L += [f"- {SPACEX_EARNINGS_NOTE}"]
+    L += ["", "You'll get a GitHub notification for: a move of 5% or more in a day, crossing the 50-day average, "
+          "a new high since the IPO, a 20% drop from the high, and 3 days before each unlock."]
+    SPACEX_LINES = L
+
+    # alerts, each kind at most once per day (unlock alerts once each)
+    alerts, sent = [], w.setdefault("sent", {})
+    def alert(kind, title, body, once_ever=False):
+        tag = kind if once_ever else f"{kind}:{TODAY}"
+        if tag not in sent:
+            sent[tag] = NOW.strftime("%Y-%m-%d %H:%M")
+            alerts.append((title, body))
+    move = price / prev - 1
+    if abs(move) >= 0.05:
+        alert("move", f"SpaceX {'up' if move > 0 else 'down'} {abs(move):.1%} today (${price:,.2f})",
+              f"SpaceX moved {move:+.1%} since yesterday's close of ${prev:,.2f}.")
+    above = price > avg50
+    if w.get("above_avg") is not None and w["above_avg"] != above:
+        alert("cross", f"SpaceX crossed {'above' if above else 'below'} its 50-day average",
+              f"Price ${price:,.2f} vs 50-day average ${avg50:,.2f}. "
+              f"The SpaceX trend strategy will now {'buy' if above else 'move to cash'}.")
+    w["above_avg"] = above
+    if w.get("high") and price > w["high"]:
+        alert("high", f"SpaceX new high since IPO: ${price:,.2f}", f"Previous high was ${w['high']:,.2f}.")
+    w["high"] = max(w.get("high") or 0, high)
+    if price <= high * 0.8:
+        alert("drawdown", f"SpaceX is {1 - price / high:.0%} below its high", f"High ${high:,.2f}, now ${price:,.2f}.")
+    for dd, what in upcoming:
+        if 0 <= (dd - today).days <= 3:
+            alert(f"unlock:{dd}", f"SpaceX share unlock on {dd.strftime('%b %d')}", what, once_ever=True)
+    return alerts
+
+
+def send_alerts(alerts):
+    token, repo = os.environ.get("GITHUB_TOKEN"), os.environ.get("GITHUB_REPOSITORY")
+    for title, body in alerts:
+        print(f"ALERT: {title}")
+        if not (token and repo):
+            continue
+        try:
+            requests.post(f"https://api.github.com/repos/{repo}/issues", timeout=30,
+                          headers={"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"},
+                          json={"title": title, "body": body + "\n\nSee REPORT.md for the full SpaceX watch. "
+                                "Close this issue once you've read it."})
+        except requests.RequestException as e:
+            print(f"Could not send alert: {e}")
+
+
 RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix, "momentum": run_momentum, "rsi": run_rsi,
-           "stock_momentum": run_stock_momentum}
+           "stock_momentum": run_stock_momentum, "gradual": run_gradual}
 
 
 # ---------- state & reports ----------
@@ -589,7 +717,8 @@ def load_state():
 def strategy_label(cfg):
     """(type, market) labels shown in the scoreboard."""
     kind = {"hold": "Hold", "trend": "Static rule", "mix": "Static rule (rebalance)",
-            "momentum": "Monthly pick", "rsi": "Static rule", "stock_momentum": "Monthly pick"}[cfg["type"]]
+            "momentum": "Monthly pick", "rsi": "Static rule", "stock_momentum": "Monthly pick",
+            "gradual": "Gradual buy"}[cfg["type"]]
     if cfg["type"] == "stock_momentum":
         return kind, "Stock"
     syms = cfg.get("symbols") or list(cfg.get("weights", {})) or [cfg.get("symbol")]
@@ -621,9 +750,14 @@ def write_reports(state, notes):
         f"Last update: {NOW.strftime('%b %d, %Y %H:%M')} UTC · Bitcoin ${latest('BTC/USD'):,.2f} · "
         f"US stock market {'open' if can_trade('SPY') else 'closed'}",
         "",
+        *SPACEX_LINES,
+        "",
+        "## All strategies",
+        "",
         "**Labels:** *Hold* = buys once and never sells (the yardstick). "
         "*Static rule* = trades by one fixed rule that never changes. "
-        "*Monthly pick* = once a month, switches to whichever investment rose most over the past year.",
+        "*Monthly pick* = once a month, switches to whichever investment rose most over the past year. "
+        "*Gradual buy* = spreads the purchase over several weeks instead of buying all at once.",
         "",
         "| Rank | Strategy | Type | Market | Worth now | Profit | Trades |",
         "|---|---|---|---|---:|---:|---:|",
@@ -680,6 +814,10 @@ def main():
         print(f"\n15-minute betting test: scored {n} new candles")
     except (TradeError, requests.RequestException) as e:
         print(f"\n15-minute betting test: problem this run: {e}")
+    try:
+        send_alerts(spacex_watch(state))
+    except (TradeError, requests.RequestException, KeyError, ValueError) as e:
+        print(f"SpaceX watch: problem this run: {e}")
     state["last_check_utc"] = NOW.strftime("%Y-%m-%d %H:%M")
     with open("state.json", "w") as f:
         json.dump(state, f, indent=2)
