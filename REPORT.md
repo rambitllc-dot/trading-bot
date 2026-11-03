@@ -7,59 +7,59 @@ Last update: Nov 03, 2026 16:31 UTC · Bitcoin $77,461.60 · US stock market ope
 
 | Rank | Strategy | Type | Market | Worth now | Profit | Trades |
 |---|---|---|---|---:|---:|---:|
-| 1 | Nvidia buy & hold | Hold | Stock | $101.06 | +$1.06 (+1.1%) | 1 |
+| 1 | Nvidia buy & hold | Hold | Stock | $101.09 | +$1.09 (+1.1%) | 1 |
 | 2 | Nvidia trend (200 day) | Static rule | Stock | $100.30 | +$0.30 (+0.3%) | 2 |
 | 3 | Bitcoin trend bot (5/20 day) | Static rule | Bitcoin | $100.00 | +$0.00 (+0.0%) | 0 |
-| 4 | Amazon trend (200 day) | Static rule | Stock | $99.72 | -$0.28 (-0.3%) | 1 |
-| 5 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.71 | -$0.29 (-0.3%) | 3 |
-| 6 | RSI dip-buying (S&P 500) | Static rule | ETF | $99.66 | -$0.34 (-0.3%) | 1 |
-| 7 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $99.65 | -$0.35 (-0.3%) | 1 |
-| 8 | S&P 500 buy & hold | Hold | ETF | $99.65 | -$0.35 (-0.4%) | 1 |
-| 9 | S&P 500 trend (200 day) | Static rule | ETF | $99.65 | -$0.35 (-0.4%) | 1 |
-| 10 | Microsoft buy & hold | Hold | Stock | $99.42 | -$0.58 (-0.6%) | 1 |
-| 11 | Microsoft trend (200 day) | Static rule | Stock | $99.42 | -$0.58 (-0.6%) | 1 |
-| 12 | Amazon buy & hold | Hold | Stock | $99.34 | -$0.66 (-0.7%) | 1 |
+| 4 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.72 | -$0.28 (-0.3%) | 3 |
+| 5 | Amazon trend (200 day) | Static rule | Stock | $99.71 | -$0.29 (-0.3%) | 1 |
+| 6 | RSI dip-buying (S&P 500) | Static rule | ETF | $99.67 | -$0.33 (-0.3%) | 1 |
+| 7 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $99.66 | -$0.34 (-0.3%) | 1 |
+| 8 | S&P 500 buy & hold | Hold | ETF | $99.66 | -$0.34 (-0.3%) | 1 |
+| 9 | S&P 500 trend (200 day) | Static rule | ETF | $99.66 | -$0.34 (-0.3%) | 1 |
+| 10 | Microsoft buy & hold | Hold | Stock | $99.44 | -$0.56 (-0.6%) | 1 |
+| 11 | Microsoft trend (200 day) | Static rule | Stock | $99.44 | -$0.56 (-0.6%) | 1 |
+| 12 | Amazon buy & hold | Hold | Stock | $99.33 | -$0.67 (-0.7%) | 1 |
 | 13 | Wide momentum (10 ETFs) | Monthly pick | ETF | $98.79 | -$1.21 (-1.2%) | 1 |
 | 14 | Bitcoin buy & hold | Hold | Bitcoin | $98.59 | -$1.41 (-1.4%) | 1 |
 | 15 | Apple buy & hold | Hold | Stock | $98.37 | -$1.63 (-1.6%) | 1 |
 | 16 | Apple trend (200 day) | Static rule | Stock | $98.37 | -$1.63 (-1.6%) | 1 |
-| 17 | Tesla buy & hold | Hold | Stock | $97.99 | -$2.01 (-2.0%) | 1 |
-| 18 | Tesla trend (200 day) | Static rule | Stock | $97.99 | -$2.01 (-2.0%) | 1 |
+| 17 | Tesla buy & hold | Hold | Stock | $97.97 | -$2.03 (-2.0%) | 1 |
+| 18 | Tesla trend (200 day) | Static rule | Stock | $97.97 | -$2.03 (-2.0%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
 | Bitcoin | $98.59 | $100.00 | trading |
-| S&P 500 | $99.65 | $99.65 | about even |
+| S&P 500 | $99.66 | $99.66 | about even |
 | Apple | $98.37 | $98.37 | about even |
-| Microsoft | $99.42 | $99.42 | about even |
-| Nvidia | $101.06 | $100.30 | holding |
-| Amazon | $99.34 | $99.72 | about even |
-| Tesla | $97.99 | $97.99 | about even |
+| Microsoft | $99.44 | $99.44 | about even |
+| Nvidia | $101.09 | $100.30 | holding |
+| Amazon | $99.33 | $99.71 | about even |
+| Tesla | $97.97 | $97.97 | about even |
 
-**All together:** $1,787.67 from $1,800 (-12.33)
+**All together:** $1,787.74 from $1,800 (-12.26)
 
 ## What each one is doing
 
-- **Nvidia buy & hold:** NVDA $100.55, cash $0.51. Holding.
+- **Nvidia buy & hold:** NVDA $100.58, cash $0.51. Holding.
 - **Nvidia trend (200 day):** cash $100.30. Signal: in cash (price $202.21 vs 200d avg $204.17).
 - **Bitcoin trend bot (5/20 day):** cash $100.00. Signal: in cash (5d avg $77,470.13 vs 20d avg $80,502.23).
-- **Amazon trend (200 day):** AMZN $99.21, cash $0.51. Signal: in the market (price $245.74 vs 200d avg $243.43).
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.48, GLD $19.76, BTC/USD $9.85, cash $10.62. Rebalanced 2026-11, next rebalance next month.
-- **RSI dip-buying (S&P 500):** SPY $99.15, cash $0.51. Holding, waiting for a bounce above the 5-day average (RSI-2 7, buys below 10).
-- **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $99.14, cash $0.51. Holding SPY until next month's check.
-- **S&P 500 buy & hold:** SPY $99.14, cash $0.51. Holding.
-- **S&P 500 trend (200 day):** SPY $99.14, cash $0.51. Signal: in the market (price $752.04 vs 200d avg $726.27).
-- **Microsoft buy & hold:** MSFT $98.91, cash $0.51. Holding.
-- **Microsoft trend (200 day):** MSFT $98.91, cash $0.51. Signal: in the market (price $507.00 vs 200d avg $437.11).
-- **Amazon buy & hold:** AMZN $98.83, cash $0.51. Holding.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.49, GLD $19.76, BTC/USD $9.85, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Amazon trend (200 day):** AMZN $99.20, cash $0.51. Signal: in the market (price $245.74 vs 200d avg $243.43).
+- **RSI dip-buying (S&P 500):** SPY $99.16, cash $0.51. Holding, waiting for a bounce above the 5-day average (RSI-2 7, buys below 10).
+- **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $99.15, cash $0.51. Holding SPY until next month's check.
+- **S&P 500 buy & hold:** SPY $99.15, cash $0.51. Holding.
+- **S&P 500 trend (200 day):** SPY $99.15, cash $0.51. Signal: in the market (price $752.04 vs 200d avg $726.27).
+- **Microsoft buy & hold:** MSFT $98.93, cash $0.51. Holding.
+- **Microsoft trend (200 day):** MSFT $98.93, cash $0.51. Signal: in the market (price $507.00 vs 200d avg $437.11).
+- **Amazon buy & hold:** AMZN $98.82, cash $0.51. Holding.
 - **Wide momentum (10 ETFs):** XLE $98.28, cash $0.51. Holding XLE until next month's check.
 - **Bitcoin buy & hold:** BTC/USD $96.20, cash $2.39. Holding.
 - **Apple buy & hold:** AAPL $97.86, cash $0.51. Holding.
 - **Apple trend (200 day):** AAPL $97.86, cash $0.51. Signal: in the market (price $338.70 vs 200d avg $296.65).
-- **Tesla buy & hold:** TSLA $97.48, cash $0.51. Holding.
-- **Tesla trend (200 day):** TSLA $97.48, cash $0.51. Signal: in the market (price $403.93 vs 200d avg $385.10).
+- **Tesla buy & hold:** TSLA $97.46, cash $0.51. Holding.
+- **Tesla trend (200 day):** TSLA $97.46, cash $0.51. Signal: in the market (price $403.93 vs 200d avg $385.10).
 
 ## 15-minute Bitcoin betting test (paper)
 
