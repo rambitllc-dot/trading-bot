@@ -62,6 +62,12 @@ for _sym, _name in STOCKS.items():
                                            "symbol": _sym, "fast": 1, "slow": 200}
 
 # rows for the "hold vs trade" table: (asset, hold key, trading key)
+# Whole-market strategies: scan all S&P 500 stocks with one rule, and an equal-weight yardstick.
+STRATEGIES["sp500_momentum"] = {"name": "Stock momentum (top 10 of the S&P 500)", "type": "stock_momentum",
+                                "top": 10}
+STRATEGIES["rsp_hold"] = {"name": "S&P 500 equal weight (RSP) buy & hold", "type": "hold", "symbol": "RSP"}
+SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
+
 PAIRS = [("Bitcoin", "btc_hold", "btc_trend"), ("S&P 500", "spy_hold", "spy_trend")] + \
         [(n, f"{s.lower()}_hold", f"{s.lower()}_trend") for s, n in STOCKS.items()]
 
@@ -477,7 +483,84 @@ def betting_report(state):
     return lines
 
 
-RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix, "momentum": run_momentum, "rsi": run_rsi}
+def sp500_symbols():
+    """Current S&P 500 list; refreshed from the web, with the copy in the repo as a fallback."""
+    text = None
+    try:
+        r = requests.get(SP500_URL, timeout=30)
+        if r.ok and r.text.startswith("Symbol"):
+            text = r.text
+            with open("sp500.csv", "w") as f:
+                f.write(text)
+    except requests.RequestException:
+        pass
+    if text is None:
+        with open("sp500.csv") as f:
+            text = f.read()
+    rows = list(csv.reader(text.splitlines()))[1:]
+    return [r[0].strip() for r in rows if r and r[0].strip()]
+
+
+def twelve_month_returns(symbols):
+    """Return over the 12 months ending last month (skipping the latest month, the standard way)."""
+    start = (NOW - dt.timedelta(days=430)).strftime("%Y-%m-01T00:00:00Z")
+    this_month = TODAY[:7]
+    monthly = {}
+    for k in range(0, len(symbols), 100):
+        chunk, token = symbols[k:k + 100], None
+        while True:
+            params = {"symbols": ",".join(chunk), "timeframe": "1Month", "start": start,
+                      "limit": 10000, "feed": "iex", "adjustment": "all"}
+            if token:
+                params["page_token"] = token
+            d = api("GET", f"{DATA_URL}/v2/stocks/bars", params=params)
+            for sym, bars in (d.get("bars") or {}).items():
+                monthly.setdefault(sym, []).extend(b["c"] for b in bars if not b["t"].startswith(this_month))
+            token = d.get("next_page_token")
+            if not token:
+                break
+    return {sym: c[-1] / c[-13] - 1 for sym, c in monthly.items() if len(c) >= 13 and c[-13] > 0}
+
+
+def fractionable(sym):
+    try:
+        a = api("GET", f"{TRADE_URL}/v2/assets/{sym}")
+        return a.get("tradable") and a.get("fractionable")
+    except TradeError:
+        return False
+
+
+def run_stock_momentum(key, cfg, s):
+    month = TODAY[:7]
+    held = sorted(sym for sym, q in s["pos"].items() if q > 0)
+    if s.get("last_rebalance") == month:
+        return f"holding {', '.join(held) or 'cash'} until next month's scan"
+    if not can_trade("SPY"):
+        return "waiting for market open for the monthly scan"
+    rets = twelve_month_returns(sp500_symbols())
+    if len(rets) < 100:
+        return f"only got price history for {len(rets)} stocks; will retry next run"
+    picks = []
+    for sym in sorted(rets, key=rets.get, reverse=True):
+        if sym in held or fractionable(sym):
+            picks.append(sym)
+        if len(picks) == cfg["top"]:
+            break
+    for sym in held:  # sell the ones that dropped out of the top 10
+        if sym not in picks:
+            sell(key, s, sym, s["pos"][sym])
+    new = [sym for sym in picks if s["pos"].get(sym, 0) == 0]
+    if new:
+        each = s["cash"] / len(new)
+        for sym in new:
+            buy(key, s, sym, each * 0.995)
+    s["last_rebalance"] = month
+    best = ", ".join(f"{sym} {rets[sym]:+.0%}" for sym in picks)
+    return f"scanned {len(rets)} stocks; top {len(picks)} for {month}: {best}"
+
+
+RUNNERS = {"hold": run_hold, "trend": run_trend, "mix": run_mix, "momentum": run_momentum, "rsi": run_rsi,
+           "stock_momentum": run_stock_momentum}
 
 
 # ---------- state & reports ----------
@@ -501,7 +584,9 @@ def load_state():
 def strategy_label(cfg):
     """(type, market) labels shown in the scoreboard."""
     kind = {"hold": "Hold", "trend": "Static rule", "mix": "Static rule (rebalance)",
-            "momentum": "Monthly pick", "rsi": "Static rule"}[cfg["type"]]
+            "momentum": "Monthly pick", "rsi": "Static rule", "stock_momentum": "Monthly pick"}[cfg["type"]]
+    if cfg["type"] == "stock_momentum":
+        return kind, "Stock"
     syms = cfg.get("symbols") or list(cfg.get("weights", {})) or [cfg.get("symbol")]
     if all(is_crypto(s) for s in syms):
         market = "Bitcoin"
@@ -564,7 +649,7 @@ def write_reports(state, notes):
         with open("history.csv") as f:
             lines_ = f.read().strip().splitlines()
         if lines_[0] != ",".join(["date"] + keys):  # strategies changed: start a fresh file
-            os.replace("history.csv", "history_old.csv")
+            os.replace("history.csv", f"history_until_{TODAY}.csv")
             exists = False
         elif lines_[-1].startswith(TODAY):
             return values
