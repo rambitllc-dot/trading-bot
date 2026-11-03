@@ -1,0 +1,7 @@
+{
+  "enabled": false,
+  "max_total_dollars": 0,
+  "stop_if_down_percent": 20,
+  "sell_everything_now": false,
+  "strategies": {}
+}

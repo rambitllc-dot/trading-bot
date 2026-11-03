@@ -80,9 +80,11 @@ PAIRS = [("Bitcoin", "btc_hold", "btc_trend"), ("S&P 500", "spy_hold", "spy_tren
 
 KEY = os.environ["ALPACA_KEY"]
 SECRET = os.environ["ALPACA_SECRET"]
-TRADE_URL = "https://paper-api.alpaca.markets"  # paper account only, never real money
 DATA_URL = "https://data.alpaca.markets"
-HEADERS = {"APCA-API-KEY-ID": KEY, "APCA-API-SECRET-KEY": SECRET}
+HEADERS = {"APCA-API-KEY-ID": KEY, "APCA-API-SECRET-KEY": SECRET}  # paper keys, also used for price data
+PAPER = {"live": False, "url": "https://paper-api.alpaca.markets", "headers": HEADERS,
+         "trades_file": "trades.csv"}
+ACCT = PAPER  # which account orders go to; switched to the live account only inside run_live()
 NOW = dt.datetime.now(dt.timezone.utc)
 TODAY = NOW.strftime("%Y-%m-%d")
 
@@ -92,7 +94,8 @@ class TradeError(Exception):
 
 
 def api(method, url, **kw):
-    r = requests.request(method, url, headers=HEADERS, timeout=30, **kw)
+    headers = ACCT["headers"] if url.startswith(ACCT["url"]) else HEADERS
+    r = requests.request(method, url, headers=headers, timeout=30, **kw)
     if r.status_code >= 400:
         raise TradeError(f"Alpaca {r.status_code}: {r.text[:300]}")
     return r.json()
@@ -142,7 +145,7 @@ def can_trade(sym):
     if is_crypto(sym):
         return True
     if MARKET_OPEN is None:
-        MARKET_OPEN = bool(api("GET", f"{TRADE_URL}/v2/clock")["is_open"])
+        MARKET_OPEN = bool(api("GET", f"{ACCT['url']}/v2/clock")["is_open"])
     return MARKET_OPEN
 
 
@@ -153,14 +156,14 @@ def floor9(x):
 
 def wait_for_fill(order_id):
     for _ in range(20):
-        o = api("GET", f"{TRADE_URL}/v2/orders/{order_id}")
+        o = api("GET", f"{ACCT['url']}/v2/orders/{order_id}")
         if o["status"] == "filled":
             return float(o["filled_qty"]), float(o["filled_avg_price"])
         if o["status"] in ("canceled", "expired", "rejected"):
             raise TradeError(f"order {o['status']}")
         time.sleep(3)
     try:
-        api("DELETE", f"{TRADE_URL}/v2/orders/{order_id}")
+        api("DELETE", f"{ACCT['url']}/v2/orders/{order_id}")
     except TradeError:
         pass
     raise TradeError("order did not fill in time; canceled, will retry next run")
@@ -174,7 +177,7 @@ def buy(key, s, sym, dollars):
         dollars = CRYPTO_MIN  # round a near-$10 order up to the minimum
     if dollars < 1:
         return
-    o = api("POST", f"{TRADE_URL}/v2/orders", json={
+    o = api("POST", f"{ACCT['url']}/v2/orders", json={
         "symbol": sym, "notional": f"{dollars:.2f}", "side": "buy", "type": "market",
         "time_in_force": "gtc" if is_crypto(sym) else "day"})
     qty, price = wait_for_fill(o["id"])
@@ -183,14 +186,19 @@ def buy(key, s, sym, dollars):
         qty *= 1 - CRYPTO_FEE  # the fee comes out of the coins received
     s["pos"][sym] = s["pos"].get(sym, 0.0) + qty
     s["trades"] += 1
+    s.setdefault("bought_on", {})[sym] = TODAY
     log_trade(key, "BUY", sym, qty, price, s["cash"])
 
 
-def sell(key, s, sym, qty):
+def sell(key, s, sym, qty, urgent=False):
     qty = floor9(min(qty, s["pos"].get(sym, 0.0)))
     if qty <= 0 or qty * latest(sym) < (CRYPTO_MIN if is_crypto(sym) else 1):
         return
-    o = api("POST", f"{TRADE_URL}/v2/orders", json={
+    if ACCT["live"] and not urgent and not is_crypto(sym) and s.get("bought_on", {}).get(sym) == TODAY:
+        # US "pattern day trader" rule: small accounts can't buy and sell the same stock the same day
+        # more than 3 times a week, so the live bot simply waits until tomorrow.
+        raise TradeError(f"bought {sym} today; will sell tomorrow (avoids the day-trading rule)")
+    o = api("POST", f"{ACCT['url']}/v2/orders", json={
         "symbol": sym, "qty": f"{qty:.9f}", "side": "sell", "type": "market",
         "time_in_force": "gtc" if is_crypto(sym) else "day"})
     fq, price = wait_for_fill(o["id"])
@@ -200,8 +208,15 @@ def sell(key, s, sym, qty):
     log_trade(key, "SELL", sym, fq, price, s["cash"])
 
 
+LIVE_TRADE_ALERTS = []
+
+
 def log_trade(key, side, sym, qty, price, cash_after):
-    path = "trades.csv"
+    path = ACCT["trades_file"]
+    if ACCT["live"]:
+        LIVE_TRADE_ALERTS.append((f"Live trade: {side} {sym} ${qty * price:,.2f}",
+                                  f"{STRATEGIES[key]['name']} {side.lower()} {qty:.6f} {sym} at ${price:,.2f} "
+                                  f"with real money. Strategy cash after: ${cash_after:,.2f}."))
     if os.path.exists(path):
         with open(path) as f:
             if "strategy" not in f.readline():
@@ -531,7 +546,7 @@ def twelve_month_returns(symbols):
 
 def fractionable(sym):
     try:
-        a = api("GET", f"{TRADE_URL}/v2/assets/{sym}")
+        a = api("GET", f"{ACCT['url']}/v2/assets/{sym}")
         return a.get("tradable") and a.get("fractionable")
     except TradeError:
         return False
@@ -576,7 +591,8 @@ def run_gradual(key, cfg, s):
                f"{dt.date.fromisoformat(last) + dt.timedelta(days=cfg['every_days'])}"
     if not can_trade(sym):
         return f"bought {done} of {cfg['buys']} times; next buy when the market opens"
-    amount = s["cash"] * 0.995 if done == cfg["buys"] - 1 else cfg["per_buy"]
+    per_buy = cfg["per_buy"] * s.get("budget", START_BUDGET) / START_BUDGET
+    amount = s["cash"] * 0.995 if done == cfg["buys"] - 1 else per_buy
     buy(key, s, sym, amount)
     s["buys_done"], s["last_buy"] = done + 1, TODAY
     return f"bought {done + 1} of {cfg['buys']} times"
@@ -800,6 +816,135 @@ def write_reports(state, notes):
     return values
 
 
+# =====================================================================
+# LIVE TRADING WITH REAL MONEY  (off unless live_config.json says "enabled": true)
+# =====================================================================
+LIVE_URL = "https://api.alpaca.markets"
+
+
+def live_report(lines):
+    with open("LIVE_REPORT.md", "w") as f:
+        f.write("\n".join(["# Live trading (real money)", "",
+                           f"Last check: {NOW.strftime('%b %d, %Y %H:%M')} UTC", ""] + lines + [""]))
+
+
+def run_live():
+    """Run the strategies chosen in live_config.json with real money, inside strict limits."""
+    global ACCT
+    try:
+        with open("live_config.json") as f:
+            cfg = json.load(f)
+    except (OSError, ValueError) as e:
+        live_report([f"**OFF.** Could not read live_config.json ({e})."])
+        return []
+    if not cfg.get("enabled"):
+        live_report(["**OFF.** Live trading is switched off in live_config.json. Nothing is bought or sold "
+                     "with real money. See LIVE.md for how to switch it on."])
+        return []
+    key, secret = os.environ.get("ALPACA_LIVE_KEY"), os.environ.get("ALPACA_LIVE_SECRET")
+    if not key or not secret:
+        live_report(["**WAITING.** live_config.json is on, but the ALPACA_LIVE_KEY and ALPACA_LIVE_SECRET "
+                     "secrets are not set in GitHub yet."])
+        return []
+    budgets = {k: float(v) for k, v in cfg.get("strategies", {}).items()}
+    unknown = [k for k in budgets if k not in STRATEGIES]
+    if unknown:
+        live_report([f"**STOPPED.** Unknown strategy names in live_config.json: {', '.join(unknown)}. "
+                     "Use the names listed in LIVE.md."])
+        return []
+    cap = float(cfg.get("max_total_dollars", 0))
+    if sum(budgets.values()) > cap:
+        live_report([f"**STOPPED.** The strategy budgets add up to ${sum(budgets.values()):,.2f}, more than "
+                     f"max_total_dollars (${cap:,.2f}). Lower a budget or raise the limit."])
+        return []
+
+    ACCT = {"live": True, "url": LIVE_URL, "trades_file": "trades_live.csv",
+            "headers": {"APCA-API-KEY-ID": key, "APCA-API-SECRET-KEY": secret}}
+    alerts = []
+    try:
+        acct = api("GET", f"{LIVE_URL}/v2/account")
+        if acct.get("status") != "ACTIVE" or acct.get("trading_blocked") or acct.get("account_blocked"):
+            live_report([f"**STOPPED.** Alpaca says the live account isn't ready to trade "
+                         f"(status: {acct.get('status')})."])
+            return []
+        state = {"strategies": {}, "halted": False}
+        if os.path.exists("live_state.json"):
+            with open("live_state.json") as f:
+                state = json.load(f)
+        strat = state["strategies"]
+        for k, budget in budgets.items():
+            if k not in strat:  # newly added: needs real cash available in the account
+                if float(acct.get("cash", 0)) < budget:
+                    alerts.append(("Live: not enough cash", f"Need ${budget:,.2f} to start {STRATEGIES[k]['name']}, "
+                                   f"but the account has ${float(acct.get('cash', 0)):,.2f}."))
+                    continue
+                strat[k] = {"cash": budget, "budget": budget, "pos": {}, "trades": 0, "started": TODAY}
+                acct["cash"] = str(float(acct.get("cash", 0)) - budget)
+        invested = sum(s["budget"] for s in strat.values())
+        total = sum(value(s) for s in strat.values())
+        stop_pct = float(cfg.get("stop_if_down_percent", 20))
+        notes = {}
+
+        if cfg.get("sell_everything_now") or (invested and total <= invested * (1 - stop_pct / 100) and not state["halted"]):
+            reason = ("sell_everything_now is set in live_config.json" if cfg.get("sell_everything_now")
+                      else f"total value fell {stop_pct:.0f}% below what was put in")
+            for k, s in strat.items():
+                for sym, q in list(s["pos"].items()):
+                    if q > 0:
+                        try:
+                            if can_trade(sym):
+                                sell(k, s, sym, q, urgent=True)
+                        except TradeError as e:
+                            notes[k] = f"could not sell {sym}: {e}"
+            if not cfg.get("sell_everything_now"):
+                state["halted"] = True
+                alerts.append(("Live trading STOPPED: loss limit reached",
+                               f"The live strategies are worth ${total:,.2f} from ${invested:,.2f} put in. "
+                               f"The bot sold what it could and stopped. To restart, see LIVE.md."))
+            notes = {k: notes.get(k, f"selling everything ({reason})") for k in strat}
+        elif state["halted"]:
+            for k, s in strat.items():  # keep selling anything left (e.g. stocks while the market was closed)
+                notes[k] = "halted after hitting the loss limit (see LIVE.md to restart)"
+                for sym, q in list(s["pos"].items()):
+                    if q > 0 and can_trade(sym):
+                        try:
+                            sell(k, s, sym, q, urgent=True)
+                        except TradeError as e:
+                            notes[k] = f"halted; could not sell {sym} yet: {e}"
+        else:
+            for k, s in strat.items():
+                if k not in budgets:
+                    notes[k] = "removed from live_config.json; holding what it has, no new trades"
+                    continue
+                try:
+                    notes[k] = RUNNERS[STRATEGIES[k]["type"]](k, STRATEGIES[k], s)
+                except TradeError as e:
+                    notes[k] = f"problem this run: {e}"
+
+        with open("live_state.json", "w") as f:
+            json.dump(state, f, indent=2)
+            f.write("\n")
+        total = sum(value(s) for s in strat.values())
+        lines = [f"**ON.** Real money. Stops and sells everything if the total falls below "
+                 f"${invested * (1 - stop_pct / 100):,.2f} ({stop_pct:.0f}% loss)." if not state["halted"]
+                 else "**HALTED** after hitting the loss limit. No new trades.", "",
+                 f"**Total: ${total:,.2f}** from ${invested:,.2f} put in ({total - invested:+,.2f}, "
+                 f"{(total / invested - 1) if invested else 0:+.1%})", "",
+                 "| Strategy | Put in | Worth now | Profit | Trades | Doing |", "|---|---:|---:|---:|---:|---|"]
+        for k, s in strat.items():
+            v = value(s)
+            lines.append(f"| {STRATEGIES[k]['name']} | ${s['budget']:,.2f} | ${v:,.2f} | {v - s['budget']:+,.2f} | "
+                         f"{s['trades']} | {notes.get(k, '')} |")
+        live_report(lines)
+        print(f"\nLIVE: total ${total:,.2f} from ${invested:,.2f}")
+    except (TradeError, requests.RequestException, KeyError, ValueError) as e:
+        live_report([f"**PROBLEM this run:** {e}. The bot will try again in 30 minutes."])
+        alerts.append(("Live trading problem", str(e)))
+    finally:
+        ACCT = PAPER
+    return alerts + LIVE_TRADE_ALERTS
+
+
 def main():
     state = load_state()
     notes = {}
@@ -823,6 +968,10 @@ def main():
         json.dump(state, f, indent=2)
         f.write("\n")
     values = write_reports(state, notes)
+    try:
+        send_alerts(run_live())
+    except Exception as e:  # never let a live-trading error stop the paper test
+        print(f"LIVE: unexpected problem: {e}")
     print("\n" + "\n".join(f"{STRATEGIES[k]['name']}: ${v:,.2f} ({v - START_BUDGET:+.2f})" for k, v in values.items()))
 
 

@@ -35,6 +35,8 @@ jobs:
           ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
           GITHUB_TOKEN: ${{ github.token }}
+          ALPACA_LIVE_KEY: ${{ secrets.ALPACA_LIVE_KEY }}        # empty until you go live
+          ALPACA_LIVE_SECRET: ${{ secrets.ALPACA_LIVE_SECRET }}
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
