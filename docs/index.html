@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Strategy Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a trading-desk ledger. Summary strip on top, then the reading ("what the data says"),
+   then one chart per question, then the full ledger table. */
+:root{
+  --bg:#F1F4F3; --panel:#FFFFFF; --ink:#15201C; --muted:#5D6B66; --line:#D6DDDA; --soft:#E8EDEB;
+  --accent:#2B47C9; --gain:#17774E; --loss:#B93A26;
+  --t-hold:#6B7A90; --t-static:#2B6FD6; --t-rebal:#1D8F86; --t-pick:#B8730F; --t-gradual:#8A4FD1;
+  --display:"Archivo",system-ui,sans-serif; --body:"Public Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1416; --panel:#161F22; --ink:#E4ECE9; --muted:#93A29D; --line:#29363B; --soft:#1C272B;
+  --accent:#8EA2FF; --gain:#4CC08A; --loss:#F07A64;
+  --t-hold:#9AA8BB; --t-static:#6FA0F2; --t-rebal:#4CC2B8; --t-pick:#E3A443; --t-gradual:#B48BEB; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1416; --panel:#161F22; --ink:#E4ECE9; --muted:#93A29D; --line:#29363B; --soft:#1C272B;
+  --accent:#8EA2FF; --gain:#4CC08A; --loss:#F07A64;
+  --t-hold:#9AA8BB; --t-static:#6FA0F2; --t-rebal:#4CC2B8; --t-pick:#E3A443; --t-gradual:#B48BEB; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:max(24px,env(safe-area-inset-top,0px));padding-bottom:max(48px,env(safe-area-inset-bottom,0px))}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+h1{font-size:clamp(28px,5vw,40px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:19px;font-weight:600}
+p{margin:0}
+.eyebrow{font:500 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.up{color:var(--gain)} .down{color:var(--loss)}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+header .left{display:flex;flex-direction:column;gap:6px}
+.pill{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--mono);padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.dot.on{background:var(--gain)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kpi{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.kpi small{font-size:12px;color:var(--muted)}
+.kpi b{font:500 22px/1.15 var(--mono);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi span{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.cardhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px}
+.cardhead .t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:20px}
+.reading{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.reading li{padding-left:16px;position:relative;max-width:85ch}
+.reading li::before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 12px var(--body);padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--panel)}
+.chip:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chart{position:relative;width:100%;height:320px}
+.chart.tall{height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat small{font-size:12px;color:var(--muted)}
+.stat b{font:500 17px var(--mono);font-variant-numeric:tabular-nums}
+.unlocks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.unlocks li{display:grid;grid-template-columns:110px 1fr;gap:10px}
+.unlocks .when{font-family:var(--mono);font-size:13px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:820px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 11px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--soft);position:sticky;top:0}
+td.r,th.r{text-align:right}
+td.num{white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;white-space:nowrap}
+.tag i{width:8px;height:8px;border-radius:50%}
+.note{font-size:12px;color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:8px}
+footer{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+footer a{color:var(--accent)}
+#err{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="left">
+      <span class="eyebrow">Paper money · updates every 30 minutes</span>
+      <h1>Strategy Desk</h1>
+      <p class="muted" id="updated">Loading the latest numbers…</p>
+    </div>
+    <span class="pill" id="livepill"><span class="dot"></span><span>Live trading: …</span></span>
+  </header>
+
+  <div class="card empty" id="err"></div>
+
+  <section class="kpis" id="kpis" aria-label="Summary"></section>
+
+  <section class="card">
+    <div class="cardhead"><div class="t"><span class="eyebrow">Reading</span><h2>What the data says</h2></div></div>
+    <ul class="reading" id="reading"></ul>
+  </section>
+
+  <section class="card">
+    <div class="cardhead">
+      <div class="t"><span class="eyebrow">Every strategy</span><h2>Value of each $100 over time</h2>
+        <p class="note">Each line is one strategy. Tap a chip to show only that kind.</p></div>
+      <div class="chips" id="typeChips" role="group" aria-label="Filter by type"></div>
+    </div>
+    <div class="chips" id="marketChips" role="group" aria-label="Filter by market"></div>
+    <div class="chart"><canvas id="timeChart" aria-label="Strategy values over time" role="img"></canvas></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <div class="cardhead"><div class="t"><span class="eyebrow">Ranking</span><h2>Profit or loss so far</h2></div></div>
+      <div class="chart tall" id="rankWrap"><canvas id="rankChart" role="img" aria-label="Profit by strategy"></canvas></div>
+      <div class="legend" id="typeLegend"></div>
+    </section>
+    <section class="card">
+      <div class="cardhead"><div class="t"><span class="eyebrow">The key question</span><h2>Holding vs trading the same asset</h2>
+        <p class="note">Same starting $100. If trading rules can't beat simply holding, they aren't worth it.</p></div></div>
+      <div class="chart tall" id="pairWrap"><canvas id="pairChart" role="img" aria-label="Holding versus trading"></canvas></div>
+      <div class="legend"><span><i style="background:var(--t-hold)"></i>Buy &amp; hold</span><span><i style="background:var(--t-static)"></i>With a trading rule</span></div>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <div class="cardhead"><div class="t"><span class="eyebrow">SpaceX · SPCX</span><h2 id="spcxTitle">SpaceX since the IPO</h2></div></div>
+      <div class="stats" id="spcxStats"></div>
+      <div class="chart"><canvas id="spcxChart" role="img" aria-label="SpaceX price since IPO"></canvas></div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>Daily close</span><span><i style="background:var(--muted)"></i>50-day average</span><span><i style="background:var(--loss)"></i>IPO price $135</span></div>
+      <div><h3 style="font-size:15px;margin-bottom:8px">Upcoming share unlocks</h3><ul class="unlocks" id="unlocks"></ul></div>
+    </section>
+    <section class="card">
+      <div class="cardhead"><div class="t"><span class="eyebrow">Anthropic · ANT</span><h2>Anthropic watch</h2></div></div>
+      <div id="antBody"></div>
+      <div class="cardhead" style="margin-top:6px"><div class="t"><span class="eyebrow">15-minute Bitcoin bets</span><h2>Win rate vs. what's needed</h2>
+        <p class="note">A win pays 0.8× the bet, so a method must win more than the dashed line to make money.</p></div>
+        <div class="chips" id="betChips" role="group" aria-label="Live or backtest"></div></div>
+      <div class="chart tall" id="betWrap"><canvas id="betChart" role="img" aria-label="Betting win rates"></canvas></div>
+      <p class="note" id="betNote"></p>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="cardhead"><div class="t"><span class="eyebrow">Ledger</span><h2>All strategies in detail</h2>
+      <p class="note">"Worst drop" is the biggest fall from a high point so far, a simple measure of risk.</p></div></div>
+    <div class="tablewrap"><table id="ledger"><thead><tr>
+      <th>Strategy</th><th>Type</th><th>Market</th><th class="r">Worth</th><th class="r">Profit</th><th class="r">Worst drop</th><th class="r">Trades</th><th>Holding</th><th>Doing</th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <footer>
+    <p>Paper money only. Past or paper results don't predict future results. Not financial advice.</p>
+    <p>Full text report: <a href="https://github.com/rambitllc-dot/trading-bot/blob/main/REPORT.md">REPORT.md</a> · Live trading: <a href="https://github.com/rambitllc-dot/trading-bot/blob/main/LIVE_REPORT.md">LIVE_REPORT.md</a></p>
+  </footer>
+</div>
+
+<script src="chart.umd.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const money = (v, d = 2) => (v < 0 ? "-$" : "$") + Math.abs(v).toLocaleString("en-US", {minimumFractionDigits: d, maximumFractionDigits: d});
+const signed = v => (v >= 0 ? "+" : "-") + "$" + Math.abs(v).toFixed(2);
+const pct = (v, d = 1) => v == null ? "–" : (v >= 0 ? "+" : "") + (v * 100).toFixed(d) + "%";
+const cls = v => v > 0.004 ? "up" : v < -0.004 ? "down" : "";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const TYPE_TOKEN = {"Hold": "--t-hold", "Static rule": "--t-static", "Static rule (rebalance)": "--t-rebal",
+                    "Monthly pick": "--t-pick", "Gradual buy": "--t-gradual"};
+const typeColor = t => css(TYPE_TOKEN[t] || "--muted");
+const fmtTime = iso => { const d = new Date(iso); return isNaN(d) ? iso : d.toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"}); };
+let D = null, charts = {}, filt = {type: "All", market: "All"}, betView = "live";
+
+function base() {
+  Chart.defaults.font.family = css("--body").split(",")[0].replace(/"/g, "") + ", system-ui, sans-serif";
+  Chart.defaults.color = css("--muted");
+  Chart.defaults.borderColor = css("--line");
+  Chart.defaults.animation = matchMedia("(prefers-reduced-motion: reduce)").matches ? false : {duration: 300};
+}
+function make(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+
+function kpis() {
+  const s = D.strategies, up = s.filter(x => x.profit > 0.005).length, start = D.budget * D.count;
+  const sp = D.spacex || {}, ant = (D.ipo || {}).ANT || {};
+  const tiles = [
+    ["All strategies together", money(D.total), `${signed(D.total - start)} from ${money(start, 0)}`, cls(D.total - start)],
+    ["Strategies up", `${up} of ${s.length}`, `${s.length - up} flat or down`, ""],
+    ["Leader", signed(s[0].profit), esc(s[0].name), cls(s[0].profit)],
+    ["Bitcoin", money(D.btc, 0), D.market_open ? "Stock market open" : "Stock market closed", ""],
+    ["SpaceX", sp.price ? money(sp.price) : "–", sp.since_ipo != null ? `${pct(sp.since_ipo)} since IPO` : "", cls(sp.since_ipo || 0)],
+    ["Anthropic", ant.trading ? money(ant.price) : "Not trading yet", ant.trading ? `since ${ant.first_seen}` : "Waiting for IPO", ""],
+  ];
+  $("kpis").innerHTML = tiles.map(([k, v, sub, c]) => `<div class="kpi"><small>${k}</small><b class="${c}">${v}</b><span>${sub}</span></div>`).join("");
+}
+
+function chips() {
+  const types = ["All", ...new Set(D.strategies.map(s => s.type))];
+  const markets = ["All", ...new Set(D.strategies.map(s => s.market))];
+  $("typeChips").innerHTML = types.map(t => `<button type="button" class="chip" data-type="${esc(t)}" aria-pressed="${filt.type === t}">${t === "All" ? "" : `<i style="background:${typeColor(t)}"></i>`}${esc(t === "All" ? "All types" : t)}</button>`).join("");
+  $("marketChips").innerHTML = markets.map(m => `<button type="button" class="chip" data-market="${esc(m)}" aria-pressed="${filt.market === m}">${esc(m === "All" ? "All markets" : m)}</button>`).join("");
+  $("typeLegend").innerHTML = types.slice(1).map(t => `<span><i style="background:${typeColor(t)}"></i>${esc(t)}</span>`).join("");
+}
+
+function timeChart() {
+  const tl = D.timeline, labels = tl.times.map(fmtTime);
+  const pick = D.strategies.filter(s => (filt.type === "All" || s.type === filt.type) && (filt.market === "All" || s.market === filt.market));
+  const top = new Set(D.strategies.slice(0, 3).map(s => s.key));
+  const ds = pick.map(s => ({
+    label: s.name, data: tl.series[s.key] || [], borderColor: typeColor(s.type),
+    borderWidth: top.has(s.key) ? 2.4 : 1.4, pointRadius: 0, pointHoverRadius: 3, tension: .2, spanGaps: false,
+  }));
+  make("timeChart", {type: "line", data: {labels, datasets: ds}, options: {
+    responsive: true, maintainAspectRatio: false, interaction: {mode: "nearest", intersect: false},
+    plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${money(c.parsed.y)}`}}},
+    scales: {x: {grid: {display: false}, ticks: {maxTicksLimit: 6, maxRotation: 0}},
+             y: {ticks: {callback: v => "$" + v}, grid: {color: css("--soft")}}}}});
+}
+
+function barHeight(n) { return Math.max(160, n * 26 + 40) + "px"; }
+
+function rankChart() {
+  const s = D.strategies;
+  $("rankWrap").style.height = barHeight(s.length);
+  make("rankChart", {type: "bar", data: {labels: s.map(x => x.name), datasets: [{
+      data: s.map(x => x.profit), backgroundColor: s.map(x => typeColor(x.type)), borderRadius: 3, barThickness: 14}]},
+    options: {indexAxis: "y", responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => `${signed(c.parsed.x)} (${s[c.dataIndex].type}, ${s[c.dataIndex].market})`}}},
+      scales: {x: {ticks: {callback: v => (v >= 0 ? "+$" : "-$") + Math.abs(v)}, grid: {color: css("--soft")}},
+               y: {grid: {display: false}, ticks: {autoSkip: false, font: {size: 11},
+                   callback: function (v) { const l = this.getLabelForValue(v); return l.length > 34 ? l.slice(0, 33) + "…" : l; }}}}}});
+}
+
+function pairChart() {
+  const p = D.pairs;
+  $("pairWrap").style.height = barHeight(p.length * 1.6);
+  make("pairChart", {type: "bar", data: {labels: p.map(x => x.asset), datasets: [
+      {label: "Buy & hold", data: p.map(x => +(x.hold - D.budget).toFixed(2)), backgroundColor: css("--t-hold"), borderRadius: 3, barThickness: 11},
+      {label: "With a trading rule", data: p.map(x => +(x.trade - D.budget).toFixed(2)), backgroundColor: css("--t-static"), borderRadius: 3, barThickness: 11}]},
+    options: {indexAxis: "y", responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: c => `${c.dataset.label}: ${signed(c.parsed.x)}`}}},
+      scales: {x: {ticks: {callback: v => (v >= 0 ? "+$" : "-$") + Math.abs(v)}, grid: {color: css("--soft")}}, y: {grid: {display: false}}}}});
+}
+
+const hLine = {id: "hLine", afterDatasetsDraw(c, _, o) {
+  if (o.y == null) return; const {ctx, chartArea: a, scales: {y}} = c; const py = y.getPixelForValue(o.y);
+  if (py < a.top || py > a.bottom) return;
+  ctx.save(); ctx.strokeStyle = o.color; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(a.left, py); ctx.lineTo(a.right, py); ctx.stroke(); ctx.restore(); }};
+const vLine = {id: "vLine", afterDatasetsDraw(c, _, o) {
+  if (o.x == null) return; const {ctx, chartArea: a, scales: {x}} = c; const px = x.getPixelForValue(o.x);
+  ctx.save(); ctx.strokeStyle = o.color; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.moveTo(px, a.top); ctx.lineTo(px, a.bottom); ctx.stroke();
+  ctx.fillStyle = o.color; ctx.font = "11px " + css("--mono"); ctx.textAlign = "center"; ctx.fillText(o.text, px, a.top - 6); ctx.restore(); }};
+
+function spacex() {
+  const sp = D.spacex;
+  if (!sp || !sp.closes) { $("spcxStats").innerHTML = `<p class="muted">SpaceX data will appear after the next run.</p>`; return; }
+  $("spcxTitle").textContent = `SpaceX ${money(sp.price)}`;
+  const st = [["Since IPO ($135)", pct(sp.since_ipo), cls(sp.since_ipo)], ["S&P 500, same time", pct(sp.spy_since_ipo), cls(sp.spy_since_ipo)],
+              ["From its high", pct(sp.price / sp.high - 1), cls(sp.price / sp.high - 1)], ["Trend", sp.price > sp.avg50 ? "Above 50-day avg" : "Below 50-day avg", sp.price > sp.avg50 ? "up" : "down"],
+              ["Typical daily move", "±" + (sp.typical_move * 100).toFixed(1) + "%", ""], ["High / low", `${money(sp.high, 0)} / ${money(sp.low, 0)}`, ""]];
+  $("spcxStats").innerHTML = st.map(([k, v, c]) => `<div class="stat"><small>${k}</small><b class="${c}">${v}</b></div>`).join("");
+  const c = sp.closes, avg = c.map((_, i) => i < 9 ? null : c.slice(Math.max(0, i - 49), i + 1).reduce((a, b) => a + b, 0) / Math.min(50, i + 1));
+  make("spcxChart", {type: "line", data: {labels: sp.dates.map(d => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", {month: "short", day: "numeric"})),
+      datasets: [{label: "Close", data: c, borderColor: css("--accent"), borderWidth: 2, pointRadius: 0, tension: .15,
+                  fill: {target: "origin"}, backgroundColor: css("--accent") + "14"},
+                 {label: "50-day average", data: avg, borderColor: css("--muted"), borderWidth: 1.3, borderDash: [4, 3], pointRadius: 0}]},
+    options: {responsive: true, maintainAspectRatio: false, interaction: {mode: "index", intersect: false},
+      plugins: {legend: {display: false}, hLine: {y: 135, color: css("--loss")},
+                tooltip: {callbacks: {label: c => `${c.dataset.label}: ${money(c.parsed.y)}`}}},
+      scales: {x: {grid: {display: false}, ticks: {maxTicksLimit: 6, maxRotation: 0}},
+               y: {ticks: {callback: v => "$" + v}, grid: {color: css("--soft")}}}}, plugins: [hLine]});
+  $("unlocks").innerHTML = (sp.unlocks || []).map(u => `<li><span class="when">${new Date(u.date + "T12:00:00Z").toLocaleDateString("en-US", {month: "short", day: "numeric", year: "numeric"})}</span><span>${esc(u.what)} <span class="muted">· in ${u.days} days</span></span></li>`).join("") +
+    `<li><span class="when">Each quarter</span><span class="muted">More shares unlock 2 trading days after every earnings report.</span></li>`;
+}
+
+function anthropic() {
+  const a = (D.ipo || {}).ANT || {};
+  const mine = D.strategies.filter(s => s.key.startsWith("ant_"));
+  $("antBody").innerHTML = a.trading
+    ? `<div class="stats"><div class="stat"><small>Price</small><b>${money(a.price)}</b></div><div class="stat"><small>Since first seen (${a.first_seen})</small><b class="${cls(a.price / a.first_price - 1)}">${pct(a.price / a.first_price - 1)}</b></div></div>`
+    : `<p>Not trading yet. Anthropic filed to list on the Nasdaq as <b>ANT</b>; the date and price aren't set. The bot checks every 30 minutes, buys for the three Anthropic strategies as soon as it lists, and sends you a notification.</p>`;
+  $("antBody").innerHTML += `<p class="note" style="margin-top:8px">${mine.map(s => `${esc(s.name)}: ${money(s.value)}`).join(" · ")}</p>`;
+}
+
+function betting() {
+  const b = D.betting; if (!b || !b.methods.length) return;
+  $("betChips").innerHTML = ["live", "backtest"].map(v => `<button type="button" class="chip" data-bet="${v}" aria-pressed="${betView === v}">${v === "live" ? "Live" : "Last 30 days (backtest)"}</button>`).join("");
+  const m = b.methods.map(x => ({...x, r: x[betView].n ? x[betView].w / x[betView].n : null})).sort((a, c) => (c.r ?? -1) - (a.r ?? -1));
+  $("betWrap").style.height = barHeight(m.length);
+  const be = b.break_even * 100;
+  make("betChart", {type: "bar", data: {labels: m.map(x => x.name.split(":")[0] + (x[betView].n ? ` (${x[betView].n} bets)` : " (no bets)")),
+      datasets: [{data: m.map(x => x.r == null ? 0 : +(x.r * 100).toFixed(1)),
+                  backgroundColor: m.map(x => x.r != null && x.r > b.break_even ? css("--gain") : x.label.startsWith("Luck") ? css("--t-hold") : css("--loss")),
+                  borderRadius: 3, barThickness: 14}]},
+    options: {indexAxis: "y", responsive: true, maintainAspectRatio: false, layout: {padding: {top: 18}},
+      plugins: {legend: {display: false}, vLine: {x: be, color: css("--ink"), text: `${be.toFixed(1)}% needed`},
+                tooltip: {callbacks: {label: c => { const x = m[c.dataIndex][betView]; return `${c.parsed.x}% wins · $100 → ${money(x.bank)}`; }}}},
+      scales: {x: {min: 0, max: 100, ticks: {callback: v => v + "%"}, grid: {color: css("--soft")}}, y: {grid: {display: false}}}}, plugins: [vLine]});
+  const best = m[0];
+  $("betNote").textContent = betView === "live"
+    ? `Live since ${b.live_from ? new Date(b.live_from).toLocaleDateString("en-US", {month: "short", day: "numeric"}) : "–"}. Judge only after a few hundred bets each.`
+    : `Over the 30 days before the live test, no method stayed above the line for long; most ran out of money.`;
+}
+
+function ledger() {
+  $("ledger").querySelector("tbody").innerHTML = D.strategies.map(s => `<tr>
+    <td>${esc(s.name)}</td>
+    <td><span class="tag"><i style="background:${typeColor(s.type)}"></i>${esc(s.type)}</span></td>
+    <td>${esc(s.market)}</td>
+    <td class="r num">${money(s.value)}</td>
+    <td class="r num ${cls(s.profit)}">${signed(s.profit)}</td>
+    <td class="r num ${s.max_drop < -0.001 ? "down" : ""}">${(s.max_drop * 100).toFixed(1)}%</td>
+    <td class="r num">${s.trades}</td>
+    <td class="note">${s.holdings.length ? s.holdings.map(h => `${esc(h.sym)} ${money(h.value)}`).join(", ") + ", " : ""}cash ${money(s.cash)}</td>
+    <td class="note">${esc(s.note)}</td></tr>`).join("");
+}
+
+function renderAll() {
+  base(); kpis(); chips(); timeChart(); rankChart(); pairChart(); spacex(); anthropic(); betting(); ledger();
+  $("reading").innerHTML = D.analysis.map(a => `<li>${esc(a)}</li>`).join("");
+  $("updated").textContent = `Updated ${new Date(D.updated.replace(/Z$/, ":00Z")).toLocaleString("en-US", {weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit"})} · started ${D.started}`;
+  const live = D.live_status || "OFF";
+  $("livepill").innerHTML = `<span class="dot ${/^ON/.test(live) ? "on" : ""}"></span><span>Live trading: ${esc(live.split(".")[0])}</span>`;
+}
+
+async function load() {
+  try {
+    const r = await fetch("data.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    D = await r.json(); $("err").style.display = "none"; renderAll();
+  } catch (e) {
+    $("err").style.display = "block";
+    $("err").textContent = "Couldn't load the latest data yet. The bot writes it every 30 minutes; try again shortly.";
+  }
+}
+document.addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t || !D) return;
+  if (t.dataset.type) { filt.type = t.dataset.type; chips(); timeChart(); }
+  if (t.dataset.market) { filt.market = t.dataset.market; chips(); timeChart(); }
+  if (t.dataset.bet) { betView = t.dataset.bet; betting(); }
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => D && renderAll());
+load(); setInterval(load, 5 * 60 * 1000);
+</script>
+</body>
+</html>

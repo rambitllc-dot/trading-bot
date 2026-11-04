@@ -617,6 +617,7 @@ SPACEX_UNLOCKS = [
 SPACEX_EARNINGS_NOTE = ("More shares also unlock 2 trading days after each quarterly earnings report "
                         "(next: Q4 2026 results, early 2027).")
 SPACEX_LINES = []
+SPACEX_SERIES = {}
 IPO_LINES = []
 _ipo_ready = {}
 
@@ -728,6 +729,12 @@ def spacex_watch(state):
     L += ["", "You'll get a GitHub notification for: a move of 5% or more in a day, crossing the 50-day average, "
           "a new high since the IPO, a 20% drop from the high, and 3 days before each unlock."]
     SPACEX_LINES = L
+    SPACEX_SERIES.update({"dates": [b["t"][:10] for b in bars], "closes": [round(x, 2) for x in closes_],
+                          "price": round(price, 2), "high": round(high, 2), "low": round(low, 2),
+                          "avg50": round(avg50, 2), "typical_move": round(typical, 4),
+                          "since_ipo": round(price / SPACEX_IPO_PRICE - 1, 4), "spy_since_ipo": round(spy_since, 4),
+                          "unlocks": [{"date": dd.isoformat(), "what": what, "days": (dd - today).days}
+                                      for dd, what in upcoming]})
 
     # alerts, each kind at most once per day (unlock alerts once each)
     alerts, sent = [], w.setdefault("sent", {})
@@ -880,6 +887,122 @@ def write_reports(state, notes):
             w.writerow(["date"] + keys)
         w.writerow([TODAY] + [f"{values[k]:.2f}" for k in keys])
     return values
+
+
+# ---------- dashboard data (docs/data.json, shown by docs/index.html on GitHub Pages) ----------
+def record_timeline(values):
+    """Append this run's value of every strategy to timeline.csv (one row per run)."""
+    keys = list(STRATEGIES)
+    header = ["time"] + keys
+    rows = []
+    if os.path.exists("timeline.csv"):
+        with open("timeline.csv") as f:
+            rows = list(csv.reader(f))
+    if not rows:
+        rows = [header]
+    elif rows[0] != header:  # strategies were added: keep old columns' data, fill new ones as blank
+        old = rows[0]
+        rows = [header] + [[r[0]] + [r[old.index(k)] if k in old and old.index(k) < len(r) else "" for k in keys]
+                           for r in rows[1:]]
+    stamp = NOW.strftime("%Y-%m-%dT%H:%MZ")
+    if rows[-1][0] != stamp:
+        rows.append([stamp] + [f"{values[k]:.2f}" for k in keys])
+    with open("timeline.csv", "w", newline="") as f:
+        csv.writer(f).writerows(rows)
+    return rows
+
+
+def max_drop(series):
+    peak, worst = None, 0.0
+    for v in series:
+        if v is None:
+            continue
+        peak = v if peak is None else max(peak, v)
+        worst = min(worst, v / peak - 1)
+    return worst
+
+
+def analysis(strats, pairs, bets, days):
+    out = []
+    up = [s for s in strats if s["profit"] > 0.005]
+    best, worst = strats[0], strats[-1]
+    out.append(f"After {days:.1f} days, {len(up)} of {len(strats)} strategies are up. Leader: {best['name']} "
+               f"({best['profit']:+.2f}). Last: {worst['name']} ({worst['profit']:+.2f}).")
+    for group in ("type", "market"):
+        avg = {}
+        for s in strats:
+            avg.setdefault(s[group], []).append(s["profit"])
+        ranked = sorted(((sum(v) / len(v), k, len(v)) for k, v in avg.items()), reverse=True)
+        out.append(("By type: " if group == "type" else "By market: ") +
+                   ", ".join(f"{k} {a:+.2f} avg ({n})" for a, k, n in ranked) + ".")
+    tw = sum(1 for p in pairs if p["trade"] - p["hold"] > 0.5)
+    hw = sum(1 for p in pairs if p["hold"] - p["trade"] > 0.5)
+    out.append(f"Holding vs trading the same asset: trading ahead on {tw}, holding ahead on {hw}, "
+               f"about even on {len(pairs) - tw - hw}.")
+    risky = min(strats, key=lambda s: s["max_drop"])
+    if risky["max_drop"] < -0.001:
+        out.append(f"Biggest drop from a peak so far: {risky['name']} ({risky['max_drop']:.1%}).")
+    live = [m for m in bets["methods"] if m["live"]["n"] >= 20]
+    if live:
+        top = max(live, key=lambda m: m["live"]["w"] / m["live"]["n"])
+        rate = top["live"]["w"] / top["live"]["n"]
+        out.append(f"15-minute betting: best live win rate is {top['name'].split(':')[0]} at {rate:.1%} over "
+                   f"{top['live']['n']} bets, {'above' if rate > BREAK_EVEN else 'below'} the "
+                   f"{BREAK_EVEN:.1%} needed to profit.")
+    if days < 30:
+        out.append("Under a month of data: most of these differences are still day-to-day noise, not skill.")
+    return out
+
+
+def write_dashboard(state, notes, values):
+    rows = record_timeline(values)
+    keys = rows[0][1:]
+    times = [r[0] for r in rows[1:]]
+    series = {k: [float(r[i + 1]) if i + 1 < len(r) and r[i + 1] else None for r in rows[1:]]
+              for i, k in enumerate(keys)}
+    strats = []
+    for k, cfg in STRATEGIES.items():
+        s = state["strategies"][k]
+        kind, market = strategy_label(cfg)
+        holds = [{"sym": sym, "value": round(q * latest(sym), 2)} for sym, q in s["pos"].items()
+                 if q > 0 and q * latest(sym) >= 0.01]
+        strats.append({"key": k, "name": cfg["name"], "type": kind, "market": market,
+                       "value": round(values[k], 2), "profit": round(values[k] - START_BUDGET, 2),
+                       "trades": s["trades"], "cash": round(s["cash"], 2), "holdings": holds,
+                       "note": notes.get(k, ""), "max_drop": round(max_drop(series.get(k, [])), 4)})
+    strats.sort(key=lambda x: -x["value"])
+    pairs = [{"asset": a, "hold": round(values[h], 2), "trade": round(values[tr], 2)} for a, h, tr in PAIRS]
+    b = state.get("bets", {})
+    methods = []
+    for k, s in b.get("signals", {}).items():
+        methods.append({"key": k, "name": BET_SIGNALS[k], "label": BET_LABELS[k],
+                        "live": {"n": s["live_n"], "w": s["live_w"], "bank": round(s["live_bank"], 2),
+                                 "mdd": round(s["live_mdd"], 4)},
+                        "backtest": {"n": s["n"], "w": s["w"], "bank": round(s["bank"], 2), "mdd": round(s["mdd"], 4)}})
+    bets = {"break_even": round(BREAK_EVEN, 4), "live_from": b.get("live_from"), "methods": methods}
+    started = dt.datetime.fromisoformat(times[0].replace("Z", "+00:00")) if times else NOW
+    days = max((NOW - started).total_seconds() / 86400, 0.01)
+    ipo = {}
+    for sym, company in PENDING_IPO.items():
+        info = state.get("ipo_watch", {}).get(sym, {})
+        ipo[sym] = {"company": company, "trading": ipo_ready(sym),
+                    "price": round(latest(sym), 2) if ipo_ready(sym) else None,
+                    "first_seen": info.get("first_seen"), "first_price": info.get("first_price")}
+    try:
+        with open("LIVE_REPORT.md") as f:
+            live_status = next((ln for ln in f.read().splitlines() if ln.startswith("**")), "")
+    except OSError:
+        live_status = ""
+    data = {"updated": NOW.strftime("%Y-%m-%dT%H:%MZ"), "started": state.get("started"),
+            "budget": START_BUDGET, "btc": round(latest("BTC/USD"), 2), "market_open": can_trade("SPY"),
+            "total": round(sum(values.values()), 2), "count": len(values),
+            "strategies": strats, "timeline": {"times": times, "series": series},
+            "pairs": pairs, "betting": bets, "spacex": SPACEX_SERIES, "ipo": ipo,
+            "live_status": live_status.replace("**", ""),
+            "analysis": analysis(strats, pairs, bets, days)}
+    os.makedirs("docs", exist_ok=True)
+    with open("docs/data.json", "w") as f:
+        json.dump(data, f, separators=(",", ":"))
 
 
 # =====================================================================
@@ -1042,6 +1165,10 @@ def main():
         send_alerts(run_live())
     except Exception as e:  # never let a live-trading error stop the paper test
         print(f"LIVE: unexpected problem: {e}")
+    try:
+        write_dashboard(state, notes, values)
+    except Exception as e:  # the dashboard is a nice-to-have; never let it break trading
+        print(f"Dashboard: problem this run: {e}")
     print("\n" + "\n".join(f"{STRATEGIES[k]['name']}: ${v:,.2f} ({v - START_BUDGET:+.2f})" for k, v in values.items()))
 
 
