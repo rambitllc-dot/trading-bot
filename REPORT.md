@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 04, 2026 00:31 UTC · Bitcoin $77,116.79 · US stock market closed
+Last update: Nov 04, 2026 01:01 UTC · Bitcoin $77,127.15 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -50,7 +50,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 18 | Wide momentum (10 ETFs) | Monthly pick | ETF | $98.56 | -$1.44 (-1.4%) | 1 |
 | 19 | Apple buy & hold | Hold | Stock | $98.29 | -$1.71 (-1.7%) | 1 |
 | 20 | Apple trend (200 day) | Static rule | Stock | $98.29 | -$1.71 (-1.7%) | 1 |
-| 21 | Bitcoin buy & hold | Hold | Bitcoin | $98.16 | -$1.84 (-1.8%) | 1 |
+| 21 | Bitcoin buy & hold | Hold | Bitcoin | $98.17 | -$1.83 (-1.8%) | 1 |
 | 22 | Tesla buy & hold | Hold | Stock | $97.69 | -$2.31 (-2.3%) | 1 |
 | 23 | Tesla trend (200 day) | Static rule | Stock | $97.69 | -$2.31 (-2.3%) | 1 |
 
@@ -58,7 +58,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $98.16 | $100.00 | trading |
+| Bitcoin | $98.17 | $100.00 | trading |
 | S&P 500 | $99.51 | $99.51 | about even |
 | Apple | $98.29 | $98.29 | about even |
 | Microsoft | $100.32 | $100.32 | about even |
@@ -67,7 +67,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | Tesla | $97.69 | $97.69 | about even |
 | SpaceX | $100.47 | $100.00 | about even |
 
-**All together:** $2,289.37 from $2,300 (-10.63)
+**All together:** $2,289.38 from $2,300 (-10.62)
 
 ## What each one is doing
 
@@ -91,7 +91,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **Wide momentum (10 ETFs):** XLE $98.05, cash $0.51. Holding XLE until next month's check.
 - **Apple buy & hold:** AAPL $97.78, cash $0.51. Holding.
 - **Apple trend (200 day):** AAPL $97.78, cash $0.51. Signal: in the market (price $331.70 vs 200d avg $297.04).
-- **Bitcoin buy & hold:** BTC/USD $95.77, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $95.78, cash $2.39. Holding.
 - **Tesla buy & hold:** TSLA $97.18, cash $0.51. Holding.
 - **Tesla trend (200 day):** TSLA $97.18, cash $0.51. Signal: in the market (price $398.21 vs 200d avg $384.90).
 
@@ -105,12 +105,12 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
-| Learning: copies whichever method has been winning lately | Learning (switches methods) | 11 | 54.5% | $97.91 | -15% |
-| Reversal: bet against unusually big moves | Static (one fixed method) | 17 | 47.1% | $86.25 | -32% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 98 | 51.0% | $60.59 | -57% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 119 | 51.3% | $55.85 | -65% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 119 | 49.6% | $46.60 | -60% |
-| Coin flip (luck benchmark) | Luck benchmark | 119 | 42.9% | $22.59 | -78% |
+| Learning: copies whichever method has been winning lately | Learning (switches methods) | 13 | 53.8% | $96.73 | -15% |
+| Reversal: bet against unusually big moves | Static (one fixed method) | 18 | 50.0% | $89.70 | -32% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 100 | 51.0% | $59.86 | -57% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 121 | 51.2% | $55.18 | -65% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 121 | 48.8% | $42.06 | -64% |
+| Coin flip (luck benchmark) | Luck benchmark | 121 | 43.0% | $22.32 | -79% |
 
 ### Backtest: the 30 days before that
 
