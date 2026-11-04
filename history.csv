@@ -1,3 +1,2 @@
-date,btc_trend,btc_hold,spy_hold,spy_trend,mix,momentum,rsi_dip,momentum_wide,aapl_hold,aapl_trend,msft_hold,msft_trend,nvda_hold,nvda_trend,amzn_hold,amzn_trend,tsla_hold,tsla_trend,spcx_hold,spcx_trend,sp500_momentum,rsp_hold,spcx_gradual
-2026-11-03,100.00,98.74,99.68,99.68,99.75,99.69,99.69,99.16,98.45,98.45,100.17,100.17,101.04,100.30,99.92,100.30,97.52,97.52,99.99,100.00,99.74,99.95,100.00
-2026-11-04,100.00,98.51,99.51,99.51,99.56,99.52,99.52,98.56,98.29,98.29,100.32,100.32,100.22,100.30,100.43,100.81,97.69,97.69,100.47,100.00,100.32,99.79,100.12
+date,btc_trend,btc_hold,spy_hold,spy_trend,mix,momentum,rsi_dip,momentum_wide,aapl_hold,aapl_trend,msft_hold,msft_trend,nvda_hold,nvda_trend,amzn_hold,amzn_trend,tsla_hold,tsla_trend,spcx_hold,spcx_trend,ant_hold,ant_trend,sp500_momentum,rsp_hold,spcx_gradual,ant_gradual
+2026-11-04,100.00,101.96,101.30,101.30,101.69,101.30,101.31,93.62,104.94,104.94,106.87,106.87,98.85,99.89,107.34,107.75,95.71,95.71,94.93,100.00,100.00,100.00,93.35,101.56,98.73,100.00
