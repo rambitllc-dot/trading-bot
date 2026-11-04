@@ -56,10 +56,14 @@ STRATEGIES = {
 # Hold vs trade pairs: each stock gets a buy & hold and a 200-day trend version.
 # Change this list to test other companies (use their ticker symbols).
 STOCKS = {"AAPL": "Apple", "MSFT": "Microsoft", "NVDA": "Nvidia", "AMZN": "Amazon", "TSLA": "Tesla",
-          "SPCX": "SpaceX"}
+          "SPCX": "SpaceX", "ANT": "Anthropic"}
 # SpaceX only started trading on June 12, 2026, so it doesn't have 200 days of history yet;
 # its trend rule uses a 50-day average instead.
-TREND_DAYS = {"SPCX": 50}
+TREND_DAYS = {"SPCX": 50, "ANT": 50}
+# Companies that have filed to go public but may not be trading yet. Their strategies wait until
+# Alpaca lists the stock under that exact company name (so the bot can't buy a different company
+# that happens to use the same ticker).
+PENDING_IPO = {"ANT": "Anthropic"}
 for _sym, _name in STOCKS.items():
     _days = TREND_DAYS.get(_sym, 200)
     STRATEGIES[f"{_sym.lower()}_hold"] = {"name": f"{_name} buy & hold", "type": "hold", "symbol": _sym}
@@ -73,6 +77,8 @@ STRATEGIES["sp500_momentum"] = {"name": "Stock momentum (top 10 of the S&P 500)"
 STRATEGIES["rsp_hold"] = {"name": "S&P 500 equal weight (RSP) buy & hold", "type": "hold", "symbol": "RSP"}
 STRATEGIES["spcx_gradual"] = {"name": "SpaceX gradual buy ($25 a week for 4 weeks)", "type": "gradual",
                               "symbol": "SPCX", "per_buy": 25.0, "buys": 4, "every_days": 7}
+STRATEGIES["ant_gradual"] = {"name": "Anthropic gradual buy ($25 a week for 4 weeks)", "type": "gradual",
+                             "symbol": "ANT", "per_buy": 25.0, "buys": 4, "every_days": 7}
 SP500_URL = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
 
 PAIRS = [("Bitcoin", "btc_hold", "btc_trend"), ("S&P 500", "spy_hold", "spy_trend")] + \
@@ -611,6 +617,64 @@ SPACEX_UNLOCKS = [
 SPACEX_EARNINGS_NOTE = ("More shares also unlock 2 trading days after each quarterly earnings report "
                         "(next: Q4 2026 results, early 2027).")
 SPACEX_LINES = []
+IPO_LINES = []
+_ipo_ready = {}
+
+
+def ipo_ready(sym):
+    """True once a pending-IPO stock is listed and tradable under the expected company name."""
+    if sym not in PENDING_IPO:
+        return True
+    if sym not in _ipo_ready:
+        try:
+            a = api("GET", f"{PAPER['url']}/v2/assets/{sym}")
+            _ipo_ready[sym] = bool(a.get("tradable")) and PENDING_IPO[sym].lower() in (a.get("name") or "").lower()
+        except TradeError:
+            _ipo_ready[sym] = False
+    return _ipo_ready[sym]
+
+
+def run_strategy(key, cfg, s):
+    syms = [cfg["symbol"]] if cfg.get("symbol") else []
+    for sym in syms:
+        if not ipo_ready(sym):
+            return f"waiting for {PENDING_IPO[sym]}'s IPO; buys automatically once {sym} starts trading"
+    return RUNNERS[cfg["type"]](key, cfg, s)
+
+
+def ipo_watch(state):
+    """Short report section for pending IPOs, plus a one-time alert when trading starts."""
+    global IPO_LINES
+    alerts, w = [], state.setdefault("ipo_watch", {})
+    L = []
+    for sym, company in PENDING_IPO.items():
+        info = w.setdefault(sym, {})
+        if not ipo_ready(sym):
+            L += [f"## {company} watch ({sym})", "",
+                  f"Not trading yet. {company} filed to go public on the Nasdaq as **{sym}** (Oct 26, 2026); "
+                  f"the date and price aren't set. The bot checks every 30 minutes and will buy for the "
+                  f"{company} strategies as soon as it lists, and send you a notification.", ""]
+            continue
+        price = latest(sym)
+        if not info.get("first_seen"):
+            info["first_seen"], info["first_price"] = TODAY, price
+            alerts.append((f"{company} ({sym}) is now trading at ${price:,.2f}",
+                           f"{company} started trading. The bot is buying for the {company} buy & hold and "
+                           f"gradual-buy strategies. The trend strategy waits for 50 days of prices."))
+        c = closes(sym, 60)
+        since = price / info["first_price"] - 1
+        L += [f"## {company} watch ({sym})", "",
+              f"**${price:,.2f}** · {since:+.1%} since the bot first saw it trading on {info['first_seen']} "
+              f"(${info['first_price']:,.2f})" + (f" · {len(c)} days of price history" if c else ""), ""]
+        if c:
+            prev = c[-1]
+            move = price / prev - 1
+            if abs(move) >= 0.05 and info.get("move_alert") != TODAY:
+                info["move_alert"] = TODAY
+                alerts.append((f"{company} {'up' if move > 0 else 'down'} {abs(move):.1%} today (${price:,.2f})",
+                               f"Moved {move:+.1%} since yesterday's close of ${prev:,.2f}."))
+    IPO_LINES = L
+    return alerts
 
 
 def spacex_watch(state):
@@ -768,6 +832,8 @@ def write_reports(state, notes):
         "",
         *SPACEX_LINES,
         "",
+        *IPO_LINES,
+        "",
         "## All strategies",
         "",
         "**Labels:** *Hold* = buys once and never sells (the yardstick). "
@@ -917,7 +983,7 @@ def run_live():
                     notes[k] = "removed from live_config.json; holding what it has, no new trades"
                     continue
                 try:
-                    notes[k] = RUNNERS[STRATEGIES[k]["type"]](k, STRATEGIES[k], s)
+                    notes[k] = run_strategy(k, STRATEGIES[k], s)
                 except TradeError as e:
                     notes[k] = f"problem this run: {e}"
 
@@ -950,7 +1016,7 @@ def main():
     notes = {}
     for key, cfg in STRATEGIES.items():
         try:
-            notes[key] = RUNNERS[cfg["type"]](key, cfg, state["strategies"][key])
+            notes[key] = run_strategy(key, cfg, state["strategies"][key])
         except TradeError as e:
             notes[key] = f"problem this run: {e}"
         print(f"{cfg['name']}: {notes[key]}")
@@ -963,6 +1029,10 @@ def main():
         send_alerts(spacex_watch(state))
     except (TradeError, requests.RequestException, KeyError, ValueError) as e:
         print(f"SpaceX watch: problem this run: {e}")
+    try:
+        send_alerts(ipo_watch(state))
+    except (TradeError, requests.RequestException, KeyError, ValueError) as e:
+        print(f"IPO watch: problem this run: {e}")
     state["last_check_utc"] = NOW.strftime("%Y-%m-%d %H:%M")
     with open("state.json", "w") as f:
         json.dump(state, f, indent=2)

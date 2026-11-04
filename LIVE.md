@@ -65,6 +65,8 @@ with its full budget from your account's cash).
 | `tsla_hold`, `tsla_trend` | Tesla buy & hold / trend |
 | `spcx_hold`, `spcx_trend` | SpaceX buy & hold / trend (50 day) |
 | `spcx_gradual` | SpaceX gradual buy (budget spread over 4 weekly buys) |
+| `ant_hold`, `ant_trend` | Anthropic buy & hold / trend (50 day), once ANT is trading |
+| `ant_gradual` | Anthropic gradual buy (budget spread over 4 weekly buys) |
 | `sp500_momentum` | Stock momentum (top 10 of the S&P 500) |
 | `rsp_hold` | S&P 500 equal weight (RSP) buy & hold |
 
