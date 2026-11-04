@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 04, 2026 11:31 UTC · Bitcoin $78,565.89 · US stock market closed
+Last update: Nov 04, 2026 12:01 UTC · Bitcoin $78,442.60 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -41,9 +41,9 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 9 | SpaceX gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $100.12 | +$0.12 (+0.1%) | 1 |
 | 10 | Bitcoin trend bot (5/20 day) | Static rule | Bitcoin | $100.00 | +$0.00 (+0.0%) | 0 |
 | 11 | SpaceX trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
-| 12 | Bitcoin buy & hold | Hold | Bitcoin | $99.96 | -$0.04 (-0.0%) | 1 |
+| 12 | Bitcoin buy & hold | Hold | Bitcoin | $99.81 | -$0.19 (-0.2%) | 1 |
 | 13 | S&P 500 equal weight (RSP) buy & hold | Hold | ETF | $99.79 | -$0.21 (-0.2%) | 1 |
-| 14 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.71 | -$0.29 (-0.3%) | 3 |
+| 14 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.70 | -$0.30 (-0.3%) | 3 |
 | 15 | RSI dip-buying (S&P 500) | Static rule | ETF | $99.52 | -$0.48 (-0.5%) | 1 |
 | 16 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $99.52 | -$0.48 (-0.5%) | 1 |
 | 17 | S&P 500 buy & hold | Hold | ETF | $99.51 | -$0.49 (-0.5%) | 1 |
@@ -58,7 +58,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $99.96 | $100.00 | about even |
+| Bitcoin | $99.81 | $100.00 | about even |
 | S&P 500 | $99.51 | $99.51 | about even |
 | Apple | $98.29 | $98.29 | about even |
 | Microsoft | $100.32 | $100.32 | about even |
@@ -67,7 +67,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | Tesla | $97.69 | $97.69 | about even |
 | SpaceX | $100.47 | $100.00 | about even |
 
-**All together:** $2,291.35 from $2,300 (-8.65)
+**All together:** $2,291.18 from $2,300 (-8.82)
 
 ## What each one is doing
 
@@ -82,9 +82,9 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **SpaceX gradual buy ($25 a week for 4 weeks):** SPCX $25.11, cash $75.01. Bought 1 of 4 times; next buy on or after 2026-11-10.
 - **Bitcoin trend bot (5/20 day):** cash $100.00. Signal: in cash (5d avg $77,377.17 vs 20d avg $80,290.72).
 - **SpaceX trend (50 day):** cash $100.00. Signal: in cash (price $141.34 vs 50d avg $149.69).
-- **Bitcoin buy & hold:** BTC/USD $97.57, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $97.42, cash $2.39. Holding.
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $99.28, cash $0.51. Holding.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.40, GLD $19.70, BTC/USD $9.99, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.40, GLD $19.70, BTC/USD $9.98, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **RSI dip-buying (S&P 500):** SPY $99.01, cash $0.51. Holding, waiting for a bounce above the 5-day average (RSI-2 32, buys below 10).
 - **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $99.01, cash $0.51. Holding SPY until next month's check.
 - **S&P 500 buy & hold:** SPY $99.00, cash $0.51. Holding.
@@ -107,10 +107,10 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 22 | 54.5% | $95.86 | -32% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 41 | 36.6% | $47.46 | -54% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 131 | 49.6% | $43.34 | -60% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 163 | 48.5% | $29.81 | -79% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 163 | 47.9% | $27.23 | -75% |
-| Coin flip (luck benchmark) | Luck benchmark | 163 | 44.2% | $15.82 | -86% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 132 | 49.2% | $41.18 | -60% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 165 | 49.1% | $32.25 | -79% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 165 | 47.9% | $26.91 | -75% |
+| Coin flip (luck benchmark) | Luck benchmark | 165 | 44.2% | $15.63 | -86% |
 
 ### Backtest: the 30 days before that
 
