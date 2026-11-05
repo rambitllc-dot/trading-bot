@@ -53,8 +53,9 @@ class YahooProvider:
         hist = self.yf.Ticker(ticker).history(period=period, auto_adjust=True)
         return [(d.strftime("%Y-%m-%d"), _clean(c)) for d, c in zip(hist.index, hist["Close"]) if _clean(c)]
 
-    def bulk(self, tickers, period="1y"):
-        """Daily bars for many tickers at once: {ticker: [(date, close, high, volume), ...]}, oldest first."""
+    def bulk(self, tickers, period="2y"):
+        """Daily bars for many tickers at once: {ticker: [(date, close, high, volume), ...]}, oldest first.
+        Two years, because 12-month momentum skipping the latest month needs a little over one year of days."""
         yahoo = {t: t.replace(".", "-") for t in tickers}  # Yahoo writes BRK.B as BRK-B
         df = self.yf.download(list(yahoo.values()), period=period, group_by="ticker", auto_adjust=True,
                               threads=True, progress=False)
