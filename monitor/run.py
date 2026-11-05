@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, config, data, macro, news, notifier, positions, storage, valuation
+from . import alerts, analytics, config, data, macro, news, notifier, positions, scanner, storage, valuation
 
 
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
@@ -33,10 +33,12 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     summary = analytics.analyze(con, rows, asof, provider)
     macro_result = macro.run(con, asof, provider)
     news_result = news.run(con, asof, book, provider, macro_result.get("label"), news_caller)
-    alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result)
+    scan = scanner.run(con, asof, provider, macro_result.get("label"), news_caller) if hasattr(provider, "bulk") \
+        else {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}
+    alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result, scan["alerts"])
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
-              "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs,
+              "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -103,6 +105,22 @@ def print_report(res):
             for f in n.get("position_flags") or []:
                 print(f"  Flag for {f.get('position_id')}: {f['flag']}")
         print(f"Claude cost this run: ${cost:.4f}")
+    sc = res.get("scan")
+    if sc:
+        print("\nOPPORTUNITIES (candidates to research, not recommendations)")
+        if sc.get("error"):
+            print(sc["error"])
+        else:
+            print(f"Scanned {sc.get('scanned')} of {sc.get('requested')} stocks.")
+            for w in sc["watchlist"]:
+                price = f"{w['price']:,.2f}" if w["price"] else "-"
+                print(f"- Watchlist {w['ticker']} {price}: {w['status']}" + (f" -> YOUR PLAN: {w['action']}" if w["action"] else ""))
+            for key, title in scanner.SCREENS.items():
+                items = sc["screens"].get(key, [])
+                print(f"{title}: " + (", ".join(f"{x['ticker']} ({x['reason']})" for x in items[:5]) or "none today"))
+            for n in sc.get("news", []):
+                if n.get("status") == "ok":
+                    print(f"  {n['ticker']} [{n['sentiment']}]: {n['summary']}")
     if "alerts" in res:
         print(f"\nALERTS ({len(res['alerts'])})")
         for a in res["alerts"]:

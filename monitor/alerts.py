@@ -76,7 +76,7 @@ def hit(mark, level, entry, direction):
     return mark <= level if level <= entry else mark >= level
 
 
-def build(con, asof, rows, analytics_summary=None, macro_result=None, news_result=None):
+def build(con, asof, rows, analytics_summary=None, macro_result=None, news_result=None, extra=None):
     con.executescript(SCHEMA)
     storage.add_missing_columns(con, "alerts", [("action", "TEXT")])
     out = []
@@ -144,6 +144,9 @@ def build(con, asof, rows, analytics_summary=None, macro_result=None, news_resul
         if row and (abs(macro_result["score"] - row[0]) >= config.MACRO_SHIFT_POINTS or row[1] != macro_result["label"]):
             add("macro_shift", "warn", f"Market environment moved from {row[1]} ({row[0]:.0f}) to "
                 f"{macro_result['label']} ({macro_result['score']:.0f}).")
+
+    for x in extra or []:  # watchlist alerts from the scanner
+        add(x["kind"], x["severity"], x["message"], ticker=x.get("ticker"))
 
     for f in (analytics_summary or {}).get("flags", []):
         add(f["kind"], f["severity"], f["message"], ticker=None, detail=f.get("position_id"))

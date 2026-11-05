@@ -12,12 +12,13 @@ import pandas as pd
 import streamlit as st
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-from monitor import config, dashboard_data, plan  # noqa: E402
+from monitor import config, dashboard_data, plan, scanner  # noqa: E402
 
 st.set_page_config(page_title="Portfolio Monitor", page_icon="▣", layout="wide")
 
 AMBER, GREEN, RED, BLUE, YELLOW, GREY = "#FFA62B", "#3DDC84", "#FF5C5C", "#4EA8FF", "#FFE14D", "#8A93A3"
 SEV = {"high": RED, "warn": AMBER, "info": BLUE}
+SENT = {"positive": GREEN, "neutral": GREY, "negative": RED}
 
 st.markdown(f"""
 <style>
@@ -267,14 +268,78 @@ if opts:
 else:
     st.markdown('<div class="muted">No options held.</div>', unsafe_allow_html=True)
 
+# ---------- opportunities ----------
+st.markdown('<div class="sec">Opportunities · watchlist and S&amp;P 500 scan (candidates to research, not recommendations)</div>',
+            unsafe_allow_html=True)
+
+
+def pct(v, d=1):
+    return "–" if v is None else f'<span class="{cls(v)}">{v * 100:+.{d}f}%</span>'
+
+
+def dist(v):
+    return "–" if v is None else f"{v:+.1f}%"
+
+
+W = D["watchlist"]
+if W:
+    t = ('<div class="muted" style="color:#FFA62B">WATCHLIST · BUY only when a stock reaches the buy level you set in '
+         'watchlist.json</div><div class="wrap"><table class="grid"><tr><th>Ticker</th><th>Plan</th><th>Price</th>'
+         '<th>Your buy level</th><th>Distance</th><th>1 day</th><th>12 months</th><th>vs 200-day</th><th>Status</th></tr>')
+    for w in W:
+        t += (f'<tr><td>{e(w["ticker"])}</td><td>{plan_pill(w["action"]) if w["action"] else "–"}</td>'
+              f'<td>{num(w["price"])}</td><td>{num(w["buy_below"])}</td>'
+              f'<td>{dist(w["to_buy_pct"])}</td>'
+              f'<td>{pct(w["chg_1d"])}</td><td>{pct(w["ret_12m"], 0)}</td><td>{pct(w["vs_200d"], 0)}</td>'
+              f'<td style="text-align:left">{e(w["status"])}</td></tr>')
+    st.markdown(t + "</table></div>", unsafe_allow_html=True)
+else:
+    st.markdown('<div class="muted">No watchlist yet. Add stocks and buy levels to monitor/watchlist.json.</div>',
+                unsafe_allow_html=True)
+
+S = D["scan"]
+if S:
+    cols = st.columns(2)
+    for i, (key, title) in enumerate(scanner.SCREENS.items()):
+        items = S.get(key, [])
+        with cols[i % 2]:
+            t = (f'<div class="muted" style="color:#FFA62B;margin-top:10px">{e(title).upper()}</div>'
+                 '<div class="wrap"><table class="grid"><tr><th>#</th><th>Ticker</th><th>Price</th><th>1 day</th>'
+                 '<th>12 mo</th><th>Why it showed up</th></tr>')
+            for x in items[:10]:
+                n = D["candidate_news"].get(x["ticker"])
+                chip = (f' <span class="pill" style="background:{SENT.get(n["sentiment"], GREY)};color:#07090C">'
+                        f'{e(n["sentiment"])}</span>' if n and n.get("sentiment") else "")
+                t += (f'<tr><td>{x["rank"]}</td><td>{e(x["ticker"])}{chip}</td><td>{num(x["price"])}</td>'
+                      f'<td>{pct(x["chg_1d"])}</td><td>{pct(x["ret_12m"], 0)}</td>'
+                      f'<td style="text-align:left;white-space:normal">{e(x["reason"])}</td></tr>')
+            if not items:
+                t += '<tr><td colspan="6" class="muted" style="text-align:left">Nothing today.</td></tr>'
+            st.markdown(t + "</table></div>", unsafe_allow_html=True)
+    cn = [n for n in D["candidate_news"].values() if n.get("status") == "ok" and n.get("summary")]
+    if cn:
+        st.markdown('<div class="muted" style="color:#FFA62B;margin-top:12px">TOP CANDIDATES · CLAUDE NEWS SUMMARY</div>',
+                    unsafe_allow_html=True)
+        cols = st.columns(2)
+        for i, n in enumerate(cn):
+            with cols[i % 2]:
+                heads = "".join(f'<div>· <a href="{e(h.get("link") or "#")}" target="_blank">{e(h["title"])}</a></div>'
+                                for h in n["headlines"][:3])
+                st.markdown(f'<div class="news"><b style="color:{AMBER}">{e(n["ticker"])}</b>'
+                            f'<span class="pill" style="background:{SENT.get(n["sentiment"], GREY)};color:#07090C;margin-left:8px">'
+                            f'{e(n["sentiment"])}</span><div style="margin:6px 0">{e(n["summary"])}</div>{heads}</div>',
+                            unsafe_allow_html=True)
+else:
+    st.markdown('<div class="muted">The market scan appears after the next monitor run.</div>', unsafe_allow_html=True)
+
 # ---------- news ----------
 st.markdown('<div class="sec">News · Claude summaries (facts only, never buy/sell)</div>', unsafe_allow_html=True)
 SENT = {"positive": GREEN, "neutral": GREY, "negative": RED}
-if not D["news"]:
+if not D["held_news"]:
     st.markdown('<div class="muted">No news analysis for this date (needs the ANTHROPIC_API_KEY secret).</div>',
                 unsafe_allow_html=True)
 cols = st.columns(2)
-for i, n in enumerate(D["news"]):
+for i, n in enumerate(D["held_news"]):
     c = SENT.get(n["sentiment"], GREY)
     flags = "".join(f'<div class="flag">⚑ {e(f.get("position_id"))}: {e(f["flag"])}</div>' for f in n["position_flags"])
     heads = "".join(f'<div>· <a href="{e(h.get("link") or "#")}" target="_blank">{e(h["title"])}</a> '

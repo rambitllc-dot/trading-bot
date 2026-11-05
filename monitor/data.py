@@ -53,6 +53,26 @@ class YahooProvider:
         hist = self.yf.Ticker(ticker).history(period=period, auto_adjust=True)
         return [(d.strftime("%Y-%m-%d"), _clean(c)) for d, c in zip(hist.index, hist["Close"]) if _clean(c)]
 
+    def bulk(self, tickers, period="1y"):
+        """Daily bars for many tickers at once: {ticker: [(date, close, high, volume), ...]}, oldest first."""
+        yahoo = {t: t.replace(".", "-") for t in tickers}  # Yahoo writes BRK.B as BRK-B
+        df = self.yf.download(list(yahoo.values()), period=period, group_by="ticker", auto_adjust=True,
+                              threads=True, progress=False)
+        out = {}
+        for t, y in yahoo.items():
+            try:
+                sub = df[y] if len(yahoo) > 1 else df
+            except KeyError:
+                continue
+            rows = []
+            for d, r in sub.iterrows():
+                c = _clean(r.get("Close"))
+                if c:
+                    rows.append((d.strftime("%Y-%m-%d"), c, _clean(r.get("High")) or c, _clean(r.get("Volume")) or 0.0))
+            if rows:
+                out[t] = rows
+        return out
+
     def news(self, ticker):
         """Recent headlines as dicts: title, publisher, published (ISO, UTC), link, summary."""
         out = []

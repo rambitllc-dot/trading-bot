@@ -103,8 +103,17 @@ def load(db_path=None, asof=None):
         ladders = {p["position_id"]: strike_ladder(con, asof, p, new_keys)
                    for p in pos if p["asset_type"] == "option" and p.get("expiry")}
         stacked, extrinsic = theta_projection(pos)
+        watch = rows(con, "SELECT * FROM watchlist WHERE asof=?", (asof,)) if table_exists(con, "watchlist") else []
+        scan = {}
+        if table_exists(con, "scan_results"):
+            for r in rows(con, "SELECT * FROM scan_results WHERE asof=? ORDER BY screen, rank", (asof,)):
+                scan.setdefault(r["screen"], []).append(r)
+        held = {p["ticker"] for p in pos}
         return {"asof": asof, "dates": avail, "positions": pos, "analytics": a[0] if a else None,
                 "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
-                "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic}
+                "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic,
+                "watchlist": watch, "scan": scan,
+                "held_news": [n for n in news if n["ticker"] in held],
+                "candidate_news": {n["ticker"]: n for n in news if n["ticker"] not in held}}
     finally:
         con.close()

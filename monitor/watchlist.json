@@ -1,0 +1,5 @@
+[
+  {"ticker": "SPCX", "buy_below": 110.00, "note": "EXAMPLE - SpaceX, buy if it drops to $110 (replace with your own level)"},
+  {"ticker": "ANT", "buy_below": null, "note": "Anthropic - not trading yet; set a buy level once it lists"},
+  {"ticker": "PLTR", "buy_below": null, "note": "EXAMPLE - watch only, no buy level yet"}
+]

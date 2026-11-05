@@ -10,6 +10,18 @@ Every position and alert gets a simple label: **SELL** (price reached your stop,
 no price, or a news/volatility alert needs a look) or **HOLD** (between your stop and target). They only apply the
 levels you write in `positions.json`; they are not predictions or advice, and nothing is ever traded.
 
+## Opportunities: watchlist and market scan
+
+Looks beyond what you own, every run:
+- **Watchlist** (`watchlist.json`): stocks you'd like to own, each with an optional `buy_below` price you choose.
+  When a stock reaches it, you get **BUY** (alert `watch_buy`); within 5% above it, **REVIEW** (`watch_near`);
+  otherwise **WAIT**. The three entries in it now are examples.
+- **S&P 500 scan** of every company (list in `sp500.csv`): momentum leaders (best 12-month return, skipping the
+  latest month), pullbacks inside uptrends (above the 200-day average with RSI-2 under 10), new 52-week highs,
+  and unusual volume (3x normal with a 3%+ move). Top 10 per screen.
+- The top 5 candidates and your watchlist names get a short Claude news summary (cached per day).
+Scan results are **candidates to research, not recommendations**. Only a buy level you set produces a BUY.
+
 ## Layer 1: data and valuation (built)
 
 - `positions.json`: your book. Two kinds of rows, `"option"` and `"shares"` (the three rows in it now are

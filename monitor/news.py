@@ -68,8 +68,12 @@ def build_prompt(ticker, headlines, held, macro_label=None):
     lines = [f"Ticker: {ticker}"]
     if macro_label:
         lines.append(f"General market environment today: {macro_label}")
-    lines.append("Positions held in this name:")
-    lines += [f"- {describe_position(p)}" for p in held]
+    if held:
+        lines.append("Positions held in this name:")
+        lines += [f"- {describe_position(p)}" for p in held]
+    else:
+        lines.append("No position is held in this name; it is a watchlist / scanner candidate. "
+                     "Return an empty position_flags list.")
     lines.append("")
     lines.append("Headlines (newest first):")
     for h in headlines:

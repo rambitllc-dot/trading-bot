@@ -64,3 +64,10 @@ NOTIFY_MIN_SEVERITY = "info"   # "info" sends everything; "warn" or "high" sends
 
 # ---- "Your plan says" labels (based only on YOUR target / stop / add_below levels) ----
 REVIEW_DTE_DAYS = 21        # options with fewer days left than this get "REVIEW" (decide what to do before expiry)
+
+# ---- Opportunity scanner + watchlist ----
+WATCHLIST_FILE = os.path.join(BASE_DIR, "watchlist.json")
+SCAN_UNIVERSE_FILE = os.path.join(os.path.dirname(BASE_DIR), "sp500.csv")  # the ~500 S&P 500 companies
+SCAN_TOP_N = 10             # candidates shown per screen
+SCAN_NEWS_TOP = 5           # how many top candidates get a Claude news summary (about $0.0005 each)
+WATCH_NEAR_PCT = 5          # "watch_near" when a watchlist stock is within this % of your buy level
