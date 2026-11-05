@@ -48,11 +48,11 @@
       "last_rebalance": "2026-11"
     },
     "rsi_dip": {
-      "cash": 0.51,
+      "cash": 100.85,
       "pos": {
-        "SPY": 0.131262649
+        "SPY": 0.0
       },
-      "trades": 1
+      "trades": 2
     },
     "momentum_wide": {
       "cash": 0.51,
@@ -98,11 +98,11 @@
       "trades": 1
     },
     "nvda_trend": {
-      "cash": 0.52,
+      "cash": 95.8,
       "pos": {
-        "NVDA": 0.487750034
+        "NVDA": 0.0
       },
-      "trades": 3,
+      "trades": 4,
       "bought_on": {
         "NVDA": "2026-11-04"
       }
@@ -199,7 +199,7 @@
       "trades": 0
     }
   },
-  "last_check_utc": "2026-11-05 14:01",
+  "last_check_utc": "2026-11-05 14:31",
   "bets": {
     "live_from": "2026-11-02T18:40:20Z",
     "signals": {
@@ -209,9 +209,9 @@
         "mdd": -0.9908407782521996,
         "n": 842,
         "w": 426,
-        "live_n": 269,
-        "live_w": 120,
-        "live_bank": 5.3064,
+        "live_n": 271,
+        "live_w": 121,
+        "live_bank": 5.2427,
         "live_peak": 102.752,
         "live_mdd": -0.951672960137029
       },
@@ -221,11 +221,11 @@
         "mdd": -0.9916838322210167,
         "n": 662,
         "w": 324,
-        "live_n": 269,
-        "live_w": 127,
-        "live_bank": 9.9999,
+        "live_n": 271,
+        "live_w": 128,
+        "live_bank": 9.8799,
         "live_peak": 100.0,
-        "live_mdd": -0.900001
+        "live_mdd": -0.901201
       },
       "reversal": {
         "bank": 4.4268,
@@ -233,9 +233,9 @@
         "mdd": -0.9646869420607038,
         "n": 389,
         "w": 186,
-        "live_n": 34,
-        "live_w": 20,
-        "live_bank": 106.8556,
+        "live_n": 35,
+        "live_w": 21,
+        "live_bank": 111.1298,
         "live_peak": 126.5319,
         "live_mdd": -0.3183220990121858
       },
@@ -245,11 +245,11 @@
         "mdd": -0.9906421493505386,
         "n": 540,
         "w": 255,
-        "live_n": 216,
-        "live_w": 105,
-        "live_bank": 20.6932,
+        "live_n": 218,
+        "live_w": 106,
+        "live_bank": 20.4449,
         "live_peak": 100.0,
-        "live_mdd": -0.793068
+        "live_mdd": -0.795551
       },
       "session": {
         "bank": 0.9637,
@@ -257,11 +257,11 @@
         "mdd": -0.9906211071317347,
         "n": 814,
         "w": 410,
-        "live_n": 269,
-        "live_w": 130,
-        "live_bank": 13.1199,
+        "live_n": 271,
+        "live_w": 131,
+        "live_bank": 12.9625,
         "live_peak": 115.5751,
-        "live_mdd": -0.8864816037364449
+        "live_mdd": -0.8921575668115364
       },
       "learning": {
         "bank": 1.0589,
@@ -276,7 +276,7 @@
         "live_mdd": -0.5381257785736531
       }
     },
-    "last_t": "2026-11-05T13:45:00Z"
+    "last_t": "2026-11-05T14:15:00Z"
   },
   "spacex_watch": {
     "spy_at_ipo": 737.01,
