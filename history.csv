@@ -1,2 +1,3 @@
 date,btc_trend,btc_hold,spy_hold,spy_trend,mix,momentum,rsi_dip,momentum_wide,aapl_hold,aapl_trend,msft_hold,msft_trend,nvda_hold,nvda_trend,amzn_hold,amzn_trend,tsla_hold,tsla_trend,spcx_hold,spcx_trend,ant_hold,ant_trend,sp500_momentum,rsp_hold,spcx_gradual,ant_gradual
 2026-11-04,100.00,101.96,101.30,101.30,101.69,101.30,101.31,93.62,104.94,104.94,106.87,106.87,98.85,99.89,107.34,107.75,95.71,95.71,94.93,100.00,100.00,100.00,93.35,101.56,98.73,100.00
+2026-11-05,100.00,102.33,101.17,101.17,101.67,101.17,101.18,93.99,103.89,103.89,107.07,107.07,97.13,98.15,106.48,106.88,94.22,94.22,95.68,100.00,100.00,100.00,94.59,101.64,98.92,100.00
