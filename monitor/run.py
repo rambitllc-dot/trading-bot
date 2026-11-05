@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, config, data, macro, news, notifier, positions, rotation, scanner, storage, valuation
+from . import alerts, analytics, config, data, levels, macro, news, notifier, positions, rotation, scanner, storage, valuation
 
 
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
@@ -39,6 +39,9 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     else:
         scan, bars = {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}, {}
     sentiment = {n["ticker"]: n.get("sentiment") for n in news_result + scan.get("news", []) if n.get("status") == "ok"}
+    auto = levels.apply(con, asof, rows, bars) if bars else []
+    if auto:
+        storage.save_valuations(con, asof, rows)
     rot = rotation.run(con, asof, rows, bars, sentiment) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestion": None}
     s = rot.get("suggestion")
@@ -52,7 +55,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
               "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
-              "rotation": rot,
+              "rotation": rot, "auto_levels": auto,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -135,6 +138,10 @@ def print_report(res):
             for n in sc.get("news", []):
                 if n.get("status") == "ok":
                     print(f"  {n['ticker']} [{n['sentiment']}]: {n['summary']}")
+    if res.get("auto_levels"):
+        print("\nAUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)")
+        for x in res["auto_levels"]:
+            print(f"- {x['ticker']}: stop {x['stop']:,.2f} · target {x['target']:,.2f} · typical daily move {x['atr']:,.2f}")
     rt = res.get("rotation")
     if rt:
         print("\nROTATION (follow the money)")

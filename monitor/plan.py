@@ -23,7 +23,7 @@ def _crossed(mark, level, entry, side):
 
 def for_position(r):
     """(action, plain-English reason) for one valued position."""
-    mark, entry = r.get("mark"), r["entry_price"]
+    mark, entry = r.get("mark"), r.get("level_ref") or r["entry_price"]
     if r.get("status") not in (None, "ok") or mark is None:
         return "REVIEW", f"no current price ({r.get('status')})"
     if _crossed(mark, r.get("stop_price"), entry, "stop"):

@@ -81,3 +81,9 @@ ROTATION_MIN_SCORE = 80     # ...and score at least this (top fifth of the marke
 ROTATION_MIN_HOLD_DAYS = 30 # don't suggest selling something bought less than this many days ago
 ROTATION_COOLDOWN_DAYS = 7  # at most one new swap suggestion per this many days
 ROTATION_NO_REBUY_DAYS = 30 # don't suggest buying back something swapped out within this many days
+
+# ---- Automatic stop / target (used when a position has no stop_price / target_price of its own) ----
+AUTO_LEVELS = True
+ATR_PERIOD = 22             # average true range over about one month of trading days
+ATR_STOP_MULT = 3.0         # stop = highest close since tracking began - 3 x ATR ("Chandelier" trailing stop)
+REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop

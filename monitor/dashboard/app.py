@@ -143,10 +143,13 @@ for p in sorted(P, key=lambda x: order.get(x["action"], 9)):
     nm = (f"{p['ticker']} ${p['strike']:g} {p['option_type']} · {p['expiry']}" if p["asset_type"] == "option"
           else f"{p['ticker']} shares")
     st.markdown(f'<div class="alert" style="border-color:{plan.COLORS.get(p["action"], GREY)};font-size:14px">'
-                f'{plan_pill(p["action"])} &nbsp;<b>{e(nm)}</b> <span class="muted">· {e(p["action_reason"])}</span></div>',
+                f'{plan_pill(p["action"])} &nbsp;<b>{e(nm)}</b> <span class="muted">· {e(p["action_reason"])}'
+                + (f' · stop {num(p["stop_price"])} · target {num(p["target_price"])}'
+                   if p.get("stop_price") is not None else "") + '</span></div>',
                 unsafe_allow_html=True)
-st.markdown('<div class="muted">These labels only apply the target, stop and add levels you set in positions.json. '
-            'They are not predictions or financial advice.</div>', unsafe_allow_html=True)
+st.markdown('<div class="muted">Labels apply your own levels from positions.json, or, where you set none, automatic ones: '
+            'a trailing stop 3x the stock\'s typical daily move below its highest close, and a 2-to-1 target. '
+            'They are rules, not predictions or financial advice.</div>', unsafe_allow_html=True)
 
 def pct(v, d=1):
     return "–" if v is None else f'<span class="{cls(v)}">{v * 100:+.{d}f}%</span>'

@@ -10,6 +10,14 @@ Every position and alert gets a simple label: **SELL** (price reached your stop,
 no price, or a news/volatility alert needs a look) or **HOLD** (between your stop and target). They only apply the
 levels you write in `positions.json`; they are not predictions or advice, and nothing is ever traded.
 
+## Automatic stop and target
+
+For shares without your own `stop_price` / `target_price`, `levels.py` sets them the way many traders do:
+a **trailing "Chandelier" stop** 3 x ATR (the stock's typical daily move over ~22 days) below its highest close
+since the monitor started tracking it, which only ever moves up; and a **2-to-1 target** (twice the starting
+distance to the stop, above the starting price). Levels start from the first tracked day, not your purchase
+price. Write your own numbers in `positions.json` to override them.
+
 ## Rotation: follow the money
 
 `rotation.py` scores every S&P 500 stock plus major ETFs (and whatever you hold) on the same 0-100 scale:

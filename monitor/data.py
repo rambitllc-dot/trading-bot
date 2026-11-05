@@ -69,7 +69,8 @@ class YahooProvider:
             for d, r in sub.iterrows():
                 c = _clean(r.get("Close"))
                 if c:
-                    rows.append((d.strftime("%Y-%m-%d"), c, _clean(r.get("High")) or c, _clean(r.get("Volume")) or 0.0))
+                    rows.append((d.strftime("%Y-%m-%d"), c, _clean(r.get("High")) or c, _clean(r.get("Volume")) or 0.0,
+                                 _clean(r.get("Low")) or c))
             if rows:
                 out[t] = rows
         return out

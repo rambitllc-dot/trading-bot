@@ -96,7 +96,7 @@ def build(con, asof, rows, analytics_summary=None, macro_result=None, news_resul
                     "is_new": bool(is_new), "detail": detail})
 
     for r in rows:
-        mark, entry, p = r.get("mark"), r["entry_price"], prev.get(r["position_id"], {})
+        mark, entry, p = r.get("mark"), r.get("level_ref") or r["entry_price"], prev.get(r["position_id"], {})
         if hit(mark, r.get("target_price"), entry, "target"):
             add("target_hit", "high", f"{label(r)} hit your target level (mark {mark:,.2f} vs target "
                 f"{r['target_price']:,.2f}).", r, is_new=not hit(p.get("mark"), r.get("target_price"), entry, "target"))
