@@ -1,0 +1,38 @@
+name: Portfolio monitor
+
+# Layer 1 runs only when you press "Run workflow" for now.
+# The daily after-close schedule comes with Layer 4.
+on:
+  workflow_dispatch:
+    inputs:
+      asof:
+        description: "Date stamp YYYY-MM-DD (leave empty for today)"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monitor        # separate from the trading bot, which holds its own lock for hours at a time
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r monitor/requirements.txt
+      - name: Tests
+        run: python -m unittest discover -s monitor/tests -t .
+      - name: Pull data and value the book
+        run: python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }}
+      - name: Save snapshots and database
+        run: |
+          git config user.name "portfolio-monitor"
+          git config user.email "portfolio-monitor@users.noreply.github.com"
+          git add monitor/snapshots monitor/monitor.db monitor/output
+          git diff --cached --quiet || (git commit -m "Monitor run" && (git push || (git pull --rebase && git push)))
