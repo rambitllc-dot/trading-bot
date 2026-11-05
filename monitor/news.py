@@ -81,9 +81,11 @@ def build_prompt(ticker, headlines, held, macro_label=None):
         '"summary" (2-3 plain sentences on what actually happened), '
         '"sentiment" ("positive", "neutral" or "negative" for this company), '
         '"drivers" (list of up to 4 short phrases naming what is behind it), '
-        '"position_flags" (list of {"position_id": ..., "flag": ...} for anything in these headlines that '
-        'specifically affects one of the positions above, such as an event before an option\'s expiry; '
-        'empty list if nothing does). No buy/sell/hold language.')
+        '"position_flags" (list of {"position_id": ..., "flag": ...}; add a flag ONLY when a headline reports a '
+        'specific event that matters for one of the positions above, such as an earnings date or other scheduled '
+        'event before an option\'s expiry, or the price reaching that position\'s strike, target or stop. '
+        'General moves in the stock are not flags. Never write a flag saying that nothing relevant was found; '
+        'use an empty list instead). No buy/sell/hold language.')
     return "\n".join(lines)
 
 
