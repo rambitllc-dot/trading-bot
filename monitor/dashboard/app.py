@@ -78,12 +78,30 @@ def chart_theme(c):
             .configure_legend(labelColor="#DDE3EA", titleColor=GREY, labelFont="monospace", orient="bottom", columns=3))
 
 
+def cache_key():
+    """Changes whenever the data or the dashboard code changes, so the page never shows stale data."""
+    parts = []
+    for path in (config.DB_FILE, dashboard_data.__file__, plan.__file__, __file__):
+        try:
+            parts.append(str(os.path.getmtime(path)))
+        except OSError:
+            parts.append("0")
+    return "|".join(parts)
+
+
 @st.cache_data(ttl=300)
-def get(asof):
-    return dashboard_data.load(asof=asof)
+def get(asof, key):
+    data = dashboard_data.load(asof=asof)
+    for p in data.get("positions", []):  # make sure every position has a plan label
+        if not p.get("action"):
+            p["action"], p["action_reason"] = plan.for_position(p)
+    for a in data.get("alerts", []):
+        a.setdefault("action", plan.ALERT_ACTION.get(a.get("kind")))
+    return data
 
 
-first = get(None)
+KEY = cache_key()
+first = get(None, KEY)
 if not first["asof"]:
     st.markdown('<div class="hdr"><b>PORTFOLIO MONITOR</b><span>no data yet</span></div>', unsafe_allow_html=True)
     st.info("No runs stored yet. Run `python -m monitor.run` (or the GitHub workflow) and refresh.")
@@ -93,7 +111,7 @@ with st.sidebar:
     asof = st.selectbox("As of", first["dates"], index=0)
     st.caption("A monitor only: it reports conditions, tracks your own targets, and summarizes news. "
                "Nothing here recommends trades or places orders.")
-D = get(asof)
+D = get(asof, KEY)
 P, A, M = D["positions"], D["analytics"] or {}, D["macro"]
 
 # ---------- header + status strip ----------
@@ -193,14 +211,14 @@ with left:
             x=alt.X("date:T", title=None), y=alt.Y("value:Q", stack="zero", title="$ value", axis=alt.Axis(format="$,.0f")),
             color=alt.Color("position:N", title=None, scale=alt.Scale(scheme="set2")),
             tooltip=["position", alt.Tooltip("date:T"), alt.Tooltip("value:Q", format="$,.2f")]).properties(height=260)
-        st.altair_chart(chart_theme(c), use_container_width=True)
+        st.altair_chart(chart_theme(c), width="stretch")
         dx = pd.DataFrame(D["extrinsic"])
         dx["date"] = pd.to_datetime(dx["date"])
         c2 = alt.Chart(dx).mark_line(strokeWidth=2).encode(
             x=alt.X("date:T", title=None), y=alt.Y("extrinsic:Q", title="Extrinsic $ / share"),
             color=alt.Color("position:N", title=None, scale=alt.Scale(scheme="set2")),
             tooltip=["position", alt.Tooltip("date:T"), alt.Tooltip("extrinsic:Q", format="$.2f")]).properties(height=260)
-        st.altair_chart(chart_theme(c2), use_container_width=True)
+        st.altair_chart(chart_theme(c2), width="stretch")
     else:
         st.markdown('<div class="muted">No priced options to project.</div>', unsafe_allow_html=True)
 with right:
@@ -238,7 +256,7 @@ with right:
         c = alt.Chart(comp).mark_bar(color=AMBER, size=12).encode(
             y=alt.Y("component:N", title=None, sort="-x", axis=alt.Axis(labelLimit=160)), x=alt.X("score:Q", scale=alt.Scale(domain=[0, 100]), title="0 = stressed · 100 = calm"),
             tooltip=["component", "score", "weight"]).properties(height=230)
-        st.altair_chart(chart_theme(c), use_container_width=True)
+        st.altair_chart(chart_theme(c), width="stretch")
         if M["missing"]:
             st.markdown(f'<div class="muted">Not available this run: {e(", ".join(M["missing"]))}</div>', unsafe_allow_html=True)
     else:
@@ -281,7 +299,7 @@ def dist(v):
     return "–" if v is None else f"{v:+.1f}%"
 
 
-W = D["watchlist"]
+W = D.get("watchlist", [])
 if W:
     t = ('<div class="muted" style="color:#FFA62B">WATCHLIST · BUY only when a stock reaches the buy level you set in '
          'watchlist.json</div><div class="wrap"><table class="grid"><tr><th>Ticker</th><th>Plan</th><th>Price</th>'
@@ -297,7 +315,7 @@ else:
     st.markdown('<div class="muted">No watchlist yet. Add stocks and buy levels to monitor/watchlist.json.</div>',
                 unsafe_allow_html=True)
 
-S = D["scan"]
+S = D.get("scan", {})
 if S:
     cols = st.columns(2)
     for i, (key, title) in enumerate(scanner.SCREENS.items()):
@@ -307,7 +325,7 @@ if S:
                  '<div class="wrap"><table class="grid"><tr><th>#</th><th>Ticker</th><th>Price</th><th>1 day</th>'
                  '<th>12 mo</th><th>Why it showed up</th></tr>')
             for x in items[:10]:
-                n = D["candidate_news"].get(x["ticker"])
+                n = D.get("candidate_news", {}).get(x["ticker"])
                 chip = (f' <span class="pill" style="background:{SENT.get(n["sentiment"], GREY)};color:#07090C">'
                         f'{e(n["sentiment"])}</span>' if n and n.get("sentiment") else "")
                 t += (f'<tr><td>{x["rank"]}</td><td>{e(x["ticker"])}{chip}</td><td>{num(x["price"])}</td>'
@@ -316,7 +334,7 @@ if S:
             if not items:
                 t += '<tr><td colspan="6" class="muted" style="text-align:left">Nothing today.</td></tr>'
             st.markdown(t + "</table></div>", unsafe_allow_html=True)
-    cn = [n for n in D["candidate_news"].values() if n.get("status") == "ok" and n.get("summary")]
+    cn = [n for n in D.get("candidate_news", {}).values() if n.get("status") == "ok" and n.get("summary")]
     if cn:
         st.markdown('<div class="muted" style="color:#FFA62B;margin-top:12px">TOP CANDIDATES · CLAUDE NEWS SUMMARY</div>',
                     unsafe_allow_html=True)
@@ -335,11 +353,11 @@ else:
 # ---------- news ----------
 st.markdown('<div class="sec">News · Claude summaries (facts only, never buy/sell)</div>', unsafe_allow_html=True)
 SENT = {"positive": GREEN, "neutral": GREY, "negative": RED}
-if not D["held_news"]:
+if not D.get("held_news", D.get("news", [])):
     st.markdown('<div class="muted">No news analysis for this date (needs the ANTHROPIC_API_KEY secret).</div>',
                 unsafe_allow_html=True)
 cols = st.columns(2)
-for i, n in enumerate(D["held_news"]):
+for i, n in enumerate(D.get("held_news", D.get("news", []))):
     c = SENT.get(n["sentiment"], GREY)
     flags = "".join(f'<div class="flag">⚑ {e(f.get("position_id"))}: {e(f["flag"])}</div>' for f in n["position_flags"])
     heads = "".join(f'<div>· <a href="{e(h.get("link") or "#")}" target="_blank">{e(h["title"])}</a> '
