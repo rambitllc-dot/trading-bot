@@ -12,10 +12,11 @@ import json
 import os
 import sys
 
-from . import analytics, config, data, positions, storage, valuation
+from . import analytics, config, data, macro, news, positions, storage, valuation
 
 
-def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None):
+def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
+        news_caller=None):
     asof = asof or dt.date.today().isoformat()
     dt.date.fromisoformat(asof)  # validates the format
     book = positions.load(positions_file)
@@ -30,8 +31,11 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     rows, totals = valuation.value_book(book, snaps, asof, rate)
     storage.save_valuations(con, asof, rows)
     summary = analytics.analyze(con, rows, asof, provider)
+    macro_result = macro.run(con, asof, provider)
+    news_result = news.run(con, asof, book, provider, macro_result.get("label"), news_caller)
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
+              "macro": macro_result, "news": news_result,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -72,6 +76,30 @@ def print_report(res):
         print(line)
     if res.get("analytics"):
         print(analytics.summary_text(res["analytics"], res["positions"]))
+    m = res.get("macro")
+    if m:
+        print("\nMARKET ENVIRONMENT (macro gate)")
+        if m["score"] is None:
+            print("Unavailable this run.")
+        else:
+            parts = ", ".join(f"{k.replace('_', ' ')} {v['score']:.0f}" for k, v in m["components"].items())
+            print(f"{m['score']:.0f}/100 · {m['label']} ({parts})"
+                  + (f" · missing: {', '.join(m['missing'])}" if m["missing"] else ""))
+    if res.get("news"):
+        print("\nNEWS (Claude summaries, facts only)")
+        cost = 0.0
+        for n in res["news"]:
+            if n.get("status") != "ok":
+                print(f"- {n['ticker']}: {n.get('status')}")
+                continue
+            cost += n.get("cost_usd") or 0
+            tag = " (cached)" if n.get("cached") else ""
+            print(f"- {n['ticker']} [{n['sentiment']}]{tag}: {n['summary']}")
+            if n.get("drivers"):
+                print(f"  Drivers: {'; '.join(n['drivers'])}")
+            for f in n.get("position_flags") or []:
+                print(f"  Flag for {f.get('position_id')}: {f['flag']}")
+        print(f"Claude cost this run: ${cost:.4f}")
     for t_, errs in res["data_errors"].items():
         print(f"Data problems for {t_}: {'; '.join(errs[:3])}")
 

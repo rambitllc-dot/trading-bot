@@ -32,5 +32,23 @@ and (in later layers) alerts you. **It never buys or sells anything.**
 - Stored each run in the database (`analytics`, `allocation`, `iv_environment`, `flags` tables).
 All thresholds live in `config.py`.
 
+## Layer 3: macro gate and Claude news (built)
+
+**Macro gate** (`macro.py`): a deterministic 0-100 score of the market environment (higher = calmer),
+blending, with weights in `config.py` that must add to 1.0:
+- VIX level (12 or lower = 100, 40 or higher = 0) and where today's VIX sits in its last year
+- VIX term structure (VIX vs VIX3M; short-term fear above long-term = stress)
+- Breadth: share of the 11 S&P 500 sector ETFs above their 200-day average (a breadth proxy)
+- Credit: the HYG (junk bonds) / TLT (Treasuries) ratio vs its last year
+Labels: Calm (65+), Mixed, Stressed (under 40). Same data in, same score out.
+
+**News** (`news.py`): for each ticker you hold, headlines from the last 3 days go to Claude (Haiku 5.5),
+which returns a short summary, a sentiment (positive / neutral / negative), the key drivers, and flags
+for anything that affects one of your positions in that name. It never says buy or sell.
+Each name is analyzed once per day and cached, so re-runs aren't billed. This is the only paid part:
+roughly $0.0005 per name per day. It needs an Anthropic API key saved as the GitHub secret
+`ANTHROPIC_API_KEY`; without it everything else still runs and news shows as "off".
+Both are stored in the database each run (`macro`, `news_analysis` tables).
+
 Run it from GitHub: **Actions > Portfolio monitor > Run workflow**.
 Tests: `python -m unittest discover -s monitor/tests -t .`

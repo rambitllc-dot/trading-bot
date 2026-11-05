@@ -48,6 +48,26 @@ class YahooProvider:
             return f"{info.get('category') or 'Fund'} (ETF)"
         return None
 
+    def closes(self, ticker, period="2y"):
+        """Daily closes as [(YYYY-MM-DD, close), ...], oldest first."""
+        hist = self.yf.Ticker(ticker).history(period=period, auto_adjust=True)
+        return [(d.strftime("%Y-%m-%d"), _clean(c)) for d, c in zip(hist.index, hist["Close"]) if _clean(c)]
+
+    def news(self, ticker):
+        """Recent headlines as dicts: title, publisher, published (ISO, UTC), link, summary."""
+        out = []
+        for item in self.yf.Ticker(ticker).news or []:
+            c = item.get("content") or item  # newer yfinance nests fields under "content"
+            published = c.get("pubDate") or c.get("displayTime")
+            if not published and item.get("providerPublishTime"):
+                published = dt.datetime.fromtimestamp(item["providerPublishTime"], dt.timezone.utc).isoformat()
+            link = ((c.get("canonicalUrl") or {}).get("url") or (c.get("clickThroughUrl") or {}).get("url")
+                    or item.get("link"))
+            out.append({"title": c.get("title"), "summary": c.get("summary") or c.get("description") or "",
+                        "publisher": (c.get("provider") or {}).get("displayName") or item.get("publisher"),
+                        "published": published, "link": link})
+        return [n for n in out if n["title"]]
+
     def expiries(self, ticker):
         return list(self.yf.Ticker(ticker).options)
 

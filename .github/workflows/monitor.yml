@@ -29,6 +29,8 @@ jobs:
       - name: Tests
         run: python -m unittest discover -s monitor/tests -t .
       - name: Pull data and value the book
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # optional; news analysis is skipped without it
         run: python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }}
       - name: Save snapshots and database
         run: |
