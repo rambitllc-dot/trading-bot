@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 05, 2026 23:31 UTC · Bitcoin $75,740.09 · US stock market closed
+Last update: Nov 05, 2026 23:31 UTC · Bitcoin $75,720.70 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -50,7 +50,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 13 | S&P 500 equal weight (RSP) buy & hold | Hold | ETF | $98.71 | -$1.29 (-1.3%) | 1 |
 | 14 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $98.37 | -$1.63 (-1.6%) | 3 |
 | 15 | SpaceX gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $96.75 | -$3.25 (-3.3%) | 1 |
-| 16 | Bitcoin buy & hold | Hold | Bitcoin | $96.45 | -$3.55 (-3.5%) | 1 |
+| 16 | Bitcoin buy & hold | Hold | Bitcoin | $96.43 | -$3.57 (-3.6%) | 1 |
 | 17 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $96.40 | -$3.60 (-3.6%) | 1 |
 | 18 | S&P 500 buy & hold | Hold | ETF | $96.39 | -$3.61 (-3.6%) | 1 |
 | 19 | S&P 500 trend (200 day) | Static rule | ETF | $96.39 | -$3.61 (-3.6%) | 1 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $96.45 | $100.00 | trading |
+| Bitcoin | $96.43 | $100.00 | trading |
 | S&P 500 | $96.39 | $96.39 | about even |
 | Apple | $102.44 | $102.44 | about even |
 | Microsoft | $103.28 | $103.28 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $87.05 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,515.61 from $2,600 (-84.39)
+**All together:** $2,515.58 from $2,600 (-84.42)
 
 ## What each one is doing
 
@@ -95,7 +95,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $98.20, cash $0.51. Holding.
 - **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $57.53, GLD $20.59, BTC/USD $9.63, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **SpaceX gradual buy ($25 a week for 4 weeks):** SPCX $21.74, cash $75.01. Bought 1 of 4 times; next buy on or after 2026-11-10.
-- **Bitcoin buy & hold:** BTC/USD $94.06, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $94.04, cash $2.39. Holding.
 - **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $95.89, cash $0.51. Holding SPY until next month's check.
 - **S&P 500 buy & hold:** SPY $95.88, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $95.88, cash $0.51. Signal: in the market (price $766.73 vs 200d avg $727.09).
