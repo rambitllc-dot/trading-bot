@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 05, 2026 07:01 UTC · Bitcoin $80,534.08 · US stock market closed
+Last update: Nov 05, 2026 07:31 UTC · Bitcoin $80,500.00 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -41,8 +41,8 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 4 | Amazon buy & hold | Hold | Stock | $106.48 | +$6.48 (+6.5%) | 1 |
 | 5 | Apple buy & hold | Hold | Stock | $103.89 | +$3.89 (+3.9%) | 1 |
 | 6 | Apple trend (200 day) | Static rule | Stock | $103.89 | +$3.89 (+3.9%) | 1 |
-| 7 | Bitcoin buy & hold | Hold | Bitcoin | $102.41 | +$2.41 (+2.4%) | 1 |
-| 8 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $101.68 | +$1.68 (+1.7%) | 3 |
+| 7 | Bitcoin buy & hold | Hold | Bitcoin | $102.36 | +$2.36 (+2.4%) | 1 |
+| 8 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $101.67 | +$1.67 (+1.7%) | 3 |
 | 9 | S&P 500 equal weight (RSP) buy & hold | Hold | ETF | $101.64 | +$1.64 (+1.6%) | 1 |
 | 10 | RSI dip-buying (S&P 500) | Static rule | ETF | $101.18 | +$1.18 (+1.2%) | 1 |
 | 11 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $101.17 | +$1.17 (+1.2%) | 1 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $102.41 | $100.00 | holding |
+| Bitcoin | $102.36 | $100.00 | holding |
 | S&P 500 | $101.17 | $101.17 | about even |
 | Apple | $103.89 | $103.89 | about even |
 | Microsoft | $107.07 | $107.07 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $95.68 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,612.57 from $2,600 (+12.57)
+**All together:** $2,612.53 from $2,600 (+12.53)
 
 ## What each one is doing
 
@@ -86,7 +86,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Amazon buy & hold:** AMZN $105.97, cash $0.51. Holding.
 - **Apple buy & hold:** AAPL $103.38, cash $0.51. Holding.
 - **Apple trend (200 day):** AAPL $103.38, cash $0.51. Signal: in the market (price $349.56 vs 200d avg $297.56).
-- **Bitcoin buy & hold:** BTC/USD $100.02, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $99.97, cash $2.39. Holding.
 - **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $60.39, GLD $20.42, BTC/USD $10.24, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $101.13, cash $0.51. Holding.
 - **RSI dip-buying (S&P 500):** SPY $100.67, cash $0.51. Holding, waiting for a bounce above the 5-day average (RSI-2 83, buys below 10).
@@ -119,10 +119,10 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 30 | 63.3% | $119.84 | -32% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 41 | 36.6% | $47.46 | -54% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 192 | 48.4% | $23.92 | -76% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 241 | 48.5% | $17.01 | -87% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 241 | 47.3% | $12.96 | -87% |
-| Coin flip (luck benchmark) | Luck benchmark | 241 | 45.6% | $9.03 | -92% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 194 | 48.5% | $23.63 | -76% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 243 | 48.6% | $16.80 | -87% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 243 | 47.3% | $12.81 | -87% |
+| Coin flip (luck benchmark) | Luck benchmark | 243 | 45.7% | $8.92 | -92% |
 
 ### Backtest: the 30 days before that
 
