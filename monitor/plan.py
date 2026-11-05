@@ -10,7 +10,7 @@ These are not predictions or advice. They only apply the plan you wrote in posit
 from . import config
 
 COLORS = {"SELL": "#FF5C5C", "BUY MORE": "#3DDC84", "BUY": "#3DDC84", "HOLD": "#8A93A3", "REVIEW": "#FFA62B",
-          "WAIT": "#5A6472"}
+          "WAIT": "#5A6472", "SWAP": "#B48BEB"}
 
 
 def _crossed(mark, level, entry, side):
@@ -42,4 +42,5 @@ def for_position(r):
 
 ALERT_ACTION = {"target_hit": "SELL", "stop_hit": "SELL", "target_near": "HOLD", "iv_change": "REVIEW",
                 "news_flag": "REVIEW", "news_negative": "REVIEW", "macro_shift": "REVIEW",
-                "expiry_watch": "REVIEW", "concentration": "REVIEW", "watch_buy": "BUY", "watch_near": "REVIEW"}
+                "expiry_watch": "REVIEW", "concentration": "REVIEW", "watch_buy": "BUY", "watch_near": "REVIEW",
+                "swap": "SWAP"}

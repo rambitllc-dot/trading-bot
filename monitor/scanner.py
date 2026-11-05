@@ -126,14 +126,15 @@ def watch(watchlist, m):
     return out, alerts
 
 
-def run(con, asof, provider, macro_label=None, news_caller=None):
+def run(con, asof, provider, macro_label=None, news_caller=None, extra_tickers=()):
+    """Returns (result, daily bars by ticker); the bars are reused by the rotation step."""
     con.executescript(SCHEMA)
     wl = load_watchlist()
-    tickers = sorted(set(universe()) | {w["ticker"] for w in wl})
+    tickers = sorted(set(universe()) | {w["ticker"] for w in wl} | set(extra_tickers) | set(config.ROTATION_EXTRA))
     try:
         data = provider.bulk(tickers)
     except Exception as e:
-        return {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": f"scan data failed: {e}"}
+        return {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": f"scan data failed: {e}"}, {}
     found, m = screens(data)
     wrows, alerts = watch(wl, m)
     con.execute("DELETE FROM scan_results WHERE asof=?", (asof,))
@@ -160,4 +161,4 @@ def run(con, asof, provider, macro_label=None, news_caller=None):
     summaries = [news.analyze_name(con, asof, t, [], provider, os.environ.get("ANTHROPIC_API_KEY"), macro_label,
                                    news_caller) for t in picks]
     return {"screens": found, "watchlist": wrows, "alerts": alerts, "news": summaries,
-            "scanned": len(m), "requested": len(tickers)}
+            "scanned": len(m), "requested": len(tickers)}, data

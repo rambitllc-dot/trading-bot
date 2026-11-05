@@ -148,6 +148,43 @@ for p in sorted(P, key=lambda x: order.get(x["action"], 9)):
 st.markdown('<div class="muted">These labels only apply the target, stop and add levels you set in positions.json. '
             'They are not predictions or financial advice.</div>', unsafe_allow_html=True)
 
+def pct(v, d=1):
+    return "–" if v is None else f'<span class="{cls(v)}">{v * 100:+.{d}f}%</span>'
+
+
+# ---------- rotation ----------
+R = D.get("rotation") or {}
+st.markdown('<div class="sec">Rotation · follow the money</div>', unsafe_allow_html=True)
+sug = R.get("suggestion")
+if sug:
+    st.markdown(f'<div class="alert" style="border-color:{plan.COLORS["SWAP"]};font-size:15px;background:#17121F">'
+                f'{plan_pill("SWAP")} &nbsp;<b>Sell all {e(sug["sell"])}</b> (about ${sug["amount"]:,.0f}, rank '
+                f'#{sug["sell_rank"]}) <b>→ buy {e(sug["buy"])}</b> (rank #{sug["buy_rank"]})'
+                f'<div class="muted" style="margin-top:4px">{e(sug["reason"])} Suggested {e(sug["asof"])}.</div></div>',
+                unsafe_allow_html=True)
+elif R.get("universe"):
+    st.markdown('<div class="muted">No swap right now: no stock you don\'t own clearly beats your weakest holding '
+                f'(needs a score of {config.ROTATION_MIN_SCORE}+ and a {config.ROTATION_MARGIN}-point lead).</div>',
+                unsafe_allow_html=True)
+if R.get("universe"):
+    c1, c2 = st.columns(2)
+    def score_table(items, title):
+        t = (f'<div class="muted" style="color:#FFA62B;margin-top:8px">{title}</div><div class="wrap"><table class="grid">'
+             '<tr><th>Ticker</th><th>Rank</th><th>Score</th><th>Momentum</th><th>Steadiness</th><th>Trend</th><th>12 mo</th></tr>')
+        for x in items:
+            t += (f'<tr><td>{e(x["ticker"])}</td><td>#{x["rank"]}</td><td><b>{x["score"]:.0f}</b></td>'
+                  f'<td>{x["momentum"]:.0f}</td><td>{x["steadiness"]:.0f}</td><td>{x["trend"]:.0f}</td>'
+                  f'<td>{pct(x["ret_12m"], 0)}</td></tr>')
+        return t + "</table></div>"
+    with c1:
+        st.markdown(score_table(R["holdings"], f"YOUR HOLDINGS · RANKED AMONG {R['universe']} STOCKS & ETFS (WEAKEST FIRST)"),
+                    unsafe_allow_html=True)
+    with c2:
+        st.markdown(score_table(R["top"], "STRONGEST YOU DON'T OWN"), unsafe_allow_html=True)
+    st.markdown('<div class="muted">Score 0-100 = momentum 40% + steadiness 30% + trend 20% + news 10%. A swap is suggested '
+                f'only with a clear lead, at most once every {config.ROTATION_COOLDOWN_DAYS} days, and never for something '
+                f'held under {config.ROTATION_MIN_HOLD_DAYS} days. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
+
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
 if not D["alerts"]:
     st.markdown('<div class="muted">No alerts.</div>', unsafe_allow_html=True)

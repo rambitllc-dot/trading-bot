@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, config, data, macro, news, notifier, positions, scanner, storage, valuation
+from . import alerts, analytics, config, data, macro, news, notifier, positions, rotation, scanner, storage, valuation
 
 
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
@@ -33,12 +33,26 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     summary = analytics.analyze(con, rows, asof, provider)
     macro_result = macro.run(con, asof, provider)
     news_result = news.run(con, asof, book, provider, macro_result.get("label"), news_caller)
-    scan = scanner.run(con, asof, provider, macro_result.get("label"), news_caller) if hasattr(provider, "bulk") \
-        else {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}
-    alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result, scan["alerts"])
+    if hasattr(provider, "bulk"):
+        scan, bars = scanner.run(con, asof, provider, macro_result.get("label"), news_caller,
+                                 extra_tickers=[p["ticker"] for p in book])
+    else:
+        scan, bars = {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}, {}
+    sentiment = {n["ticker"]: n.get("sentiment") for n in news_result + scan.get("news", []) if n.get("status") == "ok"}
+    rot = rotation.run(con, asof, rows, bars, sentiment) if bars else {"status": "no market data", "holdings": [],
+                                                                         "top": [], "suggestion": None}
+    s = rot.get("suggestion")
+    if s:  # the holding to swap out gets the SWAP label unless a stop/target already says SELL
+        for r in rows:
+            if r["ticker"] == s["sell"] and r.get("action") in ("HOLD", "REVIEW"):
+                r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
+        storage.save_valuations(con, asof, rows)
+    alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result,
+                                     scan["alerts"] + rotation.alert(rot))
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
               "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
+              "rotation": rot,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -121,6 +135,15 @@ def print_report(res):
             for n in sc.get("news", []):
                 if n.get("status") == "ok":
                     print(f"  {n['ticker']} [{n['sentiment']}]: {n['summary']}")
+    rt = res.get("rotation")
+    if rt:
+        print("\nROTATION (follow the money)")
+        for h in rt.get("holdings", []):
+            print(f"- {h['ticker']}: rank #{h['rank']} of {rt.get('universe')}, score {h['score']:.0f}")
+        if rt.get("top"):
+            print("Strongest stocks you don't own: " + ", ".join(f"{x['ticker']} ({x['score']:.0f})" for x in rt["top"][:5]))
+        s = rt.get("suggestion")
+        print(f"SWAP IDEA: sell {s['sell']} -> buy {s['buy']}. {s['reason']}" if s else f"Status: {rt.get('status')}")
     if "alerts" in res:
         print(f"\nALERTS ({len(res['alerts'])})")
         for a in res["alerts"]:

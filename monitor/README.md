@@ -10,6 +10,17 @@ Every position and alert gets a simple label: **SELL** (price reached your stop,
 no price, or a news/volatility alert needs a look) or **HOLD** (between your stop and target). They only apply the
 levels you write in `positions.json`; they are not predictions or advice, and nothing is ever traded.
 
+## Rotation: follow the money
+
+`rotation.py` scores every S&P 500 stock plus major ETFs (and whatever you hold) on the same 0-100 scale:
+momentum 40% (12-month return, skipping the latest month), steadiness 30% (that return vs how much the price
+swings), trend 20% (above the 50- and 200-day averages) and news 10% (Claude's sentiment, where available).
+Your holdings are ranked against the whole market. A **SWAP** (sell all of your weakest holding, buy the
+strongest stock you don't own) is suggested only when the candidate scores 80+ and leads by 25+ points, your
+holding is at least 30 days old (when the buy date is known), no other swap was suggested in the last 7 days,
+and the candidate wasn't swapped out in the last 30 days. All of these are in `config.py`.
+It is a fixed rule, not a prediction, and nothing is traded automatically.
+
 ## Opportunities: watchlist and market scan
 
 Looks beyond what you own, every run:

@@ -53,7 +53,7 @@ class ScannerTest(unittest.TestCase):
         json.dump([{"ticker": "WATCH", "buy_below": 100}], open(wl, "w"))
         con = storage.connect(os.path.join(d, "m.db"))
         with mock.patch.object(config, "WATCHLIST_FILE", wl), mock.patch.object(scanner, "universe", lambda: list(market())):
-            res = scanner.run(con, "2026-11-05", P())
+            res, data = scanner.run(con, "2026-11-05", P())
         self.assertEqual(res["scanned"], 5)
         self.assertGreater(con.execute("SELECT COUNT(*) FROM scan_results").fetchone()[0], 3)
         self.assertEqual(con.execute("SELECT action FROM watchlist WHERE ticker='WATCH'").fetchone()[0], "BUY")
