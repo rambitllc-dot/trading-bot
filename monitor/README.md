@@ -18,5 +18,19 @@ and (in later layers) alerts you. **It never buys or sells anything.**
 - `run.py`: runs it all. `python -m monitor.run` (or `--asof YYYY-MM-DD` to stamp a date; prices still come
   from the current feed). Output also goes to `output/valuation_latest.json` for later layers.
 
+## Layer 2: portfolio analytics (built)
+
+`analytics.py`, run automatically after Layer 1. Facts only, never advice.
+- **Allocation** by ticker and by sector (sector from `SECTORS` in `config.py`, else looked up on Yahoo and
+  remembered). Flags any ticker over 40% or sector over 60% of the book.
+- **Aggregate Greeks**: net delta in share terms, daily theta in dollars (what the book loses per day if
+  nothing moves), net vega in dollars per 1 IV point.
+- **IV environment** per option: current IV, IV rank and IV percentile versus that contract's own stored
+  daily IV (up to 252 days). Shows "building history" until 20 days exist; flags **rich** (rank > 70) or
+  **cheap** (rank < 30).
+- **Expiry watch**: flags options with fewer than 45 days left, so time decay and roll decisions are visible.
+- Stored each run in the database (`analytics`, `allocation`, `iv_environment`, `flags` tables).
+All thresholds live in `config.py`.
+
 Run it from GitHub: **Actions > Portfolio monitor > Run workflow**.
 Tests: `python -m unittest discover -s monitor/tests -t .`

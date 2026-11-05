@@ -40,6 +40,14 @@ class YahooProvider:
             price = _clean(hist["Close"].iloc[-1]) if len(hist) else None
         return price
 
+    def sector(self, ticker):
+        info = self.yf.Ticker(ticker).info or {}
+        if info.get("sector"):
+            return info["sector"]
+        if info.get("quoteType") == "ETF":
+            return f"{info.get('category') or 'Fund'} (ETF)"
+        return None
+
     def expiries(self, ticker):
         return list(self.yf.Ticker(ticker).options)
 

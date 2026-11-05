@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import config, data, positions, storage, valuation
+from . import analytics, config, data, positions, storage, valuation
 
 
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None):
@@ -29,8 +29,9 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
         snaps[t] = snap
     rows, totals = valuation.value_book(book, snaps, asof, rate)
     storage.save_valuations(con, asof, rows)
+    summary = analytics.analyze(con, rows, asof, provider)
     con.close()
-    result = {"asof": asof, "totals": totals, "positions": rows,
+    result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -69,6 +70,8 @@ def print_report(res):
         if r["status"] != "ok":
             line += f" [{r['status']}]"
         print(line)
+    if res.get("analytics"):
+        print(analytics.summary_text(res["analytics"], res["positions"]))
     for t_, errs in res["data_errors"].items():
         print(f"Data problems for {t_}: {'; '.join(errs[:3])}")
 
