@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import analytics, config, data, macro, news, positions, storage, valuation
+from . import alerts, analytics, config, data, macro, news, notifier, positions, storage, valuation
 
 
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
@@ -33,14 +33,16 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     summary = analytics.analyze(con, rows, asof, provider)
     macro_result = macro.run(con, asof, provider)
     news_result = news.run(con, asof, book, provider, macro_result.get("label"), news_caller)
+    alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result)
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
-              "macro": macro_result, "news": news_result,
+              "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "valuation_latest.json"), "w") as f:
         json.dump(result, f, indent=1)
+    result["notifier"] = notifier.maybe_send(alert_list, asof)
     return result
 
 
@@ -100,6 +102,11 @@ def print_report(res):
             for f in n.get("position_flags") or []:
                 print(f"  Flag for {f.get('position_id')}: {f['flag']}")
         print(f"Claude cost this run: ${cost:.4f}")
+    if "alerts" in res:
+        print(f"\nALERTS ({len(res['alerts'])})")
+        for a in res["alerts"]:
+            print(f"- [{a['severity']}]{' NEW' if a['is_new'] else ''} {a['message']}")
+        print(f"Notifier: {res.get('notifier')}")
     for t_, errs in res["data_errors"].items():
         print(f"Data problems for {t_}: {'; '.join(errs[:3])}")
 

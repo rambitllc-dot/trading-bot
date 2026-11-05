@@ -5,7 +5,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 POSITIONS_FILE = os.path.join(BASE_DIR, "positions.json")
 SNAPSHOT_DIR = os.path.join(BASE_DIR, "snapshots")
-DB_FILE = os.path.join(BASE_DIR, "monitor.db")
+DB_FILE = os.environ.get("MONITOR_DB") or os.path.join(BASE_DIR, "monitor.db")
 
 RISK_FREE_RATE = 0.045      # annual, used for Black-Scholes Greeks
 CONTRACT_MULTIPLIER = 100   # one option contract = 100 shares
@@ -47,3 +47,17 @@ NEWS_MAX_HEADLINES = 15
 CLAUDE_MODEL = "claude-haiku-5-5"
 CLAUDE_PRICE_IN = 0.10      # $ per million input tokens (Haiku 5.5, prompts under 100k tokens)
 CLAUDE_PRICE_OUT = 0.50     # $ per million output tokens
+
+# ---- Layer 4: alerts, dashboard, notifier ----
+NEW_STRIKE_BAND_PCT = 30    # report newly listed strikes within +/- this % of a strike you hold
+TARGET_NEAR_PCT = 80        # "target_near" once a position is this far from entry to target
+IV_CHANGE_PCT = 20          # "iv_change" when a held contract's IV moves this much vs the prior run
+MACRO_SHIFT_POINTS = 15     # "macro_shift" when the macro score moves this many points vs the prior run
+
+# Notifier: off by default. channel: "telegram" (needs TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID secrets),
+# "imessage" (macOS only, sends to IMESSAGE_RECIPIENT), or "github" (opens an issue, which the GitHub app
+# pushes to your phone).
+NOTIFY_ENABLED = False
+NOTIFY_CHANNEL = "telegram"
+IMESSAGE_RECIPIENT = ""
+NOTIFY_MIN_SEVERITY = "info"   # "info" sends everything; "warn" or "high" sends fewer

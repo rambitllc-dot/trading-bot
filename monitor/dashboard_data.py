@@ -1,0 +1,106 @@
+"""Reads the monitor database and shapes everything the dashboard shows. No Streamlit here, so it's testable."""
+import datetime as dt
+import json
+import sqlite3
+
+from . import config
+from .greeks import bs_greeks
+
+
+def rows(con, sql, args=()):
+    cur = con.execute(sql, args)
+    cols = [d[0] for d in cur.description]
+    return [dict(zip(cols, r)) for r in cur.fetchall()]
+
+
+def dates(con):
+    return [r[0] for r in con.execute("SELECT DISTINCT asof FROM valuations ORDER BY asof DESC").fetchall()]
+
+
+def table_exists(con, name):
+    return con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone() is not None
+
+
+def theta_projection(positions, rate=config.RISK_FREE_RATE):
+    """Day-by-day option value if spot and IV stay where they are (illustrative, not predictive).
+    Returns (stacked rows [{day, date, position, value}], extrinsic rows [{day, date, position, extrinsic}])."""
+    opts = [p for p in positions if p["asset_type"] == "option" and p.get("iv") and p.get("spot")
+            and p.get("dte") is not None and p["dte"] >= 0]
+    if not opts:
+        return [], []
+    horizon = max(p["dte"] for p in opts)
+    step = max(1, horizon // 150)
+    start = dt.date.fromisoformat(opts[0]["asof"])
+    stacked, extrinsic = [], []
+    for d in list(range(0, horizon + 1, step)) + ([horizon] if horizon % step else []):
+        day = (start + dt.timedelta(days=d)).isoformat()
+        for p in opts:
+            left = p["dte"] - d
+            intrinsic = max(p["spot"] - p["strike"], 0) if p["option_type"] == "call" else max(p["strike"] - p["spot"], 0)
+            price = bs_greeks(p["option_type"], p["spot"], p["strike"], max(left, 0) / 365, rate, p["iv"])["price"] \
+                if left > 0 else intrinsic
+            name = f"{p['ticker']} {p['strike']:g}{p['option_type'][0].upper()} {p['expiry']}"
+            stacked.append({"day": d, "date": day, "position": name,
+                            "value": round(price * p["contracts"] * config.CONTRACT_MULTIPLIER, 2)})
+            if left >= 0:
+                extrinsic.append({"day": d, "date": day, "position": name, "extrinsic": round(price - intrinsic, 3)})
+    return stacked, extrinsic
+
+
+def strike_ladder(con, asof, p, new_keys, width=6):
+    chain = rows(con, "SELECT strike, bid, ask, last, iv, volume, open_interest FROM chain WHERE asof=? AND ticker=? "
+                      "AND expiry=? AND option_type=? ORDER BY strike", (asof, p["ticker"], p["expiry"], p["option_type"]))
+    if not chain:
+        return []
+    idx = min(range(len(chain)), key=lambda i: abs(chain[i]["strike"] - p["strike"]))
+    out = []
+    for r in chain[max(0, idx - width): idx + width + 1]:
+        r["held"] = abs(r["strike"] - p["strike"]) < 1e-6
+        r["new"] = (p["ticker"], p["expiry"], p["option_type"], r["strike"]) in new_keys
+        out.append(r)
+    return out
+
+
+def load(db_path=None, asof=None):
+    con = sqlite3.connect(db_path or config.DB_FILE)
+    try:
+        avail = dates(con) if table_exists(con, "valuations") else []
+        if not avail:
+            return {"asof": None, "dates": []}
+        asof = asof if asof in avail else avail[0]
+        pos = rows(con, "SELECT * FROM valuations WHERE asof=? ORDER BY value DESC", (asof,))
+        for p in pos:
+            p["asof"] = asof
+        a = rows(con, "SELECT * FROM analytics WHERE asof=?", (asof,)) if table_exists(con, "analytics") else []
+        alloc = rows(con, "SELECT * FROM allocation WHERE asof=? ORDER BY pct DESC", (asof,)) \
+            if table_exists(con, "allocation") else []
+        ivenv = {r["position_id"]: r for r in rows(con, "SELECT * FROM iv_environment WHERE asof=?", (asof,))} \
+            if table_exists(con, "iv_environment") else {}
+        alerts = rows(con, "SELECT * FROM alerts WHERE asof=?", (asof,)) if table_exists(con, "alerts") else []
+        order = {"high": 0, "warn": 1, "info": 2}
+        alerts.sort(key=lambda x: (order.get(x["severity"], 9), -x["is_new"]))
+        m = rows(con, "SELECT * FROM macro WHERE asof=?", (asof,)) if table_exists(con, "macro") else []
+        macro = None
+        if m:
+            macro = {**m[0], "components": json.loads(m[0]["components"] or "{}"),
+                     "inputs": json.loads(m[0]["inputs"] or "{}"), "missing": json.loads(m[0]["missing"] or "[]")}
+            macro["history"] = rows(con, "SELECT asof, score FROM macro WHERE score IS NOT NULL ORDER BY asof")
+        news = []
+        if table_exists(con, "news_analysis"):
+            for n in rows(con, "SELECT * FROM news_analysis WHERE asof=? ORDER BY ticker", (asof,)):
+                for k in ("headlines", "drivers", "position_flags"):
+                    n[k] = json.loads(n[k] or "[]")
+                news.append(n)
+        new_keys = set()
+        if table_exists(con, "chain_diff"):
+            for d in rows(con, "SELECT ticker, new_strikes FROM chain_diff WHERE asof=?", (asof,)):
+                for s in json.loads(d["new_strikes"] or "[]"):
+                    new_keys.add((d["ticker"], s["expiry"], s["option_type"], s["strike"]))
+        ladders = {p["position_id"]: strike_ladder(con, asof, p, new_keys)
+                   for p in pos if p["asset_type"] == "option" and p.get("expiry")}
+        stacked, extrinsic = theta_projection(pos)
+        return {"asof": asof, "dates": avail, "positions": pos, "analytics": a[0] if a else None,
+                "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
+                "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic}
+    finally:
+        con.close()

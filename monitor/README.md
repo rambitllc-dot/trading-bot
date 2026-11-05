@@ -50,5 +50,43 @@ roughly $0.0005 per name per day. It needs an Anthropic API key saved as the Git
 `ANTHROPIC_API_KEY`; without it everything else still runs and news shows as "off".
 Both are stored in the database each run (`macro`, `news_analysis` tables).
 
-Run it from GitHub: **Actions > Portfolio monitor > Run workflow**.
+## Layer 4: alerts, dashboard, notifier, schedule (built)
+
+**Alerts** (`alerts.py`), facts only, never buy/sell:
+- **New strikes / expiries**: today's chain vs the prior run. New expiries, and new strikes within +/-30% of
+  strikes you hold (fresh LEAPS dates and nearby strikes, without scanning the whole chain).
+- `target_hit` (high), e.g. "NOK 100 calls (2027-01-15) hit your target level"; `stop_hit` (high);
+  `target_near` (info, 80%+ of the way); `iv_change` (warn, IV moved 20%+ vs prior run);
+  `new_strikes` / `new_expiry` (info); plus the Layer 2 flags.
+- `news_flag`, `news_negative` and `macro_shift` (warn), with the one-line driver attached. *These fill a gap
+  in the original prompt (that part was missing from the source); they match its surviving text and Layer 3.*
+- Alerts are marked NEW when they weren't raised at the prior run, and stored in the `alerts` table.
+
+**Dashboard** (`dashboard/app.py`, Streamlit, Bloomberg-terminal style, one page): status strip (NAV, P&L,
+positions, alert count, macro score, net delta, daily theta, as-of date), active alerts color-coded by
+severity (new strikes/expiries in yellow), dense positions grid with DTE pills and progress bars to target
+and stop, theta decay (stacked $ value to the longest expiry + extrinsic value per share, Black-Scholes at
+constant spot and IV: illustrative, not predictive), strike ladder (+/-6 strikes, held strike highlighted,
+NEW badges), allocation bars with concentration flags, macro panel and news panel (summary, sentiment,
+drivers, position flag, clickable headlines). *The macro and news panels also fill the gap in the prompt.*
+- Run on a computer: `pip install -r monitor/dashboard/requirements.txt` then `streamlit run monitor/dashboard/app.py`
+- Or host it free: share.streamlit.io > sign in with GitHub > New app > repo `rambitllc-dot/trading-bot`,
+  branch `main`, main file `monitor/dashboard/app.py` > Deploy. It shows the latest data after each run.
+
+**Notifier** (`notifier.py`), off by default. In `config.py` set `NOTIFY_ENABLED = True` and pick
+`NOTIFY_CHANNEL`: `"telegram"` (add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` as GitHub secrets),
+`"imessage"` (Mac only, via osascript, to `IMESSAGE_RECIPIENT`), or `"github"` (an issue that the GitHub app
+pushes to your phone). `NOTIFY_MIN_SEVERITY` limits what gets sent. The runner calls
+`notifier.maybe_send(alerts, asof)` at the end; when disabled it does nothing.
+
+**Schedule**: GitHub runs the full pipeline every weekday after the close (21:35 UTC) and saves the log to
+`monitor/logs/`. To run it on your own computer instead, this cron line does the same at 1:35 PM Pacific
+(market close is 1:00 PM Pacific):
+
+    35 13 * * 1-5 cd /path/to/trading-bot && /usr/bin/env python3 -m monitor.run >> monitor/logs/monitor.log 2>&1
+
+The whole system is a monitor. It reports conditions, tracks your own targets, and Claude summarizes the
+news. Nothing recommends trades or routes orders.
+
+Run it from GitHub any time: **Actions > Portfolio monitor > Run workflow**.
 Tests: `python -m unittest discover -s monitor/tests -t .`
