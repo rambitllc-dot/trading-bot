@@ -7,12 +7,14 @@ Every run, score every stock in the market the same way (S&P 500 + major ETFs + 
   news        Claude's sentiment where available: positive 100, neutral 50, negative 0 (50 if none)
 blended with ROTATION_WEIGHTS into a 0-100 score, and rank everything.
 
-Then compare your weakest holding with the strongest stock you don't own. Suggest a SWAP only when:
-  - the candidate scores at least ROTATION_MIN_SCORE and beats your weakest holding by ROTATION_MARGIN points
-  - your weakest holding was bought at least ROTATION_MIN_HOLD_DAYS ago (if the buy date is known)
-  - no other swap was suggested in the last ROTATION_COOLDOWN_DAYS days (one at a time)
+Then, starting with your weakest holding, pair each holding with the strongest stock you don't own
+(a different one for each swap) and suggest a SWAP when:
+  - the candidate scores at least ROTATION_MIN_SCORE and beats that holding by ROTATION_MARGIN points
+  - that holding wasn't already swapped / suggested in the last ROTATION_COOLDOWN_DAYS days
+    (each stock at most once a week), and wasn't bought less than ROTATION_MIN_HOLD_DAYS ago
   - the candidate wasn't swapped out of your book in the last ROTATION_NO_REBUY_DAYS days
-It's a suggestion based on these fixed rules, not a prediction; nothing is traded automatically.
+So every holding can be swapped once a week. It's a suggestion from fixed rules, not a prediction;
+nothing is traded automatically.
 """
 import datetime as dt
 import math
@@ -24,8 +26,8 @@ CREATE TABLE IF NOT EXISTS rotation_scores (
     asof TEXT, ticker TEXT, rank INTEGER, score REAL, momentum REAL, steadiness REAL, trend REAL, news REAL,
     ret_12m REAL, held INTEGER, PRIMARY KEY (asof, ticker));
 CREATE TABLE IF NOT EXISTS rotation_log (
-    asof TEXT PRIMARY KEY, sell TEXT, buy TEXT, sell_score REAL, buy_score REAL, sell_rank INTEGER,
-    buy_rank INTEGER, amount REAL, reason TEXT);
+    asof TEXT, sell TEXT, buy TEXT, sell_score REAL, buy_score REAL, sell_rank INTEGER,
+    buy_rank INTEGER, amount REAL, reason TEXT, PRIMARY KEY (asof, sell));
 """
 NEWS_POINTS = {"positive": 100.0, "neutral": 50.0, "negative": 0.0}
 
@@ -89,81 +91,94 @@ def why(r):
     return ", ".join(parts)
 
 
+def migrate(con):
+    """Older databases keyed rotation_log by date only (one swap per day); key it by date + stock."""
+    pk = [r[1] for r in con.execute("PRAGMA table_info(rotation_log)") if r[5]]
+    if pk == ["asof"]:
+        con.execute("ALTER TABLE rotation_log RENAME TO rotation_log_old")
+        con.executescript(SCHEMA)
+        con.execute("INSERT INTO rotation_log SELECT * FROM rotation_log_old")
+        con.execute("DROP TABLE rotation_log_old")
+        con.commit()
+
+
+def log_rows(con, since):
+    cur = con.execute("SELECT * FROM rotation_log WHERE asof>=? ORDER BY asof", (since,))
+    cols = [d[0] for d in cur.description]
+    return [dict(zip(cols, r)) for r in cur.fetchall()]
+
+
 def run(con, asof, rows, data, sentiment=None):
     con.executescript(SCHEMA)
+    migrate(con)
     held = {r["ticker"]: r for r in rows if r["asset_type"] == "shares" and r.get("value")}
     scored = score_all(data, sentiment)
     con.execute("DELETE FROM rotation_scores WHERE asof=?", (asof,))
     con.executemany("INSERT INTO rotation_scores VALUES (?,?,?,?,?,?,?,?,?,?)",
                     [(asof, r["ticker"], r["rank"], r["score"], r["momentum"], r["steadiness"], r["trend"], r["news"],
                       r["ret_12m"], int(r["ticker"] in held)) for r in scored])
-    con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))
+    con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
     con.commit()
     by = {r["ticker"]: r for r in scored}
     total = len(scored)
     mine = sorted([by[t] for t in held if t in by], key=lambda r: r["score"])
     result = {"universe": total, "holdings": mine, "top": [r for r in scored if r["ticker"] not in held][:10],
-              "suggestion": None, "status": ""}
+              "suggestions": [], "status": ""}
     if not mine:
         result["status"] = "no scored holdings yet"
         return result
 
-    last = con.execute("SELECT * FROM rotation_log ORDER BY asof DESC LIMIT 1").fetchone()
-    if last:
-        cols = [d[0] for d in con.execute("SELECT * FROM rotation_log LIMIT 0").description]
-        last = dict(zip(cols, last))
-        age = days_since(last["asof"], asof)
-        if age is not None and age < config.ROTATION_COOLDOWN_DAYS:
-            if last["sell"] in held:
-                result["suggestion"] = {**last, "pending": True, "suggested_on": last["asof"]}
-                result["status"] = f"swap suggested on {last['asof']} is still open"
-            else:
-                nxt = dt.date.fromisoformat(last["asof"]) + dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS)
-                result["status"] = f"last swap done; next suggestion allowed from {nxt}"
-            return result
+    day = dt.date.fromisoformat(asof)
+    week = log_rows(con, (day - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat())
+    recent_out = {r["sell"] for r in log_rows(con, (day - dt.timedelta(days=config.ROTATION_NO_REBUY_DAYS)).isoformat())}
+    # still-open ideas from earlier this week (the stock to sell is still in the book)
+    pending = [{**r, "pending": True, "suggested_on": r["asof"]} for r in week if r["sell"] in held]
+    swapped_this_week = {r["sell"] for r in week} | {r["buy"] for r in week}  # once a week per stock
+    taken = {r["buy"] for r in pending}
 
-    recent_out = {r[0] for r in con.execute("SELECT sell FROM rotation_log WHERE asof>=?",
-                                           ((dt.date.fromisoformat(asof)
-                                             - dt.timedelta(days=config.ROTATION_NO_REBUY_DAYS)).isoformat(),))}
-    eligible = []
-    for r in mine:
-        bought = held[r["ticker"]].get("entry_date")
+    new = []
+    candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
+                  and r["ticker"] not in taken]
+    for h in mine:  # weakest first
+        if h["ticker"] in swapped_this_week:
+            continue
+        bought = held[h["ticker"]].get("entry_date")
         d = days_since(bought, asof) if bought else None
-        if d is None or d >= config.ROTATION_MIN_HOLD_DAYS:
-            eligible.append(r)
-    if not eligible:
-        result["status"] = f"every holding is younger than {config.ROTATION_MIN_HOLD_DAYS} days"
-        return result
-    weakest = eligible[0]
-    best = next((r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out), None)
-    if not best:
-        result["status"] = "no candidates scored"
-        return result
-    gap = best["score"] - weakest["score"]
-    if best["score"] < config.ROTATION_MIN_SCORE or gap < config.ROTATION_MARGIN:
-        result["status"] = (f"no swap: best candidate {best['ticker']} ({best['score']:.0f}) isn't clearly better than "
-                            f"your weakest holding {weakest['ticker']} ({weakest['score']:.0f}); needs a "
-                            f"{config.ROTATION_MARGIN}-point lead and a score of {config.ROTATION_MIN_SCORE}+")
-        return result
-    amount = held[weakest["ticker"]]["value"]
-    reason = (f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
-              f"{weakest['ticker']} ranks #{weakest['rank']} ({why(weakest)}). Score {best['score']:.0f} vs "
-              f"{weakest['score']:.0f}.")
-    s = {"asof": asof, "sell": weakest["ticker"], "buy": best["ticker"], "sell_score": weakest["score"],
-         "buy_score": best["score"], "sell_rank": weakest["rank"], "buy_rank": best["rank"], "amount": amount,
-         "reason": reason, "pending": False, "suggested_on": asof}
-    con.execute("INSERT OR REPLACE INTO rotation_log VALUES (?,?,?,?,?,?,?,?,?)",
-                (asof, s["sell"], s["buy"], s["sell_score"], s["buy_score"], s["sell_rank"], s["buy_rank"], amount, reason))
+        if d is not None and d < config.ROTATION_MIN_HOLD_DAYS:
+            continue
+        best = candidates[0] if candidates else None
+        if not best or best["score"] < config.ROTATION_MIN_SCORE or best["score"] - h["score"] < config.ROTATION_MARGIN:
+            continue
+        candidates.pop(0)
+        amount = held[h["ticker"]]["value"]
+        reason = (f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
+                  f"{h['ticker']} ranks #{h['rank']} ({why(h)}). Score {best['score']:.0f} vs {h['score']:.0f}.")
+        s = {"asof": asof, "sell": h["ticker"], "buy": best["ticker"], "sell_score": h["score"],
+             "buy_score": best["score"], "sell_rank": h["rank"], "buy_rank": best["rank"], "amount": amount,
+             "reason": reason, "pending": False, "suggested_on": asof}
+        con.execute("INSERT OR REPLACE INTO rotation_log VALUES (?,?,?,?,?,?,?,?,?)",
+                    (asof, s["sell"], s["buy"], s["sell_score"], s["buy_score"], s["sell_rank"], s["buy_rank"],
+                     amount, reason))
+        new.append(s)
     con.commit()
-    result["suggestion"], result["status"] = s, "new swap suggested"
+    result["suggestions"] = pending + new
+    if new:
+        result["status"] = f"{len(new)} new swap(s) suggested"
+    elif pending:
+        result["status"] = "swap ideas from earlier this week are still open"
+    else:
+        best = candidates[0] if candidates else None
+        result["status"] = (f"no swap: no stock you don't own clearly beats a holding that's free to swap "
+                            f"(needs a score of {config.ROTATION_MIN_SCORE}+ and a {config.ROTATION_MARGIN}-point lead)"
+                            + (f"; best candidate {best['ticker']} scores {best['score']:.0f}" if best else ""))
     return result
 
 
 def alert(result):
-    s = result.get("suggestion")
-    if not s:
-        return []
-    return [{"kind": "swap", "severity": "high" if not s.get("pending") else "warn", "ticker": s["sell"],
-             "message": f"SWAP idea: sell all {s['sell']} (about ${s['amount']:,.0f}, rank #{s['sell_rank']}) and buy "
-                        f"{s['buy']} (rank #{s['buy_rank']}). {s['reason']}"
-                        + (f" Suggested on {s['suggested_on']}." if s.get("pending") else "")}]
+    out = []
+    for s in result.get("suggestions") or []:
+        out.append({"kind": "swap", "severity": "warn" if s.get("pending") else "high", "ticker": s["sell"],
+                    "message": f"SWAP idea: sell all {s['sell']} (about ${s['amount']:,.0f}, rank #{s['sell_rank']}) and "
+                               f"buy {s['buy']} (rank #{s['buy_rank']}). {s['reason']}"
+                               + (f" Suggested on {s['suggested_on']}." if s.get("pending") else "")})
+    return out

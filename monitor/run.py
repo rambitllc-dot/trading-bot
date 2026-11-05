@@ -43,11 +43,12 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     if auto:
         storage.save_valuations(con, asof, rows)
     rot = rotation.run(con, asof, rows, bars, sentiment) if bars else {"status": "no market data", "holdings": [],
-                                                                         "top": [], "suggestion": None}
-    s = rot.get("suggestion")
-    if s:  # the holding to swap out gets the SWAP label unless a stop/target already says SELL
+                                                                         "top": [], "suggestions": []}
+    swaps = {s["sell"]: s for s in rot.get("suggestions") or []}
+    if swaps:  # holdings to swap out get the SWAP label unless a stop/target already says SELL
         for r in rows:
-            if r["ticker"] == s["sell"] and r.get("action") in ("HOLD", "REVIEW"):
+            s = swaps.get(r["ticker"])
+            if s and r.get("action") in ("HOLD", "REVIEW"):
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
     alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result,
@@ -149,8 +150,10 @@ def print_report(res):
             print(f"- {h['ticker']}: rank #{h['rank']} of {rt.get('universe')}, score {h['score']:.0f}")
         if rt.get("top"):
             print("Strongest stocks you don't own: " + ", ".join(f"{x['ticker']} ({x['score']:.0f})" for x in rt["top"][:5]))
-        s = rt.get("suggestion")
-        print(f"SWAP IDEA: sell {s['sell']} -> buy {s['buy']}. {s['reason']}" if s else f"Status: {rt.get('status')}")
+        for s in rt.get("suggestions") or []:
+            print(f"SWAP IDEA{' (open since ' + s['suggested_on'] + ')' if s.get('pending') else ''}: "
+                  f"sell {s['sell']} -> buy {s['buy']}. {s['reason']}")
+        print(f"Status: {rt.get('status')}")
     if "alerts" in res:
         print(f"\nALERTS ({len(res['alerts'])})")
         for a in res["alerts"]:

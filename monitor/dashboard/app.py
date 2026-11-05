@@ -158,15 +158,14 @@ def pct(v, d=1):
 # ---------- rotation ----------
 R = D.get("rotation") or {}
 st.markdown('<div class="sec">Rotation · follow the money</div>', unsafe_allow_html=True)
-sug = R.get("suggestion")
-if sug:
+for sug in R.get("suggestions") or []:
     st.markdown(f'<div class="alert" style="border-color:{plan.COLORS["SWAP"]};font-size:15px;background:#17121F">'
                 f'{plan_pill("SWAP")} &nbsp;<b>Sell all {e(sug["sell"])}</b> (about ${sug["amount"]:,.0f}, rank '
                 f'#{sug["sell_rank"]}) <b>→ buy {e(sug["buy"])}</b> (rank #{sug["buy_rank"]})'
                 f'<div class="muted" style="margin-top:4px">{e(sug["reason"])} Suggested {e(sug["asof"])}.</div></div>',
                 unsafe_allow_html=True)
-elif R.get("universe"):
-    st.markdown('<div class="muted">No swap right now: no stock you don\'t own clearly beats your weakest holding '
+if not R.get("suggestions") and R.get("universe"):
+    st.markdown('<div class="muted">No swap right now: no stock you don\'t own clearly beats a holding that\'s free to swap '
                 f'(needs a score of {config.ROTATION_MIN_SCORE}+ and a {config.ROTATION_MARGIN}-point lead).</div>',
                 unsafe_allow_html=True)
 if R.get("universe"):
@@ -185,8 +184,8 @@ if R.get("universe"):
     with c2:
         st.markdown(score_table(R["top"], "STRONGEST YOU DON'T OWN"), unsafe_allow_html=True)
     st.markdown('<div class="muted">Score 0-100 = momentum 40% + steadiness 30% + trend 20% + news 10%. A swap is suggested '
-                f'only with a clear lead, at most once every {config.ROTATION_COOLDOWN_DAYS} days, and never for something '
-                f'held under {config.ROTATION_MIN_HOLD_DAYS} days. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
+                f'only with a clear lead; each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
+                f'each into a different stock. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
 
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
 if not D["alerts"]:

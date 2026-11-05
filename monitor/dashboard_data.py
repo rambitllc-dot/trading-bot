@@ -109,17 +109,16 @@ def load(db_path=None, asof=None):
             for r in rows(con, "SELECT * FROM scan_results WHERE asof=? ORDER BY screen, rank", (asof,)):
                 scan.setdefault(r["screen"], []).append(r)
         held = {p["ticker"] for p in pos}
-        rot = {"holdings": [], "top": [], "universe": 0, "suggestion": None}
+        rot = {"holdings": [], "top": [], "universe": 0, "suggestions": []}
         if table_exists(con, "rotation_scores"):
             sc = rows(con, "SELECT * FROM rotation_scores WHERE asof=? ORDER BY rank", (asof,))
             rot["universe"] = len(sc)
             rot["holdings"] = sorted([r for r in sc if r["held"]], key=lambda r: r["score"])
             rot["top"] = [r for r in sc if not r["held"]][:10]
         if table_exists(con, "rotation_log"):
-            last = rows(con, "SELECT * FROM rotation_log WHERE asof<=? ORDER BY asof DESC LIMIT 1", (asof,))
-            if last and last[0]["sell"] in held and \
-                    (dt.date.fromisoformat(asof) - dt.date.fromisoformat(last[0]["asof"])).days < config.ROTATION_COOLDOWN_DAYS:
-                rot["suggestion"] = last[0]
+            since = (dt.date.fromisoformat(asof) - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat()
+            rot["suggestions"] = [r for r in rows(con, "SELECT * FROM rotation_log WHERE asof<=? AND asof>=? "
+                                                       "ORDER BY sell_score", (asof, since)) if r["sell"] in held]
         return {"asof": asof, "dates": avail, "positions": pos, "analytics": a[0] if a else None,
                 "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
                 "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic,
