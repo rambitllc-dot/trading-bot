@@ -1,0 +1,43 @@
+Portfolio as of 2026-11-05
+Value $4,006.38 · cost $6,170.00 · P&L -$2,163.62 (-35.1%) · net delta 112 shares · theta -$32.37/day · 3/3 positions priced
+
+- SPCX 150 call 2027-01-15 x1: mark $5.00, value $500.00, P&L -$1,350.00 (-73.0%), 71 days left, IV 59%, delta 0.29, theta -$8.19/day, vega $18.82/IV pt. At or past your stop.
+- NVDA 200 call 2027-01-15 x2: mark $10.18, value $2,035.00, P&L -$805.00 (-28.3%), 71 days left, IV 51%, delta 0.41, theta -$24.18/day, vega $62.58/IV pt. Not moving toward target yet; 56% of the way from entry to stop.
+- SPY shares x2: mark $735.69, value $1,471.38, P&L -$8.62 (-0.6%). Not moving toward target yet; 7% of the way from entry to stop.
+
+ANALYTICS
+Net delta 112 shares-equivalent · daily theta -$32.37 (what the book loses per day if nothing moves) · net vega $81.39 per IV point
+
+By ticker: NVDA 51% (over cap), SPY 37%, SPCX 12%
+By sector: Technology 51%, Broad market (ETF) 37%, Aerospace & Space 12%
+
+IV environment:
+- SPCX 150 call 2027-01-15: IV 59% (building history: 1 of 20 days)
+- NVDA 200 call 2027-01-15: IV 51% (building history: 1 of 20 days)
+
+Flags:
+- [info] NVDA is 51% of the book (cap 40%).
+
+MARKET ENVIRONMENT (macro gate)
+46/100 · Mixed (vix level 58, vix percentile 9, term structure 24, breadth 64, credit 65)
+
+NEWS (Claude summaries, facts only)
+- NVDA [negative]: Nvidia has lost nearly $1.4 trillion since its October record and was the largest S&P 500 loser by value on Thursday, on track for a fifth straight weekly loss. The decline is tied to a Nasdaq drop set to be its deepest in 19 months, which headlines link to a Democratic midterm sweep and rising political resistance to AI data-center buildout.
+  Drivers: Nasdaq on track for biggest one-day drop in 19 months; Democratic midterm sweep and political pushback on AI data centers; Goldman Sachs warns 45% of planned US capacity could be affected; Fifth straight weekly loss, down about $1.4 trillion from October record
+  Flag for NVDA-200C-2027-01-15: Headlines concern the underlying NVDA stock, which this call references. None mention the 2027-01-15 expiry, the strike of 200, or contract-specific events.
+- SPCX [negative]: SpaceX (SPCX) shares fell about 9% on November 5, 2026, after Democrats swept Congress and Texas, which raised doubts about a SpaceX-Tesla merger and its regulatory path. Separately, headlines reported growing backlash over a planned 6-gigawatt Arizona AI data center. Analysts remained divided, with China Renaissance initiating coverage at Buy with a $194.20 target and another firm raising its fair value estimate to $257.11.
+  Drivers: Democratic midterm sweep and merger regulatory doubts; Backlash over 6-gigawatt Arizona AI data center; Weakness in chip stocks; Mixed analyst views, including a Buy initiation and raised fair value
+- SPY [negative]: SPY was trading at $746.84, down 2.60%, as of 10:38 AM EST on Nov 5, 2026, after an intraday low of $744.81 that tested nearby support. Headlines tie the decline to selling in AI-related shares, including Nvidia and Tesla, though one earlier pre-bell report showed SPY up 0.1%.
+  Drivers: Pressure on AI shares; Nvidia share decline; Tesla selloff; Test of nearby SPY support levels
+  Flag for SPY-shares: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop.
+Claude cost this run: $0.0015
+
+ALERTS (7)
+- [high] NEW SPCX 150 calls (2027-01-15) crossed your stop level (mark 5.00 vs stop 9.25).
+- [warn] NEW NVDA news: Headlines concern the underlying NVDA stock, which this call references. None mention the 2027-01-15 expiry, the strike of 200, or contract-specific events. (driver: Nasdaq on track for biggest one-day drop in 19 months)
+- [warn] NEW SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares)
+- [warn] NEW NVDA: news read negative (driver: Nasdaq on track for biggest one-day drop in 19 months).
+- [warn] NEW SPCX: news read negative (driver: Democratic midterm sweep and merger regulatory doubts).
+- [warn] NEW SPY: news read negative (driver: Pressure on AI shares).
+- [info] NEW NVDA is 51% of the book (cap 40%).
+Notifier: off
