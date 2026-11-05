@@ -5,6 +5,7 @@ Two row types live in one book:
           contracts, entry_date, target_price (optional, per share), stop_price (optional, per share)
   shares: ticker, entry_price (per share), contracts (= number of shares), entry_date,
           target_price, stop_price
+Optional on both: add_below (your own "buy more" level, per share).
 For options, entry/target/stop are PER SHARE; one contract is 100 shares, so a contract's
 dollar value is price x 100.
 """
@@ -56,6 +57,7 @@ def normalize(p, row="position"):
     out["entry_date"] = _date(p.get("entry_date"), "entry_date", row) if p.get("entry_date") else None
     out["target_price"] = _num(p, "target_price", row, required=False)
     out["stop_price"] = _num(p, "stop_price", row, required=False)
+    out["add_below"] = _num(p, "add_below", row, required=False)  # optional: "BUY MORE" at or below this
     if kind == "option":
         ot = str(p.get("option_type", "")).lower()
         if ot not in ("call", "put"):

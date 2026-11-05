@@ -19,13 +19,13 @@ Layer 2 flags (concentration, IV rich/cheap, expiry watch) are included too.
 """
 import json
 
-from . import config, storage
+from . import config, plan, storage
 
 SEVERITY_ORDER = {"high": 0, "warn": 1, "info": 2}
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS alerts (
     asof TEXT, kind TEXT, severity TEXT, ticker TEXT, position_id TEXT, message TEXT, is_new INTEGER,
-    detail TEXT);
+    detail TEXT, action TEXT);
 CREATE TABLE IF NOT EXISTS chain_diff (
     asof TEXT, ticker TEXT, prior_asof TEXT, new_expiries TEXT, new_strikes TEXT,
     PRIMARY KEY (asof, ticker));
@@ -78,6 +78,7 @@ def hit(mark, level, entry, direction):
 
 def build(con, asof, rows, analytics_summary=None, macro_result=None, news_result=None):
     con.executescript(SCHEMA)
+    storage.add_missing_columns(con, "alerts", [("action", "TEXT")])
     out = []
     prev = prior_valuations(con, asof)
 
@@ -90,6 +91,7 @@ def build(con, asof, rows, analytics_summary=None, macro_result=None, news_resul
         if is_new is None:  # new = this alert wasn't raised at the prior run
             is_new = (kind, tk, pid) not in seen
         out.append({"kind": kind, "severity": severity, "message": message,
+                    "action": plan.ALERT_ACTION.get(kind),
                     "ticker": tk, "position_id": pid,
                     "is_new": bool(is_new), "detail": detail})
 
@@ -148,8 +150,9 @@ def build(con, asof, rows, analytics_summary=None, macro_result=None, news_resul
 
     out.sort(key=lambda a: (SEVERITY_ORDER.get(a["severity"], 9), not a["is_new"], a["kind"]))
     con.execute("DELETE FROM alerts WHERE asof=?", (asof,))
-    con.executemany("INSERT INTO alerts VALUES (?,?,?,?,?,?,?,?)",
+    con.executemany("INSERT INTO alerts (asof, kind, severity, ticker, position_id, message, is_new, detail, action) "
+                    "VALUES (?,?,?,?,?,?,?,?,?)",
                     [(asof, a["kind"], a["severity"], a["ticker"], a["position_id"], a["message"], int(a["is_new"]),
-                      json.dumps(a["detail"])) for a in out])
+                      json.dumps(a["detail"]), a.get("action")) for a in out])
     con.commit()
     return out, diffs

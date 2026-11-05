@@ -3,6 +3,13 @@
 A monitor for your options and shares. It reads market data and your own positions, values them,
 and (in later layers) alerts you. **It never buys or sells anything.**
 
+## "Your plan says" labels
+
+Every position and alert gets a simple label: **SELL** (price reached your stop, or your target = take profit),
+**BUY MORE** (price at or below your optional `add_below` level), **REVIEW** (an option has under 21 days left,
+no price, or a news/volatility alert needs a look) or **HOLD** (between your stop and target). They only apply the
+levels you write in `positions.json`; they are not predictions or advice, and nothing is ever traded.
+
 ## Layer 1: data and valuation (built)
 
 - `positions.json`: your book. Two kinds of rows, `"option"` and `"shares"` (the three rows in it now are

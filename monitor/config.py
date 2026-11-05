@@ -61,3 +61,6 @@ NOTIFY_ENABLED = False
 NOTIFY_CHANNEL = "telegram"
 IMESSAGE_RECIPIENT = ""
 NOTIFY_MIN_SEVERITY = "info"   # "info" sends everything; "warn" or "high" sends fewer
+
+# ---- "Your plan says" labels (based only on YOUR target / stop / add_below levels) ----
+REVIEW_DTE_DAYS = 21        # options with fewer days left than this get "REVIEW" (decide what to do before expiry)

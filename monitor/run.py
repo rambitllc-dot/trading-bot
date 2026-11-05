@@ -73,6 +73,7 @@ def print_report(res):
                 line += (f", IV {r['iv'] * 100:.0f}%, delta {r['delta']:.2f}, theta {fmt(r['pos_theta'])}/day, "
                          f"vega {fmt(r['pos_vega'])}/IV pt")
         line += f". {r['progress_text'][:1].upper() + r['progress_text'][1:]}."
+        line += f" YOUR PLAN: {r['action']} ({r['action_reason']})."
         if r["status"] != "ok":
             line += f" [{r['status']}]"
         print(line)
@@ -105,7 +106,8 @@ def print_report(res):
     if "alerts" in res:
         print(f"\nALERTS ({len(res['alerts'])})")
         for a in res["alerts"]:
-            print(f"- [{a['severity']}]{' NEW' if a['is_new'] else ''} {a['message']}")
+            print(f"- [{a['severity']}]{' NEW' if a['is_new'] else ''} {a['message']}"
+                  + (f" -> YOUR PLAN: {a['action']}" if a.get("action") else ""))
         print(f"Notifier: {res.get('notifier')}")
     for t_, errs in res["data_errors"].items():
         print(f"Data problems for {t_}: {'; '.join(errs[:3])}")

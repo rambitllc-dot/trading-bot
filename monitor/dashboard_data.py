@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import sqlite3
 
-from . import config
+from . import config, plan
 from .greeks import bs_greeks
 
 
@@ -71,12 +71,16 @@ def load(db_path=None, asof=None):
         pos = rows(con, "SELECT * FROM valuations WHERE asof=? ORDER BY value DESC", (asof,))
         for p in pos:
             p["asof"] = asof
+            if not p.get("action"):  # rows saved before plan labels existed
+                p["action"], p["action_reason"] = plan.for_position(p)
         a = rows(con, "SELECT * FROM analytics WHERE asof=?", (asof,)) if table_exists(con, "analytics") else []
         alloc = rows(con, "SELECT * FROM allocation WHERE asof=? ORDER BY pct DESC", (asof,)) \
             if table_exists(con, "allocation") else []
         ivenv = {r["position_id"]: r for r in rows(con, "SELECT * FROM iv_environment WHERE asof=?", (asof,))} \
             if table_exists(con, "iv_environment") else {}
         alerts = rows(con, "SELECT * FROM alerts WHERE asof=?", (asof,)) if table_exists(con, "alerts") else []
+        for al in alerts:
+            al["action"] = al.get("action") or plan.ALERT_ACTION.get(al["kind"])
         order = {"high": 0, "warn": 1, "info": 2}
         alerts.sort(key=lambda x: (order.get(x["severity"], 9), -x["is_new"]))
         m = rows(con, "SELECT * FROM macro WHERE asof=?", (asof,)) if table_exists(con, "macro") else []

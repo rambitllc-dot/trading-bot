@@ -5,7 +5,7 @@ progress to stop as percentages with a plain-English phrase, and Greeks (options
 """
 import datetime as dt
 
-from . import config
+from . import config, plan
 from .greeks import bs_greeks
 
 
@@ -47,7 +47,7 @@ def value_position(p, snap, asof, rate=config.RISK_FREE_RATE):
     out = {"position_id": p["id"], "ticker": p["ticker"], "asset_type": p["asset_type"],
            "option_type": p.get("option_type"), "strike": p.get("strike"), "expiry": p.get("expiry"),
            "contracts": p["contracts"], "entry_price": p["entry_price"], "target_price": p.get("target_price"),
-           "stop_price": p.get("stop_price"), "spot": spot, "status": "ok"}
+           "stop_price": p.get("stop_price"), "add_below": p.get("add_below"), "spot": spot, "status": "ok"}
     if p["asset_type"] == "shares":
         mult, mark = 1, spot
         if mark is None:
@@ -85,6 +85,7 @@ def value_position(p, snap, asof, rate=config.RISK_FREE_RATE):
     out["progress_target"], out["progress_stop"] = progress(p["entry_price"], mark, p.get("target_price"),
                                                              p.get("stop_price"))
     out["progress_text"] = describe(out["progress_target"], out["progress_stop"])
+    out["action"], out["action_reason"] = plan.for_position(out)
     return out
 
 

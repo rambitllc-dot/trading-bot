@@ -18,7 +18,9 @@ ICON = {"high": "🔴", "warn": "🟠", "info": "🔵"}
 
 def format_message(alerts, asof):
     lines = [f"Portfolio monitor {asof}: {len(alerts)} alert(s)"]
-    lines += [f"{ICON.get(a['severity'], '-')} {a['message']}" for a in alerts]
+    lines += [f"{ICON.get(a['severity'], '-')} {a['message']}"
+              + (f" -> Your plan: {a['action']}" if a.get("action") else "") for a in alerts]
+    lines.append("Plan labels apply your own target/stop levels; they are not predictions or advice.")
     return "\n".join(lines)
 
 

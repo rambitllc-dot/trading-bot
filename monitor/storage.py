@@ -24,14 +24,22 @@ CREATE TABLE IF NOT EXISTS valuations (
     contracts REAL, entry_price REAL, target_price REAL, stop_price REAL, spot REAL, mark REAL, iv REAL,
     value REAL, cost REAL, pnl REAL, pnl_pct REAL, dte INTEGER, progress_target REAL, progress_stop REAL,
     delta REAL, gamma REAL, theta REAL, vega REAL, pos_delta REAL, pos_theta REAL, pos_vega REAL,
-    status TEXT, progress_text TEXT,
+    status TEXT, progress_text TEXT, action TEXT, action_reason TEXT,
     PRIMARY KEY (asof, position_id));
 """
+
+
+def add_missing_columns(con, table, columns):
+    have = {r[1] for r in con.execute(f"PRAGMA table_info({table})")}
+    for name, kind in columns:
+        if name not in have:
+            con.execute(f"ALTER TABLE {table} ADD COLUMN {name} {kind}")
 
 
 def connect(path=None):
     con = sqlite3.connect(path or config.DB_FILE)
     con.executescript(SCHEMA)
+    add_missing_columns(con, "valuations", [("action", "TEXT"), ("action_reason", "TEXT")])
     return con
 
 
@@ -82,7 +90,7 @@ def save_valuations(con, asof, rows):
     cols = ["position_id", "ticker", "asset_type", "option_type", "strike", "expiry", "contracts", "entry_price",
             "target_price", "stop_price", "spot", "mark", "iv", "value", "cost", "pnl", "pnl_pct", "dte",
             "progress_target", "progress_stop", "delta", "gamma", "theta", "vega", "pos_delta", "pos_theta",
-            "pos_vega", "status", "progress_text"]
+            "pos_vega", "status", "progress_text", "action", "action_reason"]
     con.executemany(f"INSERT INTO valuations VALUES ({','.join('?' * (len(cols) + 1))})",
                     [[asof] + [r.get(c) for c in cols] for r in rows])
     con.commit()

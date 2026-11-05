@@ -12,7 +12,7 @@ import pandas as pd
 import streamlit as st
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-from monitor import config, dashboard_data  # noqa: E402
+from monitor import config, dashboard_data, plan  # noqa: E402
 
 st.set_page_config(page_title="Portfolio Monitor", page_icon="▣", layout="wide")
 
@@ -112,6 +112,23 @@ st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</smal
                                              for k, v, c in cells) + "</div>", unsafe_allow_html=True)
 
 # ---------- alerts ----------
+# ---------- your plan ----------
+def plan_pill(action):
+    c = plan.COLORS.get(action, GREY)
+    return f'<span class="pill" style="background:{c};color:#07090C;font-weight:700">{e(action)}</span>'
+
+
+st.markdown('<div class="sec">Your plan says</div>', unsafe_allow_html=True)
+order = {"SELL": 0, "BUY MORE": 1, "REVIEW": 2, "HOLD": 3}
+for p in sorted(P, key=lambda x: order.get(x["action"], 9)):
+    nm = (f"{p['ticker']} ${p['strike']:g} {p['option_type']} · {p['expiry']}" if p["asset_type"] == "option"
+          else f"{p['ticker']} shares")
+    st.markdown(f'<div class="alert" style="border-color:{plan.COLORS.get(p["action"], GREY)};font-size:14px">'
+                f'{plan_pill(p["action"])} &nbsp;<b>{e(nm)}</b> <span class="muted">· {e(p["action_reason"])}</span></div>',
+                unsafe_allow_html=True)
+st.markdown('<div class="muted">These labels only apply the target, stop and add levels you set in positions.json. '
+            'They are not predictions or financial advice.</div>', unsafe_allow_html=True)
+
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
 if not D["alerts"]:
     st.markdown('<div class="muted">No alerts.</div>', unsafe_allow_html=True)
@@ -120,6 +137,7 @@ for a in D["alerts"]:
     color = YELLOW if newstrike else SEV.get(a["severity"], GREY)
     st.markdown(f'<div class="alert{" newstrike" if newstrike else ""}" style="border-color:{color}">'
                 f'<span class="k" style="color:{color}">{e(a["severity"])} · {e(a["kind"])}</span>{e(a["message"])}'
+                + (f' &nbsp;<span class="muted">your plan:</span> {plan_pill(a["action"])}' if a.get("action") else "")
                 + (f'<span class="tag" style="color:{color}">NEW</span>' if a["is_new"] and not newstrike else "")
                 + "</div>", unsafe_allow_html=True)
 
@@ -141,7 +159,7 @@ def dte_pill(d):
     return f'<span class="pill" style="background:{c};color:#07090C">{d}d</span>'
 
 
-head = ["Position", "Strike", "Expiry", "DTE", "Entry", "Mark", "Value", "P&L $", "P&L %", "Delta", "Theta/day",
+head = ["Position", "Plan", "Strike", "Expiry", "DTE", "Entry", "Mark", "Value", "P&L $", "P&L %", "Delta", "Theta/day",
         "Vega", "IV", "IV rank", "To target", "To stop", "Status"]
 body = []
 for p in P:
@@ -150,7 +168,7 @@ for p in P:
     iv = D["iv_env"].get(p["position_id"], {})
     rank = (f"{iv['iv_rank']:.0f}" if iv.get("iv_rank") is not None else
             ("building" if iv.get("label", "").startswith("building") else "–"))
-    body.append([e(name), num(p["strike"], 2) if opt else "–", e(p["expiry"] or "–"), dte_pill(p["dte"]) if opt else "–",
+    body.append([e(name), plan_pill(p["action"]), num(p["strike"], 2) if opt else "–", e(p["expiry"] or "–"), dte_pill(p["dte"]) if opt else "–",
                  num(p["entry_price"]), num(p["mark"]), money(p["value"]),
                  f'<span class="{cls(p["pnl"])}">{money(p["pnl"])}</span>',
                  f'<span class="{cls(p["pnl_pct"])}">{num(p["pnl_pct"], 1)}%</span>',
