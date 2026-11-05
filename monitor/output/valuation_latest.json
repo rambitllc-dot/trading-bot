@@ -1,14 +1,14 @@
 {
  "asof": "2026-11-05",
  "totals": {
-  "value": 795.0863925170898,
+  "value": 795.0850891876221,
   "cost": 907.3759,
   "positions": 5,
   "priced": 5,
   "net_delta": 1.81,
   "daily_theta": 0,
-  "pnl": -112.28950748291015,
-  "pnl_pct": -12.375191746101054
+  "pnl": -112.29081081237791,
+  "pnl_pct": -12.375335383315548
  },
  "positions": [
   {
@@ -20,8 +20,8 @@
    "expiry": null,
    "contracts": 0.05,
    "entry_price": 1695.6,
-   "target_price": null,
-   "stop_price": null,
+   "target_price": 1747.81,
+   "stop_price": 1161.07,
    "add_below": null,
    "spot": 1356.6500244140625,
    "status": "ok",
@@ -32,11 +32,13 @@
    "pnl_pct": -19.98997261063562,
    "delta": 1.0,
    "pos_delta": 0.05,
-   "progress_target": null,
-   "progress_stop": null,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "no target or stop set"
+   "action_reason": "price is between your stop and your target (auto levels)",
+   "level_ref": 1356.6500244140625,
+   "levels_auto": true
   },
   {
    "position_id": "DIS-shares",
@@ -47,23 +49,25 @@
    "expiry": null,
    "contracts": 0.27,
    "entry_price": 112.59,
-   "target_price": null,
-   "stop_price": null,
+   "target_price": 130.97,
+   "stop_price": 110.36,
    "add_below": null,
-   "spot": 117.22000122070312,
+   "spot": 117.2300033569336,
    "status": "ok",
-   "mark": 117.22000122070312,
+   "mark": 117.2300033569336,
    "cost": 30.399300000000004,
-   "value": 31.649400329589845,
-   "pnl": 1.2501003295898414,
-   "pnl_pct": 4.112266827163261,
+   "value": 31.652100906372073,
+   "pnl": 1.2528009063720695,
+   "pnl_pct": 4.1211505079790305,
    "delta": 1.0,
    "pos_delta": 0.27,
-   "progress_target": null,
-   "progress_stop": null,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "SWAP",
-   "action_reason": "rotation: swap for MRNA (rank #1)"
+   "action_reason": "rotation: swap for MRNA (rank #1)",
+   "level_ref": 117.2300033569336,
+   "levels_auto": true
   },
   {
    "position_id": "LRCX-shares",
@@ -74,8 +78,8 @@
    "expiry": null,
    "contracts": 0.6,
    "entry_price": 239.36,
-   "target_price": null,
-   "stop_price": null,
+   "target_price": 279.86,
+   "stop_price": 137.87,
    "add_below": null,
    "spot": 185.1999969482422,
    "status": "ok",
@@ -86,11 +90,13 @@
    "pnl_pct": -22.62700662255925,
    "delta": 1.0,
    "pos_delta": 0.6,
-   "progress_target": null,
-   "progress_stop": null,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "no target or stop set"
+   "action_reason": "price is between your stop and your target (auto levels)",
+   "level_ref": 185.1999969482422,
+   "levels_auto": true
   },
   {
    "position_id": "QQQ-shares",
@@ -101,8 +107,8 @@
    "expiry": null,
    "contracts": 0.79,
    "entry_price": 724.04,
-   "target_price": null,
-   "stop_price": null,
+   "target_price": 735.18,
+   "stop_price": 602.98,
    "add_below": null,
    "spot": 647.0499877929688,
    "status": "ok",
@@ -113,11 +119,13 @@
    "pnl_pct": -10.63339210637964,
    "delta": 1.0,
    "pos_delta": 0.79,
-   "progress_target": null,
-   "progress_stop": null,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "no target or stop set"
+   "action_reason": "price is between your stop and your target (auto levels)",
+   "level_ref": 647.0499877929688,
+   "levels_auto": true
   },
   {
    "position_id": "SPY-shares",
@@ -128,31 +136,33 @@
    "expiry": null,
    "contracts": 0.1,
    "entry_price": 765.89,
-   "target_price": null,
-   "stop_price": null,
+   "target_price": 790.07,
+   "stop_price": 704.63,
    "add_below": null,
-   "spot": 733.1500244140625,
+   "spot": 733.1099853515625,
    "status": "ok",
-   "mark": 733.1500244140625,
+   "mark": 733.1099853515625,
    "cost": 76.589,
-   "value": 73.31500244140625,
-   "pnl": -3.2739975585937486,
-   "pnl_pct": -4.2747621180505675,
+   "value": 73.31099853515626,
+   "pnl": -3.27800146484374,
+   "pnl_pct": -4.279989900434449,
    "delta": 1.0,
    "pos_delta": 0.1,
-   "progress_target": null,
-   "progress_stop": null,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "no target or stop set"
+   "action_reason": "price is between your stop and your target (auto levels)",
+   "level_ref": 733.1099853515625,
+   "levels_auto": true
   }
  ],
  "analytics": {
   "asof": "2026-11-05",
-  "total_value": 795.0863925170898,
+  "total_value": 795.0850891876221,
   "total_cost": 907.3759,
-  "pnl": -112.28950748291015,
-  "pnl_pct": -12.375191746101054,
+  "pnl": -112.29081081237791,
+  "pnl_pct": -12.375335383315548,
   "net_delta": 1.81,
   "daily_theta": 0,
   "net_vega": 0,
@@ -163,7 +173,7 @@
      "kind": "ticker",
      "name": "QQQ",
      "value": 511.16949035644535,
-     "pct": 64.29106260241501,
+     "pct": 64.29116799042636,
      "cap_pct": 40,
      "over_cap": true
     },
@@ -171,15 +181,15 @@
      "kind": "ticker",
      "name": "LRCX",
      "value": 111.11999816894532,
-     "pct": 13.975839508101865,
+     "pct": 13.975862417754826,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "SPY",
-     "value": 73.31500244140625,
-     "pct": 9.221010840005087,
+     "value": 73.31099853515626,
+     "pct": 9.22052237327979,
      "cap_pct": 40,
      "over_cap": false
     },
@@ -187,15 +197,15 @@
      "kind": "ticker",
      "name": "ASML",
      "value": 67.83250122070312,
-     "pct": 8.531462977998974,
+     "pct": 8.531476963051961,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "DIS",
-     "value": 31.649400329589845,
-     "pct": 3.9806240714790704,
+     "value": 31.652100906372073,
+     "pct": 3.9809702554870694,
      "cap_pct": 40,
      "over_cap": false
     }
@@ -205,7 +215,7 @@
      "kind": "sector",
      "name": "Technology (ETF)",
      "value": 511.16949035644535,
-     "pct": 64.29106260241501,
+     "pct": 64.29116799042636,
      "cap_pct": 60,
      "over_cap": true
     },
@@ -213,23 +223,23 @@
      "kind": "sector",
      "name": "Technology",
      "value": 178.95249938964844,
-     "pct": 22.507302486100837,
+     "pct": 22.507339380806787,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Broad market (ETF)",
-     "value": 73.31500244140625,
-     "pct": 9.221010840005087,
+     "value": 73.31099853515626,
+     "pct": 9.22052237327979,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Communication Services",
-     "value": 31.649400329589845,
-     "pct": 3.9806240714790704,
+     "value": 31.652100906372073,
+     "pct": 3.9809702554870694,
      "cap_pct": 60,
      "over_cap": false
     }
@@ -252,19 +262,19 @@
   ]
  },
  "macro": {
-  "score": 39.4,
+  "score": 38.9,
   "label": "Stressed",
   "inputs": {
-   "vix": 27.020000457763672,
+   "vix": 27.170000076293945,
    "vix_1y_percentile": 97.22222222222221,
-   "vix_vix3m_ratio": 1.0803678612749736,
+   "vix_vix3m_ratio": 1.0850638611377121,
    "sectors_above_200d": "7 of 11",
-   "hyg_tlt_ratio": 0.9434883774420604
+   "hyg_tlt_ratio": 0.9435493716248915
   },
   "missing": [],
   "components": {
    "vix_level": {
-    "score": 46.4,
+    "score": 45.8,
     "weight": 0.25
    },
    "vix_percentile": {
@@ -272,7 +282,7 @@
     "weight": 0.15
    },
    "term_structure": {
-    "score": 6.5,
+    "score": 5.0,
     "weight": 0.2
    },
    "breadth": {
@@ -849,7 +859,7 @@
      "high_52w": 2354.389892578125,
      "from_high": -0.6574781453072256,
      "new_high": false,
-     "vol_ratio": 3.192096982089314,
+     "vol_ratio": 3.192032451952806,
      "reason": "+770% over 12 months"
     },
     {
@@ -875,7 +885,7 @@
      "high_52w": 1143.0,
      "from_high": -0.5540682307899989,
      "new_high": false,
-     "vol_ratio": 1.5426761972427812,
+     "vol_ratio": 1.5432292977598792,
      "reason": "+490% over 12 months"
     },
     {
@@ -884,11 +894,11 @@
      "chg_1d": -0.17459096013768616,
      "rsi2": 3.5293296143508286,
      "ret_12m": 3.9950203203970123,
-     "vs_200d": -0.13068330053280275,
+     "vs_200d": -0.13068330439768994,
      "high_52w": 1254.6095437059498,
      "from_high": -0.4768172951167352,
      "new_high": false,
-     "vol_ratio": 2.786564108167736,
+     "vol_ratio": 2.78617556480765,
      "reason": "+400% over 12 months"
     },
     {
@@ -897,7 +907,7 @@
      "chg_1d": -0.14958637845273348,
      "rsi2": 4.939534399646149,
      "ret_12m": 2.778168167221938,
-     "vs_200d": -0.056411054471667055,
+     "vs_200d": -0.05641105221923415,
      "high_52w": 594.6862090656501,
      "from_high": -0.4675174926964687,
      "new_high": false,
@@ -914,7 +924,7 @@
      "high_52w": 329.72658943397715,
      "from_high": -0.5949674447516791,
      "new_high": false,
-     "vol_ratio": 2.4022534419564483,
+     "vol_ratio": 2.401798017987495,
      "reason": "+225% over 12 months"
     },
     {
@@ -922,8 +932,8 @@
      "price": 466.5299987792969,
      "chg_1d": -0.16251391084633493,
      "rsi2": 3.067073984648232,
-     "ret_12m": 2.2443888832729684,
-     "vs_200d": -0.3299808754214544,
+     "ret_12m": 2.2443890821596604,
+     "vs_200d": -0.32998087644926455,
      "high_52w": 1143.267740532915,
      "from_high": -0.59193285856047,
      "new_high": false,
@@ -935,8 +945,8 @@
      "price": 44.14500045776367,
      "chg_1d": -0.11868635808972083,
      "rsi2": 5.78688127011182,
-     "ret_12m": 2.1150214803092084,
-     "vs_200d": 0.07148340916857232,
+     "ret_12m": 2.1150217370395543,
+     "vs_200d": 0.07148340892055072,
      "high_52w": 73.55999755859375,
      "from_high": -0.39987762475657707,
      "new_high": false,
@@ -953,7 +963,7 @@
      "high_52w": 142.35000610351562,
      "from_high": -0.6329469774521521,
      "new_high": false,
-     "vol_ratio": 1.982656893971606,
+     "vol_ratio": 1.9826445542365758,
      "reason": "+205% over 12 months"
     },
     {
@@ -966,7 +976,7 @@
      "high_52w": 799.6132774415504,
      "from_high": -0.6653006991840809,
      "new_high": false,
-     "vol_ratio": 2.029498479504058,
+     "vol_ratio": 2.0299382361102767,
      "reason": "+167% over 12 months"
     }
    ],
@@ -994,7 +1004,7 @@
      "high_52w": 432.3299865722656,
      "from_high": -0.2721531626279269,
      "new_high": false,
-     "vol_ratio": 2.310280502592536,
+     "vol_ratio": 2.311939089755354,
      "reason": "+15% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
@@ -1002,8 +1012,8 @@
      "price": 1043.8699951171875,
      "chg_1d": -0.07111652636820331,
      "rsi2": 1.9002000549206883,
-     "ret_12m": 0.2265020421837971,
-     "vs_200d": 0.07297527292205719,
+     "ret_12m": 0.22650213068591807,
+     "vs_200d": 0.07297527460493702,
      "high_52w": 1202.1199951171875,
      "from_high": -0.13164243223869943,
      "new_high": false,
@@ -1015,8 +1025,8 @@
      "price": 56.34000015258789,
      "chg_1d": -0.01726847456562486,
      "rsi2": 2.320218292421174,
-     "ret_12m": 0.48126409003332293,
-     "vs_200d": 0.005629332400811871,
+     "ret_12m": 0.48126394624373736,
+     "vs_200d": 0.005629331716082264,
      "high_52w": 66.8332100604428,
      "from_high": -0.1570059241261198,
      "new_high": false,
@@ -1028,7 +1038,7 @@
      "price": 377.510009765625,
      "chg_1d": -0.03863192215825839,
      "rsi2": 2.443569497845502,
-     "ret_12m": 1.4466596253896564,
+     "ret_12m": 1.4466594188566475,
      "vs_200d": 0.2832584199739778,
      "high_52w": 493.9800109863281,
      "from_high": -0.2357787736960204,
@@ -1038,15 +1048,15 @@
     },
     {
      "ticker": "XLE",
-     "price": 61.66999816894531,
-     "chg_1d": -0.02912472096168328,
-     "rsi2": 2.448507147138031,
+     "price": 61.68000030517578,
+     "chg_1d": -0.02896725660150712,
+     "rsi2": 2.454600412829066,
      "ret_12m": 0.4948162070500448,
-     "vs_200d": 0.05405079930463241,
+     "vs_200d": 0.054220852620901594,
      "high_52w": 70.1500015258789,
-     "from_high": -0.12088386560911546,
+     "from_high": -0.12074128348491153,
      "new_high": false,
-     "vol_ratio": 1.8766814963657077,
+     "vol_ratio": 1.8767591337508116,
      "reason": "+5% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
@@ -1054,8 +1064,8 @@
      "price": 245.74000549316406,
      "chg_1d": -0.08275166237131748,
      "rsi2": 2.629275128005929,
-     "ret_12m": 0.7279371935115797,
-     "vs_200d": 0.09249211520215717,
+     "ret_12m": 0.7279375632502365,
+     "vs_200d": 0.09249211557271053,
      "high_52w": 287.70001220703125,
      "from_high": -0.14584638489230384,
      "new_high": false,
@@ -1072,7 +1082,7 @@
      "high_52w": 286.989990234375,
      "from_high": -0.2431791897311042,
      "new_high": false,
-     "vol_ratio": 1.9201758558511273,
+     "vol_ratio": 1.9201135266413631,
      "reason": "+28% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
@@ -1081,11 +1091,11 @@
      "chg_1d": -0.022701777885508867,
      "rsi2": 2.964033977646494,
      "ret_12m": 1.0296965361235118,
-     "vs_200d": 0.1522473834140745,
+     "vs_200d": 0.15224737817234613,
      "high_52w": 52.959999084472656,
      "from_high": -0.17900301559891396,
      "new_high": false,
-     "vol_ratio": 1.4152994315000647,
+     "vol_ratio": 1.420549621717846,
      "reason": "+15% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
@@ -1094,7 +1104,7 @@
      "chg_1d": -0.016183904000571125,
      "rsi2": 3.1254689926109904,
      "ret_12m": 0.40417941452238826,
-     "vs_200d": 0.06197159347218051,
+     "vs_200d": 0.06197159258011142,
      "high_52w": 165.92999267578125,
      "from_high": -0.128066057602506,
      "new_high": false,
@@ -1122,7 +1132,7 @@
      "chg_1d": 0.020579342346855656,
      "rsi2": 98.4279968292815,
      "ret_12m": 0.31196484941918134,
-     "vs_200d": 0.29082675083543097,
+     "vs_200d": 0.29082675262175206,
      "high_52w": 214.77999877929688,
      "from_high": -0.005982883273175754,
      "new_high": true,
@@ -1147,8 +1157,8 @@
      "price": 36.88999938964844,
      "chg_1d": 0.0027180883835991043,
      "rsi2": 71.2817404276605,
-     "ret_12m": 0.19096604423139163,
-     "vs_200d": 0.23684044143120642,
+     "ret_12m": 0.19096595564647845,
+     "vs_200d": 0.23684043984930714,
      "high_52w": 37.8849983215332,
      "from_high": -0.026263665724362006,
      "new_high": true,
@@ -1160,7 +1170,7 @@
      "price": 516.489990234375,
      "chg_1d": 0.03923620270662598,
      "rsi2": 97.60750739082387,
-     "ret_12m": 0.15039665172336592,
+     "ret_12m": 0.15039674180733842,
      "vs_200d": 0.17428860218121756,
      "high_52w": 548.2849731445312,
      "from_high": -0.05798988567533636,
@@ -1186,8 +1196,8 @@
      "price": 1072.050048828125,
      "chg_1d": 0.0024406302035464567,
      "rsi2": 99.0874290531294,
-     "ret_12m": 0.08583412026477011,
-     "vs_200d": 0.238688322255868,
+     "ret_12m": 0.08583404121363047,
+     "vs_200d": 0.23868832094553905,
      "high_52w": 1121.5,
      "from_high": -0.044092689408716024,
      "new_high": true,
@@ -1200,7 +1210,7 @@
      "chg_1d": 0.013919552144536107,
      "rsi2": 85.56444116182742,
      "ret_12m": 0.07866009835253762,
-     "vs_200d": 0.0740451909976394,
+     "vs_200d": 0.07404519351481831,
      "high_52w": 89.66000366210938,
      "from_high": -0.025094801562570712,
      "new_high": true,
@@ -1225,8 +1235,8 @@
      "price": 152.44000244140625,
      "chg_1d": 0.01877963955688222,
      "rsi2": 94.65399093760992,
-     "ret_12m": 0.021666541528058136,
-     "vs_200d": 0.1573420318455796,
+     "ret_12m": 0.021666666564679193,
+     "vs_200d": 0.15734203553261494,
      "high_52w": 153.67999267578125,
      "from_high": -0.008068651050699982,
      "new_high": true,
@@ -1245,7 +1255,7 @@
      "high_52w": 738.010009765625,
      "from_high": -0.5174862110385132,
      "new_high": false,
-     "vol_ratio": 5.020129719018928,
+     "vol_ratio": 5.019782035183116,
      "reason": "volume 5.0x normal, +31% on the day"
     },
     {
@@ -1258,7 +1268,7 @@
      "high_52w": 241.50999450683594,
      "from_high": -0.25502048668278743,
      "new_high": false,
-     "vol_ratio": 4.020008140254859,
+     "vol_ratio": 4.0191869703963174,
      "reason": "volume 4.0x normal, -9% on the day"
     },
     {
@@ -1271,7 +1281,7 @@
      "high_52w": 104.75085804341299,
      "from_high": -0.3809120069713927,
      "new_high": false,
-     "vol_ratio": 3.530058619493583,
+     "vol_ratio": 3.5313084460631288,
      "reason": "volume 3.5x normal, -14% on the day"
     },
     {
@@ -1280,11 +1290,11 @@
      "chg_1d": -0.09492466198773941,
      "rsi2": 21.996947339290415,
      "ret_12m": 0.04610331172046278,
-     "vs_200d": -0.06999962392662218,
-     "high_52w": 257.5617517963296,
-     "from_high": -0.3914080840545293,
+     "vs_200d": -0.06999962245323521,
+     "high_52w": 257.5617675961248,
+     "from_high": -0.39140812138781733,
      "new_high": false,
-     "vol_ratio": 3.503512817047071,
+     "vol_ratio": 3.5027005108503415,
      "reason": "volume 3.5x normal, -9% on the day"
     },
     {
@@ -1297,7 +1307,7 @@
      "high_52w": 665.0700073242188,
      "from_high": -0.4247823637428031,
      "new_high": false,
-     "vol_ratio": 3.367417163187449,
+     "vol_ratio": 3.372562047237344,
      "reason": "volume 3.4x normal, -10% on the day"
     },
     {
@@ -1318,8 +1328,8 @@
      "price": 162.30999755859375,
      "chg_1d": -0.08039661439890222,
      "rsi2": 3.941846879800252,
-     "ret_12m": 0.3773082938340899,
-     "vs_200d": -0.04416680533277495,
+     "ret_12m": 0.377308150105075,
+     "vs_200d": -0.04416680554749808,
      "high_52w": 203.25,
      "from_high": -0.20142682627998154,
      "new_high": false,
@@ -1331,7 +1341,7 @@
      "price": 508.94000244140625,
      "chg_1d": -0.12318241282348164,
      "rsi2": 8.675579099456613,
-     "ret_12m": 0.5991832232331264,
+     "ret_12m": 0.5991831119100763,
      "vs_200d": -0.19053707940398645,
      "high_52w": 788.6295298146063,
      "from_high": -0.354652617990288,
@@ -1349,7 +1359,7 @@
      "high_52w": 2354.389892578125,
      "from_high": -0.6574781453072256,
      "new_high": false,
-     "vol_ratio": 3.192096982089314,
+     "vol_ratio": 3.192032451952806,
      "reason": "volume 3.2x normal, -22% on the day"
     },
     {
@@ -1357,12 +1367,12 @@
      "price": 272.4800109863281,
      "chg_1d": -0.13739392562243757,
      "rsi2": 26.777524003012147,
-     "ret_12m": 0.2293488656494176,
-     "vs_200d": 0.05306605188410396,
+     "ret_12m": 0.22934877656424923,
+     "vs_200d": 0.05306605219460758,
      "high_52w": 341.5076975794428,
      "from_high": -0.20212629783273672,
      "new_high": false,
-     "vol_ratio": 3.1806652421176134,
+     "vol_ratio": 3.180541227320946,
      "reason": "volume 3.2x normal, -14% on the day"
     }
    ]
@@ -1407,6 +1417,7 @@
   "alerts": [],
   "news": [
    {
+    "asof": "2026-11-05",
     "ticker": "SNDK",
     "headlines": [
      {
@@ -1480,7 +1491,6 @@
       "link": "https://finance.yahoo.com/markets/article/qualcomm-micron-arm-stocks-sink-lead-chip-sector-lower-133100607.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Sandisk shares fell on Thursday as chip and AI data-center stocks sold off broadly, with headlines citing a reassessment of the AI build-out and data-center restriction fears. One article reports Sandisk is down 45% over the past four months, and another says memory-chip shortages are causing ripple effects across tech.",
     "sentiment": "negative",
     "drivers": [
@@ -1490,12 +1500,16 @@
      "Memory-chip shortage ripple effects"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1402,
     "output_tokens": 385,
     "cost_usd": 0.00033270000000000006,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-05T21:05:27Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-05",
     "ticker": "MRNA",
     "headlines": [
      {
@@ -1569,7 +1583,6 @@
       "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-apple-palantir-roku-and-more-212856249.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group recommendation to advance its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, into a Phase 2/3 efficacy study in the DRC. The stock then fell about 5% on Thursday ahead of its earnings report scheduled for Friday. Pfizer reported a 29% operational decline in Comirnaty sales in the third quarter, and BioNTech reported a 15% revenue decline.",
     "sentiment": "neutral",
     "drivers": [
@@ -1579,12 +1592,16 @@
      "Reported Comirnaty sales decline at Pfizer and BioNTech"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1606,
     "output_tokens": 702,
     "cost_usd": 0.0005116000000000001,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-05T21:05:32Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-05",
     "ticker": "LITE",
     "headlines": [
      {
@@ -1658,7 +1675,6 @@
       "link": "https://247wallst.com/investing/2026/11/05/coherent-now-sees-growth-above-60-and-its-first-4-billion-quarter-by-fiscal-2028/"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Marvell agreed to acquire Lumentum in a $115 billion all-stock deal, and Lumentum shares fell 13% to 15% in the same period as a broader post-election AI chip and optical selloff deepened. Coverage notes that Lumentum's price now tracks Marvell's shares because Marvell is paying in stock with no price protection.",
     "sentiment": "negative",
     "drivers": [
@@ -1668,12 +1684,16 @@
      "Chip stock AI regulation fears"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1672,
     "output_tokens": 405,
     "cost_usd": 0.00036970000000000004,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-05T21:05:34Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-05",
     "ticker": "MU",
     "headlines": [
      {
@@ -1747,7 +1767,6 @@
       "link": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Micron shares fell about 12% on Thursday, November 5, 2026, as a broad chip sell-off deepened during a market rout in which the Nasdaq entered a correction. A report of a planned $4.5 billion Taiwan plant being paused also weighed on the stock, and that plant was described as a major production base for AI memory components. Analysts and outlets tied the sell-off to a Democratic sweep in the midterm elections, which raised concerns about political resistance to AI infrastructure.",
     "sentiment": "negative",
     "drivers": [
@@ -1757,12 +1776,16 @@
      "Nasdaq correction amid AI trade meltdown"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1461,
     "output_tokens": 278,
     "cost_usd": 0.00028510000000000005,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-05T21:05:36Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-05",
     "ticker": "DELL",
     "headlines": [
      {
@@ -1836,7 +1859,6 @@
       "link": "https://finance.yahoo.com/technology/ai/articles/11-tech-sell-off-ai-082806748.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Dell shares fell about 11% on November 5, 2026, with no company-specific news, as a tech sell-off that followed the midterm elections deepened. Dell was also down 8% earlier in the session amid a broader chip-stock slide tied to weak phone-chip outlooks and memory costs. Analyst commentary in the headlines notes expected earnings growth and a forward P/E near its 5-year average.",
     "sentiment": "negative",
     "drivers": [
@@ -1846,10 +1868,13 @@
      "No Dell-specific news cited for the 11% drop"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1519,
     "output_tokens": 408,
     "cost_usd": 0.0003559,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-05T21:05:39Z",
+    "cached": true
    },
    {
     "asof": "2026-11-05",
@@ -1997,7 +2022,7 @@
     "steadiness": 88.4,
     "trend": 0.0,
     "news": 0.0,
-    "ret_12m": 1.1249968141925923,
+    "ret_12m": 1.1249970232993496,
     "rank": 166
    }
   ],
@@ -2111,12 +2136,59 @@
    "buy_score": 94.7,
    "sell_rank": 335,
    "buy_rank": 1,
-   "amount": 31.649400329589845,
+   "amount": 31.652100906372073,
    "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
    "pending": false,
    "suggested_on": "2026-11-05"
   },
   "status": "new swap suggested"
  },
+ "auto_levels": [
+  {
+   "ticker": "ASML",
+   "stop": 1161.0690636023792,
+   "target": 1747.8119460374292,
+   "atr": 65.19365360389442,
+   "base": 1356.6500244140625,
+   "highest": 1356.6500244140625,
+   "since": "2026-11-05"
+  },
+  {
+   "ticker": "DIS",
+   "stop": 110.36136661876331,
+   "target": 130.96727683327416,
+   "atr": 2.2895455793900923,
+   "base": 117.2300033569336,
+   "highest": 117.2300033569336,
+   "since": "2026-11-05"
+  },
+  {
+   "ticker": "LRCX",
+   "stop": 137.8695491443981,
+   "target": 279.8608925559304,
+   "atr": 15.776815934614701,
+   "base": 185.1999969482422,
+   "highest": 185.1999969482422,
+   "since": "2026-11-05"
+  },
+  {
+   "ticker": "QQQ",
+   "stop": 602.984092018821,
+   "target": 735.1817793412642,
+   "atr": 14.688631924715908,
+   "base": 647.0499877929688,
+   "highest": 647.0499877929688,
+   "since": "2026-11-05"
+  },
+  {
+   "ticker": "SPY",
+   "stop": 704.627704967152,
+   "target": 790.0745461203835,
+   "atr": 9.49409346147017,
+   "base": 733.1099853515625,
+   "highest": 733.1099853515625,
+   "since": "2026-11-05"
+  }
+ ],
  "data_errors": {}
 }

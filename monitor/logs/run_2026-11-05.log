@@ -6,11 +6,11 @@ $ANT: No data found, symbol may be delisted
 Portfolio as of 2026-11-05
 Value $795.09 · cost $907.38 · P&L -$112.29 (-12.4%) · net delta 2 shares · theta $0.00/day · 5/5 positions priced
 
-- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
-- DIS shares x0.27: mark $117.22, value $31.65, P&L $1.25 (+4.1%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRNA (rank #1)).
-- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
-- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
-- SPY shares x0.1: mark $733.15, value $73.32, P&L -$3.27 (-4.3%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
+- DIS shares x0.27: mark $117.23, value $31.65, P&L $1.25 (+4.1%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRNA (rank #1)).
+- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
+- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
+- SPY shares x0.1: mark $733.11, value $73.31, P&L -$3.28 (-4.3%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
 
 ANALYTICS
 Net delta 2 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
@@ -23,7 +23,7 @@ Flags:
 - [info] Technology (ETF) is 64% of the book (cap 60%).
 
 MARKET ENVIRONMENT (macro gate)
-39/100 · Stressed (vix level 46, vix percentile 3, term structure 6, breadth 64, credit 67)
+39/100 · Stressed (vix level 46, vix percentile 3, term structure 5, breadth 64, credit 67)
 
 NEWS (Claude summaries, facts only)
 - ASML [negative] (cached): ASML shares fell about 8% on November 5 amid a broader post-election chip sell-off, with GuruFocus reporting a 7.36% drop tied to investor doubts about the next spending cycle. TIKR noted that ASML had no company-specific news that day and that customer down payments point to demand exceeding supply. Other headlines covered a Europe-wide tech selloff and a 13% Micron drop after a memory-cost warning and a reported Taiwan plant pause.
@@ -54,6 +54,13 @@ Unusual volume: APP (volume 5.0x normal, +31% on the day), DASH (volume 4.0x nor
   MU [negative]: Micron shares fell about 12% on Thursday, November 5, 2026, as a broad chip sell-off deepened during a market rout in which the Nasdaq entered a correction. A report of a planned $4.5 billion Taiwan plant being paused also weighed on the stock, and that plant was described as a major production base for AI memory components. Analysts and outlets tied the sell-off to a Democratic sweep in the midterm elections, which raised concerns about political resistance to AI infrastructure.
   DELL [negative]: Dell shares fell about 11% on November 5, 2026, with no company-specific news, as a tech sell-off that followed the midterm elections deepened. Dell was also down 8% earlier in the session amid a broader chip-stock slide tied to weak phone-chip outlooks and memory costs. Analyst commentary in the headlines notes expected earnings growth and a forward P/E near its 5-year average.
   SPCX [negative]: SpaceX (SPCX) shares fell about 9% on November 5, 2026, after Democrats swept Congress and Texas, which raised doubts about a SpaceX-Tesla merger and its regulatory path. Separately, headlines reported growing backlash over a planned 6-gigawatt Arizona AI data center. Analysts remained divided, with China Renaissance initiating coverage at Buy with a $194.20 target and another firm raising its fair value estimate to $257.11.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- ASML: stop 1,161.07 · target 1,747.81 · typical daily move 65.19
+- DIS: stop 110.36 · target 130.97 · typical daily move 2.29
+- LRCX: stop 137.87 · target 279.86 · typical daily move 15.78
+- QQQ: stop 602.98 · target 735.18 · typical daily move 14.69
+- SPY: stop 704.63 · target 790.07 · typical daily move 9.49
 
 ROTATION (follow the money)
 - DIS: rank #335 of 518, score 44
