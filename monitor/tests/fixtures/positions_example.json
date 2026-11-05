@@ -1,0 +1,39 @@
+[
+  {
+    "asset_type": "option",
+    "ticker": "SPCX",
+    "option_type": "call",
+    "strike": 150,
+    "expiry": "2027-01-15",
+    "entry_price": 18.50,
+    "contracts": 1,
+    "entry_date": "2026-10-15",
+    "target_price": 37.00,
+    "stop_price": 9.25,
+    "note": "EXAMPLE - replace with your real position"
+  },
+  {
+    "asset_type": "option",
+    "ticker": "NVDA",
+    "option_type": "call",
+    "strike": 200,
+    "expiry": "2027-01-15",
+    "entry_price": 14.20,
+    "contracts": 2,
+    "entry_date": "2026-10-20",
+    "target_price": 28.00,
+    "stop_price": 7.00,
+    "note": "EXAMPLE - replace with your real position"
+  },
+  {
+    "id": "SPY-shares",
+    "asset_type": "shares",
+    "ticker": "SPY",
+    "entry_price": 740.00,
+    "contracts": 2,
+    "entry_date": "2026-10-01",
+    "target_price": 820.00,
+    "stop_price": 680.00,
+    "note": "EXAMPLE - replace with your real position"
+  }
+]

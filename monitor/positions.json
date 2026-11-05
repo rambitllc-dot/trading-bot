@@ -1,39 +1,12 @@
 [
-  {
-    "asset_type": "option",
-    "ticker": "SPCX",
-    "option_type": "call",
-    "strike": 150,
-    "expiry": "2027-01-15",
-    "entry_price": 18.50,
-    "contracts": 1,
-    "entry_date": "2026-10-15",
-    "target_price": 37.00,
-    "stop_price": 9.25,
-    "note": "EXAMPLE - replace with your real position"
-  },
-  {
-    "asset_type": "option",
-    "ticker": "NVDA",
-    "option_type": "call",
-    "strike": 200,
-    "expiry": "2027-01-15",
-    "entry_price": 14.20,
-    "contracts": 2,
-    "entry_date": "2026-10-20",
-    "target_price": 28.00,
-    "stop_price": 7.00,
-    "note": "EXAMPLE - replace with your real position"
-  },
-  {
-    "id": "SPY-shares",
-    "asset_type": "shares",
-    "ticker": "SPY",
-    "entry_price": 740.00,
-    "contracts": 2,
-    "entry_date": "2026-10-01",
-    "target_price": 820.00,
-    "stop_price": 680.00,
-    "note": "EXAMPLE - replace with your real position"
-  }
+  {"asset_type": "shares", "ticker": "ASML", "contracts": 0.05, "entry_price": 1695.60,
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
+  {"asset_type": "shares", "ticker": "DIS",  "contracts": 0.27, "entry_price": 112.59,
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
+  {"asset_type": "shares", "ticker": "LRCX", "contracts": 0.60, "entry_price": 239.36,
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
+  {"asset_type": "shares", "ticker": "QQQ",  "contracts": 0.79, "entry_price": 724.04,
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
+  {"asset_type": "shares", "ticker": "SPY",  "contracts": 0.10, "entry_price": 765.89,
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers"}
 ]
