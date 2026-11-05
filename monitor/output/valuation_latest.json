@@ -1,14 +1,14 @@
 {
  "asof": "2026-11-05",
  "totals": {
-  "value": 795.8933967590333,
+  "value": 795.0863925170898,
   "cost": 907.3759,
   "positions": 5,
   "priced": 5,
   "net_delta": 1.81,
   "daily_theta": 0,
-  "pnl": -111.48250324096671,
-  "pnl_pct": -12.28625349659019
+  "pnl": -112.28950748291015,
+  "pnl_pct": -12.375191746101054
  },
  "positions": [
   {
@@ -23,13 +23,13 @@
    "target_price": null,
    "stop_price": null,
    "add_below": null,
-   "spot": 1357.1650390625,
+   "spot": 1356.6500244140625,
    "status": "ok",
-   "mark": 1357.1650390625,
+   "mark": 1356.6500244140625,
    "cost": 84.78,
-   "value": 67.858251953125,
-   "pnl": -16.921748046874995,
-   "pnl_pct": -19.9595990173095,
+   "value": 67.83250122070312,
+   "pnl": -16.94749877929688,
+   "pnl_pct": -19.98997261063562,
    "delta": 1.0,
    "pos_delta": 0.05,
    "progress_target": null,
@@ -50,20 +50,20 @@
    "target_price": null,
    "stop_price": null,
    "add_below": null,
-   "spot": 117.58000183105469,
+   "spot": 117.22000122070312,
    "status": "ok",
-   "mark": 117.58000183105469,
+   "mark": 117.22000122070312,
    "cost": 30.399300000000004,
-   "value": 31.74660049438477,
-   "pnl": 1.3473004943847648,
-   "pnl_pct": 4.432011573900599,
+   "value": 31.649400329589845,
+   "pnl": 1.2501003295898414,
+   "pnl_pct": 4.112266827163261,
    "delta": 1.0,
    "pos_delta": 0.27,
    "progress_target": null,
    "progress_stop": null,
    "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "no target or stop set"
+   "action": "SWAP",
+   "action_reason": "rotation: swap for MRNA (rank #1)"
   },
   {
    "position_id": "LRCX-shares",
@@ -77,13 +77,13 @@
    "target_price": null,
    "stop_price": null,
    "add_below": null,
-   "spot": 184.69000244140625,
+   "spot": 185.1999969482422,
    "status": "ok",
-   "mark": 184.69000244140625,
+   "mark": 185.1999969482422,
    "cost": 143.616,
-   "value": 110.81400146484374,
-   "pnl": -32.80199853515627,
-   "pnl_pct": -22.840072509439246,
+   "value": 111.11999816894532,
+   "pnl": -32.4960018310547,
+   "pnl_pct": -22.62700662255925,
    "delta": 1.0,
    "pos_delta": 0.6,
    "progress_target": null,
@@ -104,13 +104,13 @@
    "target_price": null,
    "stop_price": null,
    "add_below": null,
-   "spot": 648.1817016601562,
+   "spot": 647.0499877929688,
    "status": "ok",
-   "mark": 648.1817016601562,
+   "mark": 647.0499877929688,
    "cost": 571.9916,
-   "value": 512.0635443115235,
-   "pnl": -59.928055688476434,
-   "pnl_pct": -10.47708667198547,
+   "value": 511.16949035644535,
+   "pnl": -60.8221096435546,
+   "pnl_pct": -10.63339210637964,
    "delta": 1.0,
    "pos_delta": 0.79,
    "progress_target": null,
@@ -131,13 +131,13 @@
    "target_price": null,
    "stop_price": null,
    "add_below": null,
-   "spot": 734.1099853515625,
+   "spot": 733.1500244140625,
    "status": "ok",
-   "mark": 734.1099853515625,
+   "mark": 733.1500244140625,
    "cost": 76.589,
-   "value": 73.41099853515625,
-   "pnl": -3.178001464843746,
-   "pnl_pct": -4.149422847724537,
+   "value": 73.31500244140625,
+   "pnl": -3.2739975585937486,
+   "pnl_pct": -4.2747621180505675,
    "delta": 1.0,
    "pos_delta": 0.1,
    "progress_target": null,
@@ -149,10 +149,10 @@
  ],
  "analytics": {
   "asof": "2026-11-05",
-  "total_value": 795.8933967590333,
+  "total_value": 795.0863925170898,
   "total_cost": 907.3759,
-  "pnl": -111.48250324096671,
-  "pnl_pct": -12.28625349659019,
+  "pnl": -112.28950748291015,
+  "pnl_pct": -12.375191746101054,
   "net_delta": 1.81,
   "daily_theta": 0,
   "net_vega": 0,
@@ -162,40 +162,40 @@
     {
      "kind": "ticker",
      "name": "QQQ",
-     "value": 512.0635443115235,
-     "pct": 64.33820740273804,
+     "value": 511.16949035644535,
+     "pct": 64.29106260241501,
      "cap_pct": 40,
      "over_cap": true
     },
     {
      "kind": "ticker",
      "name": "LRCX",
-     "value": 110.81400146484374,
-     "pct": 13.92322161687617,
+     "value": 111.11999816894532,
+     "pct": 13.975839508101865,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "SPY",
-     "value": 73.41099853515625,
-     "pct": 9.22372252792824,
+     "value": 73.31500244140625,
+     "pct": 9.221010840005087,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "ASML",
-     "value": 67.858251953125,
-     "pct": 8.526047863878677,
+     "value": 67.83250122070312,
+     "pct": 8.531462977998974,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "DIS",
-     "value": 31.74660049438477,
-     "pct": 3.9888005885788806,
+     "value": 31.649400329589845,
+     "pct": 3.9806240714790704,
      "cap_pct": 40,
      "over_cap": false
     }
@@ -204,32 +204,32 @@
     {
      "kind": "sector",
      "name": "Technology (ETF)",
-     "value": 512.0635443115235,
-     "pct": 64.33820740273804,
+     "value": 511.16949035644535,
+     "pct": 64.29106260241501,
      "cap_pct": 60,
      "over_cap": true
     },
     {
      "kind": "sector",
      "name": "Technology",
-     "value": 178.67225341796876,
-     "pct": 22.44926948075485,
+     "value": 178.95249938964844,
+     "pct": 22.507302486100837,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Broad market (ETF)",
-     "value": 73.41099853515625,
-     "pct": 9.22372252792824,
+     "value": 73.31500244140625,
+     "pct": 9.221010840005087,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Communication Services",
-     "value": 31.74660049438477,
-     "pct": 3.9888005885788806,
+     "value": 31.649400329589845,
+     "pct": 3.9806240714790704,
      "cap_pct": 60,
      "over_cap": false
     }
@@ -252,27 +252,27 @@
   ]
  },
  "macro": {
-  "score": 39.7,
+  "score": 39.4,
   "label": "Stressed",
   "inputs": {
-   "vix": 26.850000381469727,
-   "vix_1y_percentile": 96.82539682539682,
-   "vix_vix3m_ratio": 1.079180116043156,
+   "vix": 27.020000457763672,
+   "vix_1y_percentile": 97.22222222222221,
+   "vix_vix3m_ratio": 1.0803678612749736,
    "sectors_above_200d": "7 of 11",
-   "hyg_tlt_ratio": 0.9433420330547226
+   "hyg_tlt_ratio": 0.9434883774420604
   },
   "missing": [],
   "components": {
    "vix_level": {
-    "score": 47.0,
+    "score": 46.4,
     "weight": 0.25
    },
    "vix_percentile": {
-    "score": 3.2,
+    "score": 2.8,
     "weight": 0.15
    },
    "term_structure": {
-    "score": 6.9,
+    "score": 6.5,
     "weight": 0.2
    },
    "breadth": {
@@ -288,6 +288,7 @@
  },
  "news": [
   {
+   "asof": "2026-11-05",
    "ticker": "ASML",
    "headlines": [
     {
@@ -361,7 +362,6 @@
      "link": "https://www.fool.com/investing/2026/11/04/better-ai-semiconductor-monopoly-stock-taiwan-semi/"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "ASML shares fell about 8% on November 5 amid a broader post-election chip sell-off, with GuruFocus reporting a 7.36% drop tied to investor doubts about the next spending cycle. TIKR noted that ASML had no company-specific news that day and that customer down payments point to demand exceeding supply. Other headlines covered a Europe-wide tech selloff and a 13% Micron drop after a memory-cost warning and a reported Taiwan plant pause.",
    "sentiment": "negative",
    "drivers": [
@@ -371,12 +371,16 @@
     "Micron memory-cost warning and reported Taiwan plant pause"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1478,
    "output_tokens": 560,
    "cost_usd": 0.0004278,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-05T20:58:11Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-05",
    "ticker": "DIS",
    "headlines": [
     {
@@ -450,7 +454,6 @@
      "link": "https://www.trefis.com/stock/cmcsa/articles/622491/should-you-buy-comcast-stock-for-its-cash/2026-11-04"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Disney is reported to be planning thousands of layoffs as CEO Josh D'Amaro seeks 20% cost savings, with the money to be reinvested in parks, cruises and programming. Simply Wall St. notes the stock recently traded near a 52-week high, and ETFs bought $56.5 million of Disney stock on Nov. 3.",
    "sentiment": "neutral",
    "drivers": [
@@ -460,12 +463,16 @@
     "ETF buying of $56.5 million on Nov. 3"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1504,
    "output_tokens": 539,
    "cost_usd": 0.00041989999999999996,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-05T20:58:14Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-05",
    "ticker": "LRCX",
    "headlines": [
     {
@@ -539,7 +546,6 @@
      "link": "https://www.trefis.com/stock/klac/articles/622549/what-could-derail-kla-stock/2026-11-04"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Lam Research shares fell about 13.5% on November 5, 2026, as part of a broader chip-stock sell-off that followed the midterm elections. Headlines attribute the drop to investor fears that AI-related data-center spending will slow, with reports of hedge funds reducing AI-trade exposure and Qualcomm's weak guidance adding pressure.",
    "sentiment": "negative",
    "drivers": [
@@ -549,12 +555,16 @@
     "Qualcomm's weak guidance"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1539,
    "output_tokens": 527,
    "cost_usd": 0.00041739999999999995,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-05T20:58:17Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-05",
    "ticker": "QQQ",
    "headlines": [
     {
@@ -628,7 +638,6 @@
      "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-equity-futures-141133476.html"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Invesco QQQ Trust (QQQ) was at $661.58, down 4.39%, as of 10:20 AM EST on Nov 5, 2026, according to Investing.com, which reported a daily technical gauge of Strong Sell and an RSI of 29.7. Other headlines describe declines in AI and chip stocks, including Nvidia, AMD, and Tesla, and broad-market ETFs IWM and IVV fell after midday.",
    "sentiment": "negative",
    "drivers": [
@@ -638,10 +647,13 @@
     "Oversold technical reading (RSI 29.7)"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1629,
    "output_tokens": 688,
    "cost_usd": 0.0005069,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-05T20:58:21Z",
+   "cached": true
   },
   {
    "asof": "2026-11-05",
@@ -743,6 +755,16 @@
  ],
  "alerts": [
   {
+   "kind": "swap",
+   "severity": "high",
+   "message": "SWAP idea: sell all DIS (about $32, rank #335) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
+   "action": "SWAP",
+   "ticker": "DIS",
+   "position_id": null,
+   "is_new": true,
+   "detail": null
+  },
+  {
    "kind": "news_flag",
    "severity": "warn",
    "message": "SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares)",
@@ -816,362 +838,532 @@
  "chain_diffs": [],
  "scan": {
   "screens": {
-   "momentum_leaders": [],
+   "momentum_leaders": [
+    {
+     "ticker": "SNDK",
+     "price": 806.4299926757812,
+     "chg_1d": -0.22264317168175918,
+     "rsi2": 4.748089596703522,
+     "ret_12m": 7.698257594888066,
+     "vs_200d": -0.36526935734456034,
+     "high_52w": 2354.389892578125,
+     "from_high": -0.6574781453072256,
+     "new_high": false,
+     "vol_ratio": 3.192096982089314,
+     "reason": "+770% over 12 months"
+    },
+    {
+     "ticker": "MRNA",
+     "price": 241.4600067138672,
+     "chg_1d": -0.06548493633096464,
+     "rsi2": 50.24210140096215,
+     "ret_12m": 7.2728419253700665,
+     "vs_200d": 1.6693804043155254,
+     "high_52w": 260.6700134277344,
+     "from_high": -0.07369473174632257,
+     "new_high": false,
+     "vol_ratio": 0.6245191003612061,
+     "reason": "+727% over 12 months"
+    },
+    {
+     "ticker": "LITE",
+     "price": 509.70001220703125,
+     "chg_1d": -0.1867570606987934,
+     "rsi2": 0.9129076124749531,
+     "ret_12m": 4.898651214104967,
+     "vs_200d": -0.36820155962392853,
+     "high_52w": 1143.0,
+     "from_high": -0.5540682307899989,
+     "new_high": false,
+     "vol_ratio": 1.5426761972427812,
+     "reason": "+490% over 12 months"
+    },
+    {
+     "ticker": "MU",
+     "price": 656.3900146484375,
+     "chg_1d": -0.17459096013768616,
+     "rsi2": 3.5293296143508286,
+     "ret_12m": 3.9950203203970123,
+     "vs_200d": -0.13068330053280275,
+     "high_52w": 1254.6095437059498,
+     "from_high": -0.4768172951167352,
+     "new_high": false,
+     "vol_ratio": 2.786564108167736,
+     "reason": "+400% over 12 months"
+    },
+    {
+     "ticker": "DELL",
+     "price": 316.6600036621094,
+     "chg_1d": -0.14958637845273348,
+     "rsi2": 4.939534399646149,
+     "ret_12m": 2.778168167221938,
+     "vs_200d": -0.056411054471667055,
+     "high_52w": 594.6862090656501,
+     "from_high": -0.4675174926964687,
+     "new_high": false,
+     "vol_ratio": 1.9088968538774034,
+     "reason": "+278% over 12 months"
+    },
+    {
+     "ticker": "MRVL",
+     "price": 133.5500030517578,
+     "chg_1d": -0.16426783165641023,
+     "rsi2": 0.9857591344364778,
+     "ret_12m": 2.2549121742103777,
+     "vs_200d": -0.27690916868165905,
+     "high_52w": 329.72658943397715,
+     "from_high": -0.5949674447516791,
+     "new_high": false,
+     "vol_ratio": 2.4022534419564483,
+     "reason": "+225% over 12 months"
+    },
+    {
+     "ticker": "STX",
+     "price": 466.5299987792969,
+     "chg_1d": -0.16251391084633493,
+     "rsi2": 3.067073984648232,
+     "ret_12m": 2.2443888832729684,
+     "vs_200d": -0.3299808754214544,
+     "high_52w": 1143.267740532915,
+     "from_high": -0.59193285856047,
+     "new_high": false,
+     "vol_ratio": 1.698724737143422,
+     "reason": "+224% over 12 months"
+    },
+    {
+     "ticker": "HPE",
+     "price": 44.14500045776367,
+     "chg_1d": -0.11868635808972083,
+     "rsi2": 5.78688127011182,
+     "ret_12m": 2.1150214803092084,
+     "vs_200d": 0.07148340916857232,
+     "high_52w": 73.55999755859375,
+     "from_high": -0.39987762475657707,
+     "new_high": false,
+     "vol_ratio": 1.4050100993084436,
+     "reason": "+212% over 12 months"
+    },
+    {
+     "ticker": "INTC",
+     "price": 52.25,
+     "chg_1d": -0.1033121745404344,
+     "rsi2": 2.190586605258659,
+     "ret_12m": 2.0548205907537422,
+     "vs_200d": -0.39963058598742496,
+     "high_52w": 142.35000610351562,
+     "from_high": -0.6329469774521521,
+     "new_high": false,
+     "vol_ratio": 1.982656893971606,
+     "reason": "+205% over 12 months"
+    },
+    {
+     "ticker": "WDC",
+     "price": 267.6300048828125,
+     "chg_1d": -0.17354779983264945,
+     "rsi2": 3.535969528757647,
+     "ret_12m": 1.6690524753342544,
+     "vs_200d": -0.3637818730580793,
+     "high_52w": 799.6132774415504,
+     "from_high": -0.6653006991840809,
+     "new_high": false,
+     "vol_ratio": 2.029498479504058,
+     "reason": "+167% over 12 months"
+    }
+   ],
    "pullback_in_uptrend": [
     {
      "ticker": "PLTR",
-     "price": 154.8699951171875,
-     "chg_1d": -0.09801981438664775,
-     "rsi2": 0.07023274770554622,
-     "ret_12m": null,
-     "vs_200d": 0.0085323170409759,
+     "price": 154.99000549316406,
+     "chg_1d": -0.0973208605246233,
+     "rsi2": 0.0706369962779263,
+     "ret_12m": 0.017720402257955126,
+     "vs_200d": 0.009309895271435886,
      "high_52w": 212.94000244140625,
-     "from_high": -0.27270595782113605,
+     "from_high": -0.2721423700752893,
      "new_high": false,
-     "vol_ratio": 1.5544073340094196,
+     "vol_ratio": 1.8081534945990005,
      "reason": "+1% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
      "ticker": "PANW",
-     "price": 313.2749938964844,
-     "chg_1d": -0.09988798355046113,
-     "rsi2": 0.4744316774622064,
-     "ret_12m": null,
-     "vs_200d": 0.14784563066165513,
+     "price": 314.6700134277344,
+     "chg_1d": -0.0958797675494264,
+     "rsi2": 0.4917314517708462,
+     "ret_12m": 0.8905929481947334,
+     "vs_200d": 0.1529275439329938,
      "high_52w": 432.3299865722656,
-     "from_high": -0.27537990972985804,
+     "from_high": -0.2721531626279269,
      "new_high": false,
-     "vol_ratio": 1.8964552336020222,
+     "vol_ratio": 2.310280502592536,
      "reason": "+15% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
      "ticker": "URI",
-     "price": 1045.364990234375,
-     "chg_1d": -0.06978621103773941,
-     "rsi2": 1.9264854692326594,
-     "ret_12m": null,
-     "vs_200d": 0.07450369444562832,
+     "price": 1043.8699951171875,
+     "chg_1d": -0.07111652636820331,
+     "rsi2": 1.9002000549206883,
+     "ret_12m": 0.2265020421837971,
+     "vs_200d": 0.07297527292205719,
      "high_52w": 1202.1199951171875,
-     "from_high": -0.13039880005284443,
+     "from_high": -0.13164243223869943,
      "new_high": false,
-     "vol_ratio": 1.2642130961722906,
+     "vol_ratio": 1.32275002179789,
      "reason": "+7% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "OXY",
-     "price": 56.345001220703125,
-     "chg_1d": -0.017181241564482308,
-     "rsi2": 2.3239604754543564,
-     "ret_12m": null,
-     "vs_200d": 0.005718149065407907,
+     "price": 56.34000015258789,
+     "chg_1d": -0.01726847456562486,
+     "rsi2": 2.320218292421174,
+     "ret_12m": 0.48126409003332293,
+     "vs_200d": 0.005629332400811871,
      "high_52w": 66.8332100604428,
-     "from_high": -0.1569310950387437,
+     "from_high": -0.1570059241261198,
      "new_high": false,
-     "vol_ratio": 1.2259896494504843,
+     "vol_ratio": 1.2904386826858545,
      "reason": "+1% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "MPC",
-     "price": 377.375,
-     "chg_1d": -0.03897573841613544,
-     "rsi2": 2.4345624183675625,
-     "ret_12m": null,
-     "vs_200d": 0.28280242828598734,
+     "price": 377.510009765625,
+     "chg_1d": -0.03863192215825839,
+     "rsi2": 2.443569497845502,
+     "ret_12m": 1.4466596253896564,
+     "vs_200d": 0.2832584199739778,
      "high_52w": 493.9800109863281,
-     "from_high": -0.23605208387583,
+     "from_high": -0.2357787736960204,
      "new_high": false,
-     "vol_ratio": 1.1798351353956729,
+     "vol_ratio": 1.2439507423839233,
      "reason": "+28% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "XLE",
-     "price": 61.820098876953125,
-     "chg_1d": -0.026761674568010485,
-     "rsi2": 2.5432504267327545,
-     "ret_12m": null,
-     "vs_200d": 0.056602734531457255,
+     "price": 61.66999816894531,
+     "chg_1d": -0.02912472096168328,
+     "rsi2": 2.448507147138031,
+     "ret_12m": 0.4948162070500448,
+     "vs_200d": 0.05405079930463241,
      "high_52w": 70.1500015258789,
-     "from_high": -0.11874415492140522,
+     "from_high": -0.12088386560911546,
      "new_high": false,
-     "vol_ratio": 1.6935247257818804,
-     "reason": "+6% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 1.8766814963657077,
+     "reason": "+5% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "NUE",
-     "price": 245.58999633789062,
-     "chg_1d": -0.08331158605174349,
-     "rsi2": 2.6146471707587153,
-     "ret_12m": null,
-     "vs_200d": 0.09182885704605459,
+     "price": 245.74000549316406,
+     "chg_1d": -0.08275166237131748,
+     "rsi2": 2.629275128005929,
+     "ret_12m": 0.7279371935115797,
+     "vs_200d": 0.09249211520215717,
      "high_52w": 287.70001220703125,
-     "from_high": -0.14636779312625792,
+     "from_high": -0.14584638489230384,
      "new_high": false,
-     "vol_ratio": 1.7888511701411514,
+     "vol_ratio": 1.9029328226302886,
      "reason": "+9% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
      "ticker": "CRWD",
-     "price": 216.16990661621094,
-     "chg_1d": -0.10302943312775548,
-     "rsi2": 2.808329885006671,
-     "ret_12m": null,
-     "vs_200d": 0.27373449512821724,
+     "price": 217.1999969482422,
+     "chg_1d": -0.0987551993848872,
+     "rsi2": 2.91015178485398,
+     "ret_12m": 0.9886126081635895,
+     "vs_200d": 0.2797652417540073,
      "high_52w": 286.989990234375,
-     "from_high": -0.24676847983557793,
+     "from_high": -0.2431791897311042,
      "new_high": false,
-     "vol_ratio": 1.6869937528635899,
-     "reason": "+27% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 1.9201758558511273,
+     "reason": "+28% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
      "ticker": "APA",
-     "price": 43.54999923706055,
-     "chg_1d": -0.02112839752625162,
-     "rsi2": 3.024088947868009,
-     "ret_12m": null,
-     "vs_200d": 0.15409170977322195,
+     "price": 43.47999954223633,
+     "chg_1d": -0.022701777885508867,
+     "rsi2": 2.964033977646494,
+     "ret_12m": 1.0296965361235118,
+     "vs_200d": 0.1522473834140745,
      "high_52w": 52.959999084472656,
-     "from_high": -0.1776812690725863,
+     "from_high": -0.17900301559891396,
      "new_high": false,
-     "vol_ratio": 1.176121926008872,
+     "vol_ratio": 1.4152994315000647,
      "reason": "+15% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
-     "ticker": "PSX",
-     "price": 247.0500030517578,
-     "chg_1d": -0.04845357468114231,
-     "rsi2": 3.19002390137517,
-     "ret_12m": null,
-     "vs_200d": 0.23447528670319695,
-     "high_52w": 299.3900146484375,
-     "from_high": -0.17482216852870192,
+     "ticker": "EOG",
+     "price": 144.67999267578125,
+     "chg_1d": -0.016183904000571125,
+     "rsi2": 3.1254689926109904,
+     "ret_12m": 0.40417941452238826,
+     "vs_200d": 0.06197159347218051,
+     "high_52w": 165.92999267578125,
+     "from_high": -0.128066057602506,
      "new_high": false,
-     "vol_ratio": 1.3117922670297473,
-     "reason": "+23% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 1.6169752421185735,
+     "reason": "+6% above its 200-day average, RSI-2 3 after a sharp drop"
     }
    ],
    "new_52w_high": [
     {
-     "ticker": "AJG",
-     "price": 289.2749938964844,
-     "chg_1d": 0.0031035057858312953,
-     "rsi2": 86.88113915946047,
-     "ret_12m": null,
-     "vs_200d": 0.24855498608260462,
-     "high_52w": 294.3699951171875,
-     "from_high": -0.017308154041565382,
+     "ticker": "CPAY",
+     "price": 446.0899963378906,
+     "chg_1d": 0.06567126094971187,
+     "rsi2": 97.8505590510239,
+     "ret_12m": 0.5408736531199569,
+     "vs_200d": 0.24786561981837885,
+     "high_52w": 479.5299987792969,
+     "from_high": -0.0697349540728045,
      "new_high": true,
-     "vol_ratio": 1.0443038191471143,
-     "reason": "new 52-week high at 289.27"
-    },
-    {
-     "ticker": "AWK",
-     "price": 152.50999450683594,
-     "chg_1d": 0.01924740713788653,
-     "rsi2": 94.72366399799559,
-     "ret_12m": null,
-     "vs_200d": 0.15787034695442603,
-     "high_52w": 153.67999267578125,
-     "from_high": -0.007613210728176334,
-     "new_high": true,
-     "vol_ratio": 1.1722884856243558,
-     "reason": "new 52-week high at 152.51"
+     "vol_ratio": 3.314699009922511,
+     "reason": "new 52-week high at 446.09"
     },
     {
      "ticker": "BDX",
-     "price": 213.1199951171875,
-     "chg_1d": 0.018786713657035436,
-     "rsi2": 98.3678342717308,
-     "ret_12m": null,
-     "vs_200d": 0.28857404677776843,
+     "price": 213.4949951171875,
+     "chg_1d": 0.020579342346855656,
+     "rsi2": 98.4279968292815,
+     "ret_12m": 0.31196484941918134,
+     "vs_200d": 0.29082675083543097,
      "high_52w": 214.77999877929688,
-     "from_high": -0.0077288559062482776,
+     "from_high": -0.005982883273175754,
      "new_high": true,
-     "vol_ratio": 1.7628666860296254,
-     "reason": "new 52-week high at 213.12"
-    },
-    {
-     "ticker": "BF.B",
-     "price": 31.040000915527344,
-     "chg_1d": 0.01173404846058057,
-     "rsi2": 83.65409357212953,
-     "ret_12m": null,
-     "vs_200d": 0.15950861910129,
-     "high_52w": 31.639999389648438,
-     "from_high": -0.018963289686958484,
-     "new_high": true,
-     "vol_ratio": 0.8836574241101229,
-     "reason": "new 52-week high at 31.04"
+     "vol_ratio": 1.8763107754864943,
+     "reason": "new 52-week high at 213.49"
     },
     {
      "ticker": "CAH",
-     "price": 269.3349914550781,
-     "chg_1d": 0.02827090820585343,
-     "rsi2": 96.43288677957341,
-     "ret_12m": null,
-     "vs_200d": 0.20917007121630982,
+     "price": 268.0299987792969,
+     "chg_1d": 0.023288688863769336,
+     "rsi2": 96.03667643860562,
+     "ret_12m": 0.19694281109201373,
+     "vs_200d": 0.2033466023616839,
      "high_52w": 286.2900085449219,
-     "from_high": -0.05922322324840523,
+     "from_high": -0.06378151252442266,
      "new_high": true,
-     "vol_ratio": 1.1629344663583334,
-     "reason": "new 52-week high at 269.33"
-    },
-    {
-     "ticker": "CPAY",
-     "price": 449.32000732421875,
-     "chg_1d": 0.07338748392924388,
-     "rsi2": 98.02949828521365,
-     "ret_12m": null,
-     "vs_200d": 0.25684427970322155,
-     "high_52w": 479.5299987792969,
-     "from_high": -0.06299916904465086,
-     "new_high": true,
-     "vol_ratio": 3.1504309173703717,
-     "reason": "new 52-week high at 449.32"
-    },
-    {
-     "ticker": "ED",
-     "price": 121.55000305175781,
-     "chg_1d": 0.010390689678222209,
-     "rsi2": 88.44275309604956,
-     "ret_12m": null,
-     "vs_200d": 0.1227045716482067,
-     "high_52w": 122.75,
-     "from_high": -0.009775942551871197,
-     "new_high": true,
-     "vol_ratio": 1.5732214537110003,
-     "reason": "new 52-week high at 121.55"
-    },
-    {
-     "ticker": "EVRG",
-     "price": 87.42500305175781,
-     "chg_1d": 0.014093538802785854,
-     "rsi2": 85.67046061788889,
-     "ret_12m": null,
-     "vs_200d": 0.07422850316296792,
-     "high_52w": 89.66000366210938,
-     "from_high": -0.024927509692887484,
-     "new_high": true,
-     "vol_ratio": 2.5091434362731966,
-     "reason": "new 52-week high at 87.43"
-    },
-    {
-     "ticker": "EW",
-     "price": 100.71499633789062,
-     "chg_1d": 0.013535207347620481,
-     "rsi2": 96.44888748001654,
-     "ret_12m": null,
-     "vs_200d": 0.17543903920296233,
-     "high_52w": 104.16500091552734,
-     "from_high": -0.033120573583391044,
-     "new_high": true,
-     "vol_ratio": 1.6650084885850869,
-     "reason": "new 52-week high at 100.71"
+     "vol_ratio": 1.2505848928100216,
+     "reason": "new 52-week high at 268.03"
     },
     {
      "ticker": "KDP",
-     "price": 36.875,
-     "chg_1d": 0.002310385494901812,
-     "rsi2": 71.04283510476687,
-     "ret_12m": null,
-     "vs_200d": 0.23634065368448254,
+     "price": 36.88999938964844,
+     "chg_1d": 0.0027180883835991043,
+     "rsi2": 71.2817404276605,
+     "ret_12m": 0.19096604423139163,
+     "vs_200d": 0.23684044143120642,
      "high_52w": 37.8849983215332,
-     "from_high": -0.026659584697912964,
+     "from_high": -0.026263665724362006,
      "new_high": true,
-     "vol_ratio": 1.0132869523612633,
-     "reason": "new 52-week high at 36.88"
+     "vol_ratio": 1.224166794379192,
+     "reason": "new 52-week high at 36.89"
+    },
+    {
+     "ticker": "MSI",
+     "price": 516.489990234375,
+     "chg_1d": 0.03923620270662598,
+     "rsi2": 97.60750739082387,
+     "ret_12m": 0.15039665172336592,
+     "vs_200d": 0.17428860218121756,
+     "high_52w": 548.2849731445312,
+     "from_high": -0.05798988567533636,
+     "new_high": true,
+     "vol_ratio": 3.100564744886665,
+     "reason": "new 52-week high at 516.49"
+    },
+    {
+     "ticker": "ED",
+     "price": 121.54000091552734,
+     "chg_1d": 0.01030754640327003,
+     "rsi2": 88.41209718110674,
+     "ret_12m": 0.10362005670754582,
+     "vs_200d": 0.12261270482624931,
+     "high_52w": 122.75,
+     "from_high": -0.009857426350082688,
+     "new_high": true,
+     "vol_ratio": 1.7242681875639838,
+     "reason": "new 52-week high at 121.54"
+    },
+    {
+     "ticker": "MCK",
+     "price": 1072.050048828125,
+     "chg_1d": 0.0024406302035464567,
+     "rsi2": 99.0874290531294,
+     "ret_12m": 0.08583412026477011,
+     "vs_200d": 0.238688322255868,
+     "high_52w": 1121.5,
+     "from_high": -0.044092689408716024,
+     "new_high": true,
+     "vol_ratio": 1.5213978040540541,
+     "reason": "new 52-week high at 1,072.05"
+    },
+    {
+     "ticker": "EVRG",
+     "price": 87.41000366210938,
+     "chg_1d": 0.013919552144536107,
+     "rsi2": 85.56444116182742,
+     "ret_12m": 0.07866009835253762,
+     "vs_200d": 0.0740451909976394,
+     "high_52w": 89.66000366210938,
+     "from_high": -0.025094801562570712,
+     "new_high": true,
+     "vol_ratio": 2.9811027107626713,
+     "reason": "new 52-week high at 87.41"
+    },
+    {
+     "ticker": "RSG",
+     "price": 249.41000366210938,
+     "chg_1d": 0.016299254065891056,
+     "rsi2": 87.66161249076005,
+     "ret_12m": 0.049725972344723646,
+     "vs_200d": 0.14956501985002224,
+     "high_52w": 254.39410400390625,
+     "from_high": -0.019592043460725628,
+     "new_high": true,
+     "vol_ratio": 1.1462620628921587,
+     "reason": "new 52-week high at 249.41"
+    },
+    {
+     "ticker": "AWK",
+     "price": 152.44000244140625,
+     "chg_1d": 0.01877963955688222,
+     "rsi2": 94.65399093760992,
+     "ret_12m": 0.021666541528058136,
+     "vs_200d": 0.1573420318455796,
+     "high_52w": 153.67999267578125,
+     "from_high": -0.008068651050699982,
+     "new_high": true,
+     "vol_ratio": 1.2891922473079531,
+     "reason": "new 52-week high at 152.44"
     }
    ],
    "unusual_volume": [
     {
      "ticker": "APP",
-     "price": 355.2799987792969,
-     "chg_1d": 0.3073781003837972,
-     "rsi2": 98.18202713897726,
-     "ret_12m": null,
-     "vs_200d": -0.1333653410747594,
+     "price": 356.1000061035156,
+     "chg_1d": 0.310395606636672,
+     "rsi2": 98.19642127678765,
+     "ret_12m": -0.5378688113135444,
+     "vs_200d": -0.13137378416722634,
      "high_52w": 738.010009765625,
-     "from_high": -0.5185973170037008,
+     "from_high": -0.5174862110385132,
      "new_high": false,
-     "vol_ratio": 4.742389779155098,
-     "reason": "volume 4.7x normal, +31% on the day"
+     "vol_ratio": 5.020129719018928,
+     "reason": "volume 5.0x normal, +31% on the day"
     },
     {
      "ticker": "DASH",
-     "price": 179.70750427246094,
-     "chg_1d": -0.09508279577840417,
-     "rsi2": 31.137425979204977,
-     "ret_12m": null,
-     "vs_200d": -0.014328976687046246,
+     "price": 179.9199981689453,
+     "chg_1d": -0.09401278268407476,
+     "rsi2": 31.35967450832281,
+     "ret_12m": -0.2029341419120212,
+     "vs_200d": -0.013169227553196605,
      "high_52w": 241.50999450683594,
-     "from_high": -0.2559003421807692,
+     "from_high": -0.25502048668278743,
      "new_high": false,
-     "vol_ratio": 3.6339797186416165,
-     "reason": "volume 3.6x normal, -10% on the day"
+     "vol_ratio": 4.020008140254859,
+     "reason": "volume 4.0x normal, -9% on the day"
     },
     {
-     "ticker": "CPAY",
-     "price": 449.32000732421875,
-     "chg_1d": 0.07338748392924388,
-     "rsi2": 98.02949828521365,
-     "ret_12m": null,
-     "vs_200d": 0.25684427970322155,
-     "high_52w": 479.5299987792969,
-     "from_high": -0.06299916904465086,
-     "new_high": true,
-     "vol_ratio": 3.1504309173703717,
-     "reason": "volume 3.2x normal, +7% on the day"
+     "ticker": "MCHP",
+     "price": 64.8499984741211,
+     "chg_1d": -0.13923544430136658,
+     "rsi2": 4.216274384187415,
+     "ret_12m": 0.34560530439897197,
+     "vs_200d": -0.1803626853790694,
+     "high_52w": 104.75085804341299,
+     "from_high": -0.3809120069713927,
+     "new_high": false,
+     "vol_ratio": 3.530058619493583,
+     "reason": "volume 3.5x normal, -14% on the day"
     },
     {
-     "ticker": "PWR",
-     "price": 507.1700134277344,
-     "chg_1d": -0.1262318046748825,
-     "rsi2": 8.550779131636745,
-     "ret_12m": null,
-     "vs_200d": -0.19334087023490087,
-     "high_52w": 788.6295298146063,
-     "from_high": -0.35689700391137824,
+     "ticker": "QCOM",
+     "price": 156.75,
+     "chg_1d": -0.09492466198773941,
+     "rsi2": 21.996947339290415,
+     "ret_12m": 0.04610331172046278,
+     "vs_200d": -0.06999962392662218,
+     "high_52w": 257.5617517963296,
+     "from_high": -0.3914080840545293,
      "new_high": false,
-     "vol_ratio": 3.066006162195777,
-     "reason": "volume 3.1x normal, -13% on the day"
+     "vol_ratio": 3.503512817047071,
+     "reason": "volume 3.5x normal, -9% on the day"
     },
     {
      "ticker": "AXON",
-     "price": 386.3500061035156,
-     "chg_1d": -0.08918380693447903,
-     "rsi2": 9.53946166110832,
-     "ret_12m": null,
-     "vs_200d": -0.1859074532470819,
+     "price": 382.55999755859375,
+     "chg_1d": -0.09811871336656708,
+     "rsi2": 8.803729973473068,
+     "ret_12m": -0.42503505417904075,
+     "vs_200d": -0.19386133259845872,
      "high_52w": 665.0700073242188,
-     "from_high": -0.41908370269481776,
+     "from_high": -0.4247823637428031,
      "new_high": false,
-     "vol_ratio": 3.05929208281538,
-     "reason": "volume 3.1x normal, -9% on the day"
+     "vol_ratio": 3.367417163187449,
+     "reason": "volume 3.4x normal, -10% on the day"
     },
     {
-     "ticker": "SNDK",
-     "price": 810.0399780273438,
-     "chg_1d": -0.21916333240413677,
-     "rsi2": 4.803383926598855,
-     "ret_12m": null,
-     "vs_200d": -0.36243704222099804,
-     "high_52w": 2354.389892578125,
-     "from_high": -0.6559448455921094,
-     "new_high": false,
-     "vol_ratio": 3.0372300411420845,
-     "reason": "volume 3.0x normal, -22% on the day"
+     "ticker": "CPAY",
+     "price": 446.0899963378906,
+     "chg_1d": 0.06567126094971187,
+     "rsi2": 97.8505590510239,
+     "ret_12m": 0.5408736531199569,
+     "vs_200d": 0.24786561981837885,
+     "high_52w": 479.5299987792969,
+     "from_high": -0.0697349540728045,
+     "new_high": true,
+     "vol_ratio": 3.314699009922511,
+     "reason": "volume 3.3x normal, +7% on the day"
     },
     {
      "ticker": "XLK",
-     "price": 162.58999633789062,
-     "chg_1d": -0.07881021904877827,
-     "rsi2": 4.011407520533027,
-     "ret_12m": null,
-     "vs_200d": -0.04252580451623755,
+     "price": 162.30999755859375,
+     "chg_1d": -0.08039661439890222,
+     "rsi2": 3.941846879800252,
+     "ret_12m": 0.3773082938340899,
+     "vs_200d": -0.04416680533277495,
      "high_52w": 203.25,
-     "from_high": -0.2000492185097632,
+     "from_high": -0.20142682627998154,
      "new_high": false,
-     "vol_ratio": 3.010828990711077,
-     "reason": "volume 3.0x normal, -8% on the day"
+     "vol_ratio": 3.2400854643774024,
+     "reason": "volume 3.2x normal, -8% on the day"
+    },
+    {
+     "ticker": "PWR",
+     "price": 508.94000244140625,
+     "chg_1d": -0.12318241282348164,
+     "rsi2": 8.675579099456613,
+     "ret_12m": 0.5991832232331264,
+     "vs_200d": -0.19053707940398645,
+     "high_52w": 788.6295298146063,
+     "from_high": -0.354652617990288,
+     "new_high": false,
+     "vol_ratio": 3.1935784549283435,
+     "reason": "volume 3.2x normal, -12% on the day"
+    },
+    {
+     "ticker": "SNDK",
+     "price": 806.4299926757812,
+     "chg_1d": -0.22264317168175918,
+     "rsi2": 4.748089596703522,
+     "ret_12m": 7.698257594888066,
+     "vs_200d": -0.36526935734456034,
+     "high_52w": 2354.389892578125,
+     "from_high": -0.6574781453072256,
+     "new_high": false,
+     "vol_ratio": 3.192096982089314,
+     "reason": "volume 3.2x normal, -22% on the day"
+    },
+    {
+     "ticker": "EXPE",
+     "price": 272.4800109863281,
+     "chg_1d": -0.13739392562243757,
+     "rsi2": 26.777524003012147,
+     "ret_12m": 0.2293488656494176,
+     "vs_200d": 0.05306605188410396,
+     "high_52w": 341.5076975794428,
+     "from_high": -0.20212629783273672,
+     "new_high": false,
+     "vol_ratio": 3.1806652421176134,
+     "reason": "volume 3.2x normal, -14% on the day"
     }
    ]
   },
@@ -1180,14 +1372,14 @@
     "ticker": "SPCX",
     "buy_below": 110.0,
     "note": "EXAMPLE - SpaceX, buy if it drops to $110 (replace with your own level)",
-    "price": 123.37999725341797,
-    "to_buy_pct": 12.163633866743616,
-    "status": "12.2% above your buy level",
+    "price": 123.62000274658203,
+    "to_buy_pct": 12.381820678710941,
+    "status": "12.4% above your buy level",
     "action": "WAIT",
-    "chg_1d": -0.09226016100986423,
+    "chg_1d": -0.09049437601576982,
     "ret_12m": null,
     "vs_200d": null,
-    "rsi2": 8.430284245855603
+    "rsi2": 8.548296901291678
    },
    {
     "ticker": "ANT",
@@ -1202,425 +1394,461 @@
     "ticker": "PLTR",
     "buy_below": null,
     "note": "EXAMPLE - watch only, no buy level yet",
-    "price": 154.8699951171875,
+    "price": 154.99000549316406,
     "to_buy_pct": null,
     "status": "watching (no buy level set)",
     "action": "WAIT",
-    "chg_1d": -0.09801981438664775,
-    "ret_12m": null,
-    "vs_200d": 0.0085323170409759,
-    "rsi2": 0.07023274770554622
+    "chg_1d": -0.0973208605246233,
+    "ret_12m": 0.017720402257955126,
+    "vs_200d": 0.009309895271435886,
+    "rsi2": 0.0706369962779263
    }
   ],
   "alerts": [],
   "news": [
    {
-    "ticker": "PLTR",
+    "ticker": "SNDK",
     "headlines": [
      {
-      "title": "Ondas Just Dropped 38% in a Month: Is ONDS Stock a Falling Knife or Poised for a Comeback?",
-      "summary": "Revenue is surging, the backlog keeps growing, and a billion-dollar cash pile sits on the balance sheet, yet Ondas shareholders are watching the stock crater alongside its drone peers. Is the market punishing broken fundamentals or just a volatile group?",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-05 19:56 UTC",
-      "link": "https://247wallst.com/investing/2026/11/05/ondas-just-dropped-38-in-a-month-is-onds-stock-a-falling-knife-or-poised-for-a-comeback/"
-     },
-     {
-      "title": "Prediction: These Will Be Nvidia's and Palantir's Stock Prices by 2027 (Hint: Only 1 Is a Buy)",
-      "summary": "Nvidia and Palantir are two popular AI picks, but only one makes sense right now.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-05 19:46 UTC",
-      "link": "https://www.fool.com/investing/2026/11/05/prediction-these-will-be-nvidias-and-palantirs-sto/"
-     },
-     {
-      "title": "Palantir Just Had Its Best Growth Quarter Ever. Why Are Investors Selling?",
-      "summary": "Palantir just posted the fastest revenue growth in its public company history, yet investors are selling the stock. Understanding what spooked the market reveals a tension between two very different stories buried inside the same earnings report.",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-05 18:57 UTC",
-      "link": "https://247wallst.com/investing/2026/11/05/palantir-just-had-its-best-growth-quarter-ever-why-are-investors-selling/"
-     },
-     {
-      "title": "Don\u2019t Underestimate the Ultrarich\u2014or How Fast They Can Leave California",
-      "summary": "The wealth tax proposal in California offers a lesson about the mobility of billionaires and could push advocates to find a different, more conciliatory approach.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 18:25 UTC",
-      "link": "https://www.barrons.com/articles/billionaire-tax-california-proposal-f125b061?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Palantir Sinks 10% as Democratic Sweep Deepens AI and Defense Stock Sell-Off",
-      "summary": "Key TakeawaysPalantir shares fell 10% today as the post-midterm sell-off in AI and defense stocks deepened, with no news from the company. U.",
-      "publisher": "TIKR",
-      "published": "2026-11-05 18:14 UTC",
-      "link": "https://www.tikr.com/blog/palantir-sinks-10-as-democratic-sweep-deepens-ai-and-defense-stock-sell-off?ref=yahoofinance&tlnk=yf-261105-h4r5788c"
-     },
-     {
-      "title": "Palantir Tumbles 10%, CrowdStrike Sinks 9% as Wall Street Dumps Software\u2019s AI Winners; Okta Drops 10%",
-      "summary": "Software's biggest AI winners are getting hit hardest while the year's laggards barely move. A post-midterm shift in sentiment is reshaping who gets punished, and one security name is slipping far less than its peers.",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-05 18:11 UTC",
-      "link": "https://247wallst.com/investing/2026/11/05/palantir-tumbles-10-crowdstrike-sinks-9-as-wall-street-dumps-softwares-ai-winners-okta-drops-10/"
-     },
-     {
-      "title": "Nvidia, Micron, Intel, Sandisk, Palantir, AppLovin, Qualcomm, and More Stocks That Explain Today\u2019s Market",
-      "summary": "Intel stock is on track to slump more than 50% in a month.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 18:06 UTC",
-      "link": "https://www.barrons.com/articles/stock-movers-8b39c82b?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Palantir and CrowdStrike stocks tumble as Wall Street dumps software's AI winners",
-      "summary": "Investors are selling the software stocks that rode the AI boom and mostly sparing the ones that have been left behind.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-05 17:35 UTC",
-      "link": "https://finance.yahoo.com/markets/article/palantir-and-crowdstrike-stocks-tumble-as-wall-street-dumps-softwares-ai-winners-173540737.html"
-     },
-     {
-      "title": "The Stocks Making Noise-And the Ones That Actually Matter",
-      "summary": "NVIDIA, Amazon, and Palantir are posting strong growth underneath a volatile October, but each stock needs something specific to happen before 2027 for bold price targets to hold up.",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-05 17:33 UTC",
-      "link": "https://247wallst.com/investing/2026/11/05/the-stocks-making-noise-and-the-ones-that-actually-matter/"
-     },
-     {
-      "title": "Is Palantir Stock a Buy on the Dip as Revenue Continues to Surge?",
-      "summary": "Palantir stock may not be as expensive as it looks.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-05 14:50 UTC",
-      "link": "https://www.fool.com/investing/2026/11/05/is-palantir-stock-a-buy-on-the-dip-as-revenue-cont/"
-     }
-    ],
-    "model": "claude-haiku-5-5",
-    "summary": "Palantir shares fell about 10% on November 5, 2026, as a post-midterm sell-off in AI and defense stocks deepened, with no company-specific news cited. Coverage notes the company reported its fastest revenue growth in its public history, yet investors sold the stock.",
-    "sentiment": "negative",
-    "drivers": [
-     "Post-midterm sell-off in AI and defense stocks",
-     "Selling of software stocks that were AI winners",
-     "Record revenue growth quarter not offsetting selling",
-     "Stressed broader market environment"
-    ],
-    "position_flags": [],
-    "input_tokens": 1556,
-    "output_tokens": 371,
-    "cost_usd": 0.0003411,
-    "status": "ok"
-   },
-   {
-    "ticker": "PANW",
-    "headlines": [
-     {
-      "title": "CrowdStrike Sinks 9%, Palo Alto Down 8%, Cloudflare Down 9% as AI Trade Unwinds",
-      "summary": "Key TakeawaysCrowdStrike shares fell 10% as investors sold off AI stocks, and the company had no news to explain the drop. Palo Alto Networks, Zscaler and Cloudflare fell with it, as the market sold cybersecurity as a group.",
-      "publisher": "TIKR",
-      "published": "2026-11-05 18:18 UTC",
-      "link": "https://www.tikr.com/blog/crowdstrike-sinks-9-palo-alto-down-8-cloudflare-down-9-as-ai-trade-unwinds?ref=yahoofinance&tlnk=yf-261105-jgqw8pg5"
-     },
-     {
-      "title": "Palantir Tumbles 10%, CrowdStrike Sinks 9% as Wall Street Dumps Software\u2019s AI Winners; Okta Drops 10%",
-      "summary": "Software's biggest AI winners are getting hit hardest while the year's laggards barely move. A post-midterm shift in sentiment is reshaping who gets punished, and one security name is slipping far less than its peers.",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-05 18:11 UTC",
-      "link": "https://247wallst.com/investing/2026/11/05/palantir-tumbles-10-crowdstrike-sinks-9-as-wall-street-dumps-softwares-ai-winners-okta-drops-10/"
-     },
-     {
-      "title": "Palantir and CrowdStrike stocks tumble as Wall Street dumps software's AI winners",
-      "summary": "Investors are selling the software stocks that rode the AI boom and mostly sparing the ones that have been left behind.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-05 17:35 UTC",
-      "link": "https://finance.yahoo.com/markets/article/palantir-and-crowdstrike-stocks-tumble-as-wall-street-dumps-softwares-ai-winners-173540737.html"
-     },
-     {
-      "title": "Palo Alto Networks Eyes $500 Million AI Security Deal",
-      "summary": "Cybersecurity giants are racing to buy specialized AI-security technology.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-05 14:44 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/palo-alto-networks-eyes-500-144406186.html"
-     },
-     {
-      "title": "3 Cybersecurity Stocks To Watch With Up To 45% Earnings Growth",
-      "summary": "As US lawmakers push the Remote Access Security Act to close loopholes around cloud access to high end Nvidia chips, digital security is moving from a background concern to a frontline policy issue. That puts companies guarding data and networks in the spotlight. This article explains why this matters now and profiles 3 cyber security stocks from a global screener with strong balance sheets and high growth expectations. The stocks profiled below are just a short list to illustrate the...",
-      "publisher": "Simply Wall St.",
-      "published": "2026-11-05 14:13 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/3-cybersecurity-stocks-watch-45-141319390.html"
-     },
-     {
-      "title": "Palo Alto Networks Just Dropped 13% in a Month. Is It Time to Sell, or Load Up?",
-      "summary": "Key TakeawaysPalo Alto Networks (PANW) stock fell approximately 13% in the month through November 2, closing near $352 as AI competition concerns and cybersecurity valuations pressured shares. CrowdStrike (CRWD) also faced selling pressure, although improving cybersecurity budgets could support demand for its security platform.",
-      "publisher": "TIKR",
-      "published": "2026-11-05 11:56 UTC",
-      "link": "https://www.tikr.com/blog/palo-alto-networks-just-dropped-13-in-a-month-is-it-time-to-sell-or-load-up?ref=yahoofinance&tlnk=yf-261105-736v2653"
-     },
-     {
-      "title": "Can CrowdStrike Stock Rally 50% After This Dip?",
-      "summary": "For questions about this article or underlying research, email help@trefis.com.",
-      "publisher": "Trefis",
-      "published": "2026-11-05 10:35 UTC",
-      "link": "https://www.trefis.com/stock/crwd/articles/622823/can-crowdstrike-stock-rally-50-after-this-dip/2026-11-05"
-     },
-     {
-      "title": "Should Twilio Stock Holders Look At Fortinet Instead?",
-      "summary": "For questions about this article or underlying research, email help@trefis.com.",
-      "publisher": "Trefis",
-      "published": "2026-11-04 20:00 UTC",
-      "link": "https://www.trefis.com/stock/twlo/articles/622283/should-twilio-stock-holders-look-at-fortinet-instead/2026-11-04"
-     },
-     {
-      "title": "Zscaler Lags Cybersecurity Peers: Should Investors Hold the Stock?",
-      "summary": "ZS' slowing growth and rising spending weigh on its stock, but AI security momentum, Zero Trust adoption and attractive valuation support a hold strategy.",
-      "publisher": "Zacks",
-      "published": "2026-11-04 14:45 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/zscaler-lags-cybersecurity-peers-investors-144500471.html"
-     },
-     {
-      "title": "Wall Street Analysts Think Palo Alto (PANW) Is a Good Investment: Is It?",
-      "summary": "According to the average brokerage recommendation (ABR), one should invest in Palo Alto (PANW). It is debatable whether this highly sought-after metric is effective because Wall Street analysts' recommendations tend to be overly optimistic. Would it be worth investing in the stock?",
-      "publisher": "Zacks",
-      "published": "2026-11-04 13:30 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/wall-street-analysts-think-palo-133003356.html"
-     }
-    ],
-    "model": "claude-haiku-5-5",
-    "summary": "Palo Alto Networks (PANW) fell about 8% on November 5, 2026, in a broad selloff of AI-linked software and cybersecurity stocks, with peers CrowdStrike, Zscaler and Cloudflare also declining. Earlier, PANW had dropped about 13% in the month through November 2, closing near $352, amid AI competition concerns and valuation pressure. A GuruFocus headline reports that Palo Alto is eyeing a $500 million AI security deal.",
-    "sentiment": "negative",
-    "drivers": [
-     "Sector-wide selloff in AI-linked software and cybersecurity stocks",
-     "Concerns about AI competition and cybersecurity valuations",
-     "Monthly decline of about 13% through November 2",
-     "Reported $500 million AI security deal under consideration"
-    ],
-    "position_flags": [],
-    "input_tokens": 1608,
-    "output_tokens": 458,
-    "cost_usd": 0.0003898,
-    "status": "ok"
-   },
-   {
-    "ticker": "URI",
-    "headlines": [
-     {
-      "title": "United Rentals' Specialty Revenue Surges 35%: What Comes Next?",
-      "summary": "URI's Specialty revenue rises 34.7% to $1.70B in Q3 2026, fueled by strong project demand. Can network expansion sustain growth into 2027?",
-      "publisher": "Zacks",
-      "published": "2026-11-04 18:00 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/united-rentals-specialty-revenue-surges-180000416.html"
-     },
-     {
-      "title": "Fluor Gears Up to Report Q3 Earnings: Key Factors to Watch",
-      "summary": "FLR's Q3 earnings may gain from mining, nuclear and EPC projects, but Energy Solutions transitions and fading project closeout benefits pose risks to margins.",
-      "publisher": "Zacks",
-      "published": "2026-11-04 16:13 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/fluor-gears-report-q3-earnings-161300139.html"
-     },
-     {
-      "title": "Martin Marietta Q3 Earnings Beat on Acquisitions, Revenue Outlook Up",
-      "summary": "MLM beats Q3 estimates as acquisitions drove record aggregates volumes and Specialties growth, prompting higher 2026 revenue guidance despite margin pressure.",
-      "publisher": "Zacks",
-      "published": "2026-11-04 15:02 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/martin-marietta-q3-earnings-beat-150200200.html"
-     },
-     {
-      "title": "Masco Corporation (MAS) Hits Fresh High: Is There Still Room to Run?",
-      "summary": "Masco (MAS) is at a 52-week high, but can investors hope for more gains in the future? We take a look at the company's fundamentals for clues.",
-      "publisher": "Zacks",
-      "published": "2026-11-03 13:15 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/masco-corporation-mas-hits-fresh-131502346.html"
-     },
-     {
-      "title": "2 unpopular stocks that deserve some love and 1 we avoid",
-      "summary": "Wall Street\u2019s bearish price targets for the stocks in this article signal serious concerns. Such forecasts are uncommon in an industry where maintaining cordial corporate relationships often trumps delivering the hard truth.",
-      "publisher": "StockStory",
-      "published": "2026-11-03 09:25 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/2-unpopular-stocks-deserve-love-092536236.html"
-     }
-    ],
-    "model": "claude-haiku-5-5",
-    "summary": "A Zacks article dated 2026-11-04 reports that United Rentals' Specialty revenue rose 34.7% to $1.70B in Q3 2026, which it attributes to strong project demand. The piece asks whether network expansion can sustain growth into 2027, but the headlines do not answer that question.",
-    "sentiment": "positive",
-    "drivers": [
-     "Specialty revenue up 34.7% in Q3 2026",
-     "Strong project demand",
-     "Network expansion"
-    ],
-    "position_flags": [],
-    "input_tokens": 964,
-    "output_tokens": 419,
-    "cost_usd": 0.00030589999999999995,
-    "status": "ok"
-   },
-   {
-    "ticker": "OXY",
-    "headlines": [
-     {
-      "title": "What Analyst Projections for Key Metrics Reveal About Occidental (OXY) Q3 Earnings",
-      "summary": "Besides Wall Street's top-and-bottom-line estimates for Occidental (OXY), review projections for some of its key metrics to gain a deeper understanding of how the company might have fared during the quarter ended September 2026.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 13:15 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/analyst-projections-key-metrics-reveal-131511988.html"
-     },
-     {
-      "title": "Clearway Energy Set to Report Q3 Earnings: What's in the Cards?",
-      "summary": "CWEN's Q3 earnings may have benefited from favorable wind conditions and strong plant availability, but weaker solar resources are likely to weigh on results.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 12:40 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/clearway-energy-set-report-q3-124000446.html"
-     },
-     {
-      "title": "Is Exxon Mobil Stock Still Worth Owning After Its Quarter?",
-      "summary": "For questions about this article or underlying research, email help@trefis.com.",
-      "publisher": "Trefis",
-      "published": "2026-11-05 10:36 UTC",
-      "link": "https://www.trefis.com/stock/xom/articles/622914/is-exxon-mobil-stock-still-worth-owning-after-its-quarter/2026-11-05"
-     },
-     {
-      "title": "EOG Resources Earnings Ahead: What Past Reactions Say About The Stock",
-      "summary": "EOG Resources (NYSE:EOG) is scheduled to report its earnings on Thursday, November 5, 2026. The company has a market value of about $81.6 billion. Over the last twelve months it generated $26.6 billion in revenue and $9.4 billion in operating profit, with net income of $6.9 billion.",
-      "publisher": "Trefis",
-      "published": "2026-11-04 20:37 UTC",
-      "link": "https://www.trefis.com/stock/eog/articles/622471/eog-resources-earnings-ahead-what-past-reactions-say-about-the-stock/2026-11-04"
-     },
-     {
-      "title": "Plains All American to Report Q3 Earnings: Here's What to Expect",
-      "summary": "PAA's Q3 earnings are expected to have gained from higher pipeline volumes, Cactus III synergies and cost savings, despite NGL-related headwinds.",
-      "publisher": "Zacks",
-      "published": "2026-11-04 16:36 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/plains-american-report-q3-earnings-163600815.html"
-     },
-     {
-      "title": "Do Wall Street Analysts Like Occidental Petroleum Stock?",
-      "summary": "Despite Occidental Petroleum's outperformance relative to the S&P 500 Index over the past year, Wall Street analysts remain cautiously optimistic about the stock\u2019s prospects.",
-      "publisher": "Barchart",
-      "published": "2026-11-04 14:37 UTC",
-      "link": "https://www.barchart.com/story/news/8647505/do-wall-street-analysts-like-occidental-petroleum-stock"
-     },
-     {
-      "title": "Oil Edges Lower As U.S. Bombs Iran Before Election Day",
-      "summary": "Crude oil futures fell about 1% to around $96 a barrel.",
+      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
+      "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
       "publisher": "Investor's Business Daily",
-      "published": "2026-11-03 21:07 UTC",
-      "link": "https://www.investors.com/news/oil-prices-us-iran-hormuz-trump-exxon-chevron-midterm-election/?src=A00220&yptr=yahoo"
+      "published": "2026-11-05 20:50 UTC",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
      },
      {
-      "title": "Devon Energy to Report Q3 Earnings: Buy, Sell or Hold the Stock?",
-      "summary": "DVN heads into Q3 earnings with rising estimates, strong production prospects and Coterra merger synergies.",
-      "publisher": "Zacks",
-      "published": "2026-11-03 16:25 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/devon-energy-report-q3-earnings-162500109.html"
+      "title": "The Stocks Getting Hit Hardest Today",
+      "summary": "As investors reassess their portfolios after Tuesday's blue wave, they're positioning for a slowdown in the AI build-out, knocking chip and data-center stocks.",
+      "publisher": "The Wall Street Journal",
+      "published": "2026-11-05 20:15 UTC",
+      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/here-are-the-stocks-getting-hit-hardest-in-today-s-rotation-idhGJw2g2Q72J2tjuiZn?siteid=yhoof2&yptr=yahoo"
      },
      {
-      "title": "Canadian Natural to Report Q3 Earnings: What's in the Offing?",
-      "summary": "CNQ's Q3 earnings are likely to benefit from higher production and cost savings, but softer synthetic crude pricing and maintenance pose challenges.",
-      "publisher": "Zacks",
-      "published": "2026-11-03 15:45 UTC",
-      "link": "https://finance.yahoo.com/energy/articles/canadian-natural-report-q3-earnings-154500276.html"
+      "title": "Equities Plunge in Tech-Led Sell-Off Amid Data Center Restriction Fears",
+      "summary": "Stocks on Wall Street plummeted intraday with the technology sector getting hammered the most, as tr",
+      "publisher": "MT Newswires",
+      "published": "2026-11-05 19:14 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/equities-plunge-tech-led-sell-191442459.html"
      },
      {
-      "title": "Investors Heavily Search Occidental Petroleum Corporation (OXY): Here is What You Need to Know",
-      "summary": "Occidental (OXY) has been one of the stocks most watched by Zacks.com users lately. So, it is worth exploring what lies ahead for the stock.",
-      "publisher": "Zacks",
-      "published": "2026-11-03 13:00 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/investors-heavily-search-occidental-petroleum-130002117.html"
+      "title": "The Stock Market Celebrated Election Day. Then the AI Trade Imploded.",
+      "summary": "Investors have to consider how quickly data centers can actually be built, and what that will mean for the companies selling products into the ecosystem.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-05 19:04 UTC",
+      "link": "https://www.barrons.com/articles/stock-market-ai-stocks-tech-nasdaq-f33b2af3?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "Sandisk Stock Is Down 45% Over the Past Four Months. Is It a Bargain or a Value Trap?",
+      "summary": "Investors are worried about the future.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-05 19:03 UTC",
+      "link": "https://www.fool.com/investing/2026/11/05/sandisk-stock-is-down-47-over-the-past-four-months/"
+     },
+     {
+      "title": "Some of the Year\u2019s Hottest AI ETFs Are in Big Trouble Today",
+      "summary": "Buzzy AI ETFs that hold big helpings of AI-powered stocks are logging outsize declines as investors try to determine the next phase of the tech trade.",
+      "publisher": "Investopedia",
+      "published": "2026-11-05 18:44 UTC",
+      "link": "https://www.investopedia.com/some-of-the-year-s-hottest-ai-etfs-are-in-trouble-today-dram-soxx-12238182"
+     },
+     {
+      "title": "Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed",
+      "summary": "Chip stocks are getting crushed, especially these two former highfliers.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 18:02 UTC",
+      "link": "https://finance.yahoo.com/markets/article/micron-and-sandisk-valuation-multiples-are-unbelievable-as-chip-stocks-get-crushed-180250881.html"
+     },
+     {
+      "title": "Micron Stock Plunges As Memory-Chip Shortages Cause Ripple Effects",
+      "summary": "Micron stock fell Thursday as memory-chip shortages are having ripple effects across the tech sector.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-05 17:56 UTC",
+      "link": "https://www.investors.com/news/technology/micron-stock-plunges-memory-chip-shortages/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "The Unwinding of the AI Trade Is Taking These Stocks Down With It the Most",
+      "summary": "Vertiv, Sandisk, and other stocks with AI and data-center exposure are the worst performing S&P 500 components since the closing bell on Tuesday.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-05 17:33 UTC",
+      "link": "https://www.barrons.com/articles/sandisk-stock-vertiv-flex-ai-trade-16cce859?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "Qualcomm, Micron, Sandisk, and AMD stocks sink, leading chip sector lower",
+      "summary": "Qualcomm, Micron, and Arm Holdings were all trading lower on Thursday as chip stocks continued to slide.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 13:31 UTC",
+      "link": "https://finance.yahoo.com/markets/article/qualcomm-micron-arm-stocks-sink-lead-chip-sector-lower-133100607.html"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Recent OXY coverage is mostly preview material: Zacks and Trefis pieces on expected Q3 2026 results and key metrics, plus a Barchart note that analysts remain cautiously optimistic after the stock's outperformance versus the S&P 500 over the past year. A separate headline reports that crude futures fell about 1% to around $96 a barrel after U.S. strikes on Iran. No OXY-specific earnings date or company announcement appears in these headlines.",
-    "sentiment": "neutral",
+    "summary": "Sandisk shares fell on Thursday as chip and AI data-center stocks sold off broadly, with headlines citing a reassessment of the AI build-out and data-center restriction fears. One article reports Sandisk is down 45% over the past four months, and another says memory-chip shortages are causing ripple effects across tech.",
+    "sentiment": "negative",
     "drivers": [
-     "Q3 2026 earnings previews and analyst projections",
-     "Analyst views described as cautiously optimistic",
-     "Crude oil near $96 after U.S. strikes on Iran",
-     "Broader market environment described as stressed"
+     "Broad sell-off in chip and AI data-center stocks",
+     "Concerns about a slowdown in AI build-out",
+     "Data center restriction fears",
+     "Memory-chip shortage ripple effects"
     ],
     "position_flags": [],
-    "input_tokens": 1477,
-    "output_tokens": 445,
-    "cost_usd": 0.00037020000000000005,
+    "input_tokens": 1402,
+    "output_tokens": 385,
+    "cost_usd": 0.00033270000000000006,
     "status": "ok"
    },
    {
-    "ticker": "MPC",
+    "ticker": "MRNA",
     "headlines": [
      {
-      "title": "St. Paul Park refinery sold as part of $4.2B deal",
-      "summary": "Marathon Petroleum is selling oil refineries in St. Paul Park and Mandan, N.D., along with Marathon\u2019s related marketing business, in a deal valued at $4.2 billion. Sugarland, Texas-based CVR Energy Inc., is the buyer. \u201cWe are thrilled to deliver on our plan to strategically grow and diversify our business,\u201d Dane Neumann, president and CEO of CVR Energy, said in a statement, adding that the ...",
-      "publisher": "Pioneer Press, St. Paul, Minn.",
-      "published": "2026-11-05 19:39 UTC",
-      "link": "https://www.twincities.com/2026/11/05/st-paul-park-marathon-refinery-sold/"
+      "title": "Moderna Soared 8% on Cancer Data. Friday\u2019s Report Shows Whether It Can Afford the Pipeline",
+      "summary": "Key TakeawaysModerna stock jumped 13% on Wednesday to a new 52-week high on early multiple myeloma data and an Ebola vaccine recommendation, then gave back 5% on Thursday ahead of Friday\u2019s report. Pfizer\u2019s Comirnaty sales fell 29% operationally in the third quarter, and BioNTech\u2019s revenue fell 15%.",
+      "publisher": "TIKR",
+      "published": "2026-11-05 15:49 UTC",
+      "link": "https://www.tikr.com/blog/moderna-soared-8-on-cancer-data-fridays-report-shows-whether-it-can-afford-the-pipeline?ref=yahoofinance&tlnk=yf-261105-crx4j8gq"
      },
      {
-      "title": "Can MPC's Gulf Coast Focus Fuel Stronger Future Refining Returns?",
-      "summary": "Marathon Petroleum's $4.2B asset sale sets the stage for Gulf Coast investments aimed at boosting diesel output, crude throughput and premium gasoline exports.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 16:39 UTC",
-      "link": "https://finance.yahoo.com/energy/articles/mpcs-gulf-coast-focus-fuel-163900782.html"
+      "title": "Moderna, Humana and Elanco Earnings Previews: What Investors Should Watch",
+      "summary": "One stock has soared more than sevenfold this year, another just lost a quarter of its value on leaked data, and a third carries the fate of millions of retirees. Friday's earnings could test each rally in very different ways.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 13:18 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/moderna-humana-and-elanco-earnings-previews-what-investors-should-watch/"
      },
      {
-      "title": "CRGY Q3 Earnings Beat on Higher Oil Prices and Production",
-      "summary": "Crescent Energy's Q3 earnings surge 113.9% as oil prices and production increase, while Permian synergies and a $3.85 billion Devon deal shape its next steps.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 16:36 UTC",
-      "link": "https://finance.yahoo.com/energy/articles/crgy-q3-earnings-beat-higher-163600754.html"
+      "title": "12 S&P 500 Stocks Gain The Most From The 'Blue Wave'",
+      "summary": "Voters made no mystery of how they're feeling about the direction the U.S. is in. And some S&P 500 stocks were clear winners, too.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-05 12:22 UTC",
+      "link": "https://www.investors.com/etfs-and-funds/sectors/sp-500-stocks-gain-the-most-from-the-blue-wave/?src=A00220&yptr=yahoo"
      },
      {
-      "title": "Murphy USA's 55-Store Pipeline Supports Its 2027 Expansion Plan",
-      "summary": "MUSA targets 50-plus annual store openings from 2027, backed by 55 stores under construction and plans for additional starts to sustain expansion.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 15:13 UTC",
-      "link": "https://finance.yahoo.com/real-estate/articles/murphy-usas-55-store-pipeline-151300613.html"
+      "title": "Invesco S&P 500 Equal Weight (RSP) Adds Kimberly-Clark and Moderna on Nov. 3",
+      "summary": "The fund bought $608.1 million of stock and sold nothing, lifting 500 positions.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-05 11:04 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/invesco-p-500-equal-weight-110409048.html"
      },
      {
-      "title": "Are Investors Undervaluing Marathon Petroleum (MPC) Right Now?",
-      "summary": "Here at Zacks, our focus is on the proven Zacks Rank system, which emphasizes earnings estimates and estimate revisions to find great stocks. Nevertheless, we are always paying attention to the latest value, growth, and momentum trends to underscore strong picks.",
-      "publisher": "Zacks",
-      "published": "2026-11-05 13:40 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/investors-undervaluing-marathon-petroleum-mpc-134002792.html"
+      "title": "Moderna (MRNA) After WHO Vaccine Backing Looks Pricey Despite The Rally",
+      "summary": "Moderna (MRNA) moved back into focus after the World Health Organization\u2019s technical advisory group backed its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, to progress into a Phase 2/3 efficacy study in the Democratic Republic of the Congo. The mRNA-1469 update landed on a stock that has already been on a steep upswing, with a 1-day share price return of 13.1%, a 7-day gain of 20.7% and a 90-day move of almost 4x. This signals strong recent momentum after a much more modest 5-year...",
+      "publisher": "Simply Wall St.",
+      "published": "2026-11-05 08:14 UTC",
+      "link": "https://finance.yahoo.com/healthcare/articles/moderna-mrna-vaccine-backing-looks-081402654.html"
      },
      {
-      "title": "Is Exxon Mobil Stock Still Worth Owning After Its Quarter?",
+      "title": "Which Dates Could Move Moderna Stock Most?",
       "summary": "For questions about this article or underlying research, email help@trefis.com.",
       "publisher": "Trefis",
-      "published": "2026-11-05 10:36 UTC",
-      "link": "https://www.trefis.com/stock/xom/articles/622914/is-exxon-mobil-stock-still-worth-owning-after-its-quarter/2026-11-05"
+      "published": "2026-11-04 21:56 UTC",
+      "link": "https://www.trefis.com/stock/mrna/articles/622397/which-dates-could-move-moderna-stock-most/2026-11-04"
      },
      {
-      "title": "\ud83c\udfa7 Listen: Global Conflicts Have Meant Huge Profits for U.S. Oil Refiners",
-      "summary": "U.S. oil refiners Marathon Petroleum, Phillips 66, and Valero Energy were hit hard among the selloff in energy shares today.",
-      "publisher": "The Wall Street Journal",
-      "published": "2026-11-04 23:00 UTC",
-      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-04-2026/card/-listen-global-conflicts-have-meant-huge-profits-for-u-s-oil-refiners-MEZtjrrq74K4g0Tpw9N4?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Marathon Petroleum Sinks 10%, Valero Down 8% as Oil Stocks Slide After Democrats Win the Senate",
-      "summary": "Key TakeawaysMarathon Petroleum fell 10% today after Democrats won control of the Senate, and Valero, HF Sinclair and Phillips 66 fell with it. The selloff came a day after Marathon reported a huge third-quarter beat.",
-      "publisher": "TIKR",
-      "published": "2026-11-04 20:03 UTC",
-      "link": "https://www.tikr.com/blog/marathon-petroleum-sinks-10-valero-down-8-as-oil-stocks-slide-after-democrats-win-the-senate?ref=yahoofinance&tlnk=yf-261104-8q784wxp"
-     },
-     {
-      "title": "The 10-Year Treasury Yields 4.91%. These 4 Dividend Stocks Pay More",
-      "summary": "The 10-year Treasury now hands you a nearly 5% yield with zero credit risk, so any dividend stock asking you to take on more complexity had better earn it. These four names do, and they come with something a government bond can never offer.",
-      "publisher": "24/7 Wall St.",
-      "published": "2026-11-04 16:47 UTC",
-      "link": "https://247wallst.com/investing/2026/11/04/the-10-year-treasury-yields-4-91-these-4-dividend-stocks-pay-more/"
-     },
-     {
-      "title": "MPC Q3 Earnings Beat Estimates on Strong Refining Margins",
-      "summary": "Marathon Petroleum's Q3 earnings surge on stronger refining margins, while renewable diesel turns profitable and the company expands its share buyback plans.",
+      "title": "X4 Pharmaceuticals (XFOR) Reports Q3 Loss, Tops Revenue Estimates",
+      "summary": "X4 Pharmaceuticals (XFOR) delivered earnings and revenue surprises of +15.79% and +43.95%, respectively, for the quarter ended September 2026. Do the numbers hold clues to what lies ahead for the stock?",
       "publisher": "Zacks",
-      "published": "2026-11-04 16:24 UTC",
-      "link": "https://finance.yahoo.com/energy/articles/mpc-q3-earnings-beat-estimates-162400083.html"
+      "published": "2026-11-04 21:50 UTC",
+      "link": "https://finance.yahoo.com/healthcare/articles/x4-pharmaceuticals-xfor-reports-q3-215010225.html"
+     },
+     {
+      "title": "US Equity Markets End Higher After Crude Oil Drops, Democrats Sweep Midterm Elections",
+      "summary": "US equity indexes ended higher Wednesday after crude oil prices dropped and Democrats swept both cha",
+      "publisher": "MT Newswires",
+      "published": "2026-11-04 21:18 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/us-equity-markets-end-higher-211811079.html"
+     },
+     {
+      "title": "Sector Update: Healthcare Stocks Rise Wednesday Afternoon",
+      "summary": "Healthcare stocks were higher Wednesday afternoon, with the NYSE Healthcare Index rising 2.6% and th",
+      "publisher": "MT Newswires",
+      "published": "2026-11-04 18:31 UTC",
+      "link": "https://finance.yahoo.com/healthcare/articles/sector-healthcare-stocks-rise-wednesday-183122395.html"
+     },
+     {
+      "title": "Earnings live updates: Cava stock falls after cyclospora outbreak dented Q3 results",
+      "summary": "The third quarter earnings season is over halfway done, and the reports continue to pour in.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-02 21:28 UTC",
+      "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-apple-palantir-roku-and-more-212856249.html"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Marathon Petroleum reported a Q3 earnings beat on strong refining margins and expanded its share buyback plans. It agreed to sell its St. Paul Park and Mandan refineries and related marketing business to CVR Energy for $4.2 billion. On November 4 the stock fell 10% in a broader oil-stock selloff that headlines attributed to Democrats winning Senate control.",
+    "summary": "Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group recommendation to advance its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, into a Phase 2/3 efficacy study in the DRC. The stock then fell about 5% on Thursday ahead of its earnings report scheduled for Friday. Pfizer reported a 29% operational decline in Comirnaty sales in the third quarter, and BioNTech reported a 15% revenue decline.",
     "sentiment": "neutral",
     "drivers": [
-     "Q3 earnings beat on strong refining margins",
-     "$4.2B refinery and marketing asset sale to CVR Energy",
-     "Expanded share buyback plans",
-     "10% drop in oil-stock selloff after Senate result"
+     "WHO advisory backing for mRNA-1469 Ebola vaccine candidate",
+     "Early multiple myeloma data",
+     "Friday earnings report ahead",
+     "Reported Comirnaty sales decline at Pfizer and BioNTech"
     ],
     "position_flags": [],
-    "input_tokens": 1649,
-    "output_tokens": 559,
-    "cost_usd": 0.00044439999999999996,
+    "input_tokens": 1606,
+    "output_tokens": 702,
+    "cost_usd": 0.0005116000000000001,
+    "status": "ok"
+   },
+   {
+    "ticker": "LITE",
+    "headlines": [
+     {
+      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
+      "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-05 20:50 UTC",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "Marvell Just Dropped 49% in a Month: Is MRVL Stock Hopeless or Ready for a Rebound?",
+      "summary": "Marvell's results keep improving, yet its shares have been gutted by an all-stock acquisition and an election night shock for AI spending. Two analysts looked at the same deal and reached opposite verdicts, and the gap between them is huge.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 20:03 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/marvell-just-dropped-49-in-a-month-is-mrvl-stock-hopeless-or-ready-for-a-rebound/"
+     },
+     {
+      "title": "Cisco Falls 7% on Morgan Stanley Downgrade; Ciena Plunges 15%, Arista Networks Tumbles 10%",
+      "summary": "Morgan Stanley just cooled on a stock that has beaten the market by a wide margin, and AI-heavy rivals are falling even harder. What does Cisco's own business mix reveal about why it bends while its peers break?",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 19:03 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/cisco-falls-7-on-morgan-stanley-downgrade-ciena-plunges-15-arista-networks-tumbles-10/"
+     },
+     {
+      "title": "Chip Stocks Face AI Regulation Fears",
+      "summary": "Nvidia isn\u2019t the only chipmaker feeling a post-midterms chill.",
+      "publisher": "The Wall Street Journal",
+      "published": "2026-11-05 18:52 UTC",
+      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "Lumentum Sinks 15% as AI Chip Selloff Deepens",
+      "summary": "Key TakeawaysLumentum fell 15% today as the AI selloff deepened. Marvell is paying for Lumentum in stock with no price protection, so Lumentum trades on Marvell\u2019s shares.",
+      "publisher": "TIKR",
+      "published": "2026-11-05 17:05 UTC",
+      "link": "https://www.tikr.com/blog/lumentum-sinks-15-as-ai-chip-selloff-deepens?ref=yahoofinance&tlnk=yf-261105-4c3r2g4v"
+     },
+     {
+      "title": "Marvell Sinks Another 14% as Democratic Sweep Deepens AI Chip Selloff",
+      "summary": "Key TakeawaysMarvell Technology fell another 14% today in the post-election AI selloff. Marvell is paying for its pending optical deal in stock, so each dollar its shares lose takes $4.",
+      "publisher": "TIKR",
+      "published": "2026-11-05 17:03 UTC",
+      "link": "https://www.tikr.com/blog/marvell-sinks-another-14-as-democratic-sweep-deepens-ai-chip-selloff?ref=yahoofinance&tlnk=yf-261105-x5f5jrvq"
+     },
+     {
+      "title": "Applied Optoelectronics Sinks 16%, Coherent Tumbles 14% Despite Strong Outlook, Lumentum Plunges 13% as AI Optical Stocks Slide",
+      "summary": "Record revenue, raised guidance, and capacity sold out through 2027 couldn't save the optical group from a brutal two-day rout. One election result has traders dumping the whole supply chain, and the next catalysts could decide who recovers first.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 16:57 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/applied-optoelectronics-sinks-16-coherent-tumbles-14-despite-strong-outlook-lumentum-plunges-13-as-ai-optical-stocks-slide/"
+     },
+     {
+      "title": "Marvell agrees to buy Lumentum in $115B stock deal",
+      "summary": "The deal brings together \"complementary electrical and optical technologies\" needed for connectivity in artificial intelligence infrastructure, Marvell said in a news release.",
+      "publisher": "Manufacturing Dive",
+      "published": "2026-11-05 16:09 UTC",
+      "link": "https://www.manufacturingdive.com/news/marvell-lumentum-115b-stock-deal-ai-data-centers/873783/"
+     },
+     {
+      "title": "Marvell Stock Eyes 35% Upside After Lumentum Deal",
+      "summary": "Marvell's stock has collapsed nearly 30% in a month while its own guidance keeps climbing, and the gap between those two lines is exactly where our model's price target lives.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 14:33 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/marvell-stock-eyes-35-upside-after-lumentum-deal/"
+     },
+     {
+      "title": "Coherent Now Sees Growth Above 60% and Its First $4 Billion Quarter by Fiscal 2028",
+      "summary": "Coherent has billions in AI contracts and a rival that is about to be swallowed whole. The harder question is whether the cash it burns building capacity will pay off before the biggest orders arrive.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-05 14:19 UTC",
+      "link": "https://247wallst.com/investing/2026/11/05/coherent-now-sees-growth-above-60-and-its-first-4-billion-quarter-by-fiscal-2028/"
+     }
+    ],
+    "model": "claude-haiku-5-5",
+    "summary": "Marvell agreed to acquire Lumentum in a $115 billion all-stock deal, and Lumentum shares fell 13% to 15% in the same period as a broader post-election AI chip and optical selloff deepened. Coverage notes that Lumentum's price now tracks Marvell's shares because Marvell is paying in stock with no price protection.",
+    "sentiment": "negative",
+    "drivers": [
+     "Marvell all-stock acquisition of Lumentum",
+     "Post-election AI chip and optical selloff",
+     "Lumentum shares tied to Marvell's stock price",
+     "Chip stock AI regulation fears"
+    ],
+    "position_flags": [],
+    "input_tokens": 1672,
+    "output_tokens": 405,
+    "cost_usd": 0.00036970000000000004,
+    "status": "ok"
+   },
+   {
+    "ticker": "MU",
+    "headlines": [
+     {
+      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
+      "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-05 20:50 UTC",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "Micron Stock Falls After Report of $4.5 Billion Taiwan Pause",
+      "summary": "The planned plant was set to be a major production base for AI memory components",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-05 19:32 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-stock-falls-report-4-193252177.html"
+     },
+     {
+      "title": "Anthropic's IPO plans run up against a battered Wall Street",
+      "summary": "Anthropic's IPO plans are clashing with a market rout.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 19:21 UTC",
+      "link": "https://finance.yahoo.com/technology/article/anthropics-ipo-plans-run-up-against-a-battered-wall-street-192138177.html"
+     },
+     {
+      "title": "This Semiconductor ETF Is Set For Its Worst Week In Over 18 Months As Democratic Sweep Raises Data Center Skepticism",
+      "summary": "Global chip stocks suffered steep losses on Thursday, extending a broad market retreat as a Democratic sweep in the midterm elections fueled growing political resistance against artificial intelligence infrastructure.",
+      "publisher": "Stocktwits",
+      "published": "2026-11-05 19:21 UTC",
+      "link": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
+     },
+     {
+      "title": "Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed",
+      "summary": "Chip stocks are getting crushed, especially these two former highfliers.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 18:02 UTC",
+      "link": "https://finance.yahoo.com/markets/article/micron-and-sandisk-valuation-multiples-are-unbelievable-as-chip-stocks-get-crushed-180250881.html"
+     },
+     {
+      "title": "Nvidia has lost nearly $1.4 trillion since its October record",
+      "summary": "Nvidia is losing the most in S&P 500 stocks by value in Thursday's market rout, on track for a fifth straight week of losses.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 16:59 UTC",
+      "link": "https://finance.yahoo.com/markets/article/nvidia-has-lost-nearly-14-trillion-since-its-october-record-165912910.html"
+     },
+     {
+      "title": "Micron stock declines 12% as chip sell-off deepens",
+      "summary": "Micron led the chip sector lower on Thursday amid a heavy sell-of",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 16:31 UTC",
+      "link": "https://finance.yahoo.com/markets/article/micron-declines-12-as-chip-sell-off-deepens-163137019.html"
+     },
+     {
+      "title": "AMD CEO Su on earnings outlook, new Starbucks holiday menu, and Hilton CEO on hotel demand",
+      "summary": "Yahoo Finance Executive Editor Brian Sozzi tackles the biggest news of the market day, including AMD's (AMD) earnings outlook topping estimates as chip demand soars, what the blue wave in Congress means for a market rally, and how Starbucks (SBUX) plans its business around the holiday season with new products. \n\nSozzi also goes 1-on-1 with Hilton (HLT) CEO Chris Nassetta to discuss AI's impact on the hospitality industry. ",
+      "publisher": "Yahoo Finance Video",
+      "published": "2026-11-05 15:04 UTC",
+      "link": "https://finance.yahoo.com/video/amd-ceo-su-on-earnings-outlook-new-starbucks-holiday-menu-and-hilton-ceo-on-hotel-demand-150453106.html"
+     },
+     {
+      "title": "Qualcomm, Micron, Sandisk, and AMD stocks sink, leading chip sector lower",
+      "summary": "Qualcomm, Micron, and Arm Holdings were all trading lower on Thursday as chip stocks continued to slide.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 13:31 UTC",
+      "link": "https://finance.yahoo.com/markets/article/qualcomm-micron-arm-stocks-sink-lead-chip-sector-lower-133100607.html"
+     },
+     {
+      "title": "Stock market today: Dow plunges 1,800 points, Nasdaq enters correction in AI trade meltdown",
+      "summary": "US stocks plunged as investors dumped AI stocks and the Nasdaq entered a correction.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 09:05 UTC",
+      "link": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html"
+     }
+    ],
+    "model": "claude-haiku-5-5",
+    "summary": "Micron shares fell about 12% on Thursday, November 5, 2026, as a broad chip sell-off deepened during a market rout in which the Nasdaq entered a correction. A report of a planned $4.5 billion Taiwan plant being paused also weighed on the stock, and that plant was described as a major production base for AI memory components. Analysts and outlets tied the sell-off to a Democratic sweep in the midterm elections, which raised concerns about political resistance to AI infrastructure.",
+    "sentiment": "negative",
+    "drivers": [
+     "Broad chip sector sell-off on Thursday",
+     "Report of a $4.5 billion Taiwan plant pause",
+     "Political pushback on AI infrastructure after the Democratic sweep",
+     "Nasdaq correction amid AI trade meltdown"
+    ],
+    "position_flags": [],
+    "input_tokens": 1461,
+    "output_tokens": 278,
+    "cost_usd": 0.00028510000000000005,
+    "status": "ok"
+   },
+   {
+    "ticker": "DELL",
+    "headlines": [
+     {
+      "title": "Tech-stock rout accelerates retreat from the AI trade",
+      "summary": "NEW YORK, Nov 5 (Reuters) - Tech stocks were headed for their worst decline since June on Thursday, with the semiconductor index briefly falling by double digits\u00a0in the latest autumn reckoning for the",
+      "publisher": "Reuters",
+      "published": "2026-11-05 16:40 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/tech-stock-rout-accelerates-retreat-164037654.html"
+     },
+     {
+      "title": "The AI Selloff Is Getting Worse. Nvidia, Dell and Data Center Stocks Are Plunging Hard. Is It Time to Buy the Dip?",
+      "summary": "A day after the midterms hammered AI stocks, the selling deepened and dragged the whole market down with it. Here's what's driving it and whether it's a chance to buy.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-05 16:39 UTC",
+      "link": "https://www.fool.com/investing/2026/11/05/the-ai-selloff-is-getting-worse-nvidia-dell-and-data-center-stocks-are-plunging-hard-is-it-time-to-buy-the-dip/"
+     },
+     {
+      "title": "Dell Sinks Another 11% as Post-Midterm Tech Sell-Off Deepens",
+      "summary": "Key TakeawaysDell fell another 11% today with no news of its own, as the tech sell-off that followed Democrats\u2019 midterm wins deepened. Analysts expect Dell\u2019s earnings to more than double this fiscal year, yet its forward P/E is back near its 5-year average.",
+      "publisher": "TIKR",
+      "published": "2026-11-05 16:20 UTC",
+      "link": "https://www.tikr.com/blog/dell-sinks-another-11-as-post-midterm-tech-sell-off-deepens?ref=yahoofinance&tlnk=yf-261105-qcp2r399"
+     },
+     {
+      "title": "What Deutsche Telekom (DTE) Said on Its Q3 Earnings Call",
+      "summary": "Deutsche Telekom (ETR:DTE) raised its 2026 earnings and cash flow outlook after an increase in guidance from T-Mobile US, while proposing a higher dividend and up to EUR 2 billion in share buybacks for 2027. The telecommunications group said third-quarter organic service revenue rose 4% year over y",
+      "publisher": "MarketBeat",
+      "published": "2026-11-05 16:15 UTC",
+      "link": "https://www.marketbeat.com/instant-alerts/transcript-what-deutsche-telekom-dte-said-on-its-q3-earnings-call-2026-11-05/?utm_source=yahoofinance&utm_medium=yahoofinance"
+     },
+     {
+      "title": "Astera Labs Sinks 12%, Dell Technologies Down 8% as Chip Stocks Slide Again",
+      "summary": "Key TakeawaysAstera Labs fell 12% as a weak phone-chip outlook and a chip designer\u2019s royalty miss hit chip stocks, including Dell Technologies and Applied Materials. Both problems came from phones and memory costs, not data centers.",
+      "publisher": "TIKR",
+      "published": "2026-11-05 14:46 UTC",
+      "link": "https://www.tikr.com/blog/astera-labs-sinks-12-dell-technologies-down-8-as-chip-stocks-slide-again?ref=yahoofinance&tlnk=yf-261105-3rg9g86j"
+     },
+     {
+      "title": "Why It\u2019s Time to Buy the Pullback in Dell Stock",
+      "summary": "While Dell is expected to deliver solid growth, the decline in its share price has eased some of the valuation concerns.",
+      "publisher": "Barchart",
+      "published": "2026-11-05 14:10 UTC",
+      "link": "https://www.barchart.com/story/news/8674065/why-its-time-to-buy-the-pullback-in-dell-stock"
+     },
+     {
+      "title": "What Are Wall Street Analysts' Target Price for Dell Technologies Stock?",
+      "summary": "While Dell Technologies has outpaced the broader market over the past year, Wall Street analysts maintain a cautiously optimistic outlook on the stock\u2019s prospects.",
+      "publisher": "Barchart",
+      "published": "2026-11-05 13:26 UTC",
+      "link": "https://www.barchart.com/story/news/8672029/what-are-wall-street-analysts-target-price-for-dell-technologies-stock"
+     },
+     {
+      "title": "The Open Question Under Apple Stock's Price",
+      "summary": "For questions about this article or underlying research, email help@trefis.com.",
+      "publisher": "Trefis",
+      "published": "2026-11-05 12:32 UTC",
+      "link": "https://www.trefis.com/stock/aapl/articles/622962/the-open-question-under-apple-stocks-price/2026-11-05"
+     },
+     {
+      "title": "Can Dell Stock Hit $560?",
+      "summary": "For questions about this article or underlying research, email help@trefis.com.",
+      "publisher": "Trefis",
+      "published": "2026-11-05 10:36 UTC",
+      "link": "https://www.trefis.com/stock/dell/articles/622833/can-dell-stock-hit-560/2026-11-05"
+     },
+     {
+      "title": "After an 11% tech sell-off, are AI valuations attractive again?",
+      "summary": "Investing.com and Yahoo Finance LLC may earn commission or revenue on some items through the links below.",
+      "publisher": "Investing.com",
+      "published": "2026-11-05 08:28 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/11-tech-sell-off-ai-082806748.html"
+     }
+    ],
+    "model": "claude-haiku-5-5",
+    "summary": "Dell shares fell about 11% on November 5, 2026, with no company-specific news, as a tech sell-off that followed the midterm elections deepened. Dell was also down 8% earlier in the session amid a broader chip-stock slide tied to weak phone-chip outlooks and memory costs. Analyst commentary in the headlines notes expected earnings growth and a forward P/E near its 5-year average.",
+    "sentiment": "negative",
+    "drivers": [
+     "Post-midterm tech and AI stock sell-off",
+     "Broader chip-sector decline",
+     "Weak phone-chip outlook and memory cost pressures",
+     "No Dell-specific news cited for the 11% drop"
+    ],
+    "position_flags": [],
+    "input_tokens": 1519,
+    "output_tokens": 408,
+    "cost_usd": 0.0003559,
     "status": "ok"
    },
    {
@@ -1720,11 +1948,175 @@
   "requested": 524
  },
  "rotation": {
-  "universe": 0,
-  "holdings": [],
-  "top": [],
-  "suggestion": null,
-  "status": "no scored holdings yet"
+  "universe": 518,
+  "holdings": [
+   {
+    "ticker": "DIS",
+    "score": 44.4,
+    "momentum": 28.2,
+    "steadiness": 27.1,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": -0.04667800440367831,
+    "rank": 335
+   },
+   {
+    "ticker": "QQQ",
+    "score": 50.5,
+    "momentum": 70.0,
+    "steadiness": 74.9,
+    "trend": 0.0,
+    "news": 0.0,
+    "ret_12m": 0.2293746380594679,
+    "rank": 287
+   },
+   {
+    "ticker": "SPY",
+    "score": 59.2,
+    "momentum": 60.5,
+    "steadiness": 83.2,
+    "trend": 50.0,
+    "news": 0.0,
+    "ret_12m": 0.16344575858493116,
+    "rank": 213
+   },
+   {
+    "ticker": "ASML",
+    "score": 63.7,
+    "momentum": 92.5,
+    "steadiness": 89.0,
+    "trend": 0.0,
+    "news": 0.0,
+    "ret_12m": 0.7605672777668091,
+    "rank": 173
+   },
+   {
+    "ticker": "LRCX",
+    "score": 64.9,
+    "momentum": 95.9,
+    "steadiness": 88.4,
+    "trend": 0.0,
+    "news": 0.0,
+    "ret_12m": 1.1249968141925923,
+    "rank": 166
+   }
+  ],
+  "top": [
+   {
+    "ticker": "MRNA",
+    "score": 94.7,
+    "momentum": 99.8,
+    "steadiness": 99.2,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 7.2728419253700665,
+    "rank": 1
+   },
+   {
+    "ticker": "MRK",
+    "score": 91.0,
+    "momentum": 92.3,
+    "steadiness": 96.9,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.7527171851742802,
+    "rank": 2
+   },
+   {
+    "ticker": "VTRS",
+    "score": 91.0,
+    "momentum": 91.7,
+    "steadiness": 97.7,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.7264120438074047,
+    "rank": 3
+   },
+   {
+    "ticker": "TGT",
+    "score": 90.8,
+    "momentum": 92.1,
+    "steadiness": 96.5,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.7451797859172624,
+    "rank": 4
+   },
+   {
+    "ticker": "TXN",
+    "score": 90.7,
+    "momentum": 93.8,
+    "steadiness": 94.0,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.8438816815081032,
+    "rank": 5
+   },
+   {
+    "ticker": "CNC",
+    "score": 90.6,
+    "momentum": 92.8,
+    "steadiness": 95.0,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.7997783651418442,
+    "rank": 6
+   },
+   {
+    "ticker": "RVTY",
+    "score": 89.1,
+    "momentum": 90.9,
+    "steadiness": 92.5,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.6785906971141895,
+    "rank": 7
+   },
+   {
+    "ticker": "HST",
+    "score": 88.9,
+    "momentum": 88.4,
+    "steadiness": 95.2,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.49582716949438366,
+    "rank": 8
+   },
+   {
+    "ticker": "CPAY",
+    "score": 88.5,
+    "momentum": 89.7,
+    "steadiness": 91.9,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.5408736531199569,
+    "rank": 9
+   },
+   {
+    "ticker": "CRL",
+    "score": 87.8,
+    "momentum": 91.1,
+    "steadiness": 88.0,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.6885014196636152,
+    "rank": 10
+   }
+  ],
+  "suggestion": {
+   "asof": "2026-11-05",
+   "sell": "DIS",
+   "buy": "MRNA",
+   "sell_score": 44.4,
+   "buy_score": 94.7,
+   "sell_rank": 335,
+   "buy_rank": 1,
+   "amount": 31.649400329589845,
+   "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
+   "pending": false,
+   "suggested_on": "2026-11-05"
+  },
+  "status": "new swap suggested"
  },
  "data_errors": {}
 }
