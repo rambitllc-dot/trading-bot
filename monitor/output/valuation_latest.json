@@ -1,14 +1,14 @@
 {
  "asof": "2026-11-05",
  "totals": {
-  "value": 795.0850891876221,
+  "value": 795.0713900756837,
   "cost": 907.3759,
   "positions": 5,
   "priced": 5,
   "net_delta": 1.81,
   "daily_theta": 0,
-  "pnl": -112.29081081237791,
-  "pnl_pct": -12.375335383315548
+  "pnl": -112.30450992431633,
+  "pnl_pct": -12.376845133788139
  },
  "positions": [
   {
@@ -35,8 +35,8 @@
    "progress_target": 0.0,
    "progress_stop": 0.0,
    "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "price is between your stop and your target (auto levels)",
+   "action": "SWAP",
+   "action_reason": "rotation: swap for TGT (rank #4)",
    "level_ref": 1356.6500244140625,
    "levels_auto": true
   },
@@ -52,17 +52,17 @@
    "target_price": 130.97,
    "stop_price": 110.36,
    "add_below": null,
-   "spot": 117.2300033569336,
+   "spot": 117.22000122070312,
    "status": "ok",
-   "mark": 117.2300033569336,
+   "mark": 117.22000122070312,
    "cost": 30.399300000000004,
-   "value": 31.652100906372073,
-   "pnl": 1.2528009063720695,
-   "pnl_pct": 4.1211505079790305,
+   "value": 31.649400329589845,
+   "pnl": 1.2501003295898414,
+   "pnl_pct": 4.112266827163261,
    "delta": 1.0,
    "pos_delta": 0.27,
-   "progress_target": 0.0,
-   "progress_stop": 0.0,
+   "progress_target": -0.07281019954720443,
+   "progress_stop": 0.14562039909440885,
    "progress_text": "no target or stop set",
    "action": "SWAP",
    "action_reason": "rotation: swap for MRNA (rank #1)",
@@ -93,8 +93,8 @@
    "progress_target": 0.0,
    "progress_stop": 0.0,
    "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "price is between your stop and your target (auto levels)",
+   "action": "SWAP",
+   "action_reason": "rotation: swap for TXN (rank #5)",
    "level_ref": 185.1999969482422,
    "levels_auto": true
   },
@@ -122,8 +122,8 @@
    "progress_target": 0.0,
    "progress_stop": 0.0,
    "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "price is between your stop and your target (auto levels)",
+   "action": "SWAP",
+   "action_reason": "rotation: swap for MRK (rank #2)",
    "level_ref": 647.0499877929688,
    "levels_auto": true
   },
@@ -139,30 +139,30 @@
    "target_price": 790.07,
    "stop_price": 704.63,
    "add_below": null,
-   "spot": 733.1099853515625,
+   "spot": 733.0,
    "status": "ok",
-   "mark": 733.1099853515625,
+   "mark": 733.0,
    "cost": 76.589,
-   "value": 73.31099853515626,
-   "pnl": -3.27800146484374,
-   "pnl_pct": -4.279989900434449,
+   "value": 73.3,
+   "pnl": -3.2890000000000015,
+   "pnl_pct": -4.294350363629244,
    "delta": 1.0,
    "pos_delta": 0.1,
-   "progress_target": 0.0,
-   "progress_stop": 0.0,
+   "progress_target": -0.1930768008707256,
+   "progress_stop": 0.3861536017414512,
    "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "price is between your stop and your target (auto levels)",
+   "action": "SWAP",
+   "action_reason": "rotation: swap for VTRS (rank #3)",
    "level_ref": 733.1099853515625,
    "levels_auto": true
   }
  ],
  "analytics": {
   "asof": "2026-11-05",
-  "total_value": 795.0850891876221,
+  "total_value": 795.0713900756837,
   "total_cost": 907.3759,
-  "pnl": -112.29081081237791,
-  "pnl_pct": -12.375335383315548,
+  "pnl": -112.30450992431633,
+  "pnl_pct": -12.376845133788139,
   "net_delta": 1.81,
   "daily_theta": 0,
   "net_vega": 0,
@@ -173,7 +173,7 @@
      "kind": "ticker",
      "name": "QQQ",
      "value": 511.16949035644535,
-     "pct": 64.29116799042636,
+     "pct": 64.29227572982931,
      "cap_pct": 40,
      "over_cap": true
     },
@@ -181,15 +181,15 @@
      "kind": "ticker",
      "name": "LRCX",
      "value": 111.11999816894532,
-     "pct": 13.975862417754826,
+     "pct": 13.976103222424804,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "SPY",
-     "value": 73.31099853515626,
-     "pct": 9.22052237327979,
+     "value": 73.3,
+     "pct": 9.219297903930675,
      "cap_pct": 40,
      "over_cap": false
     },
@@ -197,15 +197,15 @@
      "kind": "ticker",
      "name": "ASML",
      "value": 67.83250122070312,
-     "pct": 8.531476963051961,
+     "pct": 8.531623960742202,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "DIS",
-     "value": 31.652100906372073,
-     "pct": 3.9809702554870694,
+     "value": 31.649400329589845,
+     "pct": 3.980699183072995,
      "cap_pct": 40,
      "over_cap": false
     }
@@ -215,7 +215,7 @@
      "kind": "sector",
      "name": "Technology (ETF)",
      "value": 511.16949035644535,
-     "pct": 64.29116799042636,
+     "pct": 64.29227572982931,
      "cap_pct": 60,
      "over_cap": true
     },
@@ -223,23 +223,23 @@
      "kind": "sector",
      "name": "Technology",
      "value": 178.95249938964844,
-     "pct": 22.507339380806787,
+     "pct": 22.507727183167006,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Broad market (ETF)",
-     "value": 73.31099853515626,
-     "pct": 9.22052237327979,
+     "value": 73.3,
+     "pct": 9.219297903930675,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Communication Services",
-     "value": 31.652100906372073,
-     "pct": 3.9809702554870694,
+     "value": 31.649400329589845,
+     "pct": 3.980699183072995,
      "cap_pct": 60,
      "over_cap": false
     }
@@ -262,27 +262,27 @@
   ]
  },
  "macro": {
-  "score": 38.9,
+  "score": 36.9,
   "label": "Stressed",
   "inputs": {
-   "vix": 27.170000076293945,
-   "vix_1y_percentile": 97.22222222222221,
-   "vix_vix3m_ratio": 1.0850638611377121,
+   "vix": 28.18000030517578,
+   "vix_1y_percentile": 98.4126984126984,
+   "vix_vix3m_ratio": 1.1029354656222607,
    "sectors_above_200d": "7 of 11",
-   "hyg_tlt_ratio": 0.9435493716248915
+   "hyg_tlt_ratio": 0.9432442144689562
   },
   "missing": [],
   "components": {
    "vix_level": {
-    "score": 45.8,
+    "score": 42.2,
     "weight": 0.25
    },
    "vix_percentile": {
-    "score": 2.8,
+    "score": 1.6,
     "weight": 0.15
    },
    "term_structure": {
-    "score": 5.0,
+    "score": 0.0,
     "weight": 0.2
    },
    "breadth": {
@@ -775,6 +775,46 @@
    "detail": null
   },
   {
+   "kind": "swap",
+   "severity": "high",
+   "message": "SWAP idea: sell all QQQ (about $511, rank #287) and buy MRK (rank #2). MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.",
+   "action": "SWAP",
+   "ticker": "QQQ",
+   "position_id": null,
+   "is_new": true,
+   "detail": null
+  },
+  {
+   "kind": "swap",
+   "severity": "high",
+   "message": "SWAP idea: sell all SPY (about $73, rank #213) and buy VTRS (rank #3). VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.",
+   "action": "SWAP",
+   "ticker": "SPY",
+   "position_id": null,
+   "is_new": true,
+   "detail": null
+  },
+  {
+   "kind": "swap",
+   "severity": "high",
+   "message": "SWAP idea: sell all ASML (about $68, rank #173) and buy TGT (rank #4). TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.",
+   "action": "SWAP",
+   "ticker": "ASML",
+   "position_id": null,
+   "is_new": true,
+   "detail": null
+  },
+  {
+   "kind": "swap",
+   "severity": "high",
+   "message": "SWAP idea: sell all LRCX (about $111, rank #166) and buy TXN (rank #5). TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.",
+   "action": "SWAP",
+   "ticker": "LRCX",
+   "position_id": null,
+   "is_new": true,
+   "detail": null
+  },
+  {
    "kind": "news_flag",
    "severity": "warn",
    "message": "SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares)",
@@ -859,7 +899,7 @@
      "high_52w": 2354.389892578125,
      "from_high": -0.6574781453072256,
      "new_high": false,
-     "vol_ratio": 3.192032451952806,
+     "vol_ratio": 3.286872514504165,
      "reason": "+770% over 12 months"
     },
     {
@@ -872,7 +912,7 @@
      "high_52w": 260.6700134277344,
      "from_high": -0.07369473174632257,
      "new_high": false,
-     "vol_ratio": 0.6245191003612061,
+     "vol_ratio": 0.6412301789404675,
      "reason": "+727% over 12 months"
     },
     {
@@ -885,7 +925,7 @@
      "high_52w": 1143.0,
      "from_high": -0.5540682307899989,
      "new_high": false,
-     "vol_ratio": 1.5432292977598792,
+     "vol_ratio": 1.5754037538192929,
      "reason": "+490% over 12 months"
     },
     {
@@ -898,20 +938,20 @@
      "high_52w": 1254.6095437059498,
      "from_high": -0.4768172951167352,
      "new_high": false,
-     "vol_ratio": 2.78617556480765,
+     "vol_ratio": 2.8298355510856097,
      "reason": "+400% over 12 months"
     },
     {
      "ticker": "DELL",
-     "price": 316.6600036621094,
-     "chg_1d": -0.14958637845273348,
-     "rsi2": 4.939534399646149,
+     "price": 316.9100036621094,
+     "chg_1d": -0.14891498515099633,
+     "rsi2": 4.953963146200067,
      "ret_12m": 2.778168167221938,
-     "vs_200d": -0.05641105221923415,
+     "vs_200d": -0.05566961757079658,
      "high_52w": 594.6862090656501,
-     "from_high": -0.4675174926964687,
+     "from_high": -0.4670971029242008,
      "new_high": false,
-     "vol_ratio": 1.9088968538774034,
+     "vol_ratio": 2.02353553586327,
      "reason": "+278% over 12 months"
     },
     {
@@ -919,12 +959,12 @@
      "price": 133.5500030517578,
      "chg_1d": -0.16426783165641023,
      "rsi2": 0.9857591344364778,
-     "ret_12m": 2.2549121742103777,
-     "vs_200d": -0.27690916868165905,
+     "ret_12m": 2.254912458202705,
+     "vs_200d": -0.27690916942840327,
      "high_52w": 329.72658943397715,
      "from_high": -0.5949674447516791,
      "new_high": false,
-     "vol_ratio": 2.401798017987495,
+     "vol_ratio": 2.52839048110389,
      "reason": "+225% over 12 months"
     },
     {
@@ -932,25 +972,25 @@
      "price": 466.5299987792969,
      "chg_1d": -0.16251391084633493,
      "rsi2": 3.067073984648232,
-     "ret_12m": 2.2443890821596604,
-     "vs_200d": -0.32998087644926455,
+     "ret_12m": 2.2443888832729684,
+     "vs_200d": -0.3299808754214544,
      "high_52w": 1143.267740532915,
      "from_high": -0.59193285856047,
      "new_high": false,
-     "vol_ratio": 1.698724737143422,
+     "vol_ratio": 1.7077734674453162,
      "reason": "+224% over 12 months"
     },
     {
      "ticker": "HPE",
-     "price": 44.14500045776367,
-     "chg_1d": -0.11868635808972083,
-     "rsi2": 5.78688127011182,
-     "ret_12m": 2.1150217370395543,
-     "vs_200d": 0.07148340892055072,
+     "price": 44.15999984741211,
+     "chg_1d": -0.11838690930547757,
+     "rsi2": 5.796834240596738,
+     "ret_12m": 2.115021993769943,
+     "vs_200d": 0.07184552386477194,
      "high_52w": 73.55999755859375,
-     "from_high": -0.39987762475657707,
+     "from_high": -0.3996737178758504,
      "new_high": false,
-     "vol_ratio": 1.4050100993084436,
+     "vol_ratio": 1.5916320015753669,
      "reason": "+212% over 12 months"
     },
     {
@@ -963,7 +1003,7 @@
      "high_52w": 142.35000610351562,
      "from_high": -0.6329469774521521,
      "new_high": false,
-     "vol_ratio": 1.9826445542365758,
+     "vol_ratio": 2.0200350386129924,
      "reason": "+205% over 12 months"
     },
     {
@@ -972,11 +1012,11 @@
      "chg_1d": -0.17354779983264945,
      "rsi2": 3.535969528757647,
      "ret_12m": 1.6690524753342544,
-     "vs_200d": -0.3637818730580793,
+     "vs_200d": -0.3637818734042486,
      "high_52w": 799.6132774415504,
      "from_high": -0.6653006991840809,
      "new_high": false,
-     "vol_ratio": 2.0299382361102767,
+     "vol_ratio": 2.0488117245542217,
      "reason": "+167% over 12 months"
     }
    ],
@@ -991,7 +1031,7 @@
      "high_52w": 212.94000244140625,
      "from_high": -0.2721423700752893,
      "new_high": false,
-     "vol_ratio": 1.8081534945990005,
+     "vol_ratio": 1.8501820445137176,
      "reason": "+1% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
@@ -1004,72 +1044,72 @@
      "high_52w": 432.3299865722656,
      "from_high": -0.2721531626279269,
      "new_high": false,
-     "vol_ratio": 2.311939089755354,
+     "vol_ratio": 2.341918008564951,
      "reason": "+15% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
      "ticker": "URI",
-     "price": 1043.8699951171875,
-     "chg_1d": -0.07111652636820331,
-     "rsi2": 1.9002000549206883,
+     "price": 1043.780029296875,
+     "chg_1d": -0.07119658208785318,
+     "rsi2": 1.8986411137016432,
      "ret_12m": 0.22650213068591807,
-     "vs_200d": 0.07297527460493702,
+     "vs_200d": 0.07288329406391458,
      "high_52w": 1202.1199951171875,
-     "from_high": -0.13164243223869943,
+     "from_high": -0.13171727153983237,
      "new_high": false,
-     "vol_ratio": 1.32275002179789,
+     "vol_ratio": 1.5035521841485744,
      "reason": "+7% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "OXY",
-     "price": 56.34000015258789,
-     "chg_1d": -0.01726847456562486,
-     "rsi2": 2.320218292421174,
-     "ret_12m": 0.48126394624373736,
-     "vs_200d": 0.005629331716082264,
+     "price": 56.36000061035156,
+     "chg_1d": -0.016919609100338295,
+     "rsi2": 2.335256917109433,
+     "ret_12m": 0.48126409003332293,
+     "vs_200d": 0.005984531863902687,
      "high_52w": 66.8332100604428,
-     "from_high": -0.1570059241261198,
+     "from_high": -0.15670666485448548,
      "new_high": false,
-     "vol_ratio": 1.2904386826858545,
+     "vol_ratio": 1.4838193953477428,
      "reason": "+1% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
-     "ticker": "MPC",
-     "price": 377.510009765625,
-     "chg_1d": -0.03863192215825839,
-     "rsi2": 2.443569497845502,
-     "ret_12m": 1.4466594188566475,
-     "vs_200d": 0.2832584199739778,
-     "high_52w": 493.9800109863281,
-     "from_high": -0.2357787736960204,
-     "new_high": false,
-     "vol_ratio": 1.2439507423839233,
-     "reason": "+28% above its 200-day average, RSI-2 2 after a sharp drop"
-    },
-    {
      "ticker": "XLE",
-     "price": 61.68000030517578,
-     "chg_1d": -0.02896725660150712,
-     "rsi2": 2.454600412829066,
+     "price": 61.630001068115234,
+     "chg_1d": -0.02975439823721593,
+     "rsi2": 2.424440445137421,
      "ret_12m": 0.4948162070500448,
-     "vs_200d": 0.054220852620901594,
+     "vs_200d": 0.053370775985916996,
      "high_52w": 70.1500015258789,
-     "from_high": -0.12074128348491153,
+     "from_high": -0.12145403096848939,
      "new_high": false,
-     "vol_ratio": 1.8767591337508116,
+     "vol_ratio": 1.9369591046511694,
      "reason": "+5% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
-     "ticker": "NUE",
-     "price": 245.74000549316406,
-     "chg_1d": -0.08275166237131748,
-     "rsi2": 2.629275128005929,
-     "ret_12m": 0.7279375632502365,
-     "vs_200d": 0.09249211557271053,
-     "high_52w": 287.70001220703125,
-     "from_high": -0.14584638489230384,
+     "ticker": "MPC",
+     "price": 377.32000732421875,
+     "chg_1d": -0.039115782922621634,
+     "rsi2": 2.43091262466902,
+     "ret_12m": 1.4466594188566475,
+     "vs_200d": 0.282616692406086,
+     "high_52w": 493.9800109863281,
+     "from_high": -0.23616340958650284,
      "new_high": false,
-     "vol_ratio": 1.9029328226302886,
+     "vol_ratio": 1.445982293980895,
+     "reason": "+28% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "NUE",
+     "price": 245.67999267578125,
+     "chg_1d": -0.08297566601643147,
+     "rsi2": 2.6234034541209894,
+     "ret_12m": 0.7279373783808882,
+     "vs_200d": 0.09222677628835374,
+     "high_52w": 287.70001220703125,
+     "from_high": -0.14605498000817618,
+     "new_high": false,
+     "vol_ratio": 2.351845118742058,
      "reason": "+9% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
@@ -1082,7 +1122,7 @@
      "high_52w": 286.989990234375,
      "from_high": -0.2431791897311042,
      "new_high": false,
-     "vol_ratio": 1.9201135266413631,
+     "vol_ratio": 1.9322248575449508,
      "reason": "+28% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
@@ -1095,153 +1135,153 @@
      "high_52w": 52.959999084472656,
      "from_high": -0.17900301559891396,
      "new_high": false,
-     "vol_ratio": 1.420549621717846,
+     "vol_ratio": 1.4443855247857358,
      "reason": "+15% above its 200-day average, RSI-2 3 after a sharp drop"
     },
     {
-     "ticker": "EOG",
-     "price": 144.67999267578125,
-     "chg_1d": -0.016183904000571125,
-     "rsi2": 3.1254689926109904,
-     "ret_12m": 0.40417941452238826,
-     "vs_200d": 0.06197159258011142,
-     "high_52w": 165.92999267578125,
-     "from_high": -0.128066057602506,
+     "ticker": "PSX",
+     "price": 247.0399932861328,
+     "chg_1d": -0.048492128644231136,
+     "rsi2": 3.188528078489668,
+     "ret_12m": 1.0601348834959254,
+     "vs_200d": 0.2344255779789024,
+     "high_52w": 299.3900146484375,
+     "from_high": -0.17485560239468023,
      "new_high": false,
-     "vol_ratio": 1.6169752421185735,
-     "reason": "+6% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 1.829024268727641,
+     "reason": "+23% above its 200-day average, RSI-2 3 after a sharp drop"
     }
    ],
    "new_52w_high": [
     {
      "ticker": "CPAY",
-     "price": 446.0899963378906,
-     "chg_1d": 0.06567126094971187,
-     "rsi2": 97.8505590510239,
+     "price": 447.0,
+     "chg_1d": 0.06784518270996243,
+     "rsi2": 97.90417848102682,
      "ret_12m": 0.5408736531199569,
-     "vs_200d": 0.24786561981837885,
+     "vs_200d": 0.2503952949611412,
      "high_52w": 479.5299987792969,
-     "from_high": -0.0697349540728045,
+     "from_high": -0.06783725494151782,
      "new_high": true,
-     "vol_ratio": 3.314699009922511,
-     "reason": "new 52-week high at 446.09"
+     "vol_ratio": 3.7630965189701455,
+     "reason": "new 52-week high at 447.00"
     },
     {
      "ticker": "BDX",
-     "price": 213.4949951171875,
-     "chg_1d": 0.020579342346855656,
-     "rsi2": 98.4279968292815,
-     "ret_12m": 0.31196484941918134,
-     "vs_200d": 0.29082675262175206,
+     "price": 213.5500030517578,
+     "chg_1d": 0.02084229915133151,
+     "rsi2": 98.43645093395854,
+     "ret_12m": 0.3119649952019301,
+     "vs_200d": 0.2911571933563373,
      "high_52w": 214.77999877929688,
-     "from_high": -0.005982883273175754,
+     "from_high": -0.00572677034421154,
      "new_high": true,
-     "vol_ratio": 1.8763107754864943,
-     "reason": "new 52-week high at 213.49"
+     "vol_ratio": 2.3157722916061574,
+     "reason": "new 52-week high at 213.55"
     },
     {
      "ticker": "CAH",
-     "price": 268.0299987792969,
-     "chg_1d": 0.023288688863769336,
-     "rsi2": 96.03667643860562,
+     "price": 267.82000732421875,
+     "chg_1d": 0.022486980541125634,
+     "rsi2": 95.96455000963148,
      "ret_12m": 0.19694281109201373,
-     "vs_200d": 0.2033466023616839,
+     "vs_200d": 0.20240949343429304,
      "high_52w": 286.2900085449219,
-     "from_high": -0.06378151252442266,
+     "from_high": -0.06451500460870951,
      "new_high": true,
-     "vol_ratio": 1.2505848928100216,
-     "reason": "new 52-week high at 268.03"
+     "vol_ratio": 1.6771676654726588,
+     "reason": "new 52-week high at 267.82"
     },
     {
      "ticker": "KDP",
      "price": 36.88999938964844,
      "chg_1d": 0.0027180883835991043,
      "rsi2": 71.2817404276605,
-     "ret_12m": 0.19096595564647845,
+     "ret_12m": 0.19096604423139163,
      "vs_200d": 0.23684043984930714,
      "high_52w": 37.8849983215332,
      "from_high": -0.026263665724362006,
      "new_high": true,
-     "vol_ratio": 1.224166794379192,
+     "vol_ratio": 1.330841266605384,
      "reason": "new 52-week high at 36.89"
     },
     {
      "ticker": "MSI",
-     "price": 516.489990234375,
-     "chg_1d": 0.03923620270662598,
-     "rsi2": 97.60750739082387,
-     "ret_12m": 0.15039674180733842,
-     "vs_200d": 0.17428860218121756,
+     "price": 517.010009765625,
+     "chg_1d": 0.04028254074455062,
+     "rsi2": 97.65761976816601,
+     "ret_12m": 0.15039683189132513,
+     "vs_200d": 0.17546396628561012,
      "high_52w": 548.2849731445312,
-     "from_high": -0.05798988567533636,
+     "from_high": -0.05704143814034823,
      "new_high": true,
-     "vol_ratio": 3.100564744886665,
-     "reason": "new 52-week high at 516.49"
+     "vol_ratio": 3.488024010666831,
+     "reason": "new 52-week high at 517.01"
     },
     {
      "ticker": "ED",
-     "price": 121.54000091552734,
-     "chg_1d": 0.01030754640327003,
-     "rsi2": 88.41209718110674,
-     "ret_12m": 0.10362005670754582,
-     "vs_200d": 0.12261270482624931,
+     "price": 121.44000244140625,
+     "chg_1d": 0.009476303912959727,
+     "rsi2": 88.09642380508791,
+     "ret_12m": 0.10361987909998893,
+     "vs_200d": 0.12169424137186224,
      "high_52w": 122.75,
-     "from_high": -0.009857426350082688,
+     "from_high": -0.010672077870417462,
      "new_high": true,
-     "vol_ratio": 1.7242681875639838,
-     "reason": "new 52-week high at 121.54"
+     "vol_ratio": 2.1336801262689873,
+     "reason": "new 52-week high at 121.44"
     },
     {
      "ticker": "MCK",
-     "price": 1072.050048828125,
-     "chg_1d": 0.0024406302035464567,
-     "rsi2": 99.0874290531294,
-     "ret_12m": 0.08583404121363047,
-     "vs_200d": 0.23868832094553905,
+     "price": 1072.0,
+     "chg_1d": 0.0023938311022717595,
+     "rsi2": 99.08629063428552,
+     "ret_12m": 0.08583412026477011,
+     "vs_200d": 0.23863085072297707,
      "high_52w": 1121.5,
-     "from_high": -0.044092689408716024,
+     "from_high": -0.04413731609451632,
      "new_high": true,
-     "vol_ratio": 1.5213978040540541,
-     "reason": "new 52-week high at 1,072.05"
+     "vol_ratio": 1.7939456644144145,
+     "reason": "new 52-week high at 1,072.00"
     },
     {
      "ticker": "EVRG",
      "price": 87.41000366210938,
      "chg_1d": 0.013919552144536107,
      "rsi2": 85.56444116182742,
-     "ret_12m": 0.07866009835253762,
+     "ret_12m": 0.07866020889872871,
      "vs_200d": 0.07404519351481831,
      "high_52w": 89.66000366210938,
      "from_high": -0.025094801562570712,
      "new_high": true,
-     "vol_ratio": 2.9811027107626713,
+     "vol_ratio": 3.0414025604883332,
      "reason": "new 52-week high at 87.41"
     },
     {
      "ticker": "RSG",
-     "price": 249.41000366210938,
-     "chg_1d": 0.016299254065891056,
-     "rsi2": 87.66161249076005,
+     "price": 249.4199981689453,
+     "chg_1d": 0.016339979817436623,
+     "rsi2": 87.6793020277373,
      "ret_12m": 0.049725972344723646,
-     "vs_200d": 0.14956501985002224,
+     "vs_200d": 0.14961082111685076,
      "high_52w": 254.39410400390625,
-     "from_high": -0.019592043460725628,
+     "from_high": -0.01955275596672068,
      "new_high": true,
-     "vol_ratio": 1.1462620628921587,
-     "reason": "new 52-week high at 249.41"
+     "vol_ratio": 1.4095292261402415,
+     "reason": "new 52-week high at 249.42"
     },
     {
      "ticker": "AWK",
-     "price": 152.44000244140625,
-     "chg_1d": 0.01877963955688222,
-     "rsi2": 94.65399093760992,
-     "ret_12m": 0.021666666564679193,
-     "vs_200d": 0.15734203553261494,
+     "price": 152.4199981689453,
+     "chg_1d": 0.018645947972252497,
+     "rsi2": 94.63373845674403,
+     "ret_12m": 0.02166660404636489,
+     "vs_200d": 0.15719104020547237,
      "high_52w": 153.67999267578125,
-     "from_high": -0.008068651050699982,
+     "from_high": -0.008198819409720781,
      "new_high": true,
-     "vol_ratio": 1.2891922473079531,
-     "reason": "new 52-week high at 152.44"
+     "vol_ratio": 1.5876366183908452,
+     "reason": "new 52-week high at 152.42"
     }
    ],
    "unusual_volume": [
@@ -1255,8 +1295,8 @@
      "high_52w": 738.010009765625,
      "from_high": -0.5174862110385132,
      "new_high": false,
-     "vol_ratio": 5.019782035183116,
-     "reason": "volume 5.0x normal, +31% on the day"
+     "vol_ratio": 5.097269449212585,
+     "reason": "volume 5.1x normal, +31% on the day"
     },
     {
      "ticker": "DASH",
@@ -1268,34 +1308,8 @@
      "high_52w": 241.50999450683594,
      "from_high": -0.25502048668278743,
      "new_high": false,
-     "vol_ratio": 4.0191869703963174,
-     "reason": "volume 4.0x normal, -9% on the day"
-    },
-    {
-     "ticker": "MCHP",
-     "price": 64.8499984741211,
-     "chg_1d": -0.13923544430136658,
-     "rsi2": 4.216274384187415,
-     "ret_12m": 0.34560530439897197,
-     "vs_200d": -0.1803626853790694,
-     "high_52w": 104.75085804341299,
-     "from_high": -0.3809120069713927,
-     "new_high": false,
-     "vol_ratio": 3.5313084460631288,
-     "reason": "volume 3.5x normal, -14% on the day"
-    },
-    {
-     "ticker": "QCOM",
-     "price": 156.75,
-     "chg_1d": -0.09492466198773941,
-     "rsi2": 21.996947339290415,
-     "ret_12m": 0.04610331172046278,
-     "vs_200d": -0.06999962245323521,
-     "high_52w": 257.5617675961248,
-     "from_high": -0.39140812138781733,
-     "new_high": false,
-     "vol_ratio": 3.5027005108503415,
-     "reason": "volume 3.5x normal, -9% on the day"
+     "vol_ratio": 4.062038917346103,
+     "reason": "volume 4.1x normal, -9% on the day"
     },
     {
      "ticker": "AXON",
@@ -1307,47 +1321,73 @@
      "high_52w": 665.0700073242188,
      "from_high": -0.4247823637428031,
      "new_high": false,
-     "vol_ratio": 3.372562047237344,
-     "reason": "volume 3.4x normal, -10% on the day"
+     "vol_ratio": 3.8361395687770585,
+     "reason": "volume 3.8x normal, -10% on the day"
+    },
+    {
+     "ticker": "MCHP",
+     "price": 64.8499984741211,
+     "chg_1d": -0.13923544430136658,
+     "rsi2": 4.216274384187415,
+     "ret_12m": 0.34560530439897197,
+     "vs_200d": -0.1803626853790694,
+     "high_52w": 104.75085804341299,
+     "from_high": -0.3809120069713927,
+     "new_high": false,
+     "vol_ratio": 3.784253555324315,
+     "reason": "volume 3.8x normal, -14% on the day"
     },
     {
      "ticker": "CPAY",
-     "price": 446.0899963378906,
-     "chg_1d": 0.06567126094971187,
-     "rsi2": 97.8505590510239,
+     "price": 447.0,
+     "chg_1d": 0.06784518270996243,
+     "rsi2": 97.90417848102682,
      "ret_12m": 0.5408736531199569,
-     "vs_200d": 0.24786561981837885,
+     "vs_200d": 0.2503952949611412,
      "high_52w": 479.5299987792969,
-     "from_high": -0.0697349540728045,
+     "from_high": -0.06783725494151782,
      "new_high": true,
-     "vol_ratio": 3.314699009922511,
-     "reason": "volume 3.3x normal, +7% on the day"
+     "vol_ratio": 3.7630965189701455,
+     "reason": "volume 3.8x normal, +7% on the day"
     },
     {
-     "ticker": "XLK",
-     "price": 162.30999755859375,
-     "chg_1d": -0.08039661439890222,
-     "rsi2": 3.941846879800252,
-     "ret_12m": 0.377308150105075,
-     "vs_200d": -0.04416680554749808,
-     "high_52w": 203.25,
-     "from_high": -0.20142682627998154,
+     "ticker": "QCOM",
+     "price": 156.75,
+     "chg_1d": -0.09492466198773941,
+     "rsi2": 21.996947339290415,
+     "ret_12m": 0.04610331172046278,
+     "vs_200d": -0.0699996228742028,
+     "high_52w": 257.5617675961248,
+     "from_high": -0.39140812138781733,
      "new_high": false,
-     "vol_ratio": 3.2400854643774024,
-     "reason": "volume 3.2x normal, -8% on the day"
+     "vol_ratio": 3.5200622019617747,
+     "reason": "volume 3.5x normal, -9% on the day"
+    },
+    {
+     "ticker": "MSI",
+     "price": 517.010009765625,
+     "chg_1d": 0.04028254074455062,
+     "rsi2": 97.65761976816601,
+     "ret_12m": 0.15039683189132513,
+     "vs_200d": 0.17546396628561012,
+     "high_52w": 548.2849731445312,
+     "from_high": -0.05704143814034823,
+     "new_high": true,
+     "vol_ratio": 3.488024010666831,
+     "reason": "volume 3.5x normal, +4% on the day"
     },
     {
      "ticker": "PWR",
-     "price": 508.94000244140625,
-     "chg_1d": -0.12318241282348164,
-     "rsi2": 8.675579099456613,
+     "price": 509.05999755859375,
+     "chg_1d": -0.12297568152191252,
+     "rsi2": 8.68417181025741,
      "ret_12m": 0.5991831119100763,
-     "vs_200d": -0.19053707940398645,
+     "vs_200d": -0.1903470012354327,
      "high_52w": 788.6295298146063,
-     "from_high": -0.354652617990288,
+     "from_high": -0.3545004614799736,
      "new_high": false,
-     "vol_ratio": 3.1935784549283435,
-     "reason": "volume 3.2x normal, -12% on the day"
+     "vol_ratio": 3.458199536421969,
+     "reason": "volume 3.5x normal, -12% on the day"
     },
     {
      "ticker": "SNDK",
@@ -1359,21 +1399,21 @@
      "high_52w": 2354.389892578125,
      "from_high": -0.6574781453072256,
      "new_high": false,
-     "vol_ratio": 3.192032451952806,
-     "reason": "volume 3.2x normal, -22% on the day"
+     "vol_ratio": 3.286872514504165,
+     "reason": "volume 3.3x normal, -22% on the day"
     },
     {
-     "ticker": "EXPE",
-     "price": 272.4800109863281,
-     "chg_1d": -0.13739392562243757,
-     "rsi2": 26.777524003012147,
-     "ret_12m": 0.22934877656424923,
-     "vs_200d": 0.05306605219460758,
-     "high_52w": 341.5076975794428,
-     "from_high": -0.20212629783273672,
+     "ticker": "IRM",
+     "price": 105.5,
+     "chg_1d": -0.11090513446791372,
+     "rsi2": 9.932850375313237,
+     "ret_12m": 0.1580007589952075,
+     "vs_200d": -0.07784253474548986,
+     "high_52w": 133.64159179823972,
+     "from_high": -0.2105751018045745,
      "new_high": false,
-     "vol_ratio": 3.180541227320946,
-     "reason": "volume 3.2x normal, -14% on the day"
+     "vol_ratio": 3.2840962337255672,
+     "reason": "volume 3.3x normal, -11% on the day"
     }
    ]
   },
@@ -2022,7 +2062,7 @@
     "steadiness": 88.4,
     "trend": 0.0,
     "news": 0.0,
-    "ret_12m": 1.1249970232993496,
+    "ret_12m": 1.1249968141925923,
     "rank": 166
    }
   ],
@@ -2044,7 +2084,7 @@
     "steadiness": 96.9,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7527171851742802,
+    "ret_12m": 0.7527170210337055,
     "rank": 2
    },
    {
@@ -2054,7 +2094,7 @@
     "steadiness": 97.7,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7264120438074047,
+    "ret_12m": 0.7264122063245697,
     "rank": 3
    },
    {
@@ -2064,7 +2104,7 @@
     "steadiness": 96.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7451797859172624,
+    "ret_12m": 0.7451796319517001,
     "rank": 4
    },
    {
@@ -2094,17 +2134,17 @@
     "steadiness": 92.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.6785906971141895,
+    "ret_12m": 0.6785908371315026,
     "rank": 7
    },
    {
     "ticker": "HST",
-    "score": 88.9,
+    "score": 89.0,
     "momentum": 88.4,
-    "steadiness": 95.2,
+    "steadiness": 95.4,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.49582716949438366,
+    "ret_12m": 0.49582726544067013,
     "rank": 8
    },
    {
@@ -2128,20 +2168,74 @@
     "rank": 10
    }
   ],
-  "suggestion": {
-   "asof": "2026-11-05",
-   "sell": "DIS",
-   "buy": "MRNA",
-   "sell_score": 44.4,
-   "buy_score": 94.7,
-   "sell_rank": 335,
-   "buy_rank": 1,
-   "amount": 31.652100906372073,
-   "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
-   "pending": false,
-   "suggested_on": "2026-11-05"
-  },
-  "status": "new swap suggested"
+  "suggestions": [
+   {
+    "asof": "2026-11-05",
+    "sell": "DIS",
+    "buy": "MRNA",
+    "sell_score": 44.4,
+    "buy_score": 94.7,
+    "sell_rank": 335,
+    "buy_rank": 1,
+    "amount": 31.649400329589845,
+    "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
+    "pending": false,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "QQQ",
+    "buy": "MRK",
+    "sell_score": 50.5,
+    "buy_score": 91.0,
+    "sell_rank": 287,
+    "buy_rank": 2,
+    "amount": 511.16949035644535,
+    "reason": "MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.",
+    "pending": false,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "SPY",
+    "buy": "VTRS",
+    "sell_score": 59.2,
+    "buy_score": 91.0,
+    "sell_rank": 213,
+    "buy_rank": 3,
+    "amount": 73.3,
+    "reason": "VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.",
+    "pending": false,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "ASML",
+    "buy": "TGT",
+    "sell_score": 63.7,
+    "buy_score": 90.8,
+    "sell_rank": 173,
+    "buy_rank": 4,
+    "amount": 67.83250122070312,
+    "reason": "TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.",
+    "pending": false,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "LRCX",
+    "buy": "TXN",
+    "sell_score": 64.9,
+    "buy_score": 90.7,
+    "sell_rank": 166,
+    "buy_rank": 5,
+    "amount": 111.11999816894532,
+    "reason": "TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.",
+    "pending": false,
+    "suggested_on": "2026-11-05"
+   }
+  ],
+  "status": "5 new swap(s) suggested"
  },
  "auto_levels": [
   {

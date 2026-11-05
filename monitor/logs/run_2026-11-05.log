@@ -4,13 +4,13 @@ $ANT: No data found, symbol may be delisted
 1 Failed download:
 ['ANT']: No data found, symbol may be delisted
 Portfolio as of 2026-11-05
-Value $795.09 · cost $907.38 · P&L -$112.29 (-12.4%) · net delta 2 shares · theta $0.00/day · 5/5 positions priced
+Value $795.07 · cost $907.38 · P&L -$112.30 (-12.4%) · net delta 2 shares · theta $0.00/day · 5/5 positions priced
 
-- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
-- DIS shares x0.27: mark $117.23, value $31.65, P&L $1.25 (+4.1%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRNA (rank #1)).
-- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
-- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
-- SPY shares x0.1: mark $733.11, value $73.31, P&L -$3.28 (-4.3%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
+- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for TGT (rank #4)).
+- DIS shares x0.27: mark $117.22, value $31.65, P&L $1.25 (+4.1%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRNA (rank #1)).
+- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for TXN (rank #5)).
+- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRK (rank #2)).
+- SPY shares x0.1: mark $733.00, value $73.30, P&L -$3.29 (-4.3%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for VTRS (rank #3)).
 
 ANALYTICS
 Net delta 2 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
@@ -23,7 +23,7 @@ Flags:
 - [info] Technology (ETF) is 64% of the book (cap 60%).
 
 MARKET ENVIRONMENT (macro gate)
-39/100 · Stressed (vix level 46, vix percentile 3, term structure 5, breadth 64, credit 67)
+37/100 · Stressed (vix level 42, vix percentile 2, term structure 0, breadth 64, credit 67)
 
 NEWS (Claude summaries, facts only)
 - ASML [negative] (cached): ASML shares fell about 8% on November 5 amid a broader post-election chip sell-off, with GuruFocus reporting a 7.36% drop tied to investor doubts about the next spending cycle. TIKR noted that ASML had no company-specific news that day and that customer down payments point to demand exceeding supply. Other headlines covered a Europe-wide tech selloff and a 13% Micron drop after a memory-cost warning and a reported Taiwan plant pause.
@@ -45,9 +45,9 @@ Scanned 521 of 524 stocks.
 - Watchlist ANT -: no price data (not trading yet?)
 - Watchlist PLTR 154.99: watching (no buy level set) -> YOUR PLAN: WAIT
 Momentum leaders: SNDK (+770% over 12 months), MRNA (+727% over 12 months), LITE (+490% over 12 months), MU (+400% over 12 months), DELL (+278% over 12 months)
-Pullbacks in uptrends: PLTR (+1% above its 200-day average, RSI-2 0 after a sharp drop), PANW (+15% above its 200-day average, RSI-2 0 after a sharp drop), URI (+7% above its 200-day average, RSI-2 2 after a sharp drop), OXY (+1% above its 200-day average, RSI-2 2 after a sharp drop), MPC (+28% above its 200-day average, RSI-2 2 after a sharp drop)
-New 52-week highs: CPAY (new 52-week high at 446.09), BDX (new 52-week high at 213.49), CAH (new 52-week high at 268.03), KDP (new 52-week high at 36.89), MSI (new 52-week high at 516.49)
-Unusual volume: APP (volume 5.0x normal, +31% on the day), DASH (volume 4.0x normal, -9% on the day), MCHP (volume 3.5x normal, -14% on the day), QCOM (volume 3.5x normal, -9% on the day), AXON (volume 3.4x normal, -10% on the day)
+Pullbacks in uptrends: PLTR (+1% above its 200-day average, RSI-2 0 after a sharp drop), PANW (+15% above its 200-day average, RSI-2 0 after a sharp drop), URI (+7% above its 200-day average, RSI-2 2 after a sharp drop), OXY (+1% above its 200-day average, RSI-2 2 after a sharp drop), XLE (+5% above its 200-day average, RSI-2 2 after a sharp drop)
+New 52-week highs: CPAY (new 52-week high at 447.00), BDX (new 52-week high at 213.55), CAH (new 52-week high at 267.82), KDP (new 52-week high at 36.89), MSI (new 52-week high at 517.01)
+Unusual volume: APP (volume 5.1x normal, +31% on the day), DASH (volume 4.1x normal, -9% on the day), AXON (volume 3.8x normal, -10% on the day), MCHP (volume 3.8x normal, -14% on the day), CPAY (volume 3.8x normal, +7% on the day)
   SNDK [negative]: Sandisk shares fell on Thursday as chip and AI data-center stocks sold off broadly, with headlines citing a reassessment of the AI build-out and data-center restriction fears. One article reports Sandisk is down 45% over the past four months, and another says memory-chip shortages are causing ripple effects across tech.
   MRNA [neutral]: Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group recommendation to advance its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, into a Phase 2/3 efficacy study in the DRC. The stock then fell about 5% on Thursday ahead of its earnings report scheduled for Friday. Pfizer reported a 29% operational decline in Comirnaty sales in the third quarter, and BioNTech reported a 15% revenue decline.
   LITE [negative]: Marvell agreed to acquire Lumentum in a $115 billion all-stock deal, and Lumentum shares fell 13% to 15% in the same period as a broader post-election AI chip and optical selloff deepened. Coverage notes that Lumentum's price now tracks Marvell's shares because Marvell is paying in stock with no price protection.
@@ -70,9 +70,18 @@ ROTATION (follow the money)
 - LRCX: rank #166 of 518, score 65
 Strongest stocks you don't own: MRNA (95), MRK (91), VTRS (91), TGT (91), TXN (91)
 SWAP IDEA: sell DIS -> buy MRNA. MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.
+SWAP IDEA: sell QQQ -> buy MRK. MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.
+SWAP IDEA: sell SPY -> buy VTRS. VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.
+SWAP IDEA: sell ASML -> buy TGT. TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.
+SWAP IDEA: sell LRCX -> buy TXN. TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.
+Status: 5 new swap(s) suggested
 
-ALERTS (8)
+ALERTS (12)
 - [high] NEW SWAP idea: sell all DIS (about $32, rank #335) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all QQQ (about $511, rank #287) and buy MRK (rank #2). MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all SPY (about $73, rank #213) and buy VTRS (rank #3). VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all ASML (about $68, rank #173) and buy TGT (rank #4). TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all LRCX (about $111, rank #166) and buy TXN (rank #5). TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65. -> YOUR PLAN: SWAP
 - [warn] NEW SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares) -> YOUR PLAN: REVIEW
 - [warn] NEW ASML: news read negative (driver: Post-election chip sector sell-off). -> YOUR PLAN: REVIEW
 - [warn] NEW LRCX: news read negative (driver: Fears of slower AI and data-center spending). -> YOUR PLAN: REVIEW
