@@ -10,6 +10,10 @@ on:
       asof:
         description: "Date stamp YYYY-MM-DD (leave empty for today)"
         required: false
+      test_message:
+        description: "Only send a test message to your phone (no full run)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -29,9 +33,18 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r monitor/requirements.txt
+      - name: Send a test message
+        if: ${{ inputs.test_message }}
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python -m monitor.notifier
       - name: Tests
+        if: ${{ !inputs.test_message }}
         run: python -m unittest discover -s monitor/tests -t .
       - name: Run the monitor (log saved to monitor/logs)
+        if: ${{ !inputs.test_message }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}     # optional: Claude news
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}   # optional: notifier
@@ -41,6 +54,7 @@ jobs:
           mkdir -p monitor/logs
           python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }} 2>&1 | tee "monitor/logs/run_$(date -u +%F).log"
       - name: Save snapshots, database and log
+        if: ${{ !inputs.test_message }}
         run: |
           git config user.name "portfolio-monitor"
           git config user.email "portfolio-monitor@users.noreply.github.com"

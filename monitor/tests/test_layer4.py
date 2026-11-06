@@ -85,9 +85,9 @@ class NotifierTest(unittest.TestCase):
     sample = [{"severity": "high", "message": "NOK calls hit your target level"},
               {"severity": "info", "message": "new strikes"}]
 
-    def test_off_by_default(self):
-        self.assertFalse(config.NOTIFY_ENABLED)
-        self.assertEqual(notifier.maybe_send(self.sample, "2026-11-05"), "off")
+    def test_switched_off_does_nothing(self):
+        with mock.patch.object(config, "NOTIFY_ENABLED", False):
+            self.assertEqual(notifier.maybe_send(self.sample, "2026-11-05"), "off")
 
     def test_telegram_needs_secrets_and_respects_severity(self):
         with mock.patch.object(config, "NOTIFY_ENABLED", True), mock.patch.dict(os.environ, {}, clear=True):

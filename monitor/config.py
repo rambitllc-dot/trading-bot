@@ -57,10 +57,10 @@ MACRO_SHIFT_POINTS = 15     # "macro_shift" when the macro score moves this many
 # Notifier: off by default. channel: "telegram" (needs TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID secrets),
 # "imessage" (macOS only, sends to IMESSAGE_RECIPIENT), or "github" (opens an issue, which the GitHub app
 # pushes to your phone).
-NOTIFY_ENABLED = False
+NOTIFY_ENABLED = True
 NOTIFY_CHANNEL = "telegram"
 IMESSAGE_RECIPIENT = ""
-NOTIFY_MIN_SEVERITY = "info"   # "info" sends everything; "warn" or "high" sends fewer
+NOTIFY_MIN_SEVERITY = "high"   # "high" = swaps, SELL (stop/target) and BUY only; "warn"/"info" send more
 
 # ---- "Your plan says" labels (based only on YOUR target / stop / add_below levels) ----
 REVIEW_DTE_DAYS = 21        # options with fewer days left than this get "REVIEW" (decide what to do before expiry)

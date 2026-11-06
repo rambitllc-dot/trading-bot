@@ -73,3 +73,18 @@ def maybe_send(alerts, asof):
         return f"skipped: unknown channel {config.NOTIFY_CHANNEL!r}"
     except requests.RequestException as e:
         return f"error: {e}"
+
+
+def send_test():
+    """Sends one test message through the configured channel (used by the workflow's test option)."""
+    text = ("✅ Portfolio monitor is connected. You'll get swap ideas and SELL / BUY alerts here "
+            "after each weekday run.")
+    if config.NOTIFY_CHANNEL == "telegram":
+        return _telegram(text)
+    if config.NOTIFY_CHANNEL == "github":
+        return _github(text, "test")
+    return _imessage(text)
+
+
+if __name__ == "__main__":
+    print("Test message:", send_test())
