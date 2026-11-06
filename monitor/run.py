@@ -15,9 +15,15 @@ import sys
 from . import alerts, analytics, config, data, levels, macro, news, notifier, positions, rotation, scanner, storage, valuation
 
 
+def market_today():
+    """Today's date in New York, where US markets trade (GitHub's clock is UTC, a day ahead in the evening)."""
+    from zoneinfo import ZoneInfo
+    return dt.datetime.now(ZoneInfo("America/New_York")).date().isoformat()
+
+
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
         news_caller=None):
-    asof = asof or dt.date.today().isoformat()
+    asof = asof or market_today()
     dt.date.fromisoformat(asof)  # validates the format
     book = positions.load(positions_file)
     provider = provider or data.YahooProvider()
