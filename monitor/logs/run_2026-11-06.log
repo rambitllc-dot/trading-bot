@@ -3,14 +3,14 @@ $ANT: No data found, symbol may be delisted
 
 1 Failed download:
 ['ANT']: No data found, symbol may be delisted
-Portfolio as of 2026-11-06
+Portfolio as of 2026-11-05
 Value $795.07 · cost $907.38 · P&L -$112.30 (-12.4%) · net delta 2 shares · theta $0.00/day · 5/5 positions priced
 
-- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for TGT (rank #4)).
+- ASML shares x0.05: mark $1,356.65, value $67.83, P&L -$16.95 (-20.0%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRK (rank #3)).
 - DIS shares x0.27: mark $117.22, value $31.65, P&L $1.25 (+4.1%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRNA (rank #1)).
-- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for TXN (rank #5)).
-- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for MRK (rank #2)).
-- SPY shares x0.1: mark $733.00, value $73.30, P&L -$3.29 (-4.3%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for VTRS (rank #3)).
+- LRCX shares x0.6: mark $185.20, value $111.12, P&L -$32.50 (-22.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for TXN (rank #4)).
+- QQQ shares x0.79: mark $647.05, value $511.17, P&L -$60.82 (-10.6%). No target or stop set. YOUR PLAN: SWAP (rotation: swap for CNC (rank #2)).
+- SPY shares x0.1: mark $733.00, value $73.30, P&L -$3.29 (-4.3%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (auto levels)).
 
 ANALYTICS
 Net delta 2 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
@@ -23,68 +23,68 @@ Flags:
 - [info] Technology (ETF) is 64% of the book (cap 60%).
 
 MARKET ENVIRONMENT (macro gate)
-37/100 · Stressed (vix level 42, vix percentile 2, term structure 0, breadth 64, credit 67)
+40/100 · Stressed (vix level 42, vix percentile 2, term structure 0, breadth 73, credit 72)
 
 NEWS (Claude summaries, facts only)
-- ASML [negative]: ASML shares fell roughly 7% to 8% on November 5 during a broader post-election chip sell-off, with one report saying the company had no news of its own. Headlines tie the decline to investor doubts about the next spending cycle and to weakness at peers such as Micron and Applied Materials. Other headlines note that customers are still seeking delivery slots in 2029 and 2030.
-  Drivers: post-election chip sector sell-off; investor doubts about the next spending cycle; Micron fall on memory-cost warning and Taiwan plant pause; tech weakness in European shares
-- DIS [neutral]: Disney CEO Josh D'Amaro is reportedly seeking 20% cost savings, with thousands of layoffs under consideration, and plans to reinvest the savings in parks, cruises and programming. Simply Wall St. notes the stock is recently near a 52-week high, and GuruFocus reports ETFs bought $56.5 million of Disney stock on Nov. 3.
-  Drivers: Planned 20% cost savings and possible thousands of layoffs; Reinvestment in parks, cruises and programming; Stock recently near 52-week high; ETF buying of $56.5M on Nov. 3
-- LRCX [negative]: Lam Research shares fell about 13.5% to 14% on November 5, 2026, as the chip-equipment sell-off deepened after the midterm elections. Headlines tie the drop to investor fears that data-center and AI spending will slow, and one article says the stock has been cut nearly in half from its 2026 highs despite record recent profitability.
-  Drivers: Fears of slower AI build-out after midterm results; Reassessment of equipment-maker AI spending; Broad chip and AI-trade sell-off; Hedge funds locking in 2026 gains
-- QQQ [negative]: QQQ and SMH fell sharply on November 5, 2026, as chip stocks had their worst day since 2020, according to a Yahoo Finance video headline. Other headlines that day cite drops in AMD, Nvidia, and Tesla, and broad-market ETFs IWM and IVV also declined after midday. The headlines do not give QQQ's exact percentage move.
-  Drivers: Sell-off in AI and semiconductor stocks; Chip stocks' worst day since 2020; Declines in AMD, Nvidia and Tesla; Broad US equity weakness after midday
-- SPY [negative]: SPY was trading at $746.84, down 2.60%, as of 10:38 AM EST on Nov 5, 2026, after an intraday low of $744.81, and its nearest support level was being tested. Headlines tie the pressure to selloffs in AI-related shares, including Nvidia and Tesla, which weighed on index funds.
-  Drivers: Selloffs in AI-related shares; Nvidia and Tesla declines hitting index funds; SPY testing nearest support after a 2.60% drop; Debt ceiling fight expected in 2027
-Claude cost this run: $0.0020
+- ASML [negative] (cached): ASML shares fell about 8% on November 5 amid a broader post-election chip sell-off, with GuruFocus reporting a 7.36% drop tied to investor doubts about the next spending cycle. TIKR noted that ASML had no company-specific news that day and that customer down payments point to demand exceeding supply. Other headlines covered a Europe-wide tech selloff and a 13% Micron drop after a memory-cost warning and a reported Taiwan plant pause.
+  Drivers: Post-election chip sector sell-off; Investor doubts about the next spending cycle; Tech selloff weighing on European shares; Micron memory-cost warning and reported Taiwan plant pause
+- DIS [neutral] (cached): Disney is reported to be planning thousands of layoffs as CEO Josh D'Amaro seeks 20% cost savings, with the money to be reinvested in parks, cruises and programming. Simply Wall St. notes the stock recently traded near a 52-week high, and ETFs bought $56.5 million of Disney stock on Nov. 3.
+  Drivers: Planned layoffs and 20% cost-savings target; Reinvestment in parks, cruises and programming; Shares recently near 52-week high; ETF buying of $56.5 million on Nov. 3
+- LRCX [negative] (cached): Lam Research shares fell about 13.5% on November 5, 2026, as part of a broader chip-stock sell-off that followed the midterm elections. Headlines attribute the drop to investor fears that AI-related data-center spending will slow, with reports of hedge funds reducing AI-trade exposure and Qualcomm's weak guidance adding pressure.
+  Drivers: Fears of slower AI and data-center spending; Chip sector sell-off after midterm election results; Hedge funds locking in AI-trade gains; Qualcomm's weak guidance
+- QQQ [negative] (cached): Invesco QQQ Trust (QQQ) was at $661.58, down 4.39%, as of 10:20 AM EST on Nov 5, 2026, according to Investing.com, which reported a daily technical gauge of Strong Sell and an RSI of 29.7. Other headlines describe declines in AI and chip stocks, including Nvidia, AMD, and Tesla, and broad-market ETFs IWM and IVV fell after midday.
+  Drivers: Selloff in AI and chip stocks; Declines in Nvidia, AMD, and Tesla; Broad US equities down after midday; Oversold technical reading (RSI 29.7)
+- SPY [negative] (cached): SPY was trading at $746.84, down 2.60%, as of 10:38 AM EST on Nov 5, 2026, after an intraday low of $744.81 that tested nearby support. Headlines tie the decline to selling in AI-related shares, including Nvidia and Tesla, though one earlier pre-bell report showed SPY up 0.1%.
+  Drivers: Pressure on AI shares; Nvidia share decline; Tesla selloff; Test of nearby SPY support levels
+  Flag for SPY-shares: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop.
+Claude cost this run: $0.0023
 
 OPPORTUNITIES (candidates to research, not recommendations)
 Scanned 521 of 524 stocks.
-- Watchlist SPCX 123.62: 12.4% above your buy level -> YOUR PLAN: WAIT
+- Watchlist SPCX 135.92: 23.6% above your buy level -> YOUR PLAN: WAIT
 - Watchlist ANT -: no price data (not trading yet?)
-- Watchlist PLTR 154.99: watching (no buy level set) -> YOUR PLAN: WAIT
-Momentum leaders: SNDK (+770% over 12 months), MRNA (+727% over 12 months), LITE (+490% over 12 months), MU (+400% over 12 months), DELL (+278% over 12 months)
-Pullbacks in uptrends: PLTR (+1% above its 200-day average, RSI-2 0 after a sharp drop), PANW (+15% above its 200-day average, RSI-2 0 after a sharp drop), URI (+7% above its 200-day average, RSI-2 2 after a sharp drop), OXY (+1% above its 200-day average, RSI-2 2 after a sharp drop), XLE (+5% above its 200-day average, RSI-2 2 after a sharp drop)
-New 52-week highs: CPAY (new 52-week high at 447.00), BDX (new 52-week high at 213.55), CAH (new 52-week high at 267.82), KDP (new 52-week high at 36.89), MSI (new 52-week high at 517.01)
-Unusual volume: APP (volume 5.1x normal, +31% on the day), DASH (volume 4.1x normal, -9% on the day), AXON (volume 3.8x normal, -10% on the day), MCHP (volume 3.8x normal, -14% on the day), CPAY (volume 3.8x normal, +7% on the day)
-  SNDK [negative]: SanDisk shares fell about 20% on November 5 as an AI-related sell-off deepened, even though the company reported strong earnings. The decline tracked Nvidia and Broadcom, with investors questioning the outlook for AI data center expansion. The Nasdaq entered correction territory the same day.
-  MRNA [neutral]: Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group backing its Ebola vaccine candidate mRNA-1469 for a Phase 2/3 study, then fell about 5% on Thursday. The company is scheduled to report fiscal Q3 earnings on Nov. 6, and Barchart reports that options data suggests shares could fall after the update.
-  LITE [negative]: Marvell agreed on November 5 to buy Lumentum in a $115 billion all-stock deal, and Lumentum shares fell about 13% to 15% that day amid a broad AI and optical-stock selloff. TIKR reports that Lumentum trades on Marvell's share price because Marvell is paying in stock without price protection.
-  MU [negative]: Micron stock fell 17% on Thursday, November 5, as a broad chip-sector sell-off led by AI-trade stocks pushed the Nasdaq into a correction. Headlines tie the selling to post-midterm AI regulation fears and new data-center restrictions, and one headline describes Micron's valuation multiples as unusually low after the decline.
-  DELL [negative]: Dell shares fell sharply on November 5 as a broad tech and AI-infrastructure selloff deepened after the midterm elections, with one report citing an 11% drop and no company-specific news. Coverage also noted that analysts expect Dell's earnings to more than double this fiscal year, and that its forward P/E is near its five-year average.
-  SPCX [negative]: SpaceX (SPCX) shares fell on November 5 and extended declines into November 6, as Wall Street weighed possible regulatory hurdles after the Democratic midterm sweep. Reports also said AT&T and T-Mobile have discussed removing Boost Mobile from their networks if SpaceX acquires the EchoStar unit, and the broader market sell-off spread beyond AI stocks.
+- Watchlist PLTR 171.70: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: SNDK (+702% over 12 months), MRNA (+653% over 12 months), LITE (+468% over 12 months), MU (+346% over 12 months), DELL (+262% over 12 months)
+Pullbacks in uptrends: PLTR (+12% above its 200-day average, RSI-2 0 after a sharp drop), SLB (+1% above its 200-day average, RSI-2 3 after a sharp drop), OXY (+2% above its 200-day average, RSI-2 3 after a sharp drop), PANW (+28% above its 200-day average, RSI-2 4 after a sharp drop), APA (+18% above its 200-day average, RSI-2 4 after a sharp drop)
+New 52-week highs: MRNA (new 52-week high at 258.38), CNC (new 52-week high at 76.01), VTRS (new 52-week high at 19.22), HST (new 52-week high at 26.11), BIIB (new 52-week high at 254.46)
+Unusual volume: FIS (volume 6.1x normal, -24% on the day), SWK (volume 4.2x normal, +13% on the day), XYZ (volume 4.1x normal, +15% on the day), DDOG (volume 4.0x normal, -14% on the day), CVS (volume 4.0x normal, -13% on the day)
+  SNDK [negative]: Sandisk shares fell on Thursday as chip and AI data-center stocks sold off broadly, with headlines citing a reassessment of the AI build-out and data-center restriction fears. One article reports Sandisk is down 45% over the past four months, and another says memory-chip shortages are causing ripple effects across tech.
+  MRNA [neutral]: Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group recommendation to advance its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, into a Phase 2/3 efficacy study in the DRC. The stock then fell about 5% on Thursday ahead of its earnings report scheduled for Friday. Pfizer reported a 29% operational decline in Comirnaty sales in the third quarter, and BioNTech reported a 15% revenue decline.
+  LITE [negative]: Marvell agreed to acquire Lumentum in a $115 billion all-stock deal, and Lumentum shares fell 13% to 15% in the same period as a broader post-election AI chip and optical selloff deepened. Coverage notes that Lumentum's price now tracks Marvell's shares because Marvell is paying in stock with no price protection.
+  MU [negative]: Micron shares fell about 12% on Thursday, November 5, 2026, as a broad chip sell-off deepened during a market rout in which the Nasdaq entered a correction. A report of a planned $4.5 billion Taiwan plant being paused also weighed on the stock, and that plant was described as a major production base for AI memory components. Analysts and outlets tied the sell-off to a Democratic sweep in the midterm elections, which raised concerns about political resistance to AI infrastructure.
+  DELL [negative]: Dell shares fell about 11% on November 5, 2026, with no company-specific news, as a tech sell-off that followed the midterm elections deepened. Dell was also down 8% earlier in the session amid a broader chip-stock slide tied to weak phone-chip outlooks and memory costs. Analyst commentary in the headlines notes expected earnings growth and a forward P/E near its 5-year average.
+  SPCX [negative]: SpaceX (SPCX) shares fell about 9% on November 5, 2026, after Democrats swept Congress and Texas, which raised doubts about a SpaceX-Tesla merger and its regulatory path. Separately, headlines reported growing backlash over a planned 6-gigawatt Arizona AI data center. Analysts remained divided, with China Renaissance initiating coverage at Buy with a $194.20 target and another firm raising its fair value estimate to $257.11.
 
 AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
-- ASML: stop 1,161.07 · target 1,747.81 · typical daily move 65.19
-- DIS: stop 110.36 · target 130.97 · typical daily move 2.29
-- LRCX: stop 137.87 · target 279.86 · typical daily move 15.78
-- QQQ: stop 602.98 · target 735.18 · typical daily move 14.69
-- SPY: stop 704.63 · target 790.07 · typical daily move 9.49
+- ASML: stop 1,313.05 · target 1,747.81 · typical daily move 61.08
+- DIS: stop 112.48 · target 130.97 · typical daily move 2.16
+- LRCX: stop 176.98 · target 279.86 · typical daily move 14.82
+- QQQ: stop 653.10 · target 735.18 · typical daily move 12.95
+- SPY: stop 742.05 · target 790.07 · typical daily move 8.25
 
 ROTATION (follow the money)
-- DIS: rank #335 of 518, score 44
-- QQQ: rank #287 of 518, score 50
-- SPY: rank #213 of 518, score 59
-- ASML: rank #173 of 518, score 64
-- LRCX: rank #166 of 518, score 65
-Strongest stocks you don't own: MRNA (95), MRK (91), VTRS (91), TGT (91), TXN (91)
-SWAP IDEA (open since 2026-11-05): sell ASML -> buy TGT. TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.
-SWAP IDEA (open since 2026-11-05): sell DIS -> buy MRNA. MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.
-SWAP IDEA (open since 2026-11-05): sell LRCX -> buy TXN. TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.
-SWAP IDEA (open since 2026-11-05): sell QQQ -> buy MRK. MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.
-SWAP IDEA (open since 2026-11-05): sell SPY -> buy VTRS. VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.
-Status: swap ideas from earlier this week are still open
+- DIS: rank #359 of 518, score 42
+- QQQ: rank #243 of 518, score 58
+- ASML: rank #198 of 518, score 63
+- LRCX: rank #187 of 518, score 65
+- SPY: rank #149 of 518, score 68
+Strongest stocks you don't own: MRNA (95), CNC (91), MRK (91), TXN (91), TGT (91)
+SWAP IDEA: sell DIS -> buy MRNA. MRNA ranks #1 of 518 (+653% over 12 months, above its 50- and 200-day averages); DIS ranks #359 (-6% over 12 months, above its 50- and 200-day averages). Score 95 vs 42.
+SWAP IDEA: sell QQQ -> buy CNC. CNC ranks #2 of 518 (+87% over 12 months, above its 50- and 200-day averages); QQQ ranks #243 (+21% over 12 months, above one of its 50-/200-day averages). Score 91 vs 58.
+SWAP IDEA: sell ASML -> buy MRK. MRK ranks #3 of 518 (+77% over 12 months, above its 50- and 200-day averages); ASML ranks #198 (+73% over 12 months, below its 50- and 200-day averages). Score 91 vs 63.
+SWAP IDEA: sell LRCX -> buy TXN. TXN ranks #4 of 518 (+87% over 12 months, above its 50- and 200-day averages); LRCX ranks #187 (+108% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.
+Status: 4 new swap(s) suggested
 
 ALERTS (11)
-- [warn] ASML: news read negative (driver: post-election chip sector sell-off). -> YOUR PLAN: REVIEW
-- [warn] LRCX: news read negative (driver: Fears of slower AI build-out after midterm results). -> YOUR PLAN: REVIEW
-- [warn] QQQ: news read negative (driver: Sell-off in AI and semiconductor stocks). -> YOUR PLAN: REVIEW
-- [warn] SPY: news read negative (driver: Selloffs in AI-related shares). -> YOUR PLAN: REVIEW
-- [warn] SWAP idea: sell all ASML (about $68, rank #173) and buy TGT (rank #4). TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64. Suggested on 2026-11-05. -> YOUR PLAN: SWAP
-- [warn] SWAP idea: sell all DIS (about $32, rank #335) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44. Suggested on 2026-11-05. -> YOUR PLAN: SWAP
-- [warn] SWAP idea: sell all LRCX (about $111, rank #166) and buy TXN (rank #5). TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65. Suggested on 2026-11-05. -> YOUR PLAN: SWAP
-- [warn] SWAP idea: sell all QQQ (about $511, rank #287) and buy MRK (rank #2). MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50. Suggested on 2026-11-05. -> YOUR PLAN: SWAP
-- [warn] SWAP idea: sell all SPY (about $73, rank #213) and buy VTRS (rank #3). VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59. Suggested on 2026-11-05. -> YOUR PLAN: SWAP
-- [info] QQQ is 64% of the book (cap 40%). -> YOUR PLAN: REVIEW
-- [info] Technology (ETF) is 64% of the book (cap 60%). -> YOUR PLAN: REVIEW
-Notifier: nothing to send
+- [high] NEW SWAP idea: sell all DIS (about $32, rank #359) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+653% over 12 months, above its 50- and 200-day averages); DIS ranks #359 (-6% over 12 months, above its 50- and 200-day averages). Score 95 vs 42. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all QQQ (about $511, rank #243) and buy CNC (rank #2). CNC ranks #2 of 518 (+87% over 12 months, above its 50- and 200-day averages); QQQ ranks #243 (+21% over 12 months, above one of its 50-/200-day averages). Score 91 vs 58. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all ASML (about $68, rank #198) and buy MRK (rank #3). MRK ranks #3 of 518 (+77% over 12 months, above its 50- and 200-day averages); ASML ranks #198 (+73% over 12 months, below its 50- and 200-day averages). Score 91 vs 63. -> YOUR PLAN: SWAP
+- [high] NEW SWAP idea: sell all LRCX (about $111, rank #187) and buy TXN (rank #4). TXN ranks #4 of 518 (+87% over 12 months, above its 50- and 200-day averages); LRCX ranks #187 (+108% over 12 months, below its 50- and 200-day averages). Score 91 vs 65. -> YOUR PLAN: SWAP
+- [warn] NEW SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares) -> YOUR PLAN: REVIEW
+- [warn] NEW ASML: news read negative (driver: Post-election chip sector sell-off). -> YOUR PLAN: REVIEW
+- [warn] NEW LRCX: news read negative (driver: Fears of slower AI and data-center spending). -> YOUR PLAN: REVIEW
+- [warn] NEW QQQ: news read negative (driver: Selloff in AI and chip stocks). -> YOUR PLAN: REVIEW
+- [warn] NEW SPY: news read negative (driver: Pressure on AI shares). -> YOUR PLAN: REVIEW
+- [info] NEW QQQ is 64% of the book (cap 40%). -> YOUR PLAN: REVIEW
+- [info] NEW Technology (ETF) is 64% of the book (cap 60%). -> YOUR PLAN: REVIEW
+Notifier: sent
