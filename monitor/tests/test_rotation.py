@@ -97,3 +97,15 @@ class SwapLineTest(unittest.TestCase):
         self.assertEqual([r["ticker"] for r in out], ["A", "C", "B", "D"])  # weakening, losers by loss, then score
         self.assertEqual([r["queue"] for r in out], [1, 2, 3, 4])
         self.assertTrue(out[0]["weak"] and out[1]["losing"] and not out[3]["losing"])
+
+
+class StopOutTest(unittest.TestCase):
+    def test_stopped_out_top_stock_is_swapped_into_the_strongest(self):
+        con = storage.connect(os.path.join(tempfile.mkdtemp(), "m.db"))
+        h = held("WINR", entry_date="2026-11-04")      # #1 stock, bought yesterday, but hit its 6% stop
+        h[0].update(action="SELL", action_reason="price 94.00 reached your stop 94.00 (stop: 6% max-loss stop)")
+        res = rotation.run(con, "2026-11-05", h, market())
+        s = res["suggestions"]
+        self.assertEqual([(x["sell"], x["buy"]) for x in s], [("WINR", "WIN2")])  # no lead / hold / weekly rules
+        self.assertTrue(s[0]["stop_out"])
+        self.assertTrue(rotation.alert(res)[0]["message"].startswith("STOP HIT"))

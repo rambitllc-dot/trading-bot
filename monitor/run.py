@@ -76,7 +76,9 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     if swaps:  # holdings to swap out get the SWAP label unless a stop/target already says SELL
         for r in rows:
             s = swaps.get(r["ticker"])
-            if s and r.get("action") in ("HOLD", "REVIEW", "WEAK"):
+            if s and r.get("action") == "SELL":
+                r["action_reason"] = f"{r['action_reason']} -> move the money to {s['buy']} (rank #{s['buy_rank']})"
+            elif s and r.get("action") in ("HOLD", "REVIEW", "WEAK"):
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
     perf = performance.run(con, asof, rows, totals, bars)

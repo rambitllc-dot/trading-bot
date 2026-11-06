@@ -160,3 +160,6 @@ values are kept. It can only *read* your account; it cannot trade.
   buy price, so a winner can't become a loser. The trailing stop keeps rising from there; stops never move down.
 - **WEAK**: a close below the 50-day average (`WEAK_MA_DAYS`) labels the stock WEAK and puts it first in the swap
   line, even if it still ranks near the top (the ranking looks back 3-12 months, so it reacts slowly).
+- **Stopped out = swapped**: a holding that hits its stop (or target) is swapped right away into the strongest stock
+  you don't own, whatever its own rank, skipping the weekly, 7-day-hold and 25-point-lead rules. If nothing scores
+  80+, the SELL stands and the money waits in cash. Sold stocks can't be bought back for 30 days.

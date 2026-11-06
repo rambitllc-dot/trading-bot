@@ -17,7 +17,9 @@ Then, going down the swap queue, pair each holding with the strongest stock you 
   - that holding wasn't already swapped / suggested in the last ROTATION_COOLDOWN_DAYS days
     (each stock at most once a week), and wasn't bought less than ROTATION_MIN_HOLD_DAYS ago
   - the candidate wasn't swapped out of your book in the last ROTATION_NO_REBUY_DAYS days
-So every holding can be swapped once a week. It's a suggestion from fixed rules, not a prediction;
+A holding that hits its stop (or target) skips those rules: it is swapped right away into the strongest
+stock, whatever its own rank, because a stopped-out stock isn't "following the money" anymore.
+Otherwise every holding can be swapped once a week. It's a suggestion from fixed rules, not a prediction;
 nothing is traded automatically.
 """
 import datetime as dt
@@ -163,25 +165,40 @@ def run(con, asof, rows, data, sentiment=None):
     new = []
     candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
                   and r["ticker"] not in taken]
-    for h in mine:  # swap queue: losing first, then weakest
-        if h["ticker"] in swapped_this_week:
-            continue
-        bought = held[h["ticker"]].get("entry_date")
-        d = days_since(bought, asof) if bought else None
-        if d is not None and d < config.ROTATION_MIN_HOLD_DAYS:
-            continue
+    # Stopped out (SELL from the stop or target) goes first and skips the weekly / minimum-hold / lead rules:
+    # the money moves to the strongest stock right away, whatever the sold stock's rank.
+    pending_sells = {r["sell"] for r in pending}
+    forced = {t for t, r in held.items() if r.get("action") == "SELL" and t not in pending_sells}
+    for h in [x for x in mine if x["ticker"] in forced] + [x for x in mine if x["ticker"] not in forced]:
+        stop_out = h["ticker"] in forced
         best = candidates[0] if candidates else None
-        if not best or best["score"] < config.ROTATION_MIN_SCORE or best["score"] - h["score"] < config.ROTATION_MARGIN:
-            continue
+        if stop_out:
+            if not best or best["score"] < config.ROTATION_MIN_SCORE:
+                continue  # nothing strong enough: the SELL stands and the money waits in cash
+        else:
+            if h["ticker"] in swapped_this_week:
+                continue
+            bought = held[h["ticker"]].get("entry_date")
+            d = days_since(bought, asof) if bought else None
+            if d is not None and d < config.ROTATION_MIN_HOLD_DAYS:
+                continue
+            if not best or best["score"] < config.ROTATION_MIN_SCORE or \
+                    best["score"] - h["score"] < config.ROTATION_MARGIN:
+                continue
         candidates.pop(0)
         amount = held[h["ticker"]]["value"]
-        reason = (("WEAKENING (below its 50-day average), first in line. " if h.get("weak") else
-                   "LOSING " + f"{h['pnl_pct']:.1f}% since you bought it, first in line. " if h.get("losing") else "")
-                  + f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
-                  f"{h['ticker']} ranks #{h['rank']} ({why(h)}). Score {best['score']:.0f} vs {h['score']:.0f}.")
+        if stop_out:
+            reason = (f"STOPPED OUT: {held[h['ticker']].get('action_reason')}. Sell regardless of its rank "
+                      f"(#{h['rank']}) and move the money to {best['ticker']}, rank #{best['rank']} of {total} "
+                      f"({why(best)}), score {best['score']:.0f}.")
+        else:
+            reason = (("WEAKENING (below its 50-day average), first in line. " if h.get("weak") else
+                       "LOSING " + f"{h['pnl_pct']:.1f}% since you bought it, first in line. " if h.get("losing") else "")
+                      + f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
+                      f"{h['ticker']} ranks #{h['rank']} ({why(h)}). Score {best['score']:.0f} vs {h['score']:.0f}.")
         s = {"asof": asof, "sell": h["ticker"], "buy": best["ticker"], "sell_score": h["score"],
              "buy_score": best["score"], "sell_rank": h["rank"], "buy_rank": best["rank"], "amount": amount,
-             "reason": reason, "pending": False, "suggested_on": asof}
+             "reason": reason, "pending": False, "suggested_on": asof, "stop_out": stop_out}
         con.execute("INSERT OR REPLACE INTO rotation_log VALUES (?,?,?,?,?,?,?,?,?)",
                     (asof, s["sell"], s["buy"], s["sell_score"], s["buy_score"], s["sell_rank"], s["buy_rank"],
                      amount, reason))
@@ -204,7 +221,7 @@ def alert(result):
     out = []
     for s in result.get("suggestions") or []:
         out.append({"kind": "swap", "severity": "warn" if s.get("pending") else "high", "ticker": s["sell"],
-                    "message": f"SWAP idea: sell all {s['sell']} (about ${s['amount']:,.0f}, rank #{s['sell_rank']}) and "
+                    "message": ("STOP HIT -> " if s.get("stop_out") else "") + f"SWAP idea: sell all {s['sell']} (about ${s['amount']:,.0f}, rank #{s['sell_rank']}) and "
                                f"buy {s['buy']} (rank #{s['buy_rank']}). {s['reason']}"
                                + (f" Suggested on {s['suggested_on']}." if s.get("pending") else "")})
     return out
