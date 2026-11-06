@@ -1,0 +1,147 @@
+{
+ "id": "2026-11-06T19:57:50Z",
+ "asof": "2026-11-06",
+ "equity": 817.7405719894408,
+ "cash": 5.21,
+ "sells": [],
+ "buys": [],
+ "reserve": [
+  {
+   "ticker": "TGT",
+   "rank": 3,
+   "score": 91.3,
+   "reason": "rank #3 of 518, score 91"
+  },
+  {
+   "ticker": "VTRS",
+   "rank": 5,
+   "score": 90.8,
+   "reason": "rank #5 of 518, score 91"
+  },
+  {
+   "ticker": "CRL",
+   "rank": 7,
+   "score": 89.8,
+   "reason": "rank #7 of 518, score 90"
+  },
+  {
+   "ticker": "CPAY",
+   "rank": 8,
+   "score": 89.4,
+   "reason": "rank #8 of 518, score 89"
+  },
+  {
+   "ticker": "HST",
+   "rank": 9,
+   "score": 89.0,
+   "reason": "rank #9 of 518, score 89"
+  },
+  {
+   "ticker": "RVTY",
+   "rank": 10,
+   "score": 88.9,
+   "reason": "rank #10 of 518, score 89"
+  },
+  {
+   "ticker": "BEN",
+   "rank": 11,
+   "score": 88.3,
+   "reason": "rank #11 of 518, score 88"
+  },
+  {
+   "ticker": "FDX",
+   "rank": 12,
+   "score": 86.9,
+   "reason": "rank #12 of 518, score 87"
+  }
+ ],
+ "stops": {
+  "CNC": {
+   "stop": 66.35,
+   "target": 89.48,
+   "rule": "6% max-loss stop",
+   "weak": false
+  },
+  "MRK": {
+   "stop": 138.85,
+   "target": 176.66,
+   "rule": "6% max-loss stop",
+   "weak": false
+  },
+  "MRNA": {
+   "stop": 244.6,
+   "target": 397.27,
+   "rule": "6% max-loss stop",
+   "weak": false
+  },
+  "TXN": {
+   "stop": 257.18,
+   "target": 346.77,
+   "rule": "6% max-loss stop",
+   "weak": false
+  }
+ },
+ "holdings": [
+  {
+   "ticker": "CNC",
+   "value": 340.5883875411987,
+   "pnl": -5.316730458801317,
+   "pnl_pct": -1.5370487981046053,
+   "entry_price": 70.59,
+   "mark": 69.50499725341797,
+   "stop_price": 66.35,
+   "target_price": 89.48,
+   "stop_rule": "6% max-loss stop",
+   "weak": false,
+   "action": "HOLD",
+   "entry_date": "2026-11-06",
+   "prev_stop": 66.3546
+  },
+  {
+   "ticker": "MRK",
+   "value": 146.6761932373047,
+   "pnl": -1.0338067626953205,
+   "pnl_pct": -0.6998894879800422,
+   "entry_price": 147.71,
+   "mark": 146.6761932373047,
+   "stop_price": 138.85,
+   "target_price": 176.66,
+   "stop_rule": "6% max-loss stop",
+   "weak": false,
+   "action": "HOLD",
+   "entry_date": "2026-11-06",
+   "prev_stop": 138.8474
+  },
+  {
+   "ticker": "MRNA",
+   "value": 158.28599853515624,
+   "pnl": 2.1599985351562623,
+   "pnl_pct": 1.3834970057237506,
+   "entry_price": 260.21,
+   "mark": 263.80999755859375,
+   "stop_price": 244.6,
+   "target_price": 397.27,
+   "stop_rule": "6% max-loss stop",
+   "weak": false,
+   "action": "HOLD",
+   "entry_date": "2026-11-06",
+   "prev_stop": 244.59739999999996
+  },
+  {
+   "ticker": "TXN",
+   "value": 166.97999267578123,
+   "pnl": 2.8199926757812364,
+   "pnl_pct": 1.7178317956757043,
+   "entry_price": 273.6,
+   "mark": 278.29998779296875,
+   "stop_price": 257.18,
+   "target_price": 346.77,
+   "stop_rule": "6% max-loss stop",
+   "weak": false,
+   "action": "HOLD",
+   "entry_date": "2026-11-06",
+   "prev_stop": 257.184
+  }
+ ],
+ "source": "positions.json (synced from IB)"
+}
