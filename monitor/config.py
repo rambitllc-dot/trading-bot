@@ -60,6 +60,7 @@ MACRO_SHIFT_POINTS = 15     # "macro_shift" when the macro score moves this many
 NOTIFY_ENABLED = True
 NOTIFY_CHANNEL = "telegram"
 IMESSAGE_RECIPIENT = ""
+NOTIFY_DIGEST = True        # Telegram: one full "daily decisions" message each evening (includes the high alerts)
 NOTIFY_MIN_SEVERITY = "high"   # "high" = swaps, SELL (stop/target) and BUY only; "warn"/"info" send more
 
 # ---- "Your plan says" labels (based only on YOUR target / stop / add_below levels) ----

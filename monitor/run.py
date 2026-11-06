@@ -97,7 +97,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "valuation_latest.json"), "w") as f:
         json.dump(result, f, indent=1)
-    result["notifier"] = notifier.maybe_send(alert_list, asof)
+    result["notifier"] = notifier.send_digest(result)
     return result
 
 

@@ -75,6 +75,69 @@ def maybe_send(alerts, asof):
         return f"error: {e}"
 
 
+ICONS = {"SELL": "🔴", "SWAP": "🟣", "WEAK": "🟠", "BUY MORE": "🟢", "REVIEW": "🟡", "HOLD": "⚪"}
+COVERED = {"swap", "stop_hit", "target_hit", "weak"}  # already shown in the per-stock lines
+
+
+def _short_rule(rule):
+    return (rule or "").split(" (")[0]
+
+
+def digest(res):
+    """The evening 'daily decisions' message: every stock's decision, stop moves, swaps, and what to do."""
+    t, asof = res["totals"], res["asof"]
+    pp = f" ({t['pnl_pct']:+.1f}%)" if t.get("pnl_pct") is not None else ""
+    L = [f"📊 Daily decisions · {asof}", f"Your IB book ${t['value']:,.0f} · open P&L {t['pnl']:+,.2f}{pp}", ""]
+    todo = []
+    for r in res["positions"]:
+        if r["asset_type"] == "cash":
+            continue
+        a = r.get("action") or "HOLD"
+        line = f"{ICONS.get(a, '⚪')} {r['ticker']} {a}"
+        if r.get("mark") is not None:
+            line += f" · {r['mark']:,.2f}" + (f" ({r['pnl_pct']:+.1f}%)" if r.get("pnl_pct") is not None else "")
+        if r.get("stop_price") is not None:
+            line += f" · stop {r['stop_price']:,.2f}"
+        if r.get("target_price") is not None:
+            line += f" · target {r['target_price']:,.2f}"
+        L.append(line)
+        if a in ("SELL", "SWAP", "BUY MORE"):
+            todo.append(f"{r['ticker']}: {a} - {r.get('action_reason', '')[:220]}")
+        elif a == "WEAK":
+            L.append("   below its 50-day average; first in line for the next swap")
+    moves = [x for x in res.get("auto_levels") or [] if x.get("prev_stop") and x["stop"] > x["prev_stop"] + 0.005]
+    if moves:
+        L += ["", "⬆️ Stops raised:"] + [f"{x['ticker']} {x['prev_stop']:,.2f} → {x['stop']:,.2f} ({_short_rule(x.get('rule'))})"
+                                     for x in moves]
+    rot = res.get("rotation") or {}
+    sw = rot.get("suggestions") or []
+    L.append("")
+    if sw:
+        L += [f"🔁 SWAP: sell {s['sell']} → buy {s['buy']} (rank #{s['buy_rank']})" for s in sw]
+    else:
+        L.append(f"🔁 Swaps: none today ({(rot.get('status') or '').split(' (')[0][:90]})")
+    extra = [a for a in res.get("alerts") or [] if a["severity"] == "high" and a["kind"] not in COVERED]
+    if extra:
+        L += ["", "⚠️ Alerts:"] + [f"- {a['message'][:200]}" for a in extra[:5]]
+    perf = (res.get("performance") or {}).get("wins_losses") or {}
+    if perf.get("trades"):
+        L += ["", f"💰 Locked in {perf['realized']:+,.2f} · {perf['wins']} win(s) / {perf['losses']} loss(es)"]
+    L += ["", "👉 To do in IB:" if todo else "👉 Nothing to do in IB today."] + [f"- {x}" for x in todo]
+    ap = res.get("autopilot") or {}
+    if ap.get("status"):
+        L += ["", f"🤖 Autopilot (practice): {ap['status'][:120]}"]
+    return "\n".join(L)
+
+
+def send_digest(res):
+    if not (config.NOTIFY_ENABLED and config.NOTIFY_DIGEST and config.NOTIFY_CHANNEL == "telegram"):
+        return maybe_send(res.get("alerts") or [], res["asof"])
+    try:
+        return _telegram(digest(res))
+    except requests.RequestException as e:
+        return f"error: {e}"
+
+
 def send_test():
     """Sends one test message through the configured channel (used by the workflow's test option)."""
     text = ("✅ Portfolio monitor is connected. You'll get swap ideas and SELL / BUY alerts here "

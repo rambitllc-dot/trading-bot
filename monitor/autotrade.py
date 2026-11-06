@@ -155,14 +155,41 @@ def plan(asof, bars, sentiment=None, client=None, db=None, plan_file=None):
          "sells": [{"ticker": t, "reason": why} for t, why in sells.items()], "buys": buys, "reserve": reserve,
          "stops": stops, "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark",
                                                               "stop_price", "target_price", "stop_rule", "weak", "action",
-                                                              "entry_date")} for r in rows]}
+                                                              "entry_date", "prev_stop")} for r in rows]}
     save_json(plan_file or PLAN_FILE, p)
-    if p["sells"] or p["buys"]:
-        notify(f"Plan for the next market open (account ${equity:,.0f}):\n"
-               + "".join(f"SELL {s['ticker']}: {s['reason'][:160]}\n" for s in p["sells"])
-               + "".join(f"BUY {b['ticker']}: {b['reason'][:160]}\n" for b in p["buys"]))
+    notify(evening_text(p))
     return {"status": f"plan saved: {len(p['sells'])} sell(s), {len(p['buys'])} buy(s), {len(stops)} holding(s) kept",
             "plan": p}
+
+
+def evening_text(p):
+    first = None
+    L = [f"Evening report {p['asof']} · account ${p['equity']:,.2f} (cash ${p['cash']:,.2f})"
+         + (" · PAUSED" if p.get("paused") else ""), ""]
+    for h in p["holdings"]:
+        if h["ticker"] in {s["ticker"] for s in p["sells"]}:
+            continue
+        line = f"{'🟠' if h.get('weak') else '⚪'} {h['ticker']} {h['mark']:,.2f} ({(h.get('pnl_pct') or 0):+.1f}%)"
+        if h.get("stop_price"):
+            line += f" · stop {h['stop_price']:,.2f}"
+            if h.get("prev_stop") and h["stop_price"] > h["prev_stop"] + 0.005:
+                line += f" (raised from {h['prev_stop']:,.2f})"
+        if h.get("target_price"):
+            line += f" · target {h['target_price']:,.2f}"
+        L.append(line + (" · WEAK" if h.get("weak") else ""))
+    if not p["holdings"]:
+        L.append("No holdings yet.")
+    L.append("")
+    if p["sells"] or p["buys"]:
+        L.append("At the next market open I will:")
+        L += [f"🔴 SELL {s['ticker']}: {s['reason'][:180]}" for s in p["sells"]]
+        L += [f"🟢 BUY {b['ticker']} (20% of the account): {b['reason'][:180]}" for b in p["buys"]]
+    else:
+        L.append("No trades planned. I'll watch the stops and targets every 30 minutes while the market is open.")
+    if p.get("reserve"):
+        first = ", ".join(x["ticker"] for x in p["reserve"][:3])
+        L.append(f"If a stock hits its stop, it's replaced by the next strongest: {first}.")
+    return "\n".join(L)
 
 
 # ---------------------------------------------------------------- market hours: execute
@@ -197,11 +224,12 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
         except AlpacaError as e:
             skip.add(t)
             log("SKIP", t, dollars, None, f"buy refused: {e}")
+            notify(f"⚠️ Couldn't buy {t} (${dollars:,.2f}): {str(e)[:150]}. Trying the next stock on the list.")
             continue
         state["bought"][t] = today
         skip.add(t)
         log("BUY", t, dollars, _price(o), f"{why_prefix}{b.get('reason', '')}")
-        return t, f"BUY {t} ${dollars:,.2f}" + (f" at {_price(o):,.2f}" if _price(o) else "") + f" ({b.get('reason', '')[:120]})"
+        return t, f"🟢 BUY {t} ${dollars:,.2f}" + (f" at {_price(o):,.2f}" if _price(o) else "") + f" ({b.get('reason', '')[:120]})"
     return None, "no stock from the plan could be bought"
 
 
@@ -237,7 +265,8 @@ def execute(client=None):
                 state["sold"][s["ticker"]] = today
                 val = float(positions[s["ticker"]]["market_value"])
                 log("SELL", s["ticker"], val, _price(o), s["reason"])
-                msgs.append(f"SELL {s['ticker']} (~${val:,.2f}): {s['reason'][:140]}")
+                msgs.append(f"🔴 SELL {s['ticker']} (~${val:,.2f})" + (f" at {_price(o):,.2f}" if _price(o) else "")
+                            + f": {s['reason'][:160]}")
             acct = client.account()
             equity, cash = float(acct["equity"]), float(acct["cash"])
             per, max_order = equity / config.AUTO_HOLDINGS, equity * config.AUTO_MAX_ORDER_PCT / 100
@@ -283,10 +312,11 @@ def execute(client=None):
             if dollars >= 1 else (None, "not enough cash to replace it")
         if nt:
             names.add(nt)
-        msgs.append(f"{'STOP' if hit == 'stop' else 'TARGET'} HIT: sold {t} (~${val:,.2f}), {why}. -> {m}")
+        msgs.append(f"{'🛑 STOP' if hit == 'stop' else '🎯 TARGET'} HIT: sold {t} (~${val:,.2f}), {why}. -> {m}")
     save_json(STATE_FILE, state)
     if msgs:
-        notify("\n".join(msgs))
+        acct = client.account()
+        notify("\n".join(msgs) + f"\n\nAccount now ${float(acct['equity']):,.2f} (cash ${float(acct['cash']):,.2f}).")
     return "; ".join(msgs) or "nothing to do"
 
 

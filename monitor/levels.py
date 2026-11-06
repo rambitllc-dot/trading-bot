@@ -78,6 +78,7 @@ def apply(con, asof, rows, bars):
                           "WHERE ticker=?", (r["ticker"],)).fetchone()
         if row is not None and r.get("entry_date") and row[0] < r["entry_date"]:
             row = None  # sold and bought again later: start fresh levels for the new purchase
+        prev_stop = row[3] if row is not None else None
         if row is None:
             base, highest = close, close
             stop = close - config.ATR_STOP_MULT * a
@@ -96,10 +97,10 @@ def apply(con, asof, rows, bars):
         if mark is not None:
             r["progress_target"] = (mark - base) / (target - base) * 100 if target != base else None
             r["progress_stop"] = (highest - mark) / (highest - stop) * 100 if highest != stop else None
-        r["stop_rule"] = rule
+        r["stop_rule"], r["prev_stop"] = rule, prev_stop
         r["action"], r["action_reason"] = plan.for_position(r)
         r["action_reason"] += f" (stop: {rule})" if "stop" in r["action_reason"] else " (auto levels)"
         out.append({"ticker": r["ticker"], "stop": stop, "target": target, "atr": a, "base": base,
-                    "highest": highest, "since": base_date, "rule": rule})
+                    "highest": highest, "since": base_date, "rule": rule, "prev_stop": prev_stop})
     con.commit()
     return out
