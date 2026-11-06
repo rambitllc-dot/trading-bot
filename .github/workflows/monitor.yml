@@ -59,4 +59,5 @@ jobs:
           git config user.name "portfolio-monitor"
           git config user.email "portfolio-monitor@users.noreply.github.com"
           git add monitor/snapshots monitor/monitor.db monitor/output monitor/logs
-          git diff --cached --quiet || (git commit -m "Monitor run" && (git push || (git pull --rebase && git push)))
+          git diff --cached --quiet || (git commit -m "Monitor run" && \
+            (git push || (git pull --rebase -X theirs && git push)))   # this run's results win over older copies
