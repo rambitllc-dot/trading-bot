@@ -30,7 +30,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     option_tickers = {p["ticker"] for p in book if p["asset_type"] == "option"}
     con = storage.connect(db)
     snaps = {}
-    for t in sorted({p["ticker"] for p in book}):
+    for t in sorted({p["ticker"] for p in book if p["asset_type"] != "cash"}):
         snap = data.pull(t, t in option_tickers, provider)
         storage.save_snapshot(con, snap, asof, snap_dir)
         snaps[t] = snap
@@ -41,7 +41,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     news_result = news.run(con, asof, book, provider, macro_result.get("label"), news_caller)
     if hasattr(provider, "bulk"):
         scan, bars = scanner.run(con, asof, provider, macro_result.get("label"), news_caller,
-                                 extra_tickers=[p["ticker"] for p in book])
+                                 extra_tickers=[p["ticker"] for p in book if p["asset_type"] != "cash"])
     else:
         scan, bars = {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}, {}
     sentiment = {n["ticker"]: n.get("sentiment") for n in news_result + scan.get("news", []) if n.get("status") == "ok"}

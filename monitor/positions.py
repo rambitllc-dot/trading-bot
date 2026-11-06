@@ -47,8 +47,13 @@ def _num(p, field, row, required=True):
 def normalize(p, row="position"):
     """Return a clean copy of one position, raising PositionError on bad input."""
     kind = str(p.get("asset_type", "")).lower()
+    if kind == "cash":  # cash balance: {"asset_type": "cash", "amount": 5.21}
+        amount = _num(p, "amount", row)
+        return {"asset_type": "cash", "ticker": "CASH", "id": str(p.get("id") or "CASH"), "entry_price": 1.0,
+                "contracts": amount, "entry_date": None, "target_price": None, "stop_price": None,
+                "add_below": None, "note": p.get("note", "")}
     if kind not in ("option", "shares"):
-        raise PositionError(f"{row}: asset_type must be 'option' or 'shares'")
+        raise PositionError(f"{row}: asset_type must be 'option', 'shares' or 'cash'")
     out = {"asset_type": kind, "ticker": str(p.get("ticker", "")).upper().strip()}
     if not out["ticker"]:
         raise PositionError(f"{row}: missing ticker")

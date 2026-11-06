@@ -48,7 +48,7 @@ def allocation(con, rows, provider=None):
     by_ticker, by_sector = {}, {}
     for r in priced:
         by_ticker[r["ticker"]] = by_ticker.get(r["ticker"], 0) + abs(r["value"])
-        s = sector_of(con, r["ticker"], provider)
+        s = "Cash" if r["asset_type"] == "cash" else sector_of(con, r["ticker"], provider)
         by_sector[s] = by_sector.get(s, 0) + abs(r["value"])
     def table(d, cap, kind):
         return [{"kind": kind, "name": k, "value": v, "pct": v / total * 100 if total else 0, "cap_pct": cap,

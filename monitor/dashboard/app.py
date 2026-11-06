@@ -139,7 +139,7 @@ def plan_pill(action):
 
 st.markdown('<div class="sec">Your plan says</div>', unsafe_allow_html=True)
 order = {"SELL": 0, "BUY MORE": 1, "REVIEW": 2, "HOLD": 3}
-for p in sorted(P, key=lambda x: order.get(x["action"], 9)):
+for p in sorted([x for x in P if x["asset_type"] != "cash"], key=lambda x: order.get(x["action"], 9)):
     nm = (f"{p['ticker']} ${p['strike']:g} {p['option_type']} · {p['expiry']}" if p["asset_type"] == "option"
           else f"{p['ticker']} shares")
     st.markdown(f'<div class="alert" style="border-color:{plan.COLORS.get(p["action"], GREY)};font-size:14px">'
@@ -222,7 +222,8 @@ head = ["Position", "Plan", "Strike", "Expiry", "DTE", "Entry", "Mark", "Value",
 body = []
 for p in P:
     opt = p["asset_type"] == "option"
-    name = f"{p['ticker']} {p['option_type'].upper()} x{p['contracts']:g}" if opt else f"{p['ticker']} SHARES x{p['contracts']:g}"
+    name = (f"{p['ticker']} {p['option_type'].upper()} x{p['contracts']:g}" if opt else
+            "CASH" if p["asset_type"] == "cash" else f"{p['ticker']} SHARES x{p['contracts']:g}")
     iv = D["iv_env"].get(p["position_id"], {})
     rank = (f"{iv['iv_rank']:.0f}" if iv.get("iv_rank") is not None else
             ("building" if iv.get("label", "").startswith("building") else "–"))

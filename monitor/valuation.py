@@ -42,6 +42,13 @@ def describe(to_target, to_stop):
 
 
 def value_position(p, snap, asof, rate=config.RISK_FREE_RATE):
+    if p["asset_type"] == "cash":
+        amt = p["contracts"]
+        return {"position_id": p["id"], "ticker": "CASH", "asset_type": "cash", "option_type": None, "strike": None,
+                "expiry": None, "contracts": amt, "entry_price": 1.0, "target_price": None, "stop_price": None,
+                "add_below": None, "spot": 1.0, "mark": 1.0, "value": amt, "cost": amt, "pnl": 0.0, "pnl_pct": 0.0,
+                "status": "ok", "progress_target": None, "progress_stop": None, "progress_text": "cash",
+                "action": "HOLD", "action_reason": "cash"}
     asof_date = dt.date.fromisoformat(asof)
     spot = snap.get("spot") if snap else None
     out = {"position_id": p["id"], "ticker": p["ticker"], "asset_type": p["asset_type"],

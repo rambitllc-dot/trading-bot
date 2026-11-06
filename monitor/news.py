@@ -175,7 +175,7 @@ def run(con, asof, book, provider, macro_label=None, caller=None):
     con.executescript(SCHEMA)
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     out = []
-    for ticker in sorted({p["ticker"] for p in book}):
+    for ticker in sorted({p["ticker"] for p in book if p["asset_type"] != "cash"}):
         held = [p for p in book if p["ticker"] == ticker]
         out.append(analyze_name(con, asof, ticker, held, provider, api_key, macro_label, caller))
     return out
