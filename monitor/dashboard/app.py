@@ -14,13 +14,22 @@ import streamlit as st
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 import importlib  # noqa: E402
 
-import monitor  # noqa: E402
-from monitor import autotrade, config, dashboard_data, levels, performance, plan, rotation, scanner  # noqa: E402
+# Streamlit keeps imported modules in memory between reruns; after an update the app file is new but those
+# modules would be old. Refresh the settings FIRST, then every helper (in dependency order), so the whole
+# dashboard always runs on one version.
+from monitor import config  # noqa: E402
 
-# Streamlit keeps imported modules in memory between reruns; after an update, the app file is new but these
-# modules would be old. Reload them so the dashboard and its helpers always come from the same version.
-for _m in (config, plan, levels, rotation, performance, autotrade, scanner, dashboard_data):
+importlib.reload(config)
+from monitor import storage, plan, levels, rotation, performance, alpaca, scanner  # noqa: E402
+
+for _m in (storage, plan, levels, rotation, performance, alpaca, scanner):
     importlib.reload(_m)
+from monitor import autotrade  # noqa: E402
+
+importlib.reload(autotrade)
+from monitor import dashboard_data  # noqa: E402
+
+importlib.reload(dashboard_data)
 
 st.set_page_config(page_title="Portfolio Monitor", page_icon="▣", layout="wide")
 
