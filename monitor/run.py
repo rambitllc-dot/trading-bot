@@ -21,6 +21,14 @@ def market_today():
     return dt.datetime.now(ZoneInfo("America/New_York")).date().isoformat()
 
 
+def weak_alerts(rows, rot):
+    line = {h["ticker"]: h.get("queue") for h in rot.get("holdings") or []}
+    return [{"kind": "weak", "severity": "warn", "ticker": r["ticker"],
+             "message": f"{r['ticker']} {r['weak_text']}. Often a top-ranked stock rolling over; "
+                        f"it's #{line.get(r['ticker'], '-')} in line for the next swap."}
+            for r in rows if r.get("weak")]
+
+
 def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=None, db=None, snap_dir=None,
         news_caller=None):
     asof = asof or market_today()
@@ -52,23 +60,28 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     rot = rotation.run(con, asof, rows, bars, sentiment) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestions": []}
     swaps = {s["sell"]: s for s in rot.get("suggestions") or []}
-    losing = {h["ticker"]: h for h in rot.get("holdings") or [] if h.get("losing")}
-    for r in rows:  # flag losing holdings: first in line for the next swap
-        h = losing.get(r["ticker"])
-        if h and r["ticker"] not in swaps and r.get("action") in ("HOLD", "REVIEW"):
+    flagged = {h["ticker"]: h for h in rot.get("holdings") or [] if h.get("losing") or h.get("weak")}
+    for r in rows:  # flag weakening / losing holdings: first in line for the next swap
+        h = flagged.get(r["ticker"])
+        if not h or r["ticker"] in swaps or r.get("action") not in ("HOLD", "REVIEW"):
+            continue
+        if h.get("weak"):
+            r["action"] = "WEAK"
+            r["action_reason"] = f"{r.get('weak_text')} · #{h['queue']} in line for the next swap · {r['action_reason']}"
+        else:
             r["action_reason"] = (f"{r.get('action_reason') or ''} · LOSING {h['pnl_pct']:.1f}%: "
                                   f"#{h['queue']} in line for the next swap").lstrip(" ·")
-    if losing and not swaps:
+    if flagged and not swaps:
         storage.save_valuations(con, asof, rows)
     if swaps:  # holdings to swap out get the SWAP label unless a stop/target already says SELL
         for r in rows:
             s = swaps.get(r["ticker"])
-            if s and r.get("action") in ("HOLD", "REVIEW"):
+            if s and r.get("action") in ("HOLD", "REVIEW", "WEAK"):
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
     perf = performance.run(con, asof, rows, totals, bars)
     alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result,
-                                     scan["alerts"] + rotation.alert(rot))
+                                     scan["alerts"] + rotation.alert(rot) + weak_alerts(rows, rot))
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
               "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
@@ -164,7 +177,8 @@ def print_report(res):
         print("\nROTATION (follow the money)")
         for h in rt.get("holdings", []):
             print(f"- #{h.get('queue')} in swap line: {h['ticker']}, rank #{h['rank']} of {rt.get('universe')}, "
-                  f"score {h['score']:.0f}" + (f", LOSING {h['pnl_pct']:.1f}%" if h.get("losing") else ""))
+                  f"score {h['score']:.0f}" + (", WEAKENING" if h.get("weak") else "")
+                  + (f", LOSING {h['pnl_pct']:.1f}%" if h.get("losing") else ""))
         if rt.get("top"):
             print("Strongest stocks you don't own: " + ", ".join(f"{x['ticker']} ({x['score']:.0f})" for x in rt["top"][:5]))
         for s in rt.get("suggestions") or []:

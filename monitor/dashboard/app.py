@@ -138,7 +138,7 @@ def plan_pill(action):
 
 
 st.markdown('<div class="sec">Your plan says</div>', unsafe_allow_html=True)
-order = {"SELL": 0, "BUY MORE": 1, "REVIEW": 2, "HOLD": 3}
+order = {"SELL": 0, "SWAP": 1, "WEAK": 2, "BUY MORE": 3, "REVIEW": 4, "HOLD": 5}
 for p in sorted([x for x in P if x["asset_type"] != "cash"], key=lambda x: order.get(x["action"], 9)):
     nm = (f"{p['ticker']} ${p['strike']:g} {p['option_type']} · {p['expiry']}" if p["asset_type"] == "option"
           else f"{p['ticker']} shares")
@@ -148,7 +148,9 @@ for p in sorted([x for x in P if x["asset_type"] != "cash"], key=lambda x: order
                    if p.get("stop_price") is not None else "") + '</span></div>',
                 unsafe_allow_html=True)
 st.markdown('<div class="muted">Labels apply your own levels from positions.json, or, where you set none, automatic ones: '
-            'a trailing stop 3x the stock\'s typical daily move below its highest close, and a 2-to-1 target. '
+            f'a trailing stop 3x the stock\'s typical daily move below its highest close, never more than {config.MAX_LOSS_PCT:g}% '
+            f'below what you paid, raised to your buy price once the stock is up {config.BREAKEVEN_AFTER_PCT:g}%; and a 2-to-1 target. '
+            'WEAK = closed below its 50-day average (first in line for the next swap). '
             'They are rules, not predictions or financial advice.</div>', unsafe_allow_html=True)
 
 def pct(v, d=1):
@@ -177,7 +179,9 @@ if R.get("universe"):
         for x in items:
             if mine:
                 lose = x.get("pnl_pct") is not None and x["pnl_pct"] < 0
-                flag = f' <span class="pill" style="background:{RED};color:#07090C;font-weight:700">LOSING</span>' if lose else ""
+                flag = (f' <span class="pill" style="background:{plan.COLORS["WEAK"]};color:#07090C;font-weight:700">'
+                        'WEAKENING</span>' if x.get("weak") else "")
+                flag += f' <span class="pill" style="background:{RED};color:#07090C;font-weight:700">LOSING</span>' if lose else ""
                 p_ = x.get("pnl_pct")
                 t += (f'<tr><td>#{x.get("queue") or "–"}</td><td>{e(x["ticker"])}{flag}</td>'
                       f'<td>{pct(p_ / 100) if p_ is not None else "–"}</td>')
@@ -188,13 +192,13 @@ if R.get("universe"):
                   f'<td>{pct(x["ret_12m"], 0)}</td></tr>')
         return t + "</table></div>"
     with c1:
-        st.markdown(score_table(R["holdings"], f"YOUR SWAP LINE · LOSING FIRST, THEN WEAKEST (RANKED AMONG {R['universe']})", mine=True),
+        st.markdown(score_table(R["holdings"], f"YOUR SWAP LINE · WEAKENING, THEN LOSING, THEN WEAKEST (RANKED AMONG {R['universe']})", mine=True),
                     unsafe_allow_html=True)
     with c2:
         st.markdown(score_table(R["top"], "STRONGEST YOU DON'T OWN"), unsafe_allow_html=True)
     st.markdown('<div class="muted">Score 0-100 = momentum 40% + steadiness 30% + trend 20% + news 10%. A swap is suggested '
-                f'only with a clear lead. Holdings losing money since you bought them are flagged LOSING and go first in line '
-                f'(biggest loss first). Each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
+                f'only with a clear lead. Holdings that closed below their 50-day average are flagged WEAKENING and go first '
+                f'in line, then holdings losing money (LOSING, biggest loss first). Each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
                 f'each into a different stock. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
 
 # ---------- wins & losses + swap scorecard ----------

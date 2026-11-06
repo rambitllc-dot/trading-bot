@@ -151,3 +151,12 @@ values are kept. It can only *read* your account; it cannot trade.
   swap (biggest loss first), then the lowest-scoring. They still need a clearly stronger replacement.
 - **Swap scorecard**: for every swap idea, the bought stock's return minus the sold stock's return since the
   idea's close ("edge"). Marked FOLLOWED / PARTLY / SKIPPED / OPEN from your trades, so skipped ideas are judged too.
+
+## Protecting against a top-ranked stock that rolls over
+
+- **6% max loss**: an automatic stop is never more than 6% below what you paid (`MAX_LOSS_PCT`). A position already
+  down more than that shows SELL.
+- **Breakeven lock**: once a stock has closed 10% above what you paid (`BREAKEVEN_AFTER_PCT`), its stop rises to your
+  buy price, so a winner can't become a loser. The trailing stop keeps rising from there; stops never move down.
+- **WEAK**: a close below the 50-day average (`WEAK_MA_DAYS`) labels the stock WEAK and puts it first in the swap
+  line, even if it still ranks near the top (the ranking looks back 3-12 months, so it reacts slowly).

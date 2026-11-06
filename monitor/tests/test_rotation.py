@@ -91,8 +91,9 @@ class SwapLineTest(unittest.TestCase):
         from monitor import rotation
         mine = [{"ticker": "A", "score": 20}, {"ticker": "B", "score": 90}, {"ticker": "C", "score": 70},
                 {"ticker": "D", "score": 10}]
-        held = {"A": {"pnl_pct": 5.0}, "B": {"pnl_pct": -1.0}, "C": {"pnl_pct": -6.0}, "D": {"pnl_pct": None}}
+        held = {"A": {"pnl_pct": 5.0, "weak": True}, "B": {"pnl_pct": -1.0}, "C": {"pnl_pct": -6.0},
+                "D": {"pnl_pct": None}}
         out = rotation.queue(mine, held)
-        self.assertEqual([r["ticker"] for r in out], ["C", "B", "D", "A"])  # losers by loss, then weakest score
+        self.assertEqual([r["ticker"] for r in out], ["A", "C", "B", "D"])  # weakening, losers by loss, then score
         self.assertEqual([r["queue"] for r in out], [1, 2, 3, 4])
-        self.assertTrue(out[0]["losing"] and not out[3]["losing"])
+        self.assertTrue(out[0]["weak"] and out[1]["losing"] and not out[3]["losing"])

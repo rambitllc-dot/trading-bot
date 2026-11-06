@@ -6,11 +6,12 @@ These are not predictions or advice. They only apply the plan you wrote in posit
   REVIEW    something needs a decision your plan doesn't cover: few days left on an option,
             no price available, or news / volatility alerts
   HOLD      the price is between your stop and your target
+  WEAK      (set by the run) closed below its 50-day average: first in line for the next swap
 """
 from . import config
 
 COLORS = {"SELL": "#FF5C5C", "BUY MORE": "#3DDC84", "BUY": "#3DDC84", "HOLD": "#8A93A3", "REVIEW": "#FFA62B",
-          "WAIT": "#5A6472", "SWAP": "#B48BEB"}
+          "WAIT": "#5A6472", "SWAP": "#B48BEB", "WEAK": "#E8803A"}
 
 
 def _crossed(mark, level, entry, side):
@@ -26,9 +27,10 @@ def for_position(r):
     mark, entry = r.get("mark"), r.get("level_ref") or r["entry_price"]
     if r.get("status") not in (None, "ok") or mark is None:
         return "REVIEW", f"no current price ({r.get('status')})"
-    if _crossed(mark, r.get("stop_price"), entry, "stop"):
+    auto = r.get("levels_auto")  # automatic levels are always stop below / target above (long shares)
+    if (mark <= r["stop_price"] if auto else _crossed(mark, r.get("stop_price"), entry, "stop")):
         return "SELL", f"price {mark:,.2f} reached your stop {r['stop_price']:,.2f}"
-    if _crossed(mark, r.get("target_price"), entry, "target"):
+    if (mark >= r["target_price"] if auto else _crossed(mark, r.get("target_price"), entry, "target")):
         return "SELL", f"price {mark:,.2f} reached your target {r['target_price']:,.2f} (take profit)"
     if r.get("add_below") is not None and mark <= r["add_below"]:
         return "BUY MORE", f"price {mark:,.2f} is at or below your add level {r['add_below']:,.2f}"
@@ -43,4 +45,4 @@ def for_position(r):
 ALERT_ACTION = {"target_hit": "SELL", "stop_hit": "SELL", "target_near": "HOLD", "iv_change": "REVIEW",
                 "news_flag": "REVIEW", "news_negative": "REVIEW", "macro_shift": "REVIEW",
                 "expiry_watch": "REVIEW", "concentration": "REVIEW", "watch_buy": "BUY", "watch_near": "REVIEW",
-                "swap": "SWAP"}
+                "swap": "SWAP", "weak": "WEAK"}

@@ -86,4 +86,7 @@ ROTATION_NO_REBUY_DAYS = 30 # don't suggest buying back something swapped out wi
 AUTO_LEVELS = True
 ATR_PERIOD = 22             # average true range over about one month of trading days
 ATR_STOP_MULT = 3.0         # stop = highest close since tracking began - 3 x ATR ("Chandelier" trailing stop)
+MAX_LOSS_PCT = 6.0          # stop never sits more than 6% below what you paid (cut losses early)
+BREAKEVEN_AFTER_PCT = 10.0  # once a stock has closed 10% above what you paid, the stop rises to your buy price
+WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop

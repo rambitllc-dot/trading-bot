@@ -7,7 +7,7 @@ Every run, score every stock in the market the same way (S&P 500 + major ETFs + 
   news        Claude's sentiment where available: positive 100, neutral 50, negative 0 (50 if none)
 blended with ROTATION_WEIGHTS into a 0-100 score, and rank everything.
 
-Swap queue: holdings that are losing money since you bought them are flagged LOSING and go first in line
+Swap queue: holdings flagged WEAKENING (last close below the 50-day average) go first, then holdings losing money since you bought them are flagged LOSING and go first in line
 (biggest loss first); the rest follow, weakest score first. A losing stock still needs a clearly stronger
 replacement (the rules below); being first in line means it gets the best candidate before anything else.
 
@@ -28,7 +28,7 @@ from . import config
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS rotation_scores (
     asof TEXT, ticker TEXT, rank INTEGER, score REAL, momentum REAL, steadiness REAL, trend REAL, news REAL,
-    ret_12m REAL, held INTEGER, pnl_pct REAL, queue INTEGER, PRIMARY KEY (asof, ticker));
+    ret_12m REAL, held INTEGER, pnl_pct REAL, queue INTEGER, weak INTEGER, PRIMARY KEY (asof, ticker));
 CREATE TABLE IF NOT EXISTS rotation_log (
     asof TEXT, sell TEXT, buy TEXT, sell_score REAL, buy_score REAL, sell_rank INTEGER,
     buy_rank INTEGER, amount REAL, reason TEXT, PRIMARY KEY (asof, sell));
@@ -96,12 +96,15 @@ def why(r):
 
 
 def queue(mine, held):
-    """Order holdings for swapping: losing money first (biggest loss first), then lowest score first.
+    """Order holdings for swapping: WEAKENING first (below the 50-day average), then losing money (biggest
+    loss first), then lowest score first.
     Adds losing / pnl_pct / queue (1 = first in line) to each holding."""
     for r in mine:
         r["pnl_pct"] = held[r["ticker"]].get("pnl_pct")
         r["losing"] = r["pnl_pct"] is not None and r["pnl_pct"] < 0
-    mine.sort(key=lambda r: (0, r["pnl_pct"]) if r["losing"] else (1, r["score"]))
+        r["weak"] = bool(held[r["ticker"]].get("weak"))
+    mine.sort(key=lambda r: (0 if r["weak"] else 1 if r["losing"] else 2,
+                             (r["pnl_pct"] or 0) if (r["weak"] or r["losing"]) else r["score"]))
     for i, r in enumerate(mine, 1):
         r["queue"] = i
     return mine
@@ -110,7 +113,7 @@ def queue(mine, held):
 def migrate(con):
     """Older databases keyed rotation_log by date only (one swap per day); key it by date + stock."""
     have = {r[1] for r in con.execute("PRAGMA table_info(rotation_scores)")}
-    for col, typ in (("pnl_pct", "REAL"), ("queue", "INTEGER")):
+    for col, typ in (("pnl_pct", "REAL"), ("queue", "INTEGER"), ("weak", "INTEGER")):
         if have and col not in have:
             con.execute(f"ALTER TABLE rotation_scores ADD COLUMN {col} {typ}")
     pk = [r[1] for r in con.execute("PRAGMA table_info(rotation_log)") if r[5]]
@@ -138,9 +141,9 @@ def run(con, asof, rows, data, sentiment=None):
     mine = queue([by[t] for t in held if t in by], held)
     con.execute("DELETE FROM rotation_scores WHERE asof=?", (asof,))
     con.executemany("INSERT INTO rotation_scores (asof, ticker, rank, score, momentum, steadiness, trend, news, ret_12m,"
-                    " held, pnl_pct, queue) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    " held, pnl_pct, queue, weak) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     [(asof, r["ticker"], r["rank"], r["score"], r["momentum"], r["steadiness"], r["trend"], r["news"],
-                      r["ret_12m"], int(r["ticker"] in held), r.get("pnl_pct"), r.get("queue")) for r in scored])
+                      r["ret_12m"], int(r["ticker"] in held), r.get("pnl_pct"), r.get("queue"), int(bool(r.get("weak")))) for r in scored])
     con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
     con.commit()
     result = {"universe": total, "holdings": mine, "top": [r for r in scored if r["ticker"] not in held][:10],
@@ -172,7 +175,8 @@ def run(con, asof, rows, data, sentiment=None):
             continue
         candidates.pop(0)
         amount = held[h["ticker"]]["value"]
-        reason = (("LOSING " + f"{h['pnl_pct']:.1f}% since you bought it, first in line. " if h.get("losing") else "")
+        reason = (("WEAKENING (below its 50-day average), first in line. " if h.get("weak") else
+                   "LOSING " + f"{h['pnl_pct']:.1f}% since you bought it, first in line. " if h.get("losing") else "")
                   + f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
                   f"{h['ticker']} ranks #{h['rank']} ({why(h)}). Score {best['score']:.0f} vs {h['score']:.0f}.")
         s = {"asof": asof, "sell": h["ticker"], "buy": best["ticker"], "sell_score": h["score"],
