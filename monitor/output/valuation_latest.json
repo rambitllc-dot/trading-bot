@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-05",
+ "asof": "2026-11-06",
  "totals": {
   "value": 795.0713900756837,
   "cost": 907.3759,
@@ -158,7 +158,7 @@
   }
  ],
  "analytics": {
-  "asof": "2026-11-05",
+  "asof": "2026-11-06",
   "total_value": 795.0713900756837,
   "total_cost": 907.3759,
   "pnl": -112.30450992431633,
@@ -298,7 +298,6 @@
  },
  "news": [
   {
-   "asof": "2026-11-05",
    "ticker": "ASML",
    "headlines": [
     {
@@ -372,27 +371,31 @@
      "link": "https://www.fool.com/investing/2026/11/04/better-ai-semiconductor-monopoly-stock-taiwan-semi/"
     }
    ],
-   "summary": "ASML shares fell about 8% on November 5 amid a broader post-election chip sell-off, with GuruFocus reporting a 7.36% drop tied to investor doubts about the next spending cycle. TIKR noted that ASML had no company-specific news that day and that customer down payments point to demand exceeding supply. Other headlines covered a Europe-wide tech selloff and a 13% Micron drop after a memory-cost warning and a reported Taiwan plant pause.",
+   "model": "claude-haiku-5-5",
+   "summary": "ASML shares fell roughly 7% to 8% on November 5 during a broader post-election chip sell-off, with one report saying the company had no news of its own. Headlines tie the decline to investor doubts about the next spending cycle and to weakness at peers such as Micron and Applied Materials. Other headlines note that customers are still seeking delivery slots in 2029 and 2030.",
    "sentiment": "negative",
    "drivers": [
-    "Post-election chip sector sell-off",
-    "Investor doubts about the next spending cycle",
-    "Tech selloff weighing on European shares",
-    "Micron memory-cost warning and reported Taiwan plant pause"
+    "post-election chip sector sell-off",
+    "investor doubts about the next spending cycle",
+    "Micron fall on memory-cost warning and Taiwan plant pause",
+    "tech weakness in European shares"
    ],
    "position_flags": [],
-   "model": "claude-haiku-5-5",
    "input_tokens": 1478,
-   "output_tokens": 560,
-   "cost_usd": 0.0004278,
-   "status": "ok",
-   "created_at": "2026-11-05T20:58:11Z",
-   "cached": true
+   "output_tokens": 543,
+   "cost_usd": 0.0004193,
+   "status": "ok"
   },
   {
-   "asof": "2026-11-05",
    "ticker": "DIS",
    "headlines": [
+    {
+     "title": "How to Play DIS Stock as Disney Eyes 20% Cost Cuts and Thousands of Layoffs",
+     "summary": "As Disney eyes deep cost cuts, investors weigh the potential upside against mounting business headwinds.",
+     "publisher": "Barchart",
+     "published": "2026-11-05 16:11 UTC",
+     "link": "https://www.barchart.com/story/news/8676893/how-to-play-dis-stock-as-disney-eyes-20-cost-cuts-and-thousands-of-layoffs"
+    },
     {
      "title": "Disney (DIS) Stock Looks Fairly Valued As Cash Flow Holds Up",
      "summary": "Walt Disney shares have climbed in recent years, and with the stock recently around a 52 week high, investors are asking whether the current price still lines up with the cash the business can generate. With Disney pushing through cost cuts and reinvestment at the same time, the question now is how those choices feed into the cash flows that matter most for valuation. Over the past 3 years, the stock has delivered a 45.2% return, which puts real pressure on the underlying cash flow story to...",
@@ -455,36 +458,33 @@
      "publisher": "Zacks",
      "published": "2026-11-04 12:55 UTC",
      "link": "https://finance.yahoo.com/media-advertising/articles/madison-square-garden-entertainment-msge-125505507.html"
-    },
-    {
-     "title": "Should You Buy Comcast Stock For Its Cash?",
-     "summary": "For questions about this article or underlying research, email help@trefis.com.",
-     "publisher": "Trefis",
-     "published": "2026-11-04 09:43 UTC",
-     "link": "https://www.trefis.com/stock/cmcsa/articles/622491/should-you-buy-comcast-stock-for-its-cash/2026-11-04"
     }
    ],
-   "summary": "Disney is reported to be planning thousands of layoffs as CEO Josh D'Amaro seeks 20% cost savings, with the money to be reinvested in parks, cruises and programming. Simply Wall St. notes the stock recently traded near a 52-week high, and ETFs bought $56.5 million of Disney stock on Nov. 3.",
+   "model": "claude-haiku-5-5",
+   "summary": "Disney CEO Josh D'Amaro is reportedly seeking 20% cost savings, with thousands of layoffs under consideration, and plans to reinvest the savings in parks, cruises and programming. Simply Wall St. notes the stock is recently near a 52-week high, and GuruFocus reports ETFs bought $56.5 million of Disney stock on Nov. 3.",
    "sentiment": "neutral",
    "drivers": [
-    "Planned layoffs and 20% cost-savings target",
+    "Planned 20% cost savings and possible thousands of layoffs",
     "Reinvestment in parks, cruises and programming",
-    "Shares recently near 52-week high",
-    "ETF buying of $56.5 million on Nov. 3"
+    "Stock recently near 52-week high",
+    "ETF buying of $56.5M on Nov. 3"
    ],
    "position_flags": [],
-   "model": "claude-haiku-5-5",
-   "input_tokens": 1504,
-   "output_tokens": 539,
-   "cost_usd": 0.00041989999999999996,
-   "status": "ok",
-   "created_at": "2026-11-05T20:58:14Z",
-   "cached": true
+   "input_tokens": 1537,
+   "output_tokens": 547,
+   "cost_usd": 0.00042720000000000003,
+   "status": "ok"
   },
   {
-   "asof": "2026-11-05",
    "ticker": "LRCX",
    "headlines": [
+    {
+     "title": "The AI Trade Just Had Its Worst Day Since The Pandemic",
+     "summary": "Nvidia gave back its entire 2026 gain in one session as Wall Street reprices the AI buildout after the midterms.",
+     "publisher": "Moby",
+     "published": "2026-11-05 21:21 UTC",
+     "link": "https://app.moby.co/home/news/news-the-ai-trade-just-had-its-worst-day-since-the-pandemic?utm_source=yahoo_finance&utm_medium=rss"
+    },
     {
      "title": "Lam Research Stocks Fall 13.5% as Equipment Investors Reassess AI Spending",
      "summary": "Record recent profitability raises the stakes for the next semiconductor investment cycle.",
@@ -547,36 +547,47 @@
      "publisher": "Motley Fool",
      "published": "2026-11-05 00:46 UTC",
      "link": "https://www.fool.com/investing/2026/11/04/did-ibm-just-tell-the-truth-about-ai/"
-    },
-    {
-     "title": "What Could Derail KLA Stock?",
-     "summary": "For questions about this article or underlying research, email help@trefis.com.",
-     "publisher": "Trefis",
-     "published": "2026-11-04 11:06 UTC",
-     "link": "https://www.trefis.com/stock/klac/articles/622549/what-could-derail-kla-stock/2026-11-04"
     }
    ],
-   "summary": "Lam Research shares fell about 13.5% on November 5, 2026, as part of a broader chip-stock sell-off that followed the midterm elections. Headlines attribute the drop to investor fears that AI-related data-center spending will slow, with reports of hedge funds reducing AI-trade exposure and Qualcomm's weak guidance adding pressure.",
+   "model": "claude-haiku-5-5",
+   "summary": "Lam Research shares fell about 13.5% to 14% on November 5, 2026, as the chip-equipment sell-off deepened after the midterm elections. Headlines tie the drop to investor fears that data-center and AI spending will slow, and one article says the stock has been cut nearly in half from its 2026 highs despite record recent profitability.",
    "sentiment": "negative",
    "drivers": [
-    "Fears of slower AI and data-center spending",
-    "Chip sector sell-off after midterm election results",
-    "Hedge funds locking in AI-trade gains",
-    "Qualcomm's weak guidance"
+    "Fears of slower AI build-out after midterm results",
+    "Reassessment of equipment-maker AI spending",
+    "Broad chip and AI-trade sell-off",
+    "Hedge funds locking in 2026 gains"
    ],
    "position_flags": [],
-   "model": "claude-haiku-5-5",
-   "input_tokens": 1539,
-   "output_tokens": 527,
-   "cost_usd": 0.00041739999999999995,
-   "status": "ok",
-   "created_at": "2026-11-05T20:58:17Z",
-   "cached": true
+   "input_tokens": 1570,
+   "output_tokens": 375,
+   "cost_usd": 0.0003445,
+   "status": "ok"
   },
   {
-   "asof": "2026-11-05",
    "ticker": "QQQ",
    "headlines": [
+    {
+     "title": "Open Text Q1 Earnings Call Highlights",
+     "summary": "Open Text (NASDAQ:OTEX) reported fiscal first-quarter revenue of $1.237 billion and maintained its full-year outlook, as growth in cloud products helped offset declines in client support, licensing and professional services revenue. Core revenue rose 2.4% year over year to $864 million, or 2.7% in",
+     "publisher": "MarketBeat",
+     "published": "2026-11-05 22:14 UTC",
+     "link": "https://www.marketbeat.com/instant-alerts/transcript-open-text-q1-earnings-call-highlights-2026-11-05/?utm_source=yahoofinance&utm_medium=yahoofinance"
+    },
+    {
+     "title": "QQQ and SMH sink as chip stocks have worst day since 2020",
+     "summary": "Yahoo Finance Markets and Data Editor Jared Blikre joins Senior Reporter Brooke DiPalma to talk about the sell-off in AI and semiconductor ETFs like SMH (SMH) and QQQ (QQQ) and which sectors are holding steady against plunging growth names.",
+     "publisher": "Yahoo Finance Video",
+     "published": "2026-11-05 21:50 UTC",
+     "link": "https://finance.yahoo.com/video/qqq-and-smh-sink-as-chip-stocks-have-worst-day-since-2020-215006209.html"
+    },
+    {
+     "title": "dYdX Team\u2019s Arcus Opens Stock-Token Collateral to All Perps Traders, With a $20,000 Cap",
+     "summary": "The Robinhood Chain exchange dropped the $25 million volume requirement from its October early access, but non-USDG deposits stay capped at $20,000 per trader and $2 million overall.",
+     "publisher": "Unchained",
+     "published": "2026-11-05 21:25 UTC",
+     "link": "https://unchainedcrypto.com/dydx-teams-arcus-opens-stock-token-collateral-to-all-perps-traders-with-a-20000-cap/"
+    },
     {
      "title": "Redwire Plunges 21% as Revenue Miss Overshadows Record Margins and Backlog; Intuitive Machines Sinks 15%, Planet Labs Tumbles 12%",
      "summary": "Record margins and a record backlog should have been a win for Redwire, yet traders ran for the exits. One shipping delay, a flattering year-over-year comparison, and a looming fourth-quarter test explain why bulls and bears are suddenly so divided.",
@@ -625,48 +636,24 @@
      "publisher": "24/7 Wall St.",
      "published": "2026-11-05 16:03 UTC",
      "link": "https://247wallst.com/investing/etf/2026/11/05/teslas-plunge-just-hit-millions-of-index-fund-investors-heres-how-much-your-etf-lost/"
-    },
-    {
-     "title": "QQQ key support and resistance levels to watch",
-     "summary": "Investing.com -- Invesco QQQ Trust (QQQ) is at $661.58, down 4.39%, as of Nov 5, 2026 at 10:20 AM EST. The daily technical gauge is Strong Sell, while RSI is 29.7, signaling oversold momentum rather than a confirmed reversal.",
-     "publisher": "Investing.com",
-     "published": "2026-11-05 15:51 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/qqq-key-support-resistance-levels-155146068.html"
-    },
-    {
-     "title": "AppLovin\u2019s Surge Is a Rare Bright Spot for Growth ETF Holders",
-     "summary": "One stock is soaring more than 30% while the rest of tech sinks, yet the funds that millions of retirement savers rely on barely feel it. Why do three different ETFs leave investors so exposed on the same day?",
-     "publisher": "24/7 Wall St.",
-     "published": "2026-11-05 15:45 UTC",
-     "link": "https://247wallst.com/investing/etf/2026/11/05/applovins-surge-is-a-rare-bright-spot-for-growth-etf-holders/"
-    },
-    {
-     "title": "Exchange-Traded Funds, Equity Futures Mixed Pre-Bell Thursday Amid Pressure on AI Shares",
-     "summary": "The broad market exchange-traded fund SPDR S&P 500 ETF Trust (SPY) was up 0.1% and the actively trad",
-     "publisher": "MT Newswires",
-     "published": "2026-11-05 14:11 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-equity-futures-141133476.html"
     }
    ],
-   "summary": "Invesco QQQ Trust (QQQ) was at $661.58, down 4.39%, as of 10:20 AM EST on Nov 5, 2026, according to Investing.com, which reported a daily technical gauge of Strong Sell and an RSI of 29.7. Other headlines describe declines in AI and chip stocks, including Nvidia, AMD, and Tesla, and broad-market ETFs IWM and IVV fell after midday.",
+   "model": "claude-haiku-5-5",
+   "summary": "QQQ and SMH fell sharply on November 5, 2026, as chip stocks had their worst day since 2020, according to a Yahoo Finance video headline. Other headlines that day cite drops in AMD, Nvidia, and Tesla, and broad-market ETFs IWM and IVV also declined after midday. The headlines do not give QQQ's exact percentage move.",
    "sentiment": "negative",
    "drivers": [
-    "Selloff in AI and chip stocks",
-    "Declines in Nvidia, AMD, and Tesla",
-    "Broad US equities down after midday",
-    "Oversold technical reading (RSI 29.7)"
+    "Sell-off in AI and semiconductor stocks",
+    "Chip stocks' worst day since 2020",
+    "Declines in AMD, Nvidia and Tesla",
+    "Broad US equity weakness after midday"
    ],
    "position_flags": [],
-   "model": "claude-haiku-5-5",
-   "input_tokens": 1629,
-   "output_tokens": 688,
-   "cost_usd": 0.0005069,
-   "status": "ok",
-   "created_at": "2026-11-05T20:58:21Z",
-   "cached": true
+   "input_tokens": 1672,
+   "output_tokens": 457,
+   "cost_usd": 0.0003957,
+   "status": "ok"
   },
   {
-   "asof": "2026-11-05",
    "ticker": "SPY",
    "headlines": [
     {
@@ -740,128 +727,111 @@
      "link": "https://www.trefis.com/stock/spy/articles/622741/stock-market-crash-or-rally-plan-for-both/2026-11-05"
     }
    ],
-   "summary": "SPY was trading at $746.84, down 2.60%, as of 10:38 AM EST on Nov 5, 2026, after an intraday low of $744.81 that tested nearby support. Headlines tie the decline to selling in AI-related shares, including Nvidia and Tesla, though one earlier pre-bell report showed SPY up 0.1%.",
+   "model": "claude-haiku-5-5",
+   "summary": "SPY was trading at $746.84, down 2.60%, as of 10:38 AM EST on Nov 5, 2026, after an intraday low of $744.81, and its nearest support level was being tested. Headlines tie the pressure to selloffs in AI-related shares, including Nvidia and Tesla, which weighed on index funds.",
    "sentiment": "negative",
    "drivers": [
-    "Pressure on AI shares",
-    "Nvidia share decline",
-    "Tesla selloff",
-    "Test of nearby SPY support levels"
+    "Selloffs in AI-related shares",
+    "Nvidia and Tesla declines hitting index funds",
+    "SPY testing nearest support after a 2.60% drop",
+    "Debt ceiling fight expected in 2027"
    ],
-   "position_flags": [
-    {
-     "position_id": "SPY-shares",
-     "flag": "Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop."
-    }
-   ],
-   "model": "claude-haiku-5-5",
-   "input_tokens": 1570,
-   "output_tokens": 780,
-   "cost_usd": 0.000547,
-   "status": "ok",
-   "created_at": "2026-11-05T20:09:42Z",
-   "cached": true
+   "position_flags": [],
+   "input_tokens": 1630,
+   "output_tokens": 575,
+   "cost_usd": 0.0004505,
+   "status": "ok"
   }
  ],
  "alerts": [
   {
+   "kind": "news_negative",
+   "severity": "warn",
+   "message": "ASML: news read negative (driver: post-election chip sector sell-off).",
+   "action": "REVIEW",
+   "ticker": "ASML",
+   "position_id": null,
+   "is_new": false,
+   "detail": null
+  },
+  {
+   "kind": "news_negative",
+   "severity": "warn",
+   "message": "LRCX: news read negative (driver: Fears of slower AI build-out after midterm results).",
+   "action": "REVIEW",
+   "ticker": "LRCX",
+   "position_id": null,
+   "is_new": false,
+   "detail": null
+  },
+  {
+   "kind": "news_negative",
+   "severity": "warn",
+   "message": "QQQ: news read negative (driver: Sell-off in AI and semiconductor stocks).",
+   "action": "REVIEW",
+   "ticker": "QQQ",
+   "position_id": null,
+   "is_new": false,
+   "detail": null
+  },
+  {
+   "kind": "news_negative",
+   "severity": "warn",
+   "message": "SPY: news read negative (driver: Selloffs in AI-related shares).",
+   "action": "REVIEW",
+   "ticker": "SPY",
+   "position_id": null,
+   "is_new": false,
+   "detail": null
+  },
+  {
    "kind": "swap",
-   "severity": "high",
-   "message": "SWAP idea: sell all DIS (about $32, rank #335) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
+   "severity": "warn",
+   "message": "SWAP idea: sell all ASML (about $68, rank #173) and buy TGT (rank #4). TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64. Suggested on 2026-11-05.",
+   "action": "SWAP",
+   "ticker": "ASML",
+   "position_id": null,
+   "is_new": false,
+   "detail": null
+  },
+  {
+   "kind": "swap",
+   "severity": "warn",
+   "message": "SWAP idea: sell all DIS (about $32, rank #335) and buy MRNA (rank #1). MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44. Suggested on 2026-11-05.",
    "action": "SWAP",
    "ticker": "DIS",
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   },
   {
    "kind": "swap",
-   "severity": "high",
-   "message": "SWAP idea: sell all QQQ (about $511, rank #287) and buy MRK (rank #2). MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.",
-   "action": "SWAP",
-   "ticker": "QQQ",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "swap",
-   "severity": "high",
-   "message": "SWAP idea: sell all SPY (about $73, rank #213) and buy VTRS (rank #3). VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.",
-   "action": "SWAP",
-   "ticker": "SPY",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "swap",
-   "severity": "high",
-   "message": "SWAP idea: sell all ASML (about $68, rank #173) and buy TGT (rank #4). TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.",
-   "action": "SWAP",
-   "ticker": "ASML",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "swap",
-   "severity": "high",
-   "message": "SWAP idea: sell all LRCX (about $111, rank #166) and buy TXN (rank #5). TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.",
+   "severity": "warn",
+   "message": "SWAP idea: sell all LRCX (about $111, rank #166) and buy TXN (rank #5). TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65. Suggested on 2026-11-05.",
    "action": "SWAP",
    "ticker": "LRCX",
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   },
   {
-   "kind": "news_flag",
+   "kind": "swap",
    "severity": "warn",
-   "message": "SPY news: Investing.com reports SPY at $746.84, about 0.9% above the $740 purchase price. The headlines do not mention the $820 target or the $680 stop. (driver: Pressure on AI shares)",
-   "action": "REVIEW",
-   "ticker": "SPY",
-   "position_id": null,
-   "is_new": true,
-   "detail": "SPY-shares"
-  },
-  {
-   "kind": "news_negative",
-   "severity": "warn",
-   "message": "ASML: news read negative (driver: Post-election chip sector sell-off).",
-   "action": "REVIEW",
-   "ticker": "ASML",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "news_negative",
-   "severity": "warn",
-   "message": "LRCX: news read negative (driver: Fears of slower AI and data-center spending).",
-   "action": "REVIEW",
-   "ticker": "LRCX",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "news_negative",
-   "severity": "warn",
-   "message": "QQQ: news read negative (driver: Selloff in AI and chip stocks).",
-   "action": "REVIEW",
+   "message": "SWAP idea: sell all QQQ (about $511, rank #287) and buy MRK (rank #2). MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50. Suggested on 2026-11-05.",
+   "action": "SWAP",
    "ticker": "QQQ",
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   },
   {
-   "kind": "news_negative",
+   "kind": "swap",
    "severity": "warn",
-   "message": "SPY: news read negative (driver: Pressure on AI shares).",
-   "action": "REVIEW",
+   "message": "SWAP idea: sell all SPY (about $73, rank #213) and buy VTRS (rank #3). VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59. Suggested on 2026-11-05.",
+   "action": "SWAP",
    "ticker": "SPY",
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   },
   {
@@ -871,7 +841,7 @@
    "action": "REVIEW",
    "ticker": null,
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   },
   {
@@ -881,7 +851,7 @@
    "action": "REVIEW",
    "ticker": null,
    "position_id": null,
-   "is_new": true,
+   "is_new": false,
    "detail": null
   }
  ],
@@ -934,7 +904,7 @@
      "chg_1d": -0.17459096013768616,
      "rsi2": 3.5293296143508286,
      "ret_12m": 3.9950203203970123,
-     "vs_200d": -0.13068330439768994,
+     "vs_200d": -0.13068330422201335,
      "high_52w": 1254.6095437059498,
      "from_high": -0.4768172951167352,
      "new_high": false,
@@ -946,8 +916,8 @@
      "price": 316.9100036621094,
      "chg_1d": -0.14891498515099633,
      "rsi2": 4.953963146200067,
-     "ret_12m": 2.778168167221938,
-     "vs_200d": -0.05566961757079658,
+     "ret_12m": 2.778168543956359,
+     "vs_200d": -0.055669615423944774,
      "high_52w": 594.6862090656501,
      "from_high": -0.4670971029242008,
      "new_high": false,
@@ -959,8 +929,8 @@
      "price": 133.5500030517578,
      "chg_1d": -0.16426783165641023,
      "rsi2": 0.9857591344364778,
-     "ret_12m": 2.254912458202705,
-     "vs_200d": -0.27690916942840327,
+     "ret_12m": 2.2549121742103777,
+     "vs_200d": -0.2769091709218917,
      "high_52w": 329.72658943397715,
      "from_high": -0.5949674447516791,
      "new_high": false,
@@ -985,8 +955,8 @@
      "price": 44.15999984741211,
      "chg_1d": -0.11838690930547757,
      "rsi2": 5.796834240596738,
-     "ret_12m": 2.115021993769943,
-     "vs_200d": 0.07184552386477194,
+     "ret_12m": 2.1150217370395543,
+     "vs_200d": 0.07184552163182745,
      "high_52w": 73.55999755859375,
      "from_high": -0.3996737178758504,
      "new_high": false,
@@ -1011,8 +981,8 @@
      "price": 267.6300048828125,
      "chg_1d": -0.17354779983264945,
      "rsi2": 3.535969528757647,
-     "ret_12m": 1.6690524753342544,
-     "vs_200d": -0.3637818734042486,
+     "ret_12m": 1.6690522072143432,
+     "vs_200d": -0.3637818728272998,
      "high_52w": 799.6132774415504,
      "from_high": -0.6653006991840809,
      "new_high": false,
@@ -1052,8 +1022,8 @@
      "price": 1043.780029296875,
      "chg_1d": -0.07119658208785318,
      "rsi2": 1.8986411137016432,
-     "ret_12m": 0.22650213068591807,
-     "vs_200d": 0.07288329406391458,
+     "ret_12m": 0.2265020421837971,
+     "vs_200d": 0.07288329339082011,
      "high_52w": 1202.1199951171875,
      "from_high": -0.13171727153983237,
      "new_high": false,
@@ -1066,7 +1036,7 @@
      "chg_1d": -0.016919609100338295,
      "rsi2": 2.335256917109433,
      "ret_12m": 0.48126409003332293,
-     "vs_200d": 0.005984531863902687,
+     "vs_200d": 0.005984531178932384,
      "high_52w": 66.8332100604428,
      "from_high": -0.15670666485448548,
      "new_high": false,
@@ -1104,8 +1074,8 @@
      "price": 245.67999267578125,
      "chg_1d": -0.08297566601643147,
      "rsi2": 2.6234034541209894,
-     "ret_12m": 0.7279373783808882,
-     "vs_200d": 0.09222677628835374,
+     "ret_12m": 0.7279371935115797,
+     "vs_200d": 0.09222677184278671,
      "high_52w": 287.70001220703125,
      "from_high": -0.14605498000817618,
      "new_high": false,
@@ -1131,7 +1101,7 @@
      "chg_1d": -0.022701777885508867,
      "rsi2": 2.964033977646494,
      "ret_12m": 1.0296965361235118,
-     "vs_200d": 0.15224737817234613,
+     "vs_200d": 0.152247381958039,
      "high_52w": 52.959999084472656,
      "from_high": -0.17900301559891396,
      "new_high": false,
@@ -1143,8 +1113,8 @@
      "price": 247.0399932861328,
      "chg_1d": -0.048492128644231136,
      "rsi2": 3.188528078489668,
-     "ret_12m": 1.0601348834959254,
-     "vs_200d": 0.2344255779789024,
+     "ret_12m": 1.0601344066483933,
+     "vs_200d": 0.2344255798613053,
      "high_52w": 299.3900146484375,
      "from_high": -0.17485560239468023,
      "new_high": false,
@@ -1171,8 +1141,8 @@
      "price": 213.5500030517578,
      "chg_1d": 0.02084229915133151,
      "rsi2": 98.43645093395854,
-     "ret_12m": 0.3119649952019301,
-     "vs_200d": 0.2911571933563373,
+     "ret_12m": 0.31196484941918134,
+     "vs_200d": 0.2911571921651537,
      "high_52w": 214.77999877929688,
      "from_high": -0.00572677034421154,
      "new_high": true,
@@ -1184,8 +1154,8 @@
      "price": 267.82000732421875,
      "chg_1d": 0.022486980541125634,
      "rsi2": 95.96455000963148,
-     "ret_12m": 0.19694281109201373,
-     "vs_200d": 0.20240949343429304,
+     "ret_12m": 0.1969427169291984,
+     "vs_200d": 0.20240949219870652,
      "high_52w": 286.2900085449219,
      "from_high": -0.06451500460870951,
      "new_high": true,
@@ -1198,7 +1168,7 @@
      "chg_1d": 0.0027180883835991043,
      "rsi2": 71.2817404276605,
      "ret_12m": 0.19096604423139163,
-     "vs_200d": 0.23684043984930714,
+     "vs_200d": 0.23684044143120642,
      "high_52w": 37.8849983215332,
      "from_high": -0.026263665724362006,
      "new_high": true,
@@ -1210,8 +1180,8 @@
      "price": 517.010009765625,
      "chg_1d": 0.04028254074455062,
      "rsi2": 97.65761976816601,
-     "ret_12m": 0.15039683189132513,
-     "vs_200d": 0.17546396628561012,
+     "ret_12m": 0.15039674180733842,
+     "vs_200d": 0.17546396669340303,
      "high_52w": 548.2849731445312,
      "from_high": -0.05704143814034823,
      "new_high": true,
@@ -1223,8 +1193,8 @@
      "price": 121.44000244140625,
      "chg_1d": 0.009476303912959727,
      "rsi2": 88.09642380508791,
-     "ret_12m": 0.10361987909998893,
-     "vs_200d": 0.12169424137186224,
+     "ret_12m": 0.10362005670754582,
+     "vs_200d": 0.1216942421623175,
      "high_52w": 122.75,
      "from_high": -0.010672077870417462,
      "new_high": true,
@@ -1250,7 +1220,7 @@
      "chg_1d": 0.013919552144536107,
      "rsi2": 85.56444116182742,
      "ret_12m": 0.07866020889872871,
-     "vs_200d": 0.07404519351481831,
+     "vs_200d": 0.07404518948733219,
      "high_52w": 89.66000366210938,
      "from_high": -0.025094801562570712,
      "new_high": true,
@@ -1263,7 +1233,7 @@
      "chg_1d": 0.016339979817436623,
      "rsi2": 87.6793020277373,
      "ret_12m": 0.049725972344723646,
-     "vs_200d": 0.14961082111685076,
+     "vs_200d": 0.1496108215211105,
      "high_52w": 254.39410400390625,
      "from_high": -0.01955275596672068,
      "new_high": true,
@@ -1276,7 +1246,7 @@
      "chg_1d": 0.018645947972252497,
      "rsi2": 94.63373845674403,
      "ret_12m": 0.02166660404636489,
-     "vs_200d": 0.15719104020547237,
+     "vs_200d": 0.1571910358486328,
      "high_52w": 153.67999267578125,
      "from_high": -0.008198819409720781,
      "new_high": true,
@@ -1329,8 +1299,8 @@
      "price": 64.8499984741211,
      "chg_1d": -0.13923544430136658,
      "rsi2": 4.216274384187415,
-     "ret_12m": 0.34560530439897197,
-     "vs_200d": -0.1803626853790694,
+     "ret_12m": 0.34560521586916804,
+     "vs_200d": -0.18036268577424808,
      "high_52w": 104.75085804341299,
      "from_high": -0.3809120069713927,
      "new_high": false,
@@ -1355,7 +1325,7 @@
      "price": 156.75,
      "chg_1d": -0.09492466198773941,
      "rsi2": 21.996947339290415,
-     "ret_12m": 0.04610331172046278,
+     "ret_12m": 0.046103217444366074,
      "vs_200d": -0.0699996228742028,
      "high_52w": 257.5617675961248,
      "from_high": -0.39140812138781733,
@@ -1368,8 +1338,8 @@
      "price": 517.010009765625,
      "chg_1d": 0.04028254074455062,
      "rsi2": 97.65761976816601,
-     "ret_12m": 0.15039683189132513,
-     "vs_200d": 0.17546396628561012,
+     "ret_12m": 0.15039674180733842,
+     "vs_200d": 0.17546396669340303,
      "high_52w": 548.2849731445312,
      "from_high": -0.05704143814034823,
      "new_high": true,
@@ -1381,8 +1351,8 @@
      "price": 509.05999755859375,
      "chg_1d": -0.12297568152191252,
      "rsi2": 8.68417181025741,
-     "ret_12m": 0.5991831119100763,
-     "vs_200d": -0.1903470012354327,
+     "ret_12m": 0.5991832232331264,
+     "vs_200d": -0.19034700025296336,
      "high_52w": 788.6295298146063,
      "from_high": -0.3545004614799736,
      "new_high": false,
@@ -1408,7 +1378,7 @@
      "chg_1d": -0.11090513446791372,
      "rsi2": 9.932850375313237,
      "ret_12m": 0.1580007589952075,
-     "vs_200d": -0.07784253474548986,
+     "vs_200d": -0.07784253443800926,
      "high_52w": 133.64159179823972,
      "from_high": -0.2105751018045745,
      "new_high": false,
@@ -1457,50 +1427,56 @@
   "alerts": [],
   "news": [
    {
-    "asof": "2026-11-05",
     "ticker": "SNDK",
     "headlines": [
      {
-      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
+      "title": "Dow Jones Futures Fall; Nasdaq Dives 5.5%, Nvidia, Sandisk, CoreWeave, SpaceX Plunge, But Sell-Off Spreads Beyond AI",
+      "summary": "Nvidia, CoreWeave, SpaceX plunged, but the stock market sell-off spread far beyond AI. The October jobs report looms.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-06 00:19 UTC",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nasdaq-dives-55-nvidia-sandisk-coreweave-spacex-plunge-jobs/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "Should You Buy SanDisk Stock For Its Cash?",
+      "summary": "For questions about this article or underlying research, email help@trefis.com.",
+      "publisher": "Trefis",
+      "published": "2026-11-06 00:01 UTC",
+      "link": "https://www.trefis.com/stock/sndk/articles/622855/should-you-buy-sandisk-stock-for-its-cash/2026-11-05"
+     },
+     {
+      "title": "Nvidia, Micron, Intel, Sandisk, Palantir, AppLovin, Qualcomm, and More Stocks That Explain Today\u2019s Market",
+      "summary": "Intel stock is on track to slump more than 50% in a month.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-05 22:12 UTC",
+      "link": "https://www.barrons.com/articles/stock-movers-8b39c82b?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "SanDisk stock plunges 20% as AI selloff deepens despite strong earnings",
+      "summary": "SanDisk shares are falling alongside Nvidia and Broadcom as investors question the outlook for AI data center expansion.",
+      "publisher": "TheStreet",
+      "published": "2026-11-05 22:08 UTC",
+      "link": "https://www.thestreet.com/investing/stocks/sandisk-stock-plunges-20-as-ai-selloff-deepens-despite-strong-earnings-sndk"
+     },
+     {
+      "title": "Update: Nasdaq Enters Correction Territory Amid Data Center Anxiety; Nvidia Tumbles Over 9%",
+      "summary": "(Updates with market moves at the end of the day, and other changes, if any.) The Nasdaq Composit",
+      "publisher": "MT Newswires",
+      "published": "2026-11-05 21:38 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-enters-correction-territory-amid-213811085.html"
+     },
+     {
+      "title": "Micron Stock Plunges As Memory-Chip Shortages Cause Ripple Effects",
+      "summary": "Micron stock fell Thursday as memory-chip shortages are having ripple effects across the tech sector.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-05 21:35 UTC",
+      "link": "https://www.investors.com/news/technology/micron-stock-plunges-memory-chip-shortages/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "Stock Market Today: Nasdaq Slammed By Big Tech Sell-Off; Nvidia Hits Bear Territory",
       "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
       "publisher": "Investor's Business Daily",
-      "published": "2026-11-05 20:50 UTC",
+      "published": "2026-11-05 21:34 UTC",
       "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
-     },
-     {
-      "title": "The Stocks Getting Hit Hardest Today",
-      "summary": "As investors reassess their portfolios after Tuesday's blue wave, they're positioning for a slowdown in the AI build-out, knocking chip and data-center stocks.",
-      "publisher": "The Wall Street Journal",
-      "published": "2026-11-05 20:15 UTC",
-      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/here-are-the-stocks-getting-hit-hardest-in-today-s-rotation-idhGJw2g2Q72J2tjuiZn?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Equities Plunge in Tech-Led Sell-Off Amid Data Center Restriction Fears",
-      "summary": "Stocks on Wall Street plummeted intraday with the technology sector getting hammered the most, as tr",
-      "publisher": "MT Newswires",
-      "published": "2026-11-05 19:14 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/equities-plunge-tech-led-sell-191442459.html"
-     },
-     {
-      "title": "The Stock Market Celebrated Election Day. Then the AI Trade Imploded.",
-      "summary": "Investors have to consider how quickly data centers can actually be built, and what that will mean for the companies selling products into the ecosystem.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 19:04 UTC",
-      "link": "https://www.barrons.com/articles/stock-market-ai-stocks-tech-nasdaq-f33b2af3?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Sandisk Stock Is Down 45% Over the Past Four Months. Is It a Bargain or a Value Trap?",
-      "summary": "Investors are worried about the future.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-05 19:03 UTC",
-      "link": "https://www.fool.com/investing/2026/11/05/sandisk-stock-is-down-47-over-the-past-four-months/"
-     },
-     {
-      "title": "Some of the Year\u2019s Hottest AI ETFs Are in Big Trouble Today",
-      "summary": "Buzzy AI ETFs that hold big helpings of AI-powered stocks are logging outsize declines as investors try to determine the next phase of the tech trade.",
-      "publisher": "Investopedia",
-      "published": "2026-11-05 18:44 UTC",
-      "link": "https://www.investopedia.com/some-of-the-year-s-hottest-ai-etfs-are-in-trouble-today-dram-soxx-12238182"
      },
      {
       "title": "Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed",
@@ -1510,48 +1486,45 @@
       "link": "https://finance.yahoo.com/markets/article/micron-and-sandisk-valuation-multiples-are-unbelievable-as-chip-stocks-get-crushed-180250881.html"
      },
      {
-      "title": "Micron Stock Plunges As Memory-Chip Shortages Cause Ripple Effects",
-      "summary": "Micron stock fell Thursday as memory-chip shortages are having ripple effects across the tech sector.",
-      "publisher": "Investor's Business Daily",
-      "published": "2026-11-05 17:56 UTC",
-      "link": "https://www.investors.com/news/technology/micron-stock-plunges-memory-chip-shortages/?src=A00220&yptr=yahoo"
-     },
-     {
-      "title": "The Unwinding of the AI Trade Is Taking These Stocks Down With It the Most",
-      "summary": "Vertiv, Sandisk, and other stocks with AI and data-center exposure are the worst performing S&P 500 components since the closing bell on Tuesday.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 17:33 UTC",
-      "link": "https://www.barrons.com/articles/sandisk-stock-vertiv-flex-ai-trade-16cce859?siteid=yhoof2&yptr=yahoo"
+      "title": "Nvidia has lost nearly $1.4 trillion since its October record",
+      "summary": "Nvidia is losing the most in S&P 500 stocks by value in Thursday's market rout, on track for a fifth straight week of losses.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-05 16:59 UTC",
+      "link": "https://finance.yahoo.com/markets/article/nvidia-has-lost-nearly-14-trillion-since-its-october-record-165912910.html"
      },
      {
       "title": "Qualcomm, Micron, Sandisk, and AMD stocks sink, leading chip sector lower",
-      "summary": "Qualcomm, Micron, and Arm Holdings were all trading lower on Thursday as chip stocks continued to slide.",
+      "summary": "Qualcomm, Micron, and Arm Holdings tanked on Thursday as investors unloaded AI trade stocks.",
       "publisher": "Yahoo Finance",
       "published": "2026-11-05 13:31 UTC",
       "link": "https://finance.yahoo.com/markets/article/qualcomm-micron-arm-stocks-sink-lead-chip-sector-lower-133100607.html"
      }
     ],
-    "summary": "Sandisk shares fell on Thursday as chip and AI data-center stocks sold off broadly, with headlines citing a reassessment of the AI build-out and data-center restriction fears. One article reports Sandisk is down 45% over the past four months, and another says memory-chip shortages are causing ripple effects across tech.",
+    "model": "claude-haiku-5-5",
+    "summary": "SanDisk shares fell about 20% on November 5 as an AI-related sell-off deepened, even though the company reported strong earnings. The decline tracked Nvidia and Broadcom, with investors questioning the outlook for AI data center expansion. The Nasdaq entered correction territory the same day.",
     "sentiment": "negative",
     "drivers": [
-     "Broad sell-off in chip and AI data-center stocks",
-     "Concerns about a slowdown in AI build-out",
-     "Data center restriction fears",
+     "AI sell-off and doubts about data center expansion outlook",
+     "Broad chip sector and Big Tech sell-off",
+     "Nasdaq in correction territory amid data center anxiety",
      "Memory-chip shortage ripple effects"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1402,
-    "output_tokens": 385,
-    "cost_usd": 0.00033270000000000006,
-    "status": "ok",
-    "created_at": "2026-11-05T21:05:27Z",
-    "cached": true
+    "input_tokens": 1416,
+    "output_tokens": 347,
+    "cost_usd": 0.0003151,
+    "status": "ok"
    },
    {
-    "asof": "2026-11-05",
     "ticker": "MRNA",
     "headlines": [
+     {
+      "title": "Ahead of Moderna Earnings, Here's What Barchart Data Says Comes Next for MRNA Stock",
+      "summary": "Moderna is set to report its fiscal Q3 earnings on Nov. 6. Options data suggests MRNA shares could tumble after the quarterly update.",
+      "publisher": "Barchart",
+      "published": "2026-11-05 17:42 UTC",
+      "link": "https://www.barchart.com/story/news/8679142/ahead-of-moderna-earnings-here-s-what-barchart-data-says-comes-next-for-mrna-stock"
+     },
      {
       "title": "Moderna Soared 8% on Cancer Data. Friday\u2019s Report Shows Whether It Can Afford the Pipeline",
       "summary": "Key TakeawaysModerna stock jumped 13% on Wednesday to a new 52-week high on early multiple myeloma data and an Ebola vaccine recommendation, then gave back 5% on Thursday ahead of Friday\u2019s report. Pfizer\u2019s Comirnaty sales fell 29% operationally in the third quarter, and BioNTech\u2019s revenue fell 15%.",
@@ -1607,48 +1580,38 @@
       "publisher": "MT Newswires",
       "published": "2026-11-04 21:18 UTC",
       "link": "https://finance.yahoo.com/markets/stocks/articles/us-equity-markets-end-higher-211811079.html"
-     },
-     {
-      "title": "Sector Update: Healthcare Stocks Rise Wednesday Afternoon",
-      "summary": "Healthcare stocks were higher Wednesday afternoon, with the NYSE Healthcare Index rising 2.6% and th",
-      "publisher": "MT Newswires",
-      "published": "2026-11-04 18:31 UTC",
-      "link": "https://finance.yahoo.com/healthcare/articles/sector-healthcare-stocks-rise-wednesday-183122395.html"
-     },
-     {
-      "title": "Earnings live updates: Cava stock falls after cyclospora outbreak dented Q3 results",
-      "summary": "The third quarter earnings season is over halfway done, and the reports continue to pour in.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-02 21:28 UTC",
-      "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-apple-palantir-roku-and-more-212856249.html"
      }
     ],
-    "summary": "Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group recommendation to advance its Bundibugyo ebolavirus vaccine candidate, mRNA-1469, into a Phase 2/3 efficacy study in the DRC. The stock then fell about 5% on Thursday ahead of its earnings report scheduled for Friday. Pfizer reported a 29% operational decline in Comirnaty sales in the third quarter, and BioNTech reported a 15% revenue decline.",
+    "model": "claude-haiku-5-5",
+    "summary": "Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group backing its Ebola vaccine candidate mRNA-1469 for a Phase 2/3 study, then fell about 5% on Thursday. The company is scheduled to report fiscal Q3 earnings on Nov. 6, and Barchart reports that options data suggests shares could fall after the update.",
     "sentiment": "neutral",
     "drivers": [
      "WHO advisory backing for mRNA-1469 Ebola vaccine candidate",
      "Early multiple myeloma data",
-     "Friday earnings report ahead",
-     "Reported Comirnaty sales decline at Pfizer and BioNTech"
+     "Fiscal Q3 earnings scheduled for Nov. 6",
+     "Options data implying possible post-earnings decline"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1606,
-    "output_tokens": 702,
-    "cost_usd": 0.0005116000000000001,
-    "status": "ok",
-    "created_at": "2026-11-05T21:05:32Z",
-    "cached": true
+    "input_tokens": 1537,
+    "output_tokens": 578,
+    "cost_usd": 0.0004427,
+    "status": "ok"
    },
    {
-    "asof": "2026-11-05",
     "ticker": "LITE",
     "headlines": [
      {
-      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
+      "title": "Chip Stocks Fall on AI Regulation Fears",
+      "summary": "Nvidia isn\u2019t the only chipmaker feeling a post-midterms chill.",
+      "publisher": "The Wall Street Journal",
+      "published": "2026-11-05 22:33 UTC",
+      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "Stock Market Today: Nasdaq Slammed By Big Tech Sell-Off; Nvidia Hits Bear Territory",
       "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
       "publisher": "Investor's Business Daily",
-      "published": "2026-11-05 20:50 UTC",
+      "published": "2026-11-05 21:34 UTC",
       "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
      },
      {
@@ -1664,13 +1627,6 @@
       "publisher": "24/7 Wall St.",
       "published": "2026-11-05 19:03 UTC",
       "link": "https://247wallst.com/investing/2026/11/05/cisco-falls-7-on-morgan-stanley-downgrade-ciena-plunges-15-arista-networks-tumbles-10/"
-     },
-     {
-      "title": "Chip Stocks Face AI Regulation Fears",
-      "summary": "Nvidia isn\u2019t the only chipmaker feeling a post-midterms chill.",
-      "publisher": "The Wall Street Journal",
-      "published": "2026-11-05 18:52 UTC",
-      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?siteid=yhoof2&yptr=yahoo"
      },
      {
       "title": "Lumentum Sinks 15% as AI Chip Selloff Deepens",
@@ -1715,54 +1671,51 @@
       "link": "https://247wallst.com/investing/2026/11/05/coherent-now-sees-growth-above-60-and-its-first-4-billion-quarter-by-fiscal-2028/"
      }
     ],
-    "summary": "Marvell agreed to acquire Lumentum in a $115 billion all-stock deal, and Lumentum shares fell 13% to 15% in the same period as a broader post-election AI chip and optical selloff deepened. Coverage notes that Lumentum's price now tracks Marvell's shares because Marvell is paying in stock with no price protection.",
+    "model": "claude-haiku-5-5",
+    "summary": "Marvell agreed on November 5 to buy Lumentum in a $115 billion all-stock deal, and Lumentum shares fell about 13% to 15% that day amid a broad AI and optical-stock selloff. TIKR reports that Lumentum trades on Marvell's share price because Marvell is paying in stock without price protection.",
     "sentiment": "negative",
     "drivers": [
-     "Marvell all-stock acquisition of Lumentum",
+     "Marvell $115B all-stock acquisition of Lumentum",
      "Post-election AI chip and optical selloff",
-     "Lumentum shares tied to Marvell's stock price",
-     "Chip stock AI regulation fears"
+     "Lumentum value tied to Marvell share price",
+     "Broad Big Tech and AI-regulation fears"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1672,
-    "output_tokens": 405,
-    "cost_usd": 0.00036970000000000004,
-    "status": "ok",
-    "created_at": "2026-11-05T21:05:34Z",
-    "cached": true
+    "input_tokens": 1656,
+    "output_tokens": 415,
+    "cost_usd": 0.0003731,
+    "status": "ok"
    },
    {
-    "asof": "2026-11-05",
     "ticker": "MU",
     "headlines": [
      {
-      "title": "Stock Market Today: Dow Loses 1,700 As Nasdaq Craters; Tesla, SpaceX Lose $450 Bil. In Two Days (Live Coverage)",
-      "summary": "The Dow Jones index rises Thursday after the postelection rally. Cava and Dutch Bros plunge on earnings.",
-      "publisher": "Investor's Business Daily",
-      "published": "2026-11-05 20:50 UTC",
-      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-election-rally-cava-dutch-bros/?src=A00220&yptr=yahoo"
+      "title": "Should You Buy SanDisk Stock For Its Cash?",
+      "summary": "For questions about this article or underlying research, email help@trefis.com.",
+      "publisher": "Trefis",
+      "published": "2026-11-06 00:01 UTC",
+      "link": "https://www.trefis.com/stock/sndk/articles/622855/should-you-buy-sandisk-stock-for-its-cash/2026-11-05"
      },
      {
-      "title": "Micron Stock Falls After Report of $4.5 Billion Taiwan Pause",
-      "summary": "The planned plant was set to be a major production base for AI memory components",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-05 19:32 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-stock-falls-report-4-193252177.html"
+      "title": "Midterms Could Deepen the K-Shaped AI Trade as Data Center Curbs Favor Big Tech Companies",
+      "summary": "Democratic gubernatorial victories and data-center restrictions could benefit financially stronger technology companies by making it harder for smaller companies to compete.",
+      "publisher": "International Business Times",
+      "published": "2026-11-05 22:55 UTC",
+      "link": "https://www.ibtimes.com/midterm-elections-big-tech-ai-data-centers-3809465"
      },
      {
-      "title": "Anthropic's IPO plans run up against a battered Wall Street",
-      "summary": "Anthropic's IPO plans are clashing with a market rout.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-05 19:21 UTC",
-      "link": "https://finance.yahoo.com/technology/article/anthropics-ipo-plans-run-up-against-a-battered-wall-street-192138177.html"
+      "title": "Chip Stocks Fall on AI Regulation Fears",
+      "summary": "Nvidia isn\u2019t the only chipmaker feeling a post-midterms chill.",
+      "publisher": "The Wall Street Journal",
+      "published": "2026-11-05 22:33 UTC",
+      "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-11-05-2026/card/chip-stocks-hit-by-data-center-ai-regulation-fears-TjThbzZVLKxkZW5tt26b?siteid=yhoof2&yptr=yahoo"
      },
      {
-      "title": "This Semiconductor ETF Is Set For Its Worst Week In Over 18 Months As Democratic Sweep Raises Data Center Skepticism",
-      "summary": "Global chip stocks suffered steep losses on Thursday, extending a broad market retreat as a Democratic sweep in the midterm elections fueled growing political resistance against artificial intelligence infrastructure.",
-      "publisher": "Stocktwits",
-      "published": "2026-11-05 19:21 UTC",
-      "link": "https://stocktwits.com/news-articles/markets/equity/soxx-etf-semiconductor-is-set-for-its-worst-week-in-over-18-months/cNG1sEhR94Z"
+      "title": "Nvidia, Micron, Intel, Sandisk, Palantir, AppLovin, Qualcomm, and More Stocks That Explain Today\u2019s Market",
+      "summary": "Intel stock is on track to slump more than 50% in a month.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-05 22:12 UTC",
+      "link": "https://www.barrons.com/articles/stock-movers-8b39c82b?siteid=yhoof2&yptr=yahoo"
      },
      {
       "title": "Micron and Sandisk valuation multiples are unbelievable as chip stocks get crushed",
@@ -1779,8 +1732,8 @@
       "link": "https://finance.yahoo.com/markets/article/nvidia-has-lost-nearly-14-trillion-since-its-october-record-165912910.html"
      },
      {
-      "title": "Micron stock declines 12% as chip sell-off deepens",
-      "summary": "Micron led the chip sector lower on Thursday amid a heavy sell-of",
+      "title": "Micron stock sinks 17% as chip sector crashes",
+      "summary": "Micron led the chip sector lower on Thursday amid a heavy sell-off.",
       "publisher": "Yahoo Finance",
       "published": "2026-11-05 16:31 UTC",
       "link": "https://finance.yahoo.com/markets/article/micron-declines-12-as-chip-sell-off-deepens-163137019.html"
@@ -1794,7 +1747,7 @@
      },
      {
       "title": "Qualcomm, Micron, Sandisk, and AMD stocks sink, leading chip sector lower",
-      "summary": "Qualcomm, Micron, and Arm Holdings were all trading lower on Thursday as chip stocks continued to slide.",
+      "summary": "Qualcomm, Micron, and Arm Holdings tanked on Thursday as investors unloaded AI trade stocks.",
       "publisher": "Yahoo Finance",
       "published": "2026-11-05 13:31 UTC",
       "link": "https://finance.yahoo.com/markets/article/qualcomm-micron-arm-stocks-sink-lead-chip-sector-lower-133100607.html"
@@ -1807,27 +1760,38 @@
       "link": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-plunge-chip-stocks-melt-down-193726491.html"
      }
     ],
-    "summary": "Micron shares fell about 12% on Thursday, November 5, 2026, as a broad chip sell-off deepened during a market rout in which the Nasdaq entered a correction. A report of a planned $4.5 billion Taiwan plant being paused also weighed on the stock, and that plant was described as a major production base for AI memory components. Analysts and outlets tied the sell-off to a Democratic sweep in the midterm elections, which raised concerns about political resistance to AI infrastructure.",
+    "model": "claude-haiku-5-5",
+    "summary": "Micron stock fell 17% on Thursday, November 5, as a broad chip-sector sell-off led by AI-trade stocks pushed the Nasdaq into a correction. Headlines tie the selling to post-midterm AI regulation fears and new data-center restrictions, and one headline describes Micron's valuation multiples as unusually low after the decline.",
     "sentiment": "negative",
     "drivers": [
-     "Broad chip sector sell-off on Thursday",
-     "Report of a $4.5 billion Taiwan plant pause",
-     "Political pushback on AI infrastructure after the Democratic sweep",
-     "Nasdaq correction amid AI trade meltdown"
+     "Chip-sector and AI-trade sell-off",
+     "AI regulation fears after midterms",
+     "Data-center restriction concerns",
+     "Nasdaq correction and broad market rout"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1461,
-    "output_tokens": 278,
-    "cost_usd": 0.00028510000000000005,
-    "status": "ok",
-    "created_at": "2026-11-05T21:05:36Z",
-    "cached": true
+    "input_tokens": 1394,
+    "output_tokens": 329,
+    "cost_usd": 0.00030389999999999996,
+    "status": "ok"
    },
    {
-    "asof": "2026-11-05",
     "ticker": "DELL",
     "headlines": [
+     {
+      "title": "Nasdaq Enters Correction Territory",
+      "summary": "Traders were looking at a sea of red on Thursday after the stock market reversed the midterm rally and then some.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-05 21:02 UTC",
+      "link": "https://www.barrons.com/livecoverage/stock-market-news-today-110526/card/inside-the-ai-panic-that-knocked-5-5-off-the-nasdaq-CvbKdgSaJkMHYCkurDj3?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "4 Strong Buy AI Stocks to Consider Amid the Tech Selloff: CLS, DELL, TER & AXTI",
+      "summary": "The tech selloff is presenting compelling buying opportunities in these four Strong Buy stocks that are benefiting from booming demand for AI infrastructure and semiconductors.",
+      "publisher": "Zacks",
+      "published": "2026-11-05 20:20 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/4-strong-buy-ai-stocks-202000643.html"
+     },
      {
       "title": "Tech-stock rout accelerates retreat from the AI trade",
       "summary": "NEW YORK, Nov 5 (Reuters) - Tech stocks were headed for their worst decline since June on Thursday, with the semiconductor index briefly falling by double digits\u00a0in the latest autumn reckoning for the",
@@ -1883,102 +1847,85 @@
       "publisher": "Trefis",
       "published": "2026-11-05 12:32 UTC",
       "link": "https://www.trefis.com/stock/aapl/articles/622962/the-open-question-under-apple-stocks-price/2026-11-05"
-     },
-     {
-      "title": "Can Dell Stock Hit $560?",
-      "summary": "For questions about this article or underlying research, email help@trefis.com.",
-      "publisher": "Trefis",
-      "published": "2026-11-05 10:36 UTC",
-      "link": "https://www.trefis.com/stock/dell/articles/622833/can-dell-stock-hit-560/2026-11-05"
-     },
-     {
-      "title": "After an 11% tech sell-off, are AI valuations attractive again?",
-      "summary": "Investing.com and Yahoo Finance LLC may earn commission or revenue on some items through the links below.",
-      "publisher": "Investing.com",
-      "published": "2026-11-05 08:28 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/11-tech-sell-off-ai-082806748.html"
      }
     ],
-    "summary": "Dell shares fell about 11% on November 5, 2026, with no company-specific news, as a tech sell-off that followed the midterm elections deepened. Dell was also down 8% earlier in the session amid a broader chip-stock slide tied to weak phone-chip outlooks and memory costs. Analyst commentary in the headlines notes expected earnings growth and a forward P/E near its 5-year average.",
+    "model": "claude-haiku-5-5",
+    "summary": "Dell shares fell sharply on November 5 as a broad tech and AI-infrastructure selloff deepened after the midterm elections, with one report citing an 11% drop and no company-specific news. Coverage also noted that analysts expect Dell's earnings to more than double this fiscal year, and that its forward P/E is near its five-year average.",
     "sentiment": "negative",
     "drivers": [
-     "Post-midterm tech and AI stock sell-off",
-     "Broader chip-sector decline",
-     "Weak phone-chip outlook and memory cost pressures",
-     "No Dell-specific news cited for the 11% drop"
+     "Post-midterm tech and AI stock selloff",
+     "Chip-sector weakness tied to phone and memory costs",
+     "Nasdaq entering correction territory",
+     "No company-specific news cited"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1519,
-    "output_tokens": 408,
-    "cost_usd": 0.0003559,
-    "status": "ok",
-    "created_at": "2026-11-05T21:05:39Z",
-    "cached": true
+    "input_tokens": 1581,
+    "output_tokens": 313,
+    "cost_usd": 0.0003146,
+    "status": "ok"
    },
    {
-    "asof": "2026-11-05",
     "ticker": "SPCX",
     "headlines": [
      {
-      "title": "SpaceX Stock Tumbles. A 6-Gigawatt AI Data Center Is Drawing Backlash",
-      "summary": "SpaceX Faces Growing Backlash Over Its Massive 6-Gigawatt Arizona AI Project",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-05 19:32 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/spacex-stock-tumbles-6-gigawatt-193257934.html"
+      "title": "Dow Jones Futures Fall; Nasdaq Dives 5.5%, Nvidia, Sandisk, CoreWeave, SpaceX Plunge, But Sell-Off Spreads Beyond AI",
+      "summary": "Nvidia, CoreWeave, SpaceX plunged, but the stock market sell-off spread far beyond AI. The October jobs report looms.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-06 00:19 UTC",
+      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nasdaq-dives-55-nvidia-sandisk-coreweave-spacex-plunge-jobs/?src=A00220&yptr=yahoo"
      },
      {
-      "title": "SpaceX Stock Is Still Falling. It Trades At Apple\u2019s Valuation.",
-      "summary": "China Renaissance initiates coverage of SpaceX with a Buy rating and a $194.20 price target,",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 19:29 UTC",
-      "link": "https://www.barrons.com/articles/spacex-stock-buy-rating-cathie-wood-e46d26d7?siteid=yhoof2&yptr=yahoo"
+      "title": "AT&T, T-Mobile Are Reportedly Ready To Boot Boost Mobile If SpaceX Buys It",
+      "summary": "Semafor\u2019s Rohan Goswami said that AT&T and T-Mobile have discussed removing Boost Mobile from their networks if SpaceX acquires the EchoStar unit, creating a potential obstacle to Elon Musk\u2019s push to become a major U.S. wireless carrier.",
+      "publisher": "Stocktwits",
+      "published": "2026-11-06 00:15 UTC",
+      "link": "https://stocktwits.com/news-articles/markets/equity/at-and-t-t-mobile-are-reportedly-ready-to-boot-boost-mobile-if-space-x-buys-it/cNGlEqAR94p"
      },
      {
-      "title": "What Anthropic's IPO could mean for Amazon and Google",
-      "summary": "Anthropic's IPO could payoff for Amazon and Google.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-05 19:27 UTC",
-      "link": "https://finance.yahoo.com/technology/article/what-anthropics-ipo-could-mean-for-amazon-and-google-192716198.html"
+      "title": "Anthropic faces valuation pushback on $1.5T IPO following market rout, WSJ reports",
+      "summary": "Investing.com -- Anthropic's (NASDAQ:ANT) ambition to execute a record-shattering initial public offering at a $1.5 trillion valuation faces mounting institutional resistance following a sharp, sector-wide unwinding of artificial intelligence bets, according to reporting from The Wall Street Journal. The San Francisco-based artificial intelligence developer had been targeting an offering the week before Thanksgiving to raise up to $100 billion, an effort that would surpass previous benchmark off",
+      "publisher": "Investing.com",
+      "published": "2026-11-05 23:59 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-faces-valuation-pushback-1-235917172.html"
      },
      {
-      "title": "Here's What a $10,000 Investment in Anthropic Could Be Worth by 2030",
-      "summary": "Anthropic could be a huge moneymaker for investors if it can maintain its rapid growth rate.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-05 19:05 UTC",
-      "link": "https://www.fool.com/investing/2026/11/05/heres-what-a-10000-investment-in-anthropic-could-b/"
+      "title": "Grant Cardone Warns James Talarico's Texas Win Could Spell Trouble for Elon Musk's SPCX, AI Bets\u2014Gina Hinojosa Governor Win Sparks Data Center Moratorium Talk",
+      "summary": "Cardone Capital founder and entrepreneur Grant Cardone warned on Tuesday that James Talarico\u2018s Texas Senate race win over GOP\u2019s Ken Paxton could pose challenges to Space Exploration Technologies Corp. as Democrats secure key victories in the midterm elections. Trouble For...",
+      "publisher": "Benzinga",
+      "published": "2026-11-05 23:00 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/grant-cardone-warns-james-talaricos-230006609.html"
      },
      {
-      "title": "Tesla Sinks 12%, SpaceX Down 9% as Midterm Sweep Puts Merger on \u201cA Much Tougher Regulatory Roadmap\u201d",
-      "summary": "[IMAGE CREDIT: NASA/Aubrey Gemignani via Canva] Key TakeawaysTesla shares fell 12% today, and SpaceX fell too, after Democrats swept Congress and Texas and raised doubts about a SpaceX-Tesla merger. A slower merger takes away part of the case Tesla\u2019s bulls have made since October.",
-      "publisher": "TIKR",
-      "published": "2026-11-05 18:43 UTC",
-      "link": "https://www.tikr.com/blog/tesla-sinks-12-spacex-down-9-as-midterm-sweep-puts-merger-on-a-much-tougher-regulatory-roadmap?ref=yahoofinance&tlnk=yf-261105-3qjm6j48"
+      "title": "Here\u2019s Why AI Insurer Lemonade (LMND) May Skyrocket in 2027",
+      "summary": "Our list of the 10 Stocks That Could Skyrocket in 2027 is out, and Lemonade (NYSE:LMND) came in eighth. SpaceX\u2019s public debut in June gave investors a new yardstick for how fast a space-linked stock can move, in both directions. Since then, shares of newer space companies have swung hard around SpaceX\u2019s latest report. Yahoo [\u2026]",
+      "publisher": "Insider Monkey",
+      "published": "2026-11-05 22:32 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/why-ai-insurer-lemonade-lmnd-223259045.html"
      },
      {
-      "title": "Why GM and Hilton Are Moving to the Nasdaq From NYSE",
-      "summary": "Hilton President and CEO Chris Nassetta said about the switch: \u201cNasdaq is closely aligned with our growth ambitions.\u201d",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 18:37 UTC",
-      "link": "https://www.barrons.com/articles/general-motors-hilton-stocks-nasdaq-nyse-aaf2ea6c?siteid=yhoof2&yptr=yahoo"
+      "title": "A Utah Drilling Project Puts Ormat Technologies (ORA) at the Center of Geothermal\u2019s Next Push",
+      "summary": "In our recently published list of the 10 Stocks That Could Skyrocket in 2027, Ormat Technologies (NYSE:ORA) ranked 10th. SpaceX\u2019s public debut in June gave investors a new yardstick for how fast a space-linked stock can move, in both directions. Since then, shares of newer space companies have swung hard around SpaceX\u2019s latest report. Yahoo [\u2026]",
+      "publisher": "Insider Monkey",
+      "published": "2026-11-05 22:31 UTC",
+      "link": "https://finance.yahoo.com/energy/articles/utah-drilling-project-puts-ormat-223143273.html"
      },
      {
-      "title": "Nvidia Stock Is Below $200. What History Suggests Is the Floor.",
-      "summary": "Nvidia stock has hit a three-month low. Here's where its record suggests the slide should stop.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-05 18:23 UTC",
-      "link": "https://www.barrons.com/articles/nvidia-stock-price-floor-0fb3b5dd?siteid=yhoof2&yptr=yahoo"
+      "title": "Marc Chaikin Sees Alphabet (GOOGL) as a Conglomerate Hiding Three World-Class Businesses",
+      "summary": "We just published a list of the 10 Stocks That Could Skyrocket in 2027 and Alphabet (NASDAQ:GOOGL) ranked 6th on this list. SpaceX\u2019s public debut in June gave investors a new yardstick for how fast a space-linked stock can move, in both directions. Since then, shares of newer space companies have swung hard around SpaceX\u2019s [\u2026]",
+      "publisher": "Insider Monkey",
+      "published": "2026-11-05 22:31 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/marc-chaikin-sees-alphabet-googl-223123609.html"
      },
      {
-      "title": "SpaceX (SPCX) Stock Gets Fair Value Boost As Analysts Weigh AI Growth And Risks",
-      "summary": "Space Exploration Technologies is back in focus after analysts lifted their Fair Value per Share from US$222.71 to US$257.11 in their latest SpaceX pricing work. That higher target range is being framed through a very mixed research backdrop, with some reports emphasizing AI and Starlink growth potential and others focusing on execution risk, competitive pressure and the overhang from possible tie up discussions with Tesla. As you read on, you will see how to track these shifting views and...",
-      "publisher": "Simply Wall St.",
-      "published": "2026-11-05 18:13 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-spcx-stock-gets-fair-181345897.html"
+      "title": "Stocks slide as Wall Street's post-election rally fizzles",
+      "summary": "Yahoo Finance Markets and Data Editor Jared Blikre breaks down all of today's market moves, which largely trended downward as markets reversed the gains and optimism from the blue wave rally.",
+      "publisher": "Yahoo Finance Video",
+      "published": "2026-11-05 21:42 UTC",
+      "link": "https://finance.yahoo.com/video/stocks-slide-as-wall-streets-post-election-rally-fizzles-214250142.html"
      },
      {
       "title": "SpaceX, Tesla stocks tumble as Democratic sweep raises questions on merger prospects, AI build-out",
-      "summary": "SpaceX and Tesla extended declines on Thursday.",
+      "summary": "SpaceX and Tesla extended declines on Thursday as Wall Street weighed the risk of regulartory hurdles for the Elon Musk-led companies.",
       "publisher": "Yahoo Finance",
       "published": "2026-11-05 15:30 UTC",
       "link": "https://finance.yahoo.com/markets/article/spacex-tesla-stocks-tumble-as-democratic-sweep-raises-questions-on-merger-prospects-ai-buildout-153753814.html"
@@ -1991,22 +1938,20 @@
       "link": "https://finance.yahoo.com/markets/article/spacex-tesla-shares-extend-declines-semiconductor-stocks-drop-alphacheck-150427180.html"
      }
     ],
-    "summary": "SpaceX (SPCX) shares fell about 9% on November 5, 2026, after Democrats swept Congress and Texas, which raised doubts about a SpaceX-Tesla merger and its regulatory path. Separately, headlines reported growing backlash over a planned 6-gigawatt Arizona AI data center. Analysts remained divided, with China Renaissance initiating coverage at Buy with a $194.20 target and another firm raising its fair value estimate to $257.11.",
+    "model": "claude-haiku-5-5",
+    "summary": "SpaceX (SPCX) shares fell on November 5 and extended declines into November 6, as Wall Street weighed possible regulatory hurdles after the Democratic midterm sweep. Reports also said AT&T and T-Mobile have discussed removing Boost Mobile from their networks if SpaceX acquires the EchoStar unit, and the broader market sell-off spread beyond AI stocks.",
     "sentiment": "negative",
     "drivers": [
-     "Democratic midterm sweep and merger regulatory doubts",
-     "Backlash over 6-gigawatt Arizona AI data center",
-     "Weakness in chip stocks",
-     "Mixed analyst views, including a Buy initiation and raised fair value"
+     "Regulatory risk after Democratic midterm sweep",
+     "Reported carrier pushback on SpaceX's possible Boost Mobile acquisition",
+     "Broader sell-off in AI and tech stocks",
+     "Pending October jobs report"
     ],
     "position_flags": [],
-    "model": "claude-haiku-5-5",
-    "input_tokens": 1473,
-    "output_tokens": 693,
-    "cost_usd": 0.0004938,
-    "status": "ok",
-    "created_at": "2026-11-05T20:09:38Z",
-    "cached": true
+    "input_tokens": 1963,
+    "output_tokens": 424,
+    "cost_usd": 0.0004083,
+    "status": "ok"
    }
   ],
   "scanned": 521,
@@ -2062,7 +2007,7 @@
     "steadiness": 88.4,
     "trend": 0.0,
     "news": 0.0,
-    "ret_12m": 1.1249968141925923,
+    "ret_12m": 1.1249970232993496,
     "rank": 166
    }
   ],
@@ -2084,7 +2029,7 @@
     "steadiness": 96.9,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7527170210337055,
+    "ret_12m": 0.7527171851742802,
     "rank": 2
    },
    {
@@ -2094,7 +2039,7 @@
     "steadiness": 97.7,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7264122063245697,
+    "ret_12m": 0.7264120438074047,
     "rank": 3
    },
    {
@@ -2104,7 +2049,7 @@
     "steadiness": 96.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7451796319517001,
+    "ret_12m": 0.7451797859172624,
     "rank": 4
    },
    {
@@ -2134,7 +2079,7 @@
     "steadiness": 92.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.6785908371315026,
+    "ret_12m": 0.6785906971141895,
     "rank": 7
    },
    {
@@ -2171,45 +2116,6 @@
   "suggestions": [
    {
     "asof": "2026-11-05",
-    "sell": "DIS",
-    "buy": "MRNA",
-    "sell_score": 44.4,
-    "buy_score": 94.7,
-    "sell_rank": 335,
-    "buy_rank": 1,
-    "amount": 31.649400329589845,
-    "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
-    "pending": false,
-    "suggested_on": "2026-11-05"
-   },
-   {
-    "asof": "2026-11-05",
-    "sell": "QQQ",
-    "buy": "MRK",
-    "sell_score": 50.5,
-    "buy_score": 91.0,
-    "sell_rank": 287,
-    "buy_rank": 2,
-    "amount": 511.16949035644535,
-    "reason": "MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.",
-    "pending": false,
-    "suggested_on": "2026-11-05"
-   },
-   {
-    "asof": "2026-11-05",
-    "sell": "SPY",
-    "buy": "VTRS",
-    "sell_score": 59.2,
-    "buy_score": 91.0,
-    "sell_rank": 213,
-    "buy_rank": 3,
-    "amount": 73.3,
-    "reason": "VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.",
-    "pending": false,
-    "suggested_on": "2026-11-05"
-   },
-   {
-    "asof": "2026-11-05",
     "sell": "ASML",
     "buy": "TGT",
     "sell_score": 63.7,
@@ -2218,7 +2124,20 @@
     "buy_rank": 4,
     "amount": 67.83250122070312,
     "reason": "TGT ranks #4 of 518 (+75% over 12 months, above its 50- and 200-day averages); ASML ranks #173 (+76% over 12 months, below its 50- and 200-day averages). Score 91 vs 64.",
-    "pending": false,
+    "pending": true,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "DIS",
+    "buy": "MRNA",
+    "sell_score": 44.4,
+    "buy_score": 94.7,
+    "sell_rank": 335,
+    "buy_rank": 1,
+    "amount": 31.649400329589845,
+    "reason": "MRNA ranks #1 of 518 (+727% over 12 months, above its 50- and 200-day averages); DIS ranks #335 (-5% over 12 months, above its 50- and 200-day averages). Score 95 vs 44.",
+    "pending": true,
     "suggested_on": "2026-11-05"
    },
    {
@@ -2231,11 +2150,37 @@
     "buy_rank": 5,
     "amount": 111.11999816894532,
     "reason": "TXN ranks #5 of 518 (+84% over 12 months, above its 50- and 200-day averages); LRCX ranks #166 (+112% over 12 months, below its 50- and 200-day averages). Score 91 vs 65.",
-    "pending": false,
+    "pending": true,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "QQQ",
+    "buy": "MRK",
+    "sell_score": 50.5,
+    "buy_score": 91.0,
+    "sell_rank": 287,
+    "buy_rank": 2,
+    "amount": 511.16949035644535,
+    "reason": "MRK ranks #2 of 518 (+75% over 12 months, above its 50- and 200-day averages); QQQ ranks #287 (+23% over 12 months, below its 50- and 200-day averages). Score 91 vs 50.",
+    "pending": true,
+    "suggested_on": "2026-11-05"
+   },
+   {
+    "asof": "2026-11-05",
+    "sell": "SPY",
+    "buy": "VTRS",
+    "sell_score": 59.2,
+    "buy_score": 91.0,
+    "sell_rank": 213,
+    "buy_rank": 3,
+    "amount": 73.3,
+    "reason": "VTRS ranks #3 of 518 (+73% over 12 months, above its 50- and 200-day averages); SPY ranks #213 (+16% over 12 months, above one of its 50-/200-day averages). Score 91 vs 59.",
+    "pending": true,
     "suggested_on": "2026-11-05"
    }
   ],
-  "status": "5 new swap(s) suggested"
+  "status": "swap ideas from earlier this week are still open"
  },
  "auto_levels": [
   {
