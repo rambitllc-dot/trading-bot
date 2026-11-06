@@ -754,3 +754,91 @@ ALERTS (3)
 - [info] CNC is 42% of the book (cap 40%). -> YOUR PLAN: REVIEW
 - [info] Healthcare is 79% of the book (cap 60%). -> YOUR PLAN: REVIEW
 Notifier: nothing to send
+IB sync waiting: IB's report is from 2026-11-05, but positions.json has a buy from 2026-11-06; it will sync once IB's report includes it; 0 new trade(s) saved
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ANT"}}}
+$ANT: No data found, symbol may be delisted
+
+1 Failed download:
+['ANT']: No data found, symbol may be delisted
+Portfolio as of 2026-11-06
+Value $815.67 · cost $819.11 · P&L -$3.44 (-0.4%) · net delta 7 shares · theta $0.00/day · 5/5 positions priced
+
+- CNC shares x4.9002: mark $69.46, value $340.37, P&L -$5.54 (-1.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: trailing stop (3 x typical daily move below the highest close)) · LOSING -1.6%: #1 in line for the next swap).
+- MRK shares x1: mark $146.74, value $146.74, P&L -$0.97 (-0.7%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: trailing stop (3 x typical daily move below the highest close)) · LOSING -0.7%: #2 in line for the next swap).
+- MRNA shares x0.6: mark $259.13, value $155.48, P&L -$0.65 (-0.4%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: trailing stop (3 x typical daily move below the highest close)) · LOSING -0.4%: #3 in line for the next swap).
+- TXN shares x0.6: mark $279.78, value $167.87, P&L $3.71 (+2.3%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: trailing stop (3 x typical daily move below the highest close))).
+- CASH shares x5.21: mark $1.00, value $5.21, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 7 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: CNC 42% (over cap), TXN 21%, MRNA 19%, MRK 18%, CASH 1%
+By sector: Healthcare 79% (over cap), Technology 21%, Cash 1%
+
+Flags:
+- [info] CNC is 42% of the book (cap 40%).
+- [info] Healthcare is 79% of the book (cap 60%).
+
+MARKET ENVIRONMENT (macro gate)
+45/100 · Mixed (vix level 56, vix percentile 8, term structure 22, breadth 64, credit 66)
+
+NEWS (Claude summaries, facts only)
+- CNC [positive] (cached): Centene (CNC) reached a 52-week high on November 5, 2026, according to a Zacks article that asks whether the stock has more room to run. Several same-day commentaries tie managed care and healthcare stocks to shifting policy expectations after the midterm elections, and Cigna beat Q3 estimates.
+  Drivers: Stock at 52-week high on Nov 5; Midterm election shifts in policy expectations; Cigna Q3 beat and raised 2026 EPS outlook; Peer Humana expecting higher Q3 premiums
+- MRK [neutral] (cached): Few headlines name Merck directly. The main MRK-related item is Halozyme reporting a Dutch patent victory against Merck, while US litigation between the two continues. Separately, global healthcare stocks fell on Friday in a broader market rout.
+  Drivers: Halozyme Dutch patent win against Merck; US patent litigation still ongoing; Broader healthcare sector sell-off
+- MRNA [neutral] (cached): Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group backing its Ebola vaccine candidate mRNA-1469 for a Phase 2/3 study, then fell about 5% on Thursday. The company is scheduled to report fiscal Q3 earnings on Nov. 6, and Barchart reports that options data suggests shares could fall after the update.
+  Drivers: WHO advisory backing for mRNA-1469 Ebola vaccine candidate; Early multiple myeloma data; Fiscal Q3 earnings scheduled for Nov. 6; Options data implying possible post-earnings decline
+- TXN [neutral] (cached): Texas Instruments priced $2.0 billion of senior unsecured notes to help fund its planned acquisition of Silicon Laboratories and cover transaction costs, according to a Simply Wall St. article that also reports a 5.63% 30-day share price return. Headlines also report that ETFs bought $144.6 million of TXN on Nov. 3, and that the Avantis U.S. Large Cap Value fund added $49.7 million of TXN that day. An Investing.com piece says the stock is up 76% over a year while AI chip stocks have stumbled.
+  Drivers: Planned Silicon Laboratories acquisition and $2.0B debt financing; ETF and fund buying in early November; Strong 1-year share price gain; Broader AI chip sector weakness
+Claude cost this run: $0.0018
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 521 of 524 stocks.
+- Watchlist SPCX 133.57: 21.4% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 160.56: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+736% over 12 months), SNDK (+643% over 12 months), LITE (+351% over 12 months), MU (+337% over 12 months), DELL (+280% over 12 months)
+Pullbacks in uptrends: MPC (+26% above its 200-day average, RSI-2 2 after a sharp drop), LMT (+1% above its 200-day average, RSI-2 3 after a sharp drop), PSX (+23% above its 200-day average, RSI-2 3 after a sharp drop), IFF (+6% above its 200-day average, RSI-2 3 after a sharp drop), TRGP (+3% above its 200-day average, RSI-2 4 after a sharp drop)
+New 52-week highs: MRNA (new 52-week high at 259.30), VTRS (new 52-week high at 19.68), CPAY (new 52-week high at 455.18), ABNB (new 52-week high at 190.79), DGX (new 52-week high at 256.13)
+Unusual volume: AXON (volume 3.6x normal, -17% on the day)
+  MRNA [neutral]: Moderna shares rose about 13% on Wednesday to a new 52-week high after early multiple myeloma data and a WHO technical advisory group backing its Ebola vaccine candidate mRNA-1469 for a Phase 2/3 study, then fell about 5% on Thursday. The company is scheduled to report fiscal Q3 earnings on Nov. 6, and Barchart reports that options data suggests shares could fall after the update.
+  SNDK [negative]: SanDisk shares fell about 20% on November 5 as an AI-related sell-off deepened, even though the company reported strong earnings. The decline tracked Nvidia and Broadcom, with investors questioning the outlook for AI data center expansion. The Nasdaq entered correction territory the same day.
+  LITE [negative]: Marvell agreed on November 5 to buy Lumentum in a $115 billion all-stock deal, and Lumentum shares fell about 13% to 15% that day amid a broad AI and optical-stock selloff. TIKR reports that Lumentum trades on Marvell's share price because Marvell is paying in stock without price protection.
+  MU [negative]: Micron stock fell 17% on Thursday, November 5, as a broad chip-sector sell-off led by AI-trade stocks pushed the Nasdaq into a correction. Headlines tie the selling to post-midterm AI regulation fears and new data-center restrictions, and one headline describes Micron's valuation multiples as unusually low after the decline.
+  DELL [negative]: Dell shares fell sharply on November 5 as a broad tech and AI-infrastructure selloff deepened after the midterm elections, with one report citing an 11% drop and no company-specific news. Coverage also noted that analysts expect Dell's earnings to more than double this fiscal year, and that its forward P/E is near its five-year average.
+  SPCX [negative]: SpaceX (SPCX) shares fell on November 5 and extended declines into November 6, as Wall Street weighed possible regulatory hurdles after the Democratic midterm sweep. Reports also said AT&T and T-Mobile have discussed removing Boost Mobile from their networks if SpaceX acquires the EchoStar unit, and the broader market sell-off spread beyond AI stocks.
+  PLTR [negative]: Palantir reported 96% revenue growth, its fastest in its public company history, yet the stock still fell as investors sold off tech and AI names amid a broader sell-off. As of Nov 6 it traded at $161.69, up 4.32% intraday, though one outlet describes the daily trend as still weak.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- CNC: stop 66.35 · target 89.48 · typical daily move 3.25
+- MRK: stop 138.85 · target 176.66 · typical daily move 4.96
+- MRNA: stop 244.60 · target 397.27 · typical daily move 22.16
+- TXN: stop 257.18 · target 346.77 · typical daily move 11.66
+
+ROTATION (follow the money)
+- #1 in swap line: CNC, rank #1 of 518, score 96, LOSING -1.6%
+- #2 in swap line: MRK, rank #4 of 518, score 91, LOSING -0.7%
+- #3 in swap line: MRNA, rank #2 of 518, score 95, LOSING -0.4%
+- #4 in swap line: TXN, rank #6 of 518, score 91
+Strongest stocks you don't own: TGT (91), VTRS (91), CRL (90), CPAY (89), HST (89)
+Status: no swap: no stock you don't own clearly beats a holding that's free to swap (needs a score of 80+ and a 25-point lead); best candidate TGT scores 91
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) +0.00 from 0 win(s) / 0 loss(es); fees 0.79
+Open (not locked in) -3.44 · total -3.44
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -5.0 pts after 1 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: +7.2 pts after 1 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -6.7 pts after 1 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -8.1 pts after 1 day(s)
+1 of 4 swap ideas are ahead; average edge -3.1 pts
+
+ALERTS (3)
+- [warn] NEW Market environment moved from Stressed (40) to Mixed (45). -> YOUR PLAN: REVIEW
+- [info] CNC is 42% of the book (cap 40%). -> YOUR PLAN: REVIEW
+- [info] Healthcare is 79% of the book (cap 60%). -> YOUR PLAN: REVIEW
+Notifier: sent
