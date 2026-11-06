@@ -147,5 +147,7 @@ values are kept. It can only *read* your account; it cannot trade.
 - **Wins & losses**: every trade from IB (needs the **Trades** section in the Flex Query). Sales carry IB's realized
   profit/loss; open positions add the not-yet-locked-in part. Win rate, average win/loss, fees.
 - **Your book vs the S&P 500**: book value each evening against SPY from the first tracked day.
+- **Swap line**: holdings losing money since you bought them are flagged LOSING and go first in line for the next
+  swap (biggest loss first), then the lowest-scoring. They still need a clearly stronger replacement.
 - **Swap scorecard**: for every swap idea, the bought stock's return minus the sold stock's return since the
   idea's close ("edge"). Marked FOLLOWED / PARTLY / SKIPPED / OPEN from your trades, so skipped ideas are judged too.

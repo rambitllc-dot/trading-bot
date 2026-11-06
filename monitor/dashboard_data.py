@@ -113,7 +113,8 @@ def load(db_path=None, asof=None):
         if table_exists(con, "rotation_scores"):
             sc = rows(con, "SELECT * FROM rotation_scores WHERE asof=? ORDER BY rank", (asof,))
             rot["universe"] = len(sc)
-            rot["holdings"] = sorted([r for r in sc if r["held"]], key=lambda r: r["score"])
+            rot["holdings"] = sorted([r for r in sc if r["held"]],
+                                     key=lambda r: (r.get("queue") or 999, r["score"]))  # swap line order
             rot["top"] = [r for r in sc if not r["held"]][:10]
         if table_exists(con, "rotation_log"):
             since = (dt.date.fromisoformat(asof) - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat()

@@ -7,7 +7,11 @@ Every run, score every stock in the market the same way (S&P 500 + major ETFs + 
   news        Claude's sentiment where available: positive 100, neutral 50, negative 0 (50 if none)
 blended with ROTATION_WEIGHTS into a 0-100 score, and rank everything.
 
-Then, starting with your weakest holding, pair each holding with the strongest stock you don't own
+Swap queue: holdings that are losing money since you bought them are flagged LOSING and go first in line
+(biggest loss first); the rest follow, weakest score first. A losing stock still needs a clearly stronger
+replacement (the rules below); being first in line means it gets the best candidate before anything else.
+
+Then, going down the swap queue, pair each holding with the strongest stock you don't own
 (a different one for each swap) and suggest a SWAP when:
   - the candidate scores at least ROTATION_MIN_SCORE and beats that holding by ROTATION_MARGIN points
   - that holding wasn't already swapped / suggested in the last ROTATION_COOLDOWN_DAYS days
@@ -24,7 +28,7 @@ from . import config
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS rotation_scores (
     asof TEXT, ticker TEXT, rank INTEGER, score REAL, momentum REAL, steadiness REAL, trend REAL, news REAL,
-    ret_12m REAL, held INTEGER, PRIMARY KEY (asof, ticker));
+    ret_12m REAL, held INTEGER, pnl_pct REAL, queue INTEGER, PRIMARY KEY (asof, ticker));
 CREATE TABLE IF NOT EXISTS rotation_log (
     asof TEXT, sell TEXT, buy TEXT, sell_score REAL, buy_score REAL, sell_rank INTEGER,
     buy_rank INTEGER, amount REAL, reason TEXT, PRIMARY KEY (asof, sell));
@@ -91,8 +95,24 @@ def why(r):
     return ", ".join(parts)
 
 
+def queue(mine, held):
+    """Order holdings for swapping: losing money first (biggest loss first), then lowest score first.
+    Adds losing / pnl_pct / queue (1 = first in line) to each holding."""
+    for r in mine:
+        r["pnl_pct"] = held[r["ticker"]].get("pnl_pct")
+        r["losing"] = r["pnl_pct"] is not None and r["pnl_pct"] < 0
+    mine.sort(key=lambda r: (0, r["pnl_pct"]) if r["losing"] else (1, r["score"]))
+    for i, r in enumerate(mine, 1):
+        r["queue"] = i
+    return mine
+
+
 def migrate(con):
     """Older databases keyed rotation_log by date only (one swap per day); key it by date + stock."""
+    have = {r[1] for r in con.execute("PRAGMA table_info(rotation_scores)")}
+    for col, typ in (("pnl_pct", "REAL"), ("queue", "INTEGER")):
+        if have and col not in have:
+            con.execute(f"ALTER TABLE rotation_scores ADD COLUMN {col} {typ}")
     pk = [r[1] for r in con.execute("PRAGMA table_info(rotation_log)") if r[5]]
     if pk == ["asof"]:
         con.execute("ALTER TABLE rotation_log RENAME TO rotation_log_old")
@@ -113,15 +133,16 @@ def run(con, asof, rows, data, sentiment=None):
     migrate(con)
     held = {r["ticker"]: r for r in rows if r["asset_type"] == "shares" and r.get("value")}
     scored = score_all(data, sentiment)
-    con.execute("DELETE FROM rotation_scores WHERE asof=?", (asof,))
-    con.executemany("INSERT INTO rotation_scores VALUES (?,?,?,?,?,?,?,?,?,?)",
-                    [(asof, r["ticker"], r["rank"], r["score"], r["momentum"], r["steadiness"], r["trend"], r["news"],
-                      r["ret_12m"], int(r["ticker"] in held)) for r in scored])
-    con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
-    con.commit()
     by = {r["ticker"]: r for r in scored}
     total = len(scored)
-    mine = sorted([by[t] for t in held if t in by], key=lambda r: r["score"])
+    mine = queue([by[t] for t in held if t in by], held)
+    con.execute("DELETE FROM rotation_scores WHERE asof=?", (asof,))
+    con.executemany("INSERT INTO rotation_scores (asof, ticker, rank, score, momentum, steadiness, trend, news, ret_12m,"
+                    " held, pnl_pct, queue) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+                    [(asof, r["ticker"], r["rank"], r["score"], r["momentum"], r["steadiness"], r["trend"], r["news"],
+                      r["ret_12m"], int(r["ticker"] in held), r.get("pnl_pct"), r.get("queue")) for r in scored])
+    con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
+    con.commit()
     result = {"universe": total, "holdings": mine, "top": [r for r in scored if r["ticker"] not in held][:10],
               "suggestions": [], "status": ""}
     if not mine:
@@ -139,7 +160,7 @@ def run(con, asof, rows, data, sentiment=None):
     new = []
     candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
                   and r["ticker"] not in taken]
-    for h in mine:  # weakest first
+    for h in mine:  # swap queue: losing first, then weakest
         if h["ticker"] in swapped_this_week:
             continue
         bought = held[h["ticker"]].get("entry_date")
@@ -151,7 +172,8 @@ def run(con, asof, rows, data, sentiment=None):
             continue
         candidates.pop(0)
         amount = held[h["ticker"]]["value"]
-        reason = (f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
+        reason = (("LOSING " + f"{h['pnl_pct']:.1f}% since you bought it, first in line. " if h.get("losing") else "")
+                  + f"{best['ticker']} ranks #{best['rank']} of {total} ({why(best)}); "
                   f"{h['ticker']} ranks #{h['rank']} ({why(h)}). Score {best['score']:.0f} vs {h['score']:.0f}.")
         s = {"asof": asof, "sell": h["ticker"], "buy": best["ticker"], "sell_score": h["score"],
              "buy_score": best["score"], "sell_rank": h["rank"], "buy_rank": best["rank"], "amount": amount,

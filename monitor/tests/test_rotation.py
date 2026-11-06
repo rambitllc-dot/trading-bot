@@ -84,3 +84,15 @@ class RotationTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SwapLineTest(unittest.TestCase):
+    def test_losing_first_biggest_loss_first(self):
+        from monitor import rotation
+        mine = [{"ticker": "A", "score": 20}, {"ticker": "B", "score": 90}, {"ticker": "C", "score": 70},
+                {"ticker": "D", "score": 10}]
+        held = {"A": {"pnl_pct": 5.0}, "B": {"pnl_pct": -1.0}, "C": {"pnl_pct": -6.0}, "D": {"pnl_pct": None}}
+        out = rotation.queue(mine, held)
+        self.assertEqual([r["ticker"] for r in out], ["C", "B", "D", "A"])  # losers by loss, then weakest score
+        self.assertEqual([r["queue"] for r in out], [1, 2, 3, 4])
+        self.assertTrue(out[0]["losing"] and not out[3]["losing"])

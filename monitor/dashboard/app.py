@@ -170,21 +170,31 @@ if not R.get("suggestions") and R.get("universe"):
                 unsafe_allow_html=True)
 if R.get("universe"):
     c1, c2 = st.columns(2)
-    def score_table(items, title):
+    def score_table(items, title, mine=False):
         t = (f'<div class="muted" style="color:#FFA62B;margin-top:8px">{title}</div><div class="wrap"><table class="grid">'
-             '<tr><th>Ticker</th><th>Rank</th><th>Score</th><th>Momentum</th><th>Steadiness</th><th>Trend</th><th>12 mo</th></tr>')
+             + ('<tr><th>Line</th><th>Ticker</th><th>Your P&amp;L</th>' if mine else '<tr><th>Ticker</th>')
+             + '<th>Rank</th><th>Score</th><th>Momentum</th><th>Steadiness</th><th>Trend</th><th>12 mo</th></tr>')
         for x in items:
-            t += (f'<tr><td>{e(x["ticker"])}</td><td>#{x["rank"]}</td><td><b>{x["score"]:.0f}</b></td>'
+            if mine:
+                lose = x.get("pnl_pct") is not None and x["pnl_pct"] < 0
+                flag = f' <span class="pill" style="background:{RED};color:#07090C;font-weight:700">LOSING</span>' if lose else ""
+                p_ = x.get("pnl_pct")
+                t += (f'<tr><td>#{x.get("queue") or "–"}</td><td>{e(x["ticker"])}{flag}</td>'
+                      f'<td>{pct(p_ / 100) if p_ is not None else "–"}</td>')
+            else:
+                t += f'<tr><td>{e(x["ticker"])}</td>'
+            t += (f'<td>#{x["rank"]}</td><td><b>{x["score"]:.0f}</b></td>'
                   f'<td>{x["momentum"]:.0f}</td><td>{x["steadiness"]:.0f}</td><td>{x["trend"]:.0f}</td>'
                   f'<td>{pct(x["ret_12m"], 0)}</td></tr>')
         return t + "</table></div>"
     with c1:
-        st.markdown(score_table(R["holdings"], f"YOUR HOLDINGS · RANKED AMONG {R['universe']} STOCKS & ETFS (WEAKEST FIRST)"),
+        st.markdown(score_table(R["holdings"], f"YOUR SWAP LINE · LOSING FIRST, THEN WEAKEST (RANKED AMONG {R['universe']})", mine=True),
                     unsafe_allow_html=True)
     with c2:
         st.markdown(score_table(R["top"], "STRONGEST YOU DON'T OWN"), unsafe_allow_html=True)
     st.markdown('<div class="muted">Score 0-100 = momentum 40% + steadiness 30% + trend 20% + news 10%. A swap is suggested '
-                f'only with a clear lead; each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
+                f'only with a clear lead. Holdings losing money since you bought them are flagged LOSING and go first in line '
+                f'(biggest loss first). Each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
                 f'each into a different stock. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
 
 # ---------- wins & losses + swap scorecard ----------

@@ -52,6 +52,14 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     rot = rotation.run(con, asof, rows, bars, sentiment) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestions": []}
     swaps = {s["sell"]: s for s in rot.get("suggestions") or []}
+    losing = {h["ticker"]: h for h in rot.get("holdings") or [] if h.get("losing")}
+    for r in rows:  # flag losing holdings: first in line for the next swap
+        h = losing.get(r["ticker"])
+        if h and r["ticker"] not in swaps and r.get("action") in ("HOLD", "REVIEW"):
+            r["action_reason"] = (f"{r.get('action_reason') or ''} · LOSING {h['pnl_pct']:.1f}%: "
+                                  f"#{h['queue']} in line for the next swap").lstrip(" ·")
+    if losing and not swaps:
+        storage.save_valuations(con, asof, rows)
     if swaps:  # holdings to swap out get the SWAP label unless a stop/target already says SELL
         for r in rows:
             s = swaps.get(r["ticker"])
@@ -155,7 +163,8 @@ def print_report(res):
     if rt:
         print("\nROTATION (follow the money)")
         for h in rt.get("holdings", []):
-            print(f"- {h['ticker']}: rank #{h['rank']} of {rt.get('universe')}, score {h['score']:.0f}")
+            print(f"- #{h.get('queue')} in swap line: {h['ticker']}, rank #{h['rank']} of {rt.get('universe')}, "
+                  f"score {h['score']:.0f}" + (f", LOSING {h['pnl_pct']:.1f}%" if h.get("losing") else ""))
         if rt.get("top"):
             print("Strongest stocks you don't own: " + ", ".join(f"{x['ticker']} ({x['score']:.0f})" for x in rt["top"][:5]))
         for s in rt.get("suggestions") or []:
