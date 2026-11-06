@@ -47,17 +47,20 @@ jobs:
         if: ${{ !inputs.test_message }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}     # optional: Claude news
+          IBKR_FLEX_TOKEN: ${{ secrets.IBKR_FLEX_TOKEN }}         # optional: read-only IB positions sync
+          IBKR_FLEX_QUERY_ID: ${{ secrets.IBKR_FLEX_QUERY_ID }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}   # optional: notifier
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           mkdir -p monitor/logs
-          python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }} 2>&1 | tee "monitor/logs/run_$(date -u +%F).log"
+          python -m monitor.ibkr_sync 2>&1 | tee -a "monitor/logs/run_$(date -u +%F).log"
+          python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }} 2>&1 | tee -a "monitor/logs/run_$(date -u +%F).log"
       - name: Save snapshots, database and log
         if: ${{ !inputs.test_message }}
         run: |
           git config user.name "portfolio-monitor"
           git config user.email "portfolio-monitor@users.noreply.github.com"
-          git add monitor/snapshots monitor/monitor.db monitor/output monitor/logs
+          git add monitor/snapshots monitor/monitor.db monitor/output monitor/logs monitor/positions.json
           git diff --cached --quiet || (git commit -m "Monitor run" && \
             (git push || (git pull --rebase -X theirs && git push)))   # this run's results win over older copies

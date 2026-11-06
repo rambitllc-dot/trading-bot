@@ -129,3 +129,14 @@ news. Nothing recommends trades or routes orders.
 
 Run it from GitHub any time: **Actions > Portfolio monitor > Run workflow**.
 Tests: `python -m unittest discover -s monitor/tests -t .`
+
+## Automatic positions from Interactive Brokers (read-only)
+
+Before each evening run, `monitor/ibkr_sync.py` downloads your IB **Flex report**
+(open positions + cash) and rewrites `positions.json`. Your own stop/target/add_below
+values are kept. It can only *read* your account; it cannot trade.
+
+- Needs GitHub secrets `IBKR_FLEX_TOKEN` and `IBKR_FLEX_QUERY_ID` (without them it does nothing).
+- IB builds the report once a day after the close, so it shows the last business day.
+- If you edited `positions.json` with trades newer than IB's report, the sync waits until IB catches up.
+- If IB is down or the download fails, the old `positions.json` is kept.
