@@ -140,3 +140,12 @@ values are kept. It can only *read* your account; it cannot trade.
 - IB builds the report once a day after the close, so it shows the last business day.
 - If you edited `positions.json` with trades newer than IB's report, the sync waits until IB catches up.
 - If IB is down or the download fails, the old `positions.json` is kept.
+
+## Wins & losses and the swap scorecard
+
+`monitor/performance.py` (dashboard section "Wins & losses · did the swaps work?"):
+- **Wins & losses**: every trade from IB (needs the **Trades** section in the Flex Query). Sales carry IB's realized
+  profit/loss; open positions add the not-yet-locked-in part. Win rate, average win/loss, fees.
+- **Your book vs the S&P 500**: book value each evening against SPY from the first tracked day.
+- **Swap scorecard**: for every swap idea, the bought stock's return minus the sold stock's return since the
+  idea's close ("edge"). Marked FOLLOWED / PARTLY / SKIPPED / OPEN from your trades, so skipped ideas are judged too.

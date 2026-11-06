@@ -187,6 +187,67 @@ if R.get("universe"):
                 f'only with a clear lead; each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
                 f'each into a different stock. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
 
+# ---------- wins & losses + swap scorecard ----------
+PF = D.get("performance") or {}
+st.markdown('<div class="sec">Wins &amp; losses · did the swaps work?</div>', unsafe_allow_html=True)
+W = PF.get("wins_losses")
+if W and W["trades"]:
+    wl_cells = [("Locked in (realized)", money(W["realized"]), cls(W["realized"])),
+                ("Still open (unrealized)", money(W["unrealized"]), cls(W["unrealized"])),
+                ("Total", money(W["total"]), cls(W["total"])),
+                ("Wins / losses", f'{W["wins"]} / {W["losses"]}', ""),
+                ("Win rate", f'{W["win_rate"]:.0f}%' if W["win_rate"] is not None else "–", ""),
+                ("Avg win / loss", f'{money(W["avg_win"])} / {money(W["avg_loss"])}', ""),
+                ("Fees", money(W["fees"]), "")]
+    st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
+                                                 for k, v, c in wl_cells) + "</div>", unsafe_allow_html=True)
+    if W["closed"]:
+        t = ('<div class="wrap"><table class="grid"><tr><th>Date</th><th>Sold</th><th>Qty</th><th>Price</th>'
+             '<th>Profit / loss</th></tr>')
+        for x in W["closed"][:15]:
+            t += (f'<tr><td>{e(x["trade_date"])}</td><td>{e(x["ticker"])}</td><td>{x["quantity"]:g}</td>'
+                  f'<td>{num(x["price"])}</td><td class="{cls(x["realized"])}"><b>{money(x["realized"])}</b></td></tr>')
+        st.markdown(t + "</table></div>", unsafe_allow_html=True)
+else:
+    st.markdown('<div class="muted">No trades from Interactive Brokers yet. They appear after the Flex Query includes the '
+                '<b>Trades</b> section and the next evening run.</div>', unsafe_allow_html=True)
+
+H = [h for h in PF.get("history") or [] if h.get("value")]
+if len(H) >= 2 and H[0].get("spy"):
+    base_v, base_s = H[0]["value"], H[0]["spy"]
+    line = []
+    for h in H:
+        line.append({"date": h["asof"], "series": "Your book", "return": h["value"] / base_v - 1})
+        if h.get("spy"):
+            line.append({"date": h["asof"], "series": "S&P 500 (SPY)", "return": h["spy"] / base_s - 1})
+    ch = alt.Chart(pd.DataFrame(line)).mark_line(point=True).encode(
+        x=alt.X("date:T", title=None), y=alt.Y("return:Q", axis=alt.Axis(format="%"), title="since first tracked day"),
+        color=alt.Color("series:N", scale=alt.Scale(range=[AMBER, GREY]), legend=alt.Legend(orient="top")))
+    st.altair_chart(chart_theme(ch.properties(height=220)), width="stretch")
+    st.markdown('<div class="muted">Book value includes cash; money you add or withdraw moves this line too.</div>',
+                unsafe_allow_html=True)
+
+cards = PF.get("scorecard") or []
+if cards:
+    S = (PF.get("summary") or {}).get("all") or {}
+    if S.get("scored"):
+        st.markdown(f'<div style="margin:8px 0;font-size:14px"><b>{S["beat"]} of {S["scored"]}</b> swap ideas are ahead of '
+                    f'keeping the old stock · average edge <b class="{cls(S["avg_edge"])}">{S["avg_edge"] * 100:+.1f} pts</b>'
+                    '</div>', unsafe_allow_html=True)
+    fol = {"yes": ("FOLLOWED", GREEN), "partly": ("PARTLY", AMBER), "no": ("SKIPPED", GREY), "open": ("OPEN", BLUE)}
+    t = ('<div class="wrap"><table class="grid"><tr><th>Idea date</th><th>Sell</th><th>Buy</th><th>You</th>'
+         '<th>Sold stock since</th><th>Bought stock since</th><th>Swap edge</th><th>Days</th></tr>')
+    for c in cards:
+        lab, col = fol.get(c["followed"], (c["followed"], GREY))
+        t += (f'<tr><td>{e(c["suggested_on"])}</td><td>{e(c["sell"])}</td><td>{e(c["buy"])}</td>'
+              f'<td><span class="pill" style="background:{col};color:#07090C;font-weight:700">{lab}</span></td>'
+              f'<td>{pct(c["sell_ret"])}</td><td>{pct(c["buy_ret"])}</td><td><b>{pct(c["edge"])}</b></td>'
+              f'<td>{c["days"]}</td></tr>')
+    st.markdown(t + "</table></div>", unsafe_allow_html=True)
+    st.markdown('<div class="muted">Swap edge = bought stock\'s return minus sold stock\'s return, from the close on the idea '
+                'date. Positive means the swap beat keeping the old stock. Skipped ideas are scored too. Give it several '
+                'weeks before judging: the ranking looks 3-12 months back, not days.</div>', unsafe_allow_html=True)
+
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
 if not D["alerts"]:
     st.markdown('<div class="muted">No alerts.</div>', unsafe_allow_html=True)

@@ -98,6 +98,8 @@ def value_position(p, snap, asof, rate=config.RISK_FREE_RATE):
 
 def value_book(book, snaps, asof, rate=config.RISK_FREE_RATE):
     rows = [value_position(p, snaps.get(p["ticker"]), asof, rate) for p in book]
+    for r, p in zip(rows, book):
+        r.setdefault("entry_date", p.get("entry_date"))  # used by the rotation's minimum-hold rule and the scorecard
     valued = [r for r in rows if r.get("value") is not None]
     totals = {"value": sum(r["value"] for r in valued), "cost": sum(r["cost"] for r in valued),
               "positions": len(rows), "priced": len(valued),

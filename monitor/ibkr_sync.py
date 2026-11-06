@@ -1,6 +1,7 @@
 """Read your current positions and cash from Interactive Brokers (read-only) and update positions.json.
 
-Uses IBKR's Flex Web Service: an Activity Flex Query with the "Open Positions" and "Cash Report" sections,
+Uses IBKR's Flex Web Service: an Activity Flex Query with the "Open Positions", "Cash Report" and (for wins &
+losses) "Trades" sections,
 fetched with a read-only token. The token cannot trade or move money.
 Needs two GitHub secrets: IBKR_FLEX_TOKEN and IBKR_FLEX_QUERY_ID.
 
@@ -17,7 +18,7 @@ import xml.etree.ElementTree as ET
 
 import requests
 
-from . import config
+from . import config, performance, storage
 
 SEND_URL = "https://ndcdyn.interactivebrokers.com/AccountManagement/FlexWebService/SendRequest"
 HEADERS = {"User-Agent": "portfolio-monitor/1.0"}
@@ -89,6 +90,30 @@ def parse(xml_text):
     return report_date, out, cash
 
 
+def parse_trades(xml_text):
+    """Every execution in the report -> list of trade dicts (realized P&L comes from IB, FIFO)."""
+    out = []
+    for t in ET.fromstring(xml_text).iter("Trade"):
+        if (t.get("levelOfDetail") or "EXECUTION").upper() != "EXECUTION":
+            continue
+        qty = _f(t.get("quantity"))
+        if not qty:
+            continue
+        cat = (t.get("assetCategory") or "").upper()
+        ticker = (t.get("underlyingSymbol") if cat == "OPT" else None) or (t.get("symbol") or "").split()[0]
+        day = _date(t.get("tradeDate") or (t.get("dateTime") or "")[:8])
+        side = (t.get("buySell") or ("BUY" if qty > 0 else "SELL")).upper()
+        side = "SELL" if side.startswith("SELL") else "BUY"
+        tid = t.get("tradeID") or t.get("ibExecID") or t.get("transactionID") or \
+            f"{day}-{t.get('symbol')}-{side}-{qty}-{t.get('tradePrice')}"
+        out.append({"trade_id": str(tid), "trade_date": day, "ticker": ticker,
+                    "asset_type": {"STK": "shares", "OPT": "option"}.get(cat, cat.lower()),
+                    "description": t.get("description") or t.get("symbol"), "side": side, "quantity": abs(qty),
+                    "price": _f(t.get("tradePrice")), "proceeds": _f(t.get("proceeds")),
+                    "commission": _f(t.get("ibCommission")), "realized": _f(t.get("fifoPnlRealized"))})
+    return out
+
+
 def key(p):
     if p["asset_type"] == "option":
         return (p["ticker"], p["option_type"], float(p["strike"]), p["expiry"])
@@ -113,7 +138,7 @@ def merge(current, synced, cash, report_date):
     return new
 
 
-def sync(path=None, fetcher=None):
+def sync(path=None, fetcher=None, db=None):
     """Returns a short status line. Never raises: a failed sync leaves positions.json as it was."""
     token, qid = os.environ.get("IBKR_FLEX_TOKEN"), os.environ.get("IBKR_FLEX_QUERY_ID")
     if not (token and qid) and fetcher is None:
@@ -122,12 +147,20 @@ def sync(path=None, fetcher=None):
     try:
         xml_text = (fetcher or fetch)(token, qid)
         report_date, synced, cash = parse(xml_text)
+        trades_note = ""
+        trades = parse_trades(xml_text)
+        if trades:  # saved even when the positions update has to wait
+            con = storage.connect(db)
+            try:
+                trades_note = f"; {performance.save_trades(con, trades)} new trade(s) saved"
+            finally:
+                con.close()
         with open(path) as f:
             current = json.load(f)
         newest = max((p.get("entry_date") or "" for p in current), default="")
         if report_date and newest > report_date:
             return (f"IB sync waiting: IB's report is from {report_date}, but positions.json has a buy from "
-                    f"{newest}; it will sync once IB's report includes it")
+                    f"{newest}; it will sync once IB's report includes it{trades_note}")
         if not synced and current:
             return "IB sync skipped: the report had no open positions (check the Flex Query has Open Positions)"
         merged = merge(current, synced, cash, report_date)
@@ -135,7 +168,7 @@ def sync(path=None, fetcher=None):
             f.write(json.dumps(merged, indent=2) + "\n")
         names = ", ".join(p["ticker"] for p in synced)
         return f"IB sync: {len(synced)} position(s) as of {report_date} ({names})" + \
-               (f", cash {cash:,.2f}" if cash is not None else "")
+               (f", cash {cash:,.2f}" if cash is not None else "") + trades_note
     except Exception as e:  # noqa: BLE001 - a sync problem must never stop the monitor
         return f"IB sync failed, kept positions.json as it was: {e}"
 

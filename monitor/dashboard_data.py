@@ -3,7 +3,7 @@ import datetime as dt
 import json
 import sqlite3
 
-from . import config, plan
+from . import config, performance, plan
 from .greeks import bs_greeks
 
 
@@ -119,7 +119,16 @@ def load(db_path=None, asof=None):
             since = (dt.date.fromisoformat(asof) - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat()
             rot["suggestions"] = [r for r in rows(con, "SELECT * FROM rotation_log WHERE asof<=? AND asof>=? "
                                                        "ORDER BY sell_score", (asof, since)) if r["sell"] in held]
-        return {"asof": asof, "dates": avail, "positions": pos, "analytics": a[0] if a else None,
+        perf = {"wins_losses": None, "history": [], "scorecard": [], "summary": None}
+        unreal = sum((p.get("value") or 0) - (p.get("cost") or 0) for p in pos if p.get("value") is not None)
+        if table_exists(con, "trades"):
+            perf["wins_losses"] = performance.wins_losses(con, unreal)
+        if table_exists(con, "perf_daily"):
+            perf["history"] = rows(con, "SELECT * FROM perf_daily WHERE asof<=? ORDER BY asof", (asof,))
+        if table_exists(con, "swap_scorecard"):
+            cards = rows(con, "SELECT * FROM swap_scorecard WHERE asof=? ORDER BY suggested_on DESC, sell", (asof,))
+            perf["scorecard"], perf["summary"] = cards, performance.score_summary(cards)
+        return {"asof": asof, "dates": avail, "positions": pos, "performance": perf, "analytics": a[0] if a else None,
                 "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
                 "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic,
                 "watchlist": watch, "scan": scan, "rotation": rot,
