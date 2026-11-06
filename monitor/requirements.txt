@@ -1,1 +1,2 @@
 yfinance>=0.2.40
+ib_async>=2.0  # IB trader on the Mac (also lets the tests run on GitHub)

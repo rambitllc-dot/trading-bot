@@ -82,6 +82,15 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
     perf = performance.run(con, asof, rows, totals, bars)
+    try:  # plan for the IB trader on your Mac (same rules, same format as the autopilot)
+        shares = [r for r in rows if r["asset_type"] == "shares" and r.get("value") is not None]
+        cash_now = sum(r.get("value") or 0 for r in rows if r["asset_type"] == "cash")
+        ib_plan = autotrade.build_plan(asof, shares, rot, con, totals["value"], cash_now)
+        ib_plan["source"] = "positions.json (synced from IB)"
+        os.makedirs(os.path.join(config.BASE_DIR, "output"), exist_ok=True)
+        autotrade.save_json(os.path.join(config.BASE_DIR, "output", "ib_plan.json"), ib_plan)
+    except Exception as e:  # noqa: BLE001
+        print(f"IB plan not saved: {e}")
     try:  # practice autopilot (separate Alpaca paper account); never allowed to break the monitor
         auto_res = autotrade.plan(asof, bars, sentiment) if bars else {"status": "no market data"}
     except Exception as e:  # noqa: BLE001

@@ -32,6 +32,17 @@ STATE_FILE = os.path.join(config.AUTO_DIR, "state.json")
 LOG_FILE = os.path.join(config.AUTO_DIR, "log.csv")
 SWITCH_FILE = os.path.join(config.AUTO_DIR, "switch.json")
 STALE_DAYS = 4  # don't trade on a plan older than this (e.g. the evening run failed for days)
+LABEL = "🤖 Autopilot (practice account)"
+MAX_ORDER_PCT = config.AUTO_MAX_ORDER_PCT
+
+
+def configure(plan_file=None, state_file=None, log_file=None, switch_file=None, label=None, max_order_pct=None):
+    """Point the engine at another account's files (used by ib_trader on the Mac)."""
+    g = globals()
+    for name, val in (("PLAN_FILE", plan_file), ("STATE_FILE", state_file), ("LOG_FILE", log_file),
+                      ("SWITCH_FILE", switch_file), ("LABEL", label), ("MAX_ORDER_PCT", max_order_pct)):
+        if val is not None:
+            g[name] = val
 
 
 def load_json(path, default):
@@ -68,13 +79,13 @@ def client_from_env():
 def notify(text):
     try:
         from .notifier import _telegram
-        return _telegram("🤖 Autopilot (practice account)\n" + text)
+        return _telegram(LABEL + "\n" + text)
     except Exception as e:  # noqa: BLE001 - a message problem must never stop trading logic
         return f"telegram failed: {e}"
 
 
 def log(action, ticker, dollars, price, reason, when=None):
-    os.makedirs(config.AUTO_DIR, exist_ok=True)
+    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     new = not os.path.exists(LOG_FILE)
     with open(LOG_FILE, "a", newline="") as f:
         w = csv.writer(f)
@@ -123,43 +134,57 @@ def plan(asof, bars, sentiment=None, client=None, db=None, plan_file=None):
     try:
         levels.apply(con, asof, rows, bars)
         rot = rotation.run(con, asof, rows, bars, sentiment)
-        held = {r["ticker"] for r in rows}
-        sells = {r["ticker"]: r["action_reason"] for r in rows if r["action"] == "SELL"}
-        swap_buys = []
-        for s in rot.get("suggestions") or []:
-            if s["sell"] in held:
-                sells.setdefault(s["sell"], s["reason"])
-                swap_buys.append({"ticker": s["buy"], "rank": s["buy_rank"], "score": s["buy_score"],
-                                  "reason": f"replaces {s['sell']}: {s['reason']}"})
-        blocked = recently_sold(state, asof, con) | held | set(sells)
-        buys = [b for b in swap_buys if b["ticker"] not in blocked]
-        slots = config.AUTO_HOLDINGS - (len(held) - len(sells))
-        buys = buys[:max(slots, 0)]
-        taken = {b["ticker"] for b in buys}
-        ranked = con.execute("SELECT ticker, rank, score FROM rotation_scores WHERE asof=? ORDER BY rank", (asof,)).fetchall()
-        extra = [{"ticker": t, "rank": rk, "score": sc, "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
-                 for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in blocked and t not in taken]
-        fill = extra[:max(slots - len(buys), 0)]
-        buys += fill
-        taken |= {b["ticker"] for b in fill}
-        reserve = [x for x in extra if x["ticker"] not in taken][:8]
-        stops = {r["ticker"]: {"stop": r.get("stop_price"), "target": r.get("target_price"), "rule": r.get("stop_rule"),
-                               "weak": bool(r.get("weak"))} for r in rows if r["ticker"] not in sells}
         equity, cash = float(acct.get("equity") or 0), float(acct.get("cash") or 0)
+        p = build_plan(asof, rows, rot, con, equity, cash, state)
         totals = {"value": equity, "cost": sum(r["cost"] for r in rows) + cash, "pnl": sum(r["pnl"] for r in rows)}
         performance.run(con, asof, rows, totals, bars)
     finally:
         con.close()
-    p = {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
-         "equity": equity, "cash": cash, "paused": paused(),
-         "sells": [{"ticker": t, "reason": why} for t, why in sells.items()], "buys": buys, "reserve": reserve,
-         "stops": stops, "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark",
-                                                              "stop_price", "target_price", "stop_rule", "weak", "action",
-                                                              "entry_date", "prev_stop")} for r in rows]}
+    p["paused"] = paused()
     save_json(plan_file or PLAN_FILE, p)
     notify(evening_text(p))
-    return {"status": f"plan saved: {len(p['sells'])} sell(s), {len(p['buys'])} buy(s), {len(stops)} holding(s) kept",
+    return {"status": f"plan saved: {len(p['sells'])} sell(s), {len(p['buys'])} buy(s), {len(p['stops'])} holding(s) kept",
             "plan": p}
+
+
+def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
+    """The plan from valued rows (levels + rotation already applied). Same format for the autopilot and IB."""
+    state = state or {"bought": {}, "sold": {}}
+    holdings = holdings or config.AUTO_HOLDINGS
+    held = {r["ticker"] for r in rows}
+    value = {r["ticker"]: r.get("value") or 0 for r in rows}
+    sells = {r["ticker"]: r["action_reason"] for r in rows if r.get("action") == "SELL"}
+    swap_buys = []
+    for s in rot.get("suggestions") or []:
+        if s["sell"] in held:
+            sells.setdefault(s["sell"], s["reason"])
+            swap_buys.append({"ticker": s["buy"], "rank": s["buy_rank"], "score": s["buy_score"], "replaces": s["sell"],
+                              "reason": f"replaces {s['sell']}: {s['reason']}"})
+    blocked = recently_sold(state, asof, con) | held | set(sells)
+    buys = [b for b in swap_buys if b["ticker"] not in blocked]
+    slots = holdings - (len(held) - len(sells))
+    buys = buys[:max(slots, 0)]
+    taken = {b["ticker"] for b in buys}
+    ranked = con.execute("SELECT ticker, rank, score FROM rotation_scores WHERE asof=? ORDER BY rank", (asof,)).fetchall()
+    extra = [{"ticker": t, "rank": rk, "score": sc, "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
+             for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in blocked and t not in taken]
+    # fill empty slots only with money that's really there: cash + sales that no swap buy uses
+    per = equity / holdings if holdings else 0
+    funded = {b["replaces"] for b in buys}
+    free = cash + sum(value.get(t, 0) for t in sells if t not in funded)
+    n_fill = min(max(slots - len(buys), 0), int(free // (per * 0.5)) if per > 0 else 0)
+    fill = extra[:n_fill]
+    buys += fill
+    taken |= {b["ticker"] for b in fill}
+    reserve = [x for x in extra if x["ticker"] not in taken][:8]
+    stops = {r["ticker"]: {"stop": r.get("stop_price"), "target": r.get("target_price"), "rule": r.get("stop_rule"),
+                           "weak": bool(r.get("weak"))} for r in rows if r["ticker"] not in sells}
+    return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
+            "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
+            "buys": buys, "reserve": reserve, "stops": stops,
+            "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark", "stop_price",
+                                                "target_price", "stop_rule", "weak", "action", "entry_date", "prev_stop")}
+                         for r in rows]}
 
 
 def evening_text(p):
@@ -256,6 +281,7 @@ def execute(client=None):
             msgs.append(f"Plan from {p['asof']} is too old to trade on; waiting for a fresh one.")
         else:
             positions = {x["symbol"]: x for x in client.positions()}
+            proceeds = {}
             for s in p["sells"]:
                 if s["ticker"] not in positions:
                     continue
@@ -264,24 +290,32 @@ def execute(client=None):
                 o = wait_filled(client, client.close(s["ticker"]))
                 state["sold"][s["ticker"]] = today
                 val = float(positions[s["ticker"]]["market_value"])
-                log("SELL", s["ticker"], val, _price(o), s["reason"])
-                msgs.append(f"🔴 SELL {s['ticker']} (~${val:,.2f})" + (f" at {_price(o):,.2f}" if _price(o) else "")
+                fill = _price(o)
+                if fill:
+                    val = fill * abs(float(positions[s["ticker"]]["qty"]))
+                proceeds[s["ticker"]] = val
+                log("SELL", s["ticker"], val, fill, s["reason"])
+                msgs.append(f"🔴 SELL {s['ticker']} (~${val:,.2f})" + (f" at {fill:,.2f}" if fill else "")
                             + f": {s['reason'][:160]}")
             acct = client.account()
             equity, cash = float(acct["equity"]), float(acct["cash"])
-            per, max_order = equity / config.AUTO_HOLDINGS, equity * config.AUTO_MAX_ORDER_PCT / 100
+            per, max_order = equity / config.AUTO_HOLDINGS, equity * MAX_ORDER_PCT / 100
             held_now = {x["symbol"] for x in client.positions()}
             skip = held_now | recently_sold(state, today)
-            for _ in range(len(p["buys"])):
-                dollars = round(min(per, max_order, cash - 1), 2)
-                if dollars < 1:
-                    msgs.append("Not enough cash left for another buy.")
-                    break
-                t, m = buy_one(client, state, today, p["buys"] + p["reserve"], dollars, "", skip)
+            for b in p["buys"]:
+                paired = b.get("replaces")
+                if paired and paired not in proceeds:
+                    continue  # its sale didn't happen (already sold, or bought today): don't buy without the money
+                want = proceeds[paired] if paired else per
+                dollars = round(min(want, max_order, cash - 1), 2)
+                if dollars < config.AUTO_MIN_BUY_USD:
+                    if paired:
+                        msgs.append(f"Not enough cash to buy {b['ticker']} (${dollars:,.2f} available).")
+                    continue
+                t, m = buy_one(client, state, today, [b] + p["reserve"], dollars, "", skip)
                 msgs.append(m)
-                if not t:
-                    break
-                cash -= dollars
+                if t:
+                    cash -= dollars
         state["executed"] = p["id"]
 
     # stop / target watch, every round while the market is open
@@ -306,10 +340,10 @@ def execute(client=None):
         log("SELL", t, val, _price(o), why)
         acct = client.account()
         equity, cash = float(acct["equity"]), float(acct["cash"])
-        dollars = round(min(val, equity * config.AUTO_MAX_ORDER_PCT / 100, cash - 1), 2)
+        dollars = round(min(val, equity * MAX_ORDER_PCT / 100, cash - 1), 2)
         skip = names | recently_sold(state, today)
         nt, m = buy_one(client, state, today, p["reserve"], dollars, f"replaces {t} ({hit} hit): ", skip) \
-            if dollars >= 1 else (None, "not enough cash to replace it")
+            if dollars >= config.AUTO_MIN_BUY_USD else (None, "not enough cash to replace it")
         if nt:
             names.add(nt)
         msgs.append(f"{'🛑 STOP' if hit == 'stop' else '🎯 TARGET'} HIT: sold {t} (~${val:,.2f}), {why}. -> {m}")

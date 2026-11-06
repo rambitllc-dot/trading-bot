@@ -99,4 +99,5 @@ AUTO_DIR = os.path.join(BASE_DIR, "autotrade")
 AUTO_DB = os.path.join(AUTO_DIR, "auto.db")
 AUTO_HOLDINGS = 5           # equal weight: each stock gets 1/5 (20%) of the account
 AUTO_MAX_ORDER_PCT = 25     # safety: no single buy larger than 25% of the account
+AUTO_MIN_BUY_USD = 20.0     # don't place buys smaller than this (avoids dust orders)
 AUTO_LIVE = False           # practice only; real money needs a deliberate switch later

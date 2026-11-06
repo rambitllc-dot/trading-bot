@@ -177,3 +177,12 @@ values are kept. It can only *read* your account; it cannot trade.
   `monitor/autotrade/switch.json`. Every trade goes to `log.csv` and Telegram.
 - Needs GitHub secrets `ALPACA_AUTO_KEY` / `ALPACA_AUTO_SECRET` from a paper account used only for this
   (not the one the old paper bot trades in).
+
+## IB trader on the Mac
+
+`monitor/ib_trader.py` runs next to IB Gateway on an always-on Mac and carries out `monitor/output/ib_plan.json`
+(written each evening, same format and rules as the autopilot) on your IB account: sells, paired buys with the
+sale money, and a stop/target watch every 2 minutes during market hours, with Telegram messages for everything.
+Paper account by default (port 4002); real money only with `"live": true` in `~/ib-trader/settings.json` and
+IB Gateway logged in to the live account (it refuses a mismatch). Pause: `"paused": true` in
+`monitor/ib_switch.json` (GitHub) or in the settings file. Setup: `bash ~/trading-bot/mac/setup.sh`.
