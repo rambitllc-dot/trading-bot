@@ -37,6 +37,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           ALPACA_LIVE_KEY: ${{ secrets.ALPACA_LIVE_KEY }}        # empty until you go live
           ALPACA_LIVE_SECRET: ${{ secrets.ALPACA_LIVE_SECRET }}
+          ALPACA_AUTO_KEY: ${{ secrets.ALPACA_AUTO_KEY }}        # practice autopilot (separate paper account)
+          ALPACA_AUTO_SECRET: ${{ secrets.ALPACA_AUTO_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           git config user.name "trading-bot"
           git config user.email "trading-bot@users.noreply.github.com"
@@ -45,6 +49,7 @@ jobs:
             echo "::group::Bot run at $(date -u '+%Y-%m-%d %H:%M UTC')"
             git pull --rebase --autostash -q || true      # pick up any bot.py you edited
             python bot.py || echo "Bot hit an error this round; will try again in 30 minutes."
+            python -m monitor.autotrade execute || echo "Autopilot hit an error; will try again in 30 minutes."
             git add -A
             if ! git diff --cached --quiet; then
               git commit -q -m "Bot update"

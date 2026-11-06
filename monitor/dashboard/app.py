@@ -262,6 +262,47 @@ if cards:
                 'date. Positive means the swap beat keeping the old stock. Skipped ideas are scored too. Give it several '
                 'weeks before judging: the ranking looks 3-12 months back, not days.</div>', unsafe_allow_html=True)
 
+# ---------- autopilot (practice) ----------
+AP = D.get("autopilot") or {}
+st.markdown('<div class="sec">Autopilot · practice account (paper money)</div>', unsafe_allow_html=True)
+PL = AP.get("plan")
+if not PL:
+    st.markdown('<div class="muted">Not running yet. It starts after the ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET secrets are added '
+                'and the next evening run makes its first plan.</div>', unsafe_allow_html=True)
+else:
+    first_v = (AP.get("history") or [{}])[0].get("value")
+    chg = (PL["equity"] / first_v - 1) if first_v else None
+    cells = [("Status", "PAUSED" if AP.get("paused") else "ON", "dn" if AP.get("paused") else "up"),
+             ("Account", money(PL["equity"]), ""), ("Since start", pct(chg) if chg is not None else "–", ""),
+             ("Cash", money(PL["cash"]), ""), ("Holdings", str(len(PL["holdings"])), ""), ("Plan made", PL["asof"], "")]
+    st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
+                                                 for k, v, c in cells) + "</div>", unsafe_allow_html=True)
+    if PL["holdings"]:
+        t = ('<div class="wrap"><table class="grid"><tr><th>Stock</th><th>Value</th><th>P&amp;L</th><th>Price</th>'
+             '<th>Stop</th><th>Target</th><th>Plan</th></tr>')
+        for h in PL["holdings"]:
+            t += (f'<tr><td>{e(h["ticker"])}' + (' <span class="pill" style="background:#E8803A;color:#07090C">WEAK</span>'
+                                                    if h.get("weak") else "") + f'</td><td>{money(h["value"])}</td>'
+                  f'<td class="{cls(h["pnl"])}">{money(h["pnl"])} ({num(h["pnl_pct"], 1)}%)</td><td>{num(h["mark"])}</td>'
+                  f'<td>{num(h["stop_price"])}</td><td>{num(h["target_price"])}</td><td>{plan_pill(h["action"])}</td></tr>')
+        st.markdown(t + "</table></div>", unsafe_allow_html=True)
+    nxt = [f'<b class="dn">SELL {e(x["ticker"])}</b> <span class="muted">{e(x["reason"][:160])}</span>' for x in PL["sells"]] + \
+          [f'<b class="up">BUY {e(x["ticker"])}</b> <span class="muted">{e(x["reason"][:160])}</span>' for x in PL["buys"]]
+    st.markdown('<div class="muted" style="margin-top:8px;color:#FFA62B">NEXT MARKET OPEN</div>'
+                + ("<br>".join(nxt) if nxt else '<span class="muted">No trades planned; stops are watched every 30 minutes.</span>'),
+                unsafe_allow_html=True)
+    if AP.get("log"):
+        t = '<div class="wrap"><table class="grid"><tr><th>Time</th><th>Action</th><th>Stock</th><th>$</th><th>Price</th><th>Why</th></tr>'
+        for x in AP["log"]:
+            t += (f'<tr><td>{e(x["time"])}</td><td><b>{e(x["action"])}</b></td><td>{e(x["ticker"])}</td>'
+                  f'<td>{e(x["dollars"])}</td><td>{e(x["price"])}</td><td class="muted">{e(x["reason"][:120])}</td></tr>')
+        st.markdown('<div class="muted" style="margin-top:8px;color:#FFA62B">TRADES MADE</div>' + t + "</table></div>",
+                    unsafe_allow_html=True)
+    st.markdown('<div class="muted">Trades by itself in an Alpaca paper account (no real money): 5 stocks at 20% each, '
+                f'{config.MAX_LOSS_PCT:g}% max-loss stop, breakeven after +{config.BREAKEVEN_AFTER_PCT:g}%, stop-outs replaced '
+                'right away, weekly swaps. Pause it with "paused": true in monitor/autotrade/switch.json.</div>',
+                unsafe_allow_html=True)
+
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
 if not D["alerts"]:
     st.markdown('<div class="muted">No alerts.</div>', unsafe_allow_html=True)

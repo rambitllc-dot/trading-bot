@@ -61,6 +61,28 @@ def strike_ladder(con, asof, p, new_keys, width=6):
     return out
 
 
+def autopilot():
+    """Practice autopilot: tonight's plan, recent trades and the account's daily value (files only, no broker calls)."""
+    import csv
+    import os
+    from . import autotrade
+    out = {"plan": autotrade.load_json(autotrade.PLAN_FILE, None), "paused": autotrade.paused(), "log": [],
+           "history": []}
+    try:
+        with open(autotrade.LOG_FILE) as f:
+            out["log"] = list(csv.DictReader(f))[-20:][::-1]
+    except OSError:
+        pass
+    if os.path.exists(config.AUTO_DB):
+        c = sqlite3.connect(config.AUTO_DB)
+        try:
+            if table_exists(c, "perf_daily"):
+                out["history"] = rows(c, "SELECT * FROM perf_daily ORDER BY asof")
+        finally:
+            c.close()
+    return out
+
+
 def load(db_path=None, asof=None):
     con = sqlite3.connect(db_path or config.DB_FILE)
     try:
@@ -129,7 +151,7 @@ def load(db_path=None, asof=None):
         if table_exists(con, "swap_scorecard"):
             cards = rows(con, "SELECT * FROM swap_scorecard WHERE asof=? ORDER BY suggested_on DESC, sell", (asof,))
             perf["scorecard"], perf["summary"] = cards, performance.score_summary(cards)
-        return {"asof": asof, "dates": avail, "positions": pos, "performance": perf, "analytics": a[0] if a else None,
+        return {"asof": asof, "dates": avail, "positions": pos, "performance": perf, "autopilot": autopilot(), "analytics": a[0] if a else None,
                 "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
                 "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic,
                 "watchlist": watch, "scan": scan, "rotation": rot,

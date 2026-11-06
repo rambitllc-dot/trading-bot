@@ -163,3 +163,17 @@ values are kept. It can only *read* your account; it cannot trade.
 - **Stopped out = swapped**: a holding that hits its stop (or target) is swapped right away into the strongest stock
   you don't own, whatever its own rank, skipping the weekly, 7-day-hold and 25-point-lead rules. If nothing scores
   80+, the SELL stands and the money waits in cash. Sold stocks can't be bought back for 30 days.
+
+## Autopilot (practice): trades the strategy by itself in a paper account
+
+`monitor/autotrade.py`, with its files in `monitor/autotrade/`. No real money (`AUTO_LIVE = False`).
+- **Evening** (inside the monitor run): reads the practice Alpaca account, applies every rule above, and writes
+  `plan.json`: what to sell, what to buy, each holding's stop and target, and backup stocks.
+- **Market hours** (the always-on bot loop, every 30 minutes): carries out a new plan once (sells, then buys
+  at 20% of the account each), and every round sells any holding at its stop or target and replaces it with
+  the next backup stock.
+- Safety: paper only; buys only stocks from the plan; no buy over 25% of the account; no same-day sale of a
+  stock bought that day; doesn't trade on a plan older than 4 days; pause with `"paused": true` in
+  `monitor/autotrade/switch.json`. Every trade goes to `log.csv` and Telegram.
+- Needs GitHub secrets `ALPACA_AUTO_KEY` / `ALPACA_AUTO_SECRET` from a paper account used only for this
+  (not the one the old paper bot trades in).

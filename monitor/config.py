@@ -90,3 +90,12 @@ MAX_LOSS_PCT = 6.0          # stop never sits more than 6% below what you paid (
 BREAKEVEN_AFTER_PCT = 10.0  # once a stock has closed 10% above what you paid, the stop rises to your buy price
 WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop
+
+# ---------- Autopilot (practice): trades the strategy by itself in a separate Alpaca PAPER account ----------
+# Needs GitHub secrets ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET (keys of a paper account used only for this).
+# Pause any time: set "paused": true in monitor/autotrade/switch.json (editable from the GitHub app).
+AUTO_DIR = os.path.join(BASE_DIR, "autotrade")
+AUTO_DB = os.path.join(AUTO_DIR, "auto.db")
+AUTO_HOLDINGS = 5           # equal weight: each stock gets 1/5 (20%) of the account
+AUTO_MAX_ORDER_PCT = 25     # safety: no single buy larger than 25% of the account
+AUTO_LIVE = False           # practice only; real money needs a deliberate switch later

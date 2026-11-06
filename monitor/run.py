@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
+from . import alerts, analytics, autotrade, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
 
 
 def market_today():
@@ -82,12 +82,16 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
     perf = performance.run(con, asof, rows, totals, bars)
+    try:  # practice autopilot (separate Alpaca paper account); never allowed to break the monitor
+        auto_res = autotrade.plan(asof, bars, sentiment) if bars else {"status": "no market data"}
+    except Exception as e:  # noqa: BLE001
+        auto_res = {"status": f"autopilot plan failed: {e}"}
     alert_list, diffs = alerts.build(con, asof, rows, summary, macro_result, news_result,
                                      scan["alerts"] + rotation.alert(rot) + weak_alerts(rows, rot))
     con.close()
     result = {"asof": asof, "totals": totals, "positions": rows, "analytics": summary,
               "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
-              "rotation": rot, "auto_levels": auto, "performance": perf,
+              "rotation": rot, "auto_levels": auto, "performance": perf, "autopilot": auto_res,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
     out_dir = os.path.join(config.BASE_DIR, "output")
     os.makedirs(out_dir, exist_ok=True)
@@ -187,6 +191,17 @@ def print_report(res):
             print(f"SWAP IDEA{' (open since ' + s['suggested_on'] + ')' if s.get('pending') else ''}: "
                   f"sell {s['sell']} -> buy {s['buy']}. {s['reason']}")
         print(f"Status: {rt.get('status')}")
+    ap = res.get("autopilot")
+    if ap:
+        print(f"\nAUTOPILOT (practice account): {ap['status']}")
+        pl = ap.get("plan")
+        if pl:
+            for x in pl["sells"]:
+                print(f"- next open SELL {x['ticker']}: {x['reason'][:150]}")
+            for x in pl["buys"]:
+                print(f"- next open BUY {x['ticker']}: {x['reason'][:150]}")
+            for t, lv in pl["stops"].items():
+                print(f"- keep {t}: stop {lv['stop'] or 0:,.2f}, target {lv['target'] or 0:,.2f}")
     if res.get("performance"):
         print(performance.text(res["performance"]))
     if "alerts" in res:

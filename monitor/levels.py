@@ -76,6 +76,8 @@ def apply(con, asof, rows, bars):
         close = b[-1][1]
         row = con.execute("SELECT baseline_date, baseline_price, highest_close, stop, target FROM auto_levels "
                           "WHERE ticker=?", (r["ticker"],)).fetchone()
+        if row is not None and r.get("entry_date") and row[0] < r["entry_date"]:
+            row = None  # sold and bought again later: start fresh levels for the new purchase
         if row is None:
             base, highest = close, close
             stop = close - config.ATR_STOP_MULT * a
