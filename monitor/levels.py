@@ -37,15 +37,21 @@ def atr(bars, n=None):
 
 
 def floors(stop, entry, highest):
-    """Raise the stop to the loss cap and, after a 10% gain, to breakeven. -> (stop, rule that set it)."""
-    rule = "trailing stop (3 x typical daily move below the highest close)"
-    if entry:
-        cap = entry * (1 - config.MAX_LOSS_PCT / 100)
-        if cap > stop:
-            stop, rule = cap, f"{config.MAX_LOSS_PCT:g}% max-loss stop"
-        if highest >= entry * (1 + config.BREAKEVEN_AFTER_PCT / 100) and entry > stop:
-            stop, rule = entry, f"breakeven stop (up {config.BREAKEVEN_AFTER_PCT:g}%+ at its high, so no loss allowed)"
-    return stop, rule
+    """Raise the stop to the loss cap and, after a 10% gain, to breakeven. -> (stop, rule that set it).
+    The label names whichever rule the final stop sits on (the stop is saved and only ever rises, so on later
+    days it can equal a floor that was applied before)."""
+    trailing = "trailing stop (3 x typical daily move below the highest close)"
+    if not entry:
+        return stop, trailing
+    cap = entry * (1 - config.MAX_LOSS_PCT / 100)
+    stop = max(stop, cap)
+    if highest >= entry * (1 + config.BREAKEVEN_AFTER_PCT / 100):
+        stop = max(stop, entry)
+    if abs(stop - entry) < 0.005:
+        return stop, f"breakeven stop (was up {config.BREAKEVEN_AFTER_PCT:g}%+, so no loss allowed)"
+    if abs(stop - cap) < 0.005:
+        return stop, f"{config.MAX_LOSS_PCT:g}% max-loss stop"
+    return stop, trailing
 
 
 def weakness(r, b):

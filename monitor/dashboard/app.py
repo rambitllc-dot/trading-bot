@@ -12,7 +12,15 @@ import pandas as pd
 import streamlit as st
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-from monitor import config, dashboard_data, plan, scanner  # noqa: E402
+import importlib  # noqa: E402
+
+import monitor  # noqa: E402
+from monitor import autotrade, config, dashboard_data, levels, performance, plan, rotation, scanner  # noqa: E402
+
+# Streamlit keeps imported modules in memory between reruns; after an update, the app file is new but these
+# modules would be old. Reload them so the dashboard and its helpers always come from the same version.
+for _m in (config, plan, levels, rotation, performance, autotrade, scanner, dashboard_data):
+    importlib.reload(_m)
 
 st.set_page_config(page_title="Portfolio Monitor", page_icon="▣", layout="wide")
 

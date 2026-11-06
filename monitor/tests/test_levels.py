@@ -32,6 +32,14 @@ class LevelsTest(unittest.TestCase):
         self.assertEqual(r["action"], "HOLD")
         self.assertIn("max-loss", r["action_reason"])
 
+    def test_rule_label_on_later_days(self):
+        r = row("CNC", entry=70.59, mark=69.7)
+        levels.apply(self.con, "2026-11-05", [r], {"CNC": bars([70.0] * 29 + [69.7], rng=3.0)})
+        r = row("CNC", entry=70.59, mark=69.4)
+        levels.apply(self.con, "2026-11-06", [r], {"CNC": bars([70.0] * 29 + [69.4], rng=3.0)})
+        self.assertAlmostEqual(r["stop_price"], 66.35, places=2)
+        self.assertEqual(r["stop_rule"], "6% max-loss stop")   # not "trailing" on the second day
+
     def test_already_down_more_than_cap_is_sell(self):
         r = row("LRCX", entry=239.36, mark=189.80)
         levels.apply(self.con, "2026-11-05", [r], {"LRCX": bars([190.0] * 29 + [189.80], rng=8.0)})
