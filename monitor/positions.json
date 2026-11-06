@@ -1,12 +1,10 @@
 [
-  {"asset_type": "shares", "ticker": "ASML", "contracts": 0.05, "entry_price": 1695.60,
-   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
-  {"asset_type": "shares", "ticker": "DIS",  "contracts": 0.27, "entry_price": 112.59,
-   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
-  {"asset_type": "shares", "ticker": "LRCX", "contracts": 0.60, "entry_price": 239.36,
-   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
-  {"asset_type": "shares", "ticker": "QQQ",  "contracts": 0.79, "entry_price": 724.04,
-   "target_price": null, "stop_price": null, "note": "Interactive Brokers"},
-  {"asset_type": "shares", "ticker": "SPY",  "contracts": 0.10, "entry_price": 765.89,
-   "target_price": null, "stop_price": null, "note": "Interactive Brokers"}
+  {"asset_type": "shares", "ticker": "CNC",  "contracts": 4.9002, "entry_price": 70.59, "entry_date": "2026-11-06",
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers - swap from QQQ"},
+  {"asset_type": "shares", "ticker": "MRK",  "contracts": 1.0,    "entry_price": 147.71, "entry_date": "2026-11-06",
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers - swap from ASML"},
+  {"asset_type": "shares", "ticker": "MRNA", "contracts": 0.6,    "entry_price": 260.21, "entry_date": "2026-11-06",
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers - swap from DIS"},
+  {"asset_type": "shares", "ticker": "TXN",  "contracts": 0.6,    "entry_price": 273.60, "entry_date": "2026-11-06",
+   "target_price": null, "stop_price": null, "note": "Interactive Brokers - swap from LRCX"}
 ]
