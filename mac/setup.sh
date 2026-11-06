@@ -2,7 +2,8 @@
 # One-time setup of the IB trader on your Mac. Run it from Terminal:
 #   bash ~/trading-bot/mac/setup.sh
 # It installs the Python pieces, asks for your Telegram details, and makes the trader start by itself
-# (and restart if it ever stops). It starts in PAPER mode. Nothing here can move money out of your account.
+# (and restart if it ever stops). It asks whether to trade the REAL account (port 4001) or paper (4002).
+# It can only buy and sell stocks; it has no way to withdraw or transfer money.
 set -e
 REPO="$HOME/trading-bot"
 HOME_DIR="$HOME/ib-trader"
@@ -22,10 +23,14 @@ echo "2/4  Settings"
 if [ ! -f "$HOME_DIR/settings.json" ]; then
   read -r -p "  Telegram bot token (same one as on GitHub): " TOKEN
   read -r -p "  Telegram chat id: " CHAT
+  echo ""
+  echo "  This trader will place REAL orders in your Interactive Brokers account."
+  read -r -p "  Type REAL to confirm (anything else sets up the paper account): " MODE
+  if [ "$MODE" = "REAL" ]; then LIVE=true; PORT=4001; else LIVE=false; PORT=4002; fi
   cat > "$HOME_DIR/settings.json" <<JSON
 {
-  "live": false,
-  "port": 4002,
+  "live": $LIVE,
+  "port": $PORT,
   "paused": false,
   "max_order_pct": 50,
   "telegram_bot_token": "$TOKEN",
@@ -33,7 +38,7 @@ if [ ! -f "$HOME_DIR/settings.json" ]; then
 }
 JSON
   chmod 600 "$HOME_DIR/settings.json"
-  echo "  Saved to $HOME_DIR/settings.json (paper mode)."
+  echo "  Saved to $HOME_DIR/settings.json (live: $LIVE, port $PORT)."
 else
   echo "  Keeping your existing $HOME_DIR/settings.json"
 fi
