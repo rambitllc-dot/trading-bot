@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 07, 2026 17:01 UTC · Bitcoin $75,673.80 · US stock market closed
+Last update: Nov 07, 2026 17:31 UTC · Bitcoin $75,675.00 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -119,10 +119,10 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 65 | 60.0% | $121.65 | -35% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 87 | 40.2% | $27.40 | -73% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 473 | 50.7% | $7.90 | -94% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 376 | 46.8% | $3.49 | -97% |
-| Coin flip (luck benchmark) | Luck benchmark | 473 | 47.4% | $1.86 | -98% |
-| Momentum: bet the last candle repeats | Static (one fixed method) | 473 | 47.1% | $1.70 | -98% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 475 | 50.7% | $7.81 | -94% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 378 | 46.6% | $3.15 | -97% |
+| Coin flip (luck benchmark) | Luck benchmark | 475 | 47.2% | $1.68 | -98% |
+| Momentum: bet the last candle repeats | Static (one fixed method) | 475 | 46.9% | $1.53 | -98% |
 
 ### Backtest: the 30 days before that
 
