@@ -136,6 +136,11 @@ class IBClient:
         return {"status": status, "filled_avg_price": t.orderStatus.avgFillPrice or None}
 
 
+def git_rev():
+    r = subprocess.run(["git", "-C", REPO, "rev-parse", "HEAD"], capture_output=True, text=True, timeout=30)
+    return r.stdout.strip()
+
+
 def git_pull():
     r = subprocess.run(["git", "-C", REPO, "pull", "-q", "--ff-only"], capture_output=True, text=True, timeout=120)
     return r.returncode == 0
@@ -174,6 +179,7 @@ def main(argv=None):
     s = settings()
     setup_engine(s)
     ib, last_warn, last_pull = None, 0.0, 0.0
+    started_rev = git_rev()
     autotrade.notify(f"Started on the Mac, watching the {'REAL' if s['live'] else 'paper'} IB account "
                      f"(port {s['port']}).")
     while True:
@@ -182,6 +188,11 @@ def main(argv=None):
         if time.time() - last_pull > 600 or is_open:
             git_pull()
             last_pull = time.time()
+            if "--once" not in argv and started_rev and git_rev() != started_rev:
+                print("New code downloaded; restarting to use it.", flush=True)
+                if ib is not None:
+                    ib.disconnect()
+                sys.exit(0)  # the launch agent (KeepAlive) starts it again right away with the new code
         if is_open or "--once" in argv:
             try:
                 if ib is None or not ib.isConnected():
