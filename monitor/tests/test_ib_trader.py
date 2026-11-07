@@ -117,3 +117,40 @@ class IBTraderTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DepositTest(IBTraderTest):
+    def cands(self):
+        return [{"ticker": "MRK", "rank": 1, "score": 99, "sector": "Health Care", "reason": "rank #1"},
+                {"ticker": "LLY", "rank": 2, "score": 97, "sector": "Health Care", "reason": "rank #2"},
+                {"ticker": "JPM", "rank": 3, "score": 95, "sector": "Financials", "reason": "rank #3"},
+                {"ticker": "XOM", "rank": 4, "score": 90, "sector": "Energy", "reason": "rank #4"}]
+
+    def prices(self):
+        return {"CNC": 70.0, "MRK": 150.0, "LLY": 900.0, "JPM": 300.0, "XOM": 120.0, "SPY": 700.0}
+
+    def test_deposit_goes_to_new_sectors_same_day(self):
+        ib = FakeIB(self.prices(), cash=400.0, holdings={"CNC": [2.86, 70.0], "MRK": [1.33, 150.0]})  # ~$200 each
+        autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertIn("New cash found", msg)
+        self.assertEqual(set(ib.pos) - {"CNC", "MRK"}, {"JPM", "XOM"})   # 2 stocks, new sectors, not more healthcare
+        self.assertLess(ib.cash, 5)
+        self.assertNotIn("LLY", ib.pos)
+
+    def test_small_cash_is_left_and_nothing_good_means_spy(self):
+        ib = FakeIB(self.prices(), cash=30.0, holdings={"CNC": [2.86, 70.0]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(set(ib.pos), {"CNC"})                            # under $50: leave it
+        ib.cash = 300.0
+        autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", deposit_candidates=[]))
+        autotrade.execute(client=self.client(ib))
+        self.assertIn("SPY", ib.pos)                                      # no stock scores 80+ -> S&P 500
+
+    def test_retries_are_limited(self):
+        ib = FakeIB({"CNC": 70.0}, cash=500.0, holdings={"CNC": [2.86, 70.0]})   # nothing buyable (no prices)
+        autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
+        for _ in range(5):
+            autotrade.execute(client=self.client(ib))
+        self.assertEqual(autotrade.load_state()["deposit_tries"]["2026-11-10"], config.DEPOSIT_MAX_TRIES_PER_DAY)

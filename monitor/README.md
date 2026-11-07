@@ -186,3 +186,11 @@ sale money, and a stop/target watch every 2 minutes during market hours, with Te
 Paper account by default (port 4002); real money only with `"live": true` in `~/ib-trader/settings.json` and
 IB Gateway logged in to the live account (it refuses a mismatch). Pause: `"paused": true` in
 `monitor/ib_switch.json` (GitHub) or in the settings file. Setup: `bash ~/trading-bot/mac/setup.sh`.
+
+## New money (deposits)
+
+`autotrade.invest_new_cash` runs every round of the IB trader and the autopilot during market hours: cash of at
+least `DEPOSIT_MIN_USD` that no planned trade used is invested the same day in 1 to `DEPOSIT_MAX_STOCKS` stocks,
+each about the size of the current holdings, picked from the plan's `deposit_candidates` (score 80+, not sold in
+the last 30 days), sectors not yet owned first (`monitor/sectors.py`); `DEPOSIT_FALLBACK` (SPY) if none qualifies.
+At most `DEPOSIT_MAX_TRIES_PER_DAY` attempts a day.

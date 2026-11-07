@@ -101,3 +101,13 @@ AUTO_HOLDINGS = 5           # equal weight: each stock gets 1/5 (20%) of the acc
 AUTO_MAX_ORDER_PCT = 25     # safety: no single buy larger than 25% of the account
 AUTO_MIN_BUY_USD = 20.0     # don't place buys smaller than this (avoids dust orders)
 AUTO_LIVE = False           # practice only; real money needs a deliberate switch later
+
+# ---------- New money (deposits) ----------
+# During market hours, when the account has at least this much cash that no planned trade is using (for example
+# your deposit on the 20th), it is invested the same day: the strongest stocks (score 80+) from sectors you don't
+# own yet, each about the size of your current holdings (1 to 3 stocks). If nothing scores 80+, it buys SPY so
+# the money at least keeps pace with the S&P 500.
+DEPOSIT_MIN_USD = 50.0
+DEPOSIT_MAX_STOCKS = 3
+DEPOSIT_FALLBACK = "SPY"
+DEPOSIT_MAX_TRIES_PER_DAY = 3

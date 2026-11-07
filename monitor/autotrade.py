@@ -24,7 +24,7 @@ import os
 import sys
 import time
 
-from . import config, levels, performance, rotation, storage
+from . import config, levels, performance, rotation, sectors, storage
 from .alpaca import Alpaca, AlpacaError
 
 PLAN_FILE = os.path.join(config.AUTO_DIR, "plan.json")
@@ -179,9 +179,13 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     reserve = [x for x in extra if x["ticker"] not in taken][:8]
     stops = {r["ticker"]: {"stop": r.get("stop_price"), "target": r.get("target_price"), "rule": r.get("stop_rule"),
                            "weak": bool(r.get("weak"))} for r in rows if r["ticker"] not in sells}
+    sold_recently = recently_sold(state, asof, con)
+    deposit = [{"ticker": t, "rank": rk, "score": sc, "sector": sectors.sector_of(t),
+                "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
+               for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently][:40]
     return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
             "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
-            "buys": buys, "reserve": reserve, "stops": stops,
+            "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit,
             "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark", "stop_price",
                                                 "target_price", "stop_rule", "weak", "action", "entry_date", "prev_stop")}
                          for r in rows]}
@@ -347,11 +351,68 @@ def execute(client=None):
         if nt:
             names.add(nt)
         msgs.append(f"{'🛑 STOP' if hit == 'stop' else '🎯 TARGET'} HIT: sold {t} (~${val:,.2f}), {why}. -> {m}")
+    if (dt.date.fromisoformat(today) - dt.date.fromisoformat(p["asof"])).days <= STALE_DAYS:
+        m = invest_new_cash(client, p, state, today)
+        if m:
+            msgs.append(m)
     save_json(STATE_FILE, state)
     if msgs:
         acct = client.account()
         notify("\n".join(msgs) + f"\n\nAccount now ${float(acct['equity']):,.2f} (cash ${float(acct['cash']):,.2f}).")
     return "; ".join(msgs) or "nothing to do"
+
+
+def pick_for_cash(p, held, blocked, n):
+    """Up to n stocks from the plan's ranked list: new sectors first, then any; SPY if none qualifies."""
+    held_sectors = {sectors.sector_of(t) for t in held}
+    cands = [c for c in p.get("deposit_candidates") or [] if c["ticker"] not in held and c["ticker"] not in blocked]
+    chosen, used = [], set(held_sectors)
+    for c in cands:  # 1st pass: a sector the portfolio doesn't have yet
+        if len(chosen) < n and c["sector"] not in used:
+            chosen.append({**c, "why": f"new sector for you: {c['sector']}"})
+            used.add(c["sector"])
+    for c in cands:  # 2nd pass: still room -> strongest remaining, any sector
+        if len(chosen) < n and c["ticker"] not in {x["ticker"] for x in chosen}:
+            chosen.append({**c, "why": f"strongest left ({c['sector']}, already owned)"})
+    if not chosen:
+        chosen = [{"ticker": config.DEPOSIT_FALLBACK, "sector": "Broad market", "reason": "S&P 500 fund",
+                   "why": "no stock scores 80+ today, so it tracks the S&P 500 instead of sitting in cash"}]
+    return chosen
+
+
+def invest_new_cash(client, p, state, today):
+    """New money (a deposit, or cash no planned trade used) is invested the same day, spreading across sectors."""
+    acct = client.account()
+    equity, cash = float(acct["equity"]), float(acct["cash"])
+    if cash < config.DEPOSIT_MIN_USD:
+        return None
+    tries = state.setdefault("deposit_tries", {})
+    if tries.get(today, 0) >= config.DEPOSIT_MAX_TRIES_PER_DAY:
+        return None
+    done = tries.get(today, 0)
+    tries.clear()  # keep only today's count
+    tries[today] = done + 1
+    positions = client.positions()
+    held = {x["symbol"] for x in positions}
+    values = [float(x["market_value"]) for x in positions if float(x["market_value"]) > 0]
+    size = sum(values) / len(values) if values else equity / config.AUTO_HOLDINGS
+    n = max(1, min(config.DEPOSIT_MAX_STOCKS, round(cash / size) if size > 0 else 1))
+    spend = cash - 1
+    each = round(min(spend / n, equity * MAX_ORDER_PCT / 100), 2)
+    if each < config.AUTO_MIN_BUY_USD:
+        return None
+    blocked = recently_sold(state, today) | {t for t, d in state["bought"].items() if d == today}
+    picks = pick_for_cash(p, held, blocked, n)
+    lines, skip = [], set(held) | blocked
+    for c in picks:
+        queue = [c] + [x for x in p.get("deposit_candidates") or [] if x["ticker"] != c["ticker"]]
+        t, m = buy_one(client, state, today, queue, each, "new cash: ", skip)
+        if t:
+            lines.append(f"{m} - {c['why']}")
+    if not lines:
+        return f"💵 Found ${cash:,.2f} of new cash but couldn't buy anything yet; I'll retry (max {config.DEPOSIT_MAX_TRIES_PER_DAY} times a day)."
+    return (f"💵 New cash found: ${cash:,.2f}. Invested about ${each:,.2f} in each of {len(lines)} stock(s), "
+            "spreading across sectors with the goal of beating the S&P 500:\n" + "\n".join(lines))
 
 
 def main(argv=None):

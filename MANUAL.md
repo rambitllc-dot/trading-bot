@@ -35,13 +35,14 @@ More details:
 - **A stock that hits its stop or target skips the weekly limits** and is replaced right away.
 - **No buying back** a stock that was sold in the last 30 days.
 - **Equal weight:** new stocks get about 20% of the account each; a swap uses all the money from the stock it replaces.
+- **New money (deposits):** when $50 or more of cash shows up that no planned trade is using (like your deposit on the 20th), the Mac invests it the same day, as soon as IB shows it as available. It buys the strongest stocks (score 80+) from **sectors you don't own yet**, each about the size of your current holdings: 1 stock for a small deposit, up to 3 for a bigger one. If no stock scores 80+, it buys SPY so the money keeps pace with the S&P 500. You get a Telegram message saying what it bought and why. Settings: `DEPOSIT_*` in `monitor/config.py`.
 
 These are fixed rules, not predictions. They limit losses but don't guarantee profits. This isn't financial advice.
 
 ## 3. A normal day
 
 - **6:30 AM Pacific (market open):** the Mac places any trades from last night's plan, then checks stops and targets every 2 minutes.
-- **During the day:** if a stop or target is hit, the Mac sells, buys the strongest replacement, and messages you on Telegram.
+- **During the day:** if a stop or target is hit, the Mac sells, buys the strongest replacement, and messages you on Telegram. New cash ($50+) is invested the same day.
 - **1:00 PM:** market closes.
 - **About 1:35 PM:** the GitHub monitor runs, syncs your IB positions, makes tomorrow's plan, updates the dashboard, and sends the "Daily decisions" Telegram message.
 - **11:45 PM:** IB Gateway restarts itself.
