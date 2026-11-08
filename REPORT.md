@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 08, 2026 09:31 UTC · Bitcoin $75,806.91 · US stock market closed
+Last update: Nov 08, 2026 10:01 UTC · Bitcoin $75,804.52 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -53,7 +53,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 16 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
 | 17 | S&P 500 buy & hold | Hold | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
 | 18 | S&P 500 trend (200 day) | Static rule | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
-| 19 | Bitcoin buy & hold | Hold | Bitcoin | $96.54 | -$3.46 (-3.5%) | 1 |
+| 19 | Bitcoin buy & hold | Hold | Bitcoin | $96.53 | -$3.47 (-3.5%) | 1 |
 | 20 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
 | 21 | SpaceX buy & hold | Hold | Stock | $95.32 | -$4.68 (-4.7%) | 1 |
 | 22 | Wide momentum (10 ETFs) | Monthly pick | ETF | $91.12 | -$8.88 (-8.9%) | 1 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $96.54 | $100.00 | trading |
+| Bitcoin | $96.53 | $100.00 | trading |
 | S&P 500 | $97.12 | $97.12 | about even |
 | Apple | $101.79 | $101.79 | about even |
 | Microsoft | $102.18 | $102.18 | about even |
@@ -98,7 +98,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $96.61, cash $0.51. Holding SPY until next month's check.
 - **S&P 500 buy & hold:** SPY $96.61, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $96.61, cash $0.51. Signal: in the market (price $735.40 vs 200d avg $727.61).
-- **Bitcoin buy & hold:** BTC/USD $94.15, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $94.14, cash $2.39. Holding.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $186.70 vs 200d avg $204.39).
 - **SpaceX buy & hold:** SPCX $94.81, cash $0.51. Holding.
 - **Wide momentum (10 ETFs):** XLE $90.61, cash $0.51. Holding XLE until next month's check.
@@ -119,8 +119,8 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 70 | 60.0% | $123.50 | -35% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 87 | 40.2% | $27.40 | -73% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 539 | 50.5% | $4.85 | -96% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 425 | 46.1% | $1.73 | -98% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 541 | 50.5% | $4.79 | -96% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 426 | 46.0% | $1.64 | -98% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Momentum: bet the last candle repeats | Static (one fixed method) | 486 | 46.1% | $0.95 (ran out) | -99% |
 
