@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 08, 2026 15:01 UTC · Bitcoin $75,965.50 · US stock market closed
+Last update: Nov 08, 2026 15:31 UTC · Bitcoin $75,920.20 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -53,7 +53,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 16 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
 | 17 | S&P 500 buy & hold | Hold | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
 | 18 | S&P 500 trend (200 day) | Static rule | ETF | $97.12 | -$2.88 (-2.9%) | 1 |
-| 19 | Bitcoin buy & hold | Hold | Bitcoin | $96.73 | -$3.27 (-3.3%) | 1 |
+| 19 | Bitcoin buy & hold | Hold | Bitcoin | $96.68 | -$3.32 (-3.3%) | 1 |
 | 20 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
 | 21 | SpaceX buy & hold | Hold | Stock | $95.32 | -$4.68 (-4.7%) | 1 |
 | 22 | Wide momentum (10 ETFs) | Monthly pick | ETF | $91.12 | -$8.88 (-8.9%) | 1 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $96.73 | $100.00 | trading |
+| Bitcoin | $96.68 | $100.00 | trading |
 | S&P 500 | $97.12 | $97.12 | about even |
 | Apple | $101.79 | $101.79 | about even |
 | Microsoft | $102.18 | $102.18 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $95.32 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,533.26 from $2,600 (-66.74)
+**All together:** $2,533.20 from $2,600 (-66.80)
 
 ## What each one is doing
 
@@ -93,12 +93,12 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Anthropic trend (50 day):** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
 - **Anthropic gradual buy ($25 a week for 4 weeks):** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
 - **SpaceX gradual buy ($25 a week for 4 weeks):** SPCX $23.82, cash $75.01. Bought 1 of 4 times; next buy on or after 2026-11-10.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $57.97, GLD $20.43, BTC/USD $9.66, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $57.97, GLD $20.43, BTC/USD $9.65, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $97.82, cash $0.51. Holding.
 - **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $96.61, cash $0.51. Holding SPY until next month's check.
 - **S&P 500 buy & hold:** SPY $96.61, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $96.61, cash $0.51. Signal: in the market (price $735.40 vs 200d avg $727.61).
-- **Bitcoin buy & hold:** BTC/USD $94.34, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $94.29, cash $2.39. Holding.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $186.70 vs 200d avg $204.39).
 - **SpaceX buy & hold:** SPCX $94.81, cash $0.51. Holding.
 - **Wide momentum (10 ETFs):** XLE $90.61, cash $0.51. Holding XLE until next month's check.
@@ -119,8 +119,8 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 72 | 59.7% | $122.02 | -35% |
 | Learning: copies whichever method has been winning lately | Learning (switches methods) | 87 | 40.2% | $27.40 | -73% |
-| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 561 | 49.9% | $3.23 | -97% |
-| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 440 | 46.1% | $1.51 | -99% |
+| Session momentum: follow the busiest hour's direction | Static (one fixed method) | 563 | 50.1% | $3.50 | -97% |
+| Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 441 | 46.0% | $1.43 | -99% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Momentum: bet the last candle repeats | Static (one fixed method) | 486 | 46.1% | $0.95 (ran out) | -99% |
 
