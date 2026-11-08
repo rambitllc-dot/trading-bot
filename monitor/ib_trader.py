@@ -37,6 +37,7 @@ REPO = os.path.dirname(config.BASE_DIR)
 IB_PLAN_FILE = os.path.join(config.BASE_DIR, "output", "ib_plan.json")
 IB_SWITCH_FILE = os.path.join(config.BASE_DIR, "ib_switch.json")
 LOOP_SECONDS = 120
+UPDATE_MARKER = os.path.join(HOME, ".restarting-for-update")
 DEFAULTS = {"host": "127.0.0.1", "port": 4002, "client_id": 17, "live": False, "paused": False,
             "telegram_bot_token": "", "telegram_chat_id": "", "max_order_pct": 50}
 
@@ -136,9 +137,16 @@ class IBClient:
         return {"status": status, "filled_avg_price": t.orderStatus.avgFillPrice or None}
 
 
-def git_rev():
-    r = subprocess.run(["git", "-C", REPO, "rev-parse", "HEAD"], capture_output=True, text=True, timeout=30)
-    return r.stdout.strip()
+def code_version():
+    """Fingerprint of the program's own code (monitor/*.py, not tests or data files). Data commits from the
+    other bots (every 30 minutes) don't change it; only a real code update does."""
+    import hashlib
+    h = hashlib.sha256()
+    for name in sorted(os.listdir(config.BASE_DIR)):
+        if name.endswith(".py"):
+            with open(os.path.join(config.BASE_DIR, name), "rb") as f:
+                h.update(name.encode() + f.read())
+    return h.hexdigest()
 
 
 def git_pull():
@@ -179,19 +187,25 @@ def main(argv=None):
     s = settings()
     setup_engine(s)
     ib, last_warn, last_pull = None, 0.0, 0.0
-    started_rev = git_rev()
-    autotrade.notify(f"Started on the Mac, watching the {'REAL' if s['live'] else 'paper'} IB account "
-                     f"(port {s['port']}).")
+    started_code = code_version()
+    if os.path.exists(UPDATE_MARKER):  # restarted only to load new code: no "Started" message
+        os.remove(UPDATE_MARKER)
+        print("Restarted with updated code.", flush=True)
+    else:
+        autotrade.notify(f"Started on the Mac, watching the {'REAL' if s['live'] else 'paper'} IB account "
+                         f"(port {s['port']}).")
     while True:
         s = settings()
         is_open, now = market_open()
         if time.time() - last_pull > 600 or is_open:
             git_pull()
             last_pull = time.time()
-            if "--once" not in argv and started_rev and git_rev() != started_rev:
+            if "--once" not in argv and code_version() != started_code:
                 print("New code downloaded; restarting to use it.", flush=True)
                 if ib is not None:
                     ib.disconnect()
+                with open(UPDATE_MARKER, "w") as f:
+                    f.write(now.isoformat())
                 sys.exit(0)  # the launch agent (KeepAlive) starts it again right away with the new code
         if is_open or "--once" in argv:
             try:

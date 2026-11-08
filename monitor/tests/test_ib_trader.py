@@ -154,3 +154,18 @@ class DepositTest(IBTraderTest):
         for _ in range(5):
             autotrade.execute(client=self.client(ib))
         self.assertEqual(autotrade.load_state()["deposit_tries"]["2026-11-10"], config.DEPOSIT_MAX_TRIES_PER_DAY)
+
+
+class CodeVersionTest(unittest.TestCase):
+    def test_data_changes_do_not_count_as_code(self):
+        d = tempfile.mkdtemp()
+        with open(os.path.join(d, "a.py"), "w") as f:
+            f.write("x = 1\n")
+        with mock.patch.object(config, "BASE_DIR", d):
+            v1 = ib_trader.code_version()
+            with open(os.path.join(d, "plan.json"), "w") as f:
+                f.write("{}")                                   # data commit (plans, positions, logs)
+            self.assertEqual(ib_trader.code_version(), v1)
+            with open(os.path.join(d, "a.py"), "w") as f:
+                f.write("x = 2\n")                              # real code update
+            self.assertNotEqual(ib_trader.code_version(), v1)
