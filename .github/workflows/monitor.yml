@@ -40,11 +40,16 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GITHUB_TOKEN: ${{ github.token }}
         run: python -m monitor.notifier
+      - name: Skip if today's run already happened (a late scheduled start after the backup run)
+        id: guard
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          python -c "import json,datetime,zoneinfo; a=json.load(open('monitor/output/valuation_latest.json')).get('asof'); t=datetime.datetime.now(zoneinfo.ZoneInfo('America/New_York')).date().isoformat(); print('skip=' + ('true' if a == t else 'false'))" >> "$GITHUB_OUTPUT"
       - name: Tests
-        if: ${{ !inputs.test_message }}
+        if: ${{ !inputs.test_message && steps.guard.outputs.skip != 'true' }}
         run: python -m unittest discover -s monitor/tests -t .
       - name: Run the monitor (log saved to monitor/logs)
-        if: ${{ !inputs.test_message }}
+        if: ${{ !inputs.test_message && steps.guard.outputs.skip != 'true' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}     # optional: Claude news
           IBKR_FLEX_TOKEN: ${{ secrets.IBKR_FLEX_TOKEN }}         # optional: read-only IB positions sync
@@ -59,7 +64,7 @@ jobs:
           python -m monitor.ibkr_sync 2>&1 | tee -a "monitor/logs/run_$(date -u +%F).log"
           python -m monitor.run ${{ inputs.asof && format('--asof {0}', inputs.asof) || '' }} 2>&1 | tee -a "monitor/logs/run_$(date -u +%F).log"
       - name: Save snapshots, database and log
-        if: ${{ !inputs.test_message }}
+        if: ${{ !inputs.test_message && steps.guard.outputs.skip != 'true' }}
         run: |
           git config user.name "portfolio-monitor"
           git config user.email "portfolio-monitor@users.noreply.github.com"

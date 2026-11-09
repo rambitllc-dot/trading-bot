@@ -35,6 +35,7 @@ jobs:
           ALPACA_KEY: ${{ secrets.ALPACA_KEY }}
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET }}
           GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}                          # lets monitor.kick start a late evening run
           ALPACA_LIVE_KEY: ${{ secrets.ALPACA_LIVE_KEY }}        # empty until you go live
           ALPACA_LIVE_SECRET: ${{ secrets.ALPACA_LIVE_SECRET }}
           ALPACA_AUTO_KEY: ${{ secrets.ALPACA_AUTO_KEY }}        # practice autopilot (separate paper account)
@@ -50,6 +51,7 @@ jobs:
             git pull --rebase --autostash -q || true      # pick up any bot.py you edited
             python bot.py || echo "Bot hit an error this round; will try again in 30 minutes."
             python -m monitor.autotrade execute || echo "Autopilot hit an error; will try again in 30 minutes."
+            python -m monitor.kick || echo "Monitor kick failed; GitHub's own schedule still applies."
             git add -A
             if ! git diff --cached --quiet; then
               git commit -q -m "Bot update"

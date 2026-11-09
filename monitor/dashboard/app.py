@@ -3,9 +3,11 @@
 Run locally:   streamlit run monitor/dashboard/app.py
 It only reads monitor.db (written by `python -m monitor.run`). It never trades.
 """
+import datetime as dt
 import html
 import os
 import sys
+from zoneinfo import ZoneInfo
 
 import altair as alt
 import pandas as pd
@@ -88,6 +90,10 @@ def e(s):
     return html.escape(str(s))
 
 
+def pct(v, d=1):
+    return "–" if v is None else f'<span class="{cls(v)}">{v * 100:+.{d}f}%</span>'
+
+
 def chart_theme(c):
     return (c.configure(background="#07090C").configure_view(stroke=None)
             .configure_axis(labelColor=GREY, titleColor=GREY, gridColor="#161B22", domainColor="#2A313B",
@@ -126,14 +132,14 @@ if not first["asof"]:
 
 with st.sidebar:
     asof = st.selectbox("As of", first["dates"], index=0)
-    st.caption("A monitor only: it reports conditions, tracks your own targets, and summarizes news. "
-               "Nothing here recommends trades or places orders.")
+    st.caption("Evening analysis from the monitor (stops, targets, swaps, news) plus live prices that refresh every "
+               "minute. Trades are placed by the IB trader on your Mac, not by this page.")
 D = get(asof, KEY)
 P, A, M = D["positions"], D["analytics"] or {}, D["macro"]
 
 # ---------- header + status strip ----------
 st.markdown(f'<div class="hdr"><b>PORTFOLIO MONITOR</b><span>AS OF {e(D["asof"])} · '
-            f'{len(P)} POSITIONS · MONITOR ONLY</span></div>', unsafe_allow_html=True)
+            f'{len(P)} POSITIONS · EVENING ANALYSIS + LIVE PRICES</span></div>', unsafe_allow_html=True)
 nav = A.get("total_value") or sum(p["value"] or 0 for p in P)
 pnl, pnl_pct = A.get("pnl"), A.get("pnl_pct")
 macro_txt = f"{M['score']:.0f} {M['label'].upper()}" if M and M.get("score") is not None else "–"
@@ -146,6 +152,71 @@ cells = [("NAV", money(nav), ""), ("P&L", f"{money(pnl)} ({num(pnl_pct, 1)}%)" i
          ("Daily theta", money(A.get("daily_theta")), cls(A.get("daily_theta"))), ("As of", D["asof"], "")]
 st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
                                              for k, v, c in cells) + "</div>", unsafe_allow_html=True)
+
+# ---------- live prices (refresh every minute) ----------
+@st.cache_data(ttl=55, show_spinner=False)
+def live_quotes(tickers):
+    """Last price and previous close per ticker from Yahoo (about real time during market hours)."""
+    import yfinance as yf
+    out = {}
+    for t in tickers:
+        try:
+            fi = yf.Ticker(t.replace(".", "-")).fast_info
+            last, prev = float(fi["last_price"]), float(fi["previous_close"])
+            if last == last and prev == prev:
+                out[t] = (last, prev)
+        except Exception:  # noqa: BLE001 - one missing quote shouldn't break the page
+            pass
+    return out
+
+
+def market_status():
+    now = dt.datetime.now(ZoneInfo("America/New_York"))
+    is_open = now.weekday() < 5 and dt.time(9, 30) <= now.time() < dt.time(16, 0)
+    return ("MARKET OPEN" if is_open else "MARKET CLOSED"), is_open
+
+
+@st.fragment(run_every="60s")
+def live_section():
+    held = [p for p in P if p["asset_type"] == "shares"]
+    if not held:
+        return
+    q = live_quotes(tuple(sorted({p["ticker"] for p in held})))
+    status, is_open = market_status()
+    when = dt.datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%-I:%M %p PT")
+    st.markdown(f'<div class="sec">Live · updates every minute · {when} · {status}</div>', unsafe_allow_html=True)
+    other = sum(p.get("value") or 0 for p in P if p["asset_type"] != "shares")  # cash and options (evening values)
+    tot_v, tot_cost, day = other, sum(p.get("cost") or 0 for p in P if p["asset_type"] != "shares"), 0.0
+    t = ('<div class="wrap"><table class="grid"><tr><th>Stock</th><th>Live price</th><th>Today</th><th>Value</th>'
+         '<th>P&amp;L since bought</th><th>Stop</th><th>To stop</th><th>Target</th></tr>')
+    for p in held:
+        qty, entry = p.get("contracts") or 0, p.get("entry_price") or 0
+        last, prev = q.get(p["ticker"], (p.get("mark"), None))
+        if last is None:
+            continue
+        v, cost = qty * last, qty * entry
+        tot_v, tot_cost = tot_v + v, tot_cost + cost
+        chg = (last / prev - 1) if prev else None
+        day += qty * (last - prev) if prev else 0
+        stop, tgt = p.get("stop_price"), p.get("target_price")
+        to_stop = (last / stop - 1) if stop else None
+        warn = ' style="color:#FF5C5C;font-weight:700"' if to_stop is not None and to_stop < 0.02 else ""
+        t += (f'<tr><td><b>{e(p["ticker"])}</b></td><td>{num(last)}</td><td class="{cls(chg)}">{pct(chg)}</td>'
+              f'<td>{money(v)}</td><td class="{cls(v - cost)}">{money(v - cost)} ({pct(v / cost - 1 if cost else None)})</td>'
+              f'<td>{num(stop)}</td><td{warn}>{pct(to_stop)}</td><td>{num(tgt)}</td></tr>')
+    cells = [("Live value", money(tot_v), ""), ("Today", money(day), cls(day)),
+             ("P&L since bought", f"{money(tot_v - tot_cost)} ({pct(tot_v / tot_cost - 1 if tot_cost else None)})",
+              cls(tot_v - tot_cost)), ("Market", status, "up" if is_open else "")]
+    st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
+                                                 for k, v, c in cells) + "</div>" + t + "</table></div>",
+                unsafe_allow_html=True)
+    st.markdown('<div class="muted">Live prices from Yahoo Finance; holdings, stops and targets from the latest '
+                'evening run (holdings update from IB the day after a trade). "To stop" turns red within 2%.</div>',
+                unsafe_allow_html=True)
+
+
+if asof == first["dates"][0]:
+    live_section()
 
 # ---------- alerts ----------
 # ---------- your plan ----------
