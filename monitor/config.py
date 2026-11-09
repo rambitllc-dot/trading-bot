@@ -111,3 +111,10 @@ DEPOSIT_MIN_USD = 50.0
 DEPOSIT_MAX_STOCKS = 3
 DEPOSIT_FALLBACK = "SPY"
 DEPOSIT_MAX_TRIES_PER_DAY = 3
+
+# ---------- Diversification and earnings guard ----------
+MAX_PER_SECTOR = 2          # never buy a stock if you'd then hold more than 2 from its sector (swaps, stop-out
+                            # replacements, new money). Holdings already over it aren't sold for that reason.
+EARNINGS_GUARD = True       # don't buy a stock that reports earnings within the next...
+EARNINGS_BLACKOUT_DAYS = 5  # ...business days (an overnight earnings jump can skip right past the 6% stop)
+EARNINGS_CHECK_TOP = 60     # how many top-ranked candidates get their earnings date checked each evening

@@ -23,10 +23,11 @@ stock, whatever its own rank, because a stopped-out stock isn't "following the m
 Otherwise every holding can be swapped again after the waiting period (2 business days). It's a suggestion from fixed rules, not a prediction;
 nothing is traded automatically.
 """
+import collections
 import datetime as dt
 import math
 
-from . import config
+from . import config, sectors
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS rotation_scores (
@@ -153,7 +154,7 @@ def log_rows(con, since):
     return [dict(zip(cols, r)) for r in cur.fetchall()]
 
 
-def run(con, asof, rows, data, sentiment=None):
+def run(con, asof, rows, data, sentiment=None, blocker=None):
     con.executescript(SCHEMA)
     migrate(con)
     held = {r["ticker"]: r for r in rows if r["asset_type"] == "shares" and r.get("value")}
@@ -185,13 +186,37 @@ def run(con, asof, rows, data, sentiment=None):
     new = []
     candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
                   and r["ticker"] not in taken]
+    # earnings guard: skip strong candidates that report earnings in the next few business days
+    soon = {}
+    if blocker:
+        top = [r["ticker"] for r in candidates if r["score"] >= config.ROTATION_MIN_SCORE][:config.EARNINGS_CHECK_TOP]
+        try:
+            soon = blocker(top + list(held))
+        except Exception:  # noqa: BLE001 - no earnings data: carry on without the guard
+            soon = {}
+    result["earnings_soon"] = soon
+    result["held_earnings"] = {t: d for t, d in soon.items() if t in held}
+    candidates = [r for r in candidates if r["ticker"] not in soon]
+    # sector limit: count what the book will hold (open ideas included) so no sector goes over MAX_PER_SECTOR
+    counts = collections.Counter(sectors.sector_of(t) for t in held)
+    for r in pending:
+        counts[sectors.sector_of(r["sell"])] -= 1
+        counts[sectors.sector_of(r["buy"])] += 1
+
+    def pick(sell_ticker):
+        out_sector = sectors.sector_of(sell_ticker)
+        for c in candidates:
+            sec = sectors.sector_of(c["ticker"])
+            if not sectors.over_limit(sec, counts[sec] + 1 - (1 if sec == out_sector else 0)):
+                return c
+        return None
     # Stopped out (SELL from the stop or target) goes first and skips the waiting-period / minimum-hold / lead rules:
     # the money moves to the strongest stock right away, whatever the sold stock's rank.
     pending_sells = {r["sell"] for r in pending}
     forced = {t for t, r in held.items() if r.get("action") == "SELL" and t not in pending_sells}
     for h in [x for x in mine if x["ticker"] in forced] + [x for x in mine if x["ticker"] not in forced]:
         stop_out = h["ticker"] in forced
-        best = candidates[0] if candidates else None
+        best = pick(h["ticker"])
         if stop_out:
             if not best or best["score"] < config.ROTATION_MIN_SCORE:
                 continue  # nothing strong enough: the SELL stands and the money waits in cash
@@ -205,7 +230,9 @@ def run(con, asof, rows, data, sentiment=None):
             if not best or best["score"] < config.ROTATION_MIN_SCORE or \
                     best["score"] - h["score"] < config.ROTATION_MARGIN:
                 continue
-        candidates.pop(0)
+        candidates.remove(best)
+        counts[sectors.sector_of(h["ticker"])] -= 1
+        counts[sectors.sector_of(best["ticker"])] += 1
         amount = held[h["ticker"]]["value"]
         if stop_out:
             reason = (f"STOPPED OUT: {held[h['ticker']].get('action_reason')}. Sell regardless of its rank "

@@ -194,3 +194,11 @@ least `DEPOSIT_MIN_USD` that no planned trade used is invested the same day in 1
 each about the size of the current holdings, picked from the plan's `deposit_candidates` (score 80+, not sold in
 the last 30 days), sectors not yet owned first (`monitor/sectors.py`); `DEPOSIT_FALLBACK` (SPY) if none qualifies.
 At most `DEPOSIT_MAX_TRIES_PER_DAY` attempts a day.
+
+## Sector limit and earnings guard
+
+- `MAX_PER_SECTOR` (2): rotation picks, plan fill buys and every buy on the Mac/autopilot skip a stock whose sector
+  (`monitor/sectors.py`, from sp500.csv plus an ETF table) is already full. "Other" (unknown) is never limited.
+- `EARNINGS_GUARD` / `EARNINGS_BLACKOUT_DAYS` (5 business days): `monitor/earnings.py` checks the next earnings date
+  (Yahoo) for the top `EARNINGS_CHECK_TOP` candidates and your holdings; candidates reporting soon are skipped,
+  holdings reporting soon are listed in the evening Telegram report. Cached daily in `output/earnings_cache.json`.

@@ -34,6 +34,8 @@ More details:
 - **Each stock can be swapped at most once every 2 business days.** A stock bought on Friday can be swapped from Tuesday's evening run (trade at Wednesday's open). The waiting period never blocks the 6% stop.
 - **A stock that hits its stop or target skips the waiting period** and is replaced right away.
 - **No buying back** a stock that was sold in the last 30 days.
+- **Sector limit:** never more than 2 stocks from the same sector. Any buy (swap, stop-out replacement, new money) skips a stock whose sector is already full. Stocks you already hold aren't sold just for this; the limit stops it from getting worse, and swaps move you toward balance over time.
+- **Earnings guard:** no buying a stock that reports earnings within the next 5 business days, because an overnight earnings jump can skip right past the 6% stop. Stocks you hold aren't sold for this; the evening Telegram report warns you when one of them reports soon.
 - **Equal weight:** new stocks get about 20% of the account each; a swap uses all the money from the stock it replaces.
 - **New money (deposits):** when $50 or more of cash shows up that no planned trade is using (like your deposit on the 20th), the Mac invests it the same day, as soon as IB shows it as available. It buys the strongest stocks (score 80+) from **sectors you don't own yet**, each about the size of your current holdings: 1 stock for a small deposit, up to 3 for a bigger one. If no stock scores 80+, it buys SPY so the money keeps pace with the S&P 500. You get a Telegram message saying what it bought and why. Settings: `DEPOSIT_*` in `monitor/config.py`.
 

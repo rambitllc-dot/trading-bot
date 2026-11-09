@@ -116,6 +116,10 @@ def digest(res):
         L += [f"🔁 SWAP: sell {s['sell']} → buy {s['buy']} (rank #{s['buy_rank']})" for s in sw]
     else:
         L.append(f"🔁 Swaps: none today ({(rot.get('status') or '').split(' (')[0][:90]})")
+    he = rot.get("held_earnings") or {}
+    if he:
+        L += ["", "📅 Earnings coming up (an overnight jump can skip past the stop):"] + \
+             [f"{t} reports on {d}" for t, d in sorted(he.items(), key=lambda x: x[1])]
     extra = [a for a in res.get("alerts") or [] if a["severity"] == "high" and a["kind"] not in COVERED]
     if extra:
         L += ["", "⚠️ Alerts:"] + [f"- {a['message'][:200]}" for a in extra[:5]]

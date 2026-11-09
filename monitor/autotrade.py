@@ -24,7 +24,9 @@ import os
 import sys
 import time
 
-from . import config, levels, performance, rotation, sectors, storage
+import collections
+
+from . import config, earnings, levels, performance, rotation, sectors, storage
 from .alpaca import Alpaca, AlpacaError
 
 PLAN_FILE = os.path.join(config.AUTO_DIR, "plan.json")
@@ -133,7 +135,8 @@ def plan(asof, bars, sentiment=None, client=None, db=None, plan_file=None):
     con = storage.connect(db or config.AUTO_DB)
     try:
         levels.apply(con, asof, rows, bars)
-        rot = rotation.run(con, asof, rows, bars, sentiment)
+        rot = rotation.run(con, asof, rows, bars, sentiment,
+                           earnings.make_blocker(asof) if config.EARNINGS_GUARD else None)
         equity, cash = float(acct.get("equity") or 0), float(acct.get("cash") or 0)
         p = build_plan(asof, rows, rot, con, equity, cash, state)
         totals = {"value": equity, "cost": sum(r["cost"] for r in rows) + cash, "pnl": sum(r["pnl"] for r in rows)}
@@ -160,7 +163,8 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
             sells.setdefault(s["sell"], s["reason"])
             swap_buys.append({"ticker": s["buy"], "rank": s["buy_rank"], "score": s["buy_score"], "replaces": s["sell"],
                               "reason": f"replaces {s['sell']}: {s['reason']}"})
-    blocked = recently_sold(state, asof, con) | held | set(sells)
+    soon = rot.get("earnings_soon") or {}
+    blocked = recently_sold(state, asof, con) | held | set(sells) | set(soon)
     buys = [b for b in swap_buys if b["ticker"] not in blocked]
     slots = holdings - (len(held) - len(sells))
     buys = buys[:max(slots, 0)]
@@ -173,7 +177,17 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     funded = {b["replaces"] for b in buys}
     free = cash + sum(value.get(t, 0) for t in sells if t not in funded)
     n_fill = min(max(slots - len(buys), 0), int(free // (per * 0.5)) if per > 0 else 0)
-    fill = extra[:n_fill]
+    counts = collections.Counter(sectors.sector_of(t) for t in held if t not in sells)
+    for b in buys:
+        counts[sectors.sector_of(b["ticker"])] += 1
+    fill = []
+    for x in extra:  # fill empty slots without going over the sector limit
+        if len(fill) >= n_fill:
+            break
+        sec = sectors.sector_of(x["ticker"])
+        if not sectors.over_limit(sec, counts[sec] + 1):
+            fill.append(x)
+            counts[sec] += 1
     buys += fill
     taken |= {b["ticker"] for b in fill}
     reserve = [x for x in extra if x["ticker"] not in taken][:8]
@@ -182,10 +196,11 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     sold_recently = recently_sold(state, asof, con)
     deposit = [{"ticker": t, "rank": rk, "score": sc, "sector": sectors.sector_of(t),
                 "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
-               for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently][:40]
+               for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently
+               and t not in soon][:40]
     return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
             "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
-            "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit,
+            "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit, "earnings_soon": soon,
             "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark", "stop_price",
                                                 "target_price", "stop_rule", "weak", "action", "entry_date", "prev_stop")}
                          for r in rows]}
@@ -244,10 +259,13 @@ def _price(o):
 
 def buy_one(client, state, today, queue, dollars, why_prefix, skip):
     """Buy the first stock in `queue` that works; returns (ticker, message) or (None, message)."""
+    counts = collections.Counter(sectors.sector_of(x["symbol"]) for x in client.positions())
     for b in queue:
         t = b["ticker"]
         if t in skip:
             continue
+        if sectors.over_limit(sectors.sector_of(t), counts[sectors.sector_of(t)] + 1):
+            continue  # would put more than MAX_PER_SECTOR stocks in one sector
         try:
             o = wait_filled(client, client.buy(t, dollars))
         except AlpacaError as e:
@@ -259,7 +277,7 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
         skip.add(t)
         log("BUY", t, dollars, _price(o), f"{why_prefix}{b.get('reason', '')}")
         return t, f"🟢 BUY {t} ${dollars:,.2f}" + (f" at {_price(o):,.2f}" if _price(o) else "") + f" ({b.get('reason', '')[:120]})"
-    return None, "no stock from the plan could be bought"
+    return None, "no stock from the plan could be bought (sector limit, recent sale or refused order)"
 
 
 def execute(client=None):

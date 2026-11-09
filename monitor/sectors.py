@@ -30,3 +30,8 @@ def _table():
 def sector_of(ticker):
     t = (ticker or "").upper().replace(".", "-")
     return ETF_SECTORS.get(t) or _table().get(t) or "Other"
+
+
+def over_limit(sector, count_after):
+    """True if holding `count_after` stocks of `sector` breaks MAX_PER_SECTOR ("Other" = unknown: no limit)."""
+    return sector != "Other" and count_after > config.MAX_PER_SECTOR
