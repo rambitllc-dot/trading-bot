@@ -49,3 +49,47 @@ class EarningsGuardTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WeatherAndTrendTest(unittest.TestCase):
+    def series(self, closes):
+        return [(f"d{i:03d}", c, c, 0, c) for i, c in enumerate(closes)]
+
+    def test_storm_needs_two_days_below_and_two_above_to_clear(self):
+        con = storage.connect(os.path.join(tempfile.mkdtemp(), "m.db"))
+        from monitor import regime
+        up = [100 + i * 0.1 for i in range(250)]
+        self.assertFalse(regime.check(con, "2026-11-02", {"SPY": self.series(up)})["storm"])
+        one_day = up + [80]
+        self.assertFalse(regime.check(con, "2026-11-03", {"SPY": self.series(one_day)})["storm"])   # 1 day: no
+        two_days = up + [80, 79]
+        self.assertTrue(regime.check(con, "2026-11-04", {"SPY": self.series(two_days)})["storm"])   # 2 days: storm
+        back_one = two_days + [200]
+        self.assertTrue(regime.check(con, "2026-11-05", {"SPY": self.series(back_one)})["storm"])   # still storm
+        back_two = back_one + [201]
+        self.assertFalse(regime.check(con, "2026-11-06", {"SPY": self.series(back_two)})["storm"])  # cleared
+
+    def test_uptrend_and_volatility(self):
+        rising = self.series([100 * 1.002 ** i for i in range(300)])
+        falling = self.series([100 * 1.002 ** i for i in range(260)] + [168 * 0.99 ** i for i in range(40)])
+        self.assertTrue(rotation.uptrend(rising))
+        self.assertFalse(rotation.uptrend(falling))                         # broke below its averages
+        calm = self.series([100 + (i % 2) * 0.5 for i in range(100)])
+        wild = self.series([100 + (i % 2) * 5 for i in range(100)])
+        self.assertLess(rotation.daily_vol(calm), rotation.daily_vol(wild))
+
+    def test_storm_parks_new_money_and_stops_swaps(self):
+        con = storage.connect(os.path.join(tempfile.mkdtemp(), "m.db"))
+        res = rotation.run(con, "2026-11-05", held("LOSR", "LOS2"), market(), storm=True)
+        self.assertEqual(res["suggestions"], [])
+        self.assertIn("storm", res["status"])
+        rows = [{"ticker": "LOSR", "asset_type": "shares", "value": 100.0, "action": "HOLD"}]
+        p = autotrade.build_plan("2026-11-05", rows, res, con, 1000.0, 900.0)
+        self.assertTrue(p["storm"])
+        self.assertEqual((p["buys"], p["deposit_candidates"]), ([], []))
+        # fair weather again while holding the parking fund: sell it, money back into stocks
+        fair = rotation.run(con, "2026-11-06", held("LOSR"), market())
+        rows2 = rows + [{"ticker": config.SAFE_FUND, "asset_type": "shares", "value": 800.0, "action": "HOLD"}]
+        p2 = autotrade.build_plan("2026-11-06", rows2, fair, con, 1000.0, 100.0)
+        self.assertIn(config.SAFE_FUND, [x["ticker"] for x in p2["sells"]])
+        self.assertTrue(p2["buys"])

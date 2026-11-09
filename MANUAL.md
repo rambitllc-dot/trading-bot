@@ -35,6 +35,9 @@ More details:
 - **A stock that hits its stop or target skips the waiting period** and is replaced right away.
 - **No buying back** a stock that was sold in the last 30 days.
 - **Sector limit:** never more than 2 stocks from the same sector. Any buy (swap, stop-out replacement, new money) skips a stock whose sector is already full. Stocks you already hold aren't sold just for this; the limit stops it from getting worse, and swaps move you toward balance over time.
+- **Market weather:** when the S&P 500 closes below its 200-day average 2 days in a row (a "storm"), no new stocks are bought: swaps pause, and new money and money from stop-outs wait in SGOV (a short-term Treasury fund, about 4% a year). Your stocks keep their stops. After 2 closes back above the average, the SGOV money goes back into the strongest stocks. Shown on the dashboard and in the evening Telegram report.
+- **Uptrends only:** a stock is bought only if it's above its 50- and 200-day averages, its 200-day average is rising, and it's within 25% of its 1-year high.
+- **Sized by how jumpy it is:** steady stocks get more money and jumpy ones less (0.5x to 1.5x of an equal share), and no single stock gets more than 35% of the account. A swap moves the sold stock's money into the new one up to that 35%; any extra is invested as new money.
 - **Earnings guard:** no buying a stock that reports earnings within the next 5 business days, because an overnight earnings jump can skip right past the 6% stop. Stocks you hold aren't sold for this; the evening Telegram report warns you when one of them reports soon.
 - **Equal weight:** new stocks get about 20% of the account each; a swap uses all the money from the stock it replaces.
 - **New money (deposits):** when $50 or more of cash shows up that no planned trade is using (like your deposit on the 20th), the Mac invests it the same day, as soon as IB shows it as available. It buys the strongest stocks (score 80+) from **sectors you don't own yet**, each about the size of your current holdings: 1 stock for a small deposit, up to 3 for a bigger one. If no stock scores 80+, it buys SPY so the money keeps pace with the S&P 500. You get a Telegram message saying what it bought and why. Settings: `DEPOSIT_*` in `monitor/config.py`.
@@ -130,5 +133,4 @@ On the Mac, the Telegram details live in `~/ib-trader/settings.json`. The bot to
 
 ## 10. Ideas on hold (for later)
 
-- **Market-weather switch:** when the S&P 500 is below its 200-day average, stop buying new stocks and park new money in cash or a short-term Treasury fund until it recovers.
 - **Politicians' trades:** a small ranking bonus for stocks members of Congress recently bought (they report up to 45 days late, so it's a weak signal).

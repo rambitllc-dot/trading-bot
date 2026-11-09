@@ -118,3 +118,13 @@ MAX_PER_SECTOR = 2          # never buy a stock if you'd then hold more than 2 f
 EARNINGS_GUARD = True       # don't buy a stock that reports earnings within the next...
 EARNINGS_BLACKOUT_DAYS = 5  # ...business days (an overnight earnings jump can skip right past the 6% stop)
 EARNINGS_CHECK_TOP = 60     # how many top-ranked candidates get their earnings date checked each evening
+
+# ---------- Market weather, uptrend check, volatility sizing ----------
+WEATHER_SWITCH = True       # S&P 500 (SPY) below its 200-day average 2 days in a row = storm: no new stock buys,
+SAFE_FUND = "SGOV"          # ...new money and stop-out money wait in this short-term Treasury fund until SPY closes
+                            # above the average 2 days in a row; then it's moved back into the strongest stocks
+UPTREND_REQUIRED = True     # only buy stocks above their 50- and 200-day averages, 200-day rising, within 25% of high
+UPTREND_MAX_FROM_HIGH = 25  # percent below the 1-year high still counted as "near the high"
+VOL_SIZING = True           # steadier stocks get more money, jumpy ones less (0.5x to 1.5x of an equal share)
+VOL_SIZE_MIN, VOL_SIZE_MAX = 0.5, 1.5
+MAX_POSITION_PCT = 35       # no single buy larger than this share of the account

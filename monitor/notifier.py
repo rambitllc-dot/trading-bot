@@ -87,7 +87,11 @@ def digest(res):
     """The evening 'daily decisions' message: every stock's decision, stop moves, swaps, and what to do."""
     t, asof = res["totals"], res["asof"]
     pp = f" ({t['pnl_pct']:+.1f}%)" if t.get("pnl_pct") is not None else ""
-    L = [f"📊 Daily decisions · {asof}", f"Your IB book ${t['value']:,.0f} · open P&L {t['pnl']:+,.2f}{pp}", ""]
+    w = (res.get("rotation") or {}).get("weather") or {}
+    L = [f"📊 Daily decisions · {asof}", f"Your IB book ${t['value']:,.0f} · open P&L {t['pnl']:+,.2f}{pp}"]
+    if w.get("text"):
+        L.append(("⛈ " if w.get("storm") else "🌤 ") + w["text"])
+    L.append("")
     todo = []
     for r in res["positions"]:
         if r["asset_type"] == "cash":

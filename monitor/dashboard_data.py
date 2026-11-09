@@ -152,7 +152,12 @@ def load(db_path=None, asof=None):
         if table_exists(con, "swap_scorecard"):
             cards = rows(con, "SELECT * FROM swap_scorecard WHERE asof=? ORDER BY suggested_on DESC, sell", (asof,))
             perf["scorecard"], perf["summary"] = cards, performance.score_summary(cards)
-        return {"asof": asof, "dates": avail, "positions": pos, "performance": perf, "autopilot": autopilot(), "analytics": a[0] if a else None,
+        weather = None
+        if table_exists(con, "market_weather"):
+            w = rows(con, "SELECT * FROM market_weather WHERE asof<=? ORDER BY asof DESC LIMIT 1", (asof,))
+            weather = w[0] if w else None
+        return {"asof": asof, "dates": avail, "positions": pos, "performance": perf, "autopilot": autopilot(),
+                "weather": weather, "analytics": a[0] if a else None,
                 "allocation": alloc, "iv_env": ivenv, "alerts": alerts, "macro": macro, "news": news,
                 "ladders": ladders, "theta_stacked": stacked, "extrinsic": extrinsic,
                 "watchlist": watch, "scan": scan, "rotation": rot,

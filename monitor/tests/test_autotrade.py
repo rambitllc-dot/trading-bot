@@ -73,8 +73,10 @@ class AutopilotTest(unittest.TestCase):
         self.assertTrue(all(b["score"] >= config.ROTATION_MIN_SCORE for b in buys))
         autotrade.execute(client=fake)
         self.assertEqual(set(fake.pos), {b["ticker"] for b in buys})
-        for s, (q, a) in fake.pos.items():
-            self.assertAlmostEqual(q * a, 10000 / config.AUTO_HOLDINGS, delta=1)  # 20% each
+        vals = {s: q * a for s, (q, a) in fake.pos.items()}   # sized by how jumpy each stock is, max 25% each
+        self.assertTrue(all(v <= 10000 * config.AUTO_MAX_ORDER_PCT / 100 + 1 for v in vals.values()))
+        self.assertGreater(min(vals.values()), 10000 / config.AUTO_HOLDINGS * 0.5)     # nobody gets only leftovers
+        self.assertAlmostEqual(sum(vals.values()), 10000, delta=5)                       # all the money invested
         before = dict(fake.pos)
         autotrade.execute(client=fake)                                    # same plan again -> no new trades
         self.assertEqual(fake.pos.keys(), before.keys())

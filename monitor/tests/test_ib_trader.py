@@ -86,7 +86,9 @@ class IBTraderTest(unittest.TestCase):
             buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("CNC", ib.pos)
-        self.assertAlmostEqual(ib.pos["XLV"][0] * 150.0, 4.9 * 70.0, delta=1.5)   # all of CNC's money, not 20%
+        equity = 4.9 * 70.0 + 1.5 * 280.0 + 5.0
+        # CNC's money goes to XLV, up to the 35% single-position limit (CNC was 45% of this account)
+        self.assertAlmostEqual(ib.pos["XLV"][0] * 150.0, min(4.9 * 70.0, equity * config.MAX_POSITION_PCT / 100), delta=1.5)
         self.assertIn("TXN", ib.pos)
 
     def test_paired_buy_skipped_when_its_sale_did_not_happen(self):

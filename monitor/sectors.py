@@ -10,7 +10,7 @@ ETF_SECTORS = {
     "QQQ": "Broad market", "XLK": "Information Technology", "SMH": "Information Technology",
     "XLF": "Financials", "XLV": "Health Care", "XLE": "Energy", "XLI": "Industrials",
     "XLY": "Consumer Discretionary", "XLP": "Consumer Staples", "XLU": "Utilities", "XLB": "Materials",
-    "XLRE": "Real Estate", "XLC": "Communication Services", "GLD": "Gold",
+    "XLRE": "Real Estate", "XLC": "Communication Services", "GLD": "Gold", "SGOV": "Cash (T-bills)",
 }
 
 
@@ -34,4 +34,4 @@ def sector_of(ticker):
 
 def over_limit(sector, count_after):
     """True if holding `count_after` stocks of `sector` breaks MAX_PER_SECTOR ("Other" = unknown: no limit)."""
-    return sector != "Other" and count_after > config.MAX_PER_SECTOR
+    return sector not in ("Other", "Cash (T-bills)") and count_after > config.MAX_PER_SECTOR

@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, autotrade, earnings, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
+from . import alerts, analytics, autotrade, earnings, regime, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
 
 
 def market_today():
@@ -58,8 +58,10 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     if auto:
         storage.save_valuations(con, asof, rows)
     blocker = earnings.make_blocker(asof) if config.EARNINGS_GUARD and isinstance(provider, data.YahooProvider) else None
-    rot = rotation.run(con, asof, rows, bars, sentiment, blocker) if bars else {"status": "no market data", "holdings": [],
+    weather = regime.check(con, asof, bars) if bars else {"storm": False, "text": "no market data"}
+    rot = rotation.run(con, asof, rows, bars, sentiment, blocker, weather["storm"]) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestions": []}
+    rot["weather"] = weather
     swaps = {s["sell"]: s for s in rot.get("suggestions") or []}
     flagged = {h["ticker"]: h for h in rot.get("holdings") or [] if h.get("losing") or h.get("weak")}
     for r in rows:  # flag weakening / losing holdings: first in line for the next swap

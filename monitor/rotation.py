@@ -32,7 +32,8 @@ from . import config, sectors
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS rotation_scores (
     asof TEXT, ticker TEXT, rank INTEGER, score REAL, momentum REAL, steadiness REAL, trend REAL, news REAL,
-    ret_12m REAL, held INTEGER, pnl_pct REAL, queue INTEGER, weak INTEGER, PRIMARY KEY (asof, ticker));
+    ret_12m REAL, held INTEGER, pnl_pct REAL, queue INTEGER, weak INTEGER, uptrend INTEGER, vol REAL,
+    PRIMARY KEY (asof, ticker));
 CREATE TABLE IF NOT EXISTS rotation_log (
     asof TEXT, sell TEXT, buy TEXT, sell_score REAL, buy_score REAL, sell_rank INTEGER,
     buy_rank INTEGER, amount REAL, reason TEXT, PRIMARY KEY (asof, sell));
@@ -66,6 +67,29 @@ def percentiles(values):
     return {k: (i / (n - 1) * 100 if n > 1 else 50.0) for i, k in enumerate(order)}
 
 
+def uptrend(bars):
+    """Clean uptrend: above the 50- and 200-day averages, 200-day rising vs a month ago, near the 1-year high."""
+    closes = [b[1] for b in bars or []]
+    if len(closes) < 222:
+        return False
+    last = closes[-1]
+    ma50, ma200 = sum(closes[-50:]) / 50, sum(closes[-200:]) / 200
+    ma200_month_ago = sum(closes[-221:-21]) / 200
+    high = max(closes[-252:])
+    return (last > ma50 and last > ma200 and ma200 > ma200_month_ago
+            and last >= high * (1 - config.UPTREND_MAX_FROM_HIGH / 100))
+
+
+def daily_vol(bars, days=60):
+    """Typical daily move (standard deviation of daily returns over the last `days` days), e.g. 0.02 = 2%."""
+    closes = [b[1] for b in bars or []][-(days + 1):]
+    rets = [closes[i] / closes[i - 1] - 1 for i in range(1, len(closes)) if closes[i - 1]]
+    if len(rets) < 20:
+        return None
+    m = sum(rets) / len(rets)
+    return math.sqrt(sum((r - m) ** 2 for r in rets) / (len(rets) - 1))
+
+
 def score_all(data, sentiment=None):
     w = check_weights()
     f = {t: x for t, x in ((t, raw_factors(b)) for t, b in data.items()) if x}
@@ -78,7 +102,8 @@ def score_all(data, sentiment=None):
         news = NEWS_POINTS.get((sentiment or {}).get(t), 50.0)
         s = w["momentum"] * mom[t] + w["steadiness"] * steady[t] + w["trend"] * x["trend"] + w["news"] * news
         out.append({"ticker": t, "score": round(s, 1), "momentum": round(mom[t], 1), "steadiness": round(steady[t], 1),
-                    "trend": x["trend"], "news": news, "ret_12m": x["ret_12m"]})
+                    "trend": x["trend"], "news": news, "ret_12m": x["ret_12m"], "uptrend": uptrend(data[t]),
+                    "vol": daily_vol(data[t])})
     out.sort(key=lambda r: -r["score"])
     for i, r in enumerate(out, 1):
         r["rank"] = i
@@ -136,7 +161,8 @@ def queue(mine, held):
 def migrate(con):
     """Older databases keyed rotation_log by date only (one swap per day); key it by date + stock."""
     have = {r[1] for r in con.execute("PRAGMA table_info(rotation_scores)")}
-    for col, typ in (("pnl_pct", "REAL"), ("queue", "INTEGER"), ("weak", "INTEGER")):
+    for col, typ in (("pnl_pct", "REAL"), ("queue", "INTEGER"), ("weak", "INTEGER"), ("uptrend", "INTEGER"),
+                     ("vol", "REAL")):
         if have and col not in have:
             con.execute(f"ALTER TABLE rotation_scores ADD COLUMN {col} {typ}")
     pk = [r[1] for r in con.execute("PRAGMA table_info(rotation_log)") if r[5]]
@@ -154,8 +180,9 @@ def log_rows(con, since):
     return [dict(zip(cols, r)) for r in cur.fetchall()]
 
 
-def run(con, asof, rows, data, sentiment=None, blocker=None):
+def run(con, asof, rows, data, sentiment=None, blocker=None, storm=False):
     con.executescript(SCHEMA)
+    data = {t: b for t, b in data.items() if t != config.SAFE_FUND}  # the parking fund is never ranked
     migrate(con)
     held = {r["ticker"]: r for r in rows if r["asset_type"] == "shares" and r.get("value")}
     scored = score_all(data, sentiment)
@@ -164,13 +191,14 @@ def run(con, asof, rows, data, sentiment=None, blocker=None):
     mine = queue([by[t] for t in held if t in by], held)
     con.execute("DELETE FROM rotation_scores WHERE asof=?", (asof,))
     con.executemany("INSERT INTO rotation_scores (asof, ticker, rank, score, momentum, steadiness, trend, news, ret_12m,"
-                    " held, pnl_pct, queue, weak) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                    " held, pnl_pct, queue, weak, uptrend, vol) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     [(asof, r["ticker"], r["rank"], r["score"], r["momentum"], r["steadiness"], r["trend"], r["news"],
-                      r["ret_12m"], int(r["ticker"] in held), r.get("pnl_pct"), r.get("queue"), int(bool(r.get("weak")))) for r in scored])
+                      r["ret_12m"], int(r["ticker"] in held), r.get("pnl_pct"), r.get("queue"), int(bool(r.get("weak"))),
+                      int(bool(r.get("uptrend"))), r.get("vol")) for r in scored])
     con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
     con.commit()
     result = {"universe": total, "holdings": mine, "top": [r for r in scored if r["ticker"] not in held][:10],
-              "suggestions": [], "status": ""}
+              "suggestions": [], "status": "", "storm": storm}
     if not mine:
         result["status"] = "no scored holdings yet"
         return result
@@ -197,6 +225,8 @@ def run(con, asof, rows, data, sentiment=None, blocker=None):
     result["earnings_soon"] = soon
     result["held_earnings"] = {t: d for t, d in soon.items() if t in held}
     candidates = [r for r in candidates if r["ticker"] not in soon]
+    if config.UPTREND_REQUIRED:
+        candidates = [r for r in candidates if r.get("uptrend")]  # only buy clean uptrends
     # sector limit: count what the book will hold (open ideas included) so no sector goes over MAX_PER_SECTOR
     counts = collections.Counter(sectors.sector_of(t) for t in held)
     for r in pending:
@@ -216,6 +246,8 @@ def run(con, asof, rows, data, sentiment=None, blocker=None):
     forced = {t for t, r in held.items() if r.get("action") == "SELL" and t not in pending_sells}
     for h in [x for x in mine if x["ticker"] in forced] + [x for x in mine if x["ticker"] not in forced]:
         stop_out = h["ticker"] in forced
+        if storm:
+            continue  # market storm: no new stock buys (stops still sell; the money waits in the safe fund)
         best = pick(h["ticker"])
         if stop_out:
             if not best or best["score"] < config.ROTATION_MIN_SCORE:
@@ -256,6 +288,9 @@ def run(con, asof, rows, data, sentiment=None, blocker=None):
         result["status"] = f"{len(new)} new swap(s) suggested"
     elif pending:
         result["status"] = "swap ideas from earlier this week are still open"
+    elif storm:
+        result["status"] = (f"no swaps: market storm (S&P 500 below its 200-day average); stops still apply and "
+                            f"the money from any sale waits in {config.SAFE_FUND}")
     else:
         best = candidates[0] if candidates else None
         result["status"] = (f"no swap: no stock you don't own clearly beats a holding that's free to swap "

@@ -26,7 +26,7 @@ import time
 
 import collections
 
-from . import config, earnings, levels, performance, rotation, sectors, storage
+from . import config, earnings, levels, performance, regime, rotation, sectors, storage
 from .alpaca import Alpaca, AlpacaError
 
 PLAN_FILE = os.path.join(config.AUTO_DIR, "plan.json")
@@ -135,8 +135,10 @@ def plan(asof, bars, sentiment=None, client=None, db=None, plan_file=None):
     con = storage.connect(db or config.AUTO_DB)
     try:
         levels.apply(con, asof, rows, bars)
+        weather = regime.check(con, asof, bars)
         rot = rotation.run(con, asof, rows, bars, sentiment,
-                           earnings.make_blocker(asof) if config.EARNINGS_GUARD else None)
+                           earnings.make_blocker(asof) if config.EARNINGS_GUARD else None, weather["storm"])
+        rot["weather"] = weather
         equity, cash = float(acct.get("equity") or 0), float(acct.get("cash") or 0)
         p = build_plan(asof, rows, rot, con, equity, cash, state)
         totals = {"value": equity, "cost": sum(r["cost"] for r in rows) + cash, "pnl": sum(r["pnl"] for r in rows)}
@@ -154,9 +156,13 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     """The plan from valued rows (levels + rotation already applied). Same format for the autopilot and IB."""
     state = state or {"bought": {}, "sold": {}}
     holdings = holdings or config.AUTO_HOLDINGS
-    held = {r["ticker"] for r in rows}
+    safe, storm = config.SAFE_FUND, bool(rot.get("storm"))
+    held_all = {r["ticker"] for r in rows}
+    held = held_all - {safe}  # the parking fund isn't one of the 5 stock slots
     value = {r["ticker"]: r.get("value") or 0 for r in rows}
-    sells = {r["ticker"]: r["action_reason"] for r in rows if r.get("action") == "SELL"}
+    sells = {r["ticker"]: r["action_reason"] for r in rows if r.get("action") == "SELL" and r["ticker"] != safe}
+    if safe in held_all and not storm:
+        sells[safe] = "fair weather again (S&P 500 back above its 200-day average): parked money goes back into stocks"
     swap_buys = []
     for s in rot.get("suggestions") or []:
         if s["sell"] in held:
@@ -166,18 +172,32 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     soon = rot.get("earnings_soon") or {}
     blocked = recently_sold(state, asof, con) | held | set(sells) | set(soon)
     buys = [b for b in swap_buys if b["ticker"] not in blocked]
-    slots = holdings - (len(held) - len(sells))
+    slots = holdings - (len(held) - len([t for t in sells if t != safe]))
     buys = buys[:max(slots, 0)]
     taken = {b["ticker"] for b in buys}
-    ranked = con.execute("SELECT ticker, rank, score FROM rotation_scores WHERE asof=? ORDER BY rank", (asof,)).fetchall()
-    extra = [{"ticker": t, "rank": rk, "score": sc, "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
-             for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in blocked and t not in taken]
+    rows_ranked = con.execute("SELECT ticker, rank, score, uptrend, vol FROM rotation_scores WHERE asof=? ORDER BY rank",
+                              (asof,)).fetchall()
+    vols = sorted(v for *_, v in rows_ranked if v)
+    ref = vols[len(vols) // 2] if vols else None  # the typical stock's daily move
+
+    def size(v):  # 1.0 = an equal share; steadier stocks more, jumpy ones less
+        if not config.VOL_SIZING or not v or not ref:
+            return 1.0
+        return round(min(config.VOL_SIZE_MAX, max(config.VOL_SIZE_MIN, ref / v)), 2)
+
+    ranked = [(t, rk, sc, sz) for t, rk, sc, up, v in rows_ranked
+              if (up or not config.UPTREND_REQUIRED) and (sz := size(v))]
+    extra = [] if storm else [
+        {"ticker": t, "rank": rk, "score": sc, "size": sz,
+         "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}, uptrend"
+                   + (f", {sz:.1f}x size ({'steadier' if sz > 1 else 'jumpier'} than most)" if sz != 1 else "")}
+        for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in blocked and t not in taken]
     # fill empty slots only with money that's really there: cash + sales that no swap buy uses
     per = equity / holdings if holdings else 0
     funded = {b["replaces"] for b in buys}
     free = cash + sum(value.get(t, 0) for t in sells if t not in funded)
     n_fill = min(max(slots - len(buys), 0), int(free // (per * 0.5)) if per > 0 else 0)
-    counts = collections.Counter(sectors.sector_of(t) for t in held if t not in sells)
+    counts = collections.Counter(sectors.sector_of(t) for t in held if t not in sells)  # stocks only
     for b in buys:
         counts[sectors.sector_of(b["ticker"])] += 1
     fill = []
@@ -194,13 +214,14 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     stops = {r["ticker"]: {"stop": r.get("stop_price"), "target": r.get("target_price"), "rule": r.get("stop_rule"),
                            "weak": bool(r.get("weak"))} for r in rows if r["ticker"] not in sells}
     sold_recently = recently_sold(state, asof, con)
-    deposit = [{"ticker": t, "rank": rk, "score": sc, "sector": sectors.sector_of(t),
-                "reason": f"rank #{rk} of {len(ranked)}, score {sc:.0f}"}
-               for t, rk, sc in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently
-               and t not in soon][:40]
+    deposit = [] if storm else [
+        {"ticker": t, "rank": rk, "score": sc, "size": sz, "sector": sectors.sector_of(t),
+         "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
+        for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
     return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
             "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
             "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit, "earnings_soon": soon,
+            "storm": storm, "weather": (rot.get("weather") or {}).get("text"),
             "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark", "stop_price",
                                                 "target_price", "stop_rule", "weak", "action", "entry_date", "prev_stop")}
                          for r in rows]}
@@ -209,7 +230,7 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
 def evening_text(p):
     first = None
     L = [f"Evening report {p['asof']} · account ${p['equity']:,.2f} (cash ${p['cash']:,.2f})"
-         + (" · PAUSED" if p.get("paused") else ""), ""]
+         + (" · PAUSED" if p.get("paused") else ""), ("⛈ " if p.get("storm") else "🌤 ") + (p.get("weather") or ""), ""]
     for h in p["holdings"]:
         if h["ticker"] in {s["ticker"] for s in p["sells"]}:
             continue
@@ -324,12 +345,16 @@ def execute(client=None):
             per, max_order = equity / config.AUTO_HOLDINGS, equity * MAX_ORDER_PCT / 100
             held_now = {x["symbol"] for x in client.positions()}
             skip = held_now | recently_sold(state, today)
+            paired_need = sum(proceeds[b["replaces"]] for b in p["buys"] if b.get("replaces") in proceeds)
+            fill_want = sum(per * b.get("size", 1.0) for b in p["buys"] if not b.get("replaces"))
+            # if the cash can't cover every new stock at full size, shrink them all alike (keeps their proportions)
+            scale = min(1.0, max(cash - 1 - paired_need, 0) / fill_want) if fill_want else 1.0
             for b in p["buys"]:
                 paired = b.get("replaces")
                 if paired and paired not in proceeds:
                     continue  # its sale didn't happen (already sold, or bought today): don't buy without the money
-                want = proceeds[paired] if paired else per
-                dollars = round(min(want, max_order, cash - 1), 2)
+                want = proceeds[paired] if paired else per * b.get("size", 1.0) * scale
+                dollars = round(min(want, max_order, equity * config.MAX_POSITION_PCT / 100, cash - 1), 2)
                 if dollars < config.AUTO_MIN_BUY_USD:
                     if paired:
                         msgs.append(f"Not enough cash to buy {b['ticker']} (${dollars:,.2f} available).")
@@ -345,8 +370,8 @@ def execute(client=None):
     names = {x["symbol"] for x in held}
     for x in held:
         t, price, avg = x["symbol"], float(x["current_price"]), float(x["avg_entry_price"])
-        if state["bought"].get(t) == today:
-            continue  # bought today: no same-day sale
+        if state["bought"].get(t) == today or t == config.SAFE_FUND:
+            continue  # bought today: no same-day sale; the parking fund has no stop
         lv = p["stops"].get(t) or {}
         stop = lv.get("stop") or avg * (1 - config.MAX_LOSS_PCT / 100)
         target = lv.get("target")
@@ -364,7 +389,9 @@ def execute(client=None):
         equity, cash = float(acct["equity"]), float(acct["cash"])
         dollars = round(min(val, equity * MAX_ORDER_PCT / 100, cash - 1), 2)
         skip = names | recently_sold(state, today)
-        nt, m = buy_one(client, state, today, p["reserve"], dollars, f"replaces {t} ({hit} hit): ", skip) \
+        queue = ([{"ticker": config.SAFE_FUND, "reason": "market storm: parked until the S&P 500 recovers"}]
+                 if p.get("storm") else p["reserve"])
+        nt, m = buy_one(client, state, today, queue, dollars, f"replaces {t} ({hit} hit): ", skip - {config.SAFE_FUND}) \
             if dollars >= config.AUTO_MIN_BUY_USD else (None, "not enough cash to replace it")
         if nt:
             names.add(nt)
@@ -419,18 +446,29 @@ def invest_new_cash(client, p, state, today):
     each = round(min(spend / n, equity * MAX_ORDER_PCT / 100), 2)
     if each < config.AUTO_MIN_BUY_USD:
         return None
+    if p.get("storm"):
+        amount = round(min(spend, equity * config.MAX_POSITION_PCT / 100 if held - {config.SAFE_FUND} else spend), 2)
+        t, m = buy_one(client, state, today, [{"ticker": config.SAFE_FUND, "reason": "market storm"}], amount,
+                       "new cash, market storm: ", set())
+        return (f"💵 New cash ${cash:,.2f}: the market is in a storm (S&P 500 below its 200-day average), so it waits "
+                f"in {config.SAFE_FUND} (Treasury bills, ~4% a year) until the market recovers.\n{m}") if t else None
     blocked = recently_sold(state, today) | {t for t, d in state["bought"].items() if d == today}
     picks = pick_for_cash(p, held, blocked, n)
+    total_size = sum(c.get("size", 1.0) for c in picks) or 1.0
     lines, skip = [], set(held) | blocked
     for c in picks:
+        amount = round(min(spend * c.get("size", 1.0) / total_size, equity * MAX_ORDER_PCT / 100,
+                           equity * config.MAX_POSITION_PCT / 100), 2)
+        if amount < config.AUTO_MIN_BUY_USD:
+            continue
         queue = [c] + [x for x in p.get("deposit_candidates") or [] if x["ticker"] != c["ticker"]]
-        t, m = buy_one(client, state, today, queue, each, "new cash: ", skip)
+        t, m = buy_one(client, state, today, queue, amount, "new cash: ", skip)
         if t:
             lines.append(f"{m} - {c['why']}")
     if not lines:
         return f"💵 Found ${cash:,.2f} of new cash but couldn't buy anything yet; I'll retry (max {config.DEPOSIT_MAX_TRIES_PER_DAY} times a day)."
-    return (f"💵 New cash found: ${cash:,.2f}. Invested about ${each:,.2f} in each of {len(lines)} stock(s), "
-            "spreading across sectors with the goal of beating the S&P 500:\n" + "\n".join(lines))
+    return (f"💵 New cash found: ${cash:,.2f}. Invested in {len(lines)} stock(s), spreading across sectors "
+            "(steadier stocks get more, jumpy ones less) with the goal of beating the S&P 500:\n" + "\n".join(lines))
 
 
 def main(argv=None):

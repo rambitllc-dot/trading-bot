@@ -152,6 +152,14 @@ cells = [("NAV", money(nav), ""), ("P&L", f"{money(pnl)} ({num(pnl_pct, 1)}%)" i
          ("Daily theta", money(A.get("daily_theta")), cls(A.get("daily_theta"))), ("As of", D["asof"], "")]
 st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
                                              for k, v, c in cells) + "</div>", unsafe_allow_html=True)
+W = D.get("weather")
+if W and W.get("ma200"):
+    gap = (W["spy"] / W["ma200"] - 1) * 100
+    msg = (f"⛈ MARKET STORM: S&P 500 {abs(gap):.1f}% below its 200-day average. No new stock buys; new money waits in "
+           f"{config.SAFE_FUND} until it recovers. Stops still apply." if W["storm"] else
+           f"🌤 Fair weather: S&P 500 {gap:+.1f}% vs its 200-day average. Buying allowed (uptrends only).")
+    st.markdown(f'<div class="muted" style="margin:6px 0;font-size:13px;color:{RED if W["storm"] else GREEN}">'
+                f'{e(msg)}</div>', unsafe_allow_html=True)
 
 # ---------- live prices (refresh every minute) ----------
 @st.cache_data(ttl=55, show_spinner=False)
