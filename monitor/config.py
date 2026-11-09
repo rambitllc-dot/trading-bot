@@ -79,8 +79,8 @@ ROTATION_EXTRA = ["SPY", "QQQ", "DIA", "IWM", "RSP", "XLK", "XLF", "XLV", "XLE",
 ROTATION_WEIGHTS = {"momentum": 0.40, "steadiness": 0.30, "trend": 0.20, "news": 0.10}  # must add to 1.0
 ROTATION_MARGIN = 25        # candidate must score this many points (0-100 scale) above your weakest holding
 ROTATION_MIN_SCORE = 80     # ...and score at least this (top fifth of the market)
-ROTATION_MIN_HOLD_DAYS = 7  # don't suggest selling something bought less than this many days ago
-ROTATION_COOLDOWN_DAYS = 7  # each stock can be swapped at most once per this many days
+ROTATION_MIN_HOLD_DAYS = 2  # business days: a stock bought Friday can be swapped from Tuesday's evening run
+ROTATION_COOLDOWN_DAYS = 2  # business days: each stock can be swapped at most once per this many market days
 ROTATION_NO_REBUY_DAYS = 30 # don't suggest buying back something swapped out within this many days
 
 # ---- Automatic stop / target (used when a position has no stop_price / target_price of its own) ----

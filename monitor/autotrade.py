@@ -4,7 +4,7 @@ Same rules as the monitor uses for your IB book:
   - 5 stocks, equal weight (20% each), bought from the top of the ranking (score 80+)
   - 6% max-loss stop, breakeven after +10%, trailing stop, 2-to-1 target (levels.py)
   - a stop or target hit -> sell right away and buy the strongest stock not owned
-  - weekly swaps when a clearly stronger stock appears; WEAK / LOSING holdings first in line (rotation.py)
+  - swaps when a clearly stronger stock appears (each stock every 2 business days at most); WEAK / LOSING holdings first in line (rotation.py)
   - nothing bought back within 30 days of selling it
 
 Two steps:

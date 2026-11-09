@@ -139,7 +139,8 @@ def load(db_path=None, asof=None):
                                      key=lambda r: (r.get("queue") or 999, r["score"]))  # swap line order
             rot["top"] = [r for r in sc if not r["held"]][:10]
         if table_exists(con, "rotation_log"):
-            since = (dt.date.fromisoformat(asof) - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat()
+            from . import rotation
+            since = rotation.cooldown_start(asof)
             rot["suggestions"] = [r for r in rows(con, "SELECT * FROM rotation_log WHERE asof<=? AND asof>=? "
                                                        "ORDER BY sell_score", (asof, since)) if r["sell"] in held]
         perf = {"wins_losses": None, "history": [], "scorecard": [], "summary": None}

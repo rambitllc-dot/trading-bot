@@ -46,21 +46,30 @@ class RotationTest(unittest.TestCase):
         alerts = rotation.alert(res)
         self.assertEqual([a["kind"] for a in alerts], ["swap", "swap"])
 
-    def test_each_stock_once_a_week(self):
-        rotation.run(self.con, "2026-11-05", held("LOSR", "LOS2"), market())
-        res = rotation.run(self.con, "2026-11-08", held("LOSR", "LOS2"), market())
+    def test_each_stock_once_per_two_business_days(self):
+        rotation.run(self.con, "2026-11-05", held("LOSR", "LOS2"), market())          # Thursday
+        res = rotation.run(self.con, "2026-11-06", held("LOSR", "LOS2"), market())    # Friday: still open
         self.assertTrue(all(s["pending"] for s in res["suggestions"]))   # same ideas stay open, no duplicates
         self.assertEqual(len(res["suggestions"]), 2)
-        # LOSR was swapped into WINR; WINR can't be swapped again this week, LOS2's idea is still open
-        res = rotation.run(self.con, "2026-11-09", held("WINR", "LOS2"), market())
+        # LOSR was swapped into WINR; WINR can't be swapped again yet, LOS2's idea is still open
+        res = rotation.run(self.con, "2026-11-06", held("WINR", "LOS2"), market())
         self.assertEqual([s["sell"] for s in res["suggestions"]], ["LOS2"])
-        # a week later the new holding is free again (it's already the strongest, so no swap for it)
-        res = rotation.run(self.con, "2026-11-12", held("WINR", "WIN2"), market())
+        # 2 business days later the new holding is free again (it's already the strongest, so no swap for it)
+        res = rotation.run(self.con, "2026-11-10", held("WINR", "WIN2"), market())
         self.assertEqual(res["suggestions"], [])
 
+    def test_business_day_waiting_period(self):
+        self.assertEqual(rotation.business_days("2026-11-06", "2026-11-09"), 1)       # Fri -> Mon
+        self.assertEqual(rotation.business_days("2026-11-06", "2026-11-10"), 2)       # Fri -> Tue
+        self.assertEqual(rotation.cooldown_start("2026-11-10"), "2026-11-09")
+        res = rotation.run(self.con, "2026-11-09", held("LOSR", entry_date="2026-11-06"), market())
+        self.assertEqual(res["suggestions"], [])                       # bought Friday, Monday is too soon
+        res = rotation.run(self.con, "2026-11-10", held("LOSR", entry_date="2026-11-06"), market())
+        self.assertEqual(len(res["suggestions"]), 1)                   # Tuesday: can be swapped
+
     def test_min_hold_and_margin(self):
-        res = rotation.run(self.con, "2026-11-05", held("LOSR", entry_date="2026-11-01"), market())
-        self.assertEqual(res["suggestions"], [])                       # bought 4 days ago
+        res = rotation.run(self.con, "2026-11-05", held("LOSR", entry_date="2026-11-04"), market())
+        self.assertEqual(res["suggestions"], [])                       # bought 1 business day ago
         res = rotation.run(self.con, "2026-11-06", held("WINR"), market())
         self.assertEqual(res["suggestions"], [])                       # already holds the best
         self.assertIn("no swap", res["status"])

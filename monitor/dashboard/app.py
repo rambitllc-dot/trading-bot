@@ -286,7 +286,7 @@ if R.get("universe"):
         st.markdown(score_table(R["top"], "STRONGEST YOU DON'T OWN"), unsafe_allow_html=True)
     st.markdown('<div class="muted">Score 0-100 = momentum 40% + steadiness 30% + trend 20% + news 10%. A swap is suggested '
                 f'only with a clear lead. Holdings that closed below their 50-day average are flagged WEAKENING and go first '
-                f'in line, then holdings losing money (LOSING, biggest loss first). Each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} days, '
+                f'in line, then holdings losing money (LOSING, biggest loss first). Each stock can be swapped at most once every {config.ROTATION_COOLDOWN_DAYS} business days, '
                 f'each into a different stock. Rule-based, not a prediction.</div>', unsafe_allow_html=True)
 
 # ---------- wins & losses + swap scorecard ----------
@@ -388,7 +388,7 @@ else:
                     unsafe_allow_html=True)
     st.markdown('<div class="muted">Trades by itself in an Alpaca paper account (no real money): 5 stocks at 20% each, '
                 f'{config.MAX_LOSS_PCT:g}% max-loss stop, breakeven after +{config.BREAKEVEN_AFTER_PCT:g}%, stop-outs replaced '
-                'right away, weekly swaps. Pause it with "paused": true in monitor/autotrade/switch.json.</div>',
+                'right away, regular swaps every 2 business days. Pause it with "paused": true in monitor/autotrade/switch.json.</div>',
                 unsafe_allow_html=True)
 
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)

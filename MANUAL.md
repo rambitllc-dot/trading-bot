@@ -22,17 +22,17 @@ You don't stick with any stock; the money follows whatever is winning.
 | Down 6% from your buy price | SELL now, swap into the strongest stock |
 | Was up 10%+, falls back to your buy price | SELL at breakeven, swap |
 | Hits its profit target | SELL, take the profit, swap |
-| Closes below its 50-day average | WEAK, first in line for the next weekly swap |
+| Closes below its 50-day average | WEAK, first in line for the next swap |
 | Losing a little | Next in line |
-| Another stock clearly ranks higher | Weekly swap |
+| Another stock clearly ranks higher | Swap (each stock at most every 2 business days) |
 
 More details:
 
 - **Stops only move up.** The stop is the highest of three things: a trailing stop (3 times the stock's normal daily move below its highest close), 6% below your buy price, and your buy price once the stock has been up 10%.
 - **Target** is set at twice the stock's normal swing above the starting price.
 - **Ranking score (0-100):** momentum 40%, steadiness 30%, trend 20%, news 10%. A swap needs a candidate scoring 80 or more and at least 25 points above the stock it replaces.
-- **Each stock can be swapped once a week.** Stocks bought in the last 7 days are protected from weekly swaps, but NOT from the 6% stop.
-- **A stock that hits its stop or target skips the weekly limits** and is replaced right away.
+- **Each stock can be swapped at most once every 2 business days.** A stock bought on Friday can be swapped from Tuesday's evening run (trade at Wednesday's open). The waiting period never blocks the 6% stop.
+- **A stock that hits its stop or target skips the waiting period** and is replaced right away.
 - **No buying back** a stock that was sold in the last 30 days.
 - **Equal weight:** new stocks get about 20% of the account each; a swap uses all the money from the stock it replaces.
 - **New money (deposits):** when $50 or more of cash shows up that no planned trade is using (like your deposit on the 20th), the Mac invests it the same day, as soon as IB shows it as available. It buys the strongest stocks (score 80+) from **sectors you don't own yet**, each about the size of your current holdings: 1 stock for a small deposit, up to 3 for a bigger one. If no stock scores 80+, it buys SPY so the money keeps pace with the S&P 500. You get a Telegram message saying what it bought and why. Settings: `DEPOSIT_*` in `monitor/config.py`.

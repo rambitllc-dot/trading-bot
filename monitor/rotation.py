@@ -14,12 +14,13 @@ replacement (the rules below); being first in line means it gets the best candid
 Then, going down the swap queue, pair each holding with the strongest stock you don't own
 (a different one for each swap) and suggest a SWAP when:
   - the candidate scores at least ROTATION_MIN_SCORE and beats that holding by ROTATION_MARGIN points
-  - that holding wasn't already swapped / suggested in the last ROTATION_COOLDOWN_DAYS days
-    (each stock at most once a week), and wasn't bought less than ROTATION_MIN_HOLD_DAYS ago
+  - that holding wasn't already swapped / suggested in the last ROTATION_COOLDOWN_DAYS business days,
+    and wasn't bought less than ROTATION_MIN_HOLD_DAYS business days ago (2 and 2: bought Friday ->
+    swappable from Tuesday's evening run)
   - the candidate wasn't swapped out of your book in the last ROTATION_NO_REBUY_DAYS days
 A holding that hits its stop (or target) skips those rules: it is swapped right away into the strongest
 stock, whatever its own rank, because a stopped-out stock isn't "following the money" anymore.
-Otherwise every holding can be swapped once a week. It's a suggestion from fixed rules, not a prediction;
+Otherwise every holding can be swapped again after the waiting period (2 business days). It's a suggestion from fixed rules, not a prediction;
 nothing is traded automatically.
 """
 import datetime as dt
@@ -83,11 +84,30 @@ def score_all(data, sentiment=None):
     return out
 
 
+def business_days(start, end):
+    """Weekdays after `start` up to and including `end` (bought Friday -> Monday is 1, Tuesday is 2)."""
+    a, b = dt.date.fromisoformat(start), dt.date.fromisoformat(end)
+    n, d = 0, a
+    while d < b:
+        d += dt.timedelta(days=1)
+        n += d.weekday() < 5
+    return n
+
+
 def days_since(date_str, asof):
+    """Business days since a date (the waiting periods count market days, not calendar days)."""
     try:
-        return (dt.date.fromisoformat(asof) - dt.date.fromisoformat(date_str)).days
+        return business_days(date_str, asof)
     except (TypeError, ValueError):
         return None
+
+
+def cooldown_start(asof):
+    """Earliest date still inside the swap waiting period (ROTATION_COOLDOWN_DAYS business days)."""
+    d = dt.date.fromisoformat(asof)
+    while business_days((d - dt.timedelta(days=1)).isoformat(), asof) < config.ROTATION_COOLDOWN_DAYS:
+        d -= dt.timedelta(days=1)
+    return d.isoformat()
 
 
 def why(r):
@@ -155,17 +175,17 @@ def run(con, asof, rows, data, sentiment=None):
         return result
 
     day = dt.date.fromisoformat(asof)
-    week = log_rows(con, (day - dt.timedelta(days=config.ROTATION_COOLDOWN_DAYS - 1)).isoformat())
+    week = log_rows(con, cooldown_start(asof))
     recent_out = {r["sell"] for r in log_rows(con, (day - dt.timedelta(days=config.ROTATION_NO_REBUY_DAYS)).isoformat())}
     # still-open ideas from earlier this week (the stock to sell is still in the book)
     pending = [{**r, "pending": True, "suggested_on": r["asof"]} for r in week if r["sell"] in held]
-    swapped_this_week = {r["sell"] for r in week} | {r["buy"] for r in week}  # once a week per stock
+    swapped_this_week = {r["sell"] for r in week} | {r["buy"] for r in week}  # once per waiting period per stock
     taken = {r["buy"] for r in pending}
 
     new = []
     candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
                   and r["ticker"] not in taken]
-    # Stopped out (SELL from the stop or target) goes first and skips the weekly / minimum-hold / lead rules:
+    # Stopped out (SELL from the stop or target) goes first and skips the waiting-period / minimum-hold / lead rules:
     # the money moves to the strongest stock right away, whatever the sold stock's rank.
     pending_sells = {r["sell"] for r in pending}
     forced = {t for t, r in held.items() if r.get("action") == "SELL" and t not in pending_sells}
