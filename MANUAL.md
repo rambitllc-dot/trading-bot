@@ -127,3 +127,8 @@ On the Mac, the Telegram details live in `~/ib-trader/settings.json`. The bot to
 - `monitor/ib_switch.json` - pause switch for the IB trader
 - `mac/setup.sh` - Mac installer
 - `monitor/README.md` - technical notes
+
+## 10. Ideas on hold (for later)
+
+- **Market-weather switch:** when the S&P 500 is below its 200-day average, stop buying new stocks and park new money in cash or a short-term Treasury fund until it recovers.
+- **Politicians' trades:** a small ranking bonus for stocks members of Congress recently bought (they report up to 45 days late, so it's a weak signal).
