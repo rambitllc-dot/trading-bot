@@ -35,8 +35,8 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Rank | Strategy | Type | Market | Worth now | Profit | Trades |
 |---|---|---|---|---:|---:|---:|
-| 1 | Amazon trend (200 day) | Static rule | Stock | $107.29 | +$7.29 (+7.3%) | 1 |
-| 2 | Amazon buy & hold | Hold | Stock | $106.88 | +$6.88 (+6.9%) | 1 |
+| 1 | Amazon trend (200 day) | Static rule | Stock | $107.44 | +$7.44 (+7.4%) | 1 |
+| 2 | Amazon buy & hold | Hold | Stock | $107.04 | +$7.04 (+7.0%) | 1 |
 | 3 | Microsoft buy & hold | Hold | Stock | $104.99 | +$4.99 (+5.0%) | 1 |
 | 4 | Microsoft trend (200 day) | Static rule | Stock | $104.99 | +$4.99 (+5.0%) | 1 |
 | 5 | Apple buy & hold | Hold | Stock | $104.19 | +$4.19 (+4.2%) | 1 |
@@ -59,7 +59,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 22 | Tesla buy & hold | Hold | Stock | $92.74 | -$7.26 (-7.3%) | 1 |
 | 23 | Wide momentum (10 ETFs) | Monthly pick | ETF | $91.59 | -$8.41 (-8.4%) | 1 |
 | 24 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $89.71 | -$10.29 (-10.3%) | 10 |
-| 25 | Nvidia buy & hold | Hold | Stock | $86.74 | -$13.26 (-13.3%) | 1 |
+| 25 | Nvidia buy & hold | Hold | Stock | $86.55 | -$13.45 (-13.5%) | 1 |
 | 26 | Tesla trend (200 day) | Static rule | Stock | $86.00 | -$14.00 (-14.0%) | 2 |
 
 ## Holding vs trading, same asset
@@ -70,18 +70,18 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | S&P 500 | $99.31 | $99.31 | about even |
 | Apple | $104.19 | $104.19 | about even |
 | Microsoft | $104.99 | $104.99 | about even |
-| Nvidia | $86.74 | $95.80 | trading |
-| Amazon | $106.88 | $107.29 | about even |
+| Nvidia | $86.55 | $95.80 | trading |
+| Amazon | $107.04 | $107.44 | about even |
 | Tesla | $92.74 | $86.00 | holding |
 | SpaceX | $100.23 | $100.00 | about even |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,570.08 from $2,600 (-29.92)
+**All together:** $2,570.20 from $2,600 (-29.80)
 
 ## What each one is doing
 
-- **Amazon trend (200 day):** AMZN $106.78, cash $0.51. Signal: in the market (price $259.45 vs 200d avg $243.93).
-- **Amazon buy & hold:** AMZN $106.37, cash $0.51. Holding.
+- **Amazon trend (200 day):** AMZN $106.93, cash $0.51. Signal: in the market (price $259.45 vs 200d avg $243.93).
+- **Amazon buy & hold:** AMZN $106.53, cash $0.51. Holding.
 - **Microsoft buy & hold:** MSFT $104.48, cash $0.51. Holding.
 - **Microsoft trend (200 day):** MSFT $104.48, cash $0.51. Signal: in the market (price $530.58 vs 200d avg $438.84).
 - **Apple buy & hold:** AAPL $103.68, cash $0.51. Holding.
@@ -104,7 +104,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Tesla buy & hold:** TSLA $92.23, cash $0.51. Holding.
 - **Wide momentum (10 ETFs):** XLE $91.08, cash $0.51. Holding XLE until next month's check.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $11.49, SNDK $7.90, LITE $8.78, MU $8.52, DELL $8.43, STX $8.27, WDC $8.27, VLO $9.09, APA $9.19, MPC $9.05, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
-- **Nvidia buy & hold:** NVDA $86.23, cash $0.51. Holding.
+- **Nvidia buy & hold:** NVDA $86.04, cash $0.51. Holding.
 - **Tesla trend (200 day):** cash $86.00. Signal: in cash (price $358.21 vs 200d avg $383.84).
 
 ## 15-minute Bitcoin betting test (paper)
