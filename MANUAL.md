@@ -2,6 +2,14 @@
 
 A plain-English guide to how your trading system works, how to turn it on and off, and what to check if something breaks. Repo: github.com/rambitllc-dot/trading-bot.
 
+## The main objective
+
+1. **Don't lose money.** Losers are cut fast (4.5% trailing stop), gains are locked in as stocks rise, and in a market storm the money waits in short-term Treasury bills.
+2. **Follow the money, not any particular stock.** No stock is kept out of loyalty or rank: a stock that's losing is swapped for one that's winning, and a stock doing fine is still swapped when another company is clearly doing better.
+3. **Beat the S&P 500.** If the system can't, it's better to just own the S&P 500, so the dashboard always compares the two.
+
+Every rule below serves these three goals, in this order.
+
 ## 1. The big picture
 
 The system has four parts that work together:
