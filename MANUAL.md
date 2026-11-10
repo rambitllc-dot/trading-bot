@@ -29,7 +29,7 @@ More details:
 
 - **4.5% trailing stop, only moves up.** The stop starts 4.5% below what you paid and always sits 4.5% below the highest price since you bought. Example: Merck bought at $147.71 has a stop at $141.06; if it rises to $155.10 the stop moves to $148.12 (above what you paid, so a sale there is a small profit); if it then falls back, the stop stays at $148.12. The Mac also moves it up during the day from the prices it checks every 2 minutes. A sharp overnight drop can still sell below the stop.
 - **Target** is set at twice the stock's normal swing above the starting price.
-- **Ranking score (0-100):** momentum 40%, steadiness 30%, trend 20%, news 10%. A swap needs a candidate scoring 80 or more and at least 25 points above the stock it replaces.
+- **Ranking score (0-100):** 12-month gain 35%, last month's gain 15% (catches a sustained rally, not a 1-3 day spike), steadiness 25%, trend 15%, news 10%. Every evening each of your stocks is compared with the whole market: a swap happens when a stock you don't own scores 80 or more and at least **10 points** above one of yours, even if yours is doing fine.
 - **Each stock can be swapped at most once every 2 business days.** A stock bought on Friday can be swapped from Tuesday's evening run (trade at Wednesday's open). The waiting period never blocks the stop.
 - **A stock that hits its stop or target skips the waiting period** and is replaced right away.
 - **No buying back** a stock that was sold in the last 30 days.

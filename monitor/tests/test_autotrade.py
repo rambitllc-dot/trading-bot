@@ -82,6 +82,7 @@ class AutopilotTest(unittest.TestCase):
         self.assertEqual(fake.pos.keys(), before.keys())
         self.assertTrue(os.path.exists(autotrade.LOG_FILE))
 
+    @mock.patch.object(config, "ROTATION_MIN_SCORE", 60)  # small made-up market: leave a few backup stocks
     def test_stop_hit_sells_and_buys_replacement_but_not_same_day(self):
         fake = FakeAlpaca(prices=self.prices, today="2026-11-09")
         autotrade.plan("2026-11-06", self.m, client=fake, db=self.db)

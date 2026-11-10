@@ -57,7 +57,8 @@ def raw_factors(bars):
     mean = sum(rets) / len(rets)
     vol = math.sqrt(sum((r - mean) ** 2 for r in rets) / (len(rets) - 1)) * math.sqrt(252) if len(rets) > 2 else 0
     trend = (50.0 if c[-1] > sum(c[-200:]) / 200 else 0.0) + (50.0 if c[-1] > sum(c[-50:]) / 50 else 0.0)
-    return {"ret_12m": ret, "steady_raw": ret / vol if vol > 0 else 0.0, "trend": trend}
+    return {"ret_12m": ret, "ret_1m": c[-1] / c[-22] - 1 if c[-22] else 0.0,
+            "steady_raw": ret / vol if vol > 0 else 0.0, "trend": trend}
 
 
 def percentiles(values):
@@ -97,12 +98,15 @@ def score_all(data, sentiment=None):
         return []
     mom = percentiles({t: x["ret_12m"] for t, x in f.items()})
     steady = percentiles({t: x["steady_raw"] for t, x in f.items()})
+    recent = percentiles({t: x["ret_1m"] for t, x in f.items()})
     out = []
     for t, x in f.items():
         news = NEWS_POINTS.get((sentiment or {}).get(t), 50.0)
-        s = w["momentum"] * mom[t] + w["steadiness"] * steady[t] + w["trend"] * x["trend"] + w["news"] * news
+        s = (w["momentum"] * mom[t] + w.get("recent", 0) * recent[t] + w["steadiness"] * steady[t]
+             + w["trend"] * x["trend"] + w["news"] * news)
         out.append({"ticker": t, "score": round(s, 1), "momentum": round(mom[t], 1), "steadiness": round(steady[t], 1),
-                    "trend": x["trend"], "news": news, "ret_12m": x["ret_12m"], "uptrend": uptrend(data[t]),
+                    "trend": x["trend"], "news": news, "ret_12m": x["ret_12m"], "recent": round(recent[t], 1),
+                    "ret_1m": x["ret_1m"], "uptrend": uptrend(data[t]),
                     "vol": daily_vol(data[t])})
     out.sort(key=lambda r: -r["score"])
     for i, r in enumerate(out, 1):
