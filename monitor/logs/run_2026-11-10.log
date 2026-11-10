@@ -1,0 +1,95 @@
+IB sync: 4 position(s) as of 2026-11-09 (CNC, MRK, MRNA, TXN), cash 5.21; 0 new trade(s) saved
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ANT"}}}
+$ANT: No data found, symbol may be delisted
+
+1 Failed download:
+['ANT']: No data found, symbol may be delisted
+Portfolio as of 2026-11-10
+Value $828.00 · cost $819.11 · P&L $8.89 (+1.1%) · net delta 7 shares · theta $0.00/day · 5/5 positions priced
+
+- CNC shares x4.9: mark $70.19, value $343.93, P&L -$1.98 (-0.6%). No target or stop set. YOUR PLAN: SELL (price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)) -> move the money to VTRS (rank #2)).
+- MRK shares x1: mark $148.05, value $148.05, P&L $0.35 (+0.2%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 148.76))).
+- MRNA shares x0.6: mark $250.83, value $150.50, P&L -$5.63 (-3.6%). No target or stop set. YOUR PLAN: SELL (price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)) -> move the money to BEN (rank #5)).
+- TXN shares x0.6: mark $300.52, value $180.31, P&L $16.15 (+9.8%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 300.52))).
+- CASH shares x5.21: mark $1.00, value $5.21, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 7 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: CNC 42% (over cap), TXN 22%, MRNA 18%, MRK 18%, CASH 1%
+By sector: Healthcare 78% (over cap), Technology 22%, Cash 1%
+
+Flags:
+- [info] CNC is 42% of the book (cap 40%).
+- [info] Healthcare is 78% of the book (cap 60%).
+
+MARKET ENVIRONMENT (macro gate)
+60/100 · Mixed (vix level 73, vix percentile 24, term structure 52, breadth 64, credit 76)
+
+NEWS (Claude summaries, facts only)
+- CNC [neutral]: Simply Wall St. reports Centene shareholders had a 100.1% total return over the past year, including dividends. Motley Fool says Medicaid rate negotiations will determine whether Centene's margin recovery holds beyond 2026.
+  Drivers: Medicaid rate negotiations; Margin recovery beyond 2026; 100.1% one-year total return
+- MRK [neutral]: Merck's 2026 sales outlook was raised at its October 29 third-quarter results, according to TIKR. A Zacks analysis says Merck's 2027 growth faces generic drug pressure, vaccine weakness and a Keytruda slowdown, while its expanding pipeline offers long-term promise. Other headlines in this set cover Merck mainly in comparison with peers or as a partner in Moderna's melanoma vaccine.
+  Drivers: Raised 2026 sales outlook; Expected 2027 generic pressures; Keytruda slowdown and vaccine weakness; Expanding pipeline and Moderna melanoma vaccine partnership
+- MRNA [positive]: Moderna reported third-quarter 2026 revenue up 29% to $1.3 billion and raised its full-year revenue growth forecast, and the shares rose 6.4% in the afternoon session. Headlines also cite analyst fair value estimates rising to US$145.42 and a planned year-end 2026 FDA filing for its intismeran cancer therapy.
+  Drivers: Q3 2026 revenue up 29% to $1.3 billion; Raised full-year revenue growth forecast; Intismeran oncology data and planned year-end 2026 FDA filing; Higher analyst fair value estimate
+- TXN [positive]: Texas Instruments stock is reported to be up 70% year-to-date as of November 10, 2026, with Zacks citing strong earnings, rising AI data center demand, and robust cash flow, alongside a premium valuation. Articles also note TXN's dividend profile and a Zacks Rank #1 (Strong Buy) income-stock listing, while GuruFocus reports that ETFs were net sellers of $228.8 million of TXN on November 6.
+  Drivers: Year-to-date share price gain of about 70%; Strong earnings and robust cash flow; Rising AI data center demand; Dividend-paying profile and Zacks Rank #1 income listing
+Claude cost this run: $0.0017
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 521 of 524 stocks.
+- Watchlist SPCX 143.09: 30.1% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 168.82: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+771% over 12 months), SNDK (+521% over 12 months), MU (+316% over 12 months), LITE (+315% over 12 months), DELL (+297% over 12 months)
+Pullbacks in uptrends: WDAY (+21% above its 200-day average, RSI-2 5 after a sharp drop), XOM (+6% above its 200-day average, RSI-2 8 after a sharp drop)
+New 52-week highs: VTRS (new 52-week high at 20.85), HUM (new 52-week high at 438.06), BEN (new 52-week high at 36.29), CPAY (new 52-week high at 459.64), KO (new 52-week high at 96.91)
+Unusual volume: AKAM (volume 3.8x normal, +4% on the day), NVDA (volume 3.1x normal, -5% on the day)
+  MRNA [positive]: Moderna reported third-quarter 2026 revenue up 29% to $1.3 billion and raised its full-year revenue growth forecast, and the shares rose 6.4% in the afternoon session. Headlines also cite analyst fair value estimates rising to US$145.42 and a planned year-end 2026 FDA filing for its intismeran cancer therapy.
+  SNDK [negative]: Sandisk (SNDK) fell again on Tuesday, Nov 10, after reports that it lost some market share to a Chinese NAND company. Headlines say the stock is down roughly 54% to 65% since mid-2026, with profit growth tied to higher flash prices that are now slowing. Sandisk also has an 8-for-1 stock split scheduled for Nov 19, and several analysts and commentators offered bullish views.
+  MU [neutral]: Micron shares fell 17.5% on Thursday, Nov. 6, according to a TIKR report, and continued to retreat in later coverage. Several analysts and commentators describe the valuation as low relative to fundamentals, and Micron is among the companies buying $26 billion of Anthropic shares in a private placement tied to its IPO.
+  LITE [negative]: Lumentum fell 11% over the past week as an AI hardware selloff hit Marvell, whose all-stock acquisition offer for Lumentum moves with Marvell's share price. The company reported September-quarter revenue up 136%, and Microsoft warned that restrictions on Chinese optical transceivers could delay U.S. AI infrastructure projects.
+  DELL [neutral]: Dell shares fell about 6% on November 10, 2026, as a board probe into NVIDIA's CEO dragged down AI server stocks. The stock had risen roughly 130% over the past year on AI server demand, a reported $95 billion backlog, and raised FY27 guidance, but Dell and HPE had also erased roughly 40% of their AI-fueled gains within a month. Headlines describe an upcoming earnings report without giving Dell's date.
+  SPCX [positive]: Deutsche Bank says SpaceX (SPCX) could benefit from political pressure on AI data centers, which it expects to slow construction mainly in 2028 and keep computing capacity scarce, and it raised its 2028 forecast for the company. SPCX also secured a deal with Singulus to develop solar cells and production equipment for its Starmind space data center satellites. No position is held in this name, so no position flags apply.
+  PLTR [neutral]: Palantir's stock is reported to be trading about 19% below its October high, with Barchart noting a pullback of more than 20%. GuruFocus reported that ETFs bought $75.3 million of PLTR on Nov. 6, with 54 buyers against 19 sellers. Commentary is split between concerns about political risk after the midterms and the debate over the stock's valuation.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- CNC: stop 70.83 · target 89.48 · typical daily move 3.28
+- MRK: stop 142.07 · target 176.66 · typical daily move 4.81
+- MRNA: stop 256.89 · target 397.27 · typical daily move 22.84
+- TXN: stop 287.00 · target 346.77 · typical daily move 12.51
+
+ROTATION (follow the money)
+- #1 in swap line: MRNA, rank #1 of 518, score 98, LOSING -3.6%
+- #2 in swap line: CNC, rank #10 of 518, score 83, LOSING -0.6%
+- #3 in swap line: MRK, rank #15 of 518, score 82
+- #4 in swap line: TXN, rank #3 of 518, score 89
+Strongest stocks you don't own: VTRS (91), CRL (88), BEN (86), CPAY (85), GWW (84)
+SWAP IDEA: sell MRNA -> buy BEN. STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to BEN, rank #5 of 518 (+50% over 12 months, above its 50- and 200-day averages), score 86.
+SWAP IDEA: sell CNC -> buy VTRS. STOPPED OUT: price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)). Sell regardless of its rank (#10) and move the money to VTRS, rank #2 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 91.
+Status: 2 new swap(s) suggested
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -88.90 from 1 win(s) / 4 loss(es), win rate 20%; fees 9.21
+Open (not locked in) +8.89 · total -80.01
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -10.4 pts after 5 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: +2.2 pts after 5 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -12.0 pts after 5 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -9.6 pts after 5 day(s)
+- 2026-11-10 CNC -> VTRS [open]: +0.0 pts after 0 day(s)
+- 2026-11-10 MRNA -> BEN [open]: +0.0 pts after 0 day(s)
+1 of 4 swap ideas are ahead; average edge -7.5 pts
+
+ALERTS (6)
+- [high] NEW MRNA shares crossed your stop level (mark 250.83 vs stop 256.89). -> YOUR PLAN: SELL
+- [high] NEW STOP HIT -> SWAP idea: sell all MRNA (about $150, rank #1) and buy BEN (rank #5). STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to BEN, rank #5 of 518 (+50% over 12 months, above its 50- and 200-day averages), score 86. -> YOUR PLAN: SWAP
+- [high] NEW STOP HIT -> SWAP idea: sell all CNC (about $344, rank #10) and buy VTRS (rank #2). STOPPED OUT: price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)). Sell regardless of its rank (#10) and move the money to VTRS, rank #2 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 91. -> YOUR PLAN: SWAP
+- [high] TXN shares crossed your stop level (mark 300.52 vs stop 287.00). -> YOUR PLAN: SELL
+- [info] CNC is 42% of the book (cap 40%). -> YOUR PLAN: REVIEW
+- [info] Healthcare is 78% of the book (cap 60%). -> YOUR PLAN: REVIEW
+Notifier: sent
