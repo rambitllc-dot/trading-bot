@@ -165,8 +165,11 @@ if W and W.get("ma200"):
 @st.cache_data(ttl=55, show_spinner=False)
 def live_quotes(tickers):
     """Last price and previous close per ticker from Yahoo (about real time during market hours)."""
-    import yfinance as yf
     out = {}
+    try:
+        import yfinance as yf
+    except ImportError:  # library missing: show the evening prices instead of failing
+        return out
     for t in tickers:
         try:
             fi = yf.Ticker(t.replace(".", "-")).fast_info
