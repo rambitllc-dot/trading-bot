@@ -36,3 +36,4 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-05 14:31,RSI dip-buying (S&P 500),SELL,SPY,0.13126265,764.39,100.85
 2026-11-05 14:31,Nvidia trend (200 day),SELL,NVDA,0.48775003,195.35,95.80
 2026-11-06 14:31,Tesla trend (200 day),SELL,TSLA,0.24405141,350.30,86.00
+2026-11-10 14:31,SpaceX gradual buy ($25 a week for 4 weeks),BUY,SPCX,0.18108958,138.00,50.02
