@@ -2,7 +2,7 @@
 
 Same rules as the monitor uses for your IB book:
   - 5 stocks, equal weight (20% each), bought from the top of the ranking (score 80+)
-  - 6% max-loss stop, breakeven after +10%, trailing stop, 2-to-1 target (levels.py)
+  - 4.5% trailing stop (4.5% below the highest price since bought, only moves up), 2-to-1 target (levels.py)
   - a stop or target hit -> sell right away and buy the strongest stock not owned
   - swaps when a clearly stronger stock appears (each stock every 2 business days at most); WEAK / LOSING holdings first in line (rotation.py)
   - nothing bought back within 30 days of selling it
@@ -295,6 +295,7 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
             notify(f"⚠️ Couldn't buy {t} (${dollars:,.2f}): {str(e)[:150]}. Trying the next stock on the list.")
             continue
         state["bought"][t] = today
+        state.setdefault("highs", {})[t] = _price(o) or 0  # the trailing stop starts from the purchase price
         skip.add(t)
         log("BUY", t, dollars, _price(o), f"{why_prefix}{b.get('reason', '')}")
         return t, f"🟢 BUY {t} ${dollars:,.2f}" + (f" at {_price(o):,.2f}" if _price(o) else "") + f" ({b.get('reason', '')[:120]})"
@@ -373,17 +374,23 @@ def execute(client=None):
         if state["bought"].get(t) == today or t == config.SAFE_FUND:
             continue  # bought today: no same-day sale; the parking fund has no stop
         lv = p["stops"].get(t) or {}
-        stop = lv.get("stop") or avg * (1 - config.MAX_LOSS_PCT / 100)
+        highs = state.setdefault("highs", {})
+        highs[t] = max(highs.get(t, 0), price, avg if state["bought"].get(t) else 0)
+        trail = highs[t] * (1 - config.TRAIL_PCT / 100)   # trails during the day too; only moves up
+        stop = max(lv.get("stop") or 0, avg * (1 - config.TRAIL_PCT / 100), trail)
         target = lv.get("target")
         hit = "stop" if price <= stop else "target" if target and price >= target else None
         if not hit:
             continue
+        peak = highs.get(t, price)
         o = wait_filled(client, client.close(t))
         state["sold"][t] = today
+        highs.pop(t, None)
         names.discard(t)
         val = float(x["market_value"])
         why = (f"price {price:,.2f} reached its {'stop' if hit == 'stop' else 'target'} "
-               f"{stop if hit == 'stop' else target:,.2f}" + (f" ({lv.get('rule')})" if hit == "stop" and lv.get("rule") else ""))
+               f"{stop if hit == 'stop' else target:,.2f}"
+               + (f" ({config.TRAIL_PCT:g}% below its high of {peak:,.2f})" if hit == "stop" else ""))
         log("SELL", t, val, _price(o), why)
         acct = client.account()
         equity, cash = float(acct["equity"]), float(acct["cash"])

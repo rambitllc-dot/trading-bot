@@ -27,36 +27,49 @@ class LevelsTest(unittest.TestCase):
     def test_first_day_levels(self):
         r = row("LRCX", entry=190.0, mark=189.80)
         levels.apply(self.con, "2026-11-05", [r], {"LRCX": bars([190.0] * 29 + [189.80], rng=8.0)})
-        self.assertAlmostEqual(r["stop_price"], 190.0 * 0.94, places=1)   # 6% cap beats 3 x ATR (24 below)
+        self.assertAlmostEqual(r["stop_price"], 190.0 * 0.955, places=2)  # 4.5% below the buy price
         self.assertAlmostEqual(r["target_price"], 189.80 + 2 * 24.0, places=1)
         self.assertEqual(r["action"], "HOLD")
-        self.assertIn("max-loss", r["action_reason"])
+        self.assertIn("4.5% trailing stop", r["action_reason"])
 
     def test_rule_label_on_later_days(self):
         r = row("CNC", entry=70.59, mark=69.7)
         levels.apply(self.con, "2026-11-05", [r], {"CNC": bars([70.0] * 29 + [69.7], rng=3.0)})
         r = row("CNC", entry=70.59, mark=69.4)
         levels.apply(self.con, "2026-11-06", [r], {"CNC": bars([70.0] * 29 + [69.4], rng=3.0)})
-        self.assertAlmostEqual(r["stop_price"], 66.35, places=2)
-        self.assertEqual(r["stop_rule"], "6% max-loss stop")   # not "trailing" on the second day
+        self.assertAlmostEqual(r["stop_price"], 67.41, places=2)
+        self.assertIn("4.5% below your buy price", r["stop_rule"])
+
+    def test_merck_example_trails_up_and_never_down(self):
+        r = row("MRK", entry=147.71, mark=147.71)
+        levels.apply(self.con, "2026-11-06", [r], {"MRK": bars([147.0] * 29 + [147.71], rng=2.0)})
+        self.assertAlmostEqual(r["stop_price"], 141.06, places=2)        # starts 4.5% below the buy price
+        r = row("MRK", entry=147.71, mark=155.10)
+        levels.apply(self.con, "2026-11-10", [r], {"MRK": bars([147.0] * 28 + [150.0, 155.10], rng=2.0)})
+        self.assertAlmostEqual(r["stop_price"], 148.12, places=2)        # moved up with the new high
+        r = row("MRK", entry=147.71, mark=150.0)
+        levels.apply(self.con, "2026-11-11", [r], {"MRK": bars([147.0] * 28 + [155.10, 150.0], rng=2.0)})
+        self.assertAlmostEqual(r["stop_price"], 148.12, places=2)        # price fell back: stop stays put
+        self.assertEqual(r["action"], "HOLD")
+        r = row("MRK", entry=147.71, mark=148.0)
+        levels.apply(self.con, "2026-11-12", [r], {"MRK": bars([147.0] * 28 + [155.10, 148.0], rng=2.0)})
+        self.assertEqual(r["action"], "SELL")                            # at/below the stop: sell (with a profit)
 
     def test_already_down_more_than_cap_is_sell(self):
         r = row("LRCX", entry=239.36, mark=189.80)
         levels.apply(self.con, "2026-11-05", [r], {"LRCX": bars([190.0] * 29 + [189.80], rng=8.0)})
         self.assertEqual(r["action"], "SELL")          # cut losses: 21% below the buy price
 
-    def test_breakeven_after_ten_percent_and_high_stop_is_not_a_sell(self):
+    def test_big_run_keeps_trailing_and_is_not_a_sell(self):
         r = row("TXN", 100.0, 100.0)
         levels.apply(self.con, "2026-10-01", [r], {"TXN": bars([100.0] * 30, rng=10.0)})
         r = row("TXN", 100.0, 108.0)
         levels.apply(self.con, "2026-11-20", [r], {"TXN": bars([100.0] * 25 + [104, 108, 111, 109, 108], rng=10.0)})
-        self.assertEqual(r["stop_price"], 100.0)       # touched +11% -> stop at the buy price
+        self.assertAlmostEqual(r["stop_price"], 106.0, places=1)    # 4.5% below the 111 high: a locked-in gain
         self.assertEqual(r["action"], "HOLD")
-        self.assertIn("breakeven", r["action_reason"])
-        r = row("TXN", 100.0, 150.0)                   # big run: trailing stop above the start price
+        r = row("TXN", 100.0, 150.0)
         levels.apply(self.con, "2026-12-20", [r], {"TXN": bars([100.0] * 25 + [130, 150, 150, 150, 150], rng=10.0)})
-        self.assertGreater(r["stop_price"], 105)
-        self.assertLess(r["target_price"], 165)
+        self.assertAlmostEqual(r["stop_price"], 143.25, places=2)
         self.assertEqual(r["action"], "HOLD")          # price above the stop is not a sell
 
     def test_weakening_below_50_day_average(self):

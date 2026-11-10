@@ -202,3 +202,9 @@ At most `DEPOSIT_MAX_TRIES_PER_DAY` attempts a day.
 - `EARNINGS_GUARD` / `EARNINGS_BLACKOUT_DAYS` (5 business days): `monitor/earnings.py` checks the next earnings date
   (Yahoo) for the top `EARNINGS_CHECK_TOP` candidates and your holdings; candidates reporting soon are skipped,
   holdings reporting soon are listed in the evening Telegram report. Cached daily in `output/earnings_cache.json`.
+
+## 4.5% trailing stop
+
+`config.TRAIL_PCT` (4.5): `levels.floors` sets the stop at 4.5% below the highest close since the buy (never below 4.5%
+under the buy price) and never lowers it; `autotrade.execute` also trails it intraday from the prices it sees
+(`state["highs"]`). Older rules (3 x ATR trail, 6% cap) are replaced; ATR is still used for the target.

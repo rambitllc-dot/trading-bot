@@ -1,16 +1,13 @@
 """Automatic stop and target for positions without levels of their own.
 
-Common trader risk management:
-  Stop    a trailing "Chandelier" stop: the highest close since the monitor started tracking the position,
-          minus 3 x ATR (the average true range, i.e. the stock's typical daily move, over ~22 days).
-          Jumpy stocks get more room than steady funds, and the stop only ever moves UP as the price rises.
-  Target  2-to-1 reward to risk: the starting price plus twice the starting distance to the stop.
-Two floors are added under the trailing stop (the highest of the three wins, and it never moves down):
-  Loss cap    the stop is never more than MAX_LOSS_PCT (6%) below what you paid.
-  Breakeven   once the stock has closed BREAKEVEN_AFTER_PCT (10%) above what you paid, the stop rises to your
-              buy price, so a winner can't turn into a loss.
-A position already down more than the cap shows SELL right away: that's the cut-losses rule.
-The target stays at 2-to-1 of the stock's normal swing (3 x ATR), measured from the first tracked day.
+  Stop    a 4.5% TRAILING STOP (config.TRAIL_PCT): it starts 4.5% below the price you paid and always sits 4.5%
+          below the highest close since you bought, so it only ever moves UP. Example: bought at 147.71 ->
+          stop 141.06; the stock closes at 155.10 -> stop 148.12, above what you paid. The Mac also trails it
+          during the day from the prices it checks every 2 minutes. A hit = sell and swap into the strongest stock.
+  Breakeven  once a stock has been 10% above what you paid, the stop is at least your buy price (with a 4.5%
+          trail it's already above that).
+  Target  2-to-1 of the stock's normal swing: the starting price plus 2 x (3 x ATR, its typical daily move).
+A position already down more than 4.5% from its high shows SELL right away: that's the cut-losses rule.
 WEAKENING: any stock (also with your own levels) whose last close is below its 50-day average is flagged;
 it often shows a top-ranked stock rolling over before the stop is hit. It moves to the front of the swap line.
 Set stop_price / target_price in positions.json to override the automatic levels with your own numbers.
@@ -37,21 +34,19 @@ def atr(bars, n=None):
 
 
 def floors(stop, entry, highest):
-    """Raise the stop to the loss cap and, after a 10% gain, to breakeven. -> (stop, rule that set it).
-    The label names whichever rule the final stop sits on (the stop is saved and only ever rises, so on later
-    days it can equal a floor that was applied before)."""
-    trailing = "trailing stop (3 x typical daily move below the highest close)"
-    if not entry:
-        return stop, trailing
-    cap = entry * (1 - config.MAX_LOSS_PCT / 100)
-    stop = max(stop, cap)
-    if highest >= entry * (1 + config.BREAKEVEN_AFTER_PCT / 100):
+    """The stop: TRAIL_PCT below the highest price since you bought (never below TRAIL_PCT under your buy price),
+    and never lower than it already was. -> (stop, rule that set it)."""
+    peak = max(highest or 0, entry or 0)
+    trail = peak * (1 - config.TRAIL_PCT / 100)
+    stop = max(stop or 0, trail)
+    if entry and highest >= entry * (1 + config.BREAKEVEN_AFTER_PCT / 100):
         stop = max(stop, entry)
-    if abs(stop - entry) < 0.005:
+    if peak and abs(stop - trail) < 0.005:
+        where = "your buy price" if entry and peak == entry else f"the highest close since you bought, {peak:,.2f}"
+        return stop, f"{config.TRAIL_PCT:g}% trailing stop ({config.TRAIL_PCT:g}% below {where})"
+    if entry and abs(stop - entry) < 0.005:
         return stop, f"breakeven stop (was up {config.BREAKEVEN_AFTER_PCT:g}%+, so no loss allowed)"
-    if abs(stop - cap) < 0.005:
-        return stop, f"{config.MAX_LOSS_PCT:g}% max-loss stop"
-    return stop, trailing
+    return stop, f"{config.TRAIL_PCT:g}% trailing stop (kept from an earlier high; stops never move down)"
 
 
 def weakness(r, b):
@@ -86,15 +81,15 @@ def apply(con, asof, rows, bars):
             row = None  # sold and bought again later: start fresh levels for the new purchase
         prev_stop = row[3] if row is not None else None
         if row is None:
-            base, highest = close, close
-            stop = close - config.ATR_STOP_MULT * a
-            target = close + config.REWARD_RISK * (close - stop)
-            base_date = asof
+            base_date = r.get("entry_date") if r.get("entry_date") and r["entry_date"] <= asof else asof
+            since = [x[1] for x in b if x[0] >= base_date] or [close]
+            base, highest = close, max(since)
+            stop = 0.0
+            target = close + config.REWARD_RISK * config.ATR_STOP_MULT * a
         else:
             base_date, base, highest, stop, target = row
             since = [x[1] for x in b if x[0] >= base_date] or [close]
             highest = max(highest, max(since))
-            stop = max(stop, highest - config.ATR_STOP_MULT * a)  # trailing: only ever moves up
         stop, rule = floors(stop, r.get("entry_price"), highest)
         con.execute("INSERT OR REPLACE INTO auto_levels VALUES (?,?,?,?,?,?,?,?)",
                     (r["ticker"], base_date, base, highest, stop, target, a, asof))

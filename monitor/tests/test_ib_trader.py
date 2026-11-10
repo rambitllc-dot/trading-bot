@@ -171,3 +171,19 @@ class CodeVersionTest(unittest.TestCase):
             with open(os.path.join(d, "a.py"), "w") as f:
                 f.write("x = 2\n")                              # real code update
             self.assertNotEqual(ib_trader.code_version(), v1)
+
+
+class IntradayTrailTest(IBTraderTest):
+    def test_stop_trails_the_days_high(self):
+        ib = FakeIB({"MRNA": 280.0, "XLV": 150.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            stops={"MRNA": {"stop": 248.5, "target": 397.0}}, reserve=[{"ticker": "XLV", "reason": "rank #1"}]))
+        autotrade.execute(client=self.client(ib))           # sees 280: new high, stop moves to 267.40
+        self.assertIn("MRNA", ib.pos)
+        ib.prices["MRNA"] = 268.0
+        autotrade.execute(client=self.client(ib))           # 268 is above 267.40: keep
+        self.assertIn("MRNA", ib.pos)
+        ib.prices["MRNA"] = 267.0
+        autotrade.execute(client=self.client(ib))           # 4.5% below the 280 high: sell, still a profit
+        self.assertNotIn("MRNA", ib.pos)
+        self.assertIn("XLV", ib.pos)

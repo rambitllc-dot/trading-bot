@@ -86,8 +86,10 @@ ROTATION_NO_REBUY_DAYS = 30 # don't suggest buying back something swapped out wi
 # ---- Automatic stop / target (used when a position has no stop_price / target_price of its own) ----
 AUTO_LEVELS = True
 ATR_PERIOD = 22             # average true range over about one month of trading days
-ATR_STOP_MULT = 3.0         # stop = highest close since tracking began - 3 x ATR ("Chandelier" trailing stop)
-MAX_LOSS_PCT = 6.0          # stop never sits more than 6% below what you paid (cut losses early)
+ATR_STOP_MULT = 3.0         # used for the profit target only: target = 2 x (3 x ATR) above the starting price
+TRAIL_PCT = 4.5             # the stop always sits 4.5% below the highest price since you bought (starts 4.5% below
+                            # your buy price) and only ever moves up
+MAX_LOSS_PCT = TRAIL_PCT    # the most a new position can lose before it's sold
 BREAKEVEN_AFTER_PCT = 10.0  # once a stock has closed 10% above what you paid, the stop rises to your buy price
 WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop

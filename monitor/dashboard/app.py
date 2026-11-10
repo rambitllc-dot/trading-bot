@@ -247,8 +247,8 @@ for p in sorted([x for x in P if x["asset_type"] != "cash"], key=lambda x: order
                    if p.get("stop_price") is not None else "") + '</span></div>',
                 unsafe_allow_html=True)
 st.markdown('<div class="muted">Labels apply your own levels from positions.json, or, where you set none, automatic ones: '
-            f'a trailing stop 3x the stock\'s typical daily move below its highest close, never more than {config.MAX_LOSS_PCT:g}% '
-            f'below what you paid, raised to your buy price once the stock is up {config.BREAKEVEN_AFTER_PCT:g}%; and a 2-to-1 target. '
+            f'a {config.TRAIL_PCT:g}% trailing stop ({config.TRAIL_PCT:g}% below the highest price since you bought, '
+            f'only moving up) and a 2-to-1 target. '
             'WEAK = closed below its 50-day average (first in line for the next swap). '
             'They are rules, not predictions or financial advice.</div>', unsafe_allow_html=True)
 
@@ -398,7 +398,7 @@ else:
         st.markdown('<div class="muted" style="margin-top:8px;color:#FFA62B">TRADES MADE</div>' + t + "</table></div>",
                     unsafe_allow_html=True)
     st.markdown('<div class="muted">Trades by itself in an Alpaca paper account (no real money): 5 stocks at 20% each, '
-                f'{config.MAX_LOSS_PCT:g}% max-loss stop, breakeven after +{config.BREAKEVEN_AFTER_PCT:g}%, stop-outs replaced '
+                f'{config.TRAIL_PCT:g}% trailing stop, stop-outs replaced '
                 'right away, regular swaps every 2 business days. Pause it with "paused": true in monitor/autotrade/switch.json.</div>',
                 unsafe_allow_html=True)
 
