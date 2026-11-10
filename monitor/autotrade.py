@@ -212,7 +212,7 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     taken |= {b["ticker"] for b in fill}
     reserve = [x for x in extra if x["ticker"] not in taken][:8]
     stops = {r["ticker"]: {"stop": r.get("stop_price"), "target": r.get("target_price"), "rule": r.get("stop_rule"),
-                           "weak": bool(r.get("weak"))} for r in rows if r["ticker"] not in sells}
+                           "weak": bool(r.get("weak")), "peak": r.get("peak")} for r in rows if r["ticker"] not in sells}
     sold_recently = recently_sold(state, asof, con)
     deposit = [] if storm else [
         {"ticker": t, "rank": rk, "score": sc, "size": sz, "sector": sectors.sector_of(t),
@@ -375,7 +375,7 @@ def execute(client=None):
             continue  # bought today: no same-day sale; the parking fund has no stop
         lv = p["stops"].get(t) or {}
         highs = state.setdefault("highs", {})
-        highs[t] = max(highs.get(t, 0), price, avg if state["bought"].get(t) else 0)
+        highs[t] = max(highs.get(t, 0), price, lv.get("peak") or 0, avg if state["bought"].get(t) else 0)
         trail = highs[t] * (1 - config.TRAIL_PCT / 100)   # trails during the day too; only moves up
         stop = max(lv.get("stop") or 0, avg * (1 - config.TRAIL_PCT / 100), trail)
         target = lv.get("target")

@@ -187,3 +187,13 @@ class IntradayTrailTest(IBTraderTest):
         autotrade.execute(client=self.client(ib))           # 4.5% below the 280 high: sell, still a profit
         self.assertNotIn("MRNA", ib.pos)
         self.assertIn("XLV", ib.pos)
+
+
+class PeakFromPlanTest(IBTraderTest):
+    def test_daytime_stop_starts_from_the_evening_high(self):
+        ib = FakeIB({"MRNA": 250.4, "XLV": 150.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            stops={"MRNA": {"stop": 244.6, "target": 397.0, "peak": 269.0}}, reserve=[{"ticker": "XLV", "reason": "#1"}]))
+        autotrade.execute(client=self.client(ib))           # 250.40 is 6.9% below the 269 high: sold
+        self.assertNotIn("MRNA", ib.pos)
+        self.assertIn("XLV", ib.pos)

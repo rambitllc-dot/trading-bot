@@ -99,6 +99,7 @@ def apply(con, asof, rows, bars):
             r["progress_target"] = (mark - base) / (target - base) * 100 if target != base else None
             r["progress_stop"] = (highest - mark) / (highest - stop) * 100 if highest != stop else None
         r["stop_rule"], r["prev_stop"] = rule, prev_stop
+        r["peak"] = round(max(highest, r.get("entry_price") or 0), 2)  # the high the trailing stop follows
         r["action"], r["action_reason"] = plan.for_position(r)
         r["action_reason"] += f" (stop: {rule})" if "stop" in r["action_reason"] else " (auto levels)"
         out.append({"ticker": r["ticker"], "stop": stop, "target": target, "atr": a, "base": base,
