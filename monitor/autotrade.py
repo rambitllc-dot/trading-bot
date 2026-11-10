@@ -218,7 +218,10 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
         {"ticker": t, "rank": rk, "score": sc, "size": sz, "sector": sectors.sector_of(t),
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
         for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
-    return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
+    spy_up = con.execute("SELECT uptrend FROM rotation_scores WHERE asof=? AND ticker=?",
+                         (asof, config.DEPOSIT_FALLBACK)).fetchone()
+    fallback = config.DEPOSIT_FALLBACK if (not storm and spy_up and spy_up[0]) else config.SAFE_FUND
+    return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof, "fallback": fallback,
             "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
             "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit, "earnings_soon": soon,
             "storm": storm, "weather": (rot.get("weather") or {}).get("text"),
@@ -427,8 +430,12 @@ def pick_for_cash(p, held, blocked, n):
         if len(chosen) < n and c["ticker"] not in {x["ticker"] for x in chosen}:
             chosen.append({**c, "why": f"strongest left ({c['sector']}, already owned)"})
     if not chosen:
-        chosen = [{"ticker": config.DEPOSIT_FALLBACK, "sector": "Broad market", "reason": "S&P 500 fund",
-                   "why": "no stock scores 80+ today, so it tracks the S&P 500 instead of sitting in cash"}]
+        fb = p.get("fallback") or config.SAFE_FUND
+        chosen = [{"ticker": fb, "sector": sectors.sector_of(fb), "reason": "S&P 500 fund" if fb == "SPY" else "T-bills",
+                   "why": ("no stock qualifies today and the S&P 500 is in an uptrend, so it tracks the S&P 500"
+                           if fb == config.DEPOSIT_FALLBACK else
+                           "no stock qualifies today and the S&P 500 isn't in an uptrend, so it waits in "
+                           "short-term Treasury bills (~4% a year)")}]
     return chosen
 
 

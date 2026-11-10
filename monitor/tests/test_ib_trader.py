@@ -146,9 +146,13 @@ class DepositTest(IBTraderTest):
         autotrade.execute(client=self.client(ib))
         self.assertEqual(set(ib.pos), {"CNC"})                            # under $50: leave it
         ib.cash = 300.0
-        autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", deposit_candidates=[]))
+        autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", deposit_candidates=[], fallback="SPY"))
         autotrade.execute(client=self.client(ib))
-        self.assertIn("SPY", ib.pos)                                      # no stock scores 80+ -> S&P 500
+        self.assertIn("SPY", ib.pos)                                      # nothing qualifies, SPY rising -> S&P 500
+        ib.cash, ib.prices["SGOV"] = 300.0, 100.5
+        autotrade.save_json(autotrade.PLAN_FILE, plan(id="p3", deposit_candidates=[], fallback="SGOV"))
+        autotrade.execute(client=self.client(ib))
+        self.assertIn("SGOV", ib.pos)                                     # SPY not rising -> short-term T-bills
 
     def test_retries_are_limited(self):
         ib = FakeIB({"CNC": 70.0}, cash=500.0, holdings={"CNC": [2.86, 70.0]})   # nothing buyable (no prices)
