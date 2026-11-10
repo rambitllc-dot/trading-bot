@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 10, 2026 08:01 UTC · Bitcoin $74,700.00 · US stock market closed
+Last update: Nov 10, 2026 08:01 UTC · Bitcoin $74,703.47 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
