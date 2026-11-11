@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 11, 2026 12:01 UTC · Bitcoin $73,914.97 · US stock market closed
+Last update: Nov 11, 2026 12:31 UTC · Bitcoin $73,800.00 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -50,12 +50,12 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 13 | Anthropic buy & hold | Hold | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
 | 14 | Anthropic trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
 | 15 | Anthropic gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
-| 16 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.33 | -$0.67 (-0.7%) | 3 |
+| 16 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.32 | -$0.68 (-0.7%) | 3 |
 | 17 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $98.94 | -$1.06 (-1.1%) | 1 |
 | 18 | S&P 500 buy & hold | Hold | ETF | $98.94 | -$1.06 (-1.1%) | 1 |
 | 19 | S&P 500 trend (200 day) | Static rule | ETF | $98.94 | -$1.06 (-1.1%) | 1 |
 | 20 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
-| 21 | Bitcoin buy & hold | Hold | Bitcoin | $94.19 | -$5.81 (-5.8%) | 1 |
+| 21 | Bitcoin buy & hold | Hold | Bitcoin | $94.04 | -$5.96 (-6.0%) | 1 |
 | 22 | Tesla buy & hold | Hold | Stock | $93.19 | -$6.81 (-6.8%) | 1 |
 | 23 | Wide momentum (10 ETFs) | Monthly pick | ETF | $91.99 | -$8.01 (-8.0%) | 1 |
 | 24 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $87.97 | -$12.03 (-12.0%) | 10 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $94.19 | $100.00 | trading |
+| Bitcoin | $94.04 | $100.00 | trading |
 | S&P 500 | $98.94 | $98.94 | about even |
 | Apple | $103.59 | $103.59 | about even |
 | Microsoft | $103.03 | $103.03 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $100.91 | $100.00 | holding |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,561.53 from $2,600 (-38.47)
+**All together:** $2,561.37 from $2,600 (-38.63)
 
 ## What each one is doing
 
@@ -95,12 +95,12 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Anthropic buy & hold:** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
 - **Anthropic trend (50 day):** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
 - **Anthropic gradual buy ($25 a week for 4 weeks):** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.06, GLD $20.26, BTC/USD $9.40, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.06, GLD $20.26, BTC/USD $9.39, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $98.43, cash $0.51. Holding SPY until next month's check.
 - **S&P 500 buy & hold:** SPY $98.43, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $98.43, cash $0.51. Signal: in the market (price $749.93 vs 200d avg $728.27).
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $168.78 vs 200d avg $204.26).
-- **Bitcoin buy & hold:** BTC/USD $91.80, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $91.65, cash $2.39. Holding.
 - **Tesla buy & hold:** TSLA $92.68, cash $0.51. Holding.
 - **Wide momentum (10 ETFs):** XLE $91.48, cash $0.51. Holding XLE until next month's check.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $10.71, SNDK $7.63, LITE $8.63, MU $8.42, DELL $8.14, STX $8.18, WDC $8.26, VLO $8.94, APA $9.31, MPC $9.05, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
