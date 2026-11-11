@@ -1,14 +1,14 @@
 {
  "asof": "2026-11-10",
  "totals": {
-  "value": 828.0010095214843,
+  "value": 828.001,
   "cost": 819.11058,
   "positions": 5,
   "priced": 5,
   "net_delta": 7.1000000000000005,
   "daily_theta": 0,
-  "pnl": 8.890429521484293,
-  "pnl_pct": 1.0853759844591793
+  "pnl": 8.89041999999995,
+  "pnl_pct": 1.0853748220417259
  },
  "positions": [
   {
@@ -21,30 +21,30 @@
    "contracts": 4.9,
    "entry_price": 70.5946,
    "target_price": 89.48,
-   "stop_price": 70.83,
+   "stop_price": 67.42,
    "add_below": null,
-   "spot": 70.19000244140625,
+   "spot": 70.19,
    "status": "ok",
-   "mark": 70.19000244140625,
+   "mark": 70.19,
    "cost": 345.91354,
-   "value": 343.93101196289064,
-   "pnl": -1.9825280371093754,
-   "pnl_pct": -0.5731281976153276,
+   "value": 343.93100000000004,
+   "pnl": -1.9825399999999718,
+   "pnl_pct": -0.5731316559623458,
    "delta": 1.0,
    "pos_delta": 4.9,
-   "progress_target": 1.077144347054681,
-   "progress_stop": 119.24545191360019,
+   "progress_target": 1.0771318243955939,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
-   "action": "SELL",
-   "action_reason": "price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)) -> move the money to VTRS (rank #2)",
+   "action": "HOLD",
+   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) \u00b7 LOSING -0.6%: #2 in line for the next swap",
    "entry_date": "2026-11-06",
-   "ma50": 66.85,
+   "ma50": 66.73,
    "weak": false,
    "level_ref": 69.9800033569336,
    "levels_auto": true,
-   "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 74.17)",
-   "prev_stop": 66.358924,
-   "peak": 74.17
+   "stop_rule": "4.5% trailing stop (4.5% below your buy price)",
+   "prev_stop": 67.4178,
+   "peak": 70.59
   },
   {
    "position_id": "MRK-shares",
@@ -58,27 +58,27 @@
    "target_price": 176.66,
    "stop_price": 142.07,
    "add_below": null,
-   "spot": 148.0500030517578,
+   "spot": 148.05,
    "status": "ok",
-   "mark": 148.0500030517578,
+   "mark": 148.05,
    "cost": 147.705,
-   "value": 148.0500030517578,
-   "pnl": 0.3450030517578,
-   "pnl_pct": 0.23357574337889708,
+   "value": 148.05,
+   "pnl": 0.34499999999999886,
+   "pnl_pct": 0.23357367726210948,
    "delta": 1.0,
    "pos_delta": 1.0,
-   "progress_target": 3.637042184969318,
-   "progress_stop": 10.606069153827466,
+   "progress_target": 3.637031907790575,
+   "progress_stop": 10.606114741917363,
    "progress_text": "no target or stop set",
    "action": "HOLD",
    "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 148.76))",
    "entry_date": "2026-11-06",
-   "ma50": 146.22,
+   "ma50": 146.19,
    "weak": false,
    "level_ref": 146.97000122070312,
    "levels_auto": true,
    "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 148.76)",
-   "prev_stop": 138.8474,
+   "prev_stop": 142.0657947540283,
    "peak": 148.76
   },
   {
@@ -93,27 +93,27 @@
    "target_price": 397.27,
    "stop_price": 256.89,
    "add_below": null,
-   "spot": 250.8300018310547,
+   "spot": 250.83,
    "status": "ok",
-   "mark": 250.8300018310547,
+   "mark": 250.83,
    "cost": 156.12402,
-   "value": 150.4980010986328,
-   "pnl": -5.626018901367189,
-   "pnl_pct": -3.6035575444234587,
+   "value": 150.498,
+   "pnl": -5.626020000000011,
+   "pnl_pct": -3.603558248115832,
    "delta": 1.0,
    "pos_delta": 0.6,
-   "progress_target": -10.541584901832302,
-   "progress_stop": 150.10324798798254,
+   "progress_target": -10.541586284016496,
+   "progress_stop": 150.1032631144152,
    "progress_text": "no target or stop set",
    "action": "SELL",
-   "action_reason": "price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)) -> move the money to BEN (rank #5)",
+   "action_reason": "price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)) -> move the money to TGT (rank #5)",
    "entry_date": "2026-11-06",
-   "ma50": 196.68,
+   "ma50": 194.47,
    "weak": false,
    "level_ref": 264.7950134277344,
    "levels_auto": true,
    "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 269.00)",
-   "prev_stop": 244.59739999999996,
+   "prev_stop": 256.895,
    "peak": 269.0
   },
   {
@@ -128,27 +128,27 @@
    "target_price": 346.77,
    "stop_price": 287.0,
    "add_below": null,
-   "spot": 300.5199890136719,
+   "spot": 300.52,
    "status": "ok",
-   "mark": 300.5199890136719,
+   "mark": 300.52,
    "cost": 164.15802,
-   "value": 180.3119934082031,
-   "pnl": 16.153973408203115,
-   "pnl_pct": 9.840502101696352,
+   "value": 180.31199999999998,
+   "pnl": 16.15397999999999,
+   "pnl_pct": 9.84050611721559,
    "delta": 1.0,
    "pos_delta": 0.6,
-   "progress_target": 33.91913812289184,
-   "progress_stop": 0.0,
+   "progress_target": 33.91915381989832,
+   "progress_stop": -8.123939622022038e-05,
    "progress_text": "no target or stop set",
    "action": "HOLD",
    "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 300.52))",
    "entry_date": "2026-11-06",
-   "ma50": 279.46,
+   "ma50": 278.64,
    "weak": false,
    "level_ref": 276.7799987792969,
    "levels_auto": true,
    "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 300.52)",
-   "prev_stop": 258.93159372837,
+   "prev_stop": 286.9965895080566,
    "peak": 300.52
   },
   {
@@ -180,10 +180,10 @@
  ],
  "analytics": {
   "asof": "2026-11-10",
-  "total_value": 828.0010095214843,
+  "total_value": 828.001,
   "total_cost": 819.11058,
-  "pnl": 8.890429521484293,
-  "pnl_pct": 1.0853759844591793,
+  "pnl": 8.89041999999995,
+  "pnl_pct": 1.0853748220417259,
   "net_delta": 7.1000000000000005,
   "daily_theta": 0,
   "net_vega": 0,
@@ -193,32 +193,32 @@
     {
      "kind": "ticker",
      "name": "CNC",
-     "value": 343.93101196289064,
-     "pct": 41.537511187535166,
+     "value": 343.93100000000004,
+     "pct": 41.53751022039829,
      "cap_pct": 40,
      "over_cap": true
     },
     {
      "kind": "ticker",
      "name": "TXN",
-     "value": 180.3119934082031,
-     "pct": 21.77678424720864,
+     "value": 180.31199999999998,
+     "pct": 21.776785293737568,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "MRNA",
-     "value": 150.4980010986328,
-     "pct": 18.1760649284242,
+     "value": 150.498,
+     "pct": 18.17606500475241,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "MRK",
-     "value": 148.0500030517578,
-     "pct": 17.88041335086275,
+     "value": 148.05,
+     "pct": 17.88041318790678,
      "cap_pct": 40,
      "over_cap": false
     },
@@ -226,7 +226,7 @@
      "kind": "ticker",
      "name": "CASH",
      "value": 5.21,
-     "pct": 0.6292262859692582,
+     "pct": 0.6292262932049599,
      "cap_pct": 40,
      "over_cap": false
     }
@@ -235,16 +235,16 @@
     {
      "kind": "sector",
      "name": "Healthcare",
-     "value": 642.4790161132812,
-     "pct": 77.5939894668221,
+     "value": 642.479,
+     "pct": 77.59398841305747,
      "cap_pct": 60,
      "over_cap": true
     },
     {
      "kind": "sector",
      "name": "Technology",
-     "value": 180.3119934082031,
-     "pct": 21.77678424720864,
+     "value": 180.31199999999998,
+     "pct": 21.776785293737568,
      "cap_pct": 60,
      "over_cap": false
     },
@@ -252,7 +252,7 @@
      "kind": "sector",
      "name": "Cash",
      "value": 5.21,
-     "pct": 0.6292262859692582,
+     "pct": 0.6292262932049599,
      "cap_pct": 60,
      "over_cap": false
     }
@@ -275,14 +275,14 @@
   ]
  },
  "macro": {
-  "score": 60.3,
+  "score": 60.9,
   "label": "Mixed",
   "inputs": {
    "vix": 19.459999084472656,
    "vix_1y_percentile": 76.19047619047619,
    "vix_vix3m_ratio": 0.9428294408880852,
-   "sectors_above_200d": "7 of 11",
-   "hyg_tlt_ratio": 0.9542532508173913
+   "sectors_above_200d": "8 of 11",
+   "hyg_tlt_ratio": 0.9457052586877683
   },
   "missing": [],
   "components": {
@@ -299,11 +299,11 @@
     "weight": 0.2
    },
    "breadth": {
-    "score": 63.6,
+    "score": 72.7,
     "weight": 0.2
    },
    "credit": {
-    "score": 75.8,
+    "score": 69.8,
     "weight": 0.2
    }
   },
@@ -311,6 +311,7 @@
  },
  "news": [
   {
+   "asof": "2026-11-10",
    "ticker": "CNC",
    "headlines": [
     {
@@ -342,7 +343,6 @@
      "link": "https://247wallst.com/investing/2026/11/07/medicare-open-enrollment-closes-dec-7-after-that-part-d-plans-are-locked/"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Simply Wall St. reports Centene shareholders had a 100.1% total return over the past year, including dividends. Motley Fool says Medicaid rate negotiations will determine whether Centene's margin recovery holds beyond 2026.",
    "sentiment": "neutral",
    "drivers": [
@@ -351,12 +351,16 @@
     "100.1% one-year total return"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 908,
    "output_tokens": 539,
    "cost_usd": 0.00036030000000000003,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-10T21:31:52Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-10",
    "ticker": "MRK",
    "headlines": [
     {
@@ -430,7 +434,6 @@
      "link": "https://finance.yahoo.com/healthcare/articles/mrks-2027-outlook-challenging-long-124800780.html"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Merck's 2026 sales outlook was raised at its October 29 third-quarter results, according to TIKR. A Zacks analysis says Merck's 2027 growth faces generic drug pressure, vaccine weakness and a Keytruda slowdown, while its expanding pipeline offers long-term promise. Other headlines in this set cover Merck mainly in comparison with peers or as a partner in Moderna's melanoma vaccine.",
    "sentiment": "neutral",
    "drivers": [
@@ -440,12 +443,16 @@
     "Expanding pipeline and Moderna melanoma vaccine partnership"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1378,
    "output_tokens": 620,
    "cost_usd": 0.0004478,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-10T21:31:55Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-10",
    "ticker": "MRNA",
    "headlines": [
     {
@@ -519,7 +526,6 @@
      "link": "https://finance.yahoo.com/healthcare/articles/modernas-first-cancer-therapy-win-170900377.html"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Moderna reported third-quarter 2026 revenue up 29% to $1.3 billion and raised its full-year revenue growth forecast, and the shares rose 6.4% in the afternoon session. Headlines also cite analyst fair value estimates rising to US$145.42 and a planned year-end 2026 FDA filing for its intismeran cancer therapy.",
    "sentiment": "positive",
    "drivers": [
@@ -529,12 +535,16 @@
     "Higher analyst fair value estimate"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1572,
    "output_tokens": 605,
    "cost_usd": 0.00045970000000000006,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-10T21:31:58Z",
+   "cached": true
   },
   {
+   "asof": "2026-11-10",
    "ticker": "TXN",
    "headlines": [
     {
@@ -608,7 +618,6 @@
      "link": "https://finance.yahoo.com/markets/stocks/articles/best-income-stocks-buy-november-064400296.html"
     }
    ],
-   "model": "claude-haiku-5-5",
    "summary": "Texas Instruments stock is reported to be up 70% year-to-date as of November 10, 2026, with Zacks citing strong earnings, rising AI data center demand, and robust cash flow, alongside a premium valuation. Articles also note TXN's dividend profile and a Zacks Rank #1 (Strong Buy) income-stock listing, while GuruFocus reports that ETFs were net sellers of $228.8 million of TXN on November 6.",
    "sentiment": "positive",
    "drivers": [
@@ -618,10 +627,13 @@
     "Dividend-paying profile and Zacks Rank #1 income listing"
    ],
    "position_flags": [],
+   "model": "claude-haiku-5-5",
    "input_tokens": 1489,
    "output_tokens": 606,
    "cost_usd": 0.0004519,
-   "status": "ok"
+   "status": "ok",
+   "created_at": "2026-11-10T21:32:01Z",
+   "cached": true
   }
  ],
  "alerts": [
@@ -638,19 +650,9 @@
   {
    "kind": "swap",
    "severity": "high",
-   "message": "STOP HIT -> SWAP idea: sell all MRNA (about $150, rank #1) and buy BEN (rank #5). STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to BEN, rank #5 of 518 (+50% over 12 months, above its 50- and 200-day averages), score 86.",
+   "message": "STOP HIT -> SWAP idea: sell all MRNA (about $150, rank #1) and buy TGT (rank #5). STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to TGT, rank #5 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 85.",
    "action": "SWAP",
    "ticker": "MRNA",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "swap",
-   "severity": "high",
-   "message": "STOP HIT -> SWAP idea: sell all CNC (about $344, rank #10) and buy VTRS (rank #2). STOPPED OUT: price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)). Sell regardless of its rank (#10) and move the money to VTRS, rank #2 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 91.",
-   "action": "SWAP",
-   "ticker": "CNC",
    "position_id": null,
    "is_new": true,
    "detail": null
@@ -692,321 +694,347 @@
    "momentum_leaders": [
     {
      "ticker": "MRNA",
-     "price": 250.8300018310547,
-     "chg_1d": -0.06754646159459221,
-     "rsi2": 38.565737869881744,
-     "ret_12m": 7.709861349594451,
-     "vs_200d": 1.6803030981710085,
+     "price": 269.0,
+     "chg_1d": 0.05826349351409932,
+     "rsi2": 85.60876502635534,
+     "ret_12m": 8.247842199159653,
+     "vs_200d": 1.9059561170911667,
      "high_52w": 280.79998779296875,
-     "from_high": -0.10673072387741933,
-     "new_high": false,
-     "vol_ratio": 0.6685940013132293,
-     "reason": "+771% over 12 months"
+     "from_high": -0.042022750377285534,
+     "new_high": true,
+     "vol_ratio": 0.7432519603936576,
+     "reason": "+825% over 12 months"
     },
     {
      "ticker": "SNDK",
-     "price": 859.989990234375,
-     "chg_1d": -0.02991508188188574,
-     "rsi2": 35.23628373451747,
-     "ret_12m": 5.21066470097507,
-     "vs_200d": -0.3261190070351031,
+     "price": 886.510009765625,
+     "chg_1d": 0.061612354031389316,
+     "rsi2": 48.20019892652059,
+     "ret_12m": 6.6162546472853325,
+     "vs_200d": -0.3042772816057471,
      "high_52w": 2354.389892578125,
-     "from_high": -0.6347291529982483,
+     "from_high": -0.6234650800361401,
      "new_high": false,
-     "vol_ratio": 1.1771616109836747,
-     "reason": "+521% over 12 months"
-    },
-    {
-     "ticker": "MU",
-     "price": 725.1099853515625,
-     "chg_1d": -0.010966430873306843,
-     "rsi2": 50.22658009433446,
-     "ret_12m": 3.1610937063894333,
-     "vs_200d": -0.04575516773646926,
-     "high_52w": 1254.6095437059498,
-     "from_high": -0.42204330503521914,
-     "new_high": false,
-     "vol_ratio": 0.8869224556817746,
-     "reason": "+316% over 12 months"
+     "vol_ratio": 1.2980835727513658,
+     "reason": "+662% over 12 months"
     },
     {
      "ticker": "LITE",
-     "price": 585.5700073242188,
-     "chg_1d": -0.017763631067772345,
-     "rsi2": 53.26608608491938,
-     "ret_12m": 3.1456414585574635,
-     "vs_200d": -0.27726643787137484,
+     "price": 596.1599731445312,
+     "chg_1d": 0.10689010827991341,
+     "rsi2": 63.09756404494043,
+     "ret_12m": 3.603450493096747,
+     "vs_200d": -0.263044721589927,
      "high_52w": 1143.0,
-     "from_high": -0.4876902823060203,
+     "from_high": -0.4784252203459919,
      "new_high": false,
-     "vol_ratio": 0.7249033958967206,
-     "reason": "+315% over 12 months"
+     "vol_ratio": 0.9284618253177402,
+     "reason": "+360% over 12 months"
+    },
+    {
+     "ticker": "MU",
+     "price": 733.1500244140625,
+     "chg_1d": 0.06253626726675732,
+     "rsi2": 57.80555709350432,
+     "ret_12m": 3.3217664790177546,
+     "vs_200d": -0.033034698463247025,
+     "high_52w": 1254.6095437059498,
+     "from_high": -0.41563490562296,
+     "new_high": false,
+     "vol_ratio": 1.0530217657207328,
+     "reason": "+332% over 12 months"
     },
     {
      "ticker": "DELL",
-     "price": 334.3800048828125,
-     "chg_1d": -0.034448883254555085,
-     "rsi2": 35.80437400114589,
-     "ret_12m": 2.967524248444839,
-     "vs_200d": -0.013355851849859879,
+     "price": 346.30999755859375,
+     "chg_1d": 0.05411986377305311,
+     "rsi2": 54.79444608915598,
+     "ret_12m": 2.964478670933217,
+     "vs_200d": 0.025160246061735947,
      "high_52w": 594.6862090656501,
-     "from_high": -0.4377202635854319,
+     "from_high": -0.41765927596891184,
      "new_high": false,
-     "vol_ratio": 0.8471312582538014,
-     "reason": "+297% over 12 months"
+     "vol_ratio": 0.8883769710963113,
+     "reason": "+296% over 12 months"
     },
     {
      "ticker": "HPE",
-     "price": 47.93000030517578,
-     "chg_1d": 0.008203605009209358,
-     "rsi2": 65.96889723990932,
-     "ret_12m": 2.053227066667064,
-     "vs_200d": 0.15255047969036717,
+     "price": 47.540000915527344,
+     "chg_1d": 0.061871798736676586,
+     "rsi2": 60.91790325383823,
+     "ret_12m": 2.195924068270977,
+     "vs_200d": 0.14686952303777123,
      "high_52w": 73.55999755859375,
-     "from_high": -0.34842303023464016,
+     "from_high": -0.3537248165667807,
      "new_high": false,
-     "vol_ratio": 0.7463625449781215,
-     "reason": "+205% over 12 months"
+     "vol_ratio": 0.7209763756737392,
+     "reason": "+220% over 12 months"
     },
     {
      "ticker": "MRVL",
-     "price": 154.38999938964844,
-     "chg_1d": -0.0013583874875565671,
-     "rsi2": 63.64448362084375,
-     "ret_12m": 1.9290397036901306,
-     "vs_200d": -0.1686943344045616,
+     "price": 154.60000610351562,
+     "chg_1d": 0.09490091674849888,
+     "rsi2": 64.64220500961255,
+     "ret_12m": 1.954507713335576,
+     "vs_200d": -0.16593110722014404,
      "high_52w": 329.72658943397715,
-     "from_high": -0.5317635752255196,
+     "from_high": -0.5311266635520397,
      "new_high": false,
-     "vol_ratio": 0.7979899708691185,
-     "reason": "+193% over 12 months"
+     "vol_ratio": 1.173735902991483,
+     "reason": "+195% over 12 months"
     },
     {
      "ticker": "STX",
-     "price": 501.6199951171875,
-     "chg_1d": -0.008930373810475345,
-     "rsi2": 51.70941381526162,
-     "ret_12m": 1.7123320938965403,
-     "vs_200d": -0.28175809780183936,
+     "price": 506.1400146484375,
+     "chg_1d": 0.09794144204976662,
+     "rsi2": 57.538842098056655,
+     "ret_12m": 1.8283669373552187,
+     "vs_200d": -0.2745356605164335,
      "high_52w": 1143.267740532915,
-     "from_high": -0.5612401388292774,
+     "from_high": -0.5572865421598366,
      "new_high": false,
-     "vol_ratio": 0.8559632811618759,
-     "reason": "+171% over 12 months"
+     "vol_ratio": 1.0001822531603606,
+     "reason": "+183% over 12 months"
     },
     {
      "ticker": "INTC",
-     "price": 58.130001068115234,
-     "chg_1d": -0.02088593373889369,
-     "rsi2": 51.33316220401882,
-     "ret_12m": 1.65801194951634,
-     "vs_200d": -0.3332893552138787,
+     "price": 59.369998931884766,
+     "chg_1d": 0.05490405507479457,
+     "rsi2": 68.15026187145682,
+     "ret_12m": 1.8114928095930414,
+     "vs_200d": -0.31845616660568277,
      "high_52w": 142.35000610351562,
-     "from_high": -0.5916403331528934,
+     "from_high": -0.5829294247538603,
      "new_high": false,
-     "vol_ratio": 0.6648168160008474,
-     "reason": "+166% over 12 months"
+     "vol_ratio": 1.0225760527319359,
+     "reason": "+181% over 12 months"
     },
     {
      "ticker": "AMD",
-     "price": 515.2100219726562,
-     "chg_1d": 0.013036367091587397,
-     "rsi2": 80.5894748490632,
-     "ret_12m": 1.5444891980720112,
-     "vs_200d": 0.2309652018922579,
+     "price": 508.5799865722656,
+     "chg_1d": 0.13259392680905702,
+     "rsi2": 78.18478736025655,
+     "ret_12m": 1.5582666528950262,
+     "vs_200d": 0.218967328653487,
      "high_52w": 658.52001953125,
-     "from_high": -0.21762435963694038,
+     "from_high": -0.22769244443884218,
      "new_high": false,
-     "vol_ratio": 1.5907036402472672,
-     "reason": "+154% over 12 months"
+     "vol_ratio": 1.8579322118059394,
+     "reason": "+156% over 12 months"
     }
    ],
    "pullback_in_uptrend": [
     {
-     "ticker": "WDAY",
-     "price": 188.88999938964844,
-     "chg_1d": -0.0069397364892817,
-     "rsi2": 5.35859632563691,
-     "ret_12m": -0.16396499742050086,
-     "vs_200d": 0.21167762246181154,
-     "high_52w": 236.8000030517578,
-     "from_high": -0.20232264799269284,
+     "ticker": "CVX",
+     "price": 210.77999877929688,
+     "chg_1d": -0.008607317745172871,
+     "rsi2": 1.9506261280922672,
+     "ret_12m": 0.440649903511249,
+     "vs_200d": 0.0925140279324741,
+     "high_52w": 236.47999572753906,
+     "from_high": -0.10867725563498609,
      "new_high": false,
-     "vol_ratio": 0.5852856069106929,
-     "reason": "+21% above its 200-day average, RSI-2 5 after a sharp drop"
+     "vol_ratio": 1.1419769402542952,
+     "reason": "+9% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "PM",
+     "price": 193.1199951171875,
+     "chg_1d": -0.024055031575544783,
+     "rsi2": 4.853792880258524,
+     "ret_12m": 0.3896381164132312,
+     "vs_200d": 0.06989722352389771,
+     "high_52w": 214.35000610351562,
+     "from_high": -0.09904366868119219,
+     "new_high": false,
+     "vol_ratio": 1.4922401517056194,
+     "reason": "+7% above its 200-day average, RSI-2 5 after a sharp drop"
+    },
+    {
+     "ticker": "SYF",
+     "price": 73.22000122070312,
+     "chg_1d": -0.007051758314762457,
+     "rsi2": 5.872879868186331,
+     "ret_12m": 0.002173513729029297,
+     "vs_200d": 0.004729685103929571,
+     "high_52w": 87.27693510399862,
+     "from_high": -0.16106126855331648,
+     "new_high": false,
+     "vol_ratio": 1.37327280116996,
+     "reason": "+0% above its 200-day average, RSI-2 6 after a sharp drop"
+    },
+    {
+     "ticker": "WDAY",
+     "price": 190.2100067138672,
+     "chg_1d": -0.013944983243808218,
+     "rsi2": 7.277499046809325,
+     "ret_12m": -0.1688641588512667,
+     "vs_200d": 0.22006840896064173,
+     "high_52w": 236.8000030517578,
+     "from_high": -0.1967482928102301,
+     "new_high": false,
+     "vol_ratio": 0.6820782691347149,
+     "reason": "+22% above its 200-day average, RSI-2 7 after a sharp drop"
     },
     {
      "ticker": "XOM",
-     "price": 164.47000122070312,
-     "chg_1d": -0.0015783070089188111,
-     "rsi2": 8.32899325306228,
-     "ret_12m": 0.511170106429325,
-     "vs_200d": 0.06259355904610242,
+     "price": 164.72999572753906,
+     "chg_1d": -0.006872848756298677,
+     "rsi2": 9.43686889373302,
+     "ret_12m": 0.5182212502667976,
+     "vs_200d": 0.06538430446052845,
      "high_52w": 188.5,
-     "from_high": -0.12748009962491713,
+     "from_high": -0.12610081842154341,
      "new_high": false,
-     "vol_ratio": 0.7978550790235893,
-     "reason": "+6% above its 200-day average, RSI-2 8 after a sharp drop"
+     "vol_ratio": 1.245056190068242,
+     "reason": "+7% above its 200-day average, RSI-2 9 after a sharp drop"
     }
    ],
    "new_52w_high": [
     {
-     "ticker": "VTRS",
-     "price": 20.850000381469727,
-     "chg_1d": 0.017569576104095708,
-     "rsi2": 95.96603740070213,
-     "ret_12m": 0.7946479320446791,
-     "vs_200d": 0.3045790209209338,
-     "high_52w": 20.860000610351562,
-     "from_high": -0.0004793973436834076,
+     "ticker": "MRNA",
+     "price": 269.0,
+     "chg_1d": 0.05826349351409932,
+     "rsi2": 85.60876502635534,
+     "ret_12m": 8.247842199159653,
+     "vs_200d": 1.9059561170911667,
+     "high_52w": 280.79998779296875,
+     "from_high": -0.042022750377285534,
      "new_high": true,
-     "vol_ratio": 1.2132218407882984,
-     "reason": "new 52-week high at 20.85"
+     "vol_ratio": 0.7432519603936576,
+     "reason": "new 52-week high at 269.00"
     },
     {
-     "ticker": "HUM",
-     "price": 438.05999755859375,
-     "chg_1d": 0.03506449670404832,
-     "rsi2": 77.18552568206485,
-     "ret_12m": 0.7387142527181629,
-     "vs_200d": 0.40165671999477204,
-     "high_52w": 455.5324527068337,
-     "from_high": -0.038356115013137515,
+     "ticker": "VTRS",
+     "price": 20.489999771118164,
+     "chg_1d": 0.029131086295886677,
+     "rsi2": 93.51435934123677,
+     "ret_12m": 0.8066648069531406,
+     "vs_200d": 0.2852639089682649,
+     "high_52w": 20.530000686645508,
+     "from_high": -0.0019484127710411858,
      "new_high": true,
-     "vol_ratio": 1.442069410434457,
-     "reason": "new 52-week high at 438.06"
+     "vol_ratio": 1.4103704563541004,
+     "reason": "new 52-week high at 20.49"
     },
     {
      "ticker": "BEN",
-     "price": 36.290000915527344,
-     "chg_1d": 0.011709004631980546,
-     "rsi2": 90.3050471038282,
-     "ret_12m": 0.5017240795574427,
-     "vs_200d": 0.2080589638589554,
-     "high_52w": 36.779998779296875,
-     "from_high": -0.01332240021838571,
+     "price": 35.869998931884766,
+     "chg_1d": 0.06344498721290392,
+     "rsi2": 88.01553699697624,
+     "ret_12m": 0.4444182909885541,
+     "vs_200d": 0.19638945996358004,
+     "high_52w": 36.150001525878906,
+     "from_high": -0.0077455762704101705,
      "new_high": true,
-     "vol_ratio": 0.9441484954354811,
-     "reason": "new 52-week high at 36.29"
+     "vol_ratio": 1.5878501827040195,
+     "reason": "new 52-week high at 35.87"
+    },
+    {
+     "ticker": "BIIB",
+     "price": 254.8699951171875,
+     "chg_1d": 0.026253226710025723,
+     "rsi2": 77.18883506519835,
+     "ret_12m": 0.440028064333015,
+     "vs_200d": 0.25186461013595607,
+     "high_52w": 261.0,
+     "from_high": -0.023486608746408066,
+     "new_high": true,
+     "vol_ratio": 0.83907050482216,
+     "reason": "new 52-week high at 254.87"
     },
     {
      "ticker": "CPAY",
-     "price": 459.6400146484375,
-     "chg_1d": 0.003646556375489718,
-     "rsi2": 99.01221334831011,
-     "ret_12m": 0.4380718735153264,
-     "vs_200d": 0.2785802620180766,
+     "price": 457.9700012207031,
+     "chg_1d": 0.006173647807331983,
+     "rsi2": 98.80613775395817,
+     "ret_12m": 0.4313669547760228,
+     "vs_200d": 0.27634266947816655,
      "high_52w": 479.5299987792969,
-     "from_high": -0.04147808099908623,
+     "from_high": -0.044960685699491965,
      "new_high": true,
-     "vol_ratio": 0.7209753741289705,
-     "reason": "new 52-week high at 459.64"
+     "vol_ratio": 1.1134388150761712,
+     "reason": "new 52-week high at 457.97"
+    },
+    {
+     "ticker": "JNJ",
+     "price": 282.1099853515625,
+     "chg_1d": 0.021323525106182295,
+     "rsi2": 86.82278474547095,
+     "ret_12m": 0.4298108287458058,
+     "vs_200d": 0.14172639663816633,
+     "high_52w": 282.7300109863281,
+     "from_high": -0.0021929954750916636,
+     "new_high": true,
+     "vol_ratio": 0.8498313147350489,
+     "reason": "new 52-week high at 282.11"
+    },
+    {
+     "ticker": "BDX",
+     "price": 215.25,
+     "chg_1d": 0.015905205963400837,
+     "rsi2": 87.06054259260793,
+     "ret_12m": 0.350554409367964,
+     "vs_200d": 0.2970194864530391,
+     "high_52w": 216.74000549316406,
+     "from_high": -0.006874621460739361,
+     "new_high": true,
+     "vol_ratio": 1.088864384560137,
+     "reason": "new 52-week high at 215.25"
+    },
+    {
+     "ticker": "DGX",
+     "price": 259.6700134277344,
+     "chg_1d": 0.01580412497654149,
+     "rsi2": 91.55567495275936,
+     "ret_12m": 0.3305441176832533,
+     "vs_200d": 0.2199771563126549,
+     "high_52w": 259.8399963378906,
+     "from_high": -0.0006541830070502241,
+     "new_high": true,
+     "vol_ratio": 1.0294669855135476,
+     "reason": "new 52-week high at 259.67"
     },
     {
      "ticker": "KO",
-     "price": 96.91000366210938,
-     "chg_1d": 0.009163853941464684,
-     "rsi2": 95.24912624067065,
-     "ret_12m": 0.30654805221016623,
-     "vs_200d": 0.17787889454346884,
+     "price": 96.02999877929688,
+     "chg_1d": 0.0037629415411488676,
+     "rsi2": 83.07774055550088,
+     "ret_12m": 0.30887216469286805,
+     "vs_200d": 0.16901111127022772,
      "high_52w": 97.38999938964844,
-     "from_high": -0.004928593598390374,
+     "from_high": -0.013964479093077409,
      "new_high": true,
-     "vol_ratio": 0.843045999379726,
-     "reason": "new 52-week high at 96.91"
+     "vol_ratio": 0.894505454927604,
+     "reason": "new 52-week high at 96.03"
     },
     {
-     "ticker": "KDP",
-     "price": 37.59000015258789,
-     "chg_1d": 0.0175961437477945,
-     "rsi2": 88.12825578064596,
-     "ret_12m": 0.30174758058824014,
-     "vs_200d": 0.2539935261011137,
-     "high_52w": 37.88999938964844,
-     "from_high": -0.007917636365613268,
+     "ticker": "LH",
+     "price": 371.8299865722656,
+     "chg_1d": 0.014349180628393965,
+     "rsi2": 85.33026067137295,
+     "ret_12m": 0.27841120783964857,
+     "vs_200d": 0.2842889060082261,
+     "high_52w": 373.760009765625,
+     "from_high": -0.005163803357586705,
      "new_high": true,
-     "vol_ratio": 0.9234030203147315,
-     "reason": "new 52-week high at 37.59"
-    },
-    {
-     "ticker": "LLY",
-     "price": 1432.2900390625,
-     "chg_1d": 0.01440567200965126,
-     "rsi2": 84.17814438061231,
-     "ret_12m": 0.28744825318816436,
-     "vs_200d": 0.300380584960956,
-     "high_52w": 1453.0,
-     "from_high": -0.014253242214384065,
-     "new_high": true,
-     "vol_ratio": 0.9167133702405478,
-     "reason": "new 52-week high at 1,432.29"
-    },
-    {
-     "ticker": "FAST",
-     "price": 54.84000015258789,
-     "chg_1d": 0.004947781918153149,
-     "rsi2": 95.70474026604928,
-     "ret_12m": 0.28118452632283897,
-     "vs_200d": 0.16467038843804072,
-     "high_52w": 54.9900016784668,
-     "from_high": -0.0027277963502525537,
-     "new_high": true,
-     "vol_ratio": 0.5652772781799426,
-     "reason": "new 52-week high at 54.84"
-    },
-    {
-     "ticker": "MAR",
-     "price": 428.260009765625,
-     "chg_1d": 0.026608509938806035,
-     "rsi2": 91.3607143078118,
-     "ret_12m": 0.27893653109864025,
-     "vs_200d": 0.19413342428627778,
-     "high_52w": 433.29998779296875,
-     "from_high": -0.011631613591809864,
-     "new_high": true,
-     "vol_ratio": 0.7331938807186935,
-     "reason": "new 52-week high at 428.26"
-    },
-    {
-     "ticker": "HAS",
-     "price": 121.81999969482422,
-     "chg_1d": 0.007442950210944099,
-     "rsi2": 82.92726261814454,
-     "ret_12m": 0.27708063963206264,
-     "vs_200d": 0.3138330919806571,
-     "high_52w": 124.0,
-     "from_high": -0.017580647622385315,
-     "new_high": true,
-     "vol_ratio": 0.8877792402572251,
-     "reason": "new 52-week high at 121.82"
+     "vol_ratio": 1.0438582718375464,
+     "reason": "new 52-week high at 371.83"
     }
    ],
    "unusual_volume": [
     {
-     "ticker": "AKAM",
-     "price": 83.70999908447266,
-     "chg_1d": 0.04259556769146733,
-     "rsi2": 64.56018808764915,
-     "ret_12m": 0.21387633292331643,
-     "vs_200d": -0.2538477598000929,
-     "high_52w": 165.4499969482422,
-     "from_high": -0.4940465359412506,
-     "new_high": false,
-     "vol_ratio": 3.7835032776445447,
-     "reason": "volume 3.8x normal, +4% on the day"
-    },
-    {
      "ticker": "NVDA",
-     "price": 168.88999938964844,
-     "chg_1d": -0.0547377784716222,
-     "rsi2": 7.81938684228686,
-     "ret_12m": 0.2057519607756264,
-     "vs_200d": -0.1731714543050883,
+     "price": 178.6699981689453,
+     "chg_1d": -0.04270253561276616,
+     "rsi2": 17.094820434017947,
+     "ret_12m": 0.22197630864134177,
+     "vs_200d": -0.1256588117649342,
      "high_52w": 243.3699951171875,
-     "from_high": -0.3060360653402465,
+     "from_high": -0.2658503441111869,
      "new_high": false,
-     "vol_ratio": 3.0649910890590455,
-     "reason": "volume 3.1x normal, -5% on the day"
+     "vol_ratio": 3.9313828557310218,
+     "reason": "volume 3.9x normal, -4% on the day"
     }
    ]
   },
@@ -1015,14 +1043,14 @@
     "ticker": "SPCX",
     "buy_below": 110.0,
     "note": "EXAMPLE - SpaceX, buy if it drops to $110 (replace with your own level)",
-    "price": 143.08999633789062,
-    "to_buy_pct": 30.081814852627843,
-    "status": "30.1% above your buy level",
+    "price": 142.07000732421875,
+    "to_buy_pct": 29.154552112926147,
+    "status": "29.2% above your buy level",
     "action": "WAIT",
-    "chg_1d": 0.0071794816716250764,
+    "chg_1d": 0.058091925251823495,
     "ret_12m": null,
     "vs_200d": null,
-    "rsi2": 79.84790962407189
+    "rsi2": 77.4867997189718
    },
    {
     "ticker": "ANT",
@@ -1037,14 +1065,14 @@
     "ticker": "PLTR",
     "buy_below": null,
     "note": "EXAMPLE - watch only, no buy level yet",
-    "price": 168.82000732421875,
+    "price": 169.1999969482422,
     "to_buy_pct": null,
     "status": "watching (no buy level set)",
     "action": "WAIT",
-    "chg_1d": -0.0022458016009283543,
-    "ret_12m": 0.17461928063378052,
-    "vs_200d": 0.09953581603354711,
-    "rsi2": 65.86797424941028
+    "chg_1d": 0.05499433717983937,
+    "ret_12m": 0.19423021655102213,
+    "vs_200d": 0.10205916371809809,
+    "rsi2": 68.86054206024318
    }
   ],
   "alerts": [],
@@ -1142,6 +1170,7 @@
     "cached": true
    },
    {
+    "asof": "2026-11-10",
     "ticker": "SNDK",
     "headlines": [
      {
@@ -1215,7 +1244,6 @@
       "link": "https://finance.yahoo.com/technology/articles/sandisk-appears-highly-lucrative-investment-121800753.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Sandisk (SNDK) fell again on Tuesday, Nov 10, after reports that it lost some market share to a Chinese NAND company. Headlines say the stock is down roughly 54% to 65% since mid-2026, with profit growth tied to higher flash prices that are now slowing. Sandisk also has an 8-for-1 stock split scheduled for Nov 19, and several analysts and commentators offered bullish views.",
     "sentiment": "negative",
     "drivers": [
@@ -1225,101 +1253,16 @@
      "Scheduled 8-for-1 stock split on Nov 19"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1670,
     "output_tokens": 595,
     "cost_usd": 0.0004645,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:42Z",
+    "cached": true
    },
    {
-    "ticker": "MU",
-    "headlines": [
-     {
-      "title": "5 Best Tech Stocks That Pay Dividends",
-      "summary": "The idea that technology companies don\u2019t pay dividends comes from the industry\u2019s early years, when most businesses focused on growing as quickly as possible. During the dot-com boom of the late 1990s and early 2000s, tech companies typically reinvested their profits into expansion, new products, and gaining market share. Returning cash to shareholders was rarely [\u2026]",
-      "publisher": "Insider Monkey",
-      "published": "2026-11-10 19:41 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/5-best-tech-stocks-pay-194142629.html"
-     },
-     {
-      "title": "Micron & 2 Profitable Stocks to Buy Now for Explosive Upside",
-      "summary": "Micron, NVIDIA and Sandisk stand out as profitable stocks, combining net profit margins above 63% with strong expected earnings growth.",
-      "publisher": "Zacks",
-      "published": "2026-11-10 19:00 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-2-profitable-stocks-buy-190000487.html"
-     },
-     {
-      "title": "Micron\u2019s Valuation Is \u201cInsane\u201d (in a Good Way). Here\u2019s the Upside Scenario",
-      "summary": "Key TakeawaysMicron fell 17. 5% on Thursday, Nov.",
-      "publisher": "TIKR",
-      "published": "2026-11-10 18:45 UTC",
-      "link": "https://www.tikr.com/blog/microns-valuation-is-insane-in-a-good-way-heres-the-upside-scenario?ref=yahoofinance&tlnk=yf-261110-wjvjpp3q"
-     },
-     {
-      "title": "How Micron Stock Can Soar 148% and End Its Slump",
-      "summary": "Micron stock continues to retreat but one analyst thinks shares can surge higher from here.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-10 18:31 UTC",
-      "link": "https://www.barrons.com/articles/micron-stock-price-soaring-70d54e25?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Midterm Meltdowns: 3 Top Tech Stocks Down Big Since the Election Results",
-      "summary": "The midterm elections took place last week, and some big names in tech have been falling sharply, potentially creating some exciting buying opportunities in the process.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-10 18:22 UTC",
-      "link": "https://www.fool.com/investing/2026/11/10/midterm-meltdowns-3-top-tech-stocks-down-big-since-the-election-results/"
-     },
-     {
-      "title": "Google, Nvidia and Microsoft \u201cLiterally Feeding Themselves Money\u201d with $26 Billion Anthropic IPO Buy",
-      "summary": "Key TakeawaysAlphabet\u2019s Google, Nvidia, Microsoft, Broadcom, AMD, Micron and TSMC will buy $26 billion of Anthropic\u2019s shares at its IPO price, on top of an offering of up to $64. 4 billion.",
-      "publisher": "TIKR",
-      "published": "2026-11-10 18:21 UTC",
-      "link": "https://www.tikr.com/blog/google-nvidia-and-microsoft-literally-feeding-themselves-money-with-26-billion-anthropic-ipo-buy?ref=yahoofinance&tlnk=yf-261110-4fh7rrpp"
-     },
-     {
-      "title": "Anthropic IPO Could Value Claude Maker at $1.4 Trillion",
-      "summary": "Nvidia, Microsoft, Google and four other companies are buying $26 billion of stock in a private placement",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-10 18:20 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-ipo-could-value-claude-182049858.html"
-     },
-     {
-      "title": "Alphabet Stocks Rise 0.34% as Google Lines Up $10 Billion Anthropic Stake Purchase",
-      "summary": "Anthropic's amended IPO filing makes Google and Nvidia the largest buyers in a $26 billion private placement priced alongside the offering.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-10 18:03 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/alphabet-stocks-rise-0-34-180311251.html"
-     },
-     {
-      "title": "Micron stock is a screaming buy at current valuation levels: Goldman Sachs",
-      "summary": "Micron's valuation has reached a level where it's simply too cheap to ignore given its fundamentals, says Goldman Sachs analyst James Schneider.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-10 17:28 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/article/micron-stock-is-a-screaming-buy-at-current-valuation-levels-goldman-sachs-172852076.html"
-     },
-     {
-      "title": "Wall Street's $1.6 trillion rebound may look like a bottom \u2014 history says it often isn't: Chart of the Day",
-      "summary": "Monday's rally came two sessions after the worst day in 18 months, and big bounces like it have usually been followed by one more trip below the low.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-10 11:00 UTC",
-      "link": "https://finance.yahoo.com/markets/article/wall-streets-16-trillion-rebound-may-look-like-a-bottom--history-says-it-often-isnt-chart-of-the-day-110000299.html"
-     }
-    ],
-    "model": "claude-haiku-5-5",
-    "summary": "Micron shares fell 17.5% on Thursday, Nov. 6, according to a TIKR report, and continued to retreat in later coverage. Several analysts and commentators describe the valuation as low relative to fundamentals, and Micron is among the companies buying $26 billion of Anthropic shares in a private placement tied to its IPO.",
-    "sentiment": "neutral",
-    "drivers": [
-     "17.5% share price drop on Thursday",
-     "Goldman Sachs analyst says valuation is too low to ignore",
-     "Participation in $26B Anthropic IPO private placement",
-     "Broader market rebound after recent sell-off"
-    ],
-    "position_flags": [],
-    "input_tokens": 1501,
-    "output_tokens": 554,
-    "cost_usd": 0.00042710000000000003,
-    "status": "ok"
-   },
-   {
+    "asof": "2026-11-10",
     "ticker": "LITE",
     "headlines": [
      {
@@ -1393,7 +1336,6 @@
       "link": "https://www.fool.com/investing/2026/11/09/alphabet-almost-sets-a-record-no-one-wants/"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Lumentum fell 11% over the past week as an AI hardware selloff hit Marvell, whose all-stock acquisition offer for Lumentum moves with Marvell's share price. The company reported September-quarter revenue up 136%, and Microsoft warned that restrictions on Chinese optical transceivers could delay U.S. AI infrastructure projects.",
     "sentiment": "negative",
     "drivers": [
@@ -1403,12 +1345,108 @@
      "September-quarter revenue up 136%"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1593,
     "output_tokens": 596,
     "cost_usd": 0.0004573,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:48Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-10",
+    "ticker": "MU",
+    "headlines": [
+     {
+      "title": "5 Best Tech Stocks That Pay Dividends",
+      "summary": "The idea that technology companies don\u2019t pay dividends comes from the industry\u2019s early years, when most businesses focused on growing as quickly as possible. During the dot-com boom of the late 1990s and early 2000s, tech companies typically reinvested their profits into expansion, new products, and gaining market share. Returning cash to shareholders was rarely [\u2026]",
+      "publisher": "Insider Monkey",
+      "published": "2026-11-10 19:41 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/5-best-tech-stocks-pay-194142629.html"
+     },
+     {
+      "title": "Micron & 2 Profitable Stocks to Buy Now for Explosive Upside",
+      "summary": "Micron, NVIDIA and Sandisk stand out as profitable stocks, combining net profit margins above 63% with strong expected earnings growth.",
+      "publisher": "Zacks",
+      "published": "2026-11-10 19:00 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-2-profitable-stocks-buy-190000487.html"
+     },
+     {
+      "title": "Micron\u2019s Valuation Is \u201cInsane\u201d (in a Good Way). Here\u2019s the Upside Scenario",
+      "summary": "Key TakeawaysMicron fell 17. 5% on Thursday, Nov.",
+      "publisher": "TIKR",
+      "published": "2026-11-10 18:45 UTC",
+      "link": "https://www.tikr.com/blog/microns-valuation-is-insane-in-a-good-way-heres-the-upside-scenario?ref=yahoofinance&tlnk=yf-261110-wjvjpp3q"
+     },
+     {
+      "title": "How Micron Stock Can Soar 148% and End Its Slump",
+      "summary": "Micron stock continues to retreat but one analyst thinks shares can surge higher from here.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-10 18:31 UTC",
+      "link": "https://www.barrons.com/articles/micron-stock-price-soaring-70d54e25?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "Midterm Meltdowns: 3 Top Tech Stocks Down Big Since the Election Results",
+      "summary": "The midterm elections took place last week, and some big names in tech have been falling sharply, potentially creating some exciting buying opportunities in the process.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-10 18:22 UTC",
+      "link": "https://www.fool.com/investing/2026/11/10/midterm-meltdowns-3-top-tech-stocks-down-big-since-the-election-results/"
+     },
+     {
+      "title": "Google, Nvidia and Microsoft \u201cLiterally Feeding Themselves Money\u201d with $26 Billion Anthropic IPO Buy",
+      "summary": "Key TakeawaysAlphabet\u2019s Google, Nvidia, Microsoft, Broadcom, AMD, Micron and TSMC will buy $26 billion of Anthropic\u2019s shares at its IPO price, on top of an offering of up to $64. 4 billion.",
+      "publisher": "TIKR",
+      "published": "2026-11-10 18:21 UTC",
+      "link": "https://www.tikr.com/blog/google-nvidia-and-microsoft-literally-feeding-themselves-money-with-26-billion-anthropic-ipo-buy?ref=yahoofinance&tlnk=yf-261110-4fh7rrpp"
+     },
+     {
+      "title": "Anthropic IPO Could Value Claude Maker at $1.4 Trillion",
+      "summary": "Nvidia, Microsoft, Google and four other companies are buying $26 billion of stock in a private placement",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-10 18:20 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-ipo-could-value-claude-182049858.html"
+     },
+     {
+      "title": "Alphabet Stocks Rise 0.34% as Google Lines Up $10 Billion Anthropic Stake Purchase",
+      "summary": "Anthropic's amended IPO filing makes Google and Nvidia the largest buyers in a $26 billion private placement priced alongside the offering.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-10 18:03 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/alphabet-stocks-rise-0-34-180311251.html"
+     },
+     {
+      "title": "Micron stock is a screaming buy at current valuation levels: Goldman Sachs",
+      "summary": "Micron's valuation has reached a level where it's simply too cheap to ignore given its fundamentals, says Goldman Sachs analyst James Schneider.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-10 17:28 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/article/micron-stock-is-a-screaming-buy-at-current-valuation-levels-goldman-sachs-172852076.html"
+     },
+     {
+      "title": "Wall Street's $1.6 trillion rebound may look like a bottom \u2014 history says it often isn't: Chart of the Day",
+      "summary": "Monday's rally came two sessions after the worst day in 18 months, and big bounces like it have usually been followed by one more trip below the low.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-10 11:00 UTC",
+      "link": "https://finance.yahoo.com/markets/article/wall-streets-16-trillion-rebound-may-look-like-a-bottom--history-says-it-often-isnt-chart-of-the-day-110000299.html"
+     }
+    ],
+    "summary": "Micron shares fell 17.5% on Thursday, Nov. 6, according to a TIKR report, and continued to retreat in later coverage. Several analysts and commentators describe the valuation as low relative to fundamentals, and Micron is among the companies buying $26 billion of Anthropic shares in a private placement tied to its IPO.",
+    "sentiment": "neutral",
+    "drivers": [
+     "17.5% share price drop on Thursday",
+     "Goldman Sachs analyst says valuation is too low to ignore",
+     "Participation in $26B Anthropic IPO private placement",
+     "Broader market rebound after recent sell-off"
+    ],
+    "position_flags": [],
+    "model": "claude-haiku-5-5",
+    "input_tokens": 1501,
+    "output_tokens": 554,
+    "cost_usd": 0.00042710000000000003,
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:45Z",
+    "cached": true
+   },
+   {
+    "asof": "2026-11-10",
     "ticker": "DELL",
     "headlines": [
      {
@@ -1482,7 +1520,6 @@
       "link": "https://247wallst.com/investing/2026/11/09/dell-and-hpe-were-ai-winners-until-the-selloff-can-earnings-put-them-back-on-track/"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Dell shares fell about 6% on November 10, 2026, as a board probe into NVIDIA's CEO dragged down AI server stocks. The stock had risen roughly 130% over the past year on AI server demand, a reported $95 billion backlog, and raised FY27 guidance, but Dell and HPE had also erased roughly 40% of their AI-fueled gains within a month. Headlines describe an upcoming earnings report without giving Dell's date.",
     "sentiment": "neutral",
     "drivers": [
@@ -1492,12 +1529,16 @@
      "Raised FY27 guidance"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1670,
     "output_tokens": 565,
     "cost_usd": 0.0004495,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:51Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-10",
     "ticker": "SPCX",
     "headlines": [
      {
@@ -1571,7 +1612,6 @@
       "link": "https://finance.yahoo.com/technology/articles/verizon-communications-vz-lands-thames-181346745.html"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Deutsche Bank says SpaceX (SPCX) could benefit from political pressure on AI data centers, which it expects to slow construction mainly in 2028 and keep computing capacity scarce, and it raised its 2028 forecast for the company. SPCX also secured a deal with Singulus to develop solar cells and production equipment for its Starmind space data center satellites. No position is held in this name, so no position flags apply.",
     "sentiment": "positive",
     "drivers": [
@@ -1581,12 +1621,16 @@
      "Google investment relationship with SpaceX"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1760,
     "output_tokens": 389,
     "cost_usd": 0.0003705,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:53Z",
+    "cached": true
    },
    {
+    "asof": "2026-11-10",
     "ticker": "PLTR",
     "headlines": [
      {
@@ -1660,7 +1704,6 @@
       "link": "https://www.fool.com/investing/2026/11/10/as-democrats-take-over-congress-is-palantir-stock-at-risk/"
      }
     ],
-    "model": "claude-haiku-5-5",
     "summary": "Palantir's stock is reported to be trading about 19% below its October high, with Barchart noting a pullback of more than 20%. GuruFocus reported that ETFs bought $75.3 million of PLTR on Nov. 6, with 54 buyers against 19 sellers. Commentary is split between concerns about political risk after the midterms and the debate over the stock's valuation.",
     "sentiment": "neutral",
     "drivers": [
@@ -1670,10 +1713,13 @@
      "Debate over AI software valuation"
     ],
     "position_flags": [],
+    "model": "claude-haiku-5-5",
     "input_tokens": 1455,
     "output_tokens": 455,
     "cost_usd": 0.000373,
-    "status": "ok"
+    "status": "ok",
+    "created_at": "2026-11-10T21:32:56Z",
+    "cached": true
    }
   ],
   "scanned": 521,
@@ -1684,72 +1730,72 @@
   "holdings": [
    {
     "ticker": "MRNA",
-    "score": 98.3,
+    "score": 98.9,
     "momentum": 100.0,
-    "steadiness": 100.0,
+    "steadiness": 99.8,
     "trend": 100.0,
     "news": 100.0,
-    "ret_12m": 7.709861349594451,
-    "recent": 88.8,
-    "ret_1m": 0.17352856453948595,
+    "ret_12m": 8.247842199159653,
+    "recent": 92.8,
+    "ret_1m": 0.19555555555555548,
     "uptrend": true,
-    "vol": 0.23705755442583237,
+    "vol": 0.23667225037678807,
     "rank": 1,
-    "pnl_pct": -3.6035575444234587,
+    "pnl_pct": -3.603558248115832,
     "losing": true,
     "weak": false,
     "queue": 1
    },
    {
     "ticker": "CNC",
-    "score": 82.7,
-    "momentum": 93.2,
-    "steadiness": 95.0,
+    "score": 82.2,
+    "momentum": 92.5,
+    "steadiness": 93.6,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7843448933078168,
-    "recent": 42.2,
-    "ret_1m": 0.04729940252343767,
+    "ret_12m": 0.7617251562946312,
+    "recent": 42.7,
+    "ret_1m": 0.04865361498592358,
     "uptrend": true,
-    "vol": 0.02601054700633156,
-    "rank": 10,
-    "pnl_pct": -0.5731281976153276,
+    "vol": 0.02653983662748543,
+    "rank": 13,
+    "pnl_pct": -0.5731316559623458,
     "losing": true,
     "weak": false,
     "queue": 2
    },
    {
     "ticker": "MRK",
-    "score": 81.5,
+    "score": 81.7,
     "momentum": 92.1,
-    "steadiness": 96.9,
+    "steadiness": 97.1,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7352919197206773,
-    "recent": 33.7,
-    "ret_1m": 0.017875600949244674,
+    "ret_12m": 0.7472067383069545,
+    "recent": 34.4,
+    "ret_1m": 0.021703216145978033,
     "uptrend": true,
-    "vol": 0.02425128525866034,
-    "rank": 15,
-    "pnl_pct": 0.23357574337889708,
+    "vol": 0.02423625457388523,
+    "rank": 14,
+    "pnl_pct": 0.23357367726210948,
     "losing": false,
     "weak": false,
     "queue": 3
    },
    {
     "ticker": "TXN",
-    "score": 88.7,
-    "momentum": 93.4,
-    "steadiness": 92.3,
+    "score": 87.1,
+    "momentum": 93.0,
+    "steadiness": 92.8,
     "trend": 100.0,
     "news": 100.0,
-    "ret_12m": 0.7843610909578584,
-    "recent": 53.0,
-    "ret_1m": 0.07186346154557843,
+    "ret_12m": 0.7877855429932494,
+    "recent": 42.0,
+    "ret_1m": 0.04734420096251446,
     "uptrend": true,
-    "vol": 0.025074480616814752,
-    "rank": 3,
-    "pnl_pct": 9.840502101696352,
+    "vol": 0.025037693801946922,
+    "rank": 4,
+    "pnl_pct": 9.84050611721559,
     "losing": false,
     "weak": false,
     "queue": 4
@@ -1758,231 +1804,217 @@
   "top": [
    {
     "ticker": "VTRS",
-    "score": 91.0,
-    "momentum": 93.6,
-    "steadiness": 98.1,
+    "score": 90.2,
+    "momentum": 93.8,
+    "steadiness": 98.3,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7946479320446791,
-    "recent": 91.7,
-    "ret_1m": 0.18871147623556817,
+    "ret_12m": 0.8066648069531406,
+    "recent": 85.5,
+    "ret_1m": 0.16156465306581436,
     "uptrend": true,
-    "vol": 0.016577161491530164,
+    "vol": 0.016496336794078262,
     "rank": 2
    },
    {
     "ticker": "CRL",
-    "score": 88.0,
-    "momentum": 93.8,
-    "steadiness": 91.7,
+    "score": 88.3,
+    "momentum": 92.8,
+    "steadiness": 90.7,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.79625099595263,
-    "recent": 81.4,
-    "ret_1m": 0.14556418397168924,
+    "ret_12m": 0.7660931643341531,
+    "recent": 87.8,
+    "ret_1m": 0.17081409699915717,
     "uptrend": true,
-    "vol": 0.031123568940880673,
-    "rank": 4
+    "vol": 0.031053117508346738,
+    "rank": 3
    },
    {
-    "ticker": "BEN",
-    "score": 86.1,
-    "momentum": 88.2,
-    "steadiness": 92.6,
+    "ticker": "TGT",
+    "score": 85.2,
+    "momentum": 93.2,
+    "steadiness": 97.7,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.5017240795574427,
-    "recent": 80.5,
-    "ret_1m": 0.14083626296132157,
+    "ret_12m": 0.7931735479524438,
+    "recent": 54.4,
+    "ret_1m": 0.07979689244688948,
     "uptrend": true,
-    "vol": 0.018671563705355703,
+    "vol": 0.02106523970441919,
     "rank": 5
    },
    {
     "ticker": "CPAY",
-    "score": 85.3,
-    "momentum": 85.9,
-    "steadiness": 90.7,
+    "score": 84.5,
+    "momentum": 85.1,
+    "steadiness": 89.4,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.4380718735153264,
-    "recent": 83.9,
-    "ret_1m": 0.15583272343456311,
+    "ret_12m": 0.4313669547760228,
+    "recent": 82.8,
+    "ret_1m": 0.1509096948295976,
     "uptrend": true,
-    "vol": 0.0151590357488846,
+    "vol": 0.015524553078018368,
     "rank": 6
    },
    {
-    "ticker": "GWW",
-    "score": 83.7,
-    "momentum": 82.8,
-    "steadiness": 91.9,
+    "ticker": "BEN",
+    "score": 83.9,
+    "momentum": 86.3,
+    "steadiness": 90.3,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.3795524671136927,
-    "recent": 78.1,
-    "ret_1m": 0.12912402222299169,
+    "ret_12m": 0.4444182909885541,
+    "recent": 74.5,
+    "ret_1m": 0.12093746662139893,
     "uptrend": true,
-    "vol": 0.014765440568524163,
+    "vol": 0.01865478728445602,
     "rank": 7
    },
    {
-    "ticker": "TGT",
-    "score": 83.6,
-    "momentum": 92.8,
-    "steadiness": 97.5,
-    "trend": 100.0,
-    "news": 50.0,
-    "ret_12m": 0.7518699331009895,
-    "recent": 44.7,
-    "ret_1m": 0.05311810910998016,
-    "uptrend": true,
-    "vol": 0.021112959309197495,
-    "rank": 8
-   },
-   {
     "ticker": "HST",
-    "score": 83.5,
-    "momentum": 82.4,
-    "steadiness": 90.5,
+    "score": 83.2,
+    "momentum": 83.9,
+    "steadiness": 92.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.3759963076888986,
-    "recent": 80.3,
-    "ret_1m": 0.14028146728959978,
+    "ret_12m": 0.4116986582998283,
+    "recent": 71.6,
+    "ret_1m": 0.11611483939997935,
     "uptrend": true,
-    "vol": 0.014340387247872403,
-    "rank": 9
+    "vol": 0.014030567875598966,
+    "rank": 8
    },
    {
     "ticker": "BIIB",
     "score": 82.6,
-    "momentum": 87.6,
-    "steadiness": 86.5,
+    "momentum": 85.5,
+    "steadiness": 84.1,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.4752106730479302,
-    "recent": 68.5,
-    "ret_1m": 0.10391873047089861,
+    "ret_12m": 0.440028064333015,
+    "recent": 77.9,
+    "ret_1m": 0.12919227121501287,
     "uptrend": true,
-    "vol": 0.019067194802803097,
+    "vol": 0.0190444828687618,
+    "rank": 9
+   },
+   {
+    "ticker": "GWW",
+    "score": 82.6,
+    "momentum": 81.2,
+    "steadiness": 91.1,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.365070359174686,
+    "recent": 76.2,
+    "ret_1m": 0.12435082991568391,
+    "uptrend": true,
+    "vol": 0.014642698500873784,
+    "rank": 10
+   },
+   {
+    "ticker": "SWK",
+    "score": 82.6,
+    "momentum": 81.6,
+    "steadiness": 76.8,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.3690503187932028,
+    "recent": 99.2,
+    "ret_1m": 0.33340859073100493,
+    "uptrend": true,
+    "vol": 0.024128168799551517,
     "rank": 11
    },
    {
     "ticker": "BDX",
-    "score": 82.5,
-    "momentum": 83.0,
-    "steadiness": 87.8,
+    "score": 82.4,
+    "momentum": 79.9,
+    "steadiness": 85.1,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.38482023148772226,
-    "recent": 76.4,
-    "ret_1m": 0.12557573877573436,
+    "ret_12m": 0.350554409367964,
+    "recent": 88.0,
+    "ret_1m": 0.17142857142857149,
     "uptrend": true,
-    "vol": 0.015925973910662382,
+    "vol": 0.015857393935047034,
     "rank": 12
-   },
-   {
-    "ticker": "SWK",
-    "score": 82.0,
-    "momentum": 80.7,
-    "steadiness": 75.4,
-    "trend": 100.0,
-    "news": 50.0,
-    "ret_12m": 0.3542298306631868,
-    "recent": 99.2,
-    "ret_1m": 0.31347998237106434,
-    "uptrend": true,
-    "vol": 0.023968539695697722,
-    "rank": 13
    }
   ],
   "suggestions": [
    {
     "asof": "2026-11-10",
     "sell": "MRNA",
-    "buy": "BEN",
-    "sell_score": 98.3,
-    "buy_score": 86.1,
+    "buy": "TGT",
+    "sell_score": 98.9,
+    "buy_score": 85.2,
     "sell_rank": 1,
     "buy_rank": 5,
-    "amount": 150.4980010986328,
-    "reason": "STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to BEN, rank #5 of 518 (+50% over 12 months, above its 50- and 200-day averages), score 86.",
-    "pending": false,
-    "suggested_on": "2026-11-10",
-    "stop_out": true
-   },
-   {
-    "asof": "2026-11-10",
-    "sell": "CNC",
-    "buy": "VTRS",
-    "sell_score": 82.7,
-    "buy_score": 91.0,
-    "sell_rank": 10,
-    "buy_rank": 2,
-    "amount": 343.93101196289064,
-    "reason": "STOPPED OUT: price 70.19 reached your stop 70.83 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 74.17)). Sell regardless of its rank (#10) and move the money to VTRS, rank #2 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 91.",
+    "amount": 150.498,
+    "reason": "STOPPED OUT: price 250.83 reached your stop 256.89 (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 269.00)). Sell regardless of its rank (#1) and move the money to TGT, rank #5 of 518 (+79% over 12 months, above its 50- and 200-day averages), score 85.",
     "pending": false,
     "suggested_on": "2026-11-10",
     "stop_out": true
    }
   ],
-  "status": "2 new swap(s) suggested",
+  "status": "1 new swap(s) suggested",
   "storm": false,
   "earnings_soon": {},
   "held_earnings": {},
   "weather": {
    "storm": false,
-   "spy": 749.9199829101562,
-   "ma200": 728.3026278686524,
-   "text": "Fair weather: S&P 500 (SPY 749.92) is +3.0% vs its 200-day average (728.30).",
-   "gap_pct": 2.9681830346769633
+   "spy": 752.6900024414062,
+   "ma200": 727.9898315429688,
+   "text": "Fair weather: S&P 500 (SPY 752.69) is +3.4% vs its 200-day average (727.99).",
+   "gap_pct": 3.392928009184648
   }
  },
  "auto_levels": [
   {
    "ticker": "CNC",
-   "stop": 70.83234825134276,
+   "stop": 67.41784299999999,
    "target": 89.4759126143022,
-   "atr": 3.2768180153586646,
+   "atr": 3.284090909090909,
    "base": 69.9800033569336,
-   "highest": 74.16999816894531,
+   "highest": 70.19,
    "since": "2026-11-06",
-   "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 74.17)",
-   "prev_stop": 66.358924
+   "rule": "4.5% trailing stop (4.5% below your buy price)",
+   "prev_stop": 67.4178
   },
   {
    "ticker": "MRK",
    "stop": 142.0657947540283,
    "target": 176.66451055353338,
-   "atr": 4.811590021306818,
+   "atr": 4.889089410955256,
    "base": 146.97000122070312,
    "highest": 148.75999450683594,
    "since": "2026-11-06",
    "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 148.76)",
-   "prev_stop": 138.8474
+   "prev_stop": 142.0657947540283
   },
   {
    "ticker": "MRNA",
    "stop": 256.895,
    "target": 397.27045926180756,
-   "atr": 22.836041537198152,
+   "atr": 23.08559140292081,
    "base": 264.7950134277344,
    "highest": 269.0,
    "since": "2026-11-06",
    "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 269.00)",
-   "prev_stop": 244.59739999999996
+   "prev_stop": 256.895
   },
   {
    "ticker": "TXN",
    "stop": 286.9965895080566,
    "target": 346.76995591901857,
-   "atr": 12.513933719953265,
+   "atr": 12.266139085986055,
    "base": 276.7799987792969,
    "highest": 300.5199890136719,
    "since": "2026-11-06",
    "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 300.52)",
-   "prev_stop": 258.93159372837
+   "prev_stop": 286.9965895080566
   }
  ],
  "performance": {
@@ -2028,11 +2060,11 @@
     "followed": "yes",
     "sell_then": 1356.6500244140625,
     "buy_then": 146.94000244140625,
-    "sell_now": 1507.8499755859375,
-    "buy_now": 148.0500030517578,
-    "sell_ret": 0.11145096262919996,
-    "buy_ret": 0.007554107744037752,
-    "edge": -0.1038968548851622,
+    "sell_now": 1513.25,
+    "buy_now": 148.75999450683594,
+    "sell_ret": 0.11543137343293308,
+    "buy_ret": 0.01238595368987716,
+    "edge": -0.10304541974305592,
     "days": 5,
     "asof": "2026-11-10"
    },
@@ -2043,11 +2075,11 @@
     "followed": "yes",
     "sell_then": 117.22000122070312,
     "buy_then": 241.4600067138672,
-    "sell_now": 119.20999908447266,
-    "buy_now": 250.8300018310547,
-    "sell_ret": 0.016976606748388745,
-    "buy_ret": 0.03880557797006534,
-    "edge": 0.021828971221676596,
+    "sell_now": 119.12000274658203,
+    "buy_now": 269.0,
+    "sell_ret": 0.016208850930666374,
+    "buy_ret": 0.1140561273932541,
+    "edge": 0.09784727646258773,
     "days": 5,
     "asof": "2026-11-10"
    },
@@ -2058,11 +2090,11 @@
     "followed": "yes",
     "sell_then": 185.1999969482422,
     "buy_then": 278.1499938964844,
-    "sell_now": 222.38999938964844,
-    "buy_now": 300.5199890136719,
-    "sell_ret": 0.20080995169670413,
-    "buy_ret": 0.0804242157399171,
-    "edge": -0.12038573595678703,
+    "sell_now": 221.30999755859375,
+    "buy_now": 295.7300109863281,
+    "sell_ret": 0.1949784082363848,
+    "buy_ret": 0.063203370395853,
+    "edge": -0.1317750378405318,
     "days": 5,
     "asof": "2026-11-10"
    },
@@ -2073,38 +2105,23 @@
     "followed": "yes",
     "sell_then": 647.0499877929688,
     "buy_then": 74.16999816894531,
-    "sell_now": 674.760009765625,
-    "buy_now": 70.19000244140625,
-    "sell_ret": 0.04282516419971305,
-    "buy_ret": -0.05366045336112024,
-    "edge": -0.09648561756083329,
+    "sell_now": 679.3499755859375,
+    "buy_now": 68.54000091552734,
+    "sell_ret": 0.0499188446060268,
+    "buy_ret": -0.07590666566546078,
+    "edge": -0.12582551027148758,
     "days": 5,
     "asof": "2026-11-10"
    },
    {
     "suggested_on": "2026-11-10",
-    "sell": "CNC",
-    "buy": "VTRS",
-    "followed": "open",
-    "sell_then": 70.19000244140625,
-    "buy_then": 20.850000381469727,
-    "sell_now": 70.19000244140625,
-    "buy_now": 20.850000381469727,
-    "sell_ret": 0.0,
-    "buy_ret": 0.0,
-    "edge": 0.0,
-    "days": 0,
-    "asof": "2026-11-10"
-   },
-   {
-    "suggested_on": "2026-11-10",
     "sell": "MRNA",
-    "buy": "BEN",
+    "buy": "TGT",
     "followed": "open",
-    "sell_then": 250.8300018310547,
-    "buy_then": 36.290000915527344,
-    "sell_now": 250.8300018310547,
-    "buy_now": 36.290000915527344,
+    "sell_then": 269.0,
+    "buy_then": 165.89999389648438,
+    "sell_now": 269.0,
+    "buy_now": 165.89999389648438,
     "sell_ret": 0.0,
     "buy_ret": 0.0,
     "edge": 0.0,
@@ -2114,16 +2131,16 @@
   ],
   "score_summary": {
    "all": {
-    "count": 6,
+    "count": 5,
     "scored": 4,
     "beat": 1,
-    "avg_edge": -0.07473480929527648
+    "avg_edge": -0.06569967284812189
    },
    "followed": {
     "count": 4,
     "scored": 4,
     "beat": 1,
-    "avg_edge": -0.07473480929527648
+    "avg_edge": -0.06569967284812189
    },
    "skipped": {
     "count": 0,
