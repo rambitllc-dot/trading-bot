@@ -22,9 +22,9 @@
   {
     "asset_type": "shares",
     "ticker": "TXN",
-    "contracts": 0.6,
-    "entry_price": 273.6,
-    "note": "Interactive Brokers (synced)",
+    "contracts": 1,
+    "entry_price": 289.53,
+    "note": "Interactive Brokers - topped up to 1 share Nov 11 (0.4 at ~313.42); IB sync will confirm the average",
     "entry_date": "2026-11-06",
     "target_price": null,
     "stop_price": null
@@ -41,7 +41,7 @@
   },
   {
     "asset_type": "cash",
-    "amount": 66.51,
-    "note": "IB cash after topping up CNC and TGT to whole shares (Nov 11)"
+    "amount": 6.74,
+    "note": "IB cash after topping up TXN to 1 share (Nov 11)"
   }
 ]
