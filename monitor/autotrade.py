@@ -334,7 +334,12 @@ def execute(client=None):
                     continue
                 if state["bought"].get(s["ticker"]) == today:
                     continue  # never sell the same day it was bought
-                o = wait_filled(client, client.close(s["ticker"]))
+                try:
+                    o = wait_filled(client, client.close(s["ticker"]))
+                except AlpacaError as e:
+                    msgs.append(f"✋ Please SELL {s['ticker']} yourself in the IB app: {e}. "
+                                f"Reason: {s['reason'][:120]}")
+                    continue
                 state["sold"][s["ticker"]] = today
                 val = float(positions[s["ticker"]]["market_value"])
                 fill = _price(o)
@@ -386,7 +391,14 @@ def execute(client=None):
         if not hit:
             continue
         peak = highs.get(t, price)
-        o = wait_filled(client, client.close(t))
+        try:
+            o = wait_filled(client, client.close(t))
+        except AlpacaError as e:
+            told = state.setdefault("manual_told", {})
+            if told.get(t) != today:  # tell once a day, not every 2 minutes
+                told[t] = today
+                msgs.append(f"✋ {t} hit its stop ({price:,.2f} vs {stop:,.2f}). Please SELL it yourself in the IB app: {e}")
+            continue
         state["sold"][t] = today
         highs.pop(t, None)
         names.discard(t)

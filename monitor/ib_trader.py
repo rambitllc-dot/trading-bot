@@ -108,19 +108,26 @@ class IBClient:
         self.trades[oid] = trade
         return {"id": oid}
 
+    # IB's API only accepts WHOLE shares (error 10243: "Fractional-sized order cannot be placed via API").
+    # Fractional positions can only be sold in the IB app; buys are rounded down to whole shares.
     def close(self, symbol):
         pos = [p for p in self.positions() if p["symbol"] == symbol]
         if not pos:
             raise BrokerError(f"no {symbol} position to sell")
-        return self._place(symbol, "SELL", abs(pos[0]["qty"]))
+        qty = abs(pos[0]["qty"])
+        if abs(qty - round(qty)) > 1e-6:
+            raise BrokerError(f"{qty:g} {symbol} is a fractional amount, which IB only lets you sell in the IB app "
+                              f"(not through the automatic connection)")
+        return self._place(symbol, "SELL", int(round(qty)))
 
     def buy(self, symbol, dollars):
         px = self.price(symbol)
         if not px:
             raise BrokerError(f"no price for {symbol}")
-        qty = math.floor(dollars / px * 10000) / 10000  # IB fractional shares: 4 decimals
-        if qty <= 0:
-            raise BrokerError(f"${dollars:.2f} is too small for one 0.0001 share of {symbol}")
+        qty = math.floor(dollars / px)
+        if qty < 1:
+            raise BrokerError(f"${dollars:,.2f} doesn't buy 1 whole share of {symbol} (${px:,.2f}); IB's automatic "
+                              "connection only takes whole shares")
         return self._place(symbol, "BUY", qty)
 
     def order(self, oid):

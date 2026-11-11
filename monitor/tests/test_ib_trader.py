@@ -80,19 +80,18 @@ class IBTraderTest(unittest.TestCase):
 
     def test_swap_buys_with_the_sale_money(self):
         ib = FakeIB({"CNC": 70.0, "TXN": 280.0, "XLV": 150.0}, cash=5.0,
-                    holdings={"CNC": [4.9, 70.59], "TXN": [1.5, 273.6]})
+                    holdings={"CNC": [5, 70.59], "TXN": [2, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "CNC", "reason": "swap"}],
             buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("CNC", ib.pos)
-        equity = 4.9 * 70.0 + 1.5 * 280.0 + 5.0
-        # CNC's money goes to XLV, up to the 35% single-position limit (CNC was 45% of this account)
-        self.assertAlmostEqual(ib.pos["XLV"][0] * 150.0, min(4.9 * 70.0, equity * config.MAX_POSITION_PCT / 100), delta=1.5)
+        # CNC's $350 goes to XLV, capped at 35% of the account ($320): 2 whole shares ($300)
+        self.assertEqual(ib.pos["XLV"][0], 2)
         self.assertIn("TXN", ib.pos)
 
     def test_paired_buy_skipped_when_its_sale_did_not_happen(self):
-        ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=500.0, holdings={"TXN": [0.6, 273.6]})
+        ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=500.0, holdings={"TXN": [1, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "CNC", "reason": "swap"}],                      # CNC already gone
             buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
@@ -100,7 +99,7 @@ class IBTraderTest(unittest.TestCase):
         self.assertNotIn("XLV", ib.pos)                                       # no money from CNC -> no buy
 
     def test_stop_hit_sells_and_replaces(self):
-        ib = FakeIB({"MRNA": 240.0, "XLV": 150.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        ib = FakeIB({"MRNA": 240.0, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             stops={"MRNA": {"stop": 244.6, "target": 397.0, "rule": "6% max-loss stop"}},
             reserve=[{"ticker": "XLV", "reason": "rank #1"}]))
@@ -109,10 +108,15 @@ class IBTraderTest(unittest.TestCase):
         self.assertIn("XLV", ib.pos)
 
     def test_fractional_quantity_and_paper_live_guard(self):
-        ib = FakeIB({"MRK": 147.0}, cash=1000.0)
+        ib = FakeIB({"MRK": 147.0}, cash=1000.0, holdings={"CNC": [4.9, 70.0]})
+        ib.prices["CNC"] = 70.0
         c = self.client(ib)
-        c.buy("MRK", 100.0)
-        self.assertAlmostEqual(ib.pos["MRK"][0], 0.6802, places=4)              # 4 decimals, rounded down
+        c.buy("MRK", 300.0)
+        self.assertEqual(ib.pos["MRK"][0], 2)                                   # whole shares only, rounded down
+        with self.assertRaises(autotrade.AlpacaError):
+            c.buy("MRK", 100.0)                                                 # less than 1 share
+        with self.assertRaises(autotrade.AlpacaError):
+            c.close("CNC")                                                      # fractional: only in the IB app
         with mock.patch.object(ib_trader.autotrade, "load_json", return_value={"live": False, "port": 4001}):
             self.assertEqual(ib_trader.settings()["port"], 4002)                # paper never uses the live port
 
@@ -129,19 +133,19 @@ class DepositTest(IBTraderTest):
                 {"ticker": "XOM", "rank": 4, "score": 90, "sector": "Energy", "reason": "rank #4"}]
 
     def prices(self):
-        return {"CNC": 70.0, "MRK": 150.0, "LLY": 900.0, "JPM": 300.0, "XOM": 120.0, "SPY": 700.0}
+        return {"CNC": 70.0, "MRK": 150.0, "LLY": 900.0, "JPM": 95.0, "XOM": 60.0, "SPY": 150.0}
 
     def test_deposit_goes_to_new_sectors_same_day(self):
-        ib = FakeIB(self.prices(), cash=400.0, holdings={"CNC": [2.86, 70.0], "MRK": [1.33, 150.0]})  # ~$200 each
+        ib = FakeIB(self.prices(), cash=400.0, holdings={"CNC": [3, 70.0], "MRK": [1, 150.0]})  # ~$180 each
         autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
         msg = autotrade.execute(client=self.client(ib))
         self.assertIn("New cash found", msg)
         self.assertEqual(set(ib.pos) - {"CNC", "MRK"}, {"JPM", "XOM"})   # 2 stocks, new sectors, not more healthcare
-        self.assertLess(ib.cash, 5)
+        self.assertLess(ib.cash, 60)                                     # whole shares leave a little cash
         self.assertNotIn("LLY", ib.pos)
 
     def test_small_cash_is_left_and_nothing_good_means_spy(self):
-        ib = FakeIB(self.prices(), cash=30.0, holdings={"CNC": [2.86, 70.0]})
+        ib = FakeIB(self.prices(), cash=30.0, holdings={"CNC": [3, 70.0]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
         autotrade.execute(client=self.client(ib))
         self.assertEqual(set(ib.pos), {"CNC"})                            # under $50: leave it
@@ -155,7 +159,7 @@ class DepositTest(IBTraderTest):
         self.assertIn("SGOV", ib.pos)                                     # SPY not rising -> short-term T-bills
 
     def test_retries_are_limited(self):
-        ib = FakeIB({"CNC": 70.0}, cash=500.0, holdings={"CNC": [2.86, 70.0]})   # nothing buyable (no prices)
+        ib = FakeIB({"CNC": 70.0}, cash=500.0, holdings={"CNC": [3, 70.0]})   # nothing buyable (no prices)
         autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
         for _ in range(5):
             autotrade.execute(client=self.client(ib))
@@ -179,7 +183,7 @@ class CodeVersionTest(unittest.TestCase):
 
 class IntradayTrailTest(IBTraderTest):
     def test_stop_trails_the_days_high(self):
-        ib = FakeIB({"MRNA": 280.0, "XLV": 150.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        ib = FakeIB({"MRNA": 280.0, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             stops={"MRNA": {"stop": 248.5, "target": 397.0}}, reserve=[{"ticker": "XLV", "reason": "rank #1"}]))
         autotrade.execute(client=self.client(ib))           # sees 280: new high, stop moves to 267.40
@@ -195,9 +199,25 @@ class IntradayTrailTest(IBTraderTest):
 
 class PeakFromPlanTest(IBTraderTest):
     def test_daytime_stop_starts_from_the_evening_high(self):
-        ib = FakeIB({"MRNA": 250.4, "XLV": 150.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        ib = FakeIB({"MRNA": 250.4, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             stops={"MRNA": {"stop": 244.6, "target": 397.0, "peak": 269.0}}, reserve=[{"ticker": "XLV", "reason": "#1"}]))
         autotrade.execute(client=self.client(ib))           # 250.40 is 6.9% below the 269 high: sold
         self.assertNotIn("MRNA", ib.pos)
         self.assertIn("XLV", ib.pos)
+
+
+class FractionalTest(IBTraderTest):
+    def test_fractional_position_asks_you_once_instead_of_retrying(self):
+        msgs = []
+        ib = FakeIB({"MRNA": 250.0, "TGT": 95.0}, cash=0.0, holdings={"MRNA": [0.6, 260.21]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "MRNA", "reason": "stop hit"}], buys=[{"ticker": "TGT", "replaces": "MRNA", "reason": "x"}],
+            stops={"MRNA": {"stop": 256.89, "peak": 269.0}}))
+        with mock.patch.object(autotrade, "notify", msgs.append):
+            autotrade.execute(client=self.client(ib))
+            autotrade.execute(client=self.client(ib))
+        self.assertIn("MRNA", ib.pos)                                   # couldn't sell a fraction via the API
+        self.assertNotIn("TGT", ib.pos)                                 # so no buy without the money
+        self.assertEqual(len(msgs), 1)                                   # one message, then quiet (no retry spam)
+        self.assertIn("Please SELL MRNA yourself in the IB app", msgs[0])
