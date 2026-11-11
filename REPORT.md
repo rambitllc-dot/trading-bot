@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 11, 2026 22:01 UTC · Bitcoin $74,300.00 · US stock market closed
+Last update: Nov 11, 2026 22:31 UTC · Bitcoin $74,311.92 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -52,11 +52,11 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 15 | Anthropic trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
 | 16 | Anthropic gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
 | 17 | SpaceX gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $99.99 | -$0.01 (-0.0%) | 2 |
-| 18 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.95 | -$0.05 (-0.0%) | 3 |
+| 18 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $99.96 | -$0.04 (-0.0%) | 3 |
 | 19 | SpaceX buy & hold | Hold | Stock | $98.63 | -$1.37 (-1.4%) | 1 |
 | 20 | Tesla buy & hold | Hold | Stock | $95.87 | -$4.13 (-4.1%) | 1 |
 | 21 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
-| 22 | Bitcoin buy & hold | Hold | Bitcoin | $94.66 | -$5.34 (-5.3%) | 1 |
+| 22 | Bitcoin buy & hold | Hold | Bitcoin | $94.68 | -$5.32 (-5.3%) | 1 |
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $94.53 | -$5.47 (-5.5%) | 10 |
 | 24 | Wide momentum (10 ETFs) | Monthly pick | ETF | $93.65 | -$6.35 (-6.3%) | 1 |
 | 25 | Tesla trend (200 day) | Static rule | Stock | $86.00 | -$14.00 (-14.0%) | 2 |
@@ -66,7 +66,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $94.66 | $100.00 | trading |
+| Bitcoin | $94.68 | $100.00 | trading |
 | S&P 500 | $100.28 | $100.28 | about even |
 | Apple | $105.75 | $105.74 | about even |
 | Microsoft | $100.28 | $100.28 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $98.63 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,569.49 from $2,600 (-30.51)
+**All together:** $2,569.50 from $2,600 (-30.50)
 
 ## What each one is doing
 
@@ -101,7 +101,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **SpaceX buy & hold:** SPCX $98.12, cash $0.51. Holding.
 - **Tesla buy & hold:** TSLA $95.36, cash $0.51. Holding.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $168.78 vs 200d avg $204.26).
-- **Bitcoin buy & hold:** BTC/USD $92.27, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $92.29, cash $2.39. Holding.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $10.62, SNDK $8.76, LITE $9.61, MU $9.48, DELL $9.15, STX $9.01, WDC $8.94, VLO $9.27, APA $9.64, MPC $9.35, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Wide momentum (10 ETFs):** XLE $93.14, cash $0.51. Holding XLE until next month's check.
 - **Tesla trend (200 day):** cash $86.00. Signal: in cash (price $379.73 vs 200d avg $383.21).
