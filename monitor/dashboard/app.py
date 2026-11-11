@@ -210,6 +210,33 @@ def current_book():
     return out, cash
 
 
+def current_allocation():
+    """Allocation of what you hold right now (positions.json at live prices), not last evening's snapshot."""
+    from monitor import sectors
+    held, cash_now = current_book()
+    if not held:
+        return D["allocation"]
+    q = live_quotes(tuple(sorted({p["ticker"] for p in held})))
+    by_ticker, by_sector = {}, {}
+    for p in held:
+        px = q.get(p["ticker"], (p.get("mark") or p.get("entry_price"), None))[0]
+        if not px:
+            continue
+        v = abs((p.get("contracts") or 0) * px)
+        by_ticker[p["ticker"]] = by_ticker.get(p["ticker"], 0) + v
+        s = sectors.sector_of(p["ticker"])
+        by_sector[s] = by_sector.get(s, 0) + v
+    if cash_now:
+        by_ticker["Cash"] = by_sector["Cash"] = abs(cash_now)
+    total = sum(by_ticker.values())
+
+    def table(d, cap, kind):
+        return [{"kind": kind, "name": k, "value": v, "pct": v / total * 100 if total else 0, "cap_pct": cap,
+                 "over_cap": bool(total and k != "Cash" and v / total * 100 > cap)}
+                for k, v in sorted(d.items(), key=lambda kv: -kv[1])]
+    return table(by_ticker, config.TICKER_CAP_PCT, "ticker") + table(by_sector, config.SECTOR_CAP_PCT, "sector")
+
+
 def live_section():
     held, cash_now = current_book()
     if not held:
@@ -523,11 +550,15 @@ with left:
     else:
         st.markdown('<div class="muted">No priced options to project.</div>', unsafe_allow_html=True)
 with right:
-    st.markdown('<div class="sec">Allocation</div>', unsafe_allow_html=True)
-    if D["allocation"]:
+    try:
+        ALLOC = current_allocation()
+    except Exception:  # noqa: BLE001 - fall back to last evening's numbers
+        ALLOC = D["allocation"]
+    st.markdown('<div class="sec">Allocation · your current holdings</div>', unsafe_allow_html=True)
+    if ALLOC:
         palette = ["#4EA8FF", "#FFA62B", "#3DDC84", "#C792EA", "#FF7AA2", "#7FDBCA", "#FFE14D", "#8A93A3"]
         for kind, title in (("ticker", "BY TICKER"), ("sector", "BY SECTOR")):
-            items = [x for x in D["allocation"] if x["kind"] == kind]
+            items = [x for x in ALLOC if x["kind"] == kind]
             segs = "".join(
                 f'<div title="{e(x["name"])} {x["pct"]:.1f}%" style="width:{x["pct"]:.2f}%;background:{palette[i % len(palette)]};'
                 f'height:22px;{"outline:2px solid " + RED + ";outline-offset:-2px;" if x["over_cap"] else ""}"></div>'
@@ -540,7 +571,7 @@ with right:
                         f'<div style="display:flex;width:100%;background:#1A2028">{segs}</div>'
                         f'<div style="font-size:12px;margin:4px 0 8px;line-height:1.7">{legend}</div>',
                         unsafe_allow_html=True)
-        over = [x for x in D["allocation"] if x["over_cap"]]
+        over = [x for x in ALLOC if x["over_cap"]]
         for x in over:
             st.markdown(f'<div class="alert" style="border-color:{RED}"><span class="k" style="color:{RED}">concentration</span>'
                         f'{e(x["name"])} is {x["pct"]:.0f}% of the book (cap {x["cap_pct"]:.0f}%)</div>', unsafe_allow_html=True)
