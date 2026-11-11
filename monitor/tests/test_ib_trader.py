@@ -90,10 +90,18 @@ class IBTraderTest(unittest.TestCase):
         self.assertEqual(ib.pos["XLV"][0], 2)
         self.assertIn("TXN", ib.pos)
 
-    def test_paired_buy_skipped_when_its_sale_did_not_happen(self):
+    def test_already_sold_by_hand_then_cash_buys_the_planned_replacement(self):
         ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=500.0, holdings={"TXN": [1, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
-            sells=[{"ticker": "CNC", "reason": "swap"}],                      # CNC already gone
+            sells=[{"ticker": "CNC", "reason": "swap"}],                      # CNC already sold in the app
+            buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
+        autotrade.execute(client=self.client(ib))
+        self.assertIn("XLV", ib.pos)                                          # the cash goes to the planned pick
+
+    def test_no_cash_no_replacement(self):
+        ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=10.0, holdings={"TXN": [1, 273.6]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "CNC", "reason": "swap"}],
             buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("XLV", ib.pos)                                       # no money from CNC -> no buy
@@ -221,3 +229,19 @@ class FractionalTest(IBTraderTest):
         self.assertNotIn("TGT", ib.pos)                                 # so no buy without the money
         self.assertEqual(len(msgs), 1)                                   # one message, then quiet (no retry spam)
         self.assertIn("Please SELL MRNA yourself in the IB app", msgs[0])
+
+
+class WholeShareTest(IBTraderTest):
+    def test_manual_sale_then_planned_replacement_in_whole_shares(self):
+        # you sold MRNA in the app; its planned replacement TGT ($95) is bought with the cash, whole shares only
+        ib = FakeIB({"CNC": 70.0, "TGT": 95.0, "LLY": 900.0}, cash=150.0, holdings={"CNC": [3, 70.0]})
+        msgs = []
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "MRNA", "reason": "stop"}],
+            buys=[{"ticker": "TGT", "replaces": "MRNA", "reason": "replaces MRNA"}],
+            deposit_candidates=[{"ticker": "LLY", "rank": 1, "score": 99, "sector": "Health Care", "reason": "#1"}]))
+        with mock.patch.object(autotrade, "notify", msgs.append):
+            autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["TGT"][0], 1)                     # 1 whole share of the planned replacement
+        self.assertNotIn("LLY", ib.pos)                           # $900 stock: too expensive, skipped quietly
+        self.assertFalse(any("Couldn't buy" in m for m in msgs))

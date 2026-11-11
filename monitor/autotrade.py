@@ -295,7 +295,8 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
         except AlpacaError as e:
             skip.add(t)
             log("SKIP", t, dollars, None, f"buy refused: {e}")
-            notify(f"⚠️ Couldn't buy {t} (${dollars:,.2f}): {str(e)[:150]}. Trying the next stock on the list.")
+            if "whole share" not in str(e):  # too expensive for whole shares: just try the next one quietly
+                notify(f"⚠️ Couldn't buy {t} (${dollars:,.2f}): {str(e)[:150]}. Trying the next stock on the list.")
             continue
         state["bought"][t] = today
         state.setdefault("highs", {})[t] = _price(o) or 0  # the trailing stop starts from the purchase price
@@ -479,7 +480,12 @@ def invest_new_cash(client, p, state, today):
         return (f"💵 New cash ${cash:,.2f}: the market is in a storm (S&P 500 below its 200-day average), so it waits "
                 f"in {config.SAFE_FUND} (Treasury bills, ~4% a year) until the market recovers.\n{m}") if t else None
     blocked = recently_sold(state, today) | {t for t, d in state["bought"].items() if d == today}
-    picks = pick_for_cash(p, held, blocked, n)
+    # replacements the plan already chose for stocks you sold by hand come first
+    planned = [{**b, "why": f"the plan's replacement for {b['replaces']}"} for b in p.get("buys") or []
+               if b.get("replaces") and b["replaces"] not in held and b["ticker"] not in held
+               and b["ticker"] not in blocked]
+    picks = (planned + [c for c in pick_for_cash(p, held, blocked, n) if c["ticker"] not in
+                        {x["ticker"] for x in planned}])[:max(n, len(planned))]
     total_size = sum(c.get("size", 1.0) for c in picks) or 1.0
     lines, skip = [], set(held) | blocked
     for c in picks:

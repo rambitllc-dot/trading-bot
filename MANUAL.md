@@ -99,7 +99,7 @@ These are fixed rules, not predictions. They limit losses but don't guarantee pr
 - **Reinstall from scratch:** `git clone https://github.com/rambitllc-dot/trading-bot.git ~/trading-bot` then `bash ~/trading-bot/mac/setup.sh` (type REAL for the real account).
 - **Python:** use `python3.15`, not `python3` (that one is the Mac's old built-in 3.9).
 - **Live holdings:** every 2 minutes in market hours the Mac compares your IB holdings and cash with `monitor/positions.json` and saves any change to GitHub (trades by the Mac or by you in the IB app, deposits). The dashboard and the evening run always use your real holdings. Needs the GitHub key on the Mac: `bash ~/trading-bot/mac/set-token.sh` (fine-grained token, only the trading-bot repo, Contents: Read and write, 1 year).
-- **IB only accepts whole shares from the Mac.** Fractional positions must be sold in the IB app; the Mac sends you one Telegram message saying exactly what to do.
+- **IB only accepts whole shares from the Mac.** Every buy is rounded down to whole shares, and a stock too expensive for the money available is skipped for the next one in line. Your older fractional holdings stay until they're due to be sold; then the Mac sends you one Telegram message and you sell them in the IB app. The Mac then buys the planned replacement with that cash by itself (needs the GitHub key so it sees the sale).
 
 ## 7. Keys and secrets
 
