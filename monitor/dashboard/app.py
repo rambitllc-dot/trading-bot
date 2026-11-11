@@ -438,11 +438,13 @@ st.markdown('<div class="sec">You vs the S&amp;P 500 · same buys and sells, mad
 if len(VS) >= 2:
     last = VS[-1]
     mine_now, sp_now, note = last["mine"], last["sp500"], f"close of {last['day']}"
-    try:  # today: your current stocks at live prices vs the shadow's SPY shares at the live SPY price
-        spy_live = live_quotes(("SPY",)).get("SPY")
-        if LIVE_HELD and spy_live:
-            mine_now = sum(x["live_value"] for x in LIVE_HELD)
-            sp_now, note = last["spy_shares"] * spy_live[0], "live"
+    try:  # live: the holdings both sides were built on (IB's last report) at live prices, so today's trades
+        # (not in the shadow until tonight's IB report) don't make the comparison lopsided
+        hold = PF.get("vs_holdings") or {}
+        qq = live_quotes(tuple(sorted(set(hold) | {"SPY"})))
+        if hold and qq.get("SPY") and all(t in qq for t in hold):
+            mine_now = sum(q * qq[t][0] for t, q in hold.items())
+            sp_now, note = last["spy_shares"] * qq["SPY"][0], "live"
     except Exception:  # noqa: BLE001
         pass
     edge = mine_now - sp_now
@@ -457,8 +459,7 @@ if len(VS) >= 2:
                           + [{"date": x["day"], "series": "Same trades in S&P 500", "value": x["sp500"]} for x in points])
         df["date"] = pd.to_datetime(df["date"])
         ch = alt.Chart(df).mark_line(point=len(points) < 40).encode(
-            x=alt.X("date:T", title=None, axis=alt.Axis(format=fmt, tickCount={"interval": "day", "step": 1}
-                                                       if len(points) < 15 else None)),
+            x=alt.X("date:T", title=None, axis=alt.Axis(format=fmt, labelOverlap=True)),
             y=alt.Y("value:Q", title="value ($)", scale=alt.Scale(zero=False)),
             color=alt.Color("series:N", title=None, legend=alt.Legend(orient="top", labelLimit=260),
                             scale=alt.Scale(domain=["Your stocks", "Same trades in S&P 500"], range=[AMBER, GREY])),
@@ -477,7 +478,8 @@ if len(VS) >= 2:
     st.markdown('<div class="muted">The grey line is a "shadow" account that made exactly your buys and sells, same '
                 'dollars, same days, but always in the S&amp;P 500 (SPY, dividends included). Cash and deposits are the '
                 'same in both, so they don\'t distort it, and stocks you\'ve sold stay in the history. Amber above grey = '
-                'your picks beat the index. One point per trading day (closing prices).</div>', unsafe_allow_html=True)
+                'your picks beat the index. One point per trading day (closing prices). Today\'s trades are added '
+                'after the evening IB report.</div>', unsafe_allow_html=True)
 else:
     st.markdown('<div class="muted">Builds after the next evening run (needs IB\'s report of your holdings and trade '
                 'history).</div>', unsafe_allow_html=True)
