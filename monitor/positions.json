@@ -21,16 +21,6 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "MRNA",
-    "contracts": 0.6,
-    "entry_price": 260.2067,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-06",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "TXN",
     "contracts": 0.6,
     "entry_price": 273.5967,
@@ -40,8 +30,18 @@
     "stop_price": null
   },
   {
+    "asset_type": "shares",
+    "ticker": "TGT",
+    "contracts": 0.9,
+    "entry_price": 161.4778,
+    "entry_date": "2026-11-11",
+    "target_price": null,
+    "stop_price": null,
+    "note": "Interactive Brokers - swap from MRNA (bought in the app)"
+  },
+  {
     "asset_type": "cash",
-    "amount": 5.21,
-    "note": "IB cash as of 2026-11-09 (synced)"
+    "amount": 8.67,
+    "note": "IB cash after selling MRNA and buying TGT (Nov 11)"
   }
 ]
