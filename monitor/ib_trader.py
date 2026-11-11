@@ -28,7 +28,7 @@ import subprocess
 import sys
 import time
 
-from . import autotrade, config
+from . import autotrade, config, live_positions
 from .alpaca import AlpacaError as BrokerError
 
 HOME = os.path.expanduser("~/ib-trader")
@@ -195,6 +195,7 @@ def main(argv=None):
     setup_engine(s)
     ib, last_warn, last_pull = None, 0.0, 0.0
     started_code = code_version()
+    sync_state = {}
     if os.path.exists(UPDATE_MARKER):  # restarted only to load new code: no "Started" message
         os.remove(UPDATE_MARKER)
         print("Restarted with updated code.", flush=True)
@@ -219,6 +220,11 @@ def main(argv=None):
                 if ib is None or not ib.isConnected():
                     ib = connect(s)
                 print(now.strftime("%Y-%m-%d %H:%M"), once(ib, s), flush=True)
+                live = live_positions.sync(ib, now, sync_state)  # your real holdings -> GitHub (dashboard, evening run)
+                if live:
+                    print(now.strftime("%Y-%m-%d %H:%M"), live, flush=True)
+                    if live.startswith("WARN"):
+                        autotrade.notify("⚠️ " + live[5:])
             except Exception as e:  # noqa: BLE001 - keep running; warn at most once an hour
                 print(now.strftime("%Y-%m-%d %H:%M"), "problem:", e, flush=True)
                 if time.time() - last_warn > 3600:

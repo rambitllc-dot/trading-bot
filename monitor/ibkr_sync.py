@@ -157,6 +157,13 @@ def sync(path=None, fetcher=None, db=None):
                 con.close()
         with open(path) as f:
             current = json.load(f)
+        try:  # the Mac keeps positions.json live from IB during the day; don't replace it with an older report
+            live_date = json.load(open(os.path.join(os.path.dirname(path), "positions_meta.json"))).get("date")
+        except (OSError, ValueError):
+            live_date = None
+        if report_date and live_date and live_date > report_date:
+            return (f"IB sync: holdings are already live from the Mac ({live_date}), newer than IB's report "
+                    f"({report_date}); kept them{trades_note}")
         newest = max((p.get("entry_date") or "" for p in current), default="")
         if report_date and newest > report_date:
             return (f"IB sync waiting: IB's report is from {report_date}, but positions.json has a buy from "
