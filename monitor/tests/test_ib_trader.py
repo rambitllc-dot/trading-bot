@@ -234,14 +234,31 @@ class FractionalTest(IBTraderTest):
 class WholeShareTest(IBTraderTest):
     def test_manual_sale_then_planned_replacement_in_whole_shares(self):
         # you sold MRNA in the app; its planned replacement TGT ($95) is bought with the cash, whole shares only
-        ib = FakeIB({"CNC": 70.0, "TGT": 95.0, "LLY": 900.0}, cash=150.0, holdings={"CNC": [3, 70.0]})
+        ib = FakeIB({"CNC": 70.0, "TGT": 95.0, "LLY": 900.0, "SPYM": 80.0}, cash=150.0, holdings={"CNC": [3, 70.0]})
         msgs = []
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "MRNA", "reason": "stop"}],
             buys=[{"ticker": "TGT", "replaces": "MRNA", "reason": "replaces MRNA"}],
-            deposit_candidates=[{"ticker": "LLY", "rank": 1, "score": 99, "sector": "Health Care", "reason": "#1"}]))
+            deposit_candidates=[{"ticker": "LLY", "rank": 1, "score": 99, "sector": "Health Care", "reason": "#1"}],
+            fallback="SPYM"))
         with mock.patch.object(autotrade, "notify", msgs.append):
             autotrade.execute(client=self.client(ib))
         self.assertEqual(ib.pos["TGT"][0], 1)                     # 1 whole share of the planned replacement
         self.assertNotIn("LLY", ib.pos)                           # $900 stock: too expensive, skipped quietly
         self.assertFalse(any("Couldn't buy" in m for m in msgs))
+
+
+class LeftoverTest(IBTraderTest):
+    def test_leftover_cash_goes_to_the_sp500_fund_in_whole_shares(self):
+        ib = FakeIB({"CNC": 70.0, "SPYM": 80.0, "SGOV": 100.5}, cash=250.0, holdings={"CNC": [3, 70.0]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(fallback="SPYM"))
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["SPYM"][0], 3)                   # $250 -> 3 whole shares ($240), $10 stays cash
+        self.assertLess(ib.cash, 80)
+
+    def test_sp500_not_rising_means_tbills(self):
+        ib = FakeIB({"CNC": 70.0, "SPYM": 80.0, "SGOV": 100.5}, cash=250.0, holdings={"CNC": [3, 70.0]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(fallback="SGOV"))
+        autotrade.execute(client=self.client(ib))
+        self.assertNotIn("SPYM", ib.pos)
+        self.assertEqual(ib.pos["SGOV"][0], 2)

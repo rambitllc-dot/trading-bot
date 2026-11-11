@@ -158,11 +158,14 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
     holdings = holdings or config.AUTO_HOLDINGS
     safe, storm = config.SAFE_FUND, bool(rot.get("storm"))
     held_all = {r["ticker"] for r in rows}
-    held = held_all - {safe}  # the parking fund isn't one of the 5 stock slots
+    held = held_all - config.PARKING  # parking funds aren't stock slots
     value = {r["ticker"]: r.get("value") or 0 for r in rows}
-    sells = {r["ticker"]: r["action_reason"] for r in rows if r.get("action") == "SELL" and r["ticker"] != safe}
+    sells = {r["ticker"]: r["action_reason"] for r in rows
+             if r.get("action") == "SELL" and r["ticker"] not in config.PARKING}
     if safe in held_all and not storm:
         sells[safe] = "fair weather again (S&P 500 back above its 200-day average): parked money goes back into stocks"
+    if config.PARK_FUND in held_all and storm:
+        sells[config.PARK_FUND] = "market storm: S&P 500 money moves to short-term Treasury bills"
     swap_buys = []
     for s in rot.get("suggestions") or []:
         if s["sell"] in held:
@@ -219,8 +222,11 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
         for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
     spy_up = con.execute("SELECT uptrend FROM rotation_scores WHERE asof=? AND ticker=?",
-                         (asof, config.DEPOSIT_FALLBACK)).fetchone()
-    fallback = config.DEPOSIT_FALLBACK if (not storm and spy_up and spy_up[0]) else config.SAFE_FUND
+                         (asof, config.INDEX_TICKER)).fetchone()
+    fallback = config.PARK_FUND if (not storm and spy_up and spy_up[0]) else config.SAFE_FUND
+    # parked S&P 500 money funds new stocks when there are free slots and good candidates
+    if config.PARK_FUND in held_all and not storm and len(buys) > len([b for b in buys if b.get("replaces")]):
+        sells.setdefault(config.PARK_FUND, "free stock slot and a strong candidate: parked S&P 500 money goes to stocks")
     return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof, "fallback": fallback,
             "equity": equity, "cash": cash, "sells": [{"ticker": t, "reason": why} for t, why in sells.items()],
             "buys": buys, "reserve": reserve, "stops": stops, "deposit_candidates": deposit, "earnings_soon": soon,
@@ -380,8 +386,8 @@ def execute(client=None):
     names = {x["symbol"] for x in held}
     for x in held:
         t, price, avg = x["symbol"], float(x["current_price"]), float(x["avg_entry_price"])
-        if state["bought"].get(t) == today or t == config.SAFE_FUND:
-            continue  # bought today: no same-day sale; the parking fund has no stop
+        if state["bought"].get(t) == today or t in config.PARKING:
+            continue  # bought today: no same-day sale; parking funds have no stop
         lv = p["stops"].get(t) or {}
         highs = state.setdefault("highs", {})
         highs[t] = max(highs.get(t, 0), price, lv.get("peak") or 0, avg if state["bought"].get(t) else 0)
@@ -423,6 +429,9 @@ def execute(client=None):
         m = invest_new_cash(client, p, state, today)
         if m:
             msgs.append(m)
+        m = sweep_leftover(client, p, state, today)
+        if m:
+            msgs.append(m)
     save_json(STATE_FILE, state)
     if msgs:
         acct = client.account()
@@ -444,9 +453,9 @@ def pick_for_cash(p, held, blocked, n):
             chosen.append({**c, "why": f"strongest left ({c['sector']}, already owned)"})
     if not chosen:
         fb = p.get("fallback") or config.SAFE_FUND
-        chosen = [{"ticker": fb, "sector": sectors.sector_of(fb), "reason": "S&P 500 fund" if fb == "SPY" else "T-bills",
+        chosen = [{"ticker": fb, "sector": sectors.sector_of(fb), "reason": "S&P 500 fund" if fb != config.SAFE_FUND else "T-bills",
                    "why": ("no stock qualifies today and the S&P 500 is in an uptrend, so it tracks the S&P 500"
-                           if fb == config.DEPOSIT_FALLBACK else
+                           if fb != config.SAFE_FUND else
                            "no stock qualifies today and the S&P 500 isn't in an uptrend, so it waits in "
                            "short-term Treasury bills (~4% a year)")}]
     return chosen
@@ -501,6 +510,21 @@ def invest_new_cash(client, p, state, today):
         return f"💵 Found ${cash:,.2f} of new cash but couldn't buy anything yet; I'll retry (max {config.DEPOSIT_MAX_TRIES_PER_DAY} times a day)."
     return (f"💵 New cash found: ${cash:,.2f}. Invested in {len(lines)} stock(s), spreading across sectors "
             "(steadier stocks get more, jumpy ones less) with the goal of beating the S&P 500:\n" + "\n".join(lines))
+
+
+def sweep_leftover(client, p, state, today):
+    """Cash left over after whole-share buys: into the S&P 500 fund (SPYM) when the S&P 500 is in an uptrend,
+    otherwise into short-term Treasury bills (SGOV). Whole shares; less than one share's worth stays as cash."""
+    fb = config.SAFE_FUND if p.get("storm") else (p.get("fallback") or config.SAFE_FUND)
+    cash = float(client.account()["cash"])
+    if cash < config.AUTO_MIN_BUY_USD:
+        return None
+    t, m = buy_one(client, state, today, [{"ticker": fb, "reason": "leftover cash"}], round(cash - 1, 2),
+                   "leftover cash: ", set())
+    if not t:
+        return None
+    where = "the S&P 500 (SPYM)" if fb == config.PARK_FUND else "short-term Treasury bills (SGOV)"
+    return f"🧺 Leftover cash put to work in {where}: {m}"
 
 
 def main(argv=None):

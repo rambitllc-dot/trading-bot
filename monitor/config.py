@@ -113,7 +113,9 @@ AUTO_LIVE = False           # practice only; real money needs a deliberate switc
 # the money at least keeps pace with the S&P 500.
 DEPOSIT_MIN_USD = 50.0
 DEPOSIT_MAX_STOCKS = 3
-DEPOSIT_FALLBACK = "SPY"
+DEPOSIT_FALLBACK = "SPYM"   # S&P 500 fund at ~1/10 of SPY's share price, so leftovers buy whole shares
+PARK_FUND = "SPYM"          # leftover cash after whole-share buys goes here when the S&P 500 is in an uptrend
+INDEX_TICKER = "SPY"        # the S&P 500 fund whose trend decides between PARK_FUND and SAFE_FUND
 DEPOSIT_MAX_TRIES_PER_DAY = 3
 
 # ---------- Diversification and earnings guard ----------
@@ -132,3 +134,5 @@ UPTREND_MAX_FROM_HIGH = 25  # percent below the 1-year high still counted as "ne
 VOL_SIZING = True           # steadier stocks get more money, jumpy ones less (0.5x to 1.5x of an equal share)
 VOL_SIZE_MIN, VOL_SIZE_MAX = 0.5, 1.5
 MAX_POSITION_PCT = 35       # no single buy larger than this share of the account
+
+PARKING = {PARK_FUND, "SGOV"}  # funds that hold idle money: not one of the 5 stock slots, no stop, never ranked

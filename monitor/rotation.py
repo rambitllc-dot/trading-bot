@@ -186,7 +186,7 @@ def log_rows(con, since):
 
 def run(con, asof, rows, data, sentiment=None, blocker=None, storm=False):
     con.executescript(SCHEMA)
-    data = {t: b for t, b in data.items() if t != config.SAFE_FUND}  # the parking fund is never ranked
+    data = {t: b for t, b in data.items() if t not in config.PARKING}  # parking funds are never ranked
     migrate(con)
     held = {r["ticker"]: r for r in rows if r["asset_type"] == "shares" and r.get("value")}
     scored = score_all(data, sentiment)
