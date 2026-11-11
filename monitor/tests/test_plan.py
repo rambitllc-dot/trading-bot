@@ -24,3 +24,15 @@ class PlanTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CrossedTest(unittest.TestCase):
+    def test_trailing_stop_above_buy_price_is_still_a_stop_below(self):
+        from monitor import alerts, plan
+        # TXN: bought 273.60, trailing stop now 287.00, price 300.52 -> nothing hit
+        self.assertFalse(alerts.hit(300.52, 287.00, False, "stop"))
+        self.assertTrue(alerts.hit(286.90, 287.00, False, "stop"))
+        r = {"mark": 300.52, "entry_price": 273.6, "contracts": 0.6, "stop_price": 287.0, "target_price": 346.77,
+             "status": "ok", "asset_type": "shares"}
+        self.assertEqual(plan.for_position(r)[0], "HOLD")
+        self.assertTrue(plan.crossed(110, 100, "stop", short=True))       # a short's stop is above the price

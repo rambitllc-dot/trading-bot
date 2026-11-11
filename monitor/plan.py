@@ -14,12 +14,18 @@ COLORS = {"SELL": "#FF5C5C", "BUY MORE": "#3DDC84", "BUY": "#3DDC84", "HOLD": "#
           "WAIT": "#5A6472", "SWAP": "#B48BEB", "WEAK": "#E8803A"}
 
 
-def _crossed(mark, level, entry, side):
+def crossed(mark, level, side, short=False):
+    """Has the price reached a level? A long position's stop is hit at or BELOW it and its target at or ABOVE it
+    (reversed for a short position). Decided by the position's direction, never by where the level sits
+    relative to the buy price: a trailing stop can rise above the buy price and is still a stop below."""
     if mark is None or level is None:
         return False
-    if side == "target":
-        return mark >= level if level >= entry else mark <= level
-    return mark <= level if level <= entry else mark >= level
+    below = (side == "stop") != bool(short)
+    return mark <= level if below else mark >= level
+
+
+def _crossed(mark, level, entry, side, short=False):  # kept for older callers; entry no longer decides
+    return crossed(mark, level, side, short)
 
 
 def for_position(r):
@@ -27,10 +33,10 @@ def for_position(r):
     mark, entry = r.get("mark"), r.get("level_ref") or r["entry_price"]
     if r.get("status") not in (None, "ok") or mark is None:
         return "REVIEW", f"no current price ({r.get('status')})"
-    auto = r.get("levels_auto")  # automatic levels are always stop below / target above (long shares)
-    if (mark <= r["stop_price"] if auto else _crossed(mark, r.get("stop_price"), entry, "stop")):
+    short = (r.get("contracts") or 0) < 0
+    if crossed(mark, r.get("stop_price"), "stop", short):
         return "SELL", f"price {mark:,.2f} reached your stop {r['stop_price']:,.2f}"
-    if (mark >= r["target_price"] if auto else _crossed(mark, r.get("target_price"), entry, "target")):
+    if crossed(mark, r.get("target_price"), "target", short):
         return "SELL", f"price {mark:,.2f} reached your target {r['target_price']:,.2f} (take profit)"
     if r.get("add_below") is not None and mark <= r["add_below"]:
         return "BUY MORE", f"price {mark:,.2f} is at or below your add level {r['add_below']:,.2f}"

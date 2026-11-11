@@ -67,13 +67,9 @@ def prior_valuations(con, asof):
     return {r[0]: {"mark": r[1], "iv": r[2], "target": r[3], "stop": r[4]} for r in cur.fetchall()}
 
 
-def hit(mark, level, entry, direction):
-    """True when mark is at/through level on the side away from entry ('target' or 'stop')."""
-    if mark is None or level is None:
-        return False
-    if direction == "target":
-        return mark >= level if level >= entry else mark <= level
-    return mark <= level if level <= entry else mark >= level
+def hit(mark, level, short, direction):
+    """True when mark has reached the level: long stop at/below, long target at/above (reversed when short)."""
+    return plan.crossed(mark, level, direction, short)
 
 
 def build(con, asof, rows, analytics_summary=None, macro_result=None, news_result=None, extra=None):
@@ -96,16 +92,17 @@ def build(con, asof, rows, analytics_summary=None, macro_result=None, news_resul
                     "is_new": bool(is_new), "detail": detail})
 
     for r in rows:
-        mark, entry, p = r.get("mark"), r.get("level_ref") or r["entry_price"], prev.get(r["position_id"], {})
-        if hit(mark, r.get("target_price"), entry, "target"):
+        mark, p = r.get("mark"), prev.get(r["position_id"], {})
+        short = (r.get("contracts") or 0) < 0
+        if hit(mark, r.get("target_price"), short, "target"):
             add("target_hit", "high", f"{label(r)} hit your target level (mark {mark:,.2f} vs target "
-                f"{r['target_price']:,.2f}).", r, is_new=not hit(p.get("mark"), r.get("target_price"), entry, "target"))
+                f"{r['target_price']:,.2f}).", r, is_new=not hit(p.get("mark"), r.get("target_price"), short, "target"))
         elif r.get("progress_target") is not None and r["progress_target"] >= config.TARGET_NEAR_PCT:
             add("target_near", "info", f"{label(r)} is {r['progress_target']:.0f}% of the way to your target "
                 f"(mark {mark:,.2f}, target {r['target_price']:,.2f}).", r)
-        if hit(mark, r.get("stop_price"), entry, "stop"):
+        if hit(mark, r.get("stop_price"), short, "stop"):
             add("stop_hit", "high", f"{label(r)} crossed your stop level (mark {mark:,.2f} vs stop "
-                f"{r['stop_price']:,.2f}).", r, is_new=not hit(p.get("mark"), r.get("stop_price"), entry, "stop"))
+                f"{r['stop_price']:,.2f}).", r, is_new=not hit(p.get("mark"), r.get("stop_price"), short, "stop"))
         iv, iv_prev = r.get("iv"), p.get("iv")
         if iv and iv_prev and abs(iv / iv_prev - 1) * 100 >= config.IV_CHANGE_PCT:
             add("iv_change", "warn", f"{label(r)}: IV moved from {iv_prev * 100:.0f}% to {iv * 100:.0f}% "
