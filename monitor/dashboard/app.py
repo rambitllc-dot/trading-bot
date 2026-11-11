@@ -137,30 +137,6 @@ with st.sidebar:
 D = get(asof, KEY)
 P, A, M = D["positions"], D["analytics"] or {}, D["macro"]
 
-# ---------- header + status strip ----------
-st.markdown(f'<div class="hdr"><b>PORTFOLIO MONITOR</b><span>AS OF {e(D["asof"])} · '
-            f'{len(P)} POSITIONS · EVENING ANALYSIS + LIVE PRICES</span></div>', unsafe_allow_html=True)
-nav = A.get("total_value") or sum(p["value"] or 0 for p in P)
-pnl, pnl_pct = A.get("pnl"), A.get("pnl_pct")
-macro_txt = f"{M['score']:.0f} {M['label'].upper()}" if M and M.get("score") is not None else "–"
-macro_cls = "" if not M or M.get("score") is None else ("up" if M["label"] == "Calm" else "dn" if M["label"] == "Stressed" else "am")
-n_high = sum(1 for a in D["alerts"] if a["severity"] == "high")
-cells = [("NAV", money(nav), ""), ("P&L", f"{money(pnl)} ({num(pnl_pct, 1)}%)" if pnl is not None else "–", cls(pnl)),
-         ("Positions", str(len(P)), ""), ("Alerts", f"{len(D['alerts'])}" + (f" · {n_high} HIGH" if n_high else ""),
-                                         "dn" if n_high else ""),
-         ("Macro score", macro_txt, macro_cls), ("Net delta", f"{num(A.get('net_delta'), 0)} sh", ""),
-         ("Daily theta", money(A.get("daily_theta")), cls(A.get("daily_theta"))), ("As of", D["asof"], "")]
-st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
-                                             for k, v, c in cells) + "</div>", unsafe_allow_html=True)
-W = D.get("weather")
-if W and W.get("ma200"):
-    gap = (W["spy"] / W["ma200"] - 1) * 100
-    msg = (f"⛈ MARKET STORM: S&P 500 {abs(gap):.1f}% below its 200-day average. No new stock buys; new money waits in "
-           f"{config.SAFE_FUND} until it recovers. Stops still apply." if W["storm"] else
-           f"🌤 Fair weather: S&P 500 {gap:+.1f}% vs its 200-day average. Buying allowed (uptrends only).")
-    st.markdown(f'<div class="muted" style="margin:6px 0;font-size:13px;color:{RED if W["storm"] else GREEN}">'
-                f'{e(msg)}</div>', unsafe_allow_html=True)
-
 # ---------- live prices (refresh every minute) ----------
 @st.cache_data(ttl=55, show_spinner=False)
 def live_quotes(tickers):
@@ -187,7 +163,6 @@ def market_status():
     return ("MARKET OPEN" if is_open else "MARKET CLOSED"), is_open
 
 
-@st.fragment(run_every="60s")
 def current_book():
     """Your holdings right now (positions.json: synced from IB, plus trades recorded since), with the stop and
     target from the latest evening run; a stock bought since then gets the starting stop, 4.5% below its price."""
@@ -237,6 +212,60 @@ def current_allocation():
     return table(by_ticker, config.TICKER_CAP_PCT, "ticker") + table(by_sector, config.SECTOR_CAP_PCT, "sector")
 
 
+def live_totals():
+    """Your current holdings at live prices: (rows, cash, total value, total cost). Cash counts at face value."""
+    held, cash_now = current_book()
+    q = live_quotes(tuple(sorted({p["ticker"] for p in held}))) if held else {}
+    out = []
+    for p in held:
+        last = q.get(p["ticker"], (p.get("mark") or p.get("entry_price"), None))[0]
+        qty, entry = p.get("contracts") or 0, p.get("entry_price") or 0
+        out.append({**p, "live": last, "live_value": qty * (last or 0), "cost": qty * entry})
+    cash = cash_now if cash_now is not None else sum(p.get("value") or 0 for p in P if p["asset_type"] == "cash")
+    val = sum(x["live_value"] for x in out) + (cash or 0)
+    cost = sum(x["cost"] for x in out) + (cash or 0)
+    return out, cash, val, cost
+
+
+# ---------- header + status strip ----------
+nav = A.get("total_value") or sum(p["value"] or 0 for p in P)
+pnl, pnl_pct = A.get("pnl"), A.get("pnl_pct")
+n_pos, LIVE_HELD, LIVE_CASH = len(P), [], None
+try:  # live: your current holdings at live prices (falls back to last evening's numbers)
+    _held, _cash, _v, _c = live_totals()
+    LIVE_HELD, LIVE_CASH = _held, _cash
+    if _held:
+        nav, pnl, pnl_pct, n_pos = _v, _v - _c, ((_v / _c - 1) * 100 if _c else None), len(_held) + (1 if _cash else 0)
+except Exception:  # noqa: BLE001
+    pass
+ALERTS = D["alerts"]  # alerts about stocks you've sold since last evening are hidden
+if LIVE_HELD:
+    _now = {h["ticker"] for h in LIVE_HELD}
+    _pid = {p["position_id"]: p["ticker"] for p in P}
+    ALERTS = [a for a in D["alerts"] if a.get("position_id") not in _pid or _pid[a["position_id"]] in _now]
+st.markdown(f'<div class="hdr"><b>PORTFOLIO MONITOR</b><span>AS OF {e(D["asof"])} · '
+            f'{n_pos} POSITIONS · EVENING ANALYSIS + LIVE PRICES</span></div>', unsafe_allow_html=True)
+
+macro_txt = f"{M['score']:.0f} {M['label'].upper()}" if M and M.get("score") is not None else "–"
+macro_cls = "" if not M or M.get("score") is None else ("up" if M["label"] == "Calm" else "dn" if M["label"] == "Stressed" else "am")
+n_high = sum(1 for a in ALERTS if a["severity"] == "high")
+cells = [("NAV", money(nav), ""), ("P&L", f"{money(pnl)} ({num(pnl_pct, 1)}%)" if pnl is not None else "–", cls(pnl)),
+         ("Positions", str(n_pos), ""), ("Alerts", f"{len(ALERTS)}" + (f" · {n_high} HIGH" if n_high else ""),
+                                         "dn" if n_high else ""),
+         ("Macro score", macro_txt, macro_cls), ("Net delta", f"{num(A.get('net_delta'), 0)} sh", ""),
+         ("Daily theta", money(A.get("daily_theta")), cls(A.get("daily_theta"))), ("As of", D["asof"], "")]
+st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
+                                             for k, v, c in cells) + "</div>", unsafe_allow_html=True)
+W = D.get("weather")
+if W and W.get("ma200"):
+    gap = (W["spy"] / W["ma200"] - 1) * 100
+    msg = (f"⛈ MARKET STORM: S&P 500 {abs(gap):.1f}% below its 200-day average. No new stock buys; new money waits in "
+           f"{config.SAFE_FUND} until it recovers. Stops still apply." if W["storm"] else
+           f"🌤 Fair weather: S&P 500 {gap:+.1f}% vs its 200-day average. Buying allowed (uptrends only).")
+    st.markdown(f'<div class="muted" style="margin:6px 0;font-size:13px;color:{RED if W["storm"] else GREEN}">'
+                f'{e(msg)}</div>', unsafe_allow_html=True)
+
+@st.fragment(run_every="60s")
 def live_section():
     held, cash_now = current_book()
     if not held:
@@ -377,6 +406,10 @@ if R.get("universe"):
 PF = D.get("performance") or {}
 st.markdown('<div class="sec">Wins &amp; losses · did the swaps work?</div>', unsafe_allow_html=True)
 W = PF.get("wins_losses")
+if W and LIVE_HELD:  # open (not locked in) profit/loss from your current holdings at live prices
+    W = dict(W)
+    W["unrealized"] = round(sum(x["live_value"] - x["cost"] for x in LIVE_HELD), 2)
+    W["total"] = round(W["realized"] + W["unrealized"], 2)
 if W and W["trades"]:
     wl_cells = [("Locked in (realized)", money(W["realized"]), cls(W["realized"])),
                 ("Still open (unrealized)", money(W["unrealized"]), cls(W["unrealized"])),
@@ -398,20 +431,56 @@ else:
     st.markdown('<div class="muted">No trades from Interactive Brokers yet. They appear after the Flex Query includes the '
                 '<b>Trades</b> section and the next evening run.</div>', unsafe_allow_html=True)
 
-H = [h for h in PF.get("history") or [] if h.get("value")]
-if len(H) >= 2 and H[0].get("spy"):
-    base_v, base_s = H[0]["value"], H[0]["spy"]
-    line = []
-    for h in H:
-        line.append({"date": h["asof"], "series": "Your book", "return": h["value"] / base_v - 1})
-        if h.get("spy"):
-            line.append({"date": h["asof"], "series": "S&P 500 (SPY)", "return": h["spy"] / base_s - 1})
-    ch = alt.Chart(pd.DataFrame(line)).mark_line(point=True).encode(
-        x=alt.X("date:T", title=None), y=alt.Y("return:Q", axis=alt.Axis(format="%"), title="since first tracked day"),
-        color=alt.Color("series:N", scale=alt.Scale(range=[AMBER, GREY]), legend=alt.Legend(orient="top")))
-    st.altair_chart(chart_theme(ch.properties(height=220)), width="stretch")
-    st.markdown('<div class="muted">Book value includes cash; money you add or withdraw moves this line too.</div>',
-                unsafe_allow_html=True)
+# ---------- you vs the S&P 500, whole history ----------
+VS = [x for x in PF.get("vs_sp500") or [] if x.get("mine") is not None]
+st.markdown('<div class="sec">You vs the S&amp;P 500 · same buys and sells, made in the index instead</div>',
+            unsafe_allow_html=True)
+if len(VS) >= 2:
+    last = VS[-1]
+    mine_now, sp_now, note = last["mine"], last["sp500"], f"close of {last['day']}"
+    try:  # today: your current stocks at live prices vs the shadow's SPY shares at the live SPY price
+        spy_live = live_quotes(("SPY",)).get("SPY")
+        if LIVE_HELD and spy_live:
+            mine_now = sum(x["live_value"] for x in LIVE_HELD)
+            sp_now, note = last["spy_shares"] * spy_live[0], "live"
+    except Exception:  # noqa: BLE001
+        pass
+    edge = mine_now - sp_now
+    st.markdown('<div class="strip">' + "".join(
+        f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>' for k, v, c in [
+            ("Your stocks", money(mine_now), ""), ("Same money in S&P 500", money(sp_now), ""),
+            ("You vs S&P 500", f"{money(edge)} ({pct(mine_now / sp_now - 1 if sp_now else None)})", cls(edge)),
+            ("Tracked since", VS[0]["day"], ""), ("As of", note, "")]) + "</div>", unsafe_allow_html=True)
+
+    def vs_chart(points, fmt, title):
+        df = pd.DataFrame([{"date": x["day"], "series": "Your stocks", "value": x["mine"]} for x in points]
+                          + [{"date": x["day"], "series": "Same trades in S&P 500", "value": x["sp500"]} for x in points])
+        df["date"] = pd.to_datetime(df["date"])
+        ch = alt.Chart(df).mark_line(point=len(points) < 40).encode(
+            x=alt.X("date:T", title=None, axis=alt.Axis(format=fmt, tickCount={"interval": "day", "step": 1}
+                                                       if len(points) < 15 else None)),
+            y=alt.Y("value:Q", title="value ($)", scale=alt.Scale(zero=False)),
+            color=alt.Color("series:N", title=None, legend=alt.Legend(orient="top", labelLimit=260),
+                            scale=alt.Scale(domain=["Your stocks", "Same trades in S&P 500"], range=[AMBER, GREY])),
+            tooltip=[alt.Tooltip("date:T", format="%b %d, %Y"), "series", alt.Tooltip("value:Q", format="$,.2f")])
+        st.markdown(f'<div class="muted" style="margin-top:6px">{title}</div>', unsafe_allow_html=True)
+        st.altair_chart(chart_theme(ch.properties(height=230)), width="stretch")
+
+    cutoff = (dt.date.fromisoformat(VS[-1]["day"]) - dt.timedelta(days=365)).isoformat()
+    year = [x for x in VS if x["day"] >= cutoff]
+    vs_chart(year, "%b %d", "LAST 12 MONTHS")
+    vs_chart(VS, "%b %Y", "ALL HISTORY (since your first trade on record)")
+    if VS[0]["day"] >= cutoff:
+        st.markdown(f'<div class="muted">Your trade history on record starts {e(VS[0]["day"])}, so both charts cover the '
+                    'same days for now. Older years appear once older IB statements are imported (see the manual).</div>',
+                    unsafe_allow_html=True)
+    st.markdown('<div class="muted">The grey line is a "shadow" account that made exactly your buys and sells, same '
+                'dollars, same days, but always in the S&amp;P 500 (SPY, dividends included). Cash and deposits are the '
+                'same in both, so they don\'t distort it, and stocks you\'ve sold stay in the history. Amber above grey = '
+                'your picks beat the index. One point per trading day (closing prices).</div>', unsafe_allow_html=True)
+else:
+    st.markdown('<div class="muted">Builds after the next evening run (needs IB\'s report of your holdings and trade '
+                'history).</div>', unsafe_allow_html=True)
 
 cards = PF.get("scorecard") or []
 if cards:
@@ -476,9 +545,12 @@ else:
                 unsafe_allow_html=True)
 
 st.markdown('<div class="sec">Active alerts</div>', unsafe_allow_html=True)
-if not D["alerts"]:
+if len(ALERTS) < len(D["alerts"]):
+    st.markdown(f'<div class="muted">{len(D["alerts"]) - len(ALERTS)} alert(s) from last evening about stocks '
+                'you have sold since are hidden.</div>', unsafe_allow_html=True)
+if not ALERTS:
     st.markdown('<div class="muted">No alerts.</div>', unsafe_allow_html=True)
-for a in D["alerts"]:
+for a in ALERTS:
     newstrike = a["kind"] in ("new_strikes", "new_expiry")
     color = YELLOW if newstrike else SEV.get(a["severity"], GREY)
     st.markdown(f'<div class="alert{" newstrike" if newstrike else ""}" style="border-color:{color}">'
@@ -488,7 +560,8 @@ for a in D["alerts"]:
                 + "</div>", unsafe_allow_html=True)
 
 # ---------- positions grid ----------
-st.markdown('<div class="sec">Positions</div>', unsafe_allow_html=True)
+st.markdown('<div class="sec">Positions · your current holdings at live prices (analysis from last evening)</div>',
+            unsafe_allow_html=True)
 
 
 def bar(pct, color):
@@ -507,8 +580,30 @@ def dte_pill(d):
 
 head = ["Position", "Plan", "Strike", "Expiry", "DTE", "Entry", "Mark", "Value", "P&L $", "P&L %", "Delta", "Theta/day",
         "Vega", "IV", "IV rank", "To target", "To stop", "Status"]
+def positions_now():
+    """Grid rows for what you hold right now: last evening's analysis where it exists, live price and value."""
+    if not LIVE_HELD:
+        return P
+    ev = {p["ticker"]: p for p in P if p["asset_type"] == "shares"}
+    blank = {"option_type": None, "strike": None, "expiry": None, "dte": None, "delta": None, "pos_theta": None,
+             "pos_vega": None, "iv": None, "progress_target": None, "progress_stop": None, "status": "new since evening",
+             "action": "HOLD"}
+    out = [p for p in P if p["asset_type"] == "option"]
+    for h in LIVE_HELD:
+        base = dict(ev.get(h["ticker"]) or {**blank, "position_id": f"live-{h['ticker']}", "asset_type": "shares"})
+        v, c = h["live_value"], h["cost"]
+        base.update({"ticker": h["ticker"], "contracts": h.get("contracts"), "entry_price": h.get("entry_price"),
+                     "mark": h["live"], "value": v, "pnl": v - c, "pnl_pct": (v / c - 1) * 100 if c else None})
+        out.append(base)
+    if LIVE_CASH is not None:
+        out.append({**blank, "position_id": "live-cash", "asset_type": "cash", "ticker": "CASH", "contracts": 1,
+                    "entry_price": None, "mark": None, "value": LIVE_CASH, "pnl": None, "pnl_pct": None,
+                    "status": "ok", "action": "HOLD"})
+    return out
+
+
 body = []
-for p in P:
+for p in positions_now():
     opt = p["asset_type"] == "option"
     name = (f"{p['ticker']} {p['option_type'].upper()} x{p['contracts']:g}" if opt else
             "CASH" if p["asset_type"] == "cash" else f"{p['ticker']} SHARES x{p['contracts']:g}")

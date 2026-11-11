@@ -149,12 +149,14 @@ def sync(path=None, fetcher=None, db=None):
         report_date, synced, cash = parse(xml_text)
         trades_note = ""
         trades = parse_trades(xml_text)
-        if trades:  # saved even when the positions update has to wait
-            con = storage.connect(db)
-            try:
+        con = storage.connect(db)  # trades and IB's holdings are saved even when the positions update has to wait
+        try:
+            if trades:
                 trades_note = f"; {performance.save_trades(con, trades)} new trade(s) saved"
-            finally:
-                con.close()
+            if synced:
+                performance.save_snapshot(con, report_date, synced)
+        finally:
+            con.close()
         with open(path) as f:
             current = json.load(f)
         try:  # the Mac keeps positions.json live from IB during the day; don't replace it with an older report
@@ -180,5 +182,25 @@ def sync(path=None, fetcher=None, db=None):
         return f"IB sync failed, kept positions.json as it was: {e}"
 
 
+def import_history(paths, db=None):
+    """One-time import of older IB Flex statements (XML files you download from IB, any date range), so the
+    you-vs-S&P-500 history goes back to the account's first trade. Only trades are read; holdings aren't touched.
+    Usage: python -m monitor.ibkr_sync --import file1.xml file2.xml ..."""
+    con = storage.connect(db)
+    try:
+        total = 0
+        for p in paths:
+            with open(p) as f:
+                total += performance.save_trades(con, parse_trades(f.read()))
+        first = con.execute("SELECT MIN(trade_date) FROM trades").fetchone()[0]
+        return f"imported {total} new trade(s); trade history now starts {first}"
+    finally:
+        con.close()
+
+
 if __name__ == "__main__":
-    print(sync())
+    import sys
+    if len(sys.argv) > 2 and sys.argv[1] == "--import":
+        print(import_history(sys.argv[2:]))
+    else:
+        print(sync())

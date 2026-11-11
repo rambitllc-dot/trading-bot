@@ -10,6 +10,12 @@
    edge = bought stock's return - sold stock's return. Positive = the swap beat keeping the old stock.
    Each idea is marked followed / not followed / open, from your IB trades (or, before IB has them, from
    what's in your book now). Ideas you skipped are scored too, so you can see if skipping was right.
+4. You vs the S&P 500 (`vs_sp500`): a "shadow" account that makes exactly your buys and sells, same dollars,
+   same days, but always in the S&P 500 (SPY) instead of the stock. Every dollar you put into a stock, it puts
+   into SPY; every dollar you take out of a stock, it takes out of SPY. Cash moves the same in both, so
+   deposits and withdrawals don't distort anything, and stocks you already sold stay in the history.
+   Your stocks' value minus the shadow's value = what your picks earned (or lost) versus the index.
+   Rebuilt every evening from IB's trade history and IB's report of what you held (`ib_snapshot`).
 """
 import datetime as dt
 
@@ -22,6 +28,9 @@ CREATE TABLE IF NOT EXISTS perf_daily (
 CREATE TABLE IF NOT EXISTS swap_scorecard (
     suggested_on TEXT, sell TEXT, buy TEXT, followed TEXT, sell_then REAL, buy_then REAL, sell_now REAL,
     buy_now REAL, sell_ret REAL, buy_ret REAL, edge REAL, days INTEGER, asof TEXT, PRIMARY KEY (suggested_on, sell));
+CREATE TABLE IF NOT EXISTS ib_snapshot (report_date TEXT, ticker TEXT, qty REAL, PRIMARY KEY (report_date, ticker));
+CREATE TABLE IF NOT EXISTS vs_sp500 (asof TEXT, day TEXT, mine REAL, sp500 REAL, spy_shares REAL,
+    PRIMARY KEY (asof, day));
 """
 FOLLOW_WINDOW_DAYS = 7  # a swap counts as followed if you traded it within a week of the idea
 
@@ -139,7 +148,92 @@ def tracked_tickers(con, days=120, asof=None):
         return []
 
 
-def run(con, asof, rows, totals, bars):
+def save_snapshot(con, report_date, positions):
+    """IB's report of the shares you held at the close of report_date (the anchor for vs_sp500)."""
+    setup(con)
+    if not report_date:
+        return
+    con.execute("DELETE FROM ib_snapshot WHERE report_date=?", (report_date,))
+    con.executemany("INSERT INTO ib_snapshot VALUES (?,?,?)",
+                    [(report_date, p["ticker"], float(p["contracts"])) for p in positions
+                     if p.get("asset_type") == "shares" and p.get("contracts")])
+    con.commit()
+
+
+def traded_tickers(con):
+    """Every stock you've traded, so its prices keep being downloaded (history vs the S&P 500)."""
+    try:
+        return sorted({r[0] for r in con.execute("SELECT DISTINCT ticker FROM trades WHERE asset_type='shares'")})
+    except Exception:  # noqa: BLE001
+        return []
+
+
+def vs_sp500(con, asof, bars):
+    """Your stocks vs the same buys and sells made in the S&P 500. Returns the daily series and today's numbers,
+    or None when there's not enough data (no IB report or no SPY prices)."""
+    setup(con)
+    spy = bars.get("SPY") if bars else None
+    snap_date = con.execute("SELECT MAX(report_date) FROM ib_snapshot WHERE report_date<=?", (asof,)).fetchone()[0]
+    if not spy or not snap_date:
+        return None
+    end = {t: q for t, q in con.execute("SELECT ticker, qty FROM ib_snapshot WHERE report_date=?", (snap_date,))}
+    trades = _rows(con, "SELECT trade_date, ticker, side, quantity, price, proceeds FROM trades "
+                        "WHERE asset_type='shares' AND trade_date<=? ORDER BY trade_date, trade_id", (snap_date,))
+    # what you held before the first trade = IB's report minus every trade since
+    held = dict(end)
+    for t in trades:
+        held[t["ticker"]] = held.get(t["ticker"], 0) + (-t["quantity"] if t["side"] == "BUY" else t["quantity"])
+    held = {k: v for k, v in held.items() if abs(v) > 1e-6}
+    first = trades[0]["trade_date"] if trades else snap_date
+    days = [b[0] for b in spy if b[0] <= asof]
+    start = max([d for d in days if d < first] or days[:1])
+    last_px = {t["ticker"]: t["price"] for t in trades}
+
+    def px(t, d):
+        p = close_on([b for b in bars.get(t) or [] if b[0] <= d], d)
+        return p if p else last_px.get(t)
+
+    def value(h, d):
+        return sum(q * (px(t, d) or 0) for t, q in h.items())
+
+    spy_sh = value(held, start) / close_on(spy, start)
+    series, i = [], 0
+    for d in [x for x in days if x >= start]:
+        while i < len(trades) and trades[i]["trade_date"] <= d and d > start:
+            t = trades[i]
+            dollars = abs(t["proceeds"]) if t["proceeds"] else t["quantity"] * t["price"]
+            sign = 1 if t["side"] == "BUY" else -1
+            held[t["ticker"]] = held.get(t["ticker"], 0) + sign * t["quantity"]
+            spy_sh += sign * dollars / close_on(spy, t["trade_date"])
+            i += 1
+        s = close_on(spy, d)
+        series.append({"day": d, "mine": round(value(held, d), 2), "sp500": round(spy_sh * s, 2),
+                       "spy_shares": spy_sh})
+    con.execute("DELETE FROM vs_sp500 WHERE asof=?", (asof,))
+    con.executemany("INSERT INTO vs_sp500 VALUES (?,?,?,?,?)",
+                    [(asof, x["day"], x["mine"], x["sp500"], x["spy_shares"]) for x in series])
+    con.commit()
+    last = series[-1]
+    return {"since": start, "report_date": snap_date, "mine": last["mine"], "sp500": last["sp500"],
+            "edge": round(last["mine"] - last["sp500"], 2), "spy_shares": spy_sh,
+            "holdings": {k: v for k, v in held.items() if abs(v) > 1e-6}, "series": series}
+
+
+def history_bars(con, bars, provider=None):
+    """The scan downloads 2 years of prices. If your trades go back further, download the full history of the
+    stocks you traded and SPY, so the all-history comparison covers every year."""
+    first = con.execute("SELECT MIN(trade_date) FROM trades WHERE asset_type='shares'").fetchone()[0]
+    spy = (bars or {}).get("SPY")
+    if not first or not spy or spy[0][0] <= first or provider is None or not hasattr(provider, "bulk"):
+        return bars
+    try:
+        extra = provider.bulk(traded_tickers(con) + ["SPY"], period="max")
+    except Exception:  # noqa: BLE001
+        return bars
+    return {**bars, **{k: v for k, v in extra.items() if v}}
+
+
+def run(con, asof, rows, totals, bars, provider=None):
     setup(con)
     wl = wins_losses(con, totals.get("pnl"))
     spy = close_on(bars.get("SPY"), asof) if bars else None
@@ -147,8 +241,12 @@ def run(con, asof, rows, totals, bars):
                 (asof, totals.get("value"), totals.get("cost"), totals.get("pnl"), wl["realized"], spy))
     con.commit()
     cards = scorecard(con, asof, rows, bars) if bars else []
+    try:
+        vs = vs_sp500(con, asof, history_bars(con, bars, provider))
+    except Exception as e:  # noqa: BLE001 - never break the evening run
+        vs = {"error": str(e)}
     return {"wins_losses": {k: v for k, v in wl.items() if k != "closed"}, "scorecard": cards,
-            "score_summary": score_summary(cards)}
+            "score_summary": score_summary(cards), "vs_sp500": {k: v for k, v in (vs or {}).items() if k != "series"}}
 
 
 def text(p):
@@ -166,6 +264,10 @@ def text(p):
     for c in p["scorecard"]:
         e = f"{c['edge'] * 100:+.1f} pts" if c["edge"] is not None else "-"
         lines.append(f"- {c['suggested_on']} {c['sell']} -> {c['buy']} [{c['followed']}]: {e} after {c['days']} day(s)")
+    v = p.get("vs_sp500") or {}
+    if v.get("mine") is not None:
+        lines.append(f"\nYOU vs S&P 500 (same buys and sells made in SPY, since {v['since']}): your stocks "
+                     f"{v['mine']:,.2f} vs {v['sp500']:,.2f} -> {v['edge']:+,.2f}")
     s = p["score_summary"]["all"]
     if s["scored"]:
         lines.append(f"{s['beat']} of {s['scored']} swap ideas are ahead; average edge {s['avg_edge'] * 100:+.1f} pts")

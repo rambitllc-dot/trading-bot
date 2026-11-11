@@ -149,6 +149,10 @@ def load(db_path=None, asof=None):
             perf["wins_losses"] = performance.wins_losses(con, unreal)
         if table_exists(con, "perf_daily"):
             perf["history"] = rows(con, "SELECT * FROM perf_daily WHERE asof<=? ORDER BY asof", (asof,))
+        if table_exists(con, "vs_sp500"):
+            last = con.execute("SELECT MAX(asof) FROM vs_sp500 WHERE asof<=?", (asof,)).fetchone()[0]
+            perf["vs_sp500"] = rows(con, "SELECT day, mine, sp500, spy_shares FROM vs_sp500 WHERE asof=? ORDER BY day",
+                                    (last,)) if last else []
         if table_exists(con, "swap_scorecard"):
             cards = rows(con, "SELECT * FROM swap_scorecard WHERE asof=? ORDER BY suggested_on DESC, sell", (asof,))
             perf["scorecard"], perf["summary"] = cards, performance.score_summary(cards)

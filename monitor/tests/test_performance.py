@@ -53,3 +53,36 @@ class PerformanceTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class VsSP500Test(unittest.TestCase):
+    """Same buys and sells made in SPY: deposits don't count, sold stocks stay in the history."""
+
+    def setUp(self):
+        self.con = sqlite3.connect(os.path.join(tempfile.mkdtemp(), "t.db"))
+        performance.save_trades(self.con, [
+            # Nov 2: sell all 1 AAA at 100 and buy 2 BBB at 50 (a swap); Nov 3: buy 1 more BBB at 50 (new money)
+            {"trade_id": "1", "trade_date": "2026-11-02", "ticker": "AAA", "asset_type": "shares", "side": "SELL",
+             "quantity": 1, "price": 100, "proceeds": 100, "commission": 0, "realized": 0},
+            {"trade_id": "2", "trade_date": "2026-11-02", "ticker": "BBB", "asset_type": "shares", "side": "BUY",
+             "quantity": 2, "price": 50, "proceeds": -100, "commission": 0, "realized": 0},
+            {"trade_id": "3", "trade_date": "2026-11-03", "ticker": "BBB", "asset_type": "shares", "side": "BUY",
+             "quantity": 1, "price": 50, "proceeds": -50, "commission": 0, "realized": 0}])
+        performance.save_snapshot(self.con, "2026-11-03", [{"asset_type": "shares", "ticker": "BBB", "contracts": 3}])
+
+    def test_shadow_mirrors_trades(self):
+        b = {"SPY": bars(("2026-10-30", 500), ("2026-11-02", 500), ("2026-11-03", 500), ("2026-11-04", 550)),
+             "AAA": bars(("2026-10-30", 100), ("2026-11-02", 100), ("2026-11-03", 90), ("2026-11-04", 80)),
+             "BBB": bars(("2026-10-30", 50), ("2026-11-02", 50), ("2026-11-03", 50), ("2026-11-04", 60))}
+        v = performance.vs_sp500(self.con, "2026-11-04", b)
+        self.assertEqual(v["since"], "2026-10-30")             # held 1 AAA before the first trade
+        self.assertEqual(v["holdings"], {"BBB": 3})
+        # shadow: 100 in SPY at 500 (0.2 sh), swap keeps it, +50 new money -> 0.3 sh; at 550 = 165
+        self.assertAlmostEqual(v["sp500"], 165.0)
+        self.assertAlmostEqual(v["mine"], 180.0)                # 3 BBB at 60
+        self.assertAlmostEqual(v["edge"], 15.0)
+        self.assertEqual([x["mine"] for x in v["series"]], [100, 100, 150, 180])
+
+    def test_needs_ib_report(self):
+        con = sqlite3.connect(os.path.join(tempfile.mkdtemp(), "t.db"))
+        self.assertIsNone(performance.vs_sp500(con, "2026-11-04", {"SPY": bars(("2026-11-04", 1))}))

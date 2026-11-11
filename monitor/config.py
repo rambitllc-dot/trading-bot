@@ -6,6 +6,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 POSITIONS_FILE = os.path.join(BASE_DIR, "positions.json")
 SNAPSHOT_DIR = os.path.join(BASE_DIR, "snapshots")
 DB_FILE = os.environ.get("MONITOR_DB") or os.path.join(BASE_DIR, "monitor.db")
+OUTPUT_DIR = os.path.join(BASE_DIR, "output")  # evening results (valuation_latest.json, ib_plan.json)
 
 RISK_FREE_RATE = 0.045      # annual, used for Black-Scholes Greeks
 CONTRACT_MULTIPLIER = 100   # one option contract = 100 shares

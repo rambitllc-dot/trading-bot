@@ -60,6 +60,14 @@ These are fixed rules, not predictions. They limit losses but don't guarantee pr
 - **11:45 PM:** IB Gateway restarts itself.
 - **About once a week:** IB asks you to approve the Gateway login on your phone (IB Key). If you miss it, Telegram warns you that the trader can't trade.
 
+### Am I beating the S&P 500?
+
+The dashboard section **You vs the S&P 500** answers this for your whole history, not just today. It runs a "shadow" account that makes exactly your buys and sells (same dollars, same days) but always in the S&P 500 (SPY, dividends included). Cash and deposits are the same in both, so adding money doesn't distort the result, and stocks you've already sold stay in the history. Your stocks above the S&P line = your picks are winning.
+
+- **Last 12 months** chart and **All history** chart, one point per trading day. Today's numbers use live prices.
+- It's rebuilt every evening from IB's trade history and IB's report of what you held.
+- **To go back further than the IB report covers:** in the IB portal, Performance & Reports, Flex Queries, run the "Monitor" query with a custom date range (up to 365 days per run, XML format) for each older year, and send the files to Claude, or put them in the repo and run `python -m monitor.ibkr_sync --import file1.xml file2.xml`. Trades are stored once, so overlapping files are fine. Setting the query's period to "Last 365 Calendar Days" keeps the last year covered automatically.
+
 ## 4. Turning things on and off
 
 **Pause the IB trader (real money) - easiest way:**

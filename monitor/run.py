@@ -50,7 +50,8 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     if hasattr(provider, "bulk"):
         scan, bars = scanner.run(con, asof, provider, macro_result.get("label"), news_caller,
                                  extra_tickers=[p["ticker"] for p in book if p["asset_type"] != "cash"]
-                                 + performance.tracked_tickers(con, asof=asof))
+                                 + performance.tracked_tickers(con, asof=asof)
+                                 + performance.traded_tickers(con) + ["SPY"])
     else:
         scan, bars = {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}, {}
     sentiment = {n["ticker"]: n.get("sentiment") for n in news_result + scan.get("news", []) if n.get("status") == "ok"}
@@ -84,7 +85,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
             elif s and r.get("action") in ("HOLD", "REVIEW", "WEAK"):
                 r["action"], r["action_reason"] = "SWAP", f"rotation: swap for {s['buy']} (rank #{s['buy_rank']})"
         storage.save_valuations(con, asof, rows)
-    perf = performance.run(con, asof, rows, totals, bars)
+    perf = performance.run(con, asof, rows, totals, bars, provider)
     try:  # plan for the IB trader on your Mac (same rules, same format as the autopilot)
         if not bars:
             raise ValueError("no market data this run")
@@ -92,8 +93,8 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
         cash_now = sum(r.get("value") or 0 for r in rows if r["asset_type"] == "cash")
         ib_plan = autotrade.build_plan(asof, shares, rot, con, totals["value"], cash_now)
         ib_plan["source"] = "positions.json (synced from IB)"
-        os.makedirs(os.path.join(config.BASE_DIR, "output"), exist_ok=True)
-        autotrade.save_json(os.path.join(config.BASE_DIR, "output", "ib_plan.json"), ib_plan)
+        os.makedirs(config.OUTPUT_DIR, exist_ok=True)
+        autotrade.save_json(os.path.join(config.OUTPUT_DIR, "ib_plan.json"), ib_plan)
     except Exception as e:  # noqa: BLE001
         if bars:
             print(f"IB plan not saved: {e}")
@@ -108,7 +109,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
               "macro": macro_result, "news": news_result, "alerts": alert_list, "chain_diffs": diffs, "scan": scan,
               "rotation": rot, "auto_levels": auto, "performance": perf, "autopilot": auto_res,
               "data_errors": {t: s["errors"] for t, s in snaps.items() if s["errors"]}}
-    out_dir = os.path.join(config.BASE_DIR, "output")
+    out_dir = config.OUTPUT_DIR
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "valuation_latest.json"), "w") as f:
         json.dump(result, f, indent=1)
