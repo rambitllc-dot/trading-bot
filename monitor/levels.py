@@ -61,7 +61,19 @@ def weakness(r, b):
         r["weak_text"] = f"WEAKENING: closed {b[-1][1]:,.2f}, below its {n}-day average {ma:,.2f}"
 
 
-def apply(con, asof, rows, bars):
+def settled(bars, asof, now=None):
+    """Only daily bars whose close is final. During market hours (and shortly after), the price feed's row for
+    today can be incomplete or still show yesterday's close, so it must not set a new high."""
+    import datetime as dt
+    from zoneinfo import ZoneInfo
+    now = now or dt.datetime.now(ZoneInfo("America/New_York"))
+    today = now.date().isoformat()
+    if asof != today or now.time() >= dt.time(16, 15):
+        return bars  # an evening run, or a run for another day: all closes are final
+    return [x for x in bars if x[0] < today]
+
+
+def apply(con, asof, rows, bars, now=None):
     """Fill in automatic levels for shares without their own, then refresh each row's plan label."""
     con.executescript(SCHEMA)
     out = []
@@ -80,15 +92,17 @@ def apply(con, asof, rows, bars):
         if row is not None and r.get("entry_date") and row[0] < r["entry_date"]:
             row = None  # sold and bought again later: start fresh levels for the new purchase
         prev_stop = row[3] if row is not None else None
+        final = settled(b, asof, now)  # highs only from final closes
         if row is None:
             base_date = r.get("entry_date") if r.get("entry_date") and r["entry_date"] <= asof else asof
-            since = [x[1] for x in b if x[0] >= base_date] or [close]
+            since = ([x[1] for x in final if x[0] >= base_date]
+                     or [close if final is b else min(close, r.get("entry_price") or close)])
             base, highest = close, max(since)
             stop = 0.0
             target = close + config.REWARD_RISK * config.ATR_STOP_MULT * a
         else:
             base_date, base, highest, stop, target = row
-            since = [x[1] for x in b if x[0] >= base_date] or [close]
+            since = [x[1] for x in final if x[0] >= base_date] or [close if final is b else highest]
             highest = max(highest, max(since))
         stop, rule = floors(stop, r.get("entry_price"), highest)
         con.execute("INSERT OR REPLACE INTO auto_levels VALUES (?,?,?,?,?,?,?,?)",

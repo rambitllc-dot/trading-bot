@@ -106,3 +106,21 @@ class LevelsTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SettledBarsTest(unittest.TestCase):
+    def test_todays_row_is_ignored_during_market_hours(self):
+        import datetime as dt
+        from zoneinfo import ZoneInfo
+        ny = ZoneInfo("America/New_York")
+        b = [("2026-11-05", 74.17, 74.2, 0, 74.0), ("2026-11-06", 74.17, 74.2, 0, 69.5)]   # stale "today" row
+        midday = dt.datetime(2026, 11, 6, 12, 0, tzinfo=ny)
+        self.assertEqual(levels.settled(b, "2026-11-06", midday), b[:1])
+        evening = dt.datetime(2026, 11, 6, 17, 0, tzinfo=ny)
+        self.assertEqual(levels.settled(b, "2026-11-06", evening), b)
+        con = storage.connect(os.path.join(tempfile.mkdtemp(), "m.db"))
+        r = row("CNC", entry=70.59, mark=69.98)
+        r["entry_date"] = "2026-11-06"
+        bars_ = [(f"2026-10-{d:02d}", 70.0, 70.5, 0, 69.5) for d in range(1, 31)] + b
+        levels.apply(con, "2026-11-06", [r], {"CNC": bars_}, now=midday)
+        self.assertAlmostEqual(r["stop_price"], 70.59 * 0.955, places=2)   # not 4.5% below the stale 74.17
