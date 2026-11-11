@@ -2,8 +2,8 @@
   {
     "asset_type": "shares",
     "ticker": "CNC",
-    "contracts": 4.9,
-    "entry_price": 70.5946,
+    "contracts": 5,
+    "entry_price": 70.6,
     "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-06",
     "target_price": null,
@@ -12,8 +12,8 @@
   {
     "asset_type": "shares",
     "ticker": "MRK",
-    "contracts": 1.0,
-    "entry_price": 147.705,
+    "contracts": 1,
+    "entry_price": 147.71,
     "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-06",
     "target_price": null,
@@ -23,7 +23,7 @@
     "asset_type": "shares",
     "ticker": "TXN",
     "contracts": 0.6,
-    "entry_price": 273.5967,
+    "entry_price": 273.6,
     "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-06",
     "target_price": null,
@@ -32,8 +32,8 @@
   {
     "asset_type": "shares",
     "ticker": "TGT",
-    "contracts": 0.9,
-    "entry_price": 161.4778,
+    "contracts": 1,
+    "entry_price": 161.47,
     "entry_date": "2026-11-11",
     "target_price": null,
     "stop_price": null,
@@ -41,7 +41,7 @@
   },
   {
     "asset_type": "cash",
-    "amount": 8.67,
-    "note": "IB cash after selling MRNA and buying TGT (Nov 11)"
+    "amount": 66.51,
+    "note": "IB cash after topping up CNC and TGT to whole shares (Nov 11)"
   }
 ]
