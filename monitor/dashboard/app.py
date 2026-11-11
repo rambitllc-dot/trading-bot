@@ -217,7 +217,8 @@ def live_section():
     q = live_quotes(tuple(sorted({p["ticker"] for p in held})))
     status, is_open = market_status()
     when = dt.datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%-I:%M %p PT")
-    st.markdown(f'<div class="sec">Live · updates every minute · {when} · {status}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="sec">Today, live · your current holdings · updates every minute · {when} · {status}</div>',
+                unsafe_allow_html=True)
     if cash_now is None:  # cash and options (evening values)
         other = sum(p.get("value") or 0 for p in P if p["asset_type"] != "shares")
         other_cost = sum(p.get("cost") or 0 for p in P if p["asset_type"] != "shares")
@@ -247,6 +248,24 @@ def live_section():
     st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
                                                  for k, v, c in cells) + "</div>" + t + "</table></div>",
                 unsafe_allow_html=True)
+    # last evening's book, for comparison with today's live one
+    ev = [p for p in P if p["asset_type"] == "shares"]
+    if ev:
+        ev_cash = sum(p.get("value") or 0 for p in P if p["asset_type"] == "cash")
+        ev_v = sum(p.get("value") or 0 for p in ev) + ev_cash
+        ev_cost = sum(p.get("cost") or 0 for p in ev) + ev_cash
+        t2 = (f'<div class="sec" style="margin-top:14px">Last evening · close of {e(asof)} · total {money(ev_v)} · '
+              f'P&amp;L <span class="{cls(ev_v - ev_cost)}">{money(ev_v - ev_cost)}</span></div>'
+              '<div class="wrap"><table class="grid"><tr><th>Stock</th><th>Close</th><th>Value</th>'
+              '<th>P&amp;L since bought</th><th>Stop</th><th>Target</th><th>Plan</th></tr>')
+        for p in ev:
+            v, c = p.get("value") or 0, p.get("cost") or 0
+            t2 += (f'<tr><td><b>{e(p["ticker"])}</b></td><td>{num(p.get("mark"))}</td><td>{money(v)}</td>'
+                   f'<td class="{cls(v - c)}">{money(v - c)} ({pct(v / c - 1 if c else None)})</td>'
+                   f'<td>{num(p.get("stop_price"))}</td><td>{num(p.get("target_price"))}</td>'
+                   f'<td><span class="pill" style="background:{plan.COLORS.get(p.get("action") or "HOLD", GREY)};'
+                   f'color:#07090C;font-weight:700">{e(p.get("action") or "HOLD")}</span></td></tr>')
+        st.markdown(t2 + "</table></div>", unsafe_allow_html=True)
     st.markdown('<div class="muted">Live prices from Yahoo Finance. Holdings are your current ones (synced from IB, plus '
                 'trades recorded since); stops and targets come from the latest evening run, and a stock bought since '
                 'then shows its starting stop. "To stop" turns red within 2%.</div>',
