@@ -188,16 +188,42 @@ def market_status():
 
 
 @st.fragment(run_every="60s")
+def current_book():
+    """Your holdings right now (positions.json: synced from IB, plus trades recorded since), with the stop and
+    target from the latest evening run; a stock bought since then gets the starting stop, 4.5% below its price."""
+    from monitor import positions as positions_mod
+    try:
+        book = positions_mod.load(config.POSITIONS_FILE)
+    except Exception:  # noqa: BLE001 - fall back to the evening snapshot
+        return [p for p in P if p["asset_type"] == "shares"], None
+    evening = {p["ticker"]: p for p in P if p["asset_type"] == "shares"}
+    out = []
+    for b in book:
+        if b["asset_type"] != "shares":
+            continue
+        e = evening.get(b["ticker"], {})
+        out.append({**b, "mark": e.get("mark") or b.get("entry_price"),
+                    "stop_price": b.get("stop_price") or e.get("stop_price")
+                    or (b.get("entry_price") or 0) * (1 - config.TRAIL_PCT / 100),
+                    "target_price": b.get("target_price") or e.get("target_price")})
+    cash = sum(b.get("contracts") or 0 for b in book if b["asset_type"] == "cash")
+    return out, cash
+
+
 def live_section():
-    held = [p for p in P if p["asset_type"] == "shares"]
+    held, cash_now = current_book()
     if not held:
         return
     q = live_quotes(tuple(sorted({p["ticker"] for p in held})))
     status, is_open = market_status()
     when = dt.datetime.now(ZoneInfo("America/Los_Angeles")).strftime("%-I:%M %p PT")
     st.markdown(f'<div class="sec">Live · updates every minute · {when} · {status}</div>', unsafe_allow_html=True)
-    other = sum(p.get("value") or 0 for p in P if p["asset_type"] != "shares")  # cash and options (evening values)
-    tot_v, tot_cost, day = other, sum(p.get("cost") or 0 for p in P if p["asset_type"] != "shares"), 0.0
+    if cash_now is None:  # cash and options (evening values)
+        other = sum(p.get("value") or 0 for p in P if p["asset_type"] != "shares")
+        other_cost = sum(p.get("cost") or 0 for p in P if p["asset_type"] != "shares")
+    else:
+        other = other_cost = cash_now
+    tot_v, tot_cost, day = other, other_cost, 0.0
     t = ('<div class="wrap"><table class="grid"><tr><th>Stock</th><th>Live price</th><th>Today</th><th>Value</th>'
          '<th>P&amp;L since bought</th><th>Stop</th><th>To stop</th><th>Target</th></tr>')
     for p in held:
@@ -221,8 +247,9 @@ def live_section():
     st.markdown('<div class="strip">' + "".join(f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>'
                                                  for k, v, c in cells) + "</div>" + t + "</table></div>",
                 unsafe_allow_html=True)
-    st.markdown('<div class="muted">Live prices from Yahoo Finance; holdings, stops and targets from the latest '
-                'evening run (holdings update from IB the day after a trade). "To stop" turns red within 2%.</div>',
+    st.markdown('<div class="muted">Live prices from Yahoo Finance. Holdings are your current ones (synced from IB, plus '
+                'trades recorded since); stops and targets come from the latest evening run, and a stock bought since '
+                'then shows its starting stop. "To stop" turns red within 2%.</div>',
                 unsafe_allow_html=True)
 
 
