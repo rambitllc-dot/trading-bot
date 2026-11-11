@@ -90,3 +90,92 @@ ALERTS (5)
 - [info] CNC is 42% of the book (cap 40%). -> YOUR PLAN: REVIEW
 - [info] Healthcare is 78% of the book (cap 60%). -> YOUR PLAN: REVIEW
 Notifier: sent
+IB sync waiting: IB's report is from 2026-11-10, but positions.json has a buy from 2026-11-11; it will sync once IB's report includes it; 0 new trade(s) saved
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ANT"}}}
+$ANT: No data found, symbol may be delisted
+
+1 Failed download:
+['ANT']: No data found, symbol may be delisted
+Portfolio as of 2026-11-11
+Value $978.83 · cost $958.45 · P&L $20.38 (+2.1%) · net delta 8 shares · theta $0.00/day · 5/5 positions priced
+
+- CNC shares x5: mark $70.48, value $352.40, P&L -$0.60 (-0.2%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -0.2%: #2 in line for the next swap).
+- MRK shares x1: mark $147.18, value $147.18, P&L -$0.53 (-0.4%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 148.76)) · LOSING -0.4%: #1 in line for the next swap).
+- TXN shares x1: mark $309.81, value $309.81, P&L $20.28 (+7.0%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 309.81))).
+- TGT shares x1: mark $162.70, value $162.70, P&L $1.23 (+0.8%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest close since you bought, 162.70))).
+- CASH shares x6.74: mark $1.00, value $6.74, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 8 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: CNC 36%, TXN 32%, TGT 17%, MRK 15%, CASH 1%
+By sector: Healthcare 51%, Technology 32%, Consumer Defensive 17%, Cash 1%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+69/100 · Calm (vix level 80, vix percentile 44, term structure 64, breadth 73, credit 76)
+
+NEWS (Claude summaries, facts only)
+- CNC [positive]: A Simply Wall St. article reports that Centene shareholders received a 100.1% return over the past year, including dividends. A separate Zacks article says UnitedHealth's profits are rising despite fewer members and lower Optum Health sales, citing higher margins and pricing discipline, and it also notes medical-cost risks. The headlines do not report any Centene-specific scheduled event or price level.
+  Drivers: Past-year shareholder return of 100.1% including dividends; Analysts were split on the stock as of November 2025, per the Simply Wall St. article; Peer UnitedHealth's profit growth from higher margins and pricing discipline; Medical-cost risks flagged for the managed-care sector
+- MRK [positive]: Merck reported Phase 2b data for its investigational GLP-1/glucagon co-agonist efinopegdutide, showing statistically significant MASH resolution without fibrosis worsening. Headlines also say the stock is up 42% since January, the 1-year return was 67.6% including dividends even though Merck's profit fell, and the Moderna melanoma vaccine it partners on succeeded in Phase 3.
+  Drivers: efinopegdutide MASH Phase 2b data; Phase 3 melanoma vaccine success with Moderna; patent cliff being addressed; growing late-stage pipeline and US manufacturing plans
+- TGT [neutral]: Target's upcoming earnings report is expected next week, and Zacks reports that Wall Street expects earnings growth. RBC says Target is set for a quarterly beat, and Simply Wall St reports traffic recovery signs and a share price around US$165.90 after a 91.6% gain over 12 months. A TheStreet piece notes that Target and Kohl's Veterans Day deals reflect growing household budget pressure.
+  Drivers: Upcoming earnings report next week; RBC expects a quarterly beat; Reported traffic recovery signs; Household budget pressure
+  Flag for TGT-shares: Target's earnings report is scheduled for next week, per Zacks (exact date not stated in the headline).
+- TXN [positive]: Texas Instruments added agentic AI features to its CCStudio development tools and launched new multiprotocol industrial communication hardware for factory automation, robotics and IIoT customers. A GuruFocus report said 42 ETFs bought $365.9 million of TXN stock on Monday, and Zacks reported the stock up 70% year to date, citing earnings, AI data center demand and cash flow. The headlines do not report any scheduled event or price level affecting the held position.
+  Drivers: Reported 70% year-to-date gain; Agentic AI features added to CCStudio; $365.9M ETF inflows on Monday; AI data center demand cited by Zacks
+Claude cost this run: $0.0017
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 522 of 524 stocks.
+- Watchlist SPCX 139.75: 27.0% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 172.40: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+773% over 12 months), SNDK (+453% over 12 months), DELL (+305% over 12 months), LITE (+280% over 12 months), MU (+277% over 12 months)
+Pullbacks in uptrends: OTIS (+3% above its 200-day average, RSI-2 10 after a sharp drop)
+New 52-week highs: HUM (new 52-week high at 446.31), VTRS (new 52-week high at 21.06), BEN (new 52-week high at 36.30), IEX (new 52-week high at 239.96), CPAY (new 52-week high at 461.95)
+Unusual volume: none today
+  MRNA [positive]: Moderna (MRNA) shares rose about 6.4% on November 10 after third-quarter 2026 results showed revenue up 29% to $1.3 billion and a raised full-year revenue growth forecast. Headlines also report the stock gained roughly 9.8% over five sessions to close near $250 and is up about 750% in 2026, mainly on a melanoma vaccine developed with Merck that succeeded in Phase 3.
+  SNDK [positive]: Sandisk (SNDK) rose nearly 17% on Wednesday, Nov 11, 2026, as memory and storage stocks rallied after CoreWeave reported strong earnings and its CEO said AI demand exceeds available capacity. The move followed a roughly 41% monthly drop, and the company has announced an 8-for-1 stock split. Headlines cite guidance of up to $12.6 billion in quarterly revenue.
+  DELL [positive]: Dell shares rose about 11% on November 11 after CoreWeave raised the low end of its 2026 capex range to $37 billion, which was cited as a read-through for Dell's record $95 billion AI backlog. The gain followed a 12% weekly decline to November 9, which headlines attributed to Texas data center moratorium fears. Dell and KIOXIA also introduced a 157 PB single-rack object storage solution.
+  LITE [positive]: Lumentum (LITE) shares rose more than 14% on Wednesday, 2026-11-11, alongside analyst price-target changes and a broad tech rally. Headlines also report a pending Marvell acquisition of Lumentum, with each Lumentum share converting into 4.5 Marvell shares; the deal value is reported as $80 billion in one headline and $115 billion in another.
+  MU [positive]: Micron shares rose on Wednesday along with memory and storage peers after CoreWeave beat third-quarter estimates and its CEO said AI demand is outpacing available capacity. The stock had fallen about 29.7% between October 29 and November 5, closing at $656 on November 5. Bernstein has said the shares could nearly double.
+  SPCX [neutral]: SpaceX (SPCX) shares reportedly fell after the midterm elections, and a Starship booster-and-ship catch attempt with its launch tower is scheduled for Friday, Nov. 13. CalPERS said it nearly doubled its $500 million investment through a radio spectrum deal now tied to a major SpaceX deal. Analysts say SpaceX's expansion into cellphone services could benefit satellite rival AST SpaceMobile.
+  PLTR [negative]: Palantir reported what headlines describe as its best quarter in company history, yet its shares reportedly fell about 19% as investors focused on slowing contract growth and a high valuation. Cathie Wood's fund trimmed its Palantir stake, and German defense contractor Helsing unveiled a competing battlefield AI platform aimed at European customers.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- CNC: stop 67.42 · target 89.48 · typical daily move 3.21
+- MRK: stop 142.07 · target 176.66 · typical daily move 4.86
+- TXN: stop 295.87 · target 346.77 · typical daily move 12.86
+- TGT: stop 155.38 · target 193.79 · typical daily move 5.18
+
+ROTATION (follow the money)
+- #1 in swap line: MRK, rank #6 of 518, score 87, LOSING -0.4%
+- #2 in swap line: CNC, rank #4 of 518, score 88, LOSING -0.2%
+- #3 in swap line: TGT, rank #9 of 518, score 85
+- #4 in swap line: TXN, rank #3 of 518, score 90
+Strongest stocks you don't own: MRNA (98), VTRS (92), CRL (88), BEN (86), CPAY (85)
+Status: no swap: no stock you don't own clearly beats a holding that's free to swap (needs a score of 80+ and a 10-point lead); best candidate VTRS scores 92
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -88.90 from 1 win(s) / 4 loss(es), win rate 20%; fees 16.99
+Open (not locked in) +20.38 · total -68.52
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -12.9 pts after 6 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: +0.9 pts after 6 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -16.0 pts after 6 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -11.7 pts after 6 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +1.4 pts after 1 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-04-02): your stocks 827.63 vs 906.03 -> -78.40
+2 of 5 swap ideas are ahead; average edge -7.7 pts
+
+ALERTS (2)
+- [warn] NEW Market environment moved from Mixed (61) to Calm (69). -> YOUR PLAN: REVIEW
+- [warn] NEW TGT news: Target's earnings report is scheduled for next week, per Zacks (exact date not stated in the headline). (driver: Upcoming earnings report next week) -> YOUR PLAN: REVIEW
+Notifier: sent
