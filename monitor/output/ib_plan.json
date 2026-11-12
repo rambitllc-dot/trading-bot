@@ -1,382 +1,272 @@
 {
- "id": "2026-11-11T21:32:47Z",
- "asof": "2026-11-11",
+ "id": "2026-11-12T21:33:27Z",
+ "asof": "2026-11-12",
  "fallback": "SGOV",
- "equity": 978.8300039672852,
+ "equity": 978.4199850463867,
  "cash": 6.74,
- "sells": [],
- "buys": [],
- "reserve": [
+ "sells": [
   {
-   "ticker": "VTRS",
-   "rank": 2,
-   "score": 91.5,
-   "size": 1.17,
-   "reason": "rank #2 of 518, score 92, uptrend, 1.2x size (steadier than most)"
+   "ticker": "CNC",
+   "reason": "STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to BEN (rank #2)"
   },
   {
-   "ticker": "CRL",
-   "rank": 5,
-   "score": 88.1,
-   "size": 0.63,
-   "reason": "rank #5 of 518, score 88, uptrend, 0.6x size (jumpier than most)"
+   "ticker": "MRK",
+   "reason": "STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to VTRS (rank #1)"
+  }
+ ],
+ "buys": [
+  {
+   "ticker": "VTRS",
+   "rank": 1,
+   "score": 89.7,
+   "replaces": "MRK",
+   "reason": "replaces MRK: STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#70) and move the money to VTRS, rank #1 of 518 (+61% over 12 months, above its 50- and 200-day averages), score 90."
   },
   {
    "ticker": "BEN",
-   "rank": 7,
-   "score": 86.4,
-   "size": 1.04,
-   "reason": "rank #7 of 518, score 86, uptrend, 1.0x size (steadier than most)"
-  },
+   "rank": 2,
+   "score": 88.2,
+   "replaces": "CNC",
+   "reason": "replaces CNC: STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#16) and move the money to BEN, rank #2 of 518 (+40% over 12 months, above its 50- and 200-day averages), score 88."
+  }
+ ],
+ "reserve": [
   {
-   "ticker": "CPAY",
-   "rank": 8,
-   "score": 85.3,
-   "size": 1.28,
-   "reason": "rank #8 of 518, score 85, uptrend, 1.3x size (steadier than most)"
+   "ticker": "GWW",
+   "rank": 3,
+   "score": 86.9,
+   "size": 1.3,
+   "reason": "rank #3 of 518, score 87, uptrend, 1.3x size (steadier than most)"
   },
   {
    "ticker": "SWK",
-   "rank": 10,
-   "score": 84.3,
-   "size": 0.81,
-   "reason": "rank #10 of 518, score 84, uptrend, 0.8x size (jumpier than most)"
+   "rank": 4,
+   "score": 86.7,
+   "size": 0.8,
+   "reason": "rank #4 of 518, score 87, uptrend, 0.8x size (jumpier than most)"
   },
   {
-   "ticker": "GWW",
-   "rank": 11,
-   "score": 84.0,
-   "size": 1.31,
-   "reason": "rank #11 of 518, score 84, uptrend, 1.3x size (steadier than most)"
+   "ticker": "CPAY",
+   "rank": 5,
+   "score": 86.5,
+   "size": 1.26,
+   "reason": "rank #5 of 518, score 86, uptrend, 1.3x size (steadier than most)"
+  },
+  {
+   "ticker": "AIZ",
+   "rank": 6,
+   "score": 83.6,
+   "size": 1.43,
+   "reason": "rank #6 of 518, score 84, uptrend, 1.4x size (steadier than most)"
+  },
+  {
+   "ticker": "BDX",
+   "rank": 7,
+   "score": 83.4,
+   "size": 1.26,
+   "reason": "rank #7 of 518, score 83, uptrend, 1.3x size (steadier than most)"
+  },
+  {
+   "ticker": "MAR",
+   "rank": 8,
+   "score": 81.7,
+   "size": 1.37,
+   "reason": "rank #8 of 518, score 82, uptrend, 1.4x size (steadier than most)"
   },
   {
    "ticker": "HUM",
-   "rank": 12,
-   "score": 83.9,
-   "size": 0.8,
-   "reason": "rank #12 of 518, score 84, uptrend, 0.8x size (jumpier than most)"
+   "rank": 10,
+   "score": 80.7,
+   "size": 0.79,
+   "reason": "rank #10 of 518, score 81, uptrend, 0.8x size (jumpier than most)"
   },
   {
-   "ticker": "FDX",
-   "rank": 13,
-   "score": 83.6,
-   "size": 1.2,
-   "reason": "rank #13 of 518, score 84, uptrend, 1.2x size (steadier than most)"
+   "ticker": "MPWR",
+   "rank": 11,
+   "score": 80.7,
+   "size": 0.5,
+   "reason": "rank #11 of 518, score 81, uptrend, 0.5x size (jumpier than most)"
   }
  ],
  "stops": {
-  "CNC": {
-   "stop": 67.42,
-   "target": 89.48,
-   "rule": "4.5% trailing stop (4.5% below your buy price)",
-   "weak": false,
-   "peak": 70.6
-  },
-  "MRK": {
-   "stop": 142.07,
-   "target": 176.66,
-   "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 148.76)",
-   "weak": false,
-   "peak": 148.76
-  },
-  "TXN": {
-   "stop": 295.87,
-   "target": 346.77,
-   "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 309.81)",
-   "weak": false,
-   "peak": 309.81
-  },
   "TGT": {
    "stop": 155.38,
    "target": 193.79,
-   "rule": "4.5% trailing stop (4.5% below the highest close since you bought, 162.70)",
+   "rule": "4.5% trailing stop (4.5% below the highest price since you bought, 162.70)",
    "weak": false,
    "peak": 162.7
+  },
+  "TXN": {
+   "stop": 298.42,
+   "target": 346.77,
+   "rule": "4.5% trailing stop (4.5% below the highest price since you bought, 312.48)",
+   "weak": false,
+   "peak": 312.48
   }
  },
  "deposit_candidates": [
   {
    "ticker": "VTRS",
-   "rank": 2,
-   "score": 91.5,
-   "size": 1.17,
+   "rank": 1,
+   "score": 89.7,
+   "size": 1.14,
    "sector": "Health Care",
-   "reason": "rank #2 of 518, score 92"
-  },
-  {
-   "ticker": "TXN",
-   "rank": 3,
-   "score": 89.9,
-   "size": 0.78,
-   "sector": "Information Technology",
-   "reason": "rank #3 of 518, score 90"
-  },
-  {
-   "ticker": "CNC",
-   "rank": 4,
-   "score": 88.1,
-   "size": 0.75,
-   "sector": "Health Care",
-   "reason": "rank #4 of 518, score 88"
-  },
-  {
-   "ticker": "CRL",
-   "rank": 5,
-   "score": 88.1,
-   "size": 0.63,
-   "sector": "Health Care",
-   "reason": "rank #5 of 518, score 88"
-  },
-  {
-   "ticker": "MRK",
-   "rank": 6,
-   "score": 86.7,
-   "size": 0.8,
-   "sector": "Health Care",
-   "reason": "rank #6 of 518, score 87"
+   "reason": "rank #1 of 518, score 90"
   },
   {
    "ticker": "BEN",
-   "rank": 7,
-   "score": 86.4,
-   "size": 1.04,
+   "rank": 2,
+   "score": 88.2,
+   "size": 1.03,
    "sector": "Financials",
-   "reason": "rank #7 of 518, score 86"
-  },
-  {
-   "ticker": "CPAY",
-   "rank": 8,
-   "score": 85.3,
-   "size": 1.28,
-   "sector": "Financials",
-   "reason": "rank #8 of 518, score 85"
-  },
-  {
-   "ticker": "SWK",
-   "rank": 10,
-   "score": 84.3,
-   "size": 0.81,
-   "sector": "Industrials",
-   "reason": "rank #10 of 518, score 84"
+   "reason": "rank #2 of 518, score 88"
   },
   {
    "ticker": "GWW",
-   "rank": 11,
-   "score": 84.0,
-   "size": 1.31,
+   "rank": 3,
+   "score": 86.9,
+   "size": 1.3,
    "sector": "Industrials",
-   "reason": "rank #11 of 518, score 84"
+   "reason": "rank #3 of 518, score 87"
   },
   {
-   "ticker": "HUM",
-   "rank": 12,
-   "score": 83.9,
+   "ticker": "SWK",
+   "rank": 4,
+   "score": 86.7,
    "size": 0.8,
-   "sector": "Health Care",
-   "reason": "rank #12 of 518, score 84"
-  },
-  {
-   "ticker": "FDX",
-   "rank": 13,
-   "score": 83.6,
-   "size": 1.2,
    "sector": "Industrials",
-   "reason": "rank #13 of 518, score 84"
+   "reason": "rank #4 of 518, score 87"
   },
   {
-   "ticker": "NUE",
-   "rank": 14,
-   "score": 82.6,
-   "size": 0.83,
-   "sector": "Materials",
-   "reason": "rank #14 of 518, score 83"
+   "ticker": "CPAY",
+   "rank": 5,
+   "score": 86.5,
+   "size": 1.26,
+   "sector": "Financials",
+   "reason": "rank #5 of 518, score 86"
   },
   {
-   "ticker": "BIIB",
-   "rank": 15,
-   "score": 82.5,
-   "size": 1.02,
-   "sector": "Health Care",
-   "reason": "rank #15 of 518, score 82"
-  },
-  {
-   "ticker": "HST",
-   "rank": 16,
-   "score": 82.4,
-   "size": 1.35,
-   "sector": "Real Estate",
-   "reason": "rank #16 of 518, score 82"
+   "ticker": "AIZ",
+   "rank": 6,
+   "score": 83.6,
+   "size": 1.43,
+   "sector": "Financials",
+   "reason": "rank #6 of 518, score 84"
   },
   {
    "ticker": "BDX",
-   "rank": 17,
-   "score": 81.9,
-   "size": 1.22,
+   "rank": 7,
+   "score": 83.4,
+   "size": 1.26,
    "sector": "Health Care",
-   "reason": "rank #17 of 518, score 82"
-  },
-  {
-   "ticker": "JNJ",
-   "rank": 18,
-   "score": 81.8,
-   "size": 1.25,
-   "sector": "Health Care",
-   "reason": "rank #18 of 518, score 82"
-  },
-  {
-   "ticker": "APA",
-   "rank": 19,
-   "score": 81.7,
-   "size": 0.74,
-   "sector": "Energy",
-   "reason": "rank #19 of 518, score 82"
-  },
-  {
-   "ticker": "WST",
-   "rank": 20,
-   "score": 81.4,
-   "size": 1.34,
-   "sector": "Health Care",
-   "reason": "rank #20 of 518, score 81"
-  },
-  {
-   "ticker": "TRGP",
-   "rank": 21,
-   "score": 81.0,
-   "size": 0.92,
-   "sector": "Energy",
-   "reason": "rank #21 of 518, score 81"
+   "reason": "rank #7 of 518, score 83"
   },
   {
    "ticker": "MAR",
-   "rank": 22,
-   "score": 80.8,
-   "size": 1.4,
+   "rank": 8,
+   "score": 81.7,
+   "size": 1.37,
    "sector": "Consumer Discretionary",
-   "reason": "rank #22 of 518, score 81"
+   "reason": "rank #8 of 518, score 82"
   },
   {
-   "ticker": "CSX",
-   "rank": 23,
+   "ticker": "HUM",
+   "rank": 10,
    "score": 80.7,
+   "size": 0.79,
+   "sector": "Health Care",
+   "reason": "rank #10 of 518, score 81"
+  },
+  {
+   "ticker": "MPWR",
+   "rank": 11,
+   "score": 80.7,
+   "size": 0.5,
+   "sector": "Information Technology",
+   "reason": "rank #11 of 518, score 81"
+  },
+  {
+   "ticker": "CAH",
+   "rank": 12,
+   "score": 80.4,
    "size": 1.24,
-   "sector": "Industrials",
-   "reason": "rank #23 of 518, score 81"
+   "sector": "Health Care",
+   "reason": "rank #12 of 518, score 80"
   },
   {
    "ticker": "DAL",
-   "rank": 24,
-   "score": 80.7,
-   "size": 0.85,
-   "sector": "Industrials",
-   "reason": "rank #24 of 518, score 81"
-  },
-  {
-   "ticker": "DOW",
-   "rank": 25,
-   "score": 80.6,
-   "size": 0.96,
-   "sector": "Materials",
-   "reason": "rank #25 of 518, score 81"
-  },
-  {
-   "ticker": "KDP",
-   "rank": 26,
-   "score": 80.3,
-   "size": 1.06,
-   "sector": "Consumer Staples",
-   "reason": "rank #26 of 518, score 80"
-  },
-  {
-   "ticker": "RVTY",
-   "rank": 27,
+   "rank": 13,
    "score": 80.2,
-   "size": 0.7,
-   "sector": "Health Care",
-   "reason": "rank #27 of 518, score 80"
-  },
-  {
-   "ticker": "ADI",
-   "rank": 28,
-   "score": 80.1,
-   "size": 0.71,
-   "sector": "Information Technology",
-   "reason": "rank #28 of 518, score 80"
-  },
-  {
-   "ticker": "AMD",
-   "rank": 29,
-   "score": 80.0,
-   "size": 0.5,
-   "sector": "Information Technology",
-   "reason": "rank #29 of 518, score 80"
+   "size": 0.81,
+   "sector": "Industrials",
+   "reason": "rank #13 of 518, score 80"
   }
  ],
  "earnings_soon": {
   "TGT": "2026-11-18"
  },
  "storm": false,
- "weather": "Fair weather: S&P 500 (SPY 759.81) is +4.3% vs its 200-day average (728.65).",
+ "weather": "Fair weather: S&P 500 (SPY 757.12) is +3.9% vs its 200-day average (728.99).",
  "holdings": [
   {
    "ticker": "CNC",
-   "value": 352.40001678466797,
-   "pnl": -0.5999832153320312,
-   "pnl_pct": -0.16996691652465473,
-   "entry_price": 70.6,
-   "mark": 70.4800033569336,
-   "stop_price": 67.42,
+   "value": 351.34998321533203,
+   "pnl": -1.6730167846679933,
+   "pnl_pct": -0.47391155382736905,
+   "entry_price": 70.6046,
+   "mark": 70.2699966430664,
+   "stop_price": 67.43,
    "target_price": 89.48,
    "stop_rule": "4.5% trailing stop (4.5% below your buy price)",
    "weak": false,
-   "action": "HOLD",
+   "action": "SELL",
    "entry_date": "2026-11-06",
-   "prev_stop": 67.41784299999999
+   "prev_stop": 67.42299999999999
   },
   {
    "ticker": "MRK",
-   "value": 147.17999267578125,
-   "pnl": -0.530007324218758,
-   "pnl_pct": -0.35881614258936967,
-   "entry_price": 147.71,
-   "mark": 147.17999267578125,
+   "value": 146.9499969482422,
+   "pnl": -0.755003051757825,
+   "pnl_pct": -0.5111560554875089,
+   "entry_price": 147.705,
+   "mark": 146.9499969482422,
    "stop_price": 142.07,
    "target_price": 176.66,
-   "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 148.76)",
+   "stop_rule": "4.5% trailing stop (4.5% below the highest price since you bought, 148.76)",
    "weak": false,
-   "action": "HOLD",
+   "action": "SELL",
    "entry_date": "2026-11-06",
    "prev_stop": 142.0657947540283
   },
   {
-   "ticker": "TXN",
-   "value": 309.80999755859375,
-   "pnl": 20.279997558593777,
-   "pnl_pct": 7.004454653608875,
-   "entry_price": 289.53,
-   "mark": 309.80999755859375,
-   "stop_price": 295.87,
-   "target_price": 346.77,
-   "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 309.81)",
-   "weak": false,
-   "action": "HOLD",
-   "entry_date": "2026-11-06",
-   "prev_stop": 286.9965895080566
-  },
-  {
    "ticker": "TGT",
-   "value": 162.6999969482422,
-   "pnl": 1.2299969482421886,
-   "pnl_pct": 0.761749518946051,
-   "entry_price": 161.47,
-   "mark": 162.6999969482422,
+   "value": 160.89999389648438,
+   "pnl": -0.8011061035156217,
+   "pnl_pct": -0.4954240283557884,
+   "entry_price": 161.7011,
+   "mark": 160.89999389648438,
    "stop_price": 155.38,
    "target_price": 193.79,
-   "stop_rule": "4.5% trailing stop (4.5% below the highest close since you bought, 162.70)",
+   "stop_rule": "4.5% trailing stop (4.5% below the highest price since you bought, 162.70)",
    "weak": false,
    "action": "HOLD",
    "entry_date": "2026-11-11",
-   "prev_stop": null
+   "prev_stop": 155.37849708557127
+  },
+  {
+   "ticker": "TXN",
+   "value": 312.4800109863281,
+   "pnl": 22.551710986328146,
+   "pnl_pct": 7.778375200464442,
+   "entry_price": 289.9283,
+   "mark": 312.4800109863281,
+   "stop_price": 298.42,
+   "target_price": 346.77,
+   "stop_rule": "4.5% trailing stop (4.5% below the highest price since you bought, 312.48)",
+   "weak": false,
+   "action": "HOLD",
+   "entry_date": "2026-11-06",
+   "prev_stop": 295.86854766845704
   }
  ],
  "source": "positions.json (synced from IB)"

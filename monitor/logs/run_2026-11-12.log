@@ -1,0 +1,91 @@
+IB sync: 4 position(s) as of 2026-11-11 (CNC, MRK, TGT, TXN), cash 6.74; 5 new trade(s) saved
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: ANT"}}}
+$ANT: No data found, symbol may be delisted
+
+1 Failed download:
+['ANT']: No data found, symbol may be delisted
+Portfolio as of 2026-11-12
+Value $978.42 · cost $959.10 · P&L $19.32 (+2.0%) · net delta 8 shares · theta $0.00/day · 5/5 positions priced
+
+- CNC shares x5: mark $70.27, value $351.35, P&L -$1.67 (-0.5%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to BEN (rank #2)).
+- MRK shares x1: mark $146.95, value $146.95, P&L -$0.76 (-0.5%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to VTRS (rank #1)).
+- TGT shares x1: mark $160.90, value $160.90, P&L -$0.80 (-0.5%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 162.70)) · LOSING -0.5%: #2 in line for the next swap).
+- TXN shares x1: mark $312.48, value $312.48, P&L $22.55 (+7.8%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 312.48))).
+- CASH shares x6.74: mark $1.00, value $6.74, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 8 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: CNC 36%, TXN 32%, TGT 16%, MRK 15%, CASH 1%
+By sector: Healthcare 51%, Technology 32%, Consumer Defensive 16%, Cash 1%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+67/100 · Calm (vix level 76, vix percentile 30, term structure 56, breadth 73, credit 89)
+
+NEWS (Claude summaries, facts only)
+- CNC [positive]: A Simply Wall St. article dated 10 November 2026 reports that Centene's shareholder return over the past year was 100.1%, including dividends. A Trefis article dated 12 November 2026 covers stocks that rose after Democrats won the midterms, but the headline provided does not name Centene.
+  Drivers: Past-year shareholder return of 100.1% including dividends; Midterm election results referenced in a Trefis headline
+- MRK: analysis failed: Claude's reply had no JSON object
+- TGT [neutral]: UBS said Target's third-quarter results could strengthen the case for a sustained turnaround into fiscal 2027, and Bank of America said the stock has moved ahead of itself despite shoppers returning on deals and exclusives. Trefis noted a rise in Target's stock without giving further detail.
+  Drivers: Upcoming third-quarter results; Sales momentum and shopper return; Deals and exclusives; Valuation concerns for 2027 (BofA)
+- TXN [neutral]: A Simply Wall St. article on November 12, 2026 says Texas Instruments has had a strong multi-year share price climb and questions whether its current market value matches the cash the business generates. The same piece cites fresh product news in embedded and industrial chips and characterizes the stock as looking fully valued. No other headline in the set covers Texas Instruments directly; the rest concern Nvidia's CEO transition, Qualcomm, and Analog Devices.
+  Drivers: Fresh embedded and industrial chip product news; Valuation debate after multi-year share price climb; Comparison of market value with cash generation
+Claude cost this run: $0.0012
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 522 of 524 stocks.
+- Watchlist SPCX 139.94: 27.2% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 171.58: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+757% over 12 months), SNDK (+417% over 12 months), MU (+280% over 12 months), DELL (+269% over 12 months), LITE (+255% over 12 months)
+Pullbacks in uptrends: ABT (+7% above its 200-day average, RSI-2 6 after a sharp drop), OTIS (+3% above its 200-day average, RSI-2 6 after a sharp drop), AMCR (+4% above its 200-day average, RSI-2 6 after a sharp drop), IFF (+2% above its 200-day average, RSI-2 7 after a sharp drop), SW (+0% above its 200-day average, RSI-2 8 after a sharp drop)
+New 52-week highs: GWW (new 52-week high at 1,502.61), JNJ (new 52-week high at 283.52), BDX (new 52-week high at 215.71), FAST (new 52-week high at 55.55), TECH (new 52-week high at 72.84)
+Unusual volume: NVDA (volume 4.4x normal, -4% on the day)
+  MRNA [neutral]: Moderna shares fell 7% on November 12, 2026, after the company guided to about $4 billion in 2027 cash costs and $4 billion to $4.5 billion a year through 2030, mostly for oncology. At the same Analyst Day, it raised its 2026 revenue growth forecast to 15%–25% from up to 10%, and it is scheduled to join the MSCI World Index in November 2026.
+  SNDK [negative]: Sandisk (SNDK) shares fell on November 12, 2026, with reports ranging from about 3% to 7.8% down, after reports that Nvidia's board may oust CEO Jensen Huang and several analyst downgrades of Nvidia. Investors reduced exposure to AI-linked hardware names, and Micron and SK Hynix also declined. Sandisk's 8-for-1 stock split is set for split-adjusted trading beginning November 20.
+  MU [neutral]: Micron shares fell about 3.24% after a roughly 11.9% gain on the prior session, as memory-chip stocks sold off following reports that Nvidia CEO Jensen Huang is departing. Micron also took part in Anthropic's IPO placement with a $1 billion purchase, and a 24/7 Wall St. piece notes its revenue more than tripled while the stock lost about a quarter of its value in a week.
+  DELL [negative]: Dell shares fell about 4% on November 12, 2026, as part of a broader selloff in AI hardware names after Nvidia dropped 11% on a report that its board is preparing to oust CEO Jensen Huang. A 24/7 Wall St. headline says Dell has fallen roughly 40% over the past month, while also citing record AI orders and a large backlog.
+  LITE [positive]: Lumentum shares rose 14.85% on November 11 as AI optics stocks rebounded, narrowing the gap to Marvell's pending acquisition, under which each Lumentum share converts into 4.5 Marvell shares. Coverage reports that Lumentum's revenue is more than doubling, that the stock trades below the buyout offer, and that a regulatory timeline runs into 2028.
+  SPCX [positive]: Yahoo Finance's 2026 Invest conference coverage included United Airlines' CEO describing Starlink as a major competitive advantage and Qualcomm's CEO discussing a recently announced 5G deal with SpaceX. A Bloomberg report, cited by Yahoo Finance, said SpaceX and Tesla are in talks about a potential merger. Binance co-founder CZ said the exchange did not sell any SpaceX stock during a recent hack and addressed his dispute with Elon Musk.
+  PLTR [negative]: Palantir shares fell more than 20% in a week after what 24/7 Wall St. describes as the stock's worst week in months, with Trefis citing a price of $172. Its CTO filed to sell about $50 million in stock, and Helsing unveiled Clarity, a European-controlled defense AI platform, as a competitor. Commentary also notes that Palantir's margins have risen and its recent growth was its fastest in public history.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- CNC: stop 67.43 · target 89.48 · typical daily move 3.17
+- MRK: stop 142.07 · target 176.66 · typical daily move 4.77
+- TGT: stop 155.38 · target 193.79 · typical daily move 5.26
+- TXN: stop 298.42 · target 346.77 · typical daily move 12.85
+
+ROTATION (follow the money)
+- #1 in swap line: MRK, rank #70 of 518, score 70, LOSING -0.5%
+- #2 in swap line: TGT, rank #9 of 518, score 81, LOSING -0.5%
+- #3 in swap line: CNC, rank #16 of 518, score 79, LOSING -0.5%
+- #4 in swap line: TXN, rank #17 of 518, score 79
+Strongest stocks you don't own: VTRS (90), BEN (88), GWW (87), SWK (87), CPAY (86)
+SWAP IDEA: sell MRK -> buy VTRS. STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#70) and move the money to VTRS, rank #1 of 518 (+61% over 12 months, above its 50- and 200-day averages), score 90.
+SWAP IDEA: sell CNC -> buy BEN. STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#16) and move the money to BEN, rank #2 of 518 (+40% over 12 months, above its 50- and 200-day averages), score 88.
+Status: 2 new swap(s) suggested
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -96.24 from 1 win(s) / 5 loss(es), win rate 17%; fees 18.27
+Open (not locked in) +19.32 · total -76.92
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -10.3 pts after 7 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -5.0 pts after 7 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -13.9 pts after 7 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -11.6 pts after 7 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +7.2 pts after 2 day(s)
+- 2026-11-12 CNC -> BEN [open]: +0.0 pts after 0 day(s)
+- 2026-11-12 MRK -> VTRS [open]: +0.0 pts after 0 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-04-02): your stocks 971.68 vs 1,046.82 -> -75.14
+1 of 5 swap ideas are ahead; average edge -6.7 pts
+
+ALERTS (2)
+- [high] NEW STOP HIT -> SWAP idea: sell all MRK (about $147, rank #70) and buy VTRS (rank #1). STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#70) and move the money to VTRS, rank #1 of 518 (+61% over 12 months, above its 50- and 200-day averages), score 90. -> YOUR PLAN: SWAP
+- [high] NEW STOP HIT -> SWAP idea: sell all CNC (about $351, rank #16) and buy BEN (rank #2). STALLED: 4 business days since you bought it and it's losing -0.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#16) and move the money to BEN, rank #2 of 518 (+40% over 12 months, above its 50- and 200-day averages), score 88. -> YOUR PLAN: SWAP
+Notifier: sent

@@ -2,8 +2,8 @@
   {
     "asset_type": "shares",
     "ticker": "CNC",
-    "contracts": 5,
-    "entry_price": 70.6,
+    "contracts": 5.0,
+    "entry_price": 70.6046,
     "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-06",
     "target_price": null,
@@ -12,8 +12,8 @@
   {
     "asset_type": "shares",
     "ticker": "MRK",
-    "contracts": 1,
-    "entry_price": 147.71,
+    "contracts": 1.0,
+    "entry_price": 147.705,
     "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-06",
     "target_price": null,
@@ -21,27 +21,27 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "TXN",
-    "contracts": 1,
-    "entry_price": 289.53,
-    "note": "Interactive Brokers - topped up to 1 share Nov 11 (0.4 at ~313.42); IB sync will confirm the average",
-    "entry_date": "2026-11-06",
+    "ticker": "TGT",
+    "contracts": 1.0,
+    "entry_price": 161.7011,
+    "note": "Interactive Brokers (synced)",
+    "entry_date": "2026-11-11",
     "target_price": null,
     "stop_price": null
   },
   {
     "asset_type": "shares",
-    "ticker": "TGT",
-    "contracts": 1,
-    "entry_price": 161.47,
-    "entry_date": "2026-11-11",
+    "ticker": "TXN",
+    "contracts": 1.0,
+    "entry_price": 289.9283,
+    "note": "Interactive Brokers (synced)",
+    "entry_date": "2026-11-06",
     "target_price": null,
-    "stop_price": null,
-    "note": "Interactive Brokers - swap from MRNA (bought in the app)"
+    "stop_price": null
   },
   {
     "asset_type": "cash",
     "amount": 6.74,
-    "note": "IB cash after topping up TXN to 1 share (Nov 11)"
+    "note": "IB cash as of 2026-11-11 (synced)"
   }
 ]
