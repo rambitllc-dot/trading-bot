@@ -100,6 +100,10 @@ PROFIT_LADDER = [(15.0, 2.0), (8.0, 3.0)]
 # can't turn into a loss).
 LOCK_AFTER_PCT = 3.0
 LOCK_AT_PCT = 0.0           # where the lock puts the stop: 0 = your buy price
+# Time stop: a stock that isn't up more than STALL_MIN_GAIN_PCT after STALL_DAYS business days (or is losing)
+# is sold and the money moves to the strongest stock in the market (or the S&P 500 fund if none qualifies).
+STALL_DAYS = 3
+STALL_MIN_GAIN_PCT = 3.0
 WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop
 

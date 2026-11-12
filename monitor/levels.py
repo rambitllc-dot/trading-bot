@@ -10,10 +10,14 @@
           (config.LOCK_AFTER_PCT), so a winner can't turn into a loss.
   Target  2-to-1 of the stock's normal swing: the starting price plus 2 x (3 x ATR, its typical daily move).
 A position already down more than 4.5% from its high shows SELL right away: that's the cut-losses rule.
+STALLED (time stop): 3 business days after you bought it (config.STALL_DAYS), a stock that isn't up more than 3%
+(config.STALL_MIN_GAIN_PCT), or is losing, shows SELL: the money moves to a stock that is actually rising.
 WEAKENING: any stock (also with your own levels) whose last close is below its 50-day average is flagged;
 it often shows a top-ranked stock rolling over before the stop is hit. It moves to the front of the swap line.
 Set stop_price / target_price in positions.json to override the automatic levels with your own numbers.
 """
+import datetime as dt
+
 from . import config, plan
 
 SCHEMA = """
@@ -139,5 +143,37 @@ def apply(con, asof, rows, bars, now=None):
         r["action_reason"] += f" (stop: {rule})" if "stop" in r["action_reason"] else " (auto levels)"
         out.append({"ticker": r["ticker"], "stop": stop, "target": target, "atr": a, "base": base,
                     "highest": highest, "since": base_date, "rule": rule, "prev_stop": prev_stop})
+    for r in rows:
+        stalled(r, asof)
     con.commit()
     return out
+
+
+def _business_days(start, end):
+    a, b = dt.date.fromisoformat(start[:10]), dt.date.fromisoformat(end[:10])
+    n, d = 0, a
+    while d < b:
+        d += dt.timedelta(days=1)
+        n += d.weekday() < 5
+    return n
+
+
+def stalled(r, asof):
+    """Time stop: after STALL_DAYS business days, a stock not up more than STALL_MIN_GAIN_PCT is sold (SELL)."""
+    if r.get("asset_type") != "shares" or r.get("ticker") in config.PARKING or r.get("action") == "SELL":
+        return
+    entry, mark, bought = r.get("entry_price"), r.get("mark"), r.get("entry_date")
+    if not entry or mark is None or not bought or (r.get("contracts") or 0) <= 0:
+        return
+    try:
+        days = _business_days(bought, asof)
+    except ValueError:
+        return
+    gain = (mark / entry - 1) * 100
+    if days >= config.STALL_DAYS and gain <= config.STALL_MIN_GAIN_PCT:
+        r["stalled"] = True
+        r["action"] = "SELL"
+        r["action_reason"] = (f"STALLED: {days} business days since you bought it and it's "
+                              f"{'losing' if gain < 0 else 'only up'} {gain:+.1f}% (needs more than "
+                              f"+{config.STALL_MIN_GAIN_PCT:g}% after {config.STALL_DAYS} days); the money moves to "
+                              f"a stock that is rising")

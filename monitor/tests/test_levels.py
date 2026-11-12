@@ -144,3 +144,31 @@ class ProfitLadderTest(unittest.TestCase):
 
     def test_never_moves_down(self):
         self.assertAlmostEqual(levels.floors(105.0, 100, 103)[0], 105.0)
+
+
+class StalledTest(unittest.TestCase):
+    """Time stop: not up more than 3% after 3 business days (or losing) -> SELL and swap."""
+
+    def check(self, entry, mark, bought, asof, **kw):
+        r = row("CNC", entry, mark, entry_date=bought, contracts=5, action="HOLD", action_reason="", **kw)
+        levels.stalled(r, asof)
+        return r
+
+    def test_flat_after_3_days_is_sold(self):
+        r = self.check(100, 102, "2026-11-06", "2026-11-11")    # Fri -> Wed = 3 business days, +2%
+        self.assertEqual(r["action"], "SELL")
+        self.assertIn("STALLED", r["action_reason"])
+
+    def test_losing_after_3_days_is_sold(self):
+        self.assertEqual(self.check(100, 99, "2026-11-06", "2026-11-11")["action"], "SELL")
+
+    def test_rising_stock_is_kept(self):
+        self.assertEqual(self.check(100, 103.5, "2026-11-06", "2026-11-11")["action"], "HOLD")
+
+    def test_gets_3_days_first(self):
+        self.assertEqual(self.check(100, 99, "2026-11-06", "2026-11-10")["action"], "HOLD")  # only 2 days
+
+    def test_parking_fund_never_stalls(self):
+        r = row("SPYM", 80, 80, entry_date="2026-11-01", contracts=1, action="HOLD", action_reason="")
+        levels.stalled(r, "2026-11-11")
+        self.assertEqual(r["action"], "HOLD")

@@ -18,7 +18,7 @@ Then, going down the swap queue, pair each holding with the strongest stock you 
     and wasn't bought less than ROTATION_MIN_HOLD_DAYS business days ago (2 and 2: bought Friday ->
     swappable from Tuesday's evening run)
   - the candidate wasn't swapped out of your book in the last ROTATION_NO_REBUY_DAYS days
-A holding that hits its stop (or target) skips those rules: it is swapped right away into the strongest
+A holding that hits its stop (or target), or is STALLED (not up more than 3% after 3 business days), skips those rules: it is swapped right away into the strongest
 stock, whatever its own rank, because a stopped-out stock isn't "following the money" anymore.
 Otherwise every holding can be swapped again after the waiting period (2 business days). It's a suggestion from fixed rules, not a prediction;
 nothing is traded automatically.
@@ -271,7 +271,8 @@ def run(con, asof, rows, data, sentiment=None, blocker=None, storm=False):
         counts[sectors.sector_of(best["ticker"])] += 1
         amount = held[h["ticker"]]["value"]
         if stop_out:
-            reason = (f"STOPPED OUT: {held[h['ticker']].get('action_reason')}. Sell regardless of its rank "
+            ar = held[h['ticker']].get('action_reason') or ""
+            reason = (("" if ar.startswith("STALLED") else "STOPPED OUT: ") + f"{ar}. Sell regardless of its rank "
                       f"(#{h['rank']}) and move the money to {best['ticker']}, rank #{best['rank']} of {total} "
                       f"({why(best)}), score {best['score']:.0f}.")
         else:
