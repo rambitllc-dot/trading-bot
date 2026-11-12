@@ -391,8 +391,8 @@ def execute(client=None):
         lv = p["stops"].get(t) or {}
         highs = state.setdefault("highs", {})
         highs[t] = max(highs.get(t, 0), price, lv.get("peak") or 0, avg if state["bought"].get(t) else 0)
-        trail = highs[t] * (1 - config.TRAIL_PCT / 100)   # trails during the day too; only moves up
-        stop = max(lv.get("stop") or 0, avg * (1 - config.TRAIL_PCT / 100), trail)
+        trail, rule = levels.stop_for(avg, highs[t])        # trails during the day too (profit ladder + lock)
+        stop = max(lv.get("stop") or 0, trail)
         target = lv.get("target")
         hit = "stop" if price <= stop else "target" if target and price >= target else None
         if not hit:
@@ -412,7 +412,7 @@ def execute(client=None):
         val = float(x["market_value"])
         why = (f"price {price:,.2f} reached its {'stop' if hit == 'stop' else 'target'} "
                f"{stop if hit == 'stop' else target:,.2f}"
-               + (f" ({config.TRAIL_PCT:g}% below its high of {peak:,.2f})" if hit == "stop" else ""))
+               + (f" ({rule}; high {peak:,.2f})" if hit == "stop" else ""))
         log("SELL", t, val, _price(o), why)
         acct = client.account()
         equity, cash = float(acct["equity"]), float(acct["cash"])

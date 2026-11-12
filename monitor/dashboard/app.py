@@ -350,7 +350,8 @@ for p in sorted([x for x in P if x["asset_type"] != "cash"], key=lambda x: order
                 unsafe_allow_html=True)
 st.markdown('<div class="muted">Labels apply your own levels from positions.json, or, where you set none, automatic ones: '
             f'a {config.TRAIL_PCT:g}% trailing stop ({config.TRAIL_PCT:g}% below the highest price since you bought, '
-            f'only moving up) and a 2-to-1 target. '
+            f'only moving up; 3% once up 8%, 2% once up 15%; never below your buy price once up '
+            f'{config.LOCK_AFTER_PCT:g}%) and a 2-to-1 target. '
             'WEAK = closed below its 50-day average (first in line for the next swap). '
             'They are rules, not predictions or financial advice.</div>', unsafe_allow_html=True)
 

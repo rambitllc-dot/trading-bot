@@ -27,7 +27,8 @@ You don't stick with any stock; the money follows whatever is winning.
 
 | Situation | What happens |
 | --- | --- |
-| Falls 4.5% below its highest price since you bought (starts 4.5% below your buy price) | SELL now, swap into the strongest stock |
+| Falls 4.5% below its highest price since you bought (starts 4.5% below your buy price; 3% once it's been up 8%, 2% once up 15%) | SELL now, swap into the strongest stock |
+| Was up 3% or more, then falls back to your buy price | SELL at break-even (profit lock), swap |
 | Hits its profit target | SELL, take the profit, swap |
 | Closes below its 50-day average | WEAK, first in line for the next swap |
 | Losing a little | Next in line |
@@ -36,6 +37,8 @@ You don't stick with any stock; the money follows whatever is winning.
 More details:
 
 - **4.5% trailing stop, only moves up.** The stop starts 4.5% below what you paid and always sits 4.5% below the highest price since you bought. Example: Merck bought at $147.71 has a stop at $141.06; if it rises to $155.10 the stop moves to $148.12 (above what you paid, so a sale there is a small profit); if it then falls back, the stop stays at $148.12. The Mac also moves it up during the day from the prices it checks every 2 minutes. A sharp overnight drop can still sell below the stop.
+- **Profit ladder:** the further a stock rises, the closer the stop follows, so big winners keep more of their gain. Up less than 8%: 4.5% below the high. Up 8% or more: 3% below the high (a stock that peaks at +8% sells at about +4.8% instead of +3.1%). Up 15% or more: 2% below the high. Setting: `PROFIT_LADDER` in `monitor/config.py`.
+- **Profit lock:** once a stock has been 3% above what you paid, its stop never goes below your buy price, so a winner can't turn into a loss. Example: bought at $100, rises to $103, falls back: sold at $100 instead of $98.37. Settings: `LOCK_AFTER_PCT`, `LOCK_AT_PCT`.
 - **Target** is set at twice the stock's normal swing above the starting price.
 - **Ranking score (0-100):** 12-month gain 35%, last month's gain 15% (catches a sustained rally, not a 1-3 day spike), steadiness 25%, trend 15%, news 10%. Every evening each of your stocks is compared with the whole market: a swap happens when a stock you don't own scores 80 or more and at least **10 points** above one of yours, even if yours is doing fine.
 - **Each stock can be swapped at most once every 2 business days.** A stock bought on Friday can be swapped from Tuesday's evening run (trade at Wednesday's open). The waiting period never blocks the stop.

@@ -65,11 +65,11 @@ class LevelsTest(unittest.TestCase):
         levels.apply(self.con, "2026-10-01", [r], {"TXN": bars([100.0] * 30, rng=10.0)})
         r = row("TXN", 100.0, 108.0)
         levels.apply(self.con, "2026-11-20", [r], {"TXN": bars([100.0] * 25 + [104, 108, 111, 109, 108], rng=10.0)})
-        self.assertAlmostEqual(r["stop_price"], 106.0, places=1)    # 4.5% below the 111 high: a locked-in gain
+        self.assertAlmostEqual(r["stop_price"], 107.67, places=1)   # up 11%: ladder trails 3% below the 111 high
         self.assertEqual(r["action"], "HOLD")
         r = row("TXN", 100.0, 150.0)
         levels.apply(self.con, "2026-12-20", [r], {"TXN": bars([100.0] * 25 + [130, 150, 150, 150, 150], rng=10.0)})
-        self.assertAlmostEqual(r["stop_price"], 143.25, places=2)
+        self.assertAlmostEqual(r["stop_price"], 147.0, places=2)    # up 50%: ladder trails 2% below 150
         self.assertEqual(r["action"], "HOLD")          # price above the stop is not a sell
 
     def test_weakening_below_50_day_average(self):
@@ -124,3 +124,23 @@ class SettledBarsTest(unittest.TestCase):
         bars_ = [(f"2026-10-{d:02d}", 70.0, 70.5, 0, 69.5) for d in range(1, 31)] + b
         levels.apply(con, "2026-11-06", [r], {"CNC": bars_}, now=midday)
         self.assertAlmostEqual(r["stop_price"], 70.59 * 0.955, places=2)   # not 4.5% below the stale 74.17
+
+
+class ProfitLadderTest(unittest.TestCase):
+    def test_normal_trail_below_8pct(self):
+        stop, rule = levels.stop_for(100, 102)
+        self.assertAlmostEqual(stop, 97.41, places=2)       # 4.5% below 102
+        self.assertIn("4.5% trailing", rule)
+
+    def test_lock_after_3pct(self):
+        stop, rule = levels.stop_for(100, 103)               # trail would be 98.37: lock lifts it to the buy price
+        self.assertAlmostEqual(stop, 100.0)
+        self.assertIn("profit lock", rule)
+        self.assertAlmostEqual(levels.stop_for(100, 106)[0], 101.23, places=2)   # trail above the lock
+
+    def test_ladder_tightens(self):
+        self.assertAlmostEqual(levels.stop_for(100, 108)[0], 104.76, places=2)   # +8%: 3% trail
+        self.assertAlmostEqual(levels.stop_for(100, 115)[0], 112.70, places=2)   # +15%: 2% trail
+
+    def test_never_moves_down(self):
+        self.assertAlmostEqual(levels.floors(105.0, 100, 103)[0], 105.0)

@@ -4,8 +4,10 @@
           below the highest close since you bought, so it only ever moves UP. Example: bought at 147.71 ->
           stop 141.06; the stock closes at 155.10 -> stop 148.12, above what you paid. The Mac also trails it
           during the day from the prices it checks every 2 minutes. A hit = sell and swap into the strongest stock.
-  Breakeven  once a stock has been 10% above what you paid, the stop is at least your buy price (with a 4.5%
-          trail it's already above that).
+  Profit ladder  the further a stock has risen, the closer the stop follows: from +8% above your buy price it
+          trails 3% below the high, from +15% 2% (config.PROFIT_LADDER).
+  Profit lock  once a stock has been 3% above what you paid, the stop is never below your buy price
+          (config.LOCK_AFTER_PCT), so a winner can't turn into a loss.
   Target  2-to-1 of the stock's normal swing: the starting price plus 2 x (3 x ATR, its typical daily move).
 A position already down more than 4.5% from its high shows SELL right away: that's the cut-losses rule.
 WEAKENING: any stock (also with your own levels) whose last close is below its 50-day average is flagged;
@@ -33,20 +35,39 @@ def atr(bars, n=None):
     return sum(trs) / n
 
 
+def trail_pct(entry, peak):
+    """How far below the high the stop sits: TRAIL_PCT, tighter as the gain grows (the profit ladder)."""
+    gain = (peak / entry - 1) * 100 if entry and peak else 0
+    for at, pct in config.PROFIT_LADDER:
+        if gain >= at - 1e-9:
+            return pct
+    return config.TRAIL_PCT
+
+
+def stop_for(entry, peak):
+    """Stop from the buy price and the highest price since: trailing (laddered) and the profit lock.
+    -> (stop, rule)."""
+    peak = max(peak or 0, entry or 0)
+    pct = trail_pct(entry, peak)
+    trail = peak * (1 - pct / 100)
+    gain = (peak / entry - 1) * 100 if entry else 0
+    lock = entry * (1 + config.LOCK_AT_PCT / 100) if entry and gain >= config.LOCK_AFTER_PCT - 1e-9 else 0
+    if lock > trail:
+        return lock, (f"profit lock (was up {config.LOCK_AFTER_PCT:g}%+, so it can't turn into a loss: "
+                      f"stop at your buy price)" if not config.LOCK_AT_PCT else
+                      f"profit lock (was up {config.LOCK_AFTER_PCT:g}%+, stop {config.LOCK_AT_PCT:+g}%)")
+    where = "your buy price" if entry and peak == entry else f"the highest price since you bought, {peak:,.2f}"
+    ladder = f", tighter because it was up {gain:.0f}%" if pct < config.TRAIL_PCT else ""
+    return trail, f"{pct:g}% trailing stop ({pct:g}% below {where}{ladder})"
+
+
 def floors(stop, entry, highest):
-    """The stop: TRAIL_PCT below the highest price since you bought (never below TRAIL_PCT under your buy price),
-    and never lower than it already was. -> (stop, rule that set it)."""
-    peak = max(highest or 0, entry or 0)
-    trail = peak * (1 - config.TRAIL_PCT / 100)
-    stop = max(stop or 0, trail)
-    if entry and highest >= entry * (1 + config.BREAKEVEN_AFTER_PCT / 100):
-        stop = max(stop, entry)
-    if peak and abs(stop - trail) < 0.005:
-        where = "your buy price" if entry and peak == entry else f"the highest close since you bought, {peak:,.2f}"
-        return stop, f"{config.TRAIL_PCT:g}% trailing stop ({config.TRAIL_PCT:g}% below {where})"
-    if entry and abs(stop - entry) < 0.005:
-        return stop, f"breakeven stop (was up {config.BREAKEVEN_AFTER_PCT:g}%+, so no loss allowed)"
-    return stop, f"{config.TRAIL_PCT:g}% trailing stop (kept from an earlier high; stops never move down)"
+    """The stop: trailing below the highest price since you bought (see stop_for), never lower than it already
+    was. -> (stop, rule that set it)."""
+    new, rule = stop_for(entry, highest)
+    if stop and stop > new + 0.005:
+        return stop, "trailing stop (kept from an earlier high; stops never move down)"
+    return max(stop or 0, new), rule
 
 
 def weakness(r, b):

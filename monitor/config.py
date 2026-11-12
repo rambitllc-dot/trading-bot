@@ -93,7 +93,13 @@ ATR_STOP_MULT = 3.0         # used for the profit target only: target = 2 x (3 x
 TRAIL_PCT = 4.5             # the stop always sits 4.5% below the highest price since you bought (starts 4.5% below
                             # your buy price) and only ever moves up
 MAX_LOSS_PCT = TRAIL_PCT    # the most a new position can lose before it's sold
-BREAKEVEN_AFTER_PCT = 10.0  # once a stock has closed 10% above what you paid, the stop rises to your buy price
+# Profit ladder: the further a stock has risen above your buy price, the closer the stop follows it, so big winners
+# keep more of their gain. (gain at its high %, trail %), biggest first. Below +8% it's the normal TRAIL_PCT.
+PROFIT_LADDER = [(15.0, 2.0), (8.0, 3.0)]
+# Profit lock: once a stock has been 3% above your buy price, its stop is never below the buy price (a winner
+# can't turn into a loss).
+LOCK_AFTER_PCT = 3.0
+LOCK_AT_PCT = 0.0           # where the lock puts the stop: 0 = your buy price
 WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop
 
