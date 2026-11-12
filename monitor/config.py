@@ -77,9 +77,10 @@ WATCH_NEAR_PCT = 5          # "watch_near" when a watchlist stock is within this
 # ---- Rotation: "follow the money" (suggests swapping your weakest holding for a clearly stronger stock) ----
 ROTATION_EXTRA = ["SPY", "QQQ", "DIA", "IWM", "RSP", "XLK", "XLF", "XLV", "XLE", "XLI", "XLY", "XLP", "XLU",
                   "XLB", "XLRE", "XLC", "SMH", "GLD"]   # ETFs scored alongside the S&P 500 stocks
-# momentum = 12-month gain (skipping the last month); recent = last month's gain (catches a sustained rally, not
-# a 1-3 day spike); steadiness = gain per unit of ups and downs; trend = above the 50/200-day averages; news = Claude.
-ROTATION_WEIGHTS = {"momentum": 0.35, "recent": 0.15, "steadiness": 0.25, "trend": 0.15, "news": 0.10}  # sum 1.0
+# momentum = 12-month gain (skipping the last month); recent = gain over the last 2 and 4 weeks (what's rising
+# now, half each; still not a 1-3 day spike); steadiness = gain per unit of ups and downs; trend = above the 50/200-day
+# averages; news = Claude. Recent has the most weight: the money follows what is going up now.
+ROTATION_WEIGHTS = {"momentum": 0.20, "recent": 0.35, "steadiness": 0.20, "trend": 0.15, "news": 0.10}  # sum 1.0
 ROTATION_MARGIN = 10        # candidate must score this many points (0-100 scale) above the holding it replaces
 ROTATION_MIN_SCORE = 80     # ...and score at least this (top fifth of the market)
 ROTATION_MIN_HOLD_DAYS = 2  # business days: a stock bought Friday can be swapped from Tuesday's evening run

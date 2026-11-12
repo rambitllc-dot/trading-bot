@@ -2,6 +2,7 @@
 
 Every run, score every stock in the market the same way (S&P 500 + major ETFs + what you hold):
   momentum    12-month return, skipping the latest month                (percentile vs the market)
+  recent      return over the last 2 weeks and the last 4 weeks, half each (percentile vs the market)
   steadiness  that return divided by how much the price swings          (percentile vs the market)
   trend       above the 200-day average (+50) and the 50-day average (+50)
   news        Claude's sentiment where available: positive 100, neutral 50, negative 0 (50 if none)
@@ -57,7 +58,7 @@ def raw_factors(bars):
     mean = sum(rets) / len(rets)
     vol = math.sqrt(sum((r - mean) ** 2 for r in rets) / (len(rets) - 1)) * math.sqrt(252) if len(rets) > 2 else 0
     trend = (50.0 if c[-1] > sum(c[-200:]) / 200 else 0.0) + (50.0 if c[-1] > sum(c[-50:]) / 50 else 0.0)
-    return {"ret_12m": ret, "ret_1m": c[-1] / c[-22] - 1 if c[-22] else 0.0,
+    return {"ret_12m": ret, "ret_1m": c[-1] / c[-22] - 1 if c[-22] else 0.0, "ret_2w": c[-1] / c[-11] - 1 if c[-11] else 0.0,
             "steady_raw": ret / vol if vol > 0 else 0.0, "trend": trend}
 
 
@@ -98,7 +99,9 @@ def score_all(data, sentiment=None):
         return []
     mom = percentiles({t: x["ret_12m"] for t, x in f.items()})
     steady = percentiles({t: x["steady_raw"] for t, x in f.items()})
-    recent = percentiles({t: x["ret_1m"] for t, x in f.items()})
+    r1m = percentiles({t: x["ret_1m"] for t, x in f.items()})
+    r2w = percentiles({t: x["ret_2w"] for t, x in f.items()})
+    recent = {t: (r1m[t] + r2w[t]) / 2 for t in f}  # last 4 weeks and last 2 weeks, half each
     out = []
     for t, x in f.items():
         news = NEWS_POINTS.get((sentiment or {}).get(t), 50.0)
@@ -106,7 +109,7 @@ def score_all(data, sentiment=None):
              + w["trend"] * x["trend"] + w["news"] * news)
         out.append({"ticker": t, "score": round(s, 1), "momentum": round(mom[t], 1), "steadiness": round(steady[t], 1),
                     "trend": x["trend"], "news": news, "ret_12m": x["ret_12m"], "recent": round(recent[t], 1),
-                    "ret_1m": x["ret_1m"], "uptrend": uptrend(data[t]),
+                    "ret_1m": x["ret_1m"], "ret_2w": x["ret_2w"], "uptrend": uptrend(data[t]),
                     "vol": daily_vol(data[t])})
     out.sort(key=lambda r: -r["score"])
     for i, r in enumerate(out, 1):
