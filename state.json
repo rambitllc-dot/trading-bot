@@ -129,11 +129,14 @@
       "trades": 1
     },
     "tsla_trend": {
-      "cash": 86.0,
+      "cash": 0.44,
       "pos": {
-        "TSLA": 0.0
+        "TSLA": 0.218887348
       },
-      "trades": 2
+      "trades": 3,
+      "bought_on": {
+        "TSLA": "2026-11-12"
+      }
     },
     "sp500_momentum": {
       "cash": 0.7,
@@ -199,7 +202,7 @@
       "trades": 0
     }
   },
-  "last_check_utc": "2026-11-12 14:01",
+  "last_check_utc": "2026-11-12 14:31",
   "bets": {
     "live_from": "2026-11-02T18:40:20Z",
     "signals": {
@@ -276,7 +279,7 @@
         "live_mdd": -0.733313220180629
       }
     },
-    "last_t": "2026-11-12T13:45:00Z"
+    "last_t": "2026-11-12T14:15:00Z"
   },
   "spacex_watch": {
     "spy_at_ipo": 737.01,
