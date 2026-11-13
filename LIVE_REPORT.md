@@ -1,5 +1,5 @@
 # Live trading (real money)
 
-Last check: Nov 13, 2026 15:01 UTC
+Last check: Nov 13, 2026 15:31 UTC
 
 **OFF.** Live trading is switched off in live_config.json. Nothing is bought or sold with real money. See LIVE.md for how to switch it on.
