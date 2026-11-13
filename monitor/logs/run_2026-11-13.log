@@ -1,0 +1,92 @@
+IB sync: holdings are already live from the Mac (2026-11-13), newer than IB's report (2026-11-12); kept them; 0 new trade(s) saved
+$ANT: possibly delisted; no price data found  (period=2y)
+
+1 Failed download:
+['ANT']: possibly delisted; no price data found  (period=2y)
+Portfolio as of 2026-11-13
+Value $970.97 · cost $972.70 · P&L -$1.73 (-0.2%) · net delta 17 shares · theta $0.00/day · 6/6 positions priced
+
+- TGT shares x1: mark $161.45, value $161.45, P&L -$0.25 (-0.2%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 162.70)) · LOSING -0.2%: #3 in line for the next swap).
+- VTRS shares x7: mark $20.82, value $145.74, P&L $0.21 (+0.1%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 20.82))).
+- BEN shares x5: mark $36.02, value $180.10, P&L -$0.65 (-0.4%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -0.4%: #2 in line for the next swap).
+- SWK shares x1: mark $113.27, value $113.27, P&L -$0.68 (-0.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -0.6%: #1 in line for the next swap).
+- SGOV shares x3: mark $100.56, value $301.68, P&L -$0.35 (-0.1%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price))).
+- CASH shares x68.73: mark $1.00, value $68.73, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 17 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: SGOV 31%, BEN 19%, TGT 17%, VTRS 15%, SWK 12%, CASH 7%
+By sector: Ultrashort Bond (ETF) 31%, Financial Services 19%, Consumer Defensive 17%, Healthcare 15%, Industrials 12%, Cash 7%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+66/100 · Calm (vix level 74, vix percentile 25, term structure 55, breadth 73, credit 91)
+
+NEWS (Claude summaries, facts only)
+- BEN [positive]: Franklin Templeton (BEN) reported fourth-quarter and full-year results to 30 September 2026, with higher sales, revenue, net income and EPS from continuing operations than a year earlier. Zacks upgraded the stock to Zacks Rank #2, and one headline notes it rose 6.61% over the past week. Peers T. Rowe Price and Lazard reported October AUM declines, while BlackRock reported record AUM of $15.49 trillion.
+  Drivers: Year-over-year growth in sales, revenue, net income and EPS; Zacks Rank upgrade to #2 on earnings outlook; Stock up 6.61% in one week; Peer AUM declines at T. Rowe Price and Lazard
+- SGOV [neutral]: A 24/7 Wall St. article reports that the U.S. ran its biggest October deficit on record, at $404 billion, and says bond investors are reacting. A second 24/7 Wall St. piece reports SGOV's yield at 3.63% and compares it with dividend payouts from Johnson & Johnson and Verizon.
+  Drivers: Record October federal deficit of $404 billion; Bond investor reaction to the deficit; SGOV yield reported at 3.63%; Income reset tied to Fed rate moves
+- SWK [positive]: Stanley Black & Decker's CEO said at Baird's Global Industrial Conference that the company targets a 34% to 35% gross margin in 2027, citing brand growth, product development and simpler supply chains, and the company reported about 4% organic growth. Separately, the company expanded its Anchanto order management system to South Korea to link online and store tool sales.
+  Drivers: 2027 gross margin target of 34% to 35%; About 4% organic growth; Brand growth and simpler supply chains; Order management expansion in South Korea
+- TGT [neutral]: Target added Sally Grimes, a former CEO of Diageo North America and Clif Bar, as an independent board director, according to reports dated November 13, 2026. A Zacks preview published the same day outlines Wall Street estimates for key metrics ahead of Target's Q3 earnings for the quarter ended October 2026, but the headlines do not give the report date.
+  Drivers: Independent board appointment of Sally Grimes; Upcoming Q3 earnings (date not stated in headlines); Analyst metric estimates previewed by Zacks
+  Flag for TGT-shares: Q3 earnings preview published November 13, 2026; the headlines do not state the report date.
+- VTRS [neutral]: None of the headlines provided concern Viatris (VTRS). They cover Ingram Micro (INGM) joining the S&P SmallCap 600 and a TIKR piece on David Einhorn's Greenlight Capital holdings, including PayPal. No Viatris-specific news was reported.
+Claude cost this run: $0.0018
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 523 of 525 stocks.
+- Watchlist SPCX 139.11: 26.5% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 167.99: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+785% over 12 months), SNDK (+393% over 12 months), MU (+281% over 12 months), LITE (+243% over 12 months), DELL (+240% over 12 months)
+Pullbacks in uptrends: PSA (+10% above its 200-day average, RSI-2 6 after a sharp drop), AMCR (+3% above its 200-day average, RSI-2 6 after a sharp drop), VRTX (+11% above its 200-day average, RSI-2 7 after a sharp drop), MRNA (+132% above its 200-day average, RSI-2 7 after a sharp drop), IQV (+26% above its 200-day average, RSI-2 8 after a sharp drop)
+New 52-week highs: HUM (new 52-week high at 450.00), CPAY (new 52-week high at 462.22), WST (new 52-week high at 416.42), MO (new 52-week high at 78.64), JNJ (new 52-week high at 285.75)
+Unusual volume: none today
+  MRNA [neutral]: Moderna shares fell about 7% on November 12 after the company guided to roughly $4 billion in 2027 cash costs, mostly for oncology, and a Zacks report on November 13 said the 2027 cost outlook and limited revenue visibility weighed on sentiment. The company also raised its 2026 revenue growth outlook, said it plans to seek U.S. approval of its individualized cancer therapy intismeran by year-end, and is scheduled to join the MSCI World Index in November 2026.
+  SNDK [negative]: Sandisk fell 7.2% on Thursday, its second straight daily decline, as a chip-sector selloff followed Nvidia CEO Jensen Huang's ouster. The drop came despite reported 378% revenue growth and an 85% gross margin in its latest quarter, and the stock is reported to trade 64% below its 52-week high ahead of an 8-for-1 stock split.
+  MU [neutral]: Micron (MU) shares fell about 3.96% on November 13, 2026, in a broader chip-sector selloff that headlines tie to Jensen Huang's resignation as Nvidia CEO. The company's latest guidance called for about $61.5 billion in quarterly revenue, and one headline notes it posted record results. Coverage also describes the stock as down about 20% over the past month but up 16% over the past five trading sessions.
+  LITE [neutral]: Marvell Technology has agreed to acquire Lumentum in an all-stock deal valued near $115 billion, with Lumentum holders to receive 4.5 Marvell shares per share and closing not expected until 2028. Lumentum trades well below the value of that offer, with the spread reported at about 18% to 19.7% in recent headlines. Lumentum is up 56% in 2026 but nearly half off its October high.
+  DELL [negative]: Dell shares fell about 8% on November 13, 2026, in a broader AI hardware selloff that also hit Super Micro and NVIDIA. GuruFocus reported that Dell has lost more than a third of its value in a month, despite a reported $95 billion AI server backlog and a raised $74 billion AI revenue goal. Dell's next earnings report is scheduled for November 24.
+  SPCX [neutral]: SpaceX (SPCX) stock traded in a state of flux this week, according to Yahoo Finance. Bloomberg reporting, as cited by Yahoo Finance, says a Tesla-SpaceX merger could be announced as early as December but may slip into early 2027. A Starship launch test with a 'double catch' of the ship and Super Heavy booster is scheduled for Friday night, and the Motley Fool reports SpaceX expects to spend $35 billion to $40 billion this quarter.
+  PLTR [positive]: Zacks reported that Palantir's Rule of 40 score reached 158% in Q3 2026, citing 96% revenue growth and expanding margins. A 24/7 Wall St. article said ARK Invest trimmed its Palantir position while buying CoreWeave, and a separate piece described a recent tech selloff.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- TGT: stop 155.38 · target 193.79 · typical daily move 5.20
+- VTRS: stop 19.88 · target 24.23 · typical daily move 0.57
+- BEN: stop 34.52 · target 42.32 · typical daily move 1.05
+- SWK: stop 108.82 · target 137.94 · typical daily move 4.11
+- SGOV: stop 96.15 · target 100.68 · typical daily move 0.02
+
+ROTATION (follow the money)
+- #1 in swap line: SWK, rank #2 of 518, score 92, LOSING -0.6%
+- #2 in swap line: BEN, rank #1 of 518, score 94, LOSING -0.4%
+- #3 in swap line: TGT, rank #14 of 518, score 80, LOSING -0.2%
+- #4 in swap line: VTRS, rank #3 of 518, score 90
+Strongest stocks you don't own: CPAY (88), GWW (87), AIZ (84), BDX (84), HUM (83)
+Status: no swap: no stock you don't own clearly beats a holding that's free to swap (needs a score of 80+ and a 10-point lead); best candidate CPAY scores 88
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -96.24 from 1 win(s) / 5 loss(es), win rate 17%; fees 18.27
+Open (not locked in) -1.73 · total -97.97
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -9.7 pts after 8 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -9.0 pts after 8 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -12.8 pts after 8 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -9.0 pts after 8 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +10.7 pts after 3 day(s)
+- 2026-11-12 CNC -> BEN [yes]: -1.0 pts after 1 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +0.2 pts after 1 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-04-02): your stocks 969.16 vs 1,043.02 -> -73.86
+2 of 7 swap ideas are ahead; average edge -4.4 pts
+
+ALERTS (1)
+- [warn] NEW TGT news: Q3 earnings preview published November 13, 2026; the headlines do not state the report date. (driver: Independent board appointment of Sally Grimes) -> YOUR PLAN: REVIEW
+Notifier: sent
