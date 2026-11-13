@@ -11,16 +11,6 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "TXN",
-    "contracts": 1.0,
-    "entry_price": 289.9283,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-06",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "VTRS",
     "contracts": 7.0,
     "entry_price": 20.7902,
@@ -50,8 +40,18 @@
     "stop_price": null
   },
   {
+    "asset_type": "shares",
+    "ticker": "SGOV",
+    "contracts": 3.0,
+    "entry_price": 100.677,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-13",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
     "asset_type": "cash",
-    "amount": 63.75,
+    "amount": 370.76,
     "note": "IB cash, live from the Mac (2026-11-13)"
   }
 ]
