@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 14, 2026 07:01 UTC · Bitcoin $67,300.00 · US stock market closed
+Last update: Nov 14, 2026 07:31 UTC · Bitcoin $67,162.00 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -53,20 +53,20 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 16 | S&P 500 buy & hold | Hold | ETF | $99.22 | -$0.78 (-0.8%) | 1 |
 | 17 | S&P 500 trend (200 day) | Static rule | ETF | $99.22 | -$0.78 (-0.8%) | 1 |
 | 18 | SpaceX buy & hold | Hold | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
-| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $97.87 | -$2.13 (-2.1%) | 3 |
+| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $97.85 | -$2.15 (-2.1%) | 3 |
 | 20 | Wide momentum (10 ETFs) | Monthly pick | ETF | $95.96 | -$4.04 (-4.0%) | 1 |
 | 21 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
 | 22 | Tesla buy & hold | Hold | Stock | $95.75 | -$4.25 (-4.3%) | 1 |
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $90.44 | -$9.56 (-9.6%) | 10 |
-| 24 | Bitcoin buy & hold | Hold | Bitcoin | $85.97 | -$14.03 (-14.0%) | 1 |
-| 25 | Tesla trend (200 day) | Static rule | Stock | $85.86 | -$14.14 (-14.1%) | 3 |
+| 24 | Tesla trend (200 day) | Static rule | Stock | $85.86 | -$14.14 (-14.1%) | 3 |
+| 25 | Bitcoin buy & hold | Hold | Bitcoin | $85.80 | -$14.20 (-14.2%) | 1 |
 | 26 | Nvidia buy & hold | Hold | Stock | $78.64 | -$21.36 (-21.4%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $85.97 | $100.00 | trading |
+| Bitcoin | $85.80 | $100.00 | trading |
 | S&P 500 | $99.22 | $99.22 | about even |
 | Apple | $105.93 | $105.93 | about even |
 | Microsoft | $100.96 | $100.96 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $98.11 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,550.97 from $2,600 (-49.03)
+**All together:** $2,550.79 from $2,600 (-49.21)
 
 ## What each one is doing
 
@@ -98,13 +98,13 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **S&P 500 buy & hold:** SPY $98.71, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $98.71, cash $0.51. Signal: in the market (price $754.27 vs 200d avg $729.28).
 - **SpaceX buy & hold:** SPCX $97.60, cash $0.51. Holding.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.23, GLD $19.46, BTC/USD $8.56, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.23, GLD $19.46, BTC/USD $8.54, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **Wide momentum (10 ETFs):** XLE $95.45, cash $0.51. Holding XLE until next month's check.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $162.84 vs 200d avg $203.92).
 - **Tesla buy & hold:** TSLA $95.24, cash $0.51. Holding.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $9.54, SNDK $7.72, LITE $8.79, MU $8.94, DELL $8.39, STX $8.62, WDC $8.44, VLO $9.68, APA $9.99, MPC $9.63, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
-- **Bitcoin buy & hold:** BTC/USD $83.58, cash $2.39. Holding.
 - **Tesla trend (200 day):** TSLA $85.42, cash $0.44. Signal: in the market (price $390.24 vs 200d avg $382.71).
+- **Bitcoin buy & hold:** BTC/USD $83.41, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $78.13, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
@@ -118,7 +118,7 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 143 | 56.6% | $99.67 | -44% |
-| Learning: copies whichever method has been winning lately | Learning (switches methods) | 201 | 50.7% | $34.04 | -76% |
+| Learning: copies whichever method has been winning lately | Learning (switches methods) | 202 | 50.5% | $32.34 | -76% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Session momentum: follow the busiest hour's direction | Static (one fixed method) | 757 | 49.9% | $0.99 (ran out) | -99% |
 | Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 496 | 46.4% | $0.98 (ran out) | -99% |
