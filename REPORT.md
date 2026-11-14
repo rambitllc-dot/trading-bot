@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 14, 2026 11:31 UTC · Bitcoin $67,215.47 · US stock market closed
+Last update: Nov 14, 2026 12:01 UTC · Bitcoin $67,223.09 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $98.11 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,550.86 from $2,600 (-49.14)
+**All together:** $2,550.87 from $2,600 (-49.13)
 
 ## What each one is doing
 
