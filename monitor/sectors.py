@@ -15,6 +15,26 @@ ETF_SECTORS = {
 
 
 @functools.lru_cache(maxsize=1)
+def _subs():
+    out = {}
+    if os.path.exists(config.SCAN_UNIVERSE_FILE):
+        with open(config.SCAN_UNIVERSE_FILE, newline="") as f:
+            for row in csv.DictReader(f):
+                t = (row.get("Symbol") or "").strip().replace(".", "-")
+                if t:
+                    out[t] = row.get("GICS Sub-Industry") or ""
+    return out
+
+
+def avoided(ticker):
+    """True for stocks on the avoid list (AI bubble): never bought."""
+    t = (ticker or "").upper().replace(".", "-")
+    if t in getattr(config, "AVOID_EXCEPT", []):
+        return False
+    return t in getattr(config, "AVOID_TICKERS", []) or _subs().get(t) in getattr(config, "AVOID_SUB_INDUSTRIES", [])
+
+
+@functools.lru_cache(maxsize=1)
 def _table():
     out = {}
     path = config.SCAN_UNIVERSE_FILE

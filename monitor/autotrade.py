@@ -189,7 +189,7 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
         return round(min(config.VOL_SIZE_MAX, max(config.VOL_SIZE_MIN, ref / v)), 2)
 
     ranked = [(t, rk, sc, sz) for t, rk, sc, up, v in rows_ranked
-              if (up or not config.UPTREND_REQUIRED) and (sz := size(v))]
+              if (up or not config.UPTREND_REQUIRED) and not sectors.avoided(t) and (sz := size(v))]
     extra = [] if storm else [
         {"ticker": t, "rank": rk, "score": sc, "size": sz,
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}, uptrend"
@@ -292,7 +292,7 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
     counts = collections.Counter(sectors.sector_of(x["symbol"]) for x in client.positions())
     for b in queue:
         t = b["ticker"]
-        if t in skip:
+        if t in skip or sectors.avoided(t):  # avoid list (AI bubble): never bought, even from an older plan
             continue
         if sectors.over_limit(sectors.sector_of(t), counts[sectors.sector_of(t)] + 1):
             continue  # would put more than MAX_PER_SECTOR stocks in one sector

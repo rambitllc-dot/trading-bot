@@ -93,3 +93,12 @@ class WeatherAndTrendTest(unittest.TestCase):
         p2 = autotrade.build_plan("2026-11-06", rows2, fair, con, 1000.0, 100.0)
         self.assertIn(config.SAFE_FUND, [x["ticker"] for x in p2["sells"]])
         self.assertTrue(p2["buys"])
+
+
+class AvoidListTest(unittest.TestCase):
+    def test_ai_stocks_avoided(self):
+        from monitor import sectors
+        for t in ("NVDA", "AMD", "MSFT", "PLTR", "VRT", "SMH", "LRCX"):
+            self.assertTrue(sectors.avoided(t), t)
+        for t in ("TGT", "VTRS", "BEN", "SWK", "FSLR", "SPYM", "SGOV"):
+            self.assertFalse(sectors.avoided(t), t)

@@ -105,6 +105,15 @@ LOCK_AT_PCT = 0.0           # where the lock puts the stop: 0 = your buy price
 # is sold and the money moves to the strongest stock in the market (or the S&P 500 fund if none qualifies).
 STALL_DAYS = 3
 STALL_MIN_GAIN_PCT = 3.0
+# Avoid list (AI bubble): never BUY these, whatever their rank. Stocks you already hold aren't sold for it.
+# Chip makers and chip equipment (except solar), the big AI platforms and AI infrastructure (data-center hardware,
+# networking, power), and the tech funds made of them.
+AVOID_SUB_INDUSTRIES = ["Semiconductors", "Semiconductor Materials & Equipment"]
+AVOID_EXCEPT = ["FSLR"]  # solar panels, not AI
+AVOID_TICKERS = ["MSFT", "GOOGL", "GOOG", "META", "AMZN", "AAPL", "TSLA", "ORCL", "PLTR", "NOW", "CRM", "SNOW",
+                 "ANET", "CSCO", "VRT", "ETN", "BE", "SMCI", "DELL", "HPE", "STX", "WDC", "SNDK", "NTAP", "LITE",
+                 "COHR", "CIEN", "GLW", "APH", "CEG", "VST", "NRG", "TLN", "IBM", "CRWV", "ARM", "TSM", "ASML",
+                 "QQQ", "XLK", "SMH", "SOXX"]
 WEAK_MA_DAYS = 50           # a close below this moving average flags the stock WEAKENING (front of the swap line)
 REWARD_RISK = 2.0           # target = starting price + 2 x the starting distance to the stop
 

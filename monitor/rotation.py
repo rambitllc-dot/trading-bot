@@ -204,7 +204,8 @@ def run(con, asof, rows, data, sentiment=None, blocker=None, storm=False):
                       int(bool(r.get("uptrend"))), r.get("vol")) for r in scored])
     con.execute("DELETE FROM rotation_log WHERE asof=?", (asof,))  # re-runs on the same day start fresh
     con.commit()
-    result = {"universe": total, "holdings": mine, "top": [r for r in scored if r["ticker"] not in held][:10],
+    result = {"universe": total, "holdings": mine,
+              "top": [r for r in scored if r["ticker"] not in held and not sectors.avoided(r["ticker"])][:10],
               "suggestions": [], "status": "", "storm": storm}
     if not mine:
         result["status"] = "no scored holdings yet"
@@ -220,7 +221,7 @@ def run(con, asof, rows, data, sentiment=None, blocker=None, storm=False):
 
     new = []
     candidates = [r for r in scored if r["ticker"] not in held and r["ticker"] not in recent_out
-                  and r["ticker"] not in taken]
+                  and r["ticker"] not in taken and not sectors.avoided(r["ticker"])]  # avoid list: AI bubble
     # earnings guard: skip strong candidates that report earnings in the next few business days
     soon = {}
     if blocker:
