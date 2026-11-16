@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 15, 2026 23:31 UTC · Bitcoin $65,086.93 · US stock market closed
+Last update: Nov 16, 2026 00:01 UTC · Bitcoin $65,301.28 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -16,10 +16,10 @@ Last update: Nov 15, 2026 23:31 UTC · Bitcoin $65,086.93 · US stock market clo
 
 **Upcoming share unlocks** (more pre-IPO shares become sellable, which can push the price down):
 
-- Dec 08, 2026 (23 days): end of the 180-day lockup, ~342 million shares
-- Mar 18, 2027 (123 days): ~176 million shares
-- May 17, 2027 (183 days): ~176 million shares
-- Jun 12, 2027 (209 days): Elon Musk's own lockup ends (6.4 billion shares)
+- Dec 08, 2026 (22 days): end of the 180-day lockup, ~342 million shares
+- Mar 18, 2027 (122 days): ~176 million shares
+- May 17, 2027 (182 days): ~176 million shares
+- Jun 12, 2027 (208 days): Elon Musk's own lockup ends (6.4 billion shares)
 - More shares also unlock 2 trading days after each quarterly earnings report (next: Q4 2026 results, early 2027).
 
 You'll get a GitHub notification for: a move of 5% or more in a day, crossing the 50-day average, a new high since the IPO, a 20% drop from the high, and 3 days before each unlock.
@@ -53,20 +53,20 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 16 | S&P 500 buy & hold | Hold | ETF | $99.22 | -$0.78 (-0.8%) | 1 |
 | 17 | S&P 500 trend (200 day) | Static rule | ETF | $99.22 | -$0.78 (-0.8%) | 1 |
 | 18 | SpaceX buy & hold | Hold | Stock | $98.11 | -$1.89 (-1.9%) | 1 |
-| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $97.59 | -$2.41 (-2.4%) | 3 |
+| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $97.62 | -$2.38 (-2.4%) | 3 |
 | 20 | Wide momentum (10 ETFs) | Monthly pick | ETF | $95.96 | -$4.04 (-4.0%) | 1 |
 | 21 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
 | 22 | Tesla buy & hold | Hold | Stock | $95.75 | -$4.25 (-4.3%) | 1 |
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $90.44 | -$9.56 (-9.6%) | 10 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $85.86 | -$14.14 (-14.1%) | 3 |
-| 25 | Bitcoin buy & hold | Hold | Bitcoin | $83.22 | -$16.78 (-16.8%) | 1 |
+| 25 | Bitcoin buy & hold | Hold | Bitcoin | $83.49 | -$16.51 (-16.5%) | 1 |
 | 26 | Nvidia buy & hold | Hold | Stock | $78.64 | -$21.36 (-21.4%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $83.22 | $100.00 | trading |
+| Bitcoin | $83.49 | $100.00 | trading |
 | S&P 500 | $99.22 | $99.22 | about even |
 | Apple | $105.93 | $105.93 | about even |
 | Microsoft | $100.96 | $100.96 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $98.11 | $100.00 | trading |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,547.94 from $2,600 (-52.06)
+**All together:** $2,548.24 from $2,600 (-51.76)
 
 ## What each one is doing
 
@@ -88,7 +88,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Microsoft trend (200 day):** MSFT $100.45, cash $0.51. Signal: in the market (price $524.19 vs 200d avg $440.48).
 - **RSI dip-buying (S&P 500):** cash $100.85. In cash, waiting for a dip (RSI-2 42, buys below 10).
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $100.15, cash $0.51. Holding.
-- **Bitcoin trend bot (5/20 day):** cash $100.00. Signal: in cash (5d avg $70,271.81 vs 20d avg $75,802.01).
+- **Bitcoin trend bot (5/20 day):** cash $100.00. Signal: in cash (5d avg $68,596.31 vs 20d avg $75,067.67).
 - **SpaceX trend (50 day):** cash $100.00. Signal: in cash (price $139.10 vs 50d avg $148.92).
 - **Anthropic buy & hold:** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
 - **Anthropic trend (50 day):** cash $100.00. Waiting for Anthropic's IPO; buys automatically once ANT starts trading.
@@ -98,13 +98,13 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **S&P 500 buy & hold:** SPY $98.71, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $98.71, cash $0.51. Signal: in the market (price $754.27 vs 200d avg $729.28).
 - **SpaceX buy & hold:** SPCX $97.60, cash $0.51. Holding.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.23, GLD $19.46, BTC/USD $8.28, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $59.23, GLD $19.46, BTC/USD $8.30, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **Wide momentum (10 ETFs):** XLE $95.45, cash $0.51. Holding XLE until next month's check.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $162.84 vs 200d avg $203.92).
 - **Tesla buy & hold:** TSLA $95.24, cash $0.51. Holding.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $9.54, SNDK $7.72, LITE $8.79, MU $8.94, DELL $8.39, STX $8.62, WDC $8.44, VLO $9.68, APA $9.99, MPC $9.63, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Tesla trend (200 day):** TSLA $85.42, cash $0.44. Signal: in the market (price $390.24 vs 200d avg $382.71).
-- **Bitcoin buy & hold:** BTC/USD $80.83, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $81.10, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $78.13, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
