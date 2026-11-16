@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-13",
+ "asof": "2026-11-16",
  "dates": {
   "ABNB": null,
   "AIZ": null,
@@ -7,13 +7,18 @@
   "BEN": "2027-01-29",
   "CAH": "2027-02-04",
   "CPAY": "2027-02-03",
+  "CRL": null,
+  "DGX": null,
+  "FAST": "2027-01-19",
+  "FDX": null,
   "GWW": "2027-02-02",
   "HUM": null,
   "JNJ": "2027-01-26",
-  "KO": null,
   "MAR": null,
+  "MSI": null,
   "SWK": "2027-02-03",
   "TGT": "2026-11-18",
-  "VTRS": null
+  "VTRS": null,
+  "WST": null
  }
 }
