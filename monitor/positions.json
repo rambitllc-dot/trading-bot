@@ -11,16 +11,6 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "SWK",
-    "contracts": 1.0,
-    "entry_price": 113.9505,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-13",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "FAST",
     "contracts": 1.0,
     "entry_price": 55.4805,
