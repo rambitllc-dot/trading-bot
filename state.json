@@ -48,11 +48,14 @@
       "last_rebalance": "2026-11"
     },
     "rsi_dip": {
-      "cash": 100.85,
+      "cash": 0.52,
       "pos": {
-        "SPY": 0.0
+        "SPY": 0.135888482
       },
-      "trades": 2
+      "trades": 3,
+      "bought_on": {
+        "SPY": "2026-11-17"
+      }
     },
     "momentum_wide": {
       "cash": 0.51,
@@ -129,11 +132,11 @@
       "trades": 1
     },
     "tsla_trend": {
-      "cash": 0.44,
+      "cash": 83.85,
       "pos": {
-        "TSLA": 0.218887348
+        "TSLA": 0.0
       },
-      "trades": 3,
+      "trades": 4,
       "bought_on": {
         "TSLA": "2026-11-12"
       }
@@ -175,16 +178,16 @@
       "trades": 0
     },
     "spcx_gradual": {
-      "cash": 50.02,
+      "cash": 25.03,
       "pos": {
-        "SPCX": 0.35732868500000003
+        "SPCX": 0.5366870420000001
       },
-      "trades": 2,
+      "trades": 3,
       "bought_on": {
-        "SPCX": "2026-11-10"
+        "SPCX": "2026-11-17"
       },
-      "buys_done": 2,
-      "last_buy": "2026-11-10"
+      "buys_done": 3,
+      "last_buy": "2026-11-17"
     },
     "ant_hold": {
       "cash": 100.0,
@@ -202,7 +205,7 @@
       "trades": 0
     }
   },
-  "last_check_utc": "2026-11-17 14:01",
+  "last_check_utc": "2026-11-17 14:31",
   "bets": {
     "live_from": "2026-11-02T18:40:20Z",
     "signals": {
@@ -272,14 +275,14 @@
         "mdd": -0.9907262413523893,
         "n": 581,
         "w": 279,
-        "live_n": 353,
-        "live_w": 179,
-        "live_bank": 14.8889,
+        "live_n": 354,
+        "live_w": 180,
+        "live_bank": 15.4845,
         "live_peak": 102.752,
         "live_mdd": -0.8550986842105264
       }
     },
-    "last_t": "2026-11-17T13:45:00Z"
+    "last_t": "2026-11-17T14:15:00Z"
   },
   "spacex_watch": {
     "spy_at_ipo": 737.01,
