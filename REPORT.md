@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 17, 2026 03:31 UTC · Bitcoin $64,990.89 · US stock market closed
+Last update: Nov 17, 2026 04:01 UTC · Bitcoin $64,992.20 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -98,7 +98,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **S&P 500 buy & hold:** SPY $97.13, cash $0.51. Holding.
 - **S&P 500 trend (200 day):** SPY $97.13, cash $0.51. Signal: in the market (price $740.04 vs 200d avg $729.55).
 - **SpaceX buy & hold:** SPCX $96.53, cash $0.51. Holding.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $58.28, GLD $19.35, BTC/USD $8.26, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $58.28, GLD $19.35, BTC/USD $8.27, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $156.15 vs 200d avg $203.74).
 - **Wide momentum (10 ETFs):** XLE $93.66, cash $0.51. Holding XLE until next month's check.
 - **Tesla buy & hold:** TSLA $92.59, cash $0.51. Holding.
@@ -117,8 +117,8 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
-| Reversal: bet against unusually big moves | Static (one fixed method) | 183 | 55.2% | $78.29 | -48% |
-| Learning: copies whichever method has been winning lately | Learning (switches methods) | 317 | 51.4% | $22.17 | -83% |
+| Reversal: bet against unusually big moves | Static (one fixed method) | 184 | 54.9% | $74.37 | -48% |
+| Learning: copies whichever method has been winning lately | Learning (switches methods) | 319 | 51.1% | $20.01 | -83% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Session momentum: follow the busiest hour's direction | Static (one fixed method) | 757 | 49.9% | $0.99 (ran out) | -99% |
 | Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 496 | 46.4% | $0.98 (ran out) | -99% |
