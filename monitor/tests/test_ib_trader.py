@@ -38,7 +38,9 @@ class FakeIB:
             self.pos[s] = [old[0] + q, px]
         else:
             self.cash += q * px
-            self.pos.pop(s)
+            self.pos[s][0] -= q
+            if self.pos[s][0] <= 1e-9:
+                self.pos.pop(s)
         return NS(order=NS(orderId=self.n), orderStatus=NS(status="Filled", avgFillPrice=px), log=[])
 
     def sleep(self, *_):
@@ -281,3 +283,37 @@ class LeftoverTest(IBTraderTest):
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("SPYM", ib.pos)
         self.assertEqual(ib.pos["SGOV"][0], 2)
+
+
+class DeployParkedTest(IBTraderTest):
+    """SGOV money goes into strong stocks when there's a free slot (fair weather)."""
+    def cands(self):
+        return [{"ticker": "HUM", "rank": 3, "score": 90, "sector": "Health Care", "reason": "rank #3"},
+                {"ticker": "AIZ", "rank": 8, "score": 84, "sector": "Financials", "reason": "rank #8"},
+                {"ticker": "FDX", "rank": 10, "score": 82, "sector": "Industrials", "reason": "rank #10"}]
+
+    def ib(self):
+        return FakeIB({"VTRS": 20.0, "FAST": 55.0, "SGOV": 100.7, "HUM": 250.0, "AIZ": 180.0, "FDX": 190.0},
+                      cash=50.0, holdings={"VTRS": [7, 20.8], "FAST": [1, 55.5], "SGOV": [7, 100.7]})
+
+    def test_sells_sgov_to_buy_stocks(self):
+        ib = self.ib()
+        autotrade.save_json(autotrade.PLAN_FILE, plan(asof="2026-11-09", deposit_candidates=self.cands(),
+                                                      fallback="SGOV"))
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertIn("Parked money put to work", msg)
+        self.assertLess(ib.pos.get("SGOV", [0])[0], 7)                    # only part of SGOV sold
+        self.assertTrue({"HUM", "AIZ", "FDX"} & set(ib.pos))
+        self.assertEqual(len(set(ib.pos) - {"SGOV"}), 5)                   # free slots filled: 2 + 3 stocks
+
+    def test_not_sgov_bought_today_nor_in_a_storm(self):
+        ib = self.ib()
+        autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands(), storm=True))
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["SGOV"][0], 7)
+        st = autotrade.load_state()
+        st["bought"]["SGOV"], st["deployed"] = self.open_time.date().isoformat(), None
+        autotrade.save_json(autotrade.STATE_FILE, st)
+        autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", deposit_candidates=self.cands()))
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["SGOV"][0], 7)                             # good-faith rule: wait a day

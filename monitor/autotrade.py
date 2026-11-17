@@ -20,6 +20,7 @@ is logged to autotrade/log.csv and sent to Telegram.
 import csv
 import datetime as dt
 import json
+import math
 import os
 import sys
 import time
@@ -451,6 +452,9 @@ def execute(client=None):
         m = invest_new_cash(client, p, state, today)
         if m:
             msgs.append(m)
+        m = deploy_parked(client, p, state, today)
+        if m:
+            msgs.append(m)
         m = sweep_leftover(client, p, state, today)
         if m:
             msgs.append(m)
@@ -532,6 +536,60 @@ def invest_new_cash(client, p, state, today):
         return f"💵 Found ${cash:,.2f} of new cash but couldn't buy anything yet; I'll retry (max {config.DEPOSIT_MAX_TRIES_PER_DAY} times a day)."
     return (f"💵 New cash found: ${cash:,.2f}. Invested in {len(lines)} stock(s), spreading across sectors "
             "(steadier stocks get more, jumpy ones less) with the goal of beating the S&P 500:\n" + "\n".join(lines))
+
+
+def deploy_parked(client, p, state, today):
+    """Money parked in SGOV goes back into stocks: when there's a free stock slot and the plan has strong stocks
+    (score 80+, uptrend, not on the avoid list), sell just enough SGOV to buy them. Not in a market storm, at most
+    once a day, and never SGOV bought today (selling it before the money that bought it settles would be a
+    good-faith violation in a cash account)."""
+    safe = config.SAFE_FUND
+    if p.get("storm") or not config.DEPLOY_PARKED or state.get("deployed") == today \
+            or state["bought"].get(safe) == today:
+        return None
+    positions = client.positions()
+    sg = [x for x in positions if x["symbol"] == safe and float(x["qty"]) >= 1]
+    held = {x["symbol"] for x in positions}
+    free = config.AUTO_HOLDINGS - len(held - config.PARKING)
+    if not sg or free <= 0:
+        return None
+    blocked = recently_sold(state, today) | {t for t, d in state["bought"].items() if d == today}
+    picks = [c for c in pick_for_cash(p, held, blocked, min(free, config.DEPOSIT_MAX_STOCKS))
+             if c["ticker"] not in config.PARKING]
+    if not picks:
+        return None
+    state["deployed"] = today
+    acct = client.account()
+    equity, cash = float(acct["equity"]), float(acct["cash"])
+    per = equity / config.AUTO_HOLDINGS
+    plan_amounts = [(c, round(min(per * c.get("size", 1.0), equity * config.MAX_POSITION_PCT / 100,
+                                  equity * MAX_ORDER_PCT / 100), 2)) for c in picks]
+    need = sum(a for _, a in plan_amounts) - max(cash - 1, 0)
+    lines = []
+    if need > 0:
+        px = float(sg[0]["current_price"]) or 1
+        qty = min(int(float(sg[0]["qty"])), math.ceil(need / px))
+        try:
+            o = wait_filled(client, client.sell(safe, qty))
+        except AlpacaError as e:
+            return f"⚠️ Wanted to move parked {safe} money into stronger stocks but the sale failed: {str(e)[:150]}"
+        log("SELL", safe, qty * px, _price(o), "parked money -> stronger stocks")
+        lines.append(f"🔴 SELL {qty} {safe} (~${qty * px:,.2f}): parked money moves into stocks that are rising")
+    skip = set(held) | blocked
+    for c, amt in plan_amounts:
+        cash = float(client.account()["cash"])
+        amt = round(min(amt, cash - 1), 2)
+        if amt < config.AUTO_MIN_BUY_USD:
+            break
+        queue = [c] + [x for x in p.get("deposit_candidates") or [] if x["ticker"] != c["ticker"]
+                       and x["ticker"] not in config.PARKING]
+        t, m = buy_one(client, state, today, queue, amt, "from parked money: ", skip)
+        if t:
+            lines.append(f"{m} - {c['why']}")
+    if len(lines) <= (1 if need > 0 else 0):
+        return ("\n".join(lines) + "\nCouldn't buy a stock with it right now; the cash goes back to the "
+                "safe fund.") if lines else None
+    return "💸 Parked money put to work (fair weather, free stock slot):\n" + "\n".join(lines)
 
 
 def sweep_leftover(client, p, state, today):

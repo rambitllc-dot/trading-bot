@@ -36,6 +36,11 @@ class Alpaca:
         """Sell the whole position at market."""
         return self._req("DELETE", f"/v2/positions/{symbol}")
 
+    def sell(self, symbol, qty):
+        """Sell part of a position at market."""
+        return self._req("POST", "/v2/orders", json={"symbol": symbol, "qty": str(qty), "side": "sell",
+                                                     "type": "market", "time_in_force": "day"})
+
     def buy(self, symbol, dollars):
         return self._req("POST", "/v2/orders", json={"symbol": symbol, "notional": f"{dollars:.2f}", "side": "buy",
                                                      "type": "market", "time_in_force": "day"})

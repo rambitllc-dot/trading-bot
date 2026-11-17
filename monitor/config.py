@@ -138,6 +138,8 @@ DEPOSIT_FALLBACK = "SPYM"   # S&P 500 fund at ~1/10 of SPY's share price, so lef
 PARK_FUND = "SPYM"          # leftover cash after whole-share buys goes here when the S&P 500 is in an uptrend
 INDEX_TICKER = "SPY"        # the S&P 500 fund whose trend decides between PARK_FUND and SAFE_FUND
 DEPOSIT_MAX_TRIES_PER_DAY = 3
+DEPLOY_PARKED = True        # in fair weather, sell SGOV to buy strong stocks when there's a free stock slot
+                            # (once a day; never SGOV bought the same day)
 
 # ---------- Diversification and earnings guard ----------
 MAX_PER_SECTOR = 2          # never buy a stock if you'd then hold more than 2 from its sector (swaps, stop-out

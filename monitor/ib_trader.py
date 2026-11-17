@@ -120,6 +120,10 @@ class IBClient:
                               f"(not through the automatic connection)")
         return self._place(symbol, "SELL", int(round(qty)))
 
+    def sell(self, symbol, qty):
+        """Sell part of a position (whole shares)."""
+        return self._place(symbol, "SELL", int(qty))
+
     def buy(self, symbol, dollars):
         px = self.price(symbol)
         if not px:
