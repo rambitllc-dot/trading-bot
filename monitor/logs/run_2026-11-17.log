@@ -1,0 +1,84 @@
+IB sync: holdings are already live from the Mac (2026-11-17), newer than IB's report (2026-11-16); kept them; 2 new trade(s) saved
+$ANT: possibly delisted; no price data found  (period=2y)
+
+1 Failed download:
+['ANT']: possibly delisted; no price data found  (period=2y)
+Portfolio as of 2026-11-17
+Value $951.63 · cost $956.15 · P&L -$4.52 (-0.5%) · net delta 15 shares · theta $0.00/day · 4/4 positions priced
+
+- VTRS shares x7: mark $20.45, value $143.15, P&L -$2.38 (-1.6%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 20.82)) · LOSING -1.6%: #2 in line for the next swap).
+- FAST shares x1: mark $54.35, value $54.35, P&L -$1.13 (-2.0%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -2.0%: #1 in line for the next swap).
+- SGOV shares x7: mark $100.59, value $704.13, P&L -$1.01 (-0.1%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price))).
+- CASH shares x50: mark $1.00, value $50.00, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 15 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: SGOV 74% (over cap), VTRS 15%, FAST 6%, CASH 5%
+By sector: Ultrashort Bond (ETF) 74% (over cap), Healthcare 15%, Industrials 6%, Cash 5%
+
+Flags:
+- [info] SGOV is 74% of the book (cap 40%).
+- [info] Ultrashort Bond (ETF) is 74% of the book (cap 60%).
+
+MARKET ENVIRONMENT (macro gate)
+47/100 · Mixed (vix level 52, vix percentile 6, term structure 27, breadth 54, credit 84)
+
+NEWS (Claude summaries, facts only)
+- FAST [neutral]: A Trefis article headlined "Has Buying Fastenal Stock At A High Paid Off?" was published on 2026-11-17. The headline reports no specific company event, such as earnings, guidance, or a corporate announcement. The Nvidia reference in the same item is a separate tagline and does not concern Fastenal.
+- SGOV [neutral]: No headlines in the last 3 days.
+- VTRS [neutral]: A Zacks article asked whether investors are undervaluing Viatris (VTRS) and described the firm's Zacks Rank and value, growth, and momentum screens in general terms. The headlines report no specific company event, and the other item, a Trefis piece on Neurocrine Biosciences, does not concern Viatris.
+  Drivers: generic Zacks valuation commentary; no company-specific event reported; unrelated Neurocrine Biosciences headline
+Claude cost this run: $0.0005
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 523 of 525 stocks.
+- Watchlist SPCX 141.70: 28.8% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 156.56: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+816% over 12 months), SNDK (+439% over 12 months), MU (+267% over 12 months), LITE (+259% over 12 months), DELL (+244% over 12 months)
+Pullbacks in uptrends: VEEV (+34% above its 200-day average, RSI-2 0 after a sharp drop), ETR (+0% above its 200-day average, RSI-2 1 after a sharp drop), DOC (+4% above its 200-day average, RSI-2 2 after a sharp drop), CTSH (+5% above its 200-day average, RSI-2 2 after a sharp drop), IQV (+22% above its 200-day average, RSI-2 2 after a sharp drop)
+New 52-week highs: DRI (new 52-week high at 231.85), SGOV (new 52-week high at 100.59)
+Unusual volume: NKE (volume 3.0x normal, -6% on the day)
+  MRNA [positive]: Moderna shares have risen sharply this year, which headlines link to positive phase 3 adjuvant melanoma data. Morgan Stanley says the data gives clinical proof of concept for its individualized cancer vaccine, and JPMorgan raised its target while still calling the stock overvalued relative to its pipeline. Several funds, including RSP and TQQQ, added Moderna stakes in the period reported.
+  SNDK [negative]: Sandisk shares fell about 5% on November 17 and the stock was described as down alongside Micron after GF Securities forecast NAND prices falling in three of four quarters of 2027. Headlines also cite Duquesne's exit from its Sandisk stake before September 30 and an 8-for-1 stock split that takes effect after Thursday's close.
+  MU [negative]: Micron fell about 3% on November 17 after GF Securities forecast that NAND flash prices would decline in three of four quarters in 2027. Several headlines also report that Micron has been pressured by a Nvidia CEO scandal and by third-quarter fund sales, while the broader market fell ahead of Nvidia earnings.
+  LITE [positive]: Lumentum shares rose on November 17, 2026, after Reuters reported that the Trump administration will proceed with restrictions on imports of Chinese data center and optical transceiver equipment. Lumentum gained about 4% in one report, and peers Coherent and Applied Optoelectronics also advanced. Some headlines that day noted hedge fund selling in technology and a fund that exited its Lumentum stake in the third quarter.
+  DELL [neutral]: Dell Technologies expanded its AI Factory with NVIDIA on 17 Nov 2026, adding an AI Data Platform, infrastructure management tools, and rack-scale storage with direct liquid cooling. On the same day, GF Securities cut its Dell price target by 30% ahead of earnings, citing weaker server and PC demand, and Dell slid about 2% alongside Super Micro and HPE after new U.S. AI chip export curbs.
+  SPCX [positive]: SpaceX (SPCX) reported Q3 revenue up 161% to $14.6 billion, according to a TipRanks article, and several 13F-based reports noted SpaceX stock rose after Berkshire Hathaway's filing. Coverage also covered a $40 billion off-balance-sheet debt package for Nvidia chips that may be sold this week, and a $47 billion chip lease, with critics calling for regulation of such deals.
+  PLTR [positive]: Palantir's Q3 2026 U.S. commercial revenue reportedly rose 148%, and the UK government will keep its health data platform for three more years under a $440 million NHS contract extension, though the contract will open to domestic competitors afterward. Coverage also noted Trump's push for a $350 billion military bill, which one article said could benefit Palantir, while Michael Burry reportedly remains bearish on Palantir and AI stocks.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- VTRS: stop 19.88 · target 24.23 · typical daily move 0.54
+- FAST: stop 52.98 · target 61.78 · typical daily move 1.24
+- SGOV: stop 96.20 · target 100.70 · typical daily move 0.02
+
+ROTATION (follow the money)
+- #1 in swap line: FAST, rank #18 of 518, score 80, LOSING -2.0%
+- #2 in swap line: VTRS, rank #1 of 518, score 91, LOSING -1.6%
+Strongest stocks you don't own: CPAY (89), BEN (88), GWW (87), HUM (87), CNC (87)
+Status: no swap: no stock you don't own clearly beats a holding that's free to swap (needs a score of 80+ and a 10-point lead); best candidate CPAY scores 89
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -82.64 from 3 win(s) / 8 loss(es), win rate 27%; fees 21.46
+Open (not locked in) -4.52 · total -87.16
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -4.4 pts after 12 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -14.1 pts after 12 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -7.4 pts after 12 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -3.7 pts after 12 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +16.2 pts after 7 day(s)
+- 2026-11-12 CNC -> BEN [yes]: -7.3 pts after 5 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +1.4 pts after 5 day(s)
+- 2026-11-16 TGT -> HUM [partly]: -3.4 pts after 1 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-04-02): your stocks 885.31 vs 950.11 -> -64.80
+2 of 8 swap ideas are ahead; average edge -2.8 pts
+
+ALERTS (2)
+- [info] NEW SGOV is 74% of the book (cap 40%). -> YOUR PLAN: REVIEW
+- [info] NEW Ultrashort Bond (ETF) is 74% of the book (cap 60%). -> YOUR PLAN: REVIEW
+Notifier: sent

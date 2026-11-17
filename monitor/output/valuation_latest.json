@@ -1,14 +1,14 @@
 {
- "asof": "2026-11-16",
+ "asof": "2026-11-17",
  "totals": {
-  "value": 963.2300009918213,
-  "cost": 972.0245,
-  "positions": 6,
-  "priced": 6,
-  "net_delta": 17.0,
+  "value": 951.6299781799316,
+  "cost": 956.1470999999999,
+  "positions": 4,
+  "priced": 4,
+  "net_delta": 15.0,
   "daily_theta": 0,
-  "pnl": -8.794499008178718,
-  "pnl_pct": -0.904761043387149
+  "pnl": -4.517121820068269,
+  "pnl_pct": -0.47242958955460607
  },
  "positions": [
   {
@@ -23,22 +23,22 @@
    "target_price": 24.23,
    "stop_price": 19.88,
    "add_below": null,
-   "spot": 20.739999771118164,
+   "spot": 20.450000762939453,
    "status": "ok",
-   "mark": 20.739999771118164,
+   "mark": 20.450000762939453,
    "cost": 145.5314,
-   "value": 145.17999839782715,
-   "pnl": -0.35140160217284233,
-   "pnl_pct": -0.2414610195276362,
+   "value": 143.15000534057617,
+   "pnl": -2.381394659423819,
+   "pnl_pct": -1.636344224974005,
    "delta": 1.0,
    "pos_delta": 7.0,
-   "progress_target": -2.348542947712999,
-   "progress_stop": 8.53879014608593,
+   "progress_target": -10.861990135542374,
+   "progress_stop": 39.4918280828416,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 20.82)) \u00b7 LOSING -0.2%: #4 in line for the next swap",
+   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below the highest price since you bought, 20.82)) \u00b7 LOSING -1.6%: #2 in line for the next swap",
    "entry_date": "2026-11-13",
-   "ma50": 18.19,
+   "ma50": 18.26,
    "weak": false,
    "level_ref": 20.81999969482422,
    "levels_auto": true,
@@ -47,110 +47,39 @@
    "peak": 20.82
   },
   {
-   "position_id": "TGT-shares",
-   "ticker": "TGT",
+   "position_id": "FAST-shares",
+   "ticker": "FAST",
    "asset_type": "shares",
    "option_type": null,
    "strike": null,
    "expiry": null,
    "contracts": 1.0,
-   "entry_price": 161.7011,
-   "target_price": 193.79,
-   "stop_price": 155.38,
+   "entry_price": 55.4805,
+   "target_price": 61.78,
+   "stop_price": 52.98,
    "add_below": null,
-   "spot": 160.32000732421875,
+   "spot": 54.349998474121094,
    "status": "ok",
-   "mark": 160.32000732421875,
-   "cost": 161.7011,
-   "value": 160.32000732421875,
-   "pnl": -1.3810926757812467,
-   "pnl_pct": -0.8541022143827388,
+   "mark": 54.349998474121094,
+   "cost": 55.4805,
+   "value": 54.349998474121094,
+   "pnl": -1.1305015258789055,
+   "pnl_pct": -2.0376556193237363,
    "delta": 1.0,
    "pos_delta": 1.0,
-   "progress_target": -7.655386955494834,
-   "progress_stop": 32.50685882216497,
-   "progress_text": "no target or stop set",
-   "action": "SELL",
-   "action_reason": "STALLED: 3 business days since you bought it and it's losing -0.9% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to HUM (rank #3)",
-   "entry_date": "2026-11-11",
-   "ma50": 155.31,
-   "weak": false,
-   "level_ref": 162.6999969482422,
-   "levels_auto": true,
-   "stop_rule": "4.5% trailing stop (4.5% below the highest price since you bought, 162.70)",
-   "prev_stop": 155.37849708557127,
-   "peak": 162.7,
-   "stalled": true
-  },
-  {
-   "position_id": "BEN-shares",
-   "ticker": "BEN",
-   "asset_type": "shares",
-   "option_type": null,
-   "strike": null,
-   "expiry": null,
-   "contracts": 5.0,
-   "entry_price": 36.1503,
-   "target_price": 42.32,
-   "stop_price": 34.52,
-   "add_below": null,
-   "spot": 35.0099983215332,
-   "status": "ok",
-   "mark": 35.0099983215332,
-   "cost": 180.75150000000002,
-   "value": 175.04999160766602,
-   "pnl": -5.701508392334006,
-   "pnl_pct": -3.154335312478184,
-   "delta": 1.0,
-   "pos_delta": 5.0,
-   "progress_target": -16.03177438049654,
-   "progress_stop": 67.49258015808303,
+   "progress_target": 0.0,
+   "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
-   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) \u00b7 LOSING -3.2%: #1 in line for the next swap",
-   "entry_date": "2026-11-13",
-   "ma50": 32.72,
+   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) \u00b7 LOSING -2.0%: #1 in line for the next swap",
+   "entry_date": "2026-11-17",
+   "ma50": 51.3,
    "weak": false,
-   "level_ref": 36.02000045776367,
+   "level_ref": 54.349998474121094,
    "levels_auto": true,
    "stop_rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 34.5235365,
-   "peak": 36.15
-  },
-  {
-   "position_id": "SWK-shares",
-   "ticker": "SWK",
-   "asset_type": "shares",
-   "option_type": null,
-   "strike": null,
-   "expiry": null,
-   "contracts": 1.0,
-   "entry_price": 113.9505,
-   "target_price": 137.94,
-   "stop_price": 108.82,
-   "add_below": null,
-   "spot": 112.91999816894531,
-   "status": "ok",
-   "mark": 112.91999816894531,
-   "cost": 113.9505,
-   "value": 112.91999816894531,
-   "pnl": -1.0305018310546927,
-   "pnl_pct": -0.9043416492728795,
-   "delta": 1.0,
-   "pos_delta": 1.0,
-   "progress_target": -1.4186689895025655,
-   "progress_stop": 7.869963855611594,
-   "progress_text": "no target or stop set",
-   "action": "HOLD",
-   "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) \u00b7 LOSING -0.9%: #2 in line for the next swap",
-   "entry_date": "2026-11-13",
-   "ma50": 96.9,
-   "weak": false,
-   "level_ref": 113.2699966430664,
-   "levels_auto": true,
-   "stop_rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 108.8227275,
-   "peak": 113.95
+   "prev_stop": null,
+   "peak": 55.48
   },
   {
    "position_id": "SGOV-shares",
@@ -159,33 +88,33 @@
    "option_type": null,
    "strike": null,
    "expiry": null,
-   "contracts": 3.0,
-   "entry_price": 100.69,
-   "target_price": 100.68,
-   "stop_price": 96.16,
+   "contracts": 7.0,
+   "entry_price": 100.7336,
+   "target_price": 100.7,
+   "stop_price": 96.2,
    "add_below": null,
-   "spot": 100.58000183105469,
+   "spot": 100.58999633789062,
    "status": "ok",
-   "mark": 100.58000183105469,
-   "cost": 302.07,
-   "value": 301.74000549316406,
-   "pnl": -0.3299945068359307,
-   "pnl_pct": -0.10924438270464816,
+   "mark": 100.58999633789062,
+   "cost": 705.1351999999999,
+   "value": 704.1299743652344,
+   "pnl": -1.0052256347655657,
+   "pnl_pct": -0.1425578576655322,
    "delta": 1.0,
-   "pos_delta": 3.0,
-   "progress_target": 16.69960133204876,
+   "pos_delta": 7.0,
+   "progress_target": 0.0,
    "progress_stop": 0.0,
    "progress_text": "no target or stop set",
    "action": "HOLD",
    "action_reason": "price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price))",
-   "entry_date": "2026-11-13",
-   "ma50": 100.2,
+   "entry_date": "2026-11-17",
+   "ma50": 100.21,
    "weak": false,
-   "level_ref": 100.55999755859375,
+   "level_ref": 100.58999633789062,
    "levels_auto": true,
    "stop_rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 96.146535,
-   "peak": 100.69
+   "prev_stop": null,
+   "peak": 100.73
   },
   {
    "position_id": "CASH",
@@ -194,15 +123,15 @@
    "option_type": null,
    "strike": null,
    "expiry": null,
-   "contracts": 68.02,
+   "contracts": 50.0,
    "entry_price": 1.0,
    "target_price": null,
    "stop_price": null,
    "add_below": null,
    "spot": 1.0,
    "mark": 1.0,
-   "value": 68.02,
-   "cost": 68.02,
+   "value": 50.0,
+   "cost": 50.0,
    "pnl": 0.0,
    "pnl_pct": 0.0,
    "status": "ok",
@@ -215,12 +144,12 @@
   }
  ],
  "analytics": {
-  "asof": "2026-11-16",
-  "total_value": 963.2300009918213,
-  "total_cost": 972.0245,
-  "pnl": -8.794499008178718,
-  "pnl_pct": -0.904761043387149,
-  "net_delta": 17.0,
+  "asof": "2026-11-17",
+  "total_value": 951.6299781799316,
+  "total_cost": 956.1470999999999,
+  "pnl": -4.517121820068269,
+  "pnl_pct": -0.47242958955460607,
+  "net_delta": 15.0,
   "daily_theta": 0,
   "net_vega": 0,
   "net_gamma": 0,
@@ -229,48 +158,32 @@
     {
      "kind": "ticker",
      "name": "SGOV",
-     "value": 301.74000549316406,
-     "pct": 31.325852099962376,
+     "value": 704.1299743652344,
+     "pct": 73.99199168903225,
      "cap_pct": 40,
-     "over_cap": false
-    },
-    {
-     "kind": "ticker",
-     "name": "BEN",
-     "value": 175.04999160766602,
-     "pct": 18.173228764409338,
-     "cap_pct": 40,
-     "over_cap": false
-    },
-    {
-     "kind": "ticker",
-     "name": "TGT",
-     "value": 160.32000732421875,
-     "pct": 16.64400061866221,
-     "cap_pct": 40,
-     "over_cap": false
+     "over_cap": true
     },
     {
      "kind": "ticker",
      "name": "VTRS",
-     "value": 145.17999839782715,
-     "pct": 15.072204795151503,
+     "value": 143.15000534057617,
+     "pct": 15.042612004968781,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
-     "name": "SWK",
-     "value": 112.91999816894531,
-     "pct": 11.723056596313814,
+     "name": "FAST",
+     "value": 54.349998474121094,
+     "pct": 5.7112532938558545,
      "cap_pct": 40,
      "over_cap": false
     },
     {
      "kind": "ticker",
      "name": "CASH",
-     "value": 68.02,
-     "pct": 7.061657125500761,
+     "value": 50.0,
+     "pct": 5.254143012143123,
      "cap_pct": 40,
      "over_cap": false
     }
@@ -279,86 +192,83 @@
     {
      "kind": "sector",
      "name": "Ultrashort Bond (ETF)",
-     "value": 301.74000549316406,
-     "pct": 31.325852099962376,
+     "value": 704.1299743652344,
+     "pct": 73.99199168903225,
      "cap_pct": 60,
-     "over_cap": false
-    },
-    {
-     "kind": "sector",
-     "name": "Financial Services",
-     "value": 175.04999160766602,
-     "pct": 18.173228764409338,
-     "cap_pct": 60,
-     "over_cap": false
-    },
-    {
-     "kind": "sector",
-     "name": "Consumer Defensive",
-     "value": 160.32000732421875,
-     "pct": 16.64400061866221,
-     "cap_pct": 60,
-     "over_cap": false
+     "over_cap": true
     },
     {
      "kind": "sector",
      "name": "Healthcare",
-     "value": 145.17999839782715,
-     "pct": 15.072204795151503,
+     "value": 143.15000534057617,
+     "pct": 15.042612004968781,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Industrials",
-     "value": 112.91999816894531,
-     "pct": 11.723056596313814,
+     "value": 54.349998474121094,
+     "pct": 5.7112532938558545,
      "cap_pct": 60,
      "over_cap": false
     },
     {
      "kind": "sector",
      "name": "Cash",
-     "value": 68.02,
-     "pct": 7.061657125500761,
+     "value": 50.0,
+     "pct": 5.254143012143123,
      "cap_pct": 60,
      "over_cap": false
     }
    ]
   },
   "iv_environment": [],
-  "flags": []
+  "flags": [
+   {
+    "kind": "concentration",
+    "severity": "info",
+    "position_id": null,
+    "message": "SGOV is 74% of the book (cap 40%)."
+   },
+   {
+    "kind": "concentration",
+    "severity": "info",
+    "position_id": null,
+    "message": "Ultrashort Bond (ETF) is 74% of the book (cap 60%)."
+   }
+  ]
  },
  "macro": {
-  "score": 56.4,
+  "score": 47.0,
   "label": "Mixed",
   "inputs": {
-   "vix": 22.90999984741211,
-   "vix_1y_percentile": 88.09523809523809,
-   "vix_vix3m_ratio": 0.9952215200623741,
-   "sectors_above_200d": "8 of 11",
-   "hyg_tlt_ratio": 0.9666163518748387
+   "vix": 25.459999084472656,
+   "vix_1y_percentile": 94.04761904761905,
+   "vix_vix3m_ratio": 1.0192153543247566,
+   "sectors_above_200d": "6 of 11",
+   "hyg_tlt_ratio": 0.9632934546031382
   },
   "missing": [],
   "components": {
    "vix_level": {
-    "score": 61.0,
+    "score": 51.9,
     "weight": 0.25
    },
    "vix_percentile": {
-    "score": 11.9,
+    "score": 6.0,
     "weight": 0.15
    },
    "term_structure": {
-    "score": 34.9,
+    "score": 26.9,
     "weight": 0.2
    },
    "breadth": {
-    "score": 72.7,
+    "score": 54.5,
     "weight": 0.2
    },
    "credit": {
-    "score": 89.3,
+    "score": 84.1,
     "weight": 0.2
    }
   },
@@ -366,36 +276,24 @@
  },
  "news": [
   {
-   "ticker": "BEN",
+   "ticker": "FAST",
    "headlines": [
     {
-     "title": "Wall Street Giant Reveals a $440 Million XRP Stash, Yet the Price Is Below $1. Why?",
-     "summary": "Franklin Templeton\u2019s spot XRP ETF held 293 million XRP worth about $440 million at the end of September. Yet XRP has now slipped below $1.",
-     "publisher": "BeInCrypto",
-     "published": "2026-11-16 03:30 UTC",
-     "link": "https://beincrypto.com/franklin-templeton-xrp-holdings-price-below-1/"
-    },
-    {
-     "title": "Franklin Templeton Is Seeing a Turnaround. The Stock Is, Too.",
-     "summary": "The global asset manager has been benefiting from improving operating performance and stronger client inflows.",
-     "publisher": "Barrons.com",
-     "published": "2026-11-14 04:15 UTC",
-     "link": "https://www.barrons.com/articles/franklin-templeton-stock-price-technical-5f2ac90a?siteid=yhoof2&yptr=yahoo"
+     "title": "Has Buying Fastenal Stock At A High Paid Off?",
+     "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+     "publisher": "Trefis",
+     "published": "2026-11-17 14:40 UTC",
+     "link": "https://www.trefis.com/stock/fast/articles/625758/has-buying-fastenal-stock-at-a-high-paid-off/2026-11-17"
     }
    ],
    "model": "claude-haiku-5-5",
-   "summary": "Barron's reports that Franklin Templeton has been benefiting from improving operating performance and stronger client inflows, and that its stock has turned around as well. BeInCrypto reports that Franklin Templeton's spot XRP ETF held 293 million XRP, worth about $440 million, at the end of September, while XRP has since slipped below $1.",
-   "sentiment": "positive",
-   "drivers": [
-    "improving operating performance",
-    "stronger client inflows",
-    "spot XRP ETF holdings reported at end of September",
-    "XRP price slipping below $1"
-   ],
+   "summary": "A Trefis article headlined \"Has Buying Fastenal Stock At A High Paid Off?\" was published on 2026-11-17. The headline reports no specific company event, such as earnings, guidance, or a corporate announcement. The Nvidia reference in the same item is a separate tagline and does not concern Fastenal.",
+   "sentiment": "neutral",
+   "drivers": [],
    "position_flags": [],
-   "input_tokens": 605,
-   "output_tokens": 536,
-   "cost_usd": 0.0003285,
+   "input_tokens": 475,
+   "output_tokens": 375,
+   "cost_usd": 0.000235,
    "status": "ok"
   },
   {
@@ -410,172 +308,43 @@
    "cost_usd": 0.0
   },
   {
-   "ticker": "SWK",
-   "headlines": [
-    {
-     "title": "Home Depot Is Beating Lowe\u2019s. The November 17 Report Has to Show It in Margins",
-     "summary": "Key TakeawaysHome Depot reports fiscal third-quarter results before the open on Tuesday, Nov. 17, days after Stifel cut Lowe\u2019s to Sell and called Home Depot the better-positioned of the two.",
-     "publisher": "TIKR",
-     "published": "2026-11-16 15:33 UTC",
-     "link": "https://www.tikr.com/blog/home-depot-is-beating-lowes-the-november-17-report-has-to-show-it-in-margins?ref=yahoofinance&tlnk=yf-261116-jjf5cgcx"
-    },
-    {
-     "title": "Is Toro Stock Engineered To Make You Money?",
-     "summary": "For questions about this article or underlying research, email help@trefis.com.",
-     "publisher": "Trefis",
-     "published": "2026-11-16 08:08 UTC",
-     "link": "https://www.trefis.com/stock/ttc/articles/625185/is-toro-stock-engineered-to-make-you-money/2026-11-16"
-    },
-    {
-     "title": "What Stanley Black & Decker Buyers Were Betting On",
-     "summary": "If Stanley Black & Decker was on your watchlist instead of in your portfolio, the result may feel like a missed swing of the hammer. Holding Stanley Black & Decker from the start of the year would have returned 52.7%, including dividends. That kind of outcome invites a tougher question. Back on 1 January 2026, what might have helped you judge whether the push into digital tools and connected jobsite software could really turn years of heavy investment into stronger earnings power? The useful...",
-     "publisher": "Simply Wall St.",
-     "published": "2026-11-15 18:06 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/stanley-black-decker-buyers-were-180615059.html"
-    },
-    {
-     "title": "Stanley Black And Decker (SWK) Stock Looks Reasonably Priced On Cash Flow",
-     "summary": "Stanley Black & Decker has rallied sharply over the last year, and the move has pushed a straightforward question to the front for investors who care about fundamentals. With that gain now in the rearview mirror, the issue is whether the current share price lines up with the cash flows the business is expected to generate. Stanley Black & Decker has delivered a 79.9% return over the past year, which puts real pressure on the idea that its recent cash flow profile alone can carry today\u2019s...",
-     "publisher": "Simply Wall St.",
-     "published": "2026-11-15 14:08 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/stanley-black-decker-swk-stock-140857754.html"
-    }
-   ],
-   "model": "claude-haiku-5-5",
-   "summary": "Simply Wall St reports that Stanley Black & Decker has rallied sharply over the last year and that holding the stock from the start of the year would have returned 52.7% including dividends. A separate Simply Wall St piece says the current share price is being assessed against the company's cash flows. No company-specific news event is reported in these headlines.",
-   "sentiment": "positive",
-   "drivers": [
-    "Sharp share price rally over the past year",
-    "52.7% year-to-date return including dividends",
-    "Valuation assessed against cash flow"
-   ],
-   "position_flags": [],
-   "input_tokens": 898,
-   "output_tokens": 484,
-   "cost_usd": 0.0003318,
-   "status": "ok"
-  },
-  {
-   "ticker": "TGT",
-   "headlines": [
-    {
-     "title": "Earnings to watch: NVIDIA, Walmart, Home Depot and more report this week",
-     "summary": "Investing.com -- This week\u2019s calendar pairs the consumer (Home Depot, Lowe\u2019s, Target, TJX, Walmart) with the AI trade (NVIDIA). Data is from the earnings calendar as of Mon, Nov 16, 2026 at 3:17 PM EST. Estimates are consensus and can shift.",
-     "publisher": "Investing.com",
-     "published": "2026-11-16 20:53 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/earnings-watch-nvidia-walmart-home-205309775.html"
-    },
-    {
-     "title": "Nvidia board needs 'some heavyweights,' ex-Medtronic CEO Bill George says",
-     "summary": "The Nvidia board could use a jolt of fresh blood.",
-     "publisher": "Yahoo Finance",
-     "published": "2026-11-16 19:19 UTC",
-     "link": "https://finance.yahoo.com/technology/article/nvidia-board-needs-some-heavyweights-ex-medtronic-ceo-bill-george-says-191935557.html"
-    },
-    {
-     "title": "Is There A Risk Hiding In Walmart Stock's Latest Quarter?",
-     "summary": "For questions about this article or underlying research, email help@trefis.com.",
-     "publisher": "Trefis",
-     "published": "2026-11-16 19:11 UTC",
-     "link": "https://www.trefis.com/stock/wmt/articles/625188/is-there-a-risk-hiding-in-walmart-stocks-latest-quarter/2026-11-16"
-    },
-    {
-     "title": "Target vs. Walmart Stock:  Which is the Better Buy Ahead of Q3 Earnings?",
-     "summary": "With Target and Walmart set to report Q3 results this week, here's how the retail giants compare on growth expectations, stock performance, valuation, and dividends.",
-     "publisher": "Zacks",
-     "published": "2026-11-16 18:50 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/target-vs-walmart-stock-better-185000131.html"
-    },
-    {
-     "title": "Edible Garden AG Incorporated Q3 2026 Earnings Call Summary",
-     "summary": "Moby summary of Edible Garden AG Incorporated's Q3 2026 earnings call",
-     "publisher": "Moby",
-     "published": "2026-11-16 17:54 UTC",
-     "link": "https://app.moby.co/home/research/tools/earningsCalendar/earnings-edible-garden-ag-incorporated-q3-2026-earnings-call-summary?utm_source=yahoo_finance&utm_medium=rss"
-    },
-    {
-     "title": "Can Target (TGT) Keep the Earnings Surprise Streak Alive?",
-     "summary": "Target (TGT) has an impressive earnings surprise history and currently possesses the right combination of the two key ingredients for a likely beat in its next quarterly report.",
-     "publisher": "Zacks",
-     "published": "2026-11-16 16:10 UTC",
-     "link": "https://finance.yahoo.com/markets/stocks/articles/target-tgt-keep-earnings-surprise-161001307.html"
-    },
-    {
-     "title": "Nvidia and Anthropic Will Really Test the Stock Market. Only One Thing Is Certain.",
-     "summary": "Nvidia earnings, the Anthropic IPO, Walmart and Lowe\u2019s earnings, Fed minutes and a Trump/Putin/Xi summit. Buckle up.",
-     "publisher": "Barrons.com",
-     "published": "2026-11-16 16:05 UTC",
-     "link": "https://www.barrons.com/articles/stock-market-things-to-know-today-eac68005?siteid=yhoof2&yptr=yahoo"
-    },
-    {
-     "title": "Target names food industry executive as a director",
-     "summary": "Sally Grimes, former CEO of Clif Bar & Company and British alcoholic beverage company Diageo, will join the retailer\u2019s board in December.",
-     "publisher": "Grocery Dive",
-     "published": "2026-11-16 15:47 UTC",
-     "link": "https://www.grocerydive.com/news/target-adds-food-industry-executive-to-board/874682/"
-    },
-    {
-     "title": "Target's AI Commerce Partnerships Open New Customer Opportunities",
-     "summary": "Target's AI commerce partnerships with OpenAI and Google Gemini drive faster digital traffic growth, opening new opportunities to attract online shoppers.",
-     "publisher": "Zacks",
-     "published": "2026-11-16 15:42 UTC",
-     "link": "https://finance.yahoo.com/technology/ai/articles/targets-ai-commerce-partnerships-open-154200091.html"
-    },
-    {
-     "title": "How Chewy's CEO plans to lower the $2,000 vet ER bill",
-     "summary": "Chewy CEO Sumit Singh explains to Yahoo Finance Executive Editor Brian Sozzi how the company is trying to bring pet insurance to millions of US households after finding fewer than 2% of pets were covered.",
-     "publisher": "Yahoo Finance Video",
-     "published": "2026-11-16 11:00 UTC",
-     "link": "https://finance.yahoo.com/video/how-chewys-ceo-plans-to-lower-the-2000-vet-er-bill-142648306.html"
-    }
-   ],
-   "model": "claude-haiku-5-5",
-   "summary": "Multiple headlines say Target is scheduled to report Q3 results this week, alongside Walmart and other retailers. Zacks notes Target has a history of earnings surprises, and Target added Sally Grimes, former Clif Bar and Diageo CEO, as a director starting in December. Target's AI commerce partnerships with OpenAI and Google Gemini were also reported as opening new digital customer opportunities.",
-   "sentiment": "neutral",
-   "drivers": [
-    "Q3 earnings report due this week",
-    "Earnings surprise history cited by Zacks",
-    "AI commerce partnerships with OpenAI and Google Gemini",
-    "New board director appointment"
-   ],
-   "position_flags": [
-    {
-     "position_id": "TGT-shares",
-     "flag": "Target reports Q3 earnings this week, per Zacks and Investing.com; the headlines do not give the exact date."
-    }
-   ],
-   "input_tokens": 1463,
-   "output_tokens": 549,
-   "cost_usd": 0.00042080000000000004,
-   "status": "ok"
-  },
-  {
    "ticker": "VTRS",
-   "headlines": [],
+   "headlines": [
+    {
+     "title": "Are Investors Undervaluing Viatris (VTRS) Right Now?",
+     "summary": "Here at Zacks, our focus is on the proven Zacks Rank system, which emphasizes earnings estimates and estimate revisions to find great stocks. Nevertheless, we are always paying attention to the latest value, growth, and momentum trends to underscore strong picks.",
+     "publisher": "Zacks",
+     "published": "2026-11-17 13:40 UTC",
+     "link": "https://finance.yahoo.com/markets/stocks/articles/investors-undervaluing-viatris-vtrs-now-134003793.html"
+    },
+    {
+     "title": "Should You Buy Neurocrine Biosciences Stock For Its Cash?",
+     "summary": "For questions about this article or underlying research, email help@trefis.com.",
+     "publisher": "Trefis",
+     "published": "2026-11-16 11:42 UTC",
+     "link": "https://www.trefis.com/stock/nbix/articles/625151/should-you-buy-neurocrine-biosciences-stock-for-its-cash/2026-11-16"
+    }
+   ],
    "model": "claude-haiku-5-5",
-   "status": "ok",
-   "summary": "No headlines in the last 3 days.",
+   "summary": "A Zacks article asked whether investors are undervaluing Viatris (VTRS) and described the firm's Zacks Rank and value, growth, and momentum screens in general terms. The headlines report no specific company event, and the other item, a Trefis piece on Neurocrine Biosciences, does not concern Viatris.",
    "sentiment": "neutral",
-   "drivers": [],
+   "drivers": [
+    "generic Zacks valuation commentary",
+    "no company-specific event reported",
+    "unrelated Neurocrine Biosciences headline"
+   ],
    "position_flags": [],
-   "cost_usd": 0.0
+   "input_tokens": 611,
+   "output_tokens": 378,
+   "cost_usd": 0.0002501,
+   "status": "ok"
   }
  ],
  "alerts": [
   {
-   "kind": "swap",
-   "severity": "high",
-   "message": "STOP HIT -> SWAP idea: sell all TGT (about $160, rank #21) and buy HUM (rank #3). STALLED: 3 business days since you bought it and it's losing -0.9% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#21) and move the money to HUM, rank #3 of 518 (+76% over 12 months, above its 50- and 200-day averages), score 91.",
-   "action": "SWAP",
-   "ticker": "TGT",
-   "position_id": null,
-   "is_new": true,
-   "detail": null
-  },
-  {
-   "kind": "macro_shift",
-   "severity": "warn",
-   "message": "Market environment moved from Calm (66) to Mixed (56).",
+   "kind": "concentration",
+   "severity": "info",
+   "message": "SGOV is 74% of the book (cap 40%).",
    "action": "REVIEW",
    "ticker": null,
    "position_id": null,
@@ -583,14 +352,14 @@
    "detail": null
   },
   {
-   "kind": "news_flag",
-   "severity": "warn",
-   "message": "TGT news: Target reports Q3 earnings this week, per Zacks and Investing.com; the headlines do not give the exact date. (driver: Q3 earnings report due this week)",
+   "kind": "concentration",
+   "severity": "info",
+   "message": "Ultrashort Bond (ETF) is 74% of the book (cap 60%).",
    "action": "REVIEW",
-   "ticker": "TGT",
+   "ticker": null,
    "position_id": null,
-   "is_new": false,
-   "detail": "TGT-shares"
+   "is_new": true,
+   "detail": null
   }
  ],
  "chain_diffs": [],
@@ -599,414 +368,324 @@
    "momentum_leaders": [
     {
      "ticker": "MRNA",
-     "price": 215.27000427246094,
-     "chg_1d": -0.036262662943951085,
-     "rsi2": 4.24861587465918,
-     "ret_12m": 7.7343751002962815,
-     "vs_200d": 1.213170490218579,
+     "price": 206.8000030517578,
+     "chg_1d": -0.03934594254935253,
+     "rsi2": 2.2325551375002277,
+     "ret_12m": 8.159870617545112,
+     "vs_200d": 1.1082905064944426,
      "high_52w": 280.79998779296875,
-     "from_high": -0.23336889732638622,
+     "from_high": -0.263532720648729,
      "new_high": false,
-     "vol_ratio": 0.44484139980847137,
-     "reason": "+773% over 12 months"
+     "vol_ratio": 0.5738969018984746,
+     "reason": "+816% over 12 months"
     },
     {
      "ticker": "SNDK",
-     "price": 809.1099853515625,
-     "chg_1d": -0.08576176944502911,
-     "rsi2": 12.6892243544509,
-     "ret_12m": 4.334400828336029,
-     "vs_200d": -0.36965476999084024,
+     "price": 797.239990234375,
+     "chg_1d": -0.014670434591200765,
+     "rsi2": 10.768008978990167,
+     "ret_12m": 4.394711895503472,
+     "vs_200d": -0.37922140015216466,
      "high_52w": 2354.389892578125,
-     "from_high": -0.656339849273833,
+     "from_high": -0.6613814930366635,
      "new_high": false,
-     "vol_ratio": 1.0213728342811796,
-     "reason": "+433% over 12 months"
+     "vol_ratio": 1.1935597649781833,
+     "reason": "+439% over 12 months"
     },
     {
      "ticker": "MU",
-     "price": 719.02001953125,
-     "chg_1d": -0.07617784457777088,
-     "rsi2": 14.56673643425357,
-     "ret_12m": 2.7131808123942935,
-     "vs_200d": -0.06248075650352669,
+     "price": 712.4199829101562,
+     "chg_1d": -0.009179211206659432,
+     "rsi2": 12.651127537184962,
+     "ret_12m": 2.6702497230456927,
+     "vs_200d": -0.07274849578711673,
      "high_52w": 1254.6095437059498,
-     "from_high": -0.42689737764359703,
+     "from_high": -0.43215800765729684,
      "new_high": false,
-     "vol_ratio": 0.8636374890375325,
-     "reason": "+271% over 12 months"
+     "vol_ratio": 1.0061091418133552,
+     "reason": "+267% over 12 months"
     },
     {
      "ticker": "LITE",
-     "price": 546.0,
-     "chg_1d": -0.08484461722950598,
-     "rsi2": 12.203905098177117,
-     "ret_12m": 2.6327691204511425,
-     "vs_200d": -0.3297715075020339,
+     "price": 559.969970703125,
+     "chg_1d": 0.02558602692880041,
+     "rsi2": 34.40586609784559,
+     "ret_12m": 2.594701838061356,
+     "vs_200d": -0.3131986261426555,
      "high_52w": 1143.0,
-     "from_high": -0.5223097112860893,
+     "from_high": -0.5100875146954287,
      "new_high": false,
-     "vol_ratio": 0.712757065600459,
-     "reason": "+263% over 12 months"
+     "vol_ratio": 0.7010700827298681,
+     "reason": "+259% over 12 months"
     },
     {
      "ticker": "DELL",
-     "price": 320.54998779296875,
-     "chg_1d": -0.06960209871793932,
-     "rsi2": 12.630864109496898,
-     "ret_12m": 2.4033289686027204,
-     "vs_200d": -0.06720787098892178,
+     "price": 322.7900085449219,
+     "chg_1d": 0.006988054397930155,
+     "rsi2": 20.542841205800144,
+     "ret_12m": 2.43604999412078,
+     "vs_200d": -0.0634741124722813,
      "high_52w": 594.6862090656501,
-     "from_high": -0.460976254524877,
+     "from_high": -0.45720952726972086,
      "new_high": false,
-     "vol_ratio": 1.1400426354052946,
-     "reason": "+240% over 12 months"
+     "vol_ratio": 0.9184928730203212,
+     "reason": "+244% over 12 months"
     },
     {
      "ticker": "MRVL",
-     "price": 145.36000061035156,
-     "chg_1d": -0.07272259693774896,
-     "rsi2": 12.339137197662836,
-     "ret_12m": 1.607566344330114,
-     "vs_200d": -0.22377076755976977,
+     "price": 148.74000549316406,
+     "chg_1d": 0.02325264769276414,
+     "rsi2": 35.357503454403954,
+     "ret_12m": 1.747134727162483,
+     "vs_200d": -0.20720642823874313,
      "high_52w": 329.72658943397715,
-     "from_high": -0.5591498979203261,
+     "from_high": -0.5488989658113483,
      "new_high": false,
-     "vol_ratio": 0.6982260536442861,
-     "reason": "+161% over 12 months"
-    },
-    {
-     "ticker": "VLO",
-     "price": 369.7300109863281,
-     "chg_1d": -0.026590779935738218,
-     "rsi2": 40.12048192063354,
-     "ret_12m": 1.5835631054121961,
-     "vs_200d": 0.25462469516918773,
-     "high_52w": 461.5199890136719,
-     "from_high": -0.1988862459099786,
-     "new_high": false,
-     "vol_ratio": 0.6473092608232717,
-     "reason": "+158% over 12 months"
+     "vol_ratio": 0.8323568957333569,
+     "reason": "+175% over 12 months"
     },
     {
      "ticker": "INTC",
-     "price": 55.470001220703125,
-     "chg_1d": -0.07023128792198174,
-     "rsi2": 11.512329057876698,
-     "ret_12m": 1.5020885228601921,
-     "vs_200d": -0.365652596372105,
+     "price": 55.16999816894531,
+     "chg_1d": -0.005408383723738641,
+     "rsi2": 10.488290252304054,
+     "ret_12m": 1.5909346169273966,
+     "vs_200d": -0.3693127464607636,
      "high_52w": 142.35000610351562,
-     "from_high": -0.6103266677743179,
+     "from_high": -0.6124341706819023,
      "new_high": false,
-     "vol_ratio": 0.6866784253669824,
-     "reason": "+150% over 12 months"
-    },
-    {
-     "ticker": "MPC",
-     "price": 402.19000244140625,
-     "chg_1d": -0.03004941912090975,
-     "rsi2": 30.40621862811807,
-     "ret_12m": 1.4979707791884218,
-     "vs_200d": 0.3314186463019648,
-     "high_52w": 493.9800109863281,
-     "from_high": -0.1858172527298121,
-     "new_high": false,
-     "vol_ratio": 0.8706017724294334,
-     "reason": "+150% over 12 months"
+     "vol_ratio": 0.6855643995031332,
+     "reason": "+159% over 12 months"
     },
     {
      "ticker": "STX",
-     "price": 499.0,
-     "chg_1d": -0.055442993896484105,
-     "rsi2": 15.914527513152152,
-     "ret_12m": 1.448112981987574,
-     "vs_200d": -0.2878579767217969,
+     "price": 504.3999938964844,
+     "chg_1d": 0.010821631055078829,
+     "rsi2": 31.25161063199971,
+     "ret_12m": 1.5742808756402735,
+     "vs_200d": -0.28052548534818433,
      "high_52w": 1143.267740532915,
-     "from_high": -0.5635318112208785,
+     "from_high": -0.5588085135146323,
      "new_high": false,
-     "vol_ratio": 0.7372947492643883,
-     "reason": "+145% over 12 months"
+     "vol_ratio": 0.5646421933582958,
+     "reason": "+157% over 12 months"
+    },
+    {
+     "ticker": "HPE",
+     "price": 46.09000015258789,
+     "chg_1d": -0.010307054871844357,
+     "rsi2": 10.068222749027626,
+     "ret_12m": 1.4913461524558778,
+     "vs_200d": 0.0907583403612855,
+     "high_52w": 73.55999755859375,
+     "from_high": -0.3734366274839094,
+     "new_high": false,
+     "vol_ratio": 1.109340749312631,
+     "reason": "+149% over 12 months"
+    },
+    {
+     "ticker": "VLO",
+     "price": 363.7699890136719,
+     "chg_1d": -0.016119930207333488,
+     "rsi2": 24.129985335076597,
+     "ret_12m": 1.434512819739051,
+     "vs_200d": 0.23051322208497682,
+     "high_52w": 461.5199890136719,
+     "from_high": -0.21180014371404465,
+     "new_high": false,
+     "vol_ratio": 0.5575237244507433,
+     "reason": "+143% over 12 months"
     }
    ],
    "pullback_in_uptrend": [
     {
-     "ticker": "ILMN",
-     "price": 198.0,
-     "chg_1d": -0.04352444203624384,
-     "rsi2": 2.7946917492378134,
-     "ret_12m": 1.1891103800288367,
-     "vs_200d": 0.10133812622481786,
-     "high_52w": 309.3500061035156,
-     "from_high": -0.35994829127708294,
-     "new_high": false,
-     "vol_ratio": 0.6803373220294091,
-     "reason": "+10% above its 200-day average, RSI-2 3 after a sharp drop"
-    },
-    {
      "ticker": "VEEV",
-     "price": 299.2799987792969,
-     "chg_1d": -0.007461944115374264,
-     "rsi2": 3.1167291999546194,
-     "ret_12m": 0.06396973727682775,
-     "vs_200d": 0.39845565440097097,
+     "price": 288.4100036621094,
+     "chg_1d": -0.03632048637237384,
+     "rsi2": 0.4497926750383954,
+     "ret_12m": 0.07990183941860973,
+     "vs_200d": 0.344990147825724,
      "high_52w": 325.989990234375,
-     "from_high": -0.08193500492415307,
+     "from_high": -0.11527957206675876,
      "new_high": false,
-     "vol_ratio": 0.7992207461791484,
-     "reason": "+40% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 0.9083231756568223,
+     "reason": "+34% above its 200-day average, RSI-2 0 after a sharp drop"
     },
     {
-     "ticker": "RVTY",
-     "price": 148.85000610351562,
-     "chg_1d": -0.03588310970939912,
-     "rsi2": 3.4430781151564958,
-     "ret_12m": 0.6375594464901955,
-     "vs_200d": 0.3041503505754819,
-     "high_52w": 171.74000549316406,
-     "from_high": -0.1332828616367987,
+     "ticker": "ETR",
+     "price": 107.56999969482422,
+     "chg_1d": -0.02404283702168153,
+     "rsi2": 1.3951417720418249,
+     "ret_12m": 0.1118354356797755,
+     "vs_200d": 0.0037644036842170436,
+     "high_52w": 117.0318767632662,
+     "from_high": -0.08084871686353967,
      "new_high": false,
-     "vol_ratio": 0.8022925524563643,
-     "reason": "+30% above its 200-day average, RSI-2 3 after a sharp drop"
+     "vol_ratio": 0.9403403795582308,
+     "reason": "+0% above its 200-day average, RSI-2 1 after a sharp drop"
+    },
+    {
+     "ticker": "DOC",
+     "price": 19.459999084472656,
+     "chg_1d": -0.01915327949559853,
+     "rsi2": 1.6199785514127,
+     "ret_12m": 0.1264436749643454,
+     "vs_200d": 0.03531174225219513,
+     "high_52w": 22.48596742975975,
+     "from_high": -0.13457141013565121,
+     "new_high": false,
+     "vol_ratio": 1.0400915561429023,
+     "reason": "+4% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "CTSH",
+     "price": 60.0,
+     "chg_1d": -0.03676353960297507,
+     "rsi2": 1.7222594341155002,
+     "ret_12m": -0.059527520995449223,
+     "vs_200d": 0.0510542464733208,
+     "high_52w": 85.0393650280241,
+     "from_high": -0.2944444025396069,
+     "new_high": false,
+     "vol_ratio": 1.377865081433067,
+     "reason": "+5% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "IQV",
+     "price": 257.6000061035156,
+     "chg_1d": -0.026933118977510717,
+     "rsi2": 1.8253250629019249,
+     "ret_12m": 0.20520377202853224,
+     "vs_200d": 0.21892449485241605,
+     "high_52w": 284.5,
+     "from_high": -0.09455182388922456,
+     "new_high": false,
+     "vol_ratio": 1.1545048099192416,
+     "reason": "+22% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "AMCR",
+     "price": 43.45000076293945,
+     "chg_1d": -0.007310936519934641,
+     "rsi2": 2.0129328748212743,
+     "ret_12m": 0.09957613571139667,
+     "vs_200d": 0.026269448469969925,
+     "high_52w": 49.709999084472656,
+     "from_high": -0.1259303648526634,
+     "new_high": false,
+     "vol_ratio": 0.7458355861406861,
+     "reason": "+3% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "CCL",
+     "price": 28.15999984741211,
+     "chg_1d": -0.02996902578902172,
+     "rsi2": 2.091794294671061,
+     "ret_12m": 0.03286104266770917,
+     "vs_200d": 0.04996682676038633,
+     "high_52w": 33.32201714868366,
+     "from_high": -0.1549131097988008,
+     "new_high": false,
+     "vol_ratio": 0.9533648318232771,
+     "reason": "+5% above its 200-day average, RSI-2 2 after a sharp drop"
+    },
+    {
+     "ticker": "XLRE",
+     "price": 43.59000015258789,
+     "chg_1d": -0.014915250788974266,
+     "rsi2": 2.117896199320711,
+     "ret_12m": 0.053486256652557795,
+     "vs_200d": 0.013668602861798052,
+     "high_52w": 46.06723889577369,
+     "from_high": -0.05377441328295163,
+     "new_high": false,
+     "vol_ratio": 0.8206135062711085,
+     "reason": "+1% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
      "ticker": "MRNA",
-     "price": 215.27000427246094,
-     "chg_1d": -0.036262662943951085,
-     "rsi2": 4.24861587465918,
-     "ret_12m": 7.7343751002962815,
-     "vs_200d": 1.213170490218579,
+     "price": 206.8000030517578,
+     "chg_1d": -0.03934594254935253,
+     "rsi2": 2.2325551375002277,
+     "ret_12m": 8.159870617545112,
+     "vs_200d": 1.1082905064944426,
      "high_52w": 280.79998779296875,
-     "from_high": -0.23336889732638622,
+     "from_high": -0.263532720648729,
      "new_high": false,
-     "vol_ratio": 0.44484139980847137,
-     "reason": "+121% above its 200-day average, RSI-2 4 after a sharp drop"
+     "vol_ratio": 0.5738969018984746,
+     "reason": "+111% above its 200-day average, RSI-2 2 after a sharp drop"
     },
     {
-     "ticker": "EMR",
-     "price": 160.64999389648438,
-     "chg_1d": -0.03443930050587496,
-     "rsi2": 4.289055238235477,
-     "ret_12m": 0.2767091962879893,
-     "vs_200d": 0.09343674683859637,
-     "high_52w": 171.38689534676772,
-     "from_high": -0.06264715530647391,
+     "ticker": "VRTX",
+     "price": 534.2000122070312,
+     "chg_1d": -0.006675404836439691,
+     "rsi2": 2.3311400046686117,
+     "ret_12m": 0.14823291596772004,
+     "vs_200d": 0.10373545167460052,
+     "high_52w": 568.6699829101562,
+     "from_high": -0.06061506979272169,
      "new_high": false,
-     "vol_ratio": 0.827746072100138,
-     "reason": "+9% above its 200-day average, RSI-2 4 after a sharp drop"
-    },
-    {
-     "ticker": "ZBH",
-     "price": 101.41000366210938,
-     "chg_1d": -0.017440126328167715,
-     "rsi2": 4.568449914829742,
-     "ret_12m": 0.05992114373091817,
-     "vs_200d": 0.09950861728719529,
-     "high_52w": 112.55000305175781,
-     "from_high": -0.09897822379023424,
-     "new_high": false,
-     "vol_ratio": 1.3011473926291233,
-     "reason": "+10% above its 200-day average, RSI-2 5 after a sharp drop"
-    },
-    {
-     "ticker": "GM",
-     "price": 83.66999816894531,
-     "chg_1d": -0.02709304454714756,
-     "rsi2": 4.571327436717553,
-     "ret_12m": 0.17797134219501753,
-     "vs_200d": 0.036948176828043744,
-     "high_52w": 93.69999694824219,
-     "from_high": -0.10704374712879905,
-     "new_high": false,
-     "vol_ratio": 0.6167413912694942,
-     "reason": "+4% above its 200-day average, RSI-2 5 after a sharp drop"
-    },
-    {
-     "ticker": "DE",
-     "price": 653.989990234375,
-     "chg_1d": -0.0290257273966521,
-     "rsi2": 4.845859322688497,
-     "ret_12m": 0.3712930695561065,
-     "vs_200d": 0.07034307314694477,
-     "high_52w": 719.5030580224836,
-     "from_high": -0.09105321660225862,
-     "new_high": false,
-     "vol_ratio": 0.921998646577083,
-     "reason": "+7% above its 200-day average, RSI-2 5 after a sharp drop"
-    },
-    {
-     "ticker": "XLB",
-     "price": 51.470001220703125,
-     "chg_1d": -0.01455099230699064,
-     "rsi2": 5.471878150397615,
-     "ret_12m": 0.1839711029694424,
-     "vs_200d": 0.010464527655522415,
-     "high_52w": 54.630001068115234,
-     "from_high": -0.05784367171203375,
-     "new_high": false,
-     "vol_ratio": 1.1459513161919546,
-     "reason": "+1% above its 200-day average, RSI-2 5 after a sharp drop"
-    },
-    {
-     "ticker": "XLY",
-     "price": 118.1500015258789,
-     "chg_1d": -0.015252556924927996,
-     "rsi2": 5.552635505922893,
-     "ret_12m": -0.022556968827616597,
-     "vs_200d": 0.026739361812512685,
-     "high_52w": 124.23764180630062,
-     "from_high": -0.04899996645069116,
-     "new_high": false,
-     "vol_ratio": 0.9636084273462878,
-     "reason": "+3% above its 200-day average, RSI-2 6 after a sharp drop"
+     "vol_ratio": 0.9783130735022139,
+     "reason": "+10% above its 200-day average, RSI-2 2 after a sharp drop"
     }
    ],
    "new_52w_high": [
     {
-     "ticker": "HUM",
-     "price": 461.25,
-     "chg_1d": 0.02499999999999991,
-     "rsi2": 94.1585840960021,
-     "ret_12m": 0.7642300831333138,
-     "vs_200d": 0.45227558317161276,
-     "high_52w": 462.8689880371094,
-     "from_high": -0.0034977241486301436,
-     "new_high": true,
-     "vol_ratio": 0.8197184084732062,
-     "reason": "new 52-week high at 461.25"
-    },
-    {
-     "ticker": "WST",
-     "price": 417.79998779296875,
-     "chg_1d": 0.003313900198684605,
-     "rsi2": 89.2708806677503,
-     "ret_12m": 0.44345798238256906,
-     "vs_200d": 0.29770093178650114,
-     "high_52w": 437.99412509527536,
-     "from_high": -0.046105954726935794,
-     "new_high": true,
-     "vol_ratio": 0.6863577493164484,
-     "reason": "new 52-week high at 417.80"
-    },
-    {
-     "ticker": "MO",
-     "price": 78.9000015258789,
-     "chg_1d": 0.0033062326837287603,
-     "rsi2": 96.11730839063662,
-     "ret_12m": 0.38712617438534336,
-     "vs_200d": 0.15609106380679938,
-     "high_52w": 79.97000122070312,
-     "from_high": -0.013380013486197218,
-     "new_high": true,
-     "vol_ratio": 0.8060098948110601,
-     "reason": "new 52-week high at 78.90"
-    },
-    {
-     "ticker": "KO",
-     "price": 99.4800033569336,
-     "chg_1d": 0.002317414175653232,
-     "rsi2": 97.27605952791816,
-     "ret_12m": 0.35635598338296925,
-     "vs_200d": 0.201484797184716,
-     "high_52w": 100.55999755859375,
-     "from_high": -0.01073979940215164,
-     "new_high": true,
-     "vol_ratio": 1.0147004810416225,
-     "reason": "new 52-week high at 99.48"
-    },
-    {
-     "ticker": "ELV",
-     "price": 446.2799987792969,
-     "chg_1d": 0.03860922116788812,
-     "rsi2": 97.31594056759842,
-     "ret_12m": 0.3304983700161861,
-     "vs_200d": 0.19340794513455384,
-     "high_52w": 450.69000244140625,
-     "from_high": -0.009785004411502762,
-     "new_high": true,
-     "vol_ratio": 1.6634920984770007,
-     "reason": "new 52-week high at 446.28"
-    },
-    {
-     "ticker": "DGX",
-     "price": 262.2099914550781,
-     "chg_1d": 0.010053872458391844,
-     "rsi2": 96.28053257443877,
-     "ret_12m": 0.2738677117906725,
-     "vs_200d": 0.22070491910508272,
-     "high_52w": 263.19000244140625,
-     "from_high": -0.0037235874358346743,
-     "new_high": true,
-     "vol_ratio": 0.7589821457161597,
-     "reason": "new 52-week high at 262.21"
-    },
-    {
      "ticker": "DRI",
-     "price": 230.92999267578125,
-     "chg_1d": 0.009574132770940436,
-     "rsi2": 87.83509960364883,
-     "ret_12m": 0.27250272473108095,
-     "vs_200d": 0.13019759028044042,
-     "high_52w": 233.97999572753906,
-     "from_high": -0.013035315443416962,
+     "price": 231.85000610351562,
+     "chg_1d": 0.003983949495144357,
+     "rsi2": 92.28741459729176,
+     "ret_12m": 0.2834893327279746,
+     "vs_200d": 0.13371032684403938,
+     "high_52w": 234.11500549316406,
+     "from_high": -0.009674729669194915,
      "new_high": true,
-     "vol_ratio": 1.1640005706008867,
-     "reason": "new 52-week high at 230.93"
+     "vol_ratio": 0.82189101581322,
+     "reason": "new 52-week high at 231.85"
     },
     {
-     "ticker": "AIZ",
-     "price": 323.79998779296875,
-     "chg_1d": 0.005246662687472092,
-     "rsi2": 83.78683836207253,
-     "ret_12m": 0.26592248140661834,
-     "vs_200d": 0.25595291695088296,
-     "high_52w": 326.989013671875,
-     "from_high": -0.009752700383097168,
+     "ticker": "SGOV",
+     "price": 100.58999633789062,
+     "chg_1d": 9.936872791804774e-05,
+     "rsi2": 97.97232335161388,
+     "ret_12m": 0.034178886546702536,
+     "vs_200d": 0.01466352895144718,
+     "high_52w": 100.58999633789062,
+     "from_high": 0.0,
      "new_high": true,
-     "vol_ratio": 1.0022230787402553,
-     "reason": "new 52-week high at 323.80"
-    },
-    {
-     "ticker": "CHD",
-     "price": 114.73999786376953,
-     "chg_1d": 0.015398211183801136,
-     "rsi2": 95.98474323394953,
-     "ret_12m": 0.24657120061237436,
-     "vs_200d": 0.16852363133568904,
-     "high_52w": 115.45999908447266,
-     "from_high": -0.006235936483737214,
-     "new_high": true,
-     "vol_ratio": 1.6693867420286292,
-     "reason": "new 52-week high at 114.74"
-    },
-    {
-     "ticker": "CAH",
-     "price": 283.8500061035156,
-     "chg_1d": 0.009782995162893382,
-     "rsi2": 99.92534069481091,
-     "ret_12m": 0.2445949878407736,
-     "vs_200d": 0.26336268113323724,
-     "high_52w": 286.2900085449219,
-     "from_high": -0.008522834777949906,
-     "new_high": true,
-     "vol_ratio": 0.7902479861176562,
-     "reason": "new 52-week high at 283.85"
+     "vol_ratio": 0.8630696476133726,
+     "reason": "new 52-week high at 100.59"
     }
    ],
-   "unusual_volume": []
+   "unusual_volume": [
+    {
+     "ticker": "NKE",
+     "price": 35.849998474121094,
+     "chg_1d": -0.06299006673128194,
+     "rsi2": 7.838994410793788,
+     "ret_12m": -0.40101473530163456,
+     "vs_200d": -0.18443418780887955,
+     "high_52w": 67.36040489291355,
+     "from_high": -0.46778825734326035,
+     "new_high": false,
+     "vol_ratio": 3.0092056998872305,
+     "reason": "volume 3.0x normal, -6% on the day"
+    }
+   ]
   },
   "watchlist": [
    {
     "ticker": "SPCX",
     "buy_below": 110.0,
     "note": "EXAMPLE - SpaceX, buy if it drops to $110 (replace with your own level)",
-    "price": 137.36000061035156,
-    "to_buy_pct": 24.872727827592335,
-    "status": "24.9% above your buy level",
+    "price": 141.6999969482422,
+    "to_buy_pct": 28.818179043856528,
+    "status": "28.8% above your buy level",
     "action": "WAIT",
-    "chg_1d": -0.01257997262829269,
+    "chg_1d": 0.03159577983842521,
     "ret_12m": null,
     "vs_200d": null,
-    "rsi2": 16.457095342753902
+    "rsi2": 77.30298372010625
    },
    {
     "ticker": "ANT",
@@ -1021,14 +700,14 @@
     "ticker": "PLTR",
     "buy_below": null,
     "note": "EXAMPLE - watch only, no buy level yet",
-    "price": 160.38999938964844,
+    "price": 156.55999755859375,
     "to_buy_pct": null,
     "status": "watching (no buy level set)",
     "action": "WAIT",
-    "chg_1d": -0.04524082299541854,
-    "ret_12m": 0.08069013267629721,
-    "vs_200d": 0.04290328746792027,
-    "rsi2": 7.621842344950707
+    "chg_1d": -0.023879305727473432,
+    "ret_12m": 0.11574047483150318,
+    "vs_200d": 0.01770831352063107,
+    "rsi2": 4.423454331298359
    }
   ],
   "alerts": [],
@@ -1036,6 +715,41 @@
    {
     "ticker": "MRNA",
     "headlines": [
+     {
+      "title": "JPMorgan Still Sees Moderna Overvalued Despite Raising Its Target",
+      "summary": "The firm sees a gap between Moderna's $87.1 billion market value and what its pipeline can justify",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:45 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/jpmorgan-still-sees-moderna-overvalued-174522489.html"
+     },
+     {
+      "title": "Moderna's INT Outlook Strengthens After Phase 3 Melanoma Data, Morgan Stanley Says",
+      "summary": "Moderna's (MRNA) phase 3 adjuvant melanoma data establishes clinical proof of concept for individual",
+      "publisher": "MT Newswires",
+      "published": "2026-11-17 16:22 UTC",
+      "link": "https://finance.yahoo.com/healthcare/articles/moderna-apos-int-outlook-strengthens-162216732.html"
+     },
+     {
+      "title": "What iShares Biotechnology ETF (IBB) Bought: Gilead Leads on Nov. 13",
+      "summary": "The fund added $84.9 million in new buying across 232 positions, led by $7.7 million of Gilead Sciences.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 11:05 UTC",
+      "link": "https://finance.yahoo.com/healthcare/articles/ishares-biotechnology-etf-ibb-bought-110502911.html"
+     },
+     {
+      "title": "At $215, Moderna Stock Already Prices In A Comeback",
+      "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+      "publisher": "Trefis",
+      "published": "2026-11-17 10:38 UTC",
+      "link": "https://www.trefis.com/stock/mrna/articles/625594/at-215-moderna-stock-already-prices-in-a-comeback/2026-11-17"
+     },
+     {
+      "title": "Is Moderna's Cancer Vaccine a Game Changer for the Stock?",
+      "summary": "The healthcare stock has hit multi-year highs this year amid positive results from its personalized cancer vaccine.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-16 22:27 UTC",
+      "link": "https://www.fool.com/investing/2026/11/16/is-moderna-s-cancer-vaccine-a-game-changer-for-the-stock/"
+     },
      {
       "title": "Flagship Pioneering expands to UK with \u00a3100m AI-native lab",
       "summary": "The Moderna creator\u2019s investment in the UK marks another sign of turning tides for the UK life sciences sector, following prior big pharma funding pullouts.",
@@ -1070,576 +784,555 @@
       "publisher": "GuruFocus.com",
       "published": "2026-11-16 11:05 UTC",
       "link": "https://finance.yahoo.com/markets/stocks/articles/invesco-p-500-equal-weight-110506567.html"
-     },
-     {
-      "title": "Moderna (MRNA) Sees $109.7 Million in Net ETF Buying on Nov. 12",
-      "summary": "ETFs bought $109.7 million of Moderna stock on Thursday, Nov. 12.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 11:00 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/moderna-mrna-sees-109-7-110053345.html"
-     },
-     {
-      "title": "Moderna Sinks 12% in a Week. Bancel Wants an FDA Filing \u201cBefore the End of the Year\u201d",
-      "summary": "Key TakeawaysModerna fell 12% in the week to Nov. 13 after guiding to about $4 billion or more of cash costs a year through 2030, mostly for cancer drugs.",
-      "publisher": "TIKR",
-      "published": "2026-11-15 02:29 UTC",
-      "link": "https://www.tikr.com/blog/moderna-sinks-12-in-a-week-bancel-wants-an-fda-filing-before-the-end-of-the-year?ref=yahoofinance&tlnk=yf-261115-xgf4v7x2"
-     },
-     {
-      "title": "Axsome Therapeutics vs. Moderna: Which Biotech Innovator Stock Is a Better Buy for 2027?",
-      "summary": "Axsome's revenue has climbed about 54% while Moderna's net losses run deep, but a steep valuation gap may tip the scales for patient investors.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-14 16:32 UTC",
-      "link": "https://www.fool.com/coverage/better-buy/2026/11/14/axsome-therapeutics-vs-moderna-which-biotech-innovator-stock-is-a-better-buy-for-2027/"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Moderna shares fell 12% in the week to Nov. 13 after the company guided to about $4 billion or more in annual cash costs through 2030, mostly for cancer drugs. The stock is still up over 600% this year following a melanoma headline, and CEO St\u00e9phane Bancel said he wants an FDA filing before the end of the year. ETFs bought $109.7 million of the stock on Nov. 12.",
-    "sentiment": "neutral",
+    "summary": "Moderna shares have risen sharply this year, which headlines link to positive phase 3 adjuvant melanoma data. Morgan Stanley says the data gives clinical proof of concept for its individualized cancer vaccine, and JPMorgan raised its target while still calling the stock overvalued relative to its pipeline. Several funds, including RSP and TQQQ, added Moderna stakes in the period reported.",
+    "sentiment": "positive",
     "drivers": [
-     "Guided cash costs of about $4B+ per year through 2030",
-     "Melanoma cancer data driving a large year-to-date gain",
-     "CEO target of an FDA filing before year-end",
-     "ETF buying on Nov. 12"
+     "Phase 3 adjuvant melanoma data for individualized cancer vaccine",
+     "Morgan Stanley views the data as clinical proof of concept",
+     "JPMorgan raised its price target but still sees overvaluation",
+     "Stock up over 600% this year and fund buying reported"
     ],
     "position_flags": [],
-    "input_tokens": 1383,
-    "output_tokens": 491,
-    "cost_usd": 0.0003838,
+    "input_tokens": 1508,
+    "output_tokens": 458,
+    "cost_usd": 0.0003798,
     "status": "ok"
    },
    {
     "ticker": "SNDK",
     "headlines": [
      {
-      "title": "Nvidia, Sandisk, SpaceX, L3Harris, Strategy, Tyson, and More Stocks That Explain Today\u2019s Market",
-      "summary": "Nvidia falls, extending a 25% decline over the past month following the resignation of former CEO Jensen Huang.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 21:26 UTC",
-      "link": "https://www.barrons.com/articles/stock-movers-dcfe4add?siteid=yhoof2&yptr=yahoo"
+      "title": "Why Is Micron Down? GF Securities Warns a \u201cNAND Glut\u201d Could Hit in 2027",
+      "summary": "Key TakeawaysMicron fell 3% today after GF Securities forecast NAND prices falling in three of 2027\u2019s four quarters, and Sandisk fell with it. Sandisk is the most exposed, but analysts still expect its revenue to grow through June 2028, when GF expects prices to be falling.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 20:30 UTC",
+      "link": "https://www.tikr.com/blog/why-is-micron-down-gf-securities-warns-a-nand-glut-could-hit-in-2027?ref=yahoofinance&tlnk=yf-261117-7qfq4x2g"
      },
      {
-      "title": "S&P 500 Tumbles 1.9%. It\u2019s Not Just AI.",
-      "summary": "It seems the stock market just can't catch a break and it is likely to get worse before it gets better.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 21:03 UTC",
-      "link": "https://www.barrons.com/livecoverage/stock-market-news-today-111626/card/s-p-500-tumbles-1-9-it-s-not-just-ai--FDvmQloAfOi6OQeFoldW?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Sandisk\u2019s Stock Split Is Coming on Nov. 19. Should You Buy Before It Happens?",
-      "summary": "The split could attract new buyers, but AI-driven demand for data center storage is the stronger reason to own the stock.",
+      "title": "4 Dates That Could Move the Stock Market in Epic Fashion This Week. Here's What Investors Need to Know.",
+      "summary": "Several market-moving events are converging on Wall Street this week.",
       "publisher": "Motley Fool",
-      "published": "2026-11-16 19:58 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/sandisk-stock-split-coming-nov-19-should-you-buy-before-it-happens/"
+      "published": "2026-11-17 20:20 UTC",
+      "link": "https://www.fool.com/investing/2026/11/17/4-dates-that-could-move-the-stock-market-in-epic-fashion-this-week-here-s-what-investors-need-to-know/"
      },
      {
-      "title": "SK Hynix Is Down 16% in a Month. What Will It Take to Get SKHY Stock Back to $150?",
-      "summary": "SK Hynix is sliding with the rest of the memory group, yet it is falling the least among its peers. A price-fixing lawsuit, a looming NVIDIA earnings report, and China's rise all stand between the stock and a comeback.",
+      "title": "Why Sandisk Stock Keeps On Going Down",
+      "summary": "Nvidia's CEO scandal keeps dragging on, weighing on AI chip sales forecasts, and damaging Sandisk stock.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-17 18:42 UTC",
+      "link": "https://www.fool.com/investing/2026/11/17/why-sandisk-stock-keeps-on-going-down/"
+     },
+     {
+      "title": "Seagate Stocks Fall 1.6% as Druckenmiller Filing Shows Stake Nearly Tripled Before Slide",
+      "summary": "Duquesne lifted its Seagate position to 341,790 shares and added call options in the third quarter, before the shares nearly halved.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 18:25 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/seagate-stocks-fall-1-6-182534915.html"
+     },
+     {
+      "title": "Sandisk Stocks Fall 5.43% as Druckenmiller Exit Surfaces Before 8-for-1 Split",
+      "summary": "Duquesne sold its entire 34,900-share stake before September 30, and Sandisk's split takes effect after Thursday's close.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 18:03 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/sandisk-stocks-fall-5-43-180327218.html"
+     },
+     {
+      "title": "Hedge Fund That Lost 67% Makes New Bets on 3 Popular AI Stocks",
+      "summary": "Situational Awareness held call options in Nebius, Sandisk, Bloom Energy and the Roundhill Memory ETF at the end of September.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:50 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/hedge-fund-lost-67-makes-175058822.html"
+     },
+     {
+      "title": "Micron, SanDisk and SK Hynix Face New Warning From Wall Street",
+      "summary": "GF Securities expects NAND flash memory prices to weaken in 2027 as consumer demand slows and production capacity expands.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:49 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-sandisk-sk-hynix-face-174959688.html"
+     },
+     {
+      "title": "Sandisk's Earnings Face a New Risk in a Key Chip Market",
+      "summary": "The next test is what big customers actually pay.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:49 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/sandisks-earnings-face-risk-key-174905915.html"
+     },
+     {
+      "title": "Nvidia, Intel, Salesforce, SpaceX, Anthropic, Sandisk, Home Depot, and More That Explain Today\u2019s Market",
+      "summary": "Nvidia falls ahead of third-quarter earnings scheduled for after the closing bell.",
+      "publisher": "Barrons.com",
+      "published": "2026-11-17 16:29 UTC",
+      "link": "https://www.barrons.com/articles/stock-movers-5503b6f4?siteid=yhoof2&yptr=yahoo"
+     },
+     {
+      "title": "SanDisk and Micron Fall 4% as GF Securities Cuts NAND Price Forecast and Warns of a Glut; SK Hynix Dips",
+      "summary": "Micron owns a far broader product mix, yet its shares are sinking right alongside the pure-play NAND maker. Is the market punishing every memory name on cycle fears, or did one analyst note just expose who is really at risk?",
       "publisher": "24/7 Wall St.",
-      "published": "2026-11-16 19:03 UTC",
-      "link": "https://247wallst.com/investing/2026/11/16/sk-hynix-is-down-16-in-a-month-what-will-it-take-to-get-skhy-stock-back-to-150/"
-     },
-     {
-      "title": "Stock Splits Arrive For These Companies. It Could Hurt Their Share Price.",
-      "summary": "The American depositary shares of Brazil-based Embraer split 4-for-1.",
-      "publisher": "Investor's Business Daily",
-      "published": "2026-11-16 19:00 UTC",
-      "link": "https://www.investors.com/news/stock-splits-embraer-embj-sandisk-sndk/?src=A00220&yptr=yahoo"
-     },
-     {
-      "title": "Jensen Leaves Void at Nvidia Ahead of Earnings, What's Next?",
-      "summary": "Nvidia stock has tumbled following the departure of founder Jensen Huang, but does his exit threaten more than just the company's outlook?",
-      "publisher": "Zacks",
-      "published": "2026-11-16 18:14 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/jensen-leaves-void-nvidia-ahead-181400167.html"
-     },
-     {
-      "title": "Sandisk Is Splitting Its Stock 8-for-1. Here\u2019s the Number I\u2019d Check Before Buying.",
-      "summary": "Sandisk\u2019s profit margin matters more to the investment case than its new share count.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 18:05 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/sandisk-is-splitting-its-stock-8-for-1-heres-the-number-id-check-before-buying/"
-     },
-     {
-      "title": "Why Sandisk Stock Keeps Going Down",
-      "summary": "The Nvidia scandal kept driving Sandisk stock lower for a third straight day Monday.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 17:22 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/why-sandisk-stock-keeps-going-down/"
-     },
-     {
-      "title": "AI Trade Is Tanking the S&P 500, But Average Stock Sees Monthly Gains",
-      "summary": "It has been a tough period for stocks, but under the surface of index-level losses, the average S&P 500 stock was trading higher.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 16:51 UTC",
-      "link": "https://www.barrons.com/livecoverage/stock-market-news-today-111626/card/ai-trade-is-tanking-the-s-p-500-but-average-stock-sees-monthly-gains-nE5EJh3XvoNrXr6Vi0yO?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Sandisk (SNDK) Stock Fair Value Edges Lower As Analysts Weigh AI Demand And Cyclicality",
-      "summary": "Sandisk\u2019s fair value estimate has been trimmed from US$2,105.29 to US$2,047.38. This marks a measured reset of expectations rather than a wholesale rethink of the story. Analysts are weighing long term AI and NAND demand against questions on valuation and industry cyclicality, which helps explain why the price target moves are incremental instead of extreme. As you read on, you will see how this updated target fits into the wider Sandisk narrative and what to watch as the story...",
-      "publisher": "Simply Wall St.",
-      "published": "2026-11-16 16:09 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/sandisk-sndk-stock-fair-value-160922935.html"
+      "published": "2026-11-17 16:06 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/sandisk-and-micron-fall-4-as-gf-securities-cuts-nand-price-forecast-and-warns-of-a-glut-sk-hynix-dips/"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Sandisk shares fell for a third straight day on November 16, which one headline attributes to the fallout from Nvidia's situation after the departure of Jensen Huang, as the broader market also dropped (the S&P 500 fell 1.9%). Sandisk is scheduled to split its stock 8-for-1 on November 19, and Simply Wall St. reported that analysts trimmed its fair value estimate to US$2,047.38 from US$2,105.29, citing AI demand and industry cyclicality.",
+    "summary": "Sandisk shares fell about 5% on November 17 and the stock was described as down alongside Micron after GF Securities forecast NAND prices falling in three of four quarters of 2027. Headlines also cite Duquesne's exit from its Sandisk stake before September 30 and an 8-for-1 stock split that takes effect after Thursday's close.",
     "sentiment": "negative",
     "drivers": [
-     "Nvidia share decline after Jensen Huang's departure",
-     "Broader AI-trade selloff in the S&P 500",
-     "8-for-1 stock split scheduled for Nov. 19",
-     "Analyst fair value trim on AI demand and cyclicality concerns"
+     "GF Securities NAND price decline forecast for 2027",
+     "Druckenmiller fund (Duquesne) exit from Sandisk stake",
+     "Nvidia CEO controversy weighing on AI chip sales forecasts",
+     "Upcoming 8-for-1 stock split"
     ],
     "position_flags": [],
-    "input_tokens": 1477,
-    "output_tokens": 692,
-    "cost_usd": 0.0004937,
+    "input_tokens": 1513,
+    "output_tokens": 427,
+    "cost_usd": 0.00036480000000000003,
     "status": "ok"
    },
    {
     "ticker": "MU",
     "headlines": [
      {
-      "title": "SK Hynix Is Down 16% in a Month. What Will It Take to Get SKHY Stock Back to $150?",
-      "summary": "SK Hynix is sliding with the rest of the memory group, yet it is falling the least among its peers. A price-fixing lawsuit, a looming NVIDIA earnings report, and China's rise all stand between the stock and a comeback.",
+      "title": "Billionaire David Tepper Grew His SpaceX Stake 17-Fold While Dumping AMD and Broadcom",
+      "summary": "David Tepper's latest 13F shows a rocket-fueled bet on one hot stock and two quiet exits from AI chip winners that were still posting blowout numbers. The filing leaves out the one thing investors most want to know.",
       "publisher": "24/7 Wall St.",
-      "published": "2026-11-16 19:03 UTC",
-      "link": "https://247wallst.com/investing/2026/11/16/sk-hynix-is-down-16-in-a-month-what-will-it-take-to-get-skhy-stock-back-to-150/"
+      "published": "2026-11-17 21:10 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/billionaire-david-tepper-grew-his-spacex-stake-17-fold-while-dumping-amd-and-broadcom/"
      },
      {
-      "title": "Samsung Stocks Fall 4.47% as Nvidia Turmoil and DRAM Lawsuit Hit Seoul",
-      "summary": "Foreign investors dumped Korean tech while a U.S. judge let a DRAM supply case against Samsung move forward.",
+      "title": "Why Is Micron Down? GF Securities Warns a \u201cNAND Glut\u201d Could Hit in 2027",
+      "summary": "Key TakeawaysMicron fell 3% today after GF Securities forecast NAND prices falling in three of 2027\u2019s four quarters, and Sandisk fell with it. Sandisk is the most exposed, but analysts still expect its revenue to grow through June 2028, when GF expects prices to be falling.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 20:30 UTC",
+      "link": "https://www.tikr.com/blog/why-is-micron-down-gf-securities-warns-a-nand-glut-could-hit-in-2027?ref=yahoofinance&tlnk=yf-261117-7qfq4x2g"
+     },
+     {
+      "title": "SK hynix Stocks Fall 1.96% as DRAM Price-Fixing Suit Advances and Kospi Drops",
+      "summary": "The memory leader closed near 1.1 million won after a US judge ruled DRAM collusion claims were pleaded well enough to proceed.",
       "publisher": "GuruFocus.com",
-      "published": "2026-11-16 18:54 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/samsung-stocks-fall-4-47-185426586.html"
+      "published": "2026-11-17 19:04 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/sk-hynix-stocks-fall-1-190411984.html"
      },
      {
-      "title": "Altimeter Capital to invest $5 billion in Anthropic IPO - report",
-      "summary": "Investing.com -- Altimeter Capital will invest $5 billion in Anthropic's initial public offering, according to Brad Gerstner, who spoke on CNBC's \"Halftime Report\" on Monday.",
-      "publisher": "Investing.com",
-      "published": "2026-11-16 18:46 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/altimeter-capital-invest-5-billion-184641881.html"
+      "title": "Jim Simons\u2019 Fund Just Dumped 99.7% of Its Nvidia, Which Had Been Its No. 1 Holding",
+      "summary": "Renaissance Technologies walked away from nearly all of its biggest holding in one quarter, and the chip trade has slid since. Was it a signal or just a quant model rotating? The answer may matter less than what Nvidia reports today.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 18:53 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/jim-simons-fund-just-dumped-99-7-of-its-nvidia-which-had-been-its-no-1-holding/"
      },
      {
-      "title": "Micron Stocks Sink Nearly 7% After Judge Lets DRAM Supply Lawsuit Proceed",
-      "summary": "A federal judge rejected Micron, Samsung and SK hynix's bid to dismiss claims they cut conventional DRAM output to lift prices.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 18:20 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-stocks-sink-nearly-7-182012075.html"
+      "title": "Why Micron Stock Keeps On Going Down",
+      "summary": "Nvidia's CEO scandal keeps dragging Micron lower -- and that's not the only reason.",
+      "publisher": "Motley Fool",
+      "published": "2026-11-17 18:27 UTC",
+      "link": "https://www.fool.com/investing/2026/11/17/why-micron-stock-keeps-on-going-down/"
      },
      {
-      "title": "Micron Stock: Why Strong Memory Prices May Count for Nothing",
-      "summary": "Micron stock isn't benefiting from predictions of rising memory prices next year.",
+      "title": "Micron Drops Again. What Hedge Funds Are Doing With the Stock.",
+      "summary": "AI hedge fund Situational Awareness sells Micron stock in the third quarter. It could be a boon for the memory-chip company.",
       "publisher": "Barrons.com",
-      "published": "2026-11-16 18:14 UTC",
-      "link": "https://www.barrons.com/articles/micron-stock-price-memory-chips-429adf7e?siteid=yhoof2&yptr=yahoo"
+      "published": "2026-11-17 18:12 UTC",
+      "link": "https://www.barrons.com/articles/micron-stock-price-hedge-funds-8e142dd5?siteid=yhoof2&yptr=yahoo"
      },
      {
-      "title": "Jensen Leaves Void at Nvidia Ahead of Earnings, What's Next?",
-      "summary": "Nvidia stock has tumbled following the departure of founder Jensen Huang, but does his exit threaten more than just the company's outlook?",
-      "publisher": "Zacks",
-      "published": "2026-11-16 18:14 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/jensen-leaves-void-nvidia-ahead-181400167.html"
+      "title": "A $7.2 Billion Fund Dumps These 3 Stocks",
+      "summary": "Key TakeawaysA $7. 2 billion fund, Evergreen Quality Fund, sold all of its Micron, Lumentum and AMD shares in the third quarter, while Alphabet and Amazon became its two largest holdings.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 18:05 UTC",
+      "link": "https://www.tikr.com/blog/a-7-2-billion-fund-dumps-these-3-stocks?ref=yahoofinance&tlnk=yf-261117-536g3rmv"
      },
      {
-      "title": "Why Micron Stock Keeps Going Down",
-      "summary": "The Nvidia scandal drove Micron stock lower for a third straight day Monday.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 18:10 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/why-micron-stock-keeps-going-down/"
+      "title": "Dow Plunges 700 Points as S&P 500 and Nasdaq Fall Ahead of Nvidia Earnings",
+      "summary": "Nvidia's Worst Month Since 2022 . Chip Stocks Reel Ahead of Crucial Earnings",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 18:04 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/dow-plunges-700-points-p-180432792.html"
      },
      {
-      "title": "Anthropic's IPO Takes Place on November 19. Investors Will Learn These 3 Key Details.",
-      "summary": "Anthropic's IPO will be a major event for the entire AI trade.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 17:59 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/anthropics-ipo-takes-place-november-175902048.html"
+      "title": "Micron, SanDisk and SK Hynix Face New Warning From Wall Street",
+      "summary": "GF Securities expects NAND flash memory prices to weaken in 2027 as consumer demand slows and production capacity expands.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:49 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/micron-sandisk-sk-hynix-face-174959688.html"
      },
      {
-      "title": "Why Micron Stock Dove Today",
-      "summary": "The U.S. government is taking steps to stem the flow of AI-related technology to China.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 17:43 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/why-micron-stock-dove-today/"
-     },
-     {
-      "title": "AMD, Broadcom stocks sink on tighter US chip rules, CoreWeave and Nebius shares drop",
-      "summary": "Chip and AI infrastructure stocks moved lower as the US moved to restrict semiconductor exports to China in the wake of Nvidia's CEO scandal.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-16 14:24 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/article/amd-broadcom-stocks-sink-on-tighter-us-chips-rules-coreweave-drops-143342994.html"
+      "title": "Sandisk's Earnings Face a New Risk in a Key Chip Market",
+      "summary": "The next test is what big customers actually pay.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:49 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/sandisks-earnings-face-risk-key-174905915.html"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Micron shares fell sharply on Monday, with one report putting the drop near 7%, after a federal judge let a DRAM supply lawsuit against Micron, Samsung and SK hynix proceed. Headlines also tie the decline to a third straight daily loss, the Nvidia leadership departure, and new U.S. steps to restrict AI-related technology exports to China. One Barron's piece notes that strong expected memory prices next year have not been helping the stock.",
+    "summary": "Micron fell about 3% on November 17 after GF Securities forecast that NAND flash prices would decline in three of four quarters in 2027. Several headlines also report that Micron has been pressured by a Nvidia CEO scandal and by third-quarter fund sales, while the broader market fell ahead of Nvidia earnings.",
     "sentiment": "negative",
     "drivers": [
-     "DRAM price-fixing lawsuit allowed to proceed",
-     "Nvidia CEO departure and related scandal",
-     "U.S. restrictions on AI tech exports to China",
-     "Memory price strength not lifting the stock"
+     "GF Securities NAND price decline forecast for 2027",
+     "Nvidia CEO scandal weighing on Micron",
+     "Third-quarter selling by some funds",
+     "Broad chip-sector weakness ahead of Nvidia earnings"
     ],
     "position_flags": [],
-    "input_tokens": 1420,
-    "output_tokens": 461,
-    "cost_usd": 0.0003725,
+    "input_tokens": 1551,
+    "output_tokens": 439,
+    "cost_usd": 0.0003746,
     "status": "ok"
    },
    {
     "ticker": "LITE",
     "headlines": [
      {
-      "title": "S&P 500 Tumbles 1.9%. It\u2019s Not Just AI.",
-      "summary": "It seems the stock market just can't catch a break and it is likely to get worse before it gets better.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 21:03 UTC",
-      "link": "https://www.barrons.com/livecoverage/stock-market-news-today-111626/card/s-p-500-tumbles-1-9-it-s-not-just-ai--FDvmQloAfOi6OQeFoldW?siteid=yhoof2&yptr=yahoo"
+      "title": "5 Highest Short Interest Large-Cap Tech Stocks Right Now",
+      "summary": "Technology stocks are facing a new test of investor conviction as hedge funds pull back from the artificial intelligence trade. Bloomberg reported on November 9 that hedge funds sold global technology stocks at one of the fastest weekly rates on record, citing Goldman Sachs prime brokerage data through November 6. Technology was the most heavily net-sold [\u2026]",
+      "publisher": "Insider Monkey",
+      "published": "2026-11-17 20:15 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/5-highest-short-interest-large-201542518.html"
      },
      {
-      "title": "CoreWeave, Oracle and Nebius Plunge as Nvidia Fallout Rattles AI Stocks",
-      "summary": "Nvidia's CEO Shake-Up Sends Shockwaves Through AI Stocks Ahead of Earnings",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 19:26 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/coreweave-oracle-nebius-plunge-nvidia-192652785.html"
-     },
-     {
-      "title": "Lumentum Stocks Sink 8.32% as Marvell Slide Shrinks Deal Value Below $660",
-      "summary": "Lumentum's all-stock sale to Marvell now implies about $657 a share, down from $1,132 when the $115 billion deal was announced.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 17:52 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/lumentum-stocks-sink-8-32-175235155.html"
-     },
-     {
-      "title": "Marvell Stocks Slide 6.88% as Nvidia Financing Pullback Report Hits AI Connectivity Bet",
-      "summary": "Marvell has lost about 42% since agreeing to buy Lumentum, as reports that Nvidia will rein in AI financing weigh on chip suppliers.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 17:51 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/marvell-stocks-slide-6-88-175145051.html"
-     },
-     {
-      "title": "AI Trade Is Tanking the S&P 500, But Average Stock Sees Monthly Gains",
-      "summary": "It has been a tough period for stocks, but under the surface of index-level losses, the average S&P 500 stock was trading higher.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 16:51 UTC",
-      "link": "https://www.barrons.com/livecoverage/stock-market-news-today-111626/card/ai-trade-is-tanking-the-s-p-500-but-average-stock-sees-monthly-gains-nE5EJh3XvoNrXr6Vi0yO?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "Coherent Sinks 9%, Lumentum Down 8% as AI Hardware Stocks Slide on Nvidia Leadership Turmoil",
-      "summary": "Key TakeawaysCoherent shares fell 9% this morning, and Lumentum dropped with it, as Nvidia\u2019s leadership turmoil hit AI hardware stocks. Coherent had no news of its own.",
+      "title": "A $7.2 Billion Fund Dumps These 3 Stocks",
+      "summary": "Key TakeawaysA $7. 2 billion fund, Evergreen Quality Fund, sold all of its Micron, Lumentum and AMD shares in the third quarter, while Alphabet and Amazon became its two largest holdings.",
       "publisher": "TIKR",
-      "published": "2026-11-16 14:32 UTC",
-      "link": "https://www.tikr.com/blog/coherent-sinks-9-lumentum-down-8-as-ai-hardware-stocks-slide-on-nvidia-leadership-turmoil?ref=yahoofinance&tlnk=yf-261116-cmwhr86p"
+      "published": "2026-11-17 18:05 UTC",
+      "link": "https://www.tikr.com/blog/a-7-2-billion-fund-dumps-these-3-stocks?ref=yahoofinance&tlnk=yf-261117-536g3rmv"
      },
      {
-      "title": "Is Ciena Stock Increasing Your Market Risk?",
-      "summary": "For questions about this article or underlying research, email help@trefis.com.",
-      "publisher": "Trefis",
-      "published": "2026-11-16 08:08 UTC",
-      "link": "https://www.trefis.com/stock/cien/articles/625178/is-ciena-stock-increasing-your-market-risk/2026-11-16"
+      "title": "AXT Faces Supplier Switch Risk if US-China Tensions Flare",
+      "summary": "B.Riley lowered its target to $43 from $56 and kept a Neutral rating",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:45 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/axt-faces-supplier-switch-risk-174559376.html"
      },
      {
-      "title": "Marvell\u2019s Trillion-Dollar Target",
-      "summary": "Custom silicon company Marvell wants to acquire Lumentum at $115 billion, dwarfing many previous deals in the publicly traded tech space.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 00:20 UTC",
-      "link": "https://www.fool.com/investing/2026/11/15/marvells-trillion-dollar-target/"
+      "title": "Nvidia Isn\u2019t the Whole AI Story. This Stock Could Prove It",
+      "summary": "Marvell lost nearly 40% of its value in a month after a $115 billion all-stock bet, yet the numbers behind the AI networking story kept climbing. Is the selloff a warning or a gap worth exploiting?",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 15:33 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/nvidia-isnt-the-whole-ai-story-this-stock-could-prove-it/"
      },
      {
-      "title": "Lumentum Holdings (LITE) Heads Into An $82.1 Billion All Stock Takeover",
-      "summary": "Lumentum Holdings (NasdaqGS:LITE) agreed to be acquired by Marvell Technology in an all stock transaction valued at $82.1b. Both boards unanimously approved a definitive merger agreement that aims to combine silicon photonics and compound semiconductor operations. The deal is structured as an all equity transaction, so Lumentum shareholders are set to receive Marvell stock instead of cash. The planned $82.1b Marvell acquisition of Lumentum is important, but investors should weigh the rest of...",
-      "publisher": "Simply Wall St.",
-      "published": "2026-11-15 09:08 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/lumentum-holdings-lite-heads-82-090812192.html"
+      "title": "Lumentum, Corning, and other optical-related stocks jump on Chinese import restrictions",
+      "summary": "US optical equipment stocks surged on Tuesday after reports that the Trump administration plans to move forward with restrictions on imports of Chinese data center equipment.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-17 15:04 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/article/optical-related-stocks-surge-on-import-restrictions-of-chinese-data-center-equipment-150444937.html"
      },
      {
-      "title": "Marvell CEO Defends $115 Billion Lumentum Deal: \u201cSometimes Being Unorthodox\u201d Pays Off",
-      "summary": "Key TakeawaysMarvell agreed on November 2 to buy Lumentum in an all-stock deal valuing it at $115 billion, leaving Lumentum holders with about a third of the combined company. Marvell\u2019s CEO admitted on Fox Business that the deal carries more risk, saying being unorthodox is how you get \u201cthe outsized return.",
+      "title": "Stocks slip ahead of Nvidia earnings, Home Depot shares slide: AlphaCheck",
+      "summary": "Stocks slipped on Tuesday ahead of Nvidia's quarterly results.",
+      "publisher": "Yahoo Finance",
+      "published": "2026-11-17 14:57 UTC",
+      "link": "https://finance.yahoo.com/markets/article/copy-copy-tech-rises-coreweave-results-reignite-ai-trade-alphacheck-145755423.html"
+     },
+     {
+      "title": "Coherent Rises 3% as Trump Presses Ahead With Chinese Optics Ban Despite Big Tech Lobbying",
+      "summary": "Key TakeawaysCoherent shares jumped 3% after Reuters reported that the Trump administration will press ahead with blocking imports of new Chinese optical transceivers. Replacing Chinese suppliers could reportedly take up to a decade, and Coherent, Lumentum and Applied Optoelectronics can compete for that demand.",
       "publisher": "TIKR",
-      "published": "2026-11-15 04:29 UTC",
-      "link": "https://www.tikr.com/blog/marvell-ceo-defends-115-billion-lumentum-deal-sometimes-being-unorthodox-pays-off?ref=yahoofinance&tlnk=yf-261115-rpgv857h"
+      "published": "2026-11-17 14:52 UTC",
+      "link": "https://www.tikr.com/blog/coherent-rises-3-as-trump-presses-ahead-with-chinese-optics-ban-despite-big-tech-lobbying?ref=yahoofinance&tlnk=yf-261117-jmvfcr2f"
+     },
+     {
+      "title": "Coherent Jumps 8%, Applied Optoelectronics Climbs 7% as U.S. Pushes Ahead With Curbs on Chinese Optical Gear; Lumentum Gains 4%",
+      "summary": "Washington wants Chinese transceivers out of U.S. data centers, and optical stocks are surging on the news. But the plan hinges on a obscure material China could cut off, which could hurt the very companies it aims to help.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 14:17 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/coherent-jumps-8-applied-optoelectronics-climbs-7-as-u-s-pushes-ahead-with-curbs-on-chinese-optical-gear-lumentum-gains-4/"
+     },
+     {
+      "title": "Coherent Is Up 46% in a Year but More Than Halved Since June. Time to Buy?",
+      "summary": "Key TakeawaysCoherent stock is up 46% in the past year, but it has more than halved since its June high. The business kept getting stronger: revenue growth hit 50% in the September quarter, and Nvidia took a $2 billion stake.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 13:50 UTC",
+      "link": "https://www.tikr.com/blog/coherent-is-up-46-in-a-year-but-more-than-halved-since-june-time-to-buy?ref=yahoofinance&tlnk=yf-261117-fh9mpjmc"
+     },
+     {
+      "title": "Coherent and Lumentum Shares Rise as US Advances Restrictions on Chinese Data Centre Equipment",
+      "summary": "Shares of US optical technology companies advanced on Tuesday following a Reuters report that the Trump administration intends to proceed with restrictions on imports of Chinese data centre equipment, despite objections from several major American technology companies. Coherent Corp.",
+      "publisher": "InvestorsHub",
+      "published": "2026-11-17 13:39 UTC",
+      "link": "https://investorshub.advfn.com/market-news/article/40206/coherent-and-lumentum-shares-rise-as-us-advances-restrictions-on-chinese-data-centre-equipment"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Lumentum (LITE) shares fell about 8% on November 16, 2026, as Marvell's stock slide reduced the implied value of Marvell's all-stock takeover of Lumentum to about $657 per share, down from $1,132 when the $115 billion deal was announced on November 2. The broader AI hardware group also fell on reports that Nvidia would rein in AI financing and after leadership turmoil at Nvidia, while the S&P 500 dropped 1.9%.",
-    "sentiment": "negative",
+    "summary": "Lumentum shares rose on November 17, 2026, after Reuters reported that the Trump administration will proceed with restrictions on imports of Chinese data center and optical transceiver equipment. Lumentum gained about 4% in one report, and peers Coherent and Applied Optoelectronics also advanced. Some headlines that day noted hedge fund selling in technology and a fund that exited its Lumentum stake in the third quarter.",
+    "sentiment": "positive",
     "drivers": [
-     "Marvell all-stock deal value down sharply after Marvell's share decline",
-     "Reports that Nvidia will rein in AI financing",
-     "Nvidia CEO leadership turmoil hitting AI hardware stocks",
-     "Broad S&P 500 decline of 1.9% led by AI trade"
+     "Reported US restrictions on Chinese optical and data center equipment imports",
+     "Gains across optical peers including Coherent and Applied Optoelectronics",
+     "Hedge fund selling in technology stocks",
+     "Replacement of Chinese suppliers reportedly could take up to a decade"
     ],
     "position_flags": [],
-    "input_tokens": 1592,
-    "output_tokens": 408,
-    "cost_usd": 0.00036320000000000005,
+    "input_tokens": 1731,
+    "output_tokens": 467,
+    "cost_usd": 0.0004066,
     "status": "ok"
    },
    {
     "ticker": "DELL",
     "headlines": [
      {
-      "title": "Dell Technologies (DELL) Can Reach New Highs on Backlog and Margins",
-      "summary": "Dell Technologies (DELL) can reach new highs as it converts its growing artificial intelligence (AI) server backlog into revenue and sustains strong margins. After three consecutive earnings reports that triggered double-digit gains, its shares have now lost more than a third of their value since their October highs. That\u2019s despite the Round Rock, Texas-based hardware and software services company raising its annual AI server revenue forecast from $60 billion to $74 billion in just a few months.",
-      "publisher": "TipRanks",
-      "published": "2026-11-16 21:19 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/dell-technologies-dell-reach-highs-211900771.html"
-     },
-     {
-      "title": "Stock Market Today: Dow Dives As Nvidia Makes Huang Decision; These AI Plays Plunge (Live Coverage)",
-      "summary": "The Dow Jones index falls. President Trump speaks on Nvidia, Jensen Huang and Howard Lutnick. Chip plays skid.",
-      "publisher": "Investor's Business Daily",
-      "published": "2026-11-16 20:06 UTC",
-      "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-nvidia-stock-nvda-jensen-huang/?src=A00220&yptr=yahoo"
-     },
-     {
-      "title": "Dell and HPE Have an Opportunity Outside AI, Citi Says",
-      "summary": "The next test is whether orders turn into sales.",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 19:43 UTC",
-      "link": "https://finance.yahoo.com/technology/articles/dell-hpe-opportunity-outside-ai-194346820.html"
-     },
-     {
-      "title": "Top Midday Decliners",
-      "summary": "Robinhood Markets (HOOD) won a US Supreme Court review of a lower court's decision reviving a propos",
-      "publisher": "MT Newswires",
-      "published": "2026-11-16 19:28 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/top-midday-decliners-192854164.html"
-     },
-     {
-      "title": "5 Stocks to Buy as Investors Look Beyond NVIDIA",
-      "summary": "For three years, the AI trade has been looking up to one face too often. Now it has an interim CEO. On November 12, Jensen Huang resigned as NVIDIA\u2019s chief executive and board member, hours after nerves gripped investors awaiting the outcome of the board\u2019s crisis meeting. And on an interim basis, CFO Colette Kress [\u2026]",
-      "publisher": "Insider Monkey",
-      "published": "2026-11-16 18:02 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/5-stocks-buy-investors-look-180230379.html"
-     },
-     {
-      "title": "Dell and HPE Stocks Are Getting Hammered. Why the Selloff May Be Overdone.",
-      "summary": "Strong AI and enterprise infrastructure demand could offset PC weakness, analysts say, following steep declines in the hardware stocks.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 15:56 UTC",
-      "link": "https://www.barrons.com/articles/dell-hpe-stock-price-earnings-ai-386e06fb?siteid=yhoof2&yptr=yahoo"
-     },
-     {
-      "title": "The Fed Is Watching \u201cCircular Financing.\u201d Dell Has $4.4 Billion in Lower-Grade Customer Receivables",
-      "summary": "Key TakeawaystThe Fed flagged \u201ccircular financing,\u201d where chip suppliers help back buyers of their own hardware. Dell\u2019s financing receivables jumped to $20.",
-      "publisher": "TIKR",
-      "published": "2026-11-16 15:55 UTC",
-      "link": "https://www.tikr.com/blog/the-fed-is-watching-circular-financing-dell-has-4-4-billion-in-lower-grade-customer-receivables?ref=yahoofinance&tlnk=yf-261116-q48m85rj"
-     },
-     {
-      "title": "Super Micro Falls 5% as Reported DOJ Smuggling Probe Weighs for a Third Session; Dell and Hewlett Packard Enterprise Drop 4%",
-      "summary": "A reported federal probe into smuggling AI servers to China is rattling Super Micro just as its revenue explodes. The question hanging over the stock is whether prosecutors will bring charges, and what that means for Dell and HPE.",
+      "title": "Jensen Huang Offered to Come Back and Nvidia Gained $90 Billion in 10 Minutes. Here\u2019s What the Stock Did the Last Four Times a Board Took the Boss Back",
+      "summary": "Jensen Huang's offer to return added about $90 billion to Nvidia in ten minutes. Here is what the stock did the last four times a board took the boss back, and what a couple holding 2,000 shares should take from tonight's report.",
       "publisher": "24/7 Wall St.",
-      "published": "2026-11-16 15:02 UTC",
-      "link": "https://247wallst.com/investing/2026/11/16/super-micro-falls-5-as-reported-doj-smuggling-probe-weighs-for-a-third-session-dell-and-hewlett-packard-enterprise-drop-4/"
+      "published": "2026-11-17 20:21 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/jensen-huang-offered-to-come-back-and-nvidia-gained-90-billion-in-10-minutes-heres-what-the-stock-did-the-last-four-times-a-board-took-the-boss-back/"
      },
      {
-      "title": "Buy 3 AI-Led Giants on Robust Fundamentals and Short-Term Price Upside",
-      "summary": "SNOW, DELL and GLW stand out as AI infrastructure leaders, backed by strong growth forecasts, rising earnings estimates and significant short-term price upside.",
-      "publisher": "Zacks",
-      "published": "2026-11-16 13:46 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/buy-3-ai-led-giants-134600936.html"
+      "title": "What Is Dell Technologies (DELL) Really Building With Its Latest AI Factory Push?",
+      "summary": "Dell Technologies (NYSE:DELL) expanded its AI Factory with NVIDIA, unveiling new enterprise AI offerings on 17 Nov 2026. The update introduces an AI Data Platform, intelligent infrastructure management tools, and rack scale storage with direct liquid cooling. Dell also rolled out software and hardware that are validated to run in NVIDIA AI environments for production workloads. The new AI Data Platform and NVIDIA validated stack only capture part of the shift in Dell's wider AI...",
+      "publisher": "Simply Wall St.",
+      "published": "2026-11-17 20:12 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/dell-technologies-dell-really-building-201218571.html"
      },
      {
-      "title": "Michael Dell Says H100 Rents Rose 58%: \u201cSo Much for GPU Depreciation\u201d",
-      "summary": "Key TakeawaysMichael Dell says renting an Nvidia H100 costs $3. 10 an hour, up 58% in a year, and CoreWeave says prices for its older Nvidia chips rose 30% to 50% last quarter.",
-      "publisher": "TIKR",
-      "published": "2026-11-16 10:02 UTC",
-      "link": "https://www.tikr.com/blog/michael-dell-says-h100-rents-rose-58-so-much-for-gpu-depreciation?ref=yahoofinance&tlnk=yf-261116-44hc85fm"
+      "title": "Could Your Dell Shares Be Worth $906 Or $114?",
+      "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+      "publisher": "Trefis",
+      "published": "2026-11-17 19:58 UTC",
+      "link": "https://www.trefis.com/stock/dell/articles/625591/could-your-dell-shares-be-worth-906-or-114/2026-11-17"
+     },
+     {
+      "title": "GF Securities Revamps Dell Target Ahead of Earnings",
+      "summary": "Strong AI shipments may mask weaker demand elsewhere.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 19:17 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/gf-securities-revamps-dell-target-191736044.html"
+     },
+     {
+      "title": "What Needs To Be True To Buy Dell Stock?",
+      "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+      "publisher": "Trefis",
+      "published": "2026-11-17 18:30 UTC",
+      "link": "https://www.trefis.com/stock/dell/articles/625654/what-needs-to-be-true-to-buy-dell-stock/2026-11-17"
+     },
+     {
+      "title": "Super Micro Falls 4%, Dell and Hewlett Packard Enterprise Slide 2%: Do New U.S. Export Curbs Deepen Super Micro\u2019s China Problem?",
+      "summary": "Washington just tightened the rules on AI chip shipments, and Super Micro already carries a federal diversion probe. Yet its bigger rivals are bleeding too, which raises a sharper question about who really has the thinnest cushion.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 18:02 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/super-micro-falls-4-dell-and-hewlett-packard-enterprise-slide-2-do-new-u-s-export-curbs-deepen-super-micros-china-problem/"
+     },
+     {
+      "title": "Top Bank Slashes Dell Stock Price Target by 30% Ahead of Earnings",
+      "summary": "GF Securities Sees Trouble Ahead for Servers and PCs",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:49 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/top-bank-slashes-dell-stock-174940508.html"
+     },
+     {
+      "title": "Michael Dell Says 90% of Kids Haven't Claimed Their $250 Investment Accounts \u2014 Jim Cramer Steps In to Help Reach Families",
+      "summary": "CNBC host Jim Cramer pledged to help Dell Technologies Inc. CEO Michael Dell reach millions of American families after the billionaire revealed that more than 90% of children\u2019s investment accounts funded through his family\u2019s $6.25 billion donation remain unclaimed. Cramer...",
+      "publisher": "Benzinga",
+      "published": "2026-11-17 17:30 UTC",
+      "link": "https://finance.yahoo.com/small-business/articles/michael-dell-says-90-kids-173006554.html"
+     },
+     {
+      "title": "Michael Dell Gave 25 Million American Kids $6.25 Billion. More Than 90% Still Haven\u2019t Claimed It.",
+      "summary": "Michael Dell's gift sits invested and growing in millions of kids' accounts, yet the $250 is the smallest piece of what's at stake. One missing step keeps parents locked out of far bigger money, and the clock is already running.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 17:02 UTC",
+      "link": "https://247wallst.com/personal-finance/2026/11/17/michael-dell-gave-25-million-american-kids-6-25-billion-more-than-90-still-havent-claimed-it/"
+     },
+     {
+      "title": "What Is Driving The Move In Super Micro Computer Stock?",
+      "summary": "For questions about this article or underlying research, email help@trefis.com.",
+      "publisher": "Trefis",
+      "published": "2026-11-17 15:20 UTC",
+      "link": "https://www.trefis.com/stock/smci/articles/625665/what-is-driving-the-move-in-super-micro-computer-stock/2026-11-17"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Dell shares fell alongside other hardware names after a reported DOJ probe into AI server smuggling to China weighed on Super Micro and dragged Dell and HPE down about 4%. Analysts quoted in the headlines say strong AI and enterprise demand could offset PC weakness, and one article notes Dell's stock has lost more than a third of its value since a recent peak. Dell's financing receivables have also drawn attention, with $4.4 billion in lower-grade customer receivables cited.",
+    "summary": "Dell Technologies expanded its AI Factory with NVIDIA on 17 Nov 2026, adding an AI Data Platform, infrastructure management tools, and rack-scale storage with direct liquid cooling. On the same day, GF Securities cut its Dell price target by 30% ahead of earnings, citing weaker server and PC demand, and Dell slid about 2% alongside Super Micro and HPE after new U.S. AI chip export curbs.",
     "sentiment": "neutral",
     "drivers": [
-     "Reported DOJ smuggling probe affecting AI server makers",
-     "AI server backlog and margin conversion",
-     "Weakness in PC business",
-     "Lower-grade customer receivables and Fed scrutiny of circular financing"
+     "NVIDIA AI Factory product expansion",
+     "GF Securities 30% target cut ahead of earnings",
+     "Weaker server and PC demand flagged by analyst",
+     "New U.S. AI chip export curbs weighing on peers"
     ],
     "position_flags": [],
-    "input_tokens": 1628,
-    "output_tokens": 524,
-    "cost_usd": 0.0004248,
+    "input_tokens": 1623,
+    "output_tokens": 545,
+    "cost_usd": 0.0004348,
     "status": "ok"
    },
    {
     "ticker": "SPCX",
     "headlines": [
      {
-      "title": "Nvidia, Sandisk, SpaceX, L3Harris, Strategy, Tyson, and More Stocks That Explain Today\u2019s Market",
-      "summary": "Nvidia falls, extending a 25% decline over the past month following the resignation of former CEO Jensen Huang.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 21:26 UTC",
-      "link": "https://www.barrons.com/articles/stock-movers-dcfe4add?siteid=yhoof2&yptr=yahoo"
+      "title": "Berkshire Hathaway Slashes This Top 5 Stock; Nvidia Boosts SpaceX",
+      "summary": "Berkshire Hathaway detailed Q3 buys and sells in a 13F filing late Monday. SpaceX stock popped.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-17 21:11 UTC",
+      "link": "https://www.investors.com/news/berkshire-hathaway-stock-buys-sells-q3-13f-bac-nvidia-alphabet-spacex/?src=A00220&yptr=yahoo"
      },
      {
-      "title": "Why SpaceX Stock Is Down After Its Historic Starship Catch",
-      "summary": "Starship\u2019s upper stage came back to Earth and was caught by the launch tower\u2019s mechanical arms. It was an amazing feat of engineering.",
-      "publisher": "Barrons.com",
-      "published": "2026-11-16 21:11 UTC",
-      "link": "https://www.barrons.com/articles/why-spacex-stock-down-historic-starship-catch-ec692e2b?siteid=yhoof2&yptr=yahoo"
+      "title": "Billionaire David Tepper Grew His SpaceX Stake 17-Fold While Dumping AMD and Broadcom",
+      "summary": "David Tepper's latest 13F shows a rocket-fueled bet on one hot stock and two quiet exits from AI chip winners that were still posting blowout numbers. The filing leaves out the one thing investors most want to know.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 21:10 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/billionaire-david-tepper-grew-his-spacex-stake-17-fold-while-dumping-amd-and-broadcom/"
      },
      {
-      "title": "The Anthropic IPO Is Coming. I Wouldn't Buy on Day 1, I'd Do This Instead",
-      "summary": "Anthropic won't go public at a record-setting valuation anymore, but it'll still be a highly expensive stock to buy on its first day.",
+      "title": "SpaceX Stock (SPCX) Could Crush Wall Street\u2019s Estimates. Here\u2019s Why",
+      "summary": "SpaceX (SPCX) could crush Wall Street\u2019s estimates if its latest progress continues. The space and artificial intelligence (AI) company grew Q3 revenue by 161% to $14.6 billion. Management described \u201ca clear inflection in our Super Intelligence business,\u201d and that description seems fair. Super Intelligence is already its largest revenue segment. Meanwhile, Starship\u2019s most recent flight has brought cheaper orbital launches another step closer. Expectations are enormous, but the business keeps open",
+      "publisher": "TipRanks",
+      "published": "2026-11-17 21:07 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-stock-spcx-could-crush-210700242.html"
+     },
+     {
+      "title": "SpaceX \u201cOff Balance Sheet\u201d Debt for AI Chips Hits the Market This Week. Here\u2019s Where Things Get Interesting",
+      "summary": "Key TakeawaysSome of a $40 billion debt package to buy Nvidia chips for SpaceX could go on sale as soon as this week, Bloomberg reported. The debt sits in a separate vehicle off SpaceX\u2019s balance sheet, and critics like Ed Zitron want that kind of deal regulated away.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 20:35 UTC",
+      "link": "https://www.tikr.com/blog/spacex-off-balance-sheet-debt-for-ai-chips-hits-the-market-this-week-heres-where-things-get-interesting?ref=yahoofinance&tlnk=yf-261117-gxghfqfw"
+     },
+     {
+      "title": "Prediction: SpaceX Stock Could Go Parabolic After Anthropic's IPO. Here's Why.",
+      "summary": "Anthropic is expected to list on the Nasdaq on Nov. 19.",
       "publisher": "Motley Fool",
-      "published": "2026-11-16 20:55 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/the-anthropic-ipo-is-coming-i-wouldn-t-buy-on-day-1-i-d-do-this-instead/"
+      "published": "2026-11-17 20:20 UTC",
+      "link": "https://www.fool.com/investing/2026/11/17/prediction-spacex-stock-could-go-parabolic-after-anthropic-s-ipo-here-s-why/"
      },
      {
-      "title": "Down 60% From Its 52-Week High, Is Rocket Lab Stock a Bargain Buy?",
-      "summary": "Rocket Lab is coming off an impressive quarter, which highlighted its tremendous growth opportunities in space.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 20:10 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/down-60-from-its-52-week-high-is-rocket-lab-stock-a-bargain-buy/"
+      "title": "The 5 Best Stocks in Cathie Wood\u2019s Portfolio",
+      "summary": "Key TakeawaysCathie Wood\u2019s ARK Invest added to CoreWeave, SpaceX and NVIDIA in the third quarter, according to the 13F it filed Nov. 13.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 19:38 UTC",
+      "link": "https://www.tikr.com/blog/the-5-best-stocks-in-cathie-woods-portfolio?ref=yahoofinance&tlnk=yf-261117-6rppm4x6"
      },
      {
-      "title": "Should Nvidia bring Jensen Huang back, as Silicon Valley's elite are demanding?",
-      "summary": "The Jensen Huang debacle at Nvidia is heading into a new dimension.",
+      "title": "SpaceX is leasing $47 billion of Nvidia chips like a car \u2014 and lenders hold the title",
+      "summary": "Leasing a car gets you the newest model for a monthly payment, and the bank keeps the title. SpaceX just signed the AI version on about $47 billion of Nvidia's newest chips.",
       "publisher": "Yahoo Finance",
-      "published": "2026-11-16 20:00 UTC",
-      "link": "https://finance.yahoo.com/technology/article/should-nvidia-bring-jensen-huang-back-as-silicon-valleys-elite-are-demanding-200000408.html"
+      "published": "2026-11-17 19:20 UTC",
+      "link": "https://finance.yahoo.com/markets/article/spacex-is-leasing-47-billion-of-nvidia-chips-like-a-car--and-lenders-hold-the-title-192002200.html"
      },
      {
-      "title": "Anthropic gears up for the largest IPO in history, but do the economics work?",
-      "summary": "Anthropic (ANTH.PVT) is gearing up for the largest IPO of all time with a valuation of $1.4 trillion.\n\nBarron's associate editor Al Root joins \"The 8:30\" hosts Julie Hyman and Pras Subramanian to discuss the details.",
+      "title": "What far cheaper AI compute in space could mean for Elon Musk",
+      "summary": "In the Loop host Ejaaz Ahamadeen explains how SpaceX (SPCX) CEO Elon Musk's ability to scale AI compute on Earth, and potentially in space at a much lower cost, could make his space business a highly lucrative AI compute provider on par with the big cloud businesses like Amazon Web Services (AMZN), Google Cloud (GOOG) (GOOGL), and Microsoft's (MSFT) Azure.",
       "publisher": "Yahoo Finance Video",
-      "published": "2026-11-16 15:43 UTC",
-      "link": "https://finance.yahoo.com/video/anthropic-gears-up-for-the-largest-ipo-in-history-but-do-the-economics-work-154323636.html"
+      "published": "2026-11-17 16:27 UTC",
+      "link": "https://finance.yahoo.com/video/what-far-cheaper-ai-compute-in-space-could-mean-for-elon-musk-162707073.html"
      },
      {
-      "title": "Jensen Huang was a great CEO, but he's not untouchable",
-      "summary": "Yahoo Finance Executive Editor Brian Sozzi argues that the push by SpaceX CEO Elon Musk and other tech figures to bring Jensen Huang back to the helm of Nvidia (NVDA) ignores corporate governance and national security questions that no CEO is exempt from.",
+      "title": "Why SpaceX's latest Starship test was a big deal",
+      "summary": "In the Loop Host Ejaaz Ahamadeen breaks down his takeaways from Friday's SpaceX (SPCX) Starship Flight 15 test mission, examining what made the launch a success and what it could mean for the company's ambitious space exploration plans.",
       "publisher": "Yahoo Finance Video",
-      "published": "2026-11-16 15:27 UTC",
-      "link": "https://finance.yahoo.com/video/jensen-huang-great-ceo-hes-152700661.html"
+      "published": "2026-11-17 16:14 UTC",
+      "link": "https://finance.yahoo.com/video/why-spacexs-latest-starship-test-was-a-big-deal-161438578.html"
      },
      {
-      "title": "SpaceX's Starship feat should remind investors that the company at its 'core' is a rocket builder",
-      "summary": "It was an absolutely massive day for  SpaceX and the rocket industry.",
-      "publisher": "Yahoo Finance",
-      "published": "2026-11-16 15:13 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/article/spacexs-starship-feat-should-remind-investors-that-the-company-at-its-core-is-a-rocket-builder-153734886.html"
-     },
-     {
-      "title": "Why Starship's breakthrough could give SpaceX a massive edge",
-      "summary": "SpaceX (SPCX) had a major breakthrough during its Starship launch over the weekend. \n\nBarron's associate editor Al Root joins \"The 8:30\" hosts Julie Hyman and Pras Subramanian to discuss what the launch means for SpaceX and the broader space industry.",
+      "title": "SpaceX just caught a spaceship out of the sky",
+      "summary": "SpaceX's Ship 42 circled the Earth 14 times, then came back 22.5 hours later and was caught mid-air by the same tower it launched from, the first catch of a spaceship returning from orbit. Host Ejaaz Ahamadeen walks through the flight and why it matters for Starlink, AI satellites and SpaceX's compute business.",
       "publisher": "Yahoo Finance Video",
-      "published": "2026-11-16 15:00 UTC",
-      "link": "https://finance.yahoo.com/video/why-starships-breakthrough-could-give-spacex-a-massive-edge-150054680.html"
-     },
-     {
-      "title": "Investors brace for Nvidia earnings, SpaceX gains after Starship catch, Huang eyes comeback",
-      "summary": "The 8:30 hosts, Julie Hyman, Pras Subramanian, and Barron's Associate Editor\u00a0Al Root, discuss the biggest headlines of the market trading day, including why Nvidia (NVDA) investors are bracing for the earnings call and the impact a possible Jensen Huang comeback would have on the company's outlook. Meanwhile, the largest airline ground stop in decades is causing ripple effects for the third day in a row across US airports. Plus, SpaceX (SPCX) stock gains after a successful launch of the Starship 15 and the capture of the rocket's upper stage by its launch tower. ",
-      "publisher": "Yahoo Finance Video",
-      "published": "2026-11-16 14:39 UTC",
-      "link": "https://finance.yahoo.com/video/investors-brace-for-nvidia-earnings-spacex-gains-after-starship-catch-huang-eyes-comeback-143933305.html"
+      "published": "2026-11-17 12:00 UTC",
+      "link": "https://finance.yahoo.com/video/spacex-just-caught-spaceship-sky-120000437.html"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "SpaceX (SPCX) had a major Starship milestone over the weekend, when the upper stage returned to Earth and was caught by the launch tower's mechanical arms. Headlines conflict on the stock reaction: one Barron's piece says SpaceX stock is down after the catch, while a market recap says SpaceX gained after it.",
-    "sentiment": "neutral",
+    "summary": "SpaceX (SPCX) reported Q3 revenue up 161% to $14.6 billion, according to a TipRanks article, and several 13F-based reports noted SpaceX stock rose after Berkshire Hathaway's filing. Coverage also covered a $40 billion off-balance-sheet debt package for Nvidia chips that may be sold this week, and a $47 billion chip lease, with critics calling for regulation of such deals.",
+    "sentiment": "positive",
     "drivers": [
-     "Starship upper stage caught by launch tower arms",
-     "Conflicting reports on the share price reaction",
-     "Commentary that SpaceX is at its core a rocket builder",
-     "Broader space-sector attention, including Rocket Lab's share decline"
+     "Q3 revenue growth of 161% to $14.6 billion",
+     "Super Intelligence business inflection cited by management",
+     "Off-balance-sheet debt package for Nvidia AI chips",
+     "Institutional 13F filings showing SpaceX stakes"
     ],
     "position_flags": [],
-    "input_tokens": 1630,
-    "output_tokens": 363,
-    "cost_usd": 0.0003445,
+    "input_tokens": 1803,
+    "output_tokens": 392,
+    "cost_usd": 0.0003763,
     "status": "ok"
    },
    {
     "ticker": "PLTR",
     "headlines": [
      {
-      "title": "Cathie Wood Just Bought $16 Million of Tumbling AI Stock",
-      "summary": "Cathie Wood Just Poured $16 Million Into CoreWeave After Its Stock Plunged",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 19:53 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-just-bought-16-195351549.html"
-     },
-     {
-      "title": "Cathie Wood Just Sold $11.8 Million of Palantir Stock",
-      "summary": "Cathie Wood's ARK Sells Palantir Stock, but the Move Looks Like Routine Rebalancing",
-      "publisher": "GuruFocus.com",
-      "published": "2026-11-16 19:45 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-just-sold-11-194517695.html"
-     },
-     {
-      "title": "Why Does Palantir Stock Keep Going Down?",
-      "summary": "This analyst just upgraded Palantir -- then Palantir stock went down. Wait. What?",
+      "title": "Cathie Wood Says AI Isn't Even in the First Inning Yet of Its Long-Term Technological Revolution, Pointing to Palantir's 123% U.S. Revenue Growth as Evidence the Market Is Underestimating the Trade. Is Her Concentrated AI Bet Still the Right One?",
+      "summary": "Ark Invest's ETFs are heavily invested in AI-related stocks.",
       "publisher": "Motley Fool",
-      "published": "2026-11-16 19:36 UTC",
-      "link": "https://www.fool.com/investing/2026/11/16/why-does-palantir-stock-keep-going-down/"
+      "published": "2026-11-17 19:01 UTC",
+      "link": "https://www.fool.com/investing/2026/11/17/cathie-wood-says-ai-is-in-the-first-innings-of-a-long-term-technological-revolution-pointing-to-palantirs-123-us-revenue-growth-as-evidence-the-market-is-underestimating-the-trade-is-her-concentrated-ai-bet-still-the-right-one/"
      },
      {
-      "title": "ServiceNow vs. Palantir Technologies: Comparing Steady Sales Scale Against Rapid Revenue Acceleration",
-      "summary": "Palantir's quarterly revenue has more than quadrupled in two years, narrowing the gap with ServiceNow's far larger base at a pace the rival cannot match.",
-      "publisher": "Motley Fool",
-      "published": "2026-11-16 19:32 UTC",
-      "link": "https://www.fool.com/coverage/charts/2026/11/16/servicenow-vs-palantir-technologies-comparing-steady-sales-scale-against-rapid-revenue-acceleration/"
+      "title": "Trump Demands a \u201c350 Billion Dollar\u201d Military Bill Before Democrats Take Over. Palantir Has a Stake",
+      "summary": "Key TakeawaysPalantir Technologies (PLTR) could benefit from President Donald Trump\u2019s push for an additional $350 billion in military spending before Democrats take control of Congress. Senate appropriators proposed nearly $1.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 18:13 UTC",
+      "link": "https://www.tikr.com/blog/trump-demands-a-350-billion-dollar-military-bill-before-democrats-take-over-palantir-has-a-stake?ref=yahoofinance&tlnk=yf-261117-cw4r6qhr"
      },
      {
-      "title": "Sector Update: Tech Stocks Fall Monday Afternoon",
-      "summary": "Tech stocks declined Monday afternoon with the State Street Technology Select Sector SPDR ETF (XLK)",
-      "publisher": "MT Newswires",
-      "published": "2026-11-16 18:28 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/sector-tech-stocks-fall-monday-182826905.html"
-     },
-     {
-      "title": "Stock Of The Day Navan Breaks Out, Defies Software Industry Slump",
-      "summary": "Navan, up 55% this year, is nearing a breakout.",
-      "publisher": "Investor's Business Daily",
-      "published": "2026-11-16 18:24 UTC",
-      "link": "https://www.investors.com/research/ibd-stock-of-the-day/navan-software-stocks-salesforce-palantir-ai-ibd-stock-of-the-day/?src=A00220&yptr=yahoo"
-     },
-     {
-      "title": "Cathie Wood Adds Nvidia Stock Before Earnings While Selling Palantir",
-      "summary": "Ark Invest increased its exposure to AI infrastructure and aerospace stocks while reducing holdings in Palantir, Tempus AI and other technology companies.",
+      "title": "Good News For Palantir Stock Investors",
+      "summary": "Palantir Keeps Its $440 Million NHS Contract. British Rivals Will Get Their Shot in 2029",
       "publisher": "GuruFocus.com",
-      "published": "2026-11-16 17:43 UTC",
-      "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-adds-nvidia-stock-174317884.html"
+      "published": "2026-11-17 17:54 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/good-news-palantir-stock-investors-175414317.html"
      },
      {
-      "title": "Palantir Technologies (PLTR) Sees \u00a3330 Million NHS Contract Draw New UK Rivals",
-      "summary": "Palantir Technologies (NasdaqGS:PLTR) faces new competition for the \u00a3330 million NHS Federated Data Platform contract from UK-led groups. A British consortium called Drystone Health AI Collaboration is mobilizing to challenge Palantir's position on the NHS data platform bid. Other technology suppliers, including Quantexa and Oracle Health, are also preparing proposals for the same large-scale NHS data project. Palantir's effort to retain the \u00a3330 million NHS Federated Data Platform contract...",
-      "publisher": "Simply Wall St.",
-      "published": "2026-11-16 17:12 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/palantir-technologies-pltr-sees-330-171216842.html"
+      "title": "Michael Burry Makes Bold Bet on Beaten-Down AI Software Stock",
+      "summary": "Michael Burry increased his Adobe stake while exiting Oracle and Caterpillar puts amid AI market volatility.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:47 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/michael-burry-makes-bold-bet-174737697.html"
      },
      {
-      "title": "Update: Market Chatter: Palantir Technologies Faces UK Competition for NHS Data Contract",
-      "summary": "(Updates with Temple Black's response in the fifth and sixth paragraphs.) Palantir Technologies (",
-      "publisher": "MT Newswires",
-      "published": "2026-11-16 16:41 UTC",
-      "link": "https://finance.yahoo.com/healthcare/articles/market-chatter-palantir-technologies-faces-164157628.html"
+      "title": "Palantir Stock Faces New Risk Despite $440 Million NHS Contract Extension",
+      "summary": "The British government will retain Palantir's health data platform for three more years as it prepares to open the contract to domestic competitors.",
+      "publisher": "GuruFocus.com",
+      "published": "2026-11-17 17:46 UTC",
+      "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-stock-faces-risk-despite-174619725.html"
      },
      {
-      "title": "PLTR Raises 2026 Guidance as Q3 AI Demand Drives 96% Revenue Growth",
-      "summary": "Palantir raises its 2026 revenue outlook as Q3 sales surge 96% on AI demand, fueled by U.S. commercial growth, stronger margins and expanding customer spending.",
+      "title": "Palantir's 148% U.S. Commercial Revenue Surge Signals AI Momentum",
+      "summary": "PLTR's U.S. commercial revenues surge 148% in Q3 2026, fueled by growing enterprise AI adoption. Can robust government demand sustain its growth momentum?",
       "publisher": "Zacks",
-      "published": "2026-11-16 15:10 UTC",
-      "link": "https://finance.yahoo.com/technology/ai/articles/pltr-raises-2026-guidance-q3-151000503.html"
+      "published": "2026-11-17 17:08 UTC",
+      "link": "https://finance.yahoo.com/technology/ai/articles/palantirs-148-u-commercial-revenue-170800611.html"
+     },
+     {
+      "title": "Stanley Druckenmiller Dumped AMD and Alphabet. His Next 3 AI Bets May Surprise Investors",
+      "summary": "Stanley Druckenmiller walked away from two fast-growing AI giants, yet he did not walk away from AI. His latest 13F reveals where the money went instead, and the new picks tell a different story about how he sees the next phase of the boom.",
+      "publisher": "24/7 Wall St.",
+      "published": "2026-11-17 17:07 UTC",
+      "link": "https://247wallst.com/investing/2026/11/17/stanley-druckenmiller-dumped-amd-and-alphabet-his-next-3-ai-bets-may-surprise-investors/"
+     },
+     {
+      "title": "6 Big Funds Sold Palo Alto Networks Last Quarter. Should You Follow Them Before Earnings?",
+      "summary": "Key TakeawaysSix big funds, including Gavin Baker\u2019s Atreides Management, cut their Palo Alto Networks stakes by 20% to 94% in the third quarter, and the stock is down 20% since Sept. 30.",
+      "publisher": "TIKR",
+      "published": "2026-11-17 15:46 UTC",
+      "link": "https://www.tikr.com/blog/6-big-funds-sold-palo-alto-networks-last-quarter-should-you-follow-them-before-earnings?ref=yahoofinance&tlnk=yf-261117-6c9xjwqj"
+     },
+     {
+      "title": "Michael Burry Still Bearish On Nvidia, AI Trade, Buys These Software Names",
+      "summary": "The \"Big Short\" investor added Adobe and other software names, while keeping his bearish view on Nvidia, Palantir and AI stocks.",
+      "publisher": "Investor's Business Daily",
+      "published": "2026-11-17 15:29 UTC",
+      "link": "https://www.investors.com/news/adobe-michael-burry-oracle-caterpillar-nvidia-nasdaq-ai-semiconductors/?src=A00220&yptr=yahoo"
+     },
+     {
+      "title": "Can Palantir Stock Double From Here?",
+      "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+      "publisher": "Trefis",
+      "published": "2026-11-17 14:13 UTC",
+      "link": "https://www.trefis.com/stock/pltr/articles/625619/can-palantir-stock-double-from-here/2026-11-17"
      }
     ],
     "model": "claude-haiku-5-5",
-    "summary": "Palantir raised its 2026 revenue outlook after third-quarter sales rose 96% on AI demand, according to Zacks. Over the same period, a UK consortium, Drystone Health AI Collaboration, reportedly began mobilizing to challenge Palantir for the \u00a3330 million NHS Federated Data Platform contract. Cathie Wood's ARK sold about $11.8 million of Palantir stock, which GuruFocus described as routine rebalancing, and a Motley Fool article noted the stock fell after an analyst upgrade.",
-    "sentiment": "neutral",
+    "summary": "Palantir's Q3 2026 U.S. commercial revenue reportedly rose 148%, and the UK government will keep its health data platform for three more years under a $440 million NHS contract extension, though the contract will open to domestic competitors afterward. Coverage also noted Trump's push for a $350 billion military bill, which one article said could benefit Palantir, while Michael Burry reportedly remains bearish on Palantir and AI stocks.",
+    "sentiment": "positive",
     "drivers": [
-     "Raised 2026 revenue guidance",
-     "Q3 sales up 96% on AI demand",
-     "New UK competition for NHS data contract",
-     "ARK Invest sale of Palantir shares"
+     "148% U.S. commercial revenue growth in Q3 2026",
+     "$440M NHS contract extension",
+     "Proposed $350B military spending push",
+     "Michael Burry remains bearish"
     ],
     "position_flags": [],
-    "input_tokens": 1470,
-    "output_tokens": 598,
-    "cost_usd": 0.000446,
+    "input_tokens": 1575,
+    "output_tokens": 446,
+    "cost_usd": 0.0003805,
     "status": "ok"
    }
   ],
@@ -1650,264 +1343,207 @@
   "universe": 518,
   "holdings": [
    {
-    "ticker": "BEN",
-    "score": 93.5,
-    "momentum": 87.4,
-    "steadiness": 92.5,
+    "ticker": "FAST",
+    "score": 79.9,
+    "momentum": 74.7,
+    "steadiness": 86.7,
     "trend": 100.0,
-    "news": 100.0,
-    "ret_12m": 0.45860370469152567,
-    "recent": 92.9,
-    "ret_1m": 0.13008388763216772,
-    "ret_2w": 0.09508911709325063,
+    "news": 50.0,
+    "ret_12m": 0.2820435227669593,
+    "recent": 78.9,
+    "ret_1m": 0.07066850097139654,
+    "ret_2w": 0.03860111928885246,
     "uptrend": true,
-    "vol": 0.019074437426142066,
-    "rank": 1,
-    "pnl_pct": -3.154335312478184,
+    "vol": 0.012719753214465397,
+    "rank": 18,
+    "pnl_pct": -2.0376556193237363,
     "losing": true,
     "weak": false,
     "queue": 1
    },
    {
-    "ticker": "SWK",
-    "score": 91.8,
-    "momentum": 85.5,
-    "steadiness": 83.6,
-    "trend": 100.0,
-    "news": 100.0,
-    "ret_12m": 0.43097299593889016,
-    "recent": 94.2,
-    "ret_1m": 0.22102069712435024,
-    "ret_2w": 0.058195100156984925,
-    "uptrend": true,
-    "vol": 0.024033906336937045,
-    "rank": 2,
-    "pnl_pct": -0.9043416492728795,
-    "losing": true,
-    "weak": false,
-    "queue": 2
-   },
-   {
-    "ticker": "TGT",
-    "score": 79.4,
-    "momentum": 94.2,
-    "steadiness": 97.9,
-    "trend": 100.0,
-    "news": 50.0,
-    "ret_12m": 0.7491559698390713,
-    "recent": 60.1,
-    "ret_1m": 0.04660243981035772,
-    "ret_2w": 0.019376704178978743,
-    "uptrend": true,
-    "vol": 0.01945029688937606,
-    "rank": 21,
-    "pnl_pct": -0.8541022143827388,
-    "losing": true,
-    "weak": false,
-    "queue": 3
-   },
-   {
     "ticker": "VTRS",
-    "score": 90.3,
-    "momentum": 94.8,
+    "score": 90.7,
+    "momentum": 94.2,
     "steadiness": 98.6,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7709937731461451,
-    "recent": 90.3,
-    "ret_1m": 0.11146837838771595,
-    "ret_2w": 0.11087304158357125,
+    "ret_12m": 0.7637463904314239,
+    "recent": 91.9,
+    "ret_1m": 0.11993431032896118,
+    "ret_2w": 0.08086684357694796,
     "uptrend": true,
-    "vol": 0.01666209014236358,
-    "rank": 4,
-    "pnl_pct": -0.2414610195276362,
+    "vol": 0.01677791231304584,
+    "rank": 1,
+    "pnl_pct": -1.636344224974005,
     "losing": true,
     "weak": false,
-    "queue": 4
+    "queue": 2
    }
   ],
   "top": [
    {
-    "ticker": "HUM",
-    "score": 90.6,
-    "momentum": 94.6,
-    "steadiness": 96.1,
+    "ticker": "CPAY",
+    "score": 88.7,
+    "momentum": 86.5,
+    "steadiness": 92.5,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.7642300831333138,
-    "recent": 92.7,
-    "ret_1m": 0.11876674394675302,
-    "ret_2w": 0.12387611384772002,
+    "ret_12m": 0.44250541797172227,
+    "recent": 93.9,
+    "ret_1m": 0.12358406275268008,
+    "ret_2w": 0.11247482044520174,
     "uptrend": true,
-    "vol": 0.02446330220278772,
+    "vol": 0.01546046082596226,
+    "rank": 2
+   },
+   {
+    "ticker": "BEN",
+    "score": 87.6,
+    "momentum": 87.0,
+    "steadiness": 91.9,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.4537175294804048,
+    "recent": 91.0,
+    "ret_1m": 0.12048195614601043,
+    "ret_2w": 0.0633497898144284,
+    "uptrend": true,
+    "vol": 0.019179188268559605,
     "rank": 3
    },
    {
-    "ticker": "CNC",
-    "score": 88.8,
-    "momentum": 96.1,
-    "steadiness": 97.3,
+    "ticker": "GWW",
+    "score": 87.2,
+    "momentum": 85.5,
+    "steadiness": 94.6,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.916320403704685,
-    "recent": 86.2,
-    "ret_1m": 0.08111614638375975,
-    "ret_2w": 0.12385387065922648,
+    "ret_12m": 0.4314321604336493,
+    "recent": 89.2,
+    "ret_1m": 0.11489591781562591,
+    "ret_2w": 0.05115942695787723,
     "uptrend": true,
-    "vol": 0.02662638415585651,
+    "vol": 0.015048366036275398,
+    "rank": 4
+   },
+   {
+    "ticker": "HUM",
+    "score": 86.8,
+    "momentum": 94.4,
+    "steadiness": 96.1,
+    "trend": 100.0,
+    "news": 50.0,
+    "ret_12m": 0.7691620738577007,
+    "recent": 82.1,
+    "ret_1m": 0.07060975541452419,
+    "ret_2w": 0.06095197434206856,
+    "uptrend": true,
+    "vol": 0.02496399015443133,
     "rank": 5
    },
    {
-    "ticker": "CPAY",
-    "score": 88.7,
-    "momentum": 84.3,
-    "steadiness": 91.3,
+    "ticker": "CNC",
+    "score": 86.7,
+    "momentum": 95.7,
+    "steadiness": 97.7,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.4122633626508472,
-    "recent": 95.9,
-    "ret_1m": 0.1547869528193384,
-    "ret_2w": 0.1281243161244936,
+    "ret_12m": 0.8864759548775223,
+    "recent": 80.2,
+    "ret_1m": 0.057117965251624936,
+    "ret_2w": 0.07513336459108633,
     "uptrend": true,
-    "vol": 0.015239498653482954,
+    "vol": 0.02693403027691727,
     "rank": 6
    },
    {
-    "ticker": "GWW",
-    "score": 88.1,
-    "momentum": 85.7,
-    "steadiness": 95.2,
+    "ticker": "SWK",
+    "score": 86.4,
+    "momentum": 86.7,
+    "steadiness": 84.3,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.43166497766052014,
-    "recent": 91.3,
-    "ret_1m": 0.12600120581647944,
-    "ret_2w": 0.08761938828992877,
+    "ret_12m": 0.44862504040469786,
+    "recent": 91.9,
+    "ret_1m": 0.19322288239337593,
+    "ret_2w": 0.04004965304924557,
     "uptrend": true,
-    "vol": 0.014804934458377472,
+    "vol": 0.02445105136296072,
     "rank": 7
    },
    {
     "ticker": "AIZ",
-    "score": 84.3,
-    "momentum": 73.3,
-    "steadiness": 85.3,
+    "score": 84.2,
+    "momentum": 71.2,
+    "steadiness": 82.8,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.26592248140661834,
-    "recent": 93.0,
-    "ret_1m": 0.1429176188037662,
-    "ret_2w": 0.08939197195623283,
+    "ret_12m": 0.2451890309906588,
+    "recent": 95.4,
+    "ret_1m": 0.14827490185883563,
+    "ret_2w": 0.08790057863132694,
     "uptrend": true,
-    "vol": 0.013312059561393435,
+    "vol": 0.013266859038977225,
     "rank": 8
    },
    {
-    "ticker": "BDX",
+    "ticker": "TGT",
     "score": 84.1,
-    "momentum": 77.2,
-    "steadiness": 81.8,
+    "momentum": 93.6,
+    "steadiness": 97.9,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.2950959089220795,
-    "recent": 92.3,
-    "ret_1m": 0.1289178681653358,
-    "ret_2w": 0.08997983166160228,
+    "ret_12m": 0.7520780500621831,
+    "recent": 73.7,
+    "ret_1m": 0.04803518926358574,
+    "ret_2w": 0.040500771993965845,
     "uptrend": true,
-    "vol": 0.015069168480928404,
+    "vol": 0.01912948728069873,
     "rank": 9
    },
    {
-    "ticker": "FDX",
-    "score": 82.5,
-    "momentum": 83.0,
-    "steadiness": 88.0,
+    "ticker": "BDX",
+    "score": 84.0,
+    "momentum": 75.6,
+    "steadiness": 81.0,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.38578657130395344,
-    "recent": 80.8,
-    "ret_1m": 0.11616422252269087,
-    "ret_2w": 0.02953650870851332,
+    "ret_12m": 0.288274452361565,
+    "recent": 93.3,
+    "ret_1m": 0.1293907516253361,
+    "ret_2w": 0.08704647605281757,
     "uptrend": true,
-    "vol": 0.016362199194530518,
+    "vol": 0.015053890148138205,
     "rank": 10
    },
    {
     "ticker": "JNJ",
-    "score": 82.5,
-    "momentum": 80.1,
-    "steadiness": 87.4,
+    "score": 83.6,
+    "momentum": 79.1,
+    "steadiness": 87.0,
     "trend": 100.0,
     "news": 50.0,
-    "ret_12m": 0.33838276079372265,
-    "recent": 83.0,
-    "ret_1m": 0.10561116955789163,
-    "ret_2w": 0.04431545809641868,
+    "ret_12m": 0.3245003215614348,
+    "recent": 86.8,
+    "ret_1m": 0.09815209259576241,
+    "ret_2w": 0.04707517055710264,
     "uptrend": true,
-    "vol": 0.015274131760391276,
+    "vol": 0.015337148425274843,
     "rank": 11
-   },
-   {
-    "ticker": "WST",
-    "score": 82.4,
-    "momentum": 87.0,
-    "steadiness": 94.4,
-    "trend": 100.0,
-    "news": 50.0,
-    "ret_12m": 0.44345798238256906,
-    "recent": 74.6,
-    "ret_1m": 0.08864935537710306,
-    "ret_2w": 0.02496601220079442,
-    "uptrend": true,
-    "vol": 0.01438919256449371,
-    "rank": 12
-   },
-   {
-    "ticker": "CAH",
-    "score": 82.2,
-    "momentum": 71.0,
-    "steadiness": 79.1,
-    "trend": 100.0,
-    "news": 50.0,
-    "ret_12m": 0.2445949878407736,
-    "recent": 92.0,
-    "ret_1m": 0.1172558011146616,
-    "ret_2w": 0.11606968922239203,
-    "uptrend": true,
-    "vol": 0.015044852882058401,
-    "rank": 13
    }
   ],
-  "suggestions": [
-   {
-    "asof": "2026-11-16",
-    "sell": "TGT",
-    "buy": "HUM",
-    "sell_score": 79.4,
-    "buy_score": 90.6,
-    "sell_rank": 21,
-    "buy_rank": 3,
-    "amount": 160.32000732421875,
-    "reason": "STALLED: 3 business days since you bought it and it's losing -0.9% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#21) and move the money to HUM, rank #3 of 518 (+76% over 12 months, above its 50- and 200-day averages), score 91.",
-    "pending": false,
-    "suggested_on": "2026-11-16",
-    "stop_out": true
-   }
-  ],
-  "status": "1 new swap(s) suggested",
+  "suggestions": [],
+  "status": "no swap: no stock you don't own clearly beats a holding that's free to swap (needs a score of 80+ and a 10-point lead); best candidate CPAY scores 89",
   "storm": false,
-  "earnings_soon": {
-   "TGT": "2026-11-18"
-  },
-  "held_earnings": {
-   "TGT": "2026-11-18"
-  },
+  "earnings_soon": {},
+  "held_earnings": {},
   "weather": {
    "storm": false,
-   "spy": 739.9500122070312,
-   "ma200": 729.5818862915039,
-   "text": "Fair weather: S&P 500 (SPY 739.95) is +1.4% vs its 200-day average (729.58).",
-   "gap_pct": 1.421105171378212
+   "spy": 732.4400024414062,
+   "ma200": 729.793984375,
+   "text": "Fair weather: S&P 500 (SPY 732.44) is +0.4% vs its 200-day average (729.79).",
+   "gap_pct": 0.36257055046462483
   }
  },
  "auto_levels": [
@@ -1915,7 +1551,7 @@
    "ticker": "VTRS",
    "stop": 19.88309970855713,
    "target": 24.226363788951527,
-   "atr": 0.5481819673018022,
+   "atr": 0.5402273698286577,
    "base": 20.81999969482422,
    "highest": 20.81999969482422,
    "since": "2026-11-13",
@@ -1923,60 +1559,38 @@
    "prev_stop": 19.88309970855713
   },
   {
-   "ticker": "TGT",
-   "stop": 155.37849708557127,
-   "target": 193.78908020242235,
-   "atr": 5.161454204196205,
-   "base": 162.6999969482422,
-   "highest": 162.6999969482422,
-   "since": "2026-11-11",
-   "rule": "4.5% trailing stop (4.5% below the highest price since you bought, 162.70)",
-   "prev_stop": 155.37849708557127
-  },
-  {
-   "ticker": "BEN",
-   "stop": 34.5235365,
-   "target": 42.320002642544836,
-   "atr": 1.0500002774325283,
-   "base": 36.02000045776367,
-   "highest": 36.02000045776367,
-   "since": "2026-11-13",
+   "ticker": "FAST",
+   "stop": 52.9838775,
+   "target": 61.77589191528,
+   "atr": 1.2376489068598173,
+   "base": 54.349998474121094,
+   "highest": 54.349998474121094,
+   "since": "2026-11-17",
    "rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 34.5235365
-  },
-  {
-   "ticker": "SWK",
-   "stop": 108.8227275,
-   "target": 137.9409013227983,
-   "atr": 4.130453629927202,
-   "base": 113.2699966430664,
-   "highest": 113.2699966430664,
-   "since": "2026-11-13",
-   "rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 108.8227275
+   "prev_stop": null
   },
   {
    "ticker": "SGOV",
-   "stop": 96.15894999999999,
-   "target": 100.67978648087507,
-   "atr": 0.020420850098791344,
-   "base": 100.55999755859375,
-   "highest": 100.58000183105469,
-   "since": "2026-11-13",
+   "stop": 96.200588,
+   "target": 100.70437532586796,
+   "atr": 0.019063164662889355,
+   "base": 100.58999633789062,
+   "highest": 100.58999633789062,
+   "since": "2026-11-17",
    "rule": "4.5% trailing stop (4.5% below your buy price)",
-   "prev_stop": 96.146535
+   "prev_stop": null
   }
  ],
  "performance": {
   "wins_losses": {
-   "trades": 38,
+   "trades": 40,
    "realized": -82.64,
-   "wins": 2,
-   "losses": 7,
-   "win_rate": 22.2,
-   "avg_win": 8.93,
-   "avg_loss": -14.36,
-   "fees": 20.75,
+   "wins": 3,
+   "losses": 8,
+   "win_rate": 27.3,
+   "avg_win": 6.18,
+   "avg_loss": -12.65,
+   "fees": 21.46,
    "by_ticker": [
     {
      "ticker": "TXN",
@@ -1985,6 +1599,10 @@
     {
      "ticker": "DIS",
      "realized": 0.78
+    },
+    {
+     "ticker": "SGOV",
+     "realized": 0.0
     },
     {
      "ticker": "MRK",
@@ -2015,8 +1633,8 @@
      "realized": -52.96
     }
    ],
-   "unrealized": -8.79,
-   "total": -91.43
+   "unrealized": -4.52,
+   "total": -87.16
   },
   "scorecard": [
    {
@@ -2026,13 +1644,13 @@
     "followed": "yes",
     "sell_then": 1356.6500244140625,
     "buy_then": 146.94000244140625,
-    "sell_now": 1406.7850341796875,
-    "buy_now": 144.4600067138672,
-    "sell_ret": 0.03695500598046886,
-    "buy_ret": -0.01687760777415248,
-    "edge": -0.05383261375462134,
-    "days": 11,
-    "asof": "2026-11-16"
+    "sell_now": 1383.1099853515625,
+    "buy_now": 143.3699951171875,
+    "sell_ret": 0.019503895965304663,
+    "buy_ret": -0.024295680311032575,
+    "edge": -0.04379957627633724,
+    "days": 12,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-05",
@@ -2041,13 +1659,13 @@
     "followed": "yes",
     "sell_then": 117.22000122070312,
     "buy_then": 241.4600067138672,
-    "sell_now": 118.69999694824219,
-    "buy_now": 215.27000427246094,
-    "sell_ret": 0.012625795189615374,
-    "buy_ret": -0.10846517730963912,
-    "edge": -0.12109097249925449,
-    "days": 11,
-    "asof": "2026-11-16"
+    "sell_now": 116.94000244140625,
+    "buy_now": 206.8000030517578,
+    "sell_ret": -0.0023886604366236686,
+    "buy_ret": -0.14354345522396128,
+    "edge": -0.1411547947873376,
+    "days": 12,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-05",
@@ -2056,13 +1674,13 @@
     "followed": "yes",
     "sell_then": 185.1999969482422,
     "buy_then": 278.1499938964844,
-    "sell_now": 210.8300018310547,
-    "buy_now": 294.2099914550781,
-    "sell_ret": 0.13839095737121054,
-    "buy_ret": 0.05773862272515662,
-    "edge": -0.08065233464605392,
-    "days": 11,
-    "asof": "2026-11-16"
+    "sell_now": 210.69000244140625,
+    "buy_now": 295.8599853515625,
+    "sell_ret": 0.13763502112955073,
+    "buy_ret": 0.0636706519636634,
+    "edge": -0.07396436916588733,
+    "days": 12,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-05",
@@ -2071,13 +1689,13 @@
     "followed": "yes",
     "sell_then": 647.0499877929688,
     "buy_then": 74.16999816894531,
-    "sell_now": 661.75,
-    "buy_now": 74.7699966430664,
-    "sell_ret": 0.022718510910063827,
-    "buy_ret": 0.008089503693318179,
-    "edge": -0.014629007216745649,
-    "days": 11,
-    "asof": "2026-11-16"
+    "sell_now": 656.9500122070312,
+    "buy_now": 72.55000305175781,
+    "sell_ret": 0.015300246659196493,
+    "buy_ret": -0.02184164968559732,
+    "edge": -0.03714189634479381,
+    "days": 12,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-10",
@@ -2086,13 +1704,13 @@
     "followed": "yes",
     "sell_then": 250.8300018310547,
     "buy_then": 161.77999877929688,
-    "sell_now": 215.27000427246094,
-    "buy_now": 160.32000732421875,
-    "sell_ret": -0.14176931506999313,
-    "buy_ret": -0.009024548560356171,
-    "edge": 0.13274476650963696,
-    "days": 6,
-    "asof": "2026-11-16"
+    "sell_now": 206.8000030517578,
+    "buy_now": 159.52999877929688,
+    "sell_ret": -0.17553721029334068,
+    "buy_ret": -0.013907776097028424,
+    "edge": 0.16162943419631226,
+    "days": 7,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-12",
@@ -2101,13 +1719,13 @@
     "followed": "yes",
     "sell_then": 70.2699966430664,
     "buy_then": 35.86000061035156,
-    "sell_now": 74.7699966430664,
-    "buy_now": 35.0099983215332,
-    "sell_ret": 0.06403871090043678,
-    "buy_ret": -0.02370335399751755,
-    "edge": -0.08774206489795433,
-    "days": 4,
-    "asof": "2026-11-16"
+    "sell_now": 72.55000305175781,
+    "buy_now": 34.40999984741211,
+    "sell_ret": 0.032446371390518314,
+    "buy_ret": -0.040435045684881765,
+    "edge": -0.07288141707540008,
+    "days": 5,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-12",
@@ -2116,42 +1734,42 @@
     "followed": "yes",
     "sell_then": 146.9499969482422,
     "buy_then": 20.670000076293945,
-    "sell_now": 144.4600067138672,
-    "buy_now": 20.739999771118164,
-    "sell_ret": -0.01694447285529377,
-    "buy_ret": 0.003386535779673183,
-    "edge": 0.02033100863496695,
-    "days": 4,
-    "asof": "2026-11-16"
+    "sell_now": 143.3699951171875,
+    "buy_now": 20.450000762939453,
+    "sell_ret": -0.024362040866973356,
+    "buy_ret": -0.010643411346998755,
+    "edge": 0.013718629519974601,
+    "days": 5,
+    "asof": "2026-11-17"
    },
    {
     "suggested_on": "2026-11-16",
     "sell": "TGT",
     "buy": "HUM",
-    "followed": "open",
+    "followed": "partly",
     "sell_then": 160.32000732421875,
     "buy_then": 461.25,
-    "sell_now": 160.32000732421875,
-    "buy_now": 461.25,
-    "sell_ret": 0.0,
-    "buy_ret": 0.0,
-    "edge": 0.0,
-    "days": 0,
-    "asof": "2026-11-16"
+    "sell_now": 159.52999877929688,
+    "buy_now": 443.3399963378906,
+    "sell_ret": -0.004927697784620322,
+    "buy_ret": -0.03882927623221544,
+    "edge": -0.033901578447595115,
+    "days": 1,
+    "asof": "2026-11-17"
    }
   ],
   "score_summary": {
    "all": {
     "count": 8,
-    "scored": 7,
+    "scored": 8,
     "beat": 2,
-    "avg_edge": -0.029267316838575117
+    "avg_edge": -0.02843694604763304
    },
    "followed": {
-    "count": 7,
-    "scored": 7,
+    "count": 8,
+    "scored": 8,
     "beat": 2,
-    "avg_edge": -0.029267316838575117
+    "avg_edge": -0.02843694604763304
    },
    "skipped": {
     "count": 0,
@@ -2162,11 +1780,11 @@
   },
   "vs_sp500": {
    "since": "2026-04-02",
-   "report_date": "2026-11-13",
-   "mine": 895.21,
-   "sp500": 959.85,
-   "edge": -64.64,
-   "spy_shares": 1.297184306623463,
+   "report_date": "2026-11-16",
+   "mine": 885.31,
+   "sp500": 950.11,
+   "edge": -64.8,
+   "spy_shares": 1.2971843159322487,
    "holdings": {
     "TGT": 1.0,
     "VTRS": 7.0,
