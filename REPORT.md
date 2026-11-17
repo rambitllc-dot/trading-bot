@@ -57,10 +57,10 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 20 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
 | 21 | Wide momentum (10 ETFs) | Monthly pick | ETF | $93.64 | -$6.36 (-6.4%) | 1 |
 | 22 | Tesla buy & hold | Hold | Stock | $93.28 | -$6.72 (-6.7%) | 1 |
-| 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $86.05 | -$13.95 (-14.0%) | 10 |
+| 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $86.06 | -$13.94 (-13.9%) | 10 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $83.85 | -$16.15 (-16.2%) | 4 |
 | 25 | Bitcoin buy & hold | Hold | Bitcoin | $82.29 | -$17.71 (-17.7%) | 1 |
-| 26 | Nvidia buy & hold | Hold | Stock | $78.44 | -$21.56 (-21.6%) | 1 |
+| 26 | Nvidia buy & hold | Hold | Stock | $78.15 | -$21.85 (-21.9%) | 1 |
 
 ## Holding vs trading, same asset
 
@@ -70,13 +70,13 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | S&P 500 | $96.75 | $96.75 | about even |
 | Apple | $104.60 | $104.60 | about even |
 | Microsoft | $97.49 | $97.49 | about even |
-| Nvidia | $78.44 | $95.80 | trading |
+| Nvidia | $78.15 | $95.80 | trading |
 | Amazon | $103.16 | $103.55 | about even |
 | Tesla | $93.28 | $83.85 | holding |
 | SpaceX | $100.65 | $100.00 | holding |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,511.03 from $2,600 (-88.97)
+**All together:** $2,510.74 from $2,600 (-89.26)
 
 ## What each one is doing
 
@@ -102,10 +102,10 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $156.15 vs 200d avg $203.74).
 - **Wide momentum (10 ETFs):** XLE $93.13, cash $0.51. Holding XLE until next month's check.
 - **Tesla buy & hold:** TSLA $92.77, cash $0.51. Holding.
-- **Stock momentum (top 10 of the S&P 500):** MRNA $8.84, SNDK $7.40, LITE $8.25, MU $8.43, DELL $7.99, STX $8.23, WDC $8.09, VLO $9.27, APA $9.67, MPC $9.19, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
+- **Stock momentum (top 10 of the S&P 500):** MRNA $8.84, SNDK $7.41, LITE $8.25, MU $8.43, DELL $7.99, STX $8.23, WDC $8.09, VLO $9.27, APA $9.67, MPC $9.19, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Tesla trend (200 day):** cash $83.85. Signal: in cash (price $379.90 vs 200d avg $382.46).
 - **Bitcoin buy & hold:** BTC/USD $79.90, cash $2.39. Holding.
-- **Nvidia buy & hold:** NVDA $77.93, cash $0.51. Holding.
+- **Nvidia buy & hold:** NVDA $77.64, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
 
