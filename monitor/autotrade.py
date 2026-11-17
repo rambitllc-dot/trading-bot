@@ -287,6 +287,21 @@ def _price(o):
         return None
 
 
+def one_share_dollars(client, ticker, budget):
+    """Whole shares only (IB): when a stock's budget is less than 1 share, the dollars for exactly 1 share if the
+    cash covers it and it stays within MAX_POSITION_PCT of the account; else None. So a pick like a $250 stock
+    isn't skipped just because the money freed for it was $160."""
+    price = getattr(client, "price", None)
+    px = price(ticker) if callable(price) else None
+    if not px or px <= budget:
+        return None
+    acct = client.account()
+    need = round(px * 1.01, 2)  # a little room for the price moving while the order fills
+    if need <= (acct.get("cash") or 0) - 1 and px <= (acct.get("equity") or 0) * config.MAX_POSITION_PCT / 100:
+        return need
+    return None
+
+
 def buy_one(client, state, today, queue, dollars, why_prefix, skip):
     """Buy the first stock in `queue` that works; returns (ticker, message) or (None, message)."""
     counts = collections.Counter(sectors.sector_of(x["symbol"]) for x in client.positions())
@@ -297,7 +312,14 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
         if sectors.over_limit(sectors.sector_of(t), counts[sectors.sector_of(t)] + 1):
             continue  # would put more than MAX_PER_SECTOR stocks in one sector
         try:
-            o = wait_filled(client, client.buy(t, dollars))
+            try:
+                o = wait_filled(client, client.buy(t, dollars))
+            except AlpacaError as e:
+                one = one_share_dollars(client, t, dollars) if "whole share" in str(e) else None
+                if not one:
+                    raise
+                dollars = one  # its budget doesn't reach 1 whole share, but the cash and the 35% cap allow one
+                o = wait_filled(client, client.buy(t, dollars))
         except AlpacaError as e:
             skip.add(t)
             log("SKIP", t, dollars, None, f"buy refused: {e}")

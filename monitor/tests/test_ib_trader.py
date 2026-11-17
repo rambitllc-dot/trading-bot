@@ -90,6 +90,25 @@ class IBTraderTest(unittest.TestCase):
         self.assertEqual(ib.pos["XLV"][0], 2)
         self.assertIn("TXN", ib.pos)
 
+    def test_pick_pricier_than_the_sale_still_bought_when_cash_allows(self):
+        # TGT's $160 doesn't reach 1 HUM ($250), but there's cash and 1 share stays under 35% of the account
+        ib = FakeIB({"TGT": 160.0, "HUM": 250.0, "VTRS": 20.0}, cash=300.0,
+                    holdings={"TGT": [1, 161.7], "VTRS": [20, 20.0]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "TGT", "reason": "stalled"}],
+            buys=[{"ticker": "HUM", "replaces": "TGT", "reason": "replaces TGT"}]))
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos.get("HUM", [0])[0], 1)
+
+    def test_one_share_never_breaks_the_35pct_cap(self):
+        ib = FakeIB({"TGT": 160.0, "HUM": 450.0, "VTRS": 20.0}, cash=300.0,
+                    holdings={"TGT": [1, 161.7], "VTRS": [20, 20.0]})            # account ~$860: 35% = $301
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "TGT", "reason": "stalled"}],
+            buys=[{"ticker": "HUM", "replaces": "TGT", "reason": "replaces TGT"}]))
+        autotrade.execute(client=self.client(ib))
+        self.assertNotIn("HUM", ib.pos)
+
     def test_already_sold_by_hand_then_cash_buys_the_planned_replacement(self):
         ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=500.0, holdings={"TXN": [1, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
