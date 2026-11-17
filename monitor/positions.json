@@ -11,16 +11,6 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "BEN",
-    "contracts": 5.0,
-    "entry_price": 36.1503,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-13",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "SWK",
     "contracts": 1.0,
     "entry_price": 113.9505,
@@ -42,8 +32,8 @@
   {
     "asset_type": "shares",
     "ticker": "SGOV",
-    "contracts": 4.0,
-    "entry_price": 100.6698,
+    "contracts": 6.0,
+    "entry_price": 100.7,
     "note": "Interactive Brokers (live from the Mac)",
     "entry_date": "2026-11-17",
     "target_price": null,
@@ -51,7 +41,7 @@
   },
   {
     "asset_type": "cash",
-    "amount": 71.01,
+    "amount": 243.1,
     "note": "IB cash, live from the Mac (2026-11-17)"
   }
 ]
