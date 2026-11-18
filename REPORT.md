@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 18, 2026 06:01 UTC · Bitcoin $64,622.21 · US stock market closed
+Last update: Nov 18, 2026 06:31 UTC · Bitcoin $64,636.80 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -59,14 +59,14 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 22 | Tesla buy & hold | Hold | Stock | $93.44 | -$6.56 (-6.6%) | 1 |
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $85.85 | -$14.15 (-14.2%) | 10 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $83.85 | -$16.15 (-16.2%) | 4 |
-| 25 | Bitcoin buy & hold | Hold | Bitcoin | $82.64 | -$17.36 (-17.4%) | 1 |
+| 25 | Bitcoin buy & hold | Hold | Bitcoin | $82.66 | -$17.34 (-17.3%) | 1 |
 | 26 | Nvidia buy & hold | Hold | Stock | $76.92 | -$23.08 (-23.1%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $82.64 | $100.00 | trading |
+| Bitcoin | $82.66 | $100.00 | trading |
 | S&P 500 | $96.75 | $96.75 | about even |
 | Apple | $104.07 | $104.06 | about even |
 | Microsoft | $97.49 | $97.49 | about even |
@@ -76,7 +76,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | SpaceX | $100.26 | $100.00 | about even |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,508.09 from $2,600 (-91.91)
+**All together:** $2,508.11 from $2,600 (-91.89)
 
 ## What each one is doing
 
@@ -104,7 +104,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Tesla buy & hold:** TSLA $92.93, cash $0.51. Holding.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $8.84, SNDK $7.19, LITE $8.25, MU $8.33, DELL $7.99, STX $8.23, WDC $8.19, VLO $9.27, APA $9.67, MPC $9.19, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Tesla trend (200 day):** cash $83.85. Signal: in cash (price $380.14 vs 200d avg $382.25).
-- **Bitcoin buy & hold:** BTC/USD $80.25, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $80.27, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $76.41, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
