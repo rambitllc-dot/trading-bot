@@ -1,0 +1,96 @@
+IB sync: holdings are already live from the Mac (2026-11-18), newer than IB's report (2026-11-17); kept them; 8 new trade(s) saved
+$ANT: possibly delisted; no price data found  (period=2y)
+
+1 Failed download:
+['ANT']: possibly delisted; no price data found  (period=2y)
+Portfolio as of 2026-11-18
+Value $939.92 · cost $954.78 · P&L -$14.86 (-1.6%) · net delta 11 shares · theta $0.00/day · 6/6 positions priced
+
+- VTRS shares x7: mark $20.28, value $141.96, P&L -$3.57 (-2.5%). No target or stop set. YOUR PLAN: SELL (STALLED: 3 business days since you bought it and it's losing -2.5% (needs more than +3% after 3 days); the money moves to a stock that is rising -> move the money to CPAY (rank #3)).
+- FAST shares x1: mark $53.96, value $53.96, P&L -$1.52 (-2.7%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -2.7%: #1 in line for the next swap).
+- JNJ shares x1: mark $272.70, value $272.70, P&L -$5.80 (-2.1%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -2.1%: #3 in line for the next swap).
+- AIZ shares x1: mark $318.96, value $318.96, P&L -$3.02 (-0.9%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -0.9%: #5 in line for the next swap).
+- KO shares x1: mark $98.09, value $98.09, P&L -$0.95 (-1.0%). No target or stop set. YOUR PLAN: HOLD (price is between your stop and your target (stop: 4.5% trailing stop (4.5% below your buy price)) · LOSING -1.0%: #4 in line for the next swap).
+- CASH shares x54.25: mark $1.00, value $54.25, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 11 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: AIZ 34%, JNJ 29%, VTRS 15%, KO 10%, CASH 6%, FAST 6%
+By sector: Healthcare 44%, Financial Services 34%, Consumer Defensive 10%, Cash 6%, Industrials 6%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+47/100 · Mixed (vix level 55, vix percentile 8, term structure 30, breadth 54, credit 75)
+
+NEWS (Claude summaries, facts only)
+- AIZ [positive]: A Zacks article dated 2026-11-16 says Assurant (AIZ) trades at a 2.64X discount to its industry and cites growth support from strong Global Lifestyle momentum, expanding partnerships, and rising earnings across key businesses. The other two headlines concern Everest (EG) and unrelated Zacks market-performance coverage, not AIZ.
+  Drivers: Global Lifestyle momentum; expanding partnerships; rising earnings across key businesses; trading at 2.64X discount to industry
+- FAST [neutral]: A 24/7 Wall St. article reports that Fastenal raised its dividend twice in 2026 and cites strong cash flow, contract wins, and profit margins. It also says analysts keep price targets below the current stock price and that one margin pressure point could affect whether the next dividend raise happens. A separate Trefis article from the previous day asks whether buying at a high has paid off, and reports no new company event.
+  Drivers: Two dividend increases in 2026; Analyst price targets below current price; Margin pressure; Strong cash flow and contract wins
+- JNJ [neutral]: Recent coverage of JNJ is mostly analysis and comparisons rather than company-specific news. Motley Fool notes J&J's quarterly sales have climbed with few setbacks, and a separate piece contrasts its valuation with Vertex's. No headline reports a new earnings date, guidance change, or other scheduled event for the company.
+  Drivers: Consistent quarterly sales growth; Valuation gap versus Vertex; Dividend-focused coverage; No new company-specific event reported
+- KO [positive]: TD Cowen raised its Coca-Cola price target to $112 from $104 and named the stock its top pick for 2027, citing about 5% organic growth from the bottling model. Coca-Cola shares moved lower after the note, though a separate report says the stock is up 43% this year and near its 52-week high.
+  Drivers: TD Cowen target raised to $112 from $104; Expected about 5% organic growth; 2026 earnings guidance raised a third time; Stock up 43% this year, near 52-week high
+- VTRS [neutral]: Zacks published an article asking whether Viatris (VTRS) is undervalued, describing its Zacks Rank system and its review of value, growth, and momentum trends, but it reports no new company event. A separate Trefis article concerns Neurocrine Biosciences, not Viatris.
+  Drivers: Zacks valuation commentary, no new results; No company-specific event reported in headlines
+Claude cost this run: $0.0018
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 523 of 525 stocks.
+- Watchlist SPCX 143.50: 30.5% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 156.67: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+878% over 12 months), SNDK (+414% over 12 months), DELL (+281% over 12 months), MU (+271% over 12 months), LITE (+240% over 12 months)
+Pullbacks in uptrends: VEEV (+29% above its 200-day average, RSI-2 0 after a sharp drop), CTSH (+2% above its 200-day average, RSI-2 1 after a sharp drop), AMGN (+17% above its 200-day average, RSI-2 1 after a sharp drop), ACN (+21% above its 200-day average, RSI-2 1 after a sharp drop), MRNA (+99% above its 200-day average, RSI-2 1 after a sharp drop)
+New 52-week highs: DRI (new 52-week high at 239.22), DIS (new 52-week high at 122.36), SGOV (new 52-week high at 100.60)
+Unusual volume: UNH (volume 3.5x normal, -10% on the day), TTWO (volume 3.2x normal, +6% on the day), TGT (volume 3.1x normal, +4% on the day)
+  MRNA [positive]: Moderna plans to file a U.S. application for its individualized cancer therapy intismeran by year-end, following positive phase III melanoma data, according to executives at a Jefferies investor session. Morgan Stanley said the INT outlook strengthened after the data, while JPMorgan raised its target but still sees the stock as overvalued relative to its pipeline. The stock has reached multi-year highs this year.
+  SNDK [neutral]: Sandisk shares fell about 4% on November 18 as an analyst warning about NAND oversupply weighed on memory stocks ahead of its 8-for-1 stock split. The company topped a GuruFocus ranking of technology earnings surprises, and one headline reports that Zacks downgraded the stock.
+  DELL [neutral]: Dell Technologies received mixed coverage on November 18, 2026. Citi cut its price targets for Dell and HPE ahead of earnings while arguing that a business IT upgrade cycle is coming, and Simply Wall St reported new Dell AI Factory with NVIDIA updates alongside cooler recent share price action. A 13F filing showed a $2.9 billion fund sold all of its Dell shares in the third quarter, and a Sandisk earnings ranking mentioned Dell as an upcoming reporter.
+  MU [neutral]: Micron shares rose 1.7% on November 18, according to a GuruFocus report that tied the move to Nvidia's supply commitments reaching $390 billion. Several commentary pieces said Micron had a record year followed by a 38% decline, and noted that its December report must defend a $61.5 billion revenue guide.
+  LITE [neutral]: Lumentum (LITE) is in focus after Washington drafted proposed limits on Chinese optical transceiver imports used in data center and AI networks. Coverage notes the stock is down 33% in a month despite record revenue and a strong outlook, and that a fixed-ratio merger clause ties its value to Marvell's share price. A $3.8 billion fund reportedly sold its entire Lumentum stake in the third quarter.
+  SPCX [neutral]: Coverage on November 18, 2026 centered on SpaceX investors and holdings. Reports said Len Blavatnik has a SpaceX stake valued at about $5 billion, and that SpaceX is now Nvidia's largest stock holding, ahead of Intel. Separately, Skydance CEO David Ellison confirmed that Elon Musk invested roughly $1 billion in Skydance.
+  PLTR [neutral]: Palantir reported strong Q3 2026 AI-driven revenue across U.S. commercial and government customers and extended its NHS Federated Data Platform contract in England through 2029. Footwear maker Changshin agreed to roll out Foundry and AIP across its workflows, though one article notes momentum has cooled and another questions whether the valuation is too high.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- VTRS: stop 19.88 · target 24.23 · typical daily move 0.54
+- FAST: stop 52.98 · target 61.78 · typical daily move 1.23
+- JNJ: stop 265.97 · target 315.33 · typical daily move 7.10
+- AIZ: stop 307.49 · target 357.76 · typical daily move 6.47
+- KO: stop 94.58 · target 108.79 · typical daily move 1.78
+
+ROTATION (follow the money)
+- #1 in swap line: FAST, rank #18 of 518, score 80, LOSING -2.7%
+- #2 in swap line: VTRS, rank #1 of 518, score 90, LOSING -2.5%
+- #3 in swap line: JNJ, rank #31 of 518, score 76, LOSING -2.1%
+- #4 in swap line: KO, rank #6 of 518, score 87, LOSING -1.0%
+- #5 in swap line: AIZ, rank #4 of 518, score 89, LOSING -0.9%
+Strongest stocks you don't own: TGT (89), CPAY (89), BEN (88), CRL (87), BDX (84)
+SWAP IDEA: sell VTRS -> buy CPAY. STALLED: 3 business days since you bought it and it's losing -2.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#1) and move the money to CPAY, rank #3 of 518 (+49% over 12 months, above its 50- and 200-day averages), score 89.
+Status: 1 new swap(s) suggested
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -97.82 from 4 win(s) / 12 loss(es), win rate 25%; fees 24.30
+Open (not locked in) -14.86 · total -112.69
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -9.1 pts after 13 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -22.9 pts after 13 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -9.2 pts after 13 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -11.0 pts after 13 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +24.1 pts after 8 day(s)
+- 2026-11-12 CNC -> BEN [yes]: +0.1 pts after 6 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +4.4 pts after 6 day(s)
+- 2026-11-16 TGT -> HUM [partly]: -19.9 pts after 2 day(s)
+- 2026-11-18 VTRS -> CPAY [open]: +0.0 pts after 0 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-04-02): your stocks 900.12 vs 962.34 -> -62.22
+3 of 8 swap ideas are ahead; average edge -5.4 pts
+
+ALERTS (1)
+- [high] NEW STOP HIT -> SWAP idea: sell all VTRS (about $142, rank #1) and buy CPAY (rank #3). STALLED: 3 business days since you bought it and it's losing -2.5% (needs more than +3% after 3 days); the money moves to a stock that is rising. Sell regardless of its rank (#1) and move the money to CPAY, rank #3 of 518 (+49% over 12 months, above its 50- and 200-day averages), score 89. -> YOUR PLAN: SWAP
+Notifier: sent

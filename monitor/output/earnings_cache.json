@@ -1,21 +1,22 @@
 {
- "asof": "2026-11-17",
+ "asof": "2026-11-18",
  "dates": {
   "AIZ": null,
   "BDX": null,
   "BEN": "2027-01-29",
   "CAH": "2027-02-04",
   "CPAY": "2027-02-03",
+  "CRL": null,
+  "CSX": "2027-01-28",
   "DGX": null,
+  "DRI": "2026-12-18",
   "FAST": "2027-01-19",
   "GWW": "2027-02-02",
-  "HUM": null,
   "JNJ": "2027-01-26",
   "KO": null,
   "MAR": null,
   "MSI": null,
-  "SWK": "2027-02-03",
-  "VTRS": null,
-  "WST": null
+  "TRGP": null,
+  "VTRS": null
  }
 }
