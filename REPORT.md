@@ -60,7 +60,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $86.29 | -$13.71 (-13.7%) | 10 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $83.85 | -$16.15 (-16.2%) | 4 |
 | 25 | Bitcoin buy & hold | Hold | Bitcoin | $81.70 | -$18.30 (-18.3%) | 1 |
-| 26 | Nvidia buy & hold | Hold | Stock | $77.63 | -$22.37 (-22.4%) | 1 |
+| 26 | Nvidia buy & hold | Hold | Stock | $77.69 | -$22.31 (-22.3%) | 1 |
 
 ## Holding vs trading, same asset
 
@@ -70,13 +70,13 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 | S&P 500 | $96.88 | $96.88 | about even |
 | Apple | $104.36 | $104.36 | about even |
 | Microsoft | $97.09 | $97.09 | about even |
-| Nvidia | $77.63 | $95.80 | trading |
+| Nvidia | $77.69 | $95.80 | trading |
 | Amazon | $104.13 | $104.53 | about even |
 | Tesla | $94.16 | $83.85 | holding |
 | SpaceX | $100.37 | $100.00 | about even |
 | Anthropic | $100.00 | $100.00 | about even |
 
-**All together:** $2,511.05 from $2,600 (-88.95)
+**All together:** $2,511.11 from $2,600 (-88.89)
 
 ## What each one is doing
 
@@ -105,7 +105,7 @@ Not trading yet. Anthropic filed to go public on the Nasdaq as **ANT** (Oct 26, 
 - **Stock momentum (top 10 of the S&P 500):** MRNA $8.84, SNDK $7.24, LITE $8.52, MU $8.45, DELL $7.99, STX $8.23, WDC $8.19, VLO $9.27, APA $9.67, MPC $9.19, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Tesla trend (200 day):** cash $83.85. Signal: in cash (price $380.14 vs 200d avg $382.25).
 - **Bitcoin buy & hold:** BTC/USD $79.31, cash $2.39. Holding.
-- **Nvidia buy & hold:** NVDA $77.12, cash $0.51. Holding.
+- **Nvidia buy & hold:** NVDA $77.18, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
 
