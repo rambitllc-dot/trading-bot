@@ -42,3 +42,5 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-17 14:31,Tesla trend (200 day),SELL,TSLA,0.21888735,381.08,83.85
 2026-11-17 14:31,SpaceX gradual buy ($25 a week for 4 weeks),BUY,SPCX,0.17935836,139.33,25.03
 2026-11-19 14:31,Tesla trend (200 day),BUY,TSLA,0.21371331,390.34,0.43
+2026-11-19 17:01,Anthropic buy & hold,BUY,ANT,0.94511152,105.27,0.51
+2026-11-19 17:01,Anthropic gradual buy ($25 a week for 4 weeks),BUY,ANT,0.23716428,105.37,75.01
