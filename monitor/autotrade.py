@@ -288,6 +288,54 @@ def _price(o):
         return None
 
 
+def wide_queue(p):
+    """Replacement choices: the plan's reserve, then every qualifying candidate (so the bot can find one that is
+    actually rising today)."""
+    seen, out = set(), []
+    for x in (p.get("reserve") or []) + (p.get("deposit_candidates") or []):
+        if x["ticker"] not in seen and x["ticker"] not in config.PARKING:
+            seen.add(x["ticker"])
+            out.append(x)
+    return out
+
+
+def day_change(symbol):
+    """% change today vs yesterday's close (live), or None if unknown."""
+    try:
+        import yfinance as yf
+        fi = yf.Ticker(symbol.replace(".", "-")).fast_info
+        last, prev = fi["last_price"], fi["previous_close"]
+        return (float(last) / float(prev) - 1) * 100 if last and prev else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def up_today(client, ticker):
+    """(ok, change %): BUY_ONLY_UP_TODAY - a stock is bought only while it's above yesterday's close."""
+    if not config.BUY_ONLY_UP_TODAY or ticker in config.PARKING:
+        return True, None
+    chg = (getattr(client, "day_change", None) or day_change)(ticker)
+    return (chg is not None and chg > config.UP_TODAY_MIN_PCT), chg
+
+
+def ny_time(now_iso):
+    from zoneinfo import ZoneInfo
+    try:
+        return dt.datetime.fromisoformat(now_iso).astimezone(ZoneInfo("America/New_York"))
+    except (TypeError, ValueError):
+        return None
+
+
+def due(state, key, now_iso):
+    """True at most once every RETRY_MINUTES for `key` (records the time)."""
+    now = ny_time(now_iso)
+    last = ny_time(state.get(key))
+    if now and last and (now - last).total_seconds() < config.RETRY_MINUTES * 60:
+        return False
+    state[key] = now_iso
+    return True
+
+
 def one_share_dollars(client, ticker, budget):
     """Whole shares only (IB): when a stock's budget is less than 1 share, the dollars for exactly 1 share if the
     cash covers it and it stays within MAX_POSITION_PCT of the account; else None. So a pick like a $250 stock
@@ -306,12 +354,17 @@ def one_share_dollars(client, ticker, budget):
 def buy_one(client, state, today, queue, dollars, why_prefix, skip):
     """Buy the first stock in `queue` that works; returns (ticker, message) or (None, message)."""
     counts = collections.Counter(sectors.sector_of(x["symbol"]) for x in client.positions())
+    down = []
     for b in queue:
         t = b["ticker"]
         if t in skip or sectors.avoided(t):  # avoid list (AI bubble): never bought, even from an older plan
             continue
         if sectors.over_limit(sectors.sector_of(t), counts[sectors.sector_of(t)] + 1):
             continue  # would put more than MAX_PER_SECTOR stocks in one sector
+        ok, chg = up_today(client, t)
+        if not ok:  # falling today (or no live price): don't buy into the drop
+            down.append(f"{t} {chg:+.1f}%" if chg is not None else f"{t} ?")
+            continue
         try:
             try:
                 o = wait_filled(client, client.buy(t, dollars))
@@ -332,6 +385,9 @@ def buy_one(client, state, today, queue, dollars, why_prefix, skip):
         skip.add(t)
         log("BUY", t, dollars, _price(o), f"{why_prefix}{b.get('reason', '')}")
         return t, f"🟢 BUY {t} ${dollars:,.2f}" + (f" at {_price(o):,.2f}" if _price(o) else "") + f" ({b.get('reason', '')[:120]})"
+    if down:
+        return None, ("none of the planned stocks is up today (" + ", ".join(down[:6]) + "); the money waits and "
+                      f"the bot checks again every {config.RETRY_MINUTES} minutes")
     return None, "no stock from the plan could be bought (sector limit, recent sale or refused order)"
 
 
@@ -398,7 +454,7 @@ def execute(client=None):
                     if paired:
                         msgs.append(f"Not enough cash to buy {b['ticker']} (${dollars:,.2f} available).")
                     continue
-                t, m = buy_one(client, state, today, [b] + p["reserve"], dollars, "", skip)
+                t, m = buy_one(client, state, today, [b] + wide_queue(p), dollars, "", skip)
                 msgs.append(m)
                 if t:
                     cash -= dollars
@@ -442,20 +498,21 @@ def execute(client=None):
         dollars = round(min(val, equity * MAX_ORDER_PCT / 100, cash - 1), 2)
         skip = names | recently_sold(state, today)
         queue = ([{"ticker": config.SAFE_FUND, "reason": "market storm: parked until the S&P 500 recovers"}]
-                 if p.get("storm") else p["reserve"])
+                 if p.get("storm") else wide_queue(p))
         nt, m = buy_one(client, state, today, queue, dollars, f"replaces {t} ({hit} hit): ", skip - {config.SAFE_FUND}) \
             if dollars >= config.AUTO_MIN_BUY_USD else (None, "not enough cash to replace it")
         if nt:
             names.add(nt)
         msgs.append(f"{'🛑 STOP' if hit == 'stop' else '🎯 TARGET'} HIT: sold {t} (~${val:,.2f}), {why}. -> {m}")
     if (dt.date.fromisoformat(today) - dt.date.fromisoformat(p["asof"])).days <= STALE_DAYS:
-        m = invest_new_cash(client, p, state, today)
+        now_iso = clock.get("timestamp")
+        m = invest_new_cash(client, p, state, today, now_iso)
         if m:
             msgs.append(m)
-        m = deploy_parked(client, p, state, today)
+        m = deploy_parked(client, p, state, today, now_iso)
         if m:
             msgs.append(m)
-        m = sweep_leftover(client, p, state, today)
+        m = sweep_leftover(client, p, state, today, now_iso)
         if m:
             msgs.append(m)
     save_json(STATE_FILE, state)
@@ -487,14 +544,14 @@ def pick_for_cash(p, held, blocked, n):
     return chosen
 
 
-def invest_new_cash(client, p, state, today):
+def invest_new_cash(client, p, state, today, now_iso=None):
     """New money (a deposit, or cash no planned trade used) is invested the same day, spreading across sectors."""
     acct = client.account()
     equity, cash = float(acct["equity"]), float(acct["cash"])
     if cash < config.DEPOSIT_MIN_USD:
         return None
     tries = state.setdefault("deposit_tries", {})
-    if tries.get(today, 0) >= config.DEPOSIT_MAX_TRIES_PER_DAY:
+    if tries.get(today, 0) >= config.DEPOSIT_MAX_TRIES_PER_DAY or not due(state, "cash_try_at", now_iso):
         return None
     done = tries.get(today, 0)
     tries.clear()  # keep only today's count
@@ -538,14 +595,14 @@ def invest_new_cash(client, p, state, today):
             "(steadier stocks get more, jumpy ones less) with the goal of beating the S&P 500:\n" + "\n".join(lines))
 
 
-def deploy_parked(client, p, state, today):
+def deploy_parked(client, p, state, today, now_iso=None):
     """Money parked in SGOV goes back into stocks: when there's a free stock slot and the plan has strong stocks
     (score 80+, uptrend, not on the avoid list), sell just enough SGOV to buy them. Not in a market storm, at most
     once a day, and never SGOV bought today (selling it before the money that bought it settles would be a
     good-faith violation in a cash account)."""
     safe = config.SAFE_FUND
     if p.get("storm") or not config.DEPLOY_PARKED or state.get("deployed") == today \
-            or state["bought"].get(safe) == today:
+            or state["bought"].get(safe) == today or not due(state, "deploy_try_at", now_iso):
         return None
     positions = client.positions()
     sg = [x for x in positions if x["symbol"] == safe and float(x["qty"]) >= 1]
@@ -554,10 +611,12 @@ def deploy_parked(client, p, state, today):
     if not sg or free <= 0:
         return None
     blocked = recently_sold(state, today) | {t for t, d in state["bought"].items() if d == today}
+    rising = {c["ticker"] for c in p.get("deposit_candidates") or [] if up_today(client, c["ticker"])[0]}
+    blocked |= {c["ticker"] for c in p.get("deposit_candidates") or [] if c["ticker"] not in rising}
     picks = [c for c in pick_for_cash(p, held, blocked, min(free, config.DEPOSIT_MAX_STOCKS))
              if c["ticker"] not in config.PARKING]
     if not picks:
-        return None
+        return None  # nothing strong is rising right now: SGOV stays; checked again in 30 minutes
     state["deployed"] = today
     acct = client.account()
     equity, cash = float(acct["equity"]), float(acct["cash"])
@@ -592,13 +651,20 @@ def deploy_parked(client, p, state, today):
     return "💸 Parked money put to work (fair weather, free stock slot):\n" + "\n".join(lines)
 
 
-def sweep_leftover(client, p, state, today):
+def sweep_leftover(client, p, state, today, now_iso=None):
     """Cash left over after whole-share buys: into the S&P 500 fund (SPYM) when the S&P 500 is in an uptrend,
     otherwise into short-term Treasury bills (SGOV). Whole shares; less than one share's worth stays as cash."""
     fb = config.SAFE_FUND if p.get("storm") else (p.get("fallback") or config.SAFE_FUND)
     cash = float(client.account()["cash"])
     if cash < config.AUTO_MIN_BUY_USD:
         return None
+    t_ny = ny_time(now_iso)
+    if config.BUY_ONLY_UP_TODAY and not p.get("storm") and t_ny and t_ny.strftime("%H:%M") < config.PARK_AFTER_ET:
+        return None  # keep the cash ready during the day, in case a strong stock starts rising
+    if fb == config.PARK_FUND and config.BUY_ONLY_UP_TODAY:
+        chg = (getattr(client, "day_change", None) or day_change)(config.INDEX_TICKER)
+        if chg is None or chg <= 0:
+            fb = config.SAFE_FUND  # the S&P 500 is falling today: park in T-bills instead
     t, m = buy_one(client, state, today, [{"ticker": fb, "reason": "leftover cash"}], round(cash - 1, 2),
                    "leftover cash: ", set())
     if not t:

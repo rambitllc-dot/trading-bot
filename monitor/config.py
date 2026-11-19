@@ -137,7 +137,14 @@ DEPOSIT_MAX_STOCKS = 3
 DEPOSIT_FALLBACK = "SPYM"   # S&P 500 fund at ~1/10 of SPY's share price, so leftovers buy whole shares
 PARK_FUND = "SPYM"          # leftover cash after whole-share buys goes here when the S&P 500 is in an uptrend
 INDEX_TICKER = "SPY"        # the S&P 500 fund whose trend decides between PARK_FUND and SAFE_FUND
-DEPOSIT_MAX_TRIES_PER_DAY = 3
+DEPOSIT_MAX_TRIES_PER_DAY = 14   # with RETRY_MINUTES apart: about all day
+# Only buy what is rising TODAY: a stock is bought only if it's above yesterday's close at that moment (its rank
+# still has to qualify). On a falling day nothing passes and the money waits; the bot retries every 30 minutes
+# and parks what's left at 12:30 PM Pacific (SGOV, or SPYM only if the S&P 500 is up today and in an uptrend).
+BUY_ONLY_UP_TODAY = True
+UP_TODAY_MIN_PCT = 0.0      # how much above yesterday's close a stock must be to be bought
+RETRY_MINUTES = 30
+PARK_AFTER_ET = "15:30"     # New York time
 DEPLOY_PARKED = True        # in fair weather, sell SGOV to buy strong stocks when there's a free stock slot
                             # (once a day; never SGOV bought the same day)
 

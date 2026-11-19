@@ -190,9 +190,15 @@ class DepositTest(IBTraderTest):
     def test_retries_are_limited(self):
         ib = FakeIB({"CNC": 70.0}, cash=500.0, holdings={"CNC": [3, 70.0]})   # nothing buyable (no prices)
         autotrade.save_json(autotrade.PLAN_FILE, plan(deposit_candidates=self.cands()))
-        for _ in range(5):
+        for _ in range(3):  # several rounds within 30 minutes: one try
             autotrade.execute(client=self.client(ib))
-        self.assertEqual(autotrade.load_state()["deposit_tries"]["2026-11-10"], config.DEPOSIT_MAX_TRIES_PER_DAY)
+        self.assertEqual(autotrade.load_state()["deposit_tries"]["2026-11-10"], 1)
+        for i in range(1, 20):  # every 30 minutes, until the daily limit
+            c = ib_trader.IBClient(ib, price=lambda s: ib.prices.get(s), now=self.open_time + dt.timedelta(minutes=31 * i))
+            autotrade.execute(client=c)
+        n = autotrade.load_state()["deposit_tries"]["2026-11-10"]
+        self.assertEqual(n, 12)                       # 10:00 to 15:41, one every 31 minutes (closed at 16:00)
+        self.assertLessEqual(n, config.DEPOSIT_MAX_TRIES_PER_DAY)
 
 
 class CodeVersionTest(unittest.TestCase):
@@ -317,3 +323,43 @@ class DeployParkedTest(IBTraderTest):
         autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", deposit_candidates=self.cands()))
         autotrade.execute(client=self.client(ib))
         self.assertEqual(ib.pos["SGOV"][0], 7)                             # good-faith rule: wait a day
+
+
+class BuyOnlyUpTodayTest(IBTraderTest):
+    """Only stocks rising today are bought; on a falling day the cash waits, then parks late in the day."""
+    def run_at(self, ib, change, minutes=0):
+        config.BUY_ONLY_UP_TODAY = True
+        self.addCleanup(setattr, config, "BUY_ONLY_UP_TODAY", False)
+        c = ib_trader.IBClient(ib, price=lambda s: ib.prices.get(s), now=self.open_time + dt.timedelta(minutes=minutes))
+        c.day_change = lambda t: change.get(t)
+        return autotrade.execute(client=c)
+
+    def setup_swap(self):
+        ib = FakeIB({"TGT": 160.0, "HUM": 150.0, "AIZ": 140.0, "SGOV": 100.0, "SPY": 700.0}, cash=600.0,
+                    holdings={"TGT": [1, 161.7]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(
+            sells=[{"ticker": "TGT", "reason": "stalled"}],
+            buys=[{"ticker": "HUM", "replaces": "TGT", "reason": "replaces TGT"}],
+            deposit_candidates=[{"ticker": "AIZ", "rank": 5, "score": 85, "sector": "Financials",
+                                 "reason": "rank #5"}], fallback="SGOV"))
+        return ib
+
+    def test_falling_pick_skipped_for_one_that_is_rising(self):
+        ib = self.setup_swap()
+        self.run_at(ib, {"HUM": -1.2, "AIZ": 0.8})
+        self.assertNotIn("HUM", ib.pos)
+        self.assertIn("AIZ", ib.pos)
+
+    def test_everything_falling_cash_waits_then_buys_when_one_rises(self):
+        ib = self.setup_swap()
+        msg = self.run_at(ib, {"HUM": -1.2, "AIZ": -0.5, "SPY": -1.0})
+        self.assertIn("none of the planned stocks is up today", msg)
+        self.assertEqual(set(ib.pos), set())                     # TGT sold, money waits in cash (not SGOV yet)
+        self.run_at(ib, {"HUM": 0.6, "AIZ": -0.5, "SPY": 0.2}, minutes=60)
+        self.assertIn("HUM", ib.pos)                             # an hour later HUM is rising: bought
+
+    def test_parks_late_in_the_day_if_nothing_rises(self):
+        ib = self.setup_swap()
+        self.run_at(ib, {"HUM": -1.2, "AIZ": -0.5, "SPY": -1.0})
+        self.run_at(ib, {"HUM": -1.0, "AIZ": -0.4, "SPY": -1.0}, minutes=331)   # 15:31 New York
+        self.assertIn("SGOV", ib.pos)
