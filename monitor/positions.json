@@ -21,16 +21,6 @@
   },
   {
     "asset_type": "shares",
-    "ticker": "JNJ",
-    "contracts": 1.0,
-    "entry_price": 278.5005,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-18",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "KO",
     "contracts": 1.0,
     "entry_price": 99.04,
@@ -50,8 +40,18 @@
     "stop_price": null
   },
   {
+    "asset_type": "shares",
+    "ticker": "DRI",
+    "contracts": 1.0,
+    "entry_price": 232.9405,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-19",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
     "asset_type": "cash",
-    "amount": 41.69,
+    "amount": 74.14,
     "note": "IB cash, live from the Mac (2026-11-19)"
   }
 ]
