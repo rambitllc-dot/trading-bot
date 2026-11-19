@@ -154,8 +154,15 @@ def load(db_path=None, asof=None):
             snap = con.execute("SELECT MAX(report_date) FROM ib_snapshot").fetchone()[0] \
                 if table_exists(con, "ib_snapshot") else None
             perf["vs_report"] = snap
-            perf["vs_holdings"] = {t: q for t, q in con.execute(
+            hold = {t: q for t, q in con.execute(
                 "SELECT ticker, qty FROM ib_snapshot WHERE report_date=?", (snap,))} if snap else {}
+            perf["vs_cash"] = hold.pop("__CASH__", None)
+            perf["vs_holdings"] = hold
+            meta = con.execute("SELECT mode FROM vs_meta WHERE asof=?", (last,)).fetchone() \
+                if last and table_exists(con, "vs_meta") else None
+            perf["vs_mode"] = meta[0] if meta else "picks"  # the mode the saved series was built in
+            perf["deposits"] = rows(con, "SELECT day, amount FROM cash_flows WHERE type='Deposits/Withdrawals' "
+                                         "ORDER BY day") if perf["vs_mode"] == "account" else []
             perf["vs_sp500"] = rows(con, "SELECT day, mine, sp500, spy_shares FROM vs_sp500 WHERE asof=? ORDER BY day",
                                     (last,)) if last else []
         if table_exists(con, "swap_scorecard"):

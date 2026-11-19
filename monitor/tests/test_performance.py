@@ -86,3 +86,26 @@ class VsSP500Test(unittest.TestCase):
     def test_needs_ib_report(self):
         con = sqlite3.connect(os.path.join(tempfile.mkdtemp(), "t.db"))
         self.assertIsNone(performance.vs_sp500(con, "2026-11-04", {"SPY": bars(("2026-11-04", 1))}))
+
+
+class VsAccountTest(unittest.TestCase):
+    """Whole account (stocks + cash) vs every deposit put in SPY on its day."""
+
+    def test_deposits_go_into_spy_and_idle_cash_counts(self):
+        con = sqlite3.connect(os.path.join(tempfile.mkdtemp(), "t.db"))
+        performance.save_cash_flows(con, [
+            {"txn_id": "d1", "day": "2026-11-02", "type": "Deposits/Withdrawals", "amount": 100.0},
+            {"txn_id": "d2", "day": "2026-11-03", "type": "Deposits/Withdrawals", "amount": 50.0}])
+        performance.save_trades(con, [  # Nov 2: buy 1 AAA at 100 (+$1 fee); the Nov 3 deposit stays as cash
+            {"trade_id": "1", "trade_date": "2026-11-02", "ticker": "AAA", "asset_type": "shares", "side": "BUY",
+             "quantity": 1, "price": 100, "proceeds": -100, "commission": -1, "realized": 0}])
+        performance.save_snapshot(con, "2026-11-04", [{"asset_type": "shares", "ticker": "AAA", "contracts": 1}],
+                                  cash=49.0)
+        b = {"SPY": bars(("2026-10-30", 500), ("2026-11-02", 500), ("2026-11-03", 500), ("2026-11-04", 550)),
+             "AAA": bars(("2026-10-30", 100), ("2026-11-02", 100), ("2026-11-03", 100), ("2026-11-04", 110))}
+        v = performance.vs_sp500(con, "2026-11-04", b)
+        self.assertEqual(v["mode"], "account")
+        self.assertAlmostEqual(v["mine"], 159.0)        # AAA 110 + cash 49
+        self.assertAlmostEqual(v["sp500"], 165.0)       # 0.3 SPY at 550: the idle $49 and the fee count against you
+        self.assertAlmostEqual(v["deposited"], 150.0)
+        self.assertEqual(v["series"][0]["mine"], 0.0)   # before the first deposit: nothing

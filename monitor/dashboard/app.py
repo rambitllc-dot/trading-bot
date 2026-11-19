@@ -434,8 +434,9 @@ else:
 
 # ---------- you vs the S&P 500, whole history ----------
 VS = [x for x in PF.get("vs_sp500") or [] if x.get("mine") is not None]
-st.markdown('<div class="sec">You vs the S&amp;P 500 · same buys and sells, made in the index instead</div>',
-            unsafe_allow_html=True)
+ACCOUNT_MODE = PF.get("vs_mode") == "account"
+st.markdown('<div class="sec">You vs the S&amp;P 500 · ' + ("your whole account vs every deposit put in the index"
+            if ACCOUNT_MODE else "same buys and sells, made in the index instead") + '</div>', unsafe_allow_html=True)
 if len(VS) >= 2:
     last = VS[-1]
     mine_now, sp_now, note = last["mine"], last["sp500"], f"close of {last['day']}"
@@ -444,15 +445,17 @@ if len(VS) >= 2:
         hold = PF.get("vs_holdings") or {}
         qq = live_quotes(tuple(sorted(set(hold) | {"SPY"})))
         if hold and qq.get("SPY") and all(t in qq for t in hold):
-            mine_now = sum(q * qq[t][0] for t, q in hold.items())
+            mine_now = sum(q * qq[t][0] for t, q in hold.items()) + \
+                ((PF.get("vs_cash") or 0) if PF.get("vs_mode") == "account" else 0)
             sp_now, note = last["spy_shares"] * qq["SPY"][0], "live"
     except Exception:  # noqa: BLE001
         pass
     edge = mine_now - sp_now
     st.markdown('<div class="strip">' + "".join(
         f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>' for k, v, c in [
-            (f"Your investments · IB report {PF.get('vs_report') or ''}", money(mine_now), ""),
-            ("Same money in S&P 500", money(sp_now), ""),
+            ((f"Your whole account · IB report {PF.get('vs_report') or ''}" if ACCOUNT_MODE else
+              f"Your investments · IB report {PF.get('vs_report') or ''}"), money(mine_now), ""),
+            ("Every deposit in S&P 500" if ACCOUNT_MODE else "Same money in S&P 500", money(sp_now), ""),
             ("You vs S&P 500", f"{money(edge)} ({pct(mine_now / sp_now - 1 if sp_now else None)})", cls(edge)),
             ("Tracked since", VS[0]["day"], ""), ("As of", note, "")]) + "</div>", unsafe_allow_html=True)
 
@@ -477,7 +480,16 @@ if len(VS) >= 2:
         st.markdown(f'<div class="muted">Your trade history on record starts {e(VS[0]["day"])}, so both charts cover the '
                     'same days for now. Older years appear once older IB statements are imported (see the manual).</div>',
                     unsafe_allow_html=True)
-    st.markdown('<div class="muted">The grey line is a "shadow" account that made exactly your buys and sells, same '
+    if ACCOUNT_MODE:
+        dep = sum(x["amount"] for x in PF.get("deposits") or [])
+        st.markdown('<div class="muted">Amber: your whole IB account (stocks, SGOV and cash). Grey: what you\'d have '
+                    f'if every deposit (${dep:,.2f} so far) had gone into the S&amp;P 500 (SPY, dividends included) on '
+                    'the day it arrived. Idle cash and time parked in SGOV count, fees and dividends too. Amber above '
+                    'grey = everything you did beat simply buying the S&amp;P 500. Uses IB\'s latest daily report '
+                    '(about a day behind) at live prices; newer trades join after the next evening run.</div>',
+                    unsafe_allow_html=True)
+    else:
+        st.markdown('<div class="muted">The grey line is a "shadow" account that made exactly your buys and sells, same '
                 'dollars, same days, but always in the S&amp;P 500 (SPY, dividends included). Cash and deposits are the '
                 'same in both, so they don\'t distort it, and stocks you\'ve sold stay in the history. Amber above grey = '
                 'your picks beat the index. Why this differs from your portfolio value at the top: cash is left '

@@ -16,6 +16,8 @@
    deposits and withdrawals don't distort anything, and stocks you already sold stay in the history.
    Your stocks' value minus the shadow's value = what your picks earned (or lost) versus the index.
    Rebuilt every evening from IB's trade history and IB's report of what you held (`ib_snapshot`).
+   Once IB's deposits are known (`cash_flows`), it compares the WHOLE account instead (stocks, funds and cash)
+   with every deposit put into the S&P 500 on the day it arrived: idle cash and parking count too.
 """
 import datetime as dt
 
@@ -29,6 +31,8 @@ CREATE TABLE IF NOT EXISTS swap_scorecard (
     suggested_on TEXT, sell TEXT, buy TEXT, followed TEXT, sell_then REAL, buy_then REAL, sell_now REAL,
     buy_now REAL, sell_ret REAL, buy_ret REAL, edge REAL, days INTEGER, asof TEXT, PRIMARY KEY (suggested_on, sell));
 CREATE TABLE IF NOT EXISTS ib_snapshot (report_date TEXT, ticker TEXT, qty REAL, PRIMARY KEY (report_date, ticker));
+CREATE TABLE IF NOT EXISTS cash_flows (txn_id TEXT PRIMARY KEY, day TEXT, type TEXT, amount REAL, description TEXT);
+CREATE TABLE IF NOT EXISTS vs_meta (asof TEXT PRIMARY KEY, mode TEXT, deposited REAL);
 CREATE TABLE IF NOT EXISTS vs_sp500 (asof TEXT, day TEXT, mine REAL, sp500 REAL, spy_shares REAL,
     PRIMARY KEY (asof, day));
 """
@@ -148,16 +152,76 @@ def tracked_tickers(con, days=120, asof=None):
         return []
 
 
-def save_snapshot(con, report_date, positions):
-    """IB's report of the shares you held at the close of report_date (the anchor for vs_sp500)."""
+CASH_KEY = "__CASH__"
+
+
+def save_snapshot(con, report_date, positions, cash=None):
+    """IB's report of the shares (and cash) you held at the close of report_date (the anchor for vs_sp500)."""
     setup(con)
     if not report_date:
         return
     con.execute("DELETE FROM ib_snapshot WHERE report_date=?", (report_date,))
-    con.executemany("INSERT INTO ib_snapshot VALUES (?,?,?)",
-                    [(report_date, p["ticker"], float(p["contracts"])) for p in positions
-                     if p.get("asset_type") == "shares" and p.get("contracts")])
+    rows = [(report_date, p["ticker"], float(p["contracts"])) for p in positions
+            if p.get("asset_type") == "shares" and p.get("contracts")]
+    if cash is not None:
+        rows.append((report_date, CASH_KEY, float(cash)))
+    con.executemany("INSERT INTO ib_snapshot VALUES (?,?,?)", rows)
     con.commit()
+
+
+def save_cash_flows(con, flows):
+    """Deposits, withdrawals, dividends and interest from IB (stored once each)."""
+    setup(con)
+    before = con.total_changes
+    con.executemany("INSERT OR IGNORE INTO cash_flows VALUES (?,?,?,?,?)",
+                    [(f["txn_id"], f["day"], f["type"], f["amount"], f.get("description")) for f in flows])
+    con.commit()
+    return con.total_changes - before
+
+
+def _vs_account(con, asof, bars, snap_date, end, cash_end, spy, days):
+    """Whole account (stocks, funds and cash) vs every deposit put into the S&P 500 on the day it arrived.
+    Cash on each day = IB's reported cash rebuilt backwards from trades and cash flows."""
+    trades = _rows(con, "SELECT trade_date, ticker, side, quantity, price, proceeds, commission FROM trades "
+                        "WHERE asset_type='shares' AND trade_date<=? ORDER BY trade_date, trade_id", (snap_date,))
+    flows = _rows(con, "SELECT day, type, amount FROM cash_flows WHERE day<=? ORDER BY day", (snap_date,))
+    held, cash = dict(end), cash_end
+    for t in trades:  # back to before the first trade
+        held[t["ticker"]] = held.get(t["ticker"], 0) + (-t["quantity"] if t["side"] == "BUY" else t["quantity"])
+        cash -= (t["proceeds"] or 0) + (t["commission"] or 0)
+    for f in flows:
+        cash -= f["amount"]
+    held = {k: v for k, v in held.items() if abs(v) > 1e-6}
+    first = min([t["trade_date"] for t in trades] + [f["day"] for f in flows] + [snap_date])
+    start = max([d for d in days if d < first] or days[:1])
+    last_px = {t["ticker"]: t["price"] for t in trades}
+
+    def px(t, d):
+        p = close_on([b for b in bars.get(t) or [] if b[0] <= d], d)
+        return p if p else last_px.get(t)
+
+    def value(h, d):
+        return sum(q * (px(t, d) or 0) for t, q in h.items())
+
+    spy_sh = (value(held, start) + cash) / close_on(spy, start)
+    series, i, j, deposited = [], 0, 0, value(held, start) + cash
+    for d in [x for x in days if x >= start]:
+        while i < len(trades) and trades[i]["trade_date"] <= d and d > start:
+            t = trades[i]
+            held[t["ticker"]] = held.get(t["ticker"], 0) + (t["quantity"] if t["side"] == "BUY" else -t["quantity"])
+            cash += (t["proceeds"] or 0) + (t["commission"] or 0)
+            i += 1
+        while j < len(flows) and flows[j]["day"] <= d and d > start:
+            f = flows[j]
+            cash += f["amount"]
+            if f["type"] == "Deposits/Withdrawals":  # money in or out: the S&P side gets the same
+                spy_sh += f["amount"] / close_on(spy, d)
+                deposited += f["amount"]
+            j += 1
+        s = close_on(spy, d)
+        series.append({"day": d, "mine": round(value(held, d) + cash, 2), "sp500": round(spy_sh * s, 2),
+                       "spy_shares": spy_sh})
+    return start, series, spy_sh, round(deposited, 2)
 
 
 def traded_tickers(con):
@@ -177,6 +241,19 @@ def vs_sp500(con, asof, bars):
     if not spy or not snap_date:
         return None
     end = {t: q for t, q in con.execute("SELECT ticker, qty FROM ib_snapshot WHERE report_date=?", (snap_date,))}
+    cash_end = end.pop(CASH_KEY, None)
+    if cash_end is not None and con.execute("SELECT COUNT(*) FROM cash_flows").fetchone()[0]:
+        days = [b[0] for b in spy if b[0] <= asof]
+        start, series, spy_sh, deposited = _vs_account(con, asof, bars, snap_date, end, cash_end, spy, days)
+        con.execute("DELETE FROM vs_sp500 WHERE asof=?", (asof,))
+        con.executemany("INSERT INTO vs_sp500 VALUES (?,?,?,?,?)",
+                        [(asof, x["day"], x["mine"], x["sp500"], x["spy_shares"]) for x in series])
+        con.execute("INSERT OR REPLACE INTO vs_meta VALUES (?,?,?)", (asof, "account", deposited))
+        con.commit()
+        last = series[-1]
+        return {"mode": "account", "since": start, "report_date": snap_date, "mine": last["mine"],
+                "sp500": last["sp500"], "edge": round(last["mine"] - last["sp500"], 2), "spy_shares": spy_sh,
+                "deposited": deposited, "series": series}
     trades = _rows(con, "SELECT trade_date, ticker, side, quantity, price, proceeds FROM trades "
                         "WHERE asset_type='shares' AND trade_date<=? ORDER BY trade_date, trade_id", (snap_date,))
     # what you held before the first trade = IB's report minus every trade since

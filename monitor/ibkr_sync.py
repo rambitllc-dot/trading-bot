@@ -114,6 +114,22 @@ def parse_trades(xml_text):
     return out
 
 
+def parse_cash_flows(xml_text):
+    """Deposits/withdrawals, dividends, interest and fees -> list of dicts (summary rows skipped)."""
+    out = []
+    for t in ET.fromstring(xml_text).iter("CashTransaction"):
+        if (t.get("levelOfDetail") or "DETAIL").upper() != "DETAIL" or t.get("currency") not in (None, "", "USD"):
+            continue
+        amt = _f(t.get("amount"))
+        if not amt:
+            continue
+        day = _date((t.get("dateTime") or t.get("settleDate") or "")[:8])
+        tid = t.get("transactionID") or f"{day}-{t.get('type')}-{amt}-{t.get('description')}"
+        out.append({"txn_id": str(tid), "day": day, "type": t.get("type") or "", "amount": amt,
+                    "description": t.get("description") or ""})
+    return out
+
+
 def key(p):
     if p["asset_type"] == "option":
         return (p["ticker"], p["option_type"], float(p["strike"]), p["expiry"])
@@ -153,8 +169,11 @@ def sync(path=None, fetcher=None, db=None):
         try:
             if trades:
                 trades_note = f"; {performance.save_trades(con, trades)} new trade(s) saved"
-            if synced:
-                performance.save_snapshot(con, report_date, synced)
+            if synced or cash is not None:
+                performance.save_snapshot(con, report_date, synced, cash)
+            flows = parse_cash_flows(xml_text)
+            if flows:
+                performance.save_cash_flows(con, flows)
         finally:
             con.close()
         with open(path) as f:
@@ -191,7 +210,9 @@ def import_history(paths, db=None):
         total = 0
         for p in paths:
             with open(p) as f:
-                total += performance.save_trades(con, parse_trades(f.read()))
+                xml = f.read()
+            total += performance.save_trades(con, parse_trades(xml))
+            performance.save_cash_flows(con, parse_cash_flows(xml))
         first = con.execute("SELECT MIN(trade_date) FROM trades").fetchone()[0]
         return f"imported {total} new trade(s); trade history now starts {first}"
     finally:
