@@ -451,7 +451,8 @@ if len(VS) >= 2:
     edge = mine_now - sp_now
     st.markdown('<div class="strip">' + "".join(
         f'<div class="cell"><small>{k}</small><b class="{c}">{v}</b></div>' for k, v, c in [
-            ("Your stocks", money(mine_now), ""), ("Same money in S&P 500", money(sp_now), ""),
+            (f"Your investments · IB report {PF.get('vs_report') or ''}", money(mine_now), ""),
+            ("Same money in S&P 500", money(sp_now), ""),
             ("You vs S&P 500", f"{money(edge)} ({pct(mine_now / sp_now - 1 if sp_now else None)})", cls(edge)),
             ("Tracked since", VS[0]["day"], ""), ("As of", note, "")]) + "</div>", unsafe_allow_html=True)
 
@@ -479,7 +480,10 @@ if len(VS) >= 2:
     st.markdown('<div class="muted">The grey line is a "shadow" account that made exactly your buys and sells, same '
                 'dollars, same days, but always in the S&amp;P 500 (SPY, dividends included). Cash and deposits are the '
                 'same in both, so they don\'t distort it, and stocks you\'ve sold stay in the history. Amber above grey = '
-                'your picks beat the index. One point per trading day (closing prices). Today\'s trades are added '
+                'your picks beat the index. Why this differs from your portfolio value at the top: cash is left '
+                'out (it\'s the same on both sides), and it uses what you held in IB\'s latest daily report '
+                '(about a day behind), valued at live prices, because the S&amp;P side only knows the trades in '
+                'that report. Newer trades join both sides after the next evening run. One point per trading day (closing prices). Today\'s trades are added '
                 'after the evening IB report.</div>', unsafe_allow_html=True)
 else:
     st.markdown('<div class="muted">Builds after the next evening run (needs IB\'s report of your holdings and trade '

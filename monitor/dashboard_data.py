@@ -153,6 +153,7 @@ def load(db_path=None, asof=None):
             last = con.execute("SELECT MAX(asof) FROM vs_sp500 WHERE asof<=?", (asof,)).fetchone()[0]
             snap = con.execute("SELECT MAX(report_date) FROM ib_snapshot").fetchone()[0] \
                 if table_exists(con, "ib_snapshot") else None
+            perf["vs_report"] = snap
             perf["vs_holdings"] = {t: q for t, q in con.execute(
                 "SELECT ticker, qty FROM ib_snapshot WHERE report_date=?", (snap,))} if snap else {}
             perf["vs_sp500"] = rows(con, "SELECT day, mine, sp500, spy_shares FROM vs_sp500 WHERE asof=? ORDER BY day",
