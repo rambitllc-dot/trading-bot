@@ -1,16 +1,6 @@
 [
   {
     "asset_type": "shares",
-    "ticker": "FAST",
-    "contracts": 1.0,
-    "entry_price": 55.4805,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-17",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
     "ticker": "AIZ",
     "contracts": 1.0,
     "entry_price": 321.9805,
@@ -50,8 +40,18 @@
     "stop_price": null
   },
   {
+    "asset_type": "shares",
+    "ticker": "SGOV",
+    "contracts": 1.0,
+    "entry_price": 12.6194,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-19",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
     "asset_type": "cash",
-    "amount": 74.14,
+    "amount": 126.66,
     "note": "IB cash, live from the Mac (2026-11-19)"
   }
 ]
