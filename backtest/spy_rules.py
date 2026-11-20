@@ -175,6 +175,8 @@ RULES = {
     "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it":
         lambda d: ma200_band(d, 5.0, 0.0, 2),
     "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": lambda d: ma200_band(d, 2.0, 0.0, 2),
+    "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": lambda d: ma200_band(d, 1.0, 0.0, 2),
+    "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": lambda d: ma200_band(d, 3.0, 0.0, 2),
     "Out at -10% from the high, back in at +10% from the low": lambda d: trailing(d, 10, back=10),
     "Out at -15% from the high, back in at +15% from the low": lambda d: trailing(d, 15, back=15),
     "Out at -20% from the high, back in at +20% from the low": lambda d: trailing(d, 20, back=20),
