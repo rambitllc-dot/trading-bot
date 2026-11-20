@@ -53,6 +53,22 @@ def trailing(df, stop=4.5, back=None, up_days=None):
     return out
 
 
+def stop_then_trend(df, stop):
+    """Out when the S&P falls `stop`% below its highest close since buying; back in after 2 closes above its
+    200-day average (once it has recovered)."""
+    c, m, out, inn, peak, above = df["close"].values, df["ma200"].values, [], 1, df["close"].values[0], 0
+    for x, a in zip(c, m):
+        above = above + 1 if a == a and x > a else 0
+        if inn:
+            peak = max(peak, x)
+            if x <= peak * (1 - stop / 100):
+                inn = 0
+        elif above >= 2:
+            inn, peak = 1, x
+        out.append(inn)
+    return out
+
+
 def three_down(df, total=3.0, up_days=3):
     """Sell after 3 down days in a row totalling `total`% or more; buy back after `up_days` up days in a row."""
     c, out, inn, down, up = df["close"].values, [], 1, 0, 0
@@ -119,6 +135,12 @@ RULES = {
     "Out at -4.5% from the high, back in after 3 up days in a row": lambda d: trailing(d, 4.5, up_days=3),
     "Out after 3 down days totalling -3%, back after 3 up days": three_down,
     "Bot's storm switch: 2 closes below / above the 200-day average": ma200,
+    "Out at -10% from the high, back in at +10% from the low": lambda d: trailing(d, 10, back=10),
+    "Out at -15% from the high, back in at +15% from the low": lambda d: trailing(d, 15, back=15),
+    "Out at -20% from the high, back in at +20% from the low": lambda d: trailing(d, 20, back=20),
+    "Out at -10% from the high, back in above the 200-day average": lambda d: stop_then_trend(d, 10),
+    "Out at -15% from the high, back in above the 200-day average": lambda d: stop_then_trend(d, 15),
+    "Out at -20% from the high, back in above the 200-day average": lambda d: stop_then_trend(d, 20),
 }
 PERIODS = [("Since 1993 (33 years)", "1993-01-01", None), ("Last 10 years", "2016-11-01", None),
            ("Last 5 years", "2021-11-01", None), ("Last 2 years", "2024-11-01", None),
