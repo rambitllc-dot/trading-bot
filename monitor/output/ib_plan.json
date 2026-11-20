@@ -222,8 +222,8 @@
   }
  ],
  "earnings_soon": {},
- "storm": false,
- "weather": "Fair weather: S&P 500 (SPY 730.20) is +0.0% vs its 200-day average (730.02).",
+ "storm": true,
+ "weather": "STORM (your choice, Nov 19): money waits in SGOV until SPY closes 5%+ above its 200-day average (about $766.50 now) 2 days in a row. SPY closed $715.87, 1.9% below the average ($730.02).",
  "holdings": [
   {
    "ticker": "VTRS",
@@ -301,5 +301,6 @@
    "prev_stop": null
   }
  ],
- "source": "positions.json (synced from IB)"
+ "source": "positions.json (synced from IB)",
+ "target": "SGOV"
 }

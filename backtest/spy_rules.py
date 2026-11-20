@@ -85,6 +85,22 @@ def ma200_buffer(df, below_pct=5.0, out_days=2, in_days=3):
     return out
 
 
+def ma200_band(df, in_pct=5.0, out_pct=0.0, days=2):
+    """Out after `days` closes at/below the 200-day average (+out_pct%); back in after `days` closes at least
+    in_pct% above it."""
+    c, m, out, inn, lo, hi = df["close"].values, df["ma200"].values, [], 1, 0, 0
+    for x, a in zip(c, m):
+        if a == a:
+            lo = lo + 1 if x <= a * (1 + out_pct / 100) else 0
+            hi = hi + 1 if x >= a * (1 + in_pct / 100) else 0
+            if inn and lo >= days:
+                inn = 0
+            elif not inn and hi >= days:
+                inn = 1
+        out.append(inn)
+    return out
+
+
 def three_down(df, total=3.0, up_days=3):
     """Sell after 3 down days in a row totalling `total`% or more; buy back after `up_days` up days in a row."""
     c, out, inn, down, up = df["close"].values, [], 1, 0, 0
@@ -156,6 +172,9 @@ RULES = {
     "Out after 2 closes 3% below the 200-day, back after 3 closes above it": lambda d: ma200_buffer(d, 3, 2, 3),
     "Out after 2 closes 2% below the 200-day, back after 3 closes above it": lambda d: ma200_buffer(d, 2, 2, 3),
     "Out after 2 closes below the 200-day, back after 3 closes above it": lambda d: ma200_buffer(d, 0.0001, 2, 3),
+    "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it":
+        lambda d: ma200_band(d, 5.0, 0.0, 2),
+    "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": lambda d: ma200_band(d, 2.0, 0.0, 2),
     "Out at -10% from the high, back in at +10% from the low": lambda d: trailing(d, 10, back=10),
     "Out at -15% from the high, back in at +15% from the low": lambda d: trailing(d, 15, back=15),
     "Out at -20% from the high, back in at +20% from the low": lambda d: trailing(d, 20, back=20),
