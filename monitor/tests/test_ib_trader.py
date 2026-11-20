@@ -375,19 +375,19 @@ class IndexPlanTest(unittest.TestCase):
     tearDown = IBTraderTest.tearDown
     client = IBTraderTest.client
 
-    def test_stocks_sold_and_everything_into_spym(self):
-        ib = FakeIB({"AIZ": 320.0, "KO": 99.0, "SGOV": 100.6, "SPYM": 80.0}, cash=25.0,
+    def test_stocks_sold_and_everything_into_sso(self):
+        ib = FakeIB({"AIZ": 320.0, "KO": 99.0, "SGOV": 100.6, "SSO": 80.0}, cash=25.0,
                     holdings={"AIZ": [1, 321.98], "KO": [1, 99.04], "SGOV": [1, 100.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(storm=False))
         msg = autotrade.execute(client=self.client(ib))
-        self.assertEqual(set(ib.pos), {"SPYM"})
-        self.assertEqual(ib.pos["SPYM"][0], 6)               # (320 + 99 + 100.6 + 25 - 1) // 80 = 6 whole shares
+        self.assertEqual(set(ib.pos), {"SSO"})
+        self.assertEqual(ib.pos["SSO"][0], 6)               # (320 + 99 + 100.6 + 25 - 1) // 80 = 6 whole shares
         self.assertLess(ib.cash, 80)                           # less than one share left over
-        self.assertIn("BUY SPYM", msg)
+        self.assertIn("BUY SSO", msg)
         self.assertEqual(autotrade.execute(client=self.client(ib)), "index plan: nothing to do")  # done: quiet
 
     def test_storm_moves_everything_to_sgov_and_back(self):
-        ib = FakeIB({"SPYM": 80.0, "SGOV": 100.0}, cash=5.0, holdings={"SPYM": [10, 80.0]})
+        ib = FakeIB({"SSO": 80.0, "SGOV": 100.0}, cash=5.0, holdings={"SSO": [10, 80.0]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(storm=True))
         autotrade.execute(client=self.client(ib))
         self.assertEqual(set(ib.pos), {"SGOV"})
@@ -397,14 +397,14 @@ class IndexPlanTest(unittest.TestCase):
         autotrade.save_json(autotrade.STATE_FILE, st)
         autotrade.save_json(autotrade.PLAN_FILE, plan(id="p2", storm=False))   # fair weather again
         autotrade.execute(client=self.client(ib))
-        self.assertEqual(set(ib.pos), {"SPYM"})
+        self.assertEqual(set(ib.pos), {"SSO"})
 
     def test_never_sells_what_was_bought_today(self):
-        ib = FakeIB({"SPYM": 80.0, "SGOV": 100.0}, cash=5.0, holdings={"SPYM": [10, 80.0]})
+        ib = FakeIB({"SSO": 80.0, "SGOV": 100.0}, cash=5.0, holdings={"SSO": [10, 80.0]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(storm=False))
         st = autotrade.load_state()
-        st["bought"]["SPYM"] = self.open_time.date().isoformat()
+        st["bought"]["SSO"] = self.open_time.date().isoformat()
         autotrade.save_json(autotrade.STATE_FILE, st)
         autotrade.save_json(autotrade.PLAN_FILE, plan(id="p3", storm=True))
         autotrade.execute(client=self.client(ib))
-        self.assertEqual(ib.pos["SPYM"][0], 10)                # waits until tomorrow
+        self.assertEqual(ib.pos["SSO"][0], 10)                # waits until tomorrow

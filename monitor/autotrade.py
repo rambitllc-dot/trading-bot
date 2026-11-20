@@ -223,9 +223,10 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
         for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
     if config.STRATEGY == "index":  # everything in the S&P 500 fund; Treasury bills only in a market storm
-        target = safe if storm else config.PARK_FUND
-        why = (f"market storm (S&P 500 below its 200-day average): everything waits in {safe}" if storm else
-               f"index plan: the whole account goes into the S&P 500 fund ({config.PARK_FUND})")
+        target = safe if storm else config.INDEX_FUND
+        why = (f"market storm (S&P 500 at/below its 200-day average): everything waits in {safe}" if storm else
+               f"index plan: the whole account goes into {config.INDEX_FUND}"
+               + (" (2x the S&P 500)" if config.INDEX_FUND == "SSO" else " (the S&P 500)"))
         sells = {t: why for t in held_all if t != target}
         buys = [{"ticker": target, "reason": why}]
         reserve, deposit, fallback = [], [], target
@@ -307,7 +308,7 @@ def _price(o):
 def index_round(client, p, state, today):
     """Index plan, every round: hold only the target fund (SPYM, or SGOV in a market storm). Anything else is sold
     (never the same day it was bought); all cash buys whole shares of the target. Nothing happens when it's done."""
-    target = config.SAFE_FUND if p.get("storm") else config.PARK_FUND
+    target = config.SAFE_FUND if p.get("storm") else config.INDEX_FUND
     lines = []
     for x in client.positions():
         t = x["symbol"]
@@ -328,7 +329,7 @@ def index_round(client, p, state, today):
             val = fill * abs(float(x["qty"]))
         state["sold"][t] = today
         why = ("market storm: moving to Treasury bills" if target == config.SAFE_FUND else
-               "index plan: moving into the S&P 500 fund")
+               f"index plan: moving into {target}")
         log("SELL", t, val, fill, why)
         lines.append(f"🔴 SELL {t} (~${val:,.2f})" + (f" at {fill:,.2f}" if fill else "") + f": {why}")
     cash = float(client.account()["cash"])
@@ -342,7 +343,7 @@ def index_round(client, p, state, today):
             log("BUY", target, cash - 1, fill, "index plan")
             lines.append(f"🟢 BUY {target} with ${cash - 1:,.2f}" + (f" at {fill:,.2f}" if fill else "")
                          + (": market storm, Treasury bills" if target == config.SAFE_FUND else
-                            ": the S&P 500 fund (index plan)"))
+                            f": {target} (index plan)"))
         except AlpacaError as e:
             if "whole share" not in str(e):
                 state["index_buy_failed"] = today

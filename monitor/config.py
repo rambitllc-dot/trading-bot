@@ -97,6 +97,11 @@ ATR_STOP_MULT = 3.0         # used for the profit target only: target = 2 x (3 x
 # Chosen Nov 19 2026 after the 33-year backtest (backtest/results/spy_rules.md): about the S&P's return with a worst
 # drop of about -20% instead of -55%. "stocks" = the stock-picking bot (rules below).
 STRATEGY = "index"
+# The fund the index plan holds when the switch is "in". Nov 19 2026, your choice after the test: SSO (2x the S&P 500's
+# daily move): +14.3% a year since 1993 in the test (real fund ~0.7%/yr less) vs +10.6% for holding the S&P, worst
+# drop about -36% (S&P alone: -55%); it can lag the S&P for a year or more in choppy markets (2022: -9%/yr).
+# "SPYM" = the plain S&P 500.
+INDEX_FUND = "SSO"
 
 TRAIL_PCT = 4.5             # the stop always sits 4.5% below the highest price since you bought (starts 4.5% below
                             # your buy price) and only ever moves up
@@ -178,4 +183,4 @@ VOL_SIZING = True           # steadier stocks get more money, jumpy ones less (0
 VOL_SIZE_MIN, VOL_SIZE_MAX = 0.5, 1.5
 MAX_POSITION_PCT = 35       # no single buy larger than this share of the account
 
-PARKING = {PARK_FUND, "SGOV"}  # funds that hold idle money: not one of the 5 stock slots, no stop, never ranked
+PARKING = {PARK_FUND, "SGOV", INDEX_FUND}  # funds that hold idle money: not one of the 5 stock slots, no stop, never ranked

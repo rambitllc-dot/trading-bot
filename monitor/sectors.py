@@ -11,6 +11,7 @@ ETF_SECTORS = {
     "XLF": "Financials", "XLV": "Health Care", "XLE": "Energy", "XLI": "Industrials",
     "XLY": "Consumer Discretionary", "XLP": "Consumer Staples", "XLU": "Utilities", "XLB": "Materials",
     "XLRE": "Real Estate", "XLC": "Communication Services", "GLD": "Gold", "SGOV": "Cash (T-bills)", "SPYM": "Broad market",
+    "SSO": "Broad market",
 }
 
 
