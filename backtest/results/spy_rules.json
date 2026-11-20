@@ -78,7 +78,7 @@
    "time_in_sp": 68.0
   },
   "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
-   "final": 20493.0,
+   "final": 20492.0,
    "per_year": 9.35,
    "worst_drop": -18.0,
    "switches": 72,
@@ -140,6 +140,20 @@
    "switches": 10,
    "time_in_sp": 91.0
   },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 46192.0,
+   "per_year": 12.01,
+   "worst_drop": -27.5,
+   "switches": 72,
+   "time_in_sp": 74.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 58733.0,
+   "per_year": 12.8,
+   "worst_drop": -75.6,
+   "switches": 0,
+   "time_in_sp": 100.0
+  },
   "2x S&P, just hold (no switch)": {
    "final": 87705.0,
    "per_year": 14.15,
@@ -169,14 +183,14 @@
    "time_in_sp": 100.0
   },
   "3x S&P + 200-day switch (2 closes below / above)": {
-   "final": 346795.0,
+   "final": 346791.0,
    "per_year": 18.89,
    "worst_drop": -53.9,
    "switches": 118,
    "time_in_sp": 78.0
   },
   "3x S&P + switch: out at/below the 200-day, back in 2%+ above": {
-   "final": 320711.0,
+   "final": 320708.0,
    "per_year": 18.61,
    "worst_drop": -53.0,
    "switches": 72,
@@ -323,6 +337,20 @@
    "worst_drop": -26.7,
    "switches": 4,
    "time_in_sp": 93.0
+  },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 4214.0,
+   "per_year": 15.39,
+   "worst_drop": -26.5,
+   "switches": 22,
+   "time_in_sp": 82.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 6035.0,
+   "per_year": 19.59,
+   "worst_drop": -48.8,
+   "switches": 0,
+   "time_in_sp": 100.0
   },
   "2x S&P, just hold (no switch)": {
    "final": 8098.0,
@@ -508,6 +536,20 @@
    "switches": 2,
    "time_in_sp": 91.0
   },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 1465.0,
+   "per_year": 7.85,
+   "worst_drop": -25.9,
+   "switches": 14,
+   "time_in_sp": 76.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 1770.0,
+   "per_year": 11.98,
+   "worst_drop": -35.7,
+   "switches": 0,
+   "time_in_sp": 100.0
+  },
   "2x S&P, just hold (no switch)": {
    "final": 1877.0,
    "per_year": 13.28,
@@ -689,6 +731,20 @@
    "final": 1283.0,
    "per_year": 12.92,
    "worst_drop": -18.8,
+   "switches": 0,
+   "time_in_sp": 100.0
+  },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 1201.0,
+   "per_year": 9.34,
+   "worst_drop": -13.9,
+   "switches": 4,
+   "time_in_sp": 89.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 1345.0,
+   "per_year": 15.57,
+   "worst_drop": -27.2,
    "switches": 0,
    "time_in_sp": 100.0
   },
@@ -876,6 +932,20 @@
    "switches": 2,
    "time_in_sp": 84.0
   },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 1687.0,
+   "per_year": 10.0,
+   "worst_drop": -21.9,
+   "switches": 10,
+   "time_in_sp": 58.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 996.0,
+   "per_year": -0.08,
+   "worst_drop": -69.8,
+   "switches": 0,
+   "time_in_sp": 100.0
+  },
   "2x S&P, just hold (no switch)": {
    "final": 848.0,
    "per_year": -2.95,
@@ -1060,6 +1130,20 @@
    "switches": 2,
    "time_in_sp": 79.0
   },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 1191.0,
+   "per_year": 19.14,
+   "worst_drop": -20.0,
+   "switches": 2,
+   "time_in_sp": 75.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 1191.0,
+   "per_year": 19.14,
+   "worst_drop": -46.5,
+   "switches": 0,
+   "time_in_sp": 100.0
+  },
   "2x S&P, just hold (no switch)": {
    "final": 1209.0,
    "per_year": 20.99,
@@ -1243,6 +1327,20 @@
    "worst_drop": -24.6,
    "switches": 2,
    "time_in_sp": 76.0
+  },
+  "HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)": {
+   "final": 887.0,
+   "per_year": -5.87,
+   "worst_drop": -25.8,
+   "switches": 10,
+   "time_in_sp": 50.0
+  },
+  "Half S&P + half 2x S&P, just hold (no switch)": {
+   "final": 961.0,
+   "per_year": -2.01,
+   "worst_drop": -35.5,
+   "switches": 0,
+   "time_in_sp": 100.0
   },
   "2x S&P, just hold (no switch)": {
    "final": 895.0,
