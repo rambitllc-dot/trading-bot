@@ -70,6 +70,20 @@
    "switches": 104,
    "time_in_sp": 77.0
   },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 13433.0,
+   "per_year": 7.99,
+   "worst_drop": -17.3,
+   "switches": 52,
+   "time_in_sp": 68.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 20492.0,
+   "per_year": 9.35,
+   "worst_drop": -18.0,
+   "switches": 72,
+   "time_in_sp": 74.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 29130.0,
    "per_year": 10.49,
@@ -183,6 +197,20 @@
    "worst_drop": -17.4,
    "switches": 28,
    "time_in_sp": 83.0
+  },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 2578.0,
+   "per_year": 9.88,
+   "worst_drop": -17.3,
+   "switches": 16,
+   "time_in_sp": 78.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 2990.0,
+   "per_year": 11.52,
+   "worst_drop": -17.1,
+   "switches": 22,
+   "time_in_sp": 82.0
   },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 4133.0,
@@ -298,6 +326,20 @@
    "switches": 18,
    "time_in_sp": 77.0
   },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 1344.0,
+   "per_year": 6.03,
+   "worst_drop": -11.9,
+   "switches": 10,
+   "time_in_sp": 70.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 1415.0,
+   "per_year": 7.11,
+   "worst_drop": -17.1,
+   "switches": 14,
+   "time_in_sp": 76.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1610.0,
    "per_year": 9.89,
@@ -408,6 +450,20 @@
   "Out after 2 closes below the 200-day, back after 3 closes above it": {
    "final": 1189.0,
    "per_year": 8.84,
+   "worst_drop": -9.3,
+   "switches": 4,
+   "time_in_sp": 89.0
+  },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 1100.0,
+   "per_year": 4.75,
+   "worst_drop": -9.3,
+   "switches": 4,
+   "time_in_sp": 82.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 1178.0,
+   "per_year": 8.32,
    "worst_drop": -9.3,
    "switches": 4,
    "time_in_sp": 89.0
@@ -526,6 +582,20 @@
    "switches": 22,
    "time_in_sp": 60.0
   },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 1359.0,
+   "per_year": 5.74,
+   "worst_drop": -11.8,
+   "switches": 9,
+   "time_in_sp": 51.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 1469.0,
+   "per_year": 7.26,
+   "worst_drop": -14.4,
+   "switches": 10,
+   "time_in_sp": 58.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1337.0,
    "per_year": 5.43,
@@ -637,6 +707,20 @@
    "final": 1148.0,
    "per_year": 14.9,
    "worst_drop": -12.5,
+   "switches": 2,
+   "time_in_sp": 75.0
+  },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 1085.0,
+   "per_year": 8.48,
+   "worst_drop": -17.3,
+   "switches": 2,
+   "time_in_sp": 73.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 1133.0,
+   "per_year": 13.36,
+   "worst_drop": -13.6,
    "switches": 2,
    "time_in_sp": 75.0
   },
@@ -753,6 +837,20 @@
    "worst_drop": -17.4,
    "switches": 14,
    "time_in_sp": 54.0
+  },
+  "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
+   "final": 967.0,
+   "per_year": -1.66,
+   "worst_drop": -11.9,
+   "switches": 6,
+   "time_in_sp": 43.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it": {
+   "final": 951.0,
+   "per_year": -2.52,
+   "worst_drop": -17.1,
+   "switches": 10,
+   "time_in_sp": 50.0
   },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 951.0,

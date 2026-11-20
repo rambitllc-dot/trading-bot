@@ -16,6 +16,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $19,901 | +9.25% | -24.2% | 48 | 82% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $22,514 | +9.65% | -23.2% | 52 | 81% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $20,246 | +9.31% | -20.6% | 104 | 77% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $13,433 | +7.99% | -17.3% | 52 | 68% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $20,492 | +9.35% | -18.0% | 72 | 74% |
 | Out at -10% from the high, back in at +10% from the low | $29,130 | +10.49% | -38.0% | 52 | 87% |
 | Out at -15% from the high, back in at +15% from the low | $16,271 | +8.60% | -47.3% | 30 | 91% |
 | Out at -20% from the high, back in at +20% from the low | $30,621 | +10.65% | -48.3% | 12 | 93% |
@@ -37,6 +39,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $2,571 | +9.85% | -20.6% | 16 | 87% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $2,836 | +10.93% | -23.2% | 16 | 86% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $3,115 | +11.97% | -17.4% | 28 | 83% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $2,578 | +9.88% | -17.3% | 16 | 78% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $2,990 | +11.52% | -17.1% | 22 | 82% |
 | Out at -10% from the high, back in at +10% from the low | $4,133 | +15.17% | -25.7% | 14 | 89% |
 | Out at -15% from the high, back in at +15% from the low | $2,889 | +11.14% | -30.6% | 10 | 91% |
 | Out at -20% from the high, back in at +20% from the low | $3,356 | +12.80% | -26.7% | 4 | 90% |
@@ -58,6 +62,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,275 | +4.93% | -20.6% | 10 | 82% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,407 | +7.00% | -23.2% | 10 | 82% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $1,448 | +7.61% | -17.4% | 18 | 77% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,344 | +6.03% | -11.9% | 10 | 70% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,415 | +7.11% | -17.1% | 14 | 76% |
 | Out at -10% from the high, back in at +10% from the low | $1,610 | +9.89% | -25.7% | 8 | 89% |
 | Out at -15% from the high, back in at +15% from the low | $1,185 | +3.42% | -30.6% | 6 | 86% |
 | Out at -20% from the high, back in at +20% from the low | $1,493 | +8.26% | -21.3% | 2 | 81% |
@@ -79,6 +85,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,015 | +0.71% | -20.5% | 4 | 93% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,157 | +7.38% | -10.0% | 4 | 92% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $1,189 | +8.84% | -9.3% | 4 | 89% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,100 | +4.75% | -9.3% | 4 | 82% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,178 | +8.32% | -9.3% | 4 | 89% |
 | Out at -10% from the high, back in at +10% from the low | $1,339 | +15.33% | -12.2% | 2 | 96% |
 | Out at -15% from the high, back in at +15% from the low | $1,079 | +3.78% | -20.3% | 2 | 95% |
 | Out at -20% from the high, back in at +20% from the low | $1,283 | +12.92% | -18.8% | 0 | 100% |
@@ -100,6 +108,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,161 | +2.75% | -24.2% | 14 | 66% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,225 | +3.77% | -19.4% | 16 | 64% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $1,322 | +5.22% | -17.9% | 22 | 60% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,359 | +5.74% | -11.8% | 9 | 51% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,469 | +7.26% | -14.4% | 10 | 58% |
 | Out at -10% from the high, back in at +10% from the low | $1,337 | +5.43% | -38.0% | 14 | 78% |
 | Out at -15% from the high, back in at +15% from the low | $1,026 | +0.48% | -40.9% | 10 | 74% |
 | Out at -20% from the high, back in at +20% from the low | $1,412 | +6.49% | -35.5% | 4 | 91% |
@@ -121,6 +131,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,081 | +8.11% | -18.9% | 2 | 78% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,081 | +8.11% | -18.9% | 2 | 78% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $1,148 | +14.90% | -12.5% | 2 | 75% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,085 | +8.48% | -17.3% | 2 | 73% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,133 | +13.36% | -13.6% | 2 | 75% |
 | Out at -10% from the high, back in at +10% from the low | $1,348 | +34.89% | -15.9% | 2 | 92% |
 | Out at -15% from the high, back in at +15% from the low | $1,309 | +30.98% | -18.9% | 2 | 95% |
 | Out at -20% from the high, back in at +20% from the low | $1,104 | +10.40% | -26.7% | 2 | 92% |
@@ -142,6 +154,8 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 3% below the 200-day, back after 3 closes above it | $995 | -0.28% | -20.6% | 6 | 62% |
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $962 | -1.92% | -23.2% | 6 | 62% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $963 | -1.86% | -17.4% | 14 | 54% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $967 | -1.66% | -11.9% | 6 | 43% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $951 | -2.52% | -17.1% | 10 | 50% |
 | Out at -10% from the high, back in at +10% from the low | $951 | -2.49% | -25.7% | 6 | 75% |
 | Out at -15% from the high, back in at +15% from the low | $869 | -6.84% | -30.6% | 4 | 70% |
 | Out at -20% from the high, back in at +20% from the low | $921 | -4.06% | -21.3% | 2 | 51% |
