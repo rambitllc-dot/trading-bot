@@ -63,6 +63,9 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     rot = rotation.run(con, asof, rows, bars, sentiment, blocker, weather["storm"]) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestions": []}
     rot["weather"] = weather
+    if config.STRATEGY == "index":  # no stock picking: the account holds the S&P 500 fund (or T-bills in a storm)
+        rot["suggestions"] = []
+        rot["status"] = (f"index plan: everything in {config.SAFE_FUND if weather['storm'] else config.PARK_FUND}")
     swaps = {s["sell"]: s for s in rot.get("suggestions") or []}
     flagged = {h["ticker"]: h for h in rot.get("holdings") or [] if h.get("losing") or h.get("weak")}
     for r in rows:  # flag weakening / losing holdings: first in line for the next swap

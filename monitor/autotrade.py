@@ -222,6 +222,22 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
         {"ticker": t, "rank": rk, "score": sc, "size": sz, "sector": sectors.sector_of(t),
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
         for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
+    if config.STRATEGY == "index":  # everything in the S&P 500 fund; Treasury bills only in a market storm
+        target = safe if storm else config.PARK_FUND
+        why = (f"market storm (S&P 500 below its 200-day average): everything waits in {safe}" if storm else
+               f"index plan: the whole account goes into the S&P 500 fund ({config.PARK_FUND})")
+        sells = {t: why for t in held_all if t != target}
+        buys = [{"ticker": target, "reason": why}]
+        reserve, deposit, fallback = [], [], target
+        stops = {}
+        return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
+                "fallback": fallback, "strategy": "index", "target": target, "equity": equity, "cash": cash,
+                "sells": [{"ticker": t, "reason": w} for t, w in sells.items()], "buys": buys, "reserve": reserve,
+                "stops": stops, "deposit_candidates": deposit, "earnings_soon": {}, "storm": storm,
+                "weather": (rot.get("weather") or {}).get("text"),
+                "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark",
+                                                    "stop_price", "target_price", "stop_rule", "weak", "action",
+                                                    "entry_date", "prev_stop")} for r in rows]}
     spy_up = con.execute("SELECT uptrend FROM rotation_scores WHERE asof=? AND ticker=?",
                          (asof, config.INDEX_TICKER)).fetchone()
     fallback = config.PARK_FUND if (not storm and spy_up and spy_up[0]) else config.SAFE_FUND
@@ -286,6 +302,52 @@ def _price(o):
         return float(o.get("filled_avg_price") or 0) or None
     except (TypeError, ValueError):
         return None
+
+
+def index_round(client, p, state, today):
+    """Index plan, every round: hold only the target fund (SPYM, or SGOV in a market storm). Anything else is sold
+    (never the same day it was bought); all cash buys whole shares of the target. Nothing happens when it's done."""
+    target = config.SAFE_FUND if p.get("storm") else config.PARK_FUND
+    lines = []
+    for x in client.positions():
+        t = x["symbol"]
+        if t == target or float(x["qty"]) <= 0:
+            continue
+        if state["bought"].get(t) == today:
+            continue  # bought today: sold tomorrow (cash-account settlement)
+        if state.get("index_warned", {}).get(t) == today:
+            continue
+        try:
+            o = wait_filled(client, client.close(t))
+        except AlpacaError as e:
+            state.setdefault("index_warned", {})[t] = today
+            lines.append(f"✋ Please SELL {t} yourself in the IB app ({str(e)[:120]}); the plan holds only {target}.")
+            continue
+        val, fill = float(x["market_value"]), _price(o)
+        if fill:
+            val = fill * abs(float(x["qty"]))
+        state["sold"][t] = today
+        why = ("market storm: moving to Treasury bills" if target == config.SAFE_FUND else
+               "index plan: moving into the S&P 500 fund")
+        log("SELL", t, val, fill, why)
+        lines.append(f"🔴 SELL {t} (~${val:,.2f})" + (f" at {fill:,.2f}" if fill else "") + f": {why}")
+    cash = float(client.account()["cash"])
+    price = getattr(client, "price", None)
+    px = price(target) if callable(price) else None
+    if cash - 1 >= (px or config.AUTO_MIN_BUY_USD) and state.get("index_buy_failed") != today:
+        try:
+            o = wait_filled(client, client.buy(target, round(cash - 1, 2)))
+            state["bought"][target] = today
+            fill = _price(o)
+            log("BUY", target, cash - 1, fill, "index plan")
+            lines.append(f"🟢 BUY {target} with ${cash - 1:,.2f}" + (f" at {fill:,.2f}" if fill else "")
+                         + (": market storm, Treasury bills" if target == config.SAFE_FUND else
+                            ": the S&P 500 fund (index plan)"))
+        except AlpacaError as e:
+            if "whole share" not in str(e):
+                state["index_buy_failed"] = today
+                lines.append(f"⚠️ Couldn't buy {target}: {str(e)[:150]}")
+    return "\n".join(lines) if lines else None
 
 
 def wide_queue(p):
@@ -405,6 +467,12 @@ def execute(client=None):
         return "no plan yet (made by the evening monitor run)"
     state = load_state()
     today = (clock.get("timestamp") or "")[:10] or dt.date.today().isoformat()
+    if config.STRATEGY == "index":
+        m = index_round(client, p, state, today)
+        save_json(STATE_FILE, state)
+        if m:
+            notify(m)
+        return m or "index plan: nothing to do"
     msgs = []
     max_order = None
 

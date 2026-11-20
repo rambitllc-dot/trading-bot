@@ -10,6 +10,16 @@ A plain-English guide to how your trading system works, how to turn it on and of
 
 Every rule below serves these three goals, in this order.
 
+## Current strategy: the index plan (since Nov 20, 2026)
+
+After a 33-year test on real prices (`backtest/results/spy_rules.md`), the account no longer picks stocks:
+
+- **Everything is in the S&P 500 fund (SPYM)**, in whole shares. New deposits are invested the same day.
+- **One protection rule (the 200-day switch):** when the S&P 500 (SPY) closes below its 200-day average two days in a row, the bot sells SPYM the next morning and moves everything to **SGOV** (Treasury bills, ~4% a year). When it closes back above the average two days in a row, the money goes back into SPYM.
+- No stops, no 3-day rule and no swaps on SPYM: normal dips don't sell it.
+- In the test since 1993: about +9.5% a year (holding the S&P: +10.6%), with a worst drop of about -20% instead of -55%.
+- Setting: `STRATEGY = "index"` in `monitor/config.py`. `STRATEGY = "stocks"` brings back the stock-picking bot described in the rest of this manual.
+
 ## 1. The big picture
 
 The system has four parts that work together:

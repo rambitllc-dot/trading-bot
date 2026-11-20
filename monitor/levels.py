@@ -105,6 +105,8 @@ def apply(con, asof, rows, bars, now=None):
     for r in rows:
         own = r.get("stop_price") is not None or r.get("target_price") is not None
         b = bars.get(r["ticker"])
+        if r.get("ticker") in config.PARKING:
+            continue  # SPYM/SGOV: no stops or weak flags; only the market-weather switch moves them
         weakness(r, b)
         if not config.AUTO_LEVELS or own or r["asset_type"] != "shares" or not b:
             continue

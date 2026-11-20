@@ -1,3 +1,4 @@
+import datetime as dt
 import os
 import tempfile
 import unittest
@@ -86,7 +87,8 @@ class LevelsTest(unittest.TestCase):
         levels.apply(self.con, "2026-11-05", [r], {"QQQ": bars([650.0] * 30, rng=10.0)})
         first = r["stop_price"]
         r = row("QQQ", 650.0, 700.0)
-        levels.apply(self.con, "2026-11-20", [r], {"QQQ": bars([650.0] * 25 + [680, 690, 700, 700, 700], rng=10.0)})
+        levels.apply(self.con, "2026-11-20", [r], {"QQQ": bars([650.0] * 25 + [680, 690, 700, 700, 700], rng=10.0)},
+                     now=dt.datetime(2026, 11, 21, 3, 0, tzinfo=dt.timezone.utc))  # after the close: bars final
         self.assertGreater(r["stop_price"], first)       # price rose -> stop rose
         risen = r["stop_price"]
         r = row("QQQ", 650.0, 690.0)

@@ -91,6 +91,13 @@ ROTATION_NO_REBUY_DAYS = 30 # don't suggest buying back something swapped out wi
 AUTO_LEVELS = True
 ATR_PERIOD = 22             # average true range over about one month of trading days
 ATR_STOP_MULT = 3.0         # used for the profit target only: target = 2 x (3 x ATR) above the starting price
+# STRATEGY: "index" = the whole account in the S&P 500 fund (PARK_FUND, SPYM), moved to Treasury bills (SAFE_FUND,
+# SGOV) only by the market-weather switch: 2 closes below the S&P 500's 200-day average -> SGOV; 2 closes above ->
+# back to SPYM. No stock picking, no stops on SPYM. New money is invested the same day.
+# Chosen Nov 19 2026 after the 33-year backtest (backtest/results/spy_rules.md): about the S&P's return with a worst
+# drop of about -20% instead of -55%. "stocks" = the stock-picking bot (rules below).
+STRATEGY = "index"
+
 TRAIL_PCT = 4.5             # the stop always sits 4.5% below the highest price since you bought (starts 4.5% below
                             # your buy price) and only ever moves up
 MAX_LOSS_PCT = TRAIL_PCT    # the most a new position can lose before it's sold
