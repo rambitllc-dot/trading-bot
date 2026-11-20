@@ -174,6 +174,38 @@ def simulate_lev(df, sig, lev, fee=0.0091):
     return pd.Series(vals, index=df.index), switches, days_in / len(df)
 
 
+def simulate_mix(df, sig, fee2=0.0091):
+    """Half in the S&P (1x), half in a 2x S&P fund, split 50/50 each time the switch turns on (the halves then grow
+    on their own, no daily rebalancing); all to T-bills when it turns off."""
+    o, c, b = df["open"].values, df["close"].values, df["bill"].values
+    one, two, cash, vals, pos, switches, days_in = 0.0, 0.0, 1000.0, [], 0, 0, 0
+    if sig[0]:
+        one, two, cash, pos = 500.0, 500.0, 0.0, 1
+    for i in range(len(df)):
+        if i:
+            want = sig[i - 1]
+            if want != pos:
+                if pos:  # sell both at the open, then bills
+                    one *= o[i] / c[i - 1]
+                    two *= max(1 + 2 * (o[i] / c[i - 1] - 1) - b[i] - fee2 / 252, 0)
+                    cash, one, two = (one + two) * (1 - COST) * (1 + b[i]), 0.0, 0.0
+                else:  # bills, then split 50/50 at the open
+                    tot = cash * (1 + b[i]) * (1 - COST)
+                    one = tot / 2 * c[i] / o[i]
+                    two = tot / 2 * max(1 + 2 * (c[i] / o[i] - 1) - b[i] - fee2 / 252, 0)
+                    cash = 0.0
+                pos, switches = want, switches + 1
+            elif pos:
+                r = c[i] / c[i - 1] - 1
+                one *= 1 + r
+                two *= max(1 + 2 * r - b[i] - fee2 / 252, 0)
+            else:
+                cash *= 1 + b[i]
+        days_in += pos
+        vals.append(one + two + cash)
+    return pd.Series(vals, index=df.index), switches, days_in / len(df)
+
+
 LEV_RULES = {
     "2x S&P, just hold (no switch)": (2, hold),
     "2x S&P + 200-day switch (2 closes below / above)": (2, ma200),
@@ -237,6 +269,14 @@ def main():
         for name in RULES:
             sig = pd.Series(sigs[name], index=full.index).loc[a:b].tolist()
             st = stats(*simulate(df, sig))
+            res[pname][name] = st
+            lines.append(f"| {name} | ${st['final']:,.0f} | {st['per_year']:+.2f}% | {st['worst_drop']}% | "
+                         f"{st['switches']} | {st['time_in_sp']:.0f}% |")
+        for name, f in {"HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above)":
+                        lambda d: ma200_band(d, 2.0, 0.0, 2),
+                        "Half S&P + half 2x S&P, just hold (no switch)": hold}.items():
+            sig = pd.Series(f(full), index=full.index).loc[a:b].tolist()
+            st = stats(*simulate_mix(df, sig))
             res[pname][name] = st
             lines.append(f"| {name} | ${st['final']:,.0f} | {st['per_year']:+.2f}% | {st['worst_drop']}% | "
                          f"{st['switches']} | {st['time_in_sp']:.0f}% |")
