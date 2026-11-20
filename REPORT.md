@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 20, 2026 06:01 UTC · Bitcoin $61,808.18 · US stock market closed
+Last update: Nov 20, 2026 06:31 UTC · Bitcoin $61,782.90 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -59,14 +59,14 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 22 | Wide momentum (10 ETFs) | Monthly pick | ETF | $90.04 | -$9.96 (-10.0%) | 1 |
 | 23 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $82.61 | -$17.39 (-17.4%) | 10 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $80.46 | -$19.54 (-19.5%) | 5 |
-| 25 | Bitcoin buy & hold | Hold | Bitcoin | $79.15 | -$20.85 (-20.8%) | 1 |
+| 25 | Bitcoin buy & hold | Hold | Bitcoin | $79.12 | -$20.88 (-20.9%) | 1 |
 | 26 | Nvidia buy & hold | Hold | Stock | $70.64 | -$29.36 (-29.4%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $79.15 | $100.00 | trading |
+| Bitcoin | $79.12 | $100.00 | trading |
 | S&P 500 | $94.31 | $94.31 | about even |
 | Apple | $104.15 | $104.15 | about even |
 | Microsoft | $96.03 | $96.03 | about even |
@@ -76,7 +76,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | SpaceX | $96.75 | $100.00 | trading |
 | Anthropic | $90.18 | $100.00 | trading |
 
-**All together:** $2,450.57 from $2,600 (-149.43)
+**All together:** $2,450.53 from $2,600 (-149.47)
 
 ## What each one is doing
 
@@ -104,7 +104,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **Wide momentum (10 ETFs):** XLE $89.53, cash $0.51. Holding XLE until next month's check.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $8.51, SNDK $6.67, LITE $7.88, MU $7.97, DELL $7.53, STX $8.51, WDC $8.45, VLO $8.63, APA $9.21, MPC $8.54, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Tesla trend (200 day):** TSLA $80.03, cash $0.43. Signal: in cash (price $374.48 vs 200d avg $381.90).
-- **Bitcoin buy & hold:** BTC/USD $76.76, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $76.73, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $70.13, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
@@ -118,7 +118,7 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 226 | 56.6% | $99.35 | -49% |
-| Learning: copies whichever method has been winning lately | Learning (switches methods) | 368 | 49.5% | $9.05 | -91% |
+| Learning: copies whichever method has been winning lately | Learning (switches methods) | 369 | 49.3% | $8.60 | -92% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Session momentum: follow the busiest hour's direction | Static (one fixed method) | 757 | 49.9% | $0.99 (ran out) | -99% |
 | Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 496 | 46.4% | $0.98 (ran out) | -99% |
