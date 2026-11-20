@@ -84,6 +84,20 @@
    "switches": 72,
    "time_in_sp": 74.0
   },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 20351.0,
+   "per_year": 9.32,
+   "worst_drop": -18.6,
+   "switches": 90,
+   "time_in_sp": 76.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 18830.0,
+   "per_year": 9.07,
+   "worst_drop": -17.7,
+   "switches": 58,
+   "time_in_sp": 72.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 29130.0,
    "per_year": 10.49,
@@ -211,6 +225,20 @@
    "worst_drop": -17.1,
    "switches": 22,
    "time_in_sp": 82.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 3061.0,
+   "per_year": 11.78,
+   "worst_drop": -18.4,
+   "switches": 26,
+   "time_in_sp": 83.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 2939.0,
+   "per_year": 11.33,
+   "worst_drop": -14.9,
+   "switches": 18,
+   "time_in_sp": 81.0
   },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 4133.0,
@@ -340,6 +368,20 @@
    "switches": 14,
    "time_in_sp": 76.0
   },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 1417.0,
+   "per_year": 7.14,
+   "worst_drop": -18.4,
+   "switches": 18,
+   "time_in_sp": 77.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 1435.0,
+   "per_year": 7.41,
+   "worst_drop": -14.3,
+   "switches": 12,
+   "time_in_sp": 74.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1610.0,
    "per_year": 9.89,
@@ -467,6 +509,20 @@
    "worst_drop": -9.3,
    "switches": 4,
    "time_in_sp": 89.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 1178.0,
+   "per_year": 8.32,
+   "worst_drop": -9.3,
+   "switches": 4,
+   "time_in_sp": 89.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 1155.0,
+   "per_year": 7.27,
+   "worst_drop": -9.3,
+   "switches": 4,
+   "time_in_sp": 88.0
   },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1339.0,
@@ -596,6 +652,20 @@
    "switches": 10,
    "time_in_sp": 58.0
   },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 1356.0,
+   "per_year": 5.7,
+   "worst_drop": -16.8,
+   "switches": 18,
+   "time_in_sp": 60.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 1466.0,
+   "per_year": 7.21,
+   "worst_drop": -11.7,
+   "switches": 8,
+   "time_in_sp": 57.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1337.0,
    "per_year": 5.43,
@@ -724,6 +794,20 @@
    "switches": 2,
    "time_in_sp": 75.0
   },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 1148.0,
+   "per_year": 14.9,
+   "worst_drop": -12.5,
+   "switches": 2,
+   "time_in_sp": 75.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 1117.0,
+   "per_year": 11.69,
+   "worst_drop": -14.9,
+   "switches": 2,
+   "time_in_sp": 74.0
+  },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 1348.0,
    "per_year": 34.89,
@@ -851,6 +935,20 @@
    "worst_drop": -17.1,
    "switches": 10,
    "time_in_sp": 50.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it": {
+   "final": 952.0,
+   "per_year": -2.46,
+   "worst_drop": -18.4,
+   "switches": 14,
+   "time_in_sp": 53.0
+  },
+  "Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it": {
+   "final": 983.0,
+   "per_year": -0.84,
+   "worst_drop": -14.3,
+   "switches": 8,
+   "time_in_sp": 48.0
   },
   "Out at -10% from the high, back in at +10% from the low": {
    "final": 951.0,
