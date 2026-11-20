@@ -371,6 +371,8 @@ class IndexPlanTest(unittest.TestCase):
         IBTraderTest.setUp(self)
         config.STRATEGY = "index"
         self.addCleanup(setattr, config, "STRATEGY", "stocks")
+        self.addCleanup(setattr, config, "INDEX_FUND", config.INDEX_FUND)
+        config.INDEX_FUND = "SSO"  # tested with the 2x fund; SPYM works the same way
 
     tearDown = IBTraderTest.tearDown
     client = IBTraderTest.client
