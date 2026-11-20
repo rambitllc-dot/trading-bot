@@ -17,7 +17,7 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out after 2 closes 2% below the 200-day, back after 3 closes above it | $22,514 | +9.65% | -23.2% | 52 | 81% |
 | Out after 2 closes below the 200-day, back after 3 closes above it | $20,246 | +9.31% | -20.6% | 104 | 77% |
 | YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $13,433 | +7.99% | -17.3% | 52 | 68% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $20,492 | +9.35% | -18.0% | 72 | 74% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $20,493 | +9.35% | -18.0% | 72 | 74% |
 | Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $20,351 | +9.32% | -18.6% | 90 | 76% |
 | Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $18,830 | +9.07% | -17.7% | 58 | 72% |
 | Out at -10% from the high, back in at +10% from the low | $29,130 | +10.49% | -38.0% | 52 | 87% |
@@ -26,6 +26,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $22,510 | +9.65% | -23.9% | 42 | 84% |
 | Out at -15% from the high, back in above the 200-day average | $20,355 | +9.32% | -36.5% | 22 | 87% |
 | Out at -20% from the high, back in above the 200-day average | $31,752 | +10.77% | -37.7% | 10 | 91% |
+| 2x S&P, just hold (no switch) | $87,705 | +14.15% | -87.8% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $98,296 | +14.54% | -38.8% | 118 | 78% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $92,007 | +14.31% | -35.8% | 72 | 74% |
+| 3x S&P, just hold (no switch) | $107,455 | +14.84% | -98.0% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $346,795 | +18.89% | -53.9% | 118 | 78% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $320,711 | +18.61% | -53.0% | 72 | 74% |
 
 ## Last 10 years
 
@@ -51,6 +57,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $2,809 | +10.83% | -23.7% | 14 | 88% |
 | Out at -15% from the high, back in above the 200-day average | $2,822 | +10.88% | -20.9% | 8 | 90% |
 | Out at -20% from the high, back in above the 200-day average | $3,208 | +12.30% | -26.7% | 4 | 93% |
+| 2x S&P, just hold (no switch) | $8,098 | +23.14% | -58.8% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $5,607 | +18.72% | -35.0% | 34 | 84% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $5,665 | +18.84% | -33.8% | 22 | 82% |
+| 3x S&P, just hold (no switch) | $12,884 | +28.97% | -76.2% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $9,810 | +25.51% | -49.0% | 34 | 84% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $10,003 | +25.76% | -47.4% | 22 | 82% |
 
 ## Last 5 years
 
@@ -76,6 +88,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $1,335 | +5.89% | -23.7% | 8 | 84% |
 | Out at -15% from the high, back in above the 200-day average | $1,405 | +6.97% | -20.9% | 4 | 87% |
 | Out at -20% from the high, back in above the 200-day average | $1,566 | +9.29% | -24.6% | 2 | 91% |
+| 2x S&P, just hold (no switch) | $1,877 | +13.28% | -46.5% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,532 | +8.82% | -35.0% | 22 | 78% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,501 | +8.37% | -33.8% | 14 | 76% |
+| 3x S&P, just hold (no switch) | $1,907 | +13.64% | -63.6% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,587 | +9.58% | -49.0% | 22 | 78% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,543 | +8.97% | -47.4% | 14 | 76% |
 
 ## Last 2 years
 
@@ -101,6 +119,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $1,033 | +1.60% | -23.7% | 4 | 93% |
 | Out at -15% from the high, back in above the 200-day average | $1,071 | +3.41% | -20.9% | 2 | 95% |
 | Out at -20% from the high, back in above the 200-day average | $1,283 | +12.92% | -18.8% | 0 | 100% |
+| 2x S&P, just hold (no switch) | $1,407 | +18.16% | -35.2% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,179 | +8.39% | -21.3% | 6 | 89% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,222 | +10.31% | -18.5% | 4 | 89% |
+| 3x S&P, just hold (no switch) | $1,486 | +21.32% | -48.9% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,185 | +8.64% | -30.9% | 6 | 89% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,250 | +11.52% | -27.1% | 4 | 89% |
 
 ## 2008 crash (Oct 2007 - Mar 2013)
 
@@ -126,6 +150,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $1,376 | +5.98% | -23.9% | 8 | 72% |
 | Out at -15% from the high, back in above the 200-day average | $1,021 | +0.39% | -36.5% | 8 | 76% |
 | Out at -20% from the high, back in above the 200-day average | $1,449 | +7.00% | -25.7% | 2 | 84% |
+| 2x S&P, just hold (no switch) | $848 | -2.95% | -84.2% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,449 | +6.99% | -34.6% | 28 | 62% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,917 | +12.58% | -28.9% | 10 | 58% |
+| 3x S&P, just hold (no switch) | $460 | -13.17% | -95.5% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,573 | +8.60% | -47.7% | 28 | 62% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $2,405 | +17.33% | -41.3% | 10 | 58% |
 
 ## 2020 Covid crash (2020)
 
@@ -151,6 +181,12 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $1,104 | +10.42% | -15.9% | 2 | 75% |
 | Out at -15% from the high, back in above the 200-day average | $1,088 | +8.84% | -18.9% | 2 | 78% |
 | Out at -20% from the high, back in above the 200-day average | $1,006 | +0.57% | -26.7% | 2 | 79% |
+| 2x S&P, just hold (no switch) | $1,209 | +20.99% | -58.8% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,253 | +25.39% | -25.2% | 2 | 76% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,238 | +23.87% | -26.1% | 2 | 75% |
+| 3x S&P, just hold (no switch) | $1,112 | +11.27% | -76.2% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,347 | +34.87% | -36.3% | 2 | 76% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,323 | +32.43% | -37.4% | 2 | 75% |
 
 ## 2022 bear market (2022-2023)
 
@@ -176,4 +212,14 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 | Out at -10% from the high, back in above the 200-day average | $1,023 | +1.13% | -20.2% | 4 | 66% |
 | Out at -15% from the high, back in above the 200-day average | $1,038 | +1.91% | -19.0% | 2 | 71% |
 | Out at -20% from the high, back in above the 200-day average | $966 | -1.71% | -24.6% | 2 | 76% |
+| 2x S&P, just hold (no switch) | $895 | -5.46% | -46.5% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $871 | -6.70% | -35.0% | 16 | 56% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $823 | -9.33% | -33.8% | 10 | 50% |
+| 3x S&P, just hold (no switch) | $736 | -14.34% | -63.6% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $767 | -12.48% | -49.0% | 16 | 56% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $707 | -16.02% | -47.4% | 10 | 50% |
+
+## Check: simulated 2x vs the real SSO fund
+
+$1,000 from 2006-06-21: real SSO $16,584, simulated 2x $18,940.
 
