@@ -152,6 +152,38 @@ def simulate(df, sig):
     return pd.Series(vals, index=df.index), switches, days_in / len(df)
 
 
+def simulate_lev(df, sig, lev, fee=0.0091):
+    """Like simulate(), but in the market you hold a fund with `lev` times the S&P's DAILY move (like SSO = 2x,
+    UPRO = 3x), paying its yearly fee and the cost of borrowing the extra (T-bill rate on (lev-1))."""
+    o, c, b = df["open"].values, df["close"].values, df["bill"].values
+    v, vals, pos, switches, days_in = 1000.0, [], sig[0], 0, 0
+    carry = lambda i: (lev - 1) * b[i] + fee / 252  # noqa: E731 - daily cost of the leveraged fund
+    for i in range(len(df)):
+        if i:
+            want = sig[i - 1]
+            if want != pos:
+                if pos:  # sell at today's open, then T-bills
+                    v *= max(1 + lev * (o[i] / c[i - 1] - 1) - carry(i), 0) * (1 - COST) * (1 + b[i])
+                else:  # T-bills, buy at today's open
+                    v *= (1 + b[i]) * (1 - COST) * max(1 + lev * (c[i] / o[i] - 1) - carry(i), 0)
+                pos, switches = want, switches + 1
+            else:
+                v *= max(1 + lev * (c[i] / c[i - 1] - 1) - carry(i), 0) if pos else 1 + b[i]
+        days_in += pos
+        vals.append(v)
+    return pd.Series(vals, index=df.index), switches, days_in / len(df)
+
+
+LEV_RULES = {
+    "2x S&P, just hold (no switch)": (2, hold),
+    "2x S&P + 200-day switch (2 closes below / above)": (2, ma200),
+    "2x S&P + switch: out at/below the 200-day, back in 2%+ above": (2, lambda d: ma200_band(d, 2.0, 0.0, 2)),
+    "3x S&P, just hold (no switch)": (3, hold),
+    "3x S&P + 200-day switch (2 closes below / above)": (3, ma200),
+    "3x S&P + switch: out at/below the 200-day, back in 2%+ above": (3, lambda d: ma200_band(d, 2.0, 0.0, 2)),
+}
+
+
 def stats(s, switches, in_pct):
     years = (s.index[-1] - s.index[0]).days / 365.25
     dd = (s / s.cummax() - 1).min()
@@ -208,7 +240,25 @@ def main():
             res[pname][name] = st
             lines.append(f"| {name} | ${st['final']:,.0f} | {st['per_year']:+.2f}% | {st['worst_drop']}% | "
                          f"{st['switches']} | {st['time_in_sp']:.0f}% |")
+        for name, (lev, f) in LEV_RULES.items():
+            sig = pd.Series(f(full), index=full.index).loc[a:b].tolist()
+            st = stats(*simulate_lev(df, sig, lev))
+            res[pname][name] = st
+            lines.append(f"| {name} | ${st['final']:,.0f} | {st['per_year']:+.2f}% | {st['worst_drop']}% | "
+                         f"{st['switches']} | {st['time_in_sp']:.0f}% |")
         lines.append("")
+    # check the simulated 2x against the real 2x fund (SSO, since 2006)
+    try:
+        sso = yf.download("SSO", start="2006-06-21", auto_adjust=True, progress=False)
+        if isinstance(sso.columns, pd.MultiIndex):
+            sso.columns = sso.columns.get_level_values(0)
+        real = sso["Close"].dropna()
+        sim, _, _ = simulate_lev(full.loc[real.index[0]:], [1] * len(full.loc[real.index[0]:]), 2)
+        lines += ["## Check: simulated 2x vs the real SSO fund", "",
+                  f"$1,000 from {real.index[0].date()}: real SSO ${float(real.iloc[-1] / real.iloc[0] * 1000):,.0f}, "
+                  f"simulated 2x ${float(sim.iloc[-1] / sim.iloc[0] * 1000):,.0f}.", ""]
+    except Exception as e:  # noqa: BLE001
+        lines += [f"(SSO check skipped: {e})", ""]
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "spy_rules.md"), "w") as f:
         f.write("\n".join(lines) + "\n")
