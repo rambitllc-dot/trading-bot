@@ -15,7 +15,7 @@ Every rule below serves these three goals, in this order.
 After a 33-year test on real prices (`backtest/results/spy_rules.md`), the account no longer picks stocks:
 
 - **Everything is in the S&P 500 fund (SPYM)**, in whole shares. New deposits are invested the same day.
-- **One protection rule (the 200-day switch, your lines since Nov 19):** when the S&P 500 (SPY) closes **at or below** its 200-day average two days in a row, the bot sells SPYM the next morning and moves everything to **SGOV** (Treasury bills, ~4% a year). It buys SPYM again only after SPY closes **5% or more above** the average two days in a row. Settings: `SWITCH_IN_ABOVE_PCT`, `SWITCH_OUT_ABOVE_PCT`, `SWITCH_DAYS`. Started in SGOV on Nov 20, 2026 (SPY was 1.9% below its average).
+- **One protection rule (the 200-day switch, your lines since Nov 19):** when the S&P 500 (SPY) closes **at or below** its 200-day average two days in a row, the bot sells SPYM the next morning and moves everything to **SGOV** (Treasury bills, ~4% a year). It buys SPYM again only after SPY closes **2% or more above** the average two days in a row (changed from 5% on Nov 19 after the test: same protection, more of the recovery). Settings: `SWITCH_IN_ABOVE_PCT`, `SWITCH_OUT_ABOVE_PCT`, `SWITCH_DAYS`. Started in SGOV on Nov 20, 2026 (SPY was 1.9% below its average).
 - No stops, no 3-day rule and no swaps on SPYM: normal dips don't sell it.
 - In the test since 1993: about +9.5% a year (holding the S&P: +10.6%), with a worst drop of about -20% instead of -55%.
 - Setting: `STRATEGY = "index"` in `monitor/config.py`. `STRATEGY = "stocks"` brings back the stock-picking bot described in the rest of this manual.

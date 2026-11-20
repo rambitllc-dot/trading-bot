@@ -69,15 +69,15 @@ class WeatherAndTrendTest(unittest.TestCase):
         back_two = back_one + [201]
         self.assertFalse(regime.check(con, "2026-11-06", {"SPY": self.series(back_two)})["storm"])  # cleared
 
-    def test_back_in_only_5pct_above_the_average(self):
+    def test_back_in_only_above_the_buffer(self):  # SWITCH_IN_ABOVE_PCT (2%)
         con = storage.connect(os.path.join(tempfile.mkdtemp(), "m.db"))
         from monitor import regime
         flat = [100.0] * 250
         down = flat + [99, 99]                                                   # 2 closes at/below: storm
         self.assertTrue(regime.check(con, "2026-11-04", {"SPY": self.series(down)})["storm"])
-        up3 = down + [103, 103]                                                  # 3% above: not enough
+        up3 = down + [101, 101]                                                  # 1% above: not enough
         self.assertTrue(regime.check(con, "2026-11-05", {"SPY": self.series(up3)})["storm"])
-        up6 = up3 + [106, 106]                                                   # 2 closes 5%+ above: back in
+        up6 = up3 + [106, 106]                                                   # 2 closes 2%+ above: back in
         self.assertFalse(regime.check(con, "2026-11-06", {"SPY": self.series(up6)})["storm"])
         dip = up6 + [102, 102]                                                   # still above the average: stays in
         self.assertFalse(regime.check(con, "2026-11-07", {"SPY": self.series(dip)})["storm"])

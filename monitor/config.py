@@ -167,7 +167,7 @@ WEATHER_SWITCH = True       # S&P 500 (SPY) below its 200-day average 2 days in 
 # The switch's lines (chosen by you Nov 19 2026): back into the S&P 500 only after SWITCH_DAYS closes at least
 # SWITCH_IN_ABOVE_PCT% ABOVE the 200-day average; out to SGOV after SWITCH_DAYS closes at or below
 # SWITCH_OUT_ABOVE_PCT% above it (0 = at the average). In between, nothing changes.
-SWITCH_IN_ABOVE_PCT = 5.0
+SWITCH_IN_ABOVE_PCT = 2.0
 SWITCH_OUT_ABOVE_PCT = 0.0
 SWITCH_DAYS = 2
 SAFE_FUND = "SGOV"          # ...new money and stop-out money wait in this short-term Treasury fund until SPY closes
