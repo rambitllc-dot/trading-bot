@@ -1,0 +1,32 @@
+name: Backtest
+
+on:
+  push:
+    paths: ["backtest/*.py", ".github/workflows/backtest.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: backtest
+  cancel-in-progress: true
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install yfinance pandas
+      - run: python backtest/spy_rules.py
+      - name: Save the results
+        run: |
+          git config user.name "backtest"
+          git config user.email "backtest@users.noreply.github.com"
+          git add backtest/results
+          git commit -m "Backtest results" || exit 0
+          for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
