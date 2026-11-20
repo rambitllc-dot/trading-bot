@@ -101,7 +101,7 @@ STRATEGY = "index"
 # daily move): +14.3% a year since 1993 in the test (real fund ~0.7%/yr less) vs +10.6% for holding the S&P, worst
 # drop about -36% (S&P alone: -55%); it can lag the S&P for a year or more in choppy markets (2022: -9%/yr).
 # "SPYM" = the plain S&P 500.
-INDEX_FUND = "SSO"
+INDEX_FUND = "SPYM"  # SSO (2x) chosen Nov 19, but IB declined the leveraged-ETF permission; you can re-request after Dec 19, 2026
 
 TRAIL_PCT = 4.5             # the stop always sits 4.5% below the highest price since you bought (starts 4.5% below
                             # your buy price) and only ever moves up
