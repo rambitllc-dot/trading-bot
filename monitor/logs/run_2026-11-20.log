@@ -1,0 +1,70 @@
+IB sync: holdings are already live from the Mac (2026-11-20), newer than IB's report (2026-11-19); kept them; 7 new trade(s) saved
+Portfolio as of 2026-11-20
+Value $923.26 · cost $923.92 · P&L -$0.66 (-0.1%) · net delta 5 shares · theta $0.00/day · 2/2 positions priced
+
+- SGOV shares x5: mark $100.64, value $503.20, P&L -$0.66 (-0.1%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- CASH shares x420.06: mark $1.00, value $420.06, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 5 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: SGOV 55% (over cap), CASH 45% (over cap)
+By sector: Ultrashort Bond (ETF) 55%, Cash 45%
+
+Flags:
+- [info] SGOV is 55% of the book (cap 40%).
+- [info] CASH is 45% of the book (cap 40%).
+
+MARKET ENVIRONMENT (macro gate)
+23/100 · Stressed (vix level 15, vix percentile 0, term structure 0, breadth 36, credit 59)
+
+NEWS (Claude summaries, facts only)
+- SGOV [neutral]: No headlines in the last 3 days.
+Claude cost this run: $0.0000
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 523 of 525 stocks.
+- Watchlist SPCX 127.79: 16.2% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 143.49: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+738% over 12 months), SNDK (+413% over 12 months), DELL (+283% over 12 months), MU (+280% over 12 months), LITE (+180% over 12 months)
+Pullbacks in uptrends: PKG (+2% above its 200-day average, RSI-2 0 after a sharp drop), FAST (+7% above its 200-day average, RSI-2 0 after a sharp drop), AMGN (+14% above its 200-day average, RSI-2 0 after a sharp drop), PFE (+4% above its 200-day average, RSI-2 1 after a sharp drop), BLK (+4% above its 200-day average, RSI-2 1 after a sharp drop)
+New 52-week highs: SGOV (new 52-week high at 100.64)
+Unusual volume: INTU (volume 3.5x normal, -13% on the day)
+  MRNA [negative]: Moderna shares fell 17% in the week before November 19, 2026, after the company guided to about $4 billion in 2027 cash costs and up to $4.5 billion a year through 2030. A November 20 Trefis headline refers to a cancer vaccine stumble, and Motley Fool describes the company's cancer vaccine data as historic.
+  SNDK [negative]: Sandisk (SNDK) shares fell as part of a broader AI chip and memory selloff on Friday, and they began trading after an 8-for-1 stock split that was reported as sinking. One headline says the stock has lost more than a third of its value in a month even as earnings beats continue. Separately, the company said it is shifting more NAND flash production toward data centers, citing strong AI-driven demand.
+  DELL [negative]: Dell shares fell 10% on Friday with no company-specific news, amid a broader AI-related selloff, and are down 34% in November. The stock reports earnings on Tuesday, and a headline notes it has moved 13% on average the day after its last eight reports.
+  MU [negative]: Micron (MU) shares have fallen 32% in a month, including a 12% single-day plunge, as the broader Nasdaq and AI-linked semiconductor selloff deepened and the S&P 500 and Dow entered correction territory. A headline cites UBS questioning whether AI spending can pay for itself, while Micron's president said the company "can't support every customer," and a report says Apple is nearing a Samsung DRAM deal.
+  LITE [negative]: Lumentum (LITE) slid about 5% on Nov 20 as an AI-related sell-off hit optical networking stocks, with peers such as Applied Optoelectronics and Coherent also falling. The company's CEO acknowledged that shareholders are unhappy with the Marvell deal, which uses a fixed exchange ratio tied to Marvell's share price, and said upcoming earnings and a merger filing could help win them back. A Nov 19 report noted sales rose 137% even as the stock fell.
+  SPCX [negative]: SpaceX (SPCX) fell about 7% on November 20 as an AI and growth-stock sell-off swept through the market. Local Texas officials rejected the company's request for a property tax rebate on its proposed $24 billion data center, which creates uncertainty about that project. A Bernstein analyst said SpaceX's plan to expand AI data center capacity quickly could pay off.
+  PLTR [neutral]: Palantir shares have slid over the past month even as one report says revenue is nearly doubling, and Cathie Wood's Ark has been selling the stock. Recent company-related news includes Nvidia naming Palantir a key AI partner on its November 2026 earnings call and Palantir's FedStart program supporting OLIGO Security's FedRAMP Class D (High) certification. A GuruFocus headline on November 19 linked a stock jump to Palantir's Ukraine ties and an alleged Russian operation targeting its employees.
+
+ROTATION (follow the money)
+Strongest stocks you don't own: TGT (92), VTRS (87), AIZ (85), KO (84), BDX (83)
+Status: index plan: everything in SGOV
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -120.06 from 5 win(s) / 17 loss(es), win rate 23%; fees 27.83
+Open (not locked in) -0.66 · total -120.72
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -2.3 pts after 15 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -19.9 pts after 15 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -4.1 pts after 15 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -8.0 pts after 15 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +24.8 pts after 10 day(s)
+- 2026-11-12 CNC -> BEN [yes]: -1.4 pts after 8 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +4.0 pts after 8 day(s)
+- 2026-11-16 TGT -> HUM [partly]: -18.9 pts after 4 day(s)
+- 2026-11-18 VTRS -> CPAY [partly]: -2.4 pts after 2 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-03-27): your stocks 913.02 vs 982.57 -> -69.55
+2 of 9 swap ideas are ahead; average edge -3.1 pts
+
+ALERTS (3)
+- [warn] NEW Market environment moved from Mixed (47) to Stressed (23). -> YOUR PLAN: REVIEW
+- [info] NEW SGOV is 55% of the book (cap 40%). -> YOUR PLAN: REVIEW
+- [info] NEW CASH is 45% of the book (cap 40%). -> YOUR PLAN: REVIEW
+Notifier: sent
