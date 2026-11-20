@@ -44,3 +44,5 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-19 14:31,Tesla trend (200 day),BUY,TSLA,0.21371331,390.34,0.43
 2026-11-19 17:01,Anthropic buy & hold,BUY,ANT,0.94511152,105.27,0.51
 2026-11-19 17:01,Anthropic gradual buy ($25 a week for 4 weeks),BUY,ANT,0.23716428,105.37,75.01
+2026-11-20 14:31,S&P 500 trend (200 day),SELL,SPY,0.13125191,711.92,93.95
+2026-11-20 14:31,Tesla trend (200 day),SELL,TSLA,0.21371331,366.10,78.67
