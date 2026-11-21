@@ -183,14 +183,14 @@
    "time_in_sp": 100.0
   },
   "3x S&P + 200-day switch (2 closes below / above)": {
-   "final": 308798.0,
+   "final": 308797.0,
    "per_year": 18.48,
    "worst_drop": -53.9,
    "switches": 118,
    "time_in_sp": 78.0
   },
   "3x S&P + switch: out at/below the 200-day, back in 2%+ above": {
-   "final": 285572.0,
+   "final": 285571.0,
    "per_year": 18.21,
    "worst_drop": -53.0,
    "switches": 72,
@@ -1260,7 +1260,7 @@
   },
   "YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it": {
    "final": 967.0,
-   "per_year": -1.66,
+   "per_year": -1.67,
    "worst_drop": -11.9,
    "switches": 6,
    "time_in_sp": 43.0
