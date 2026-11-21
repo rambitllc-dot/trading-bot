@@ -34,6 +34,14 @@ def main():
         y = s.loc[last - pd.DateOffset(years=1):]
         dd = (y / y.cummax() - 1).min() * 100
         lines.append(f"| {t} | {name} | " + " | ".join(cells) + f" | {dd:.1f}% |")
+    raw = yf.download(list(FUNDS), period="2y", auto_adjust=False, progress=False)["Close"]  # quoted prices
+    lines += ["", f"## Price vs 200-day average, close of {raw.index[-1].date()}", "",
+              "| ETF | Price | 200-day average | Gap | 50-day average |", "|---|---|---|---|---|"]
+    for t in FUNDS:
+        c = raw[t].dropna()
+        ma200, ma50 = c.rolling(200).mean().iloc[-1], c.rolling(50).mean().iloc[-1]
+        lines.append(f"| {t} | ${c.iloc[-1]:,.2f} | ${ma200:,.2f} | {(c.iloc[-1] / ma200 - 1) * 100:+.1f}% | "
+                     f"${ma50:,.2f} |")
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "etf_returns.md"), "w") as f:
         f.write("\n".join(lines) + "\n")
