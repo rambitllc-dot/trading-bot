@@ -29,11 +29,11 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-20. Out = T-bills. Trades at the
 | HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $43,660 | +11.82% | -27.5% | 72 | 74% |
 | Half S&P + half 2x S&P, just hold (no switch) | $54,990 | +12.58% | -75.6% | 0 | 100% |
 | 2x S&P, just hold (no switch) | $81,302 | +13.89% | -87.8% | 0 | 100% |
-| 2x S&P + 200-day switch (2 closes below / above) | $91,120 | +14.28% | -38.8% | 118 | 78% |
+| 2x S&P + 200-day switch (2 closes below / above) | $91,121 | +14.28% | -38.8% | 118 | 78% |
 | 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $85,291 | +14.06% | -35.8% | 72 | 74% |
 | 3x S&P, just hold (no switch) | $95,681 | +14.44% | -98.0% | 0 | 100% |
-| 3x S&P + 200-day switch (2 closes below / above) | $308,796 | +18.48% | -53.9% | 118 | 78% |
-| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $285,571 | +18.21% | -53.0% | 72 | 74% |
+| 3x S&P + 200-day switch (2 closes below / above) | $308,798 | +18.48% | -53.9% | 118 | 78% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $285,572 | +18.21% | -53.0% | 72 | 74% |
 
 ## Last 10 years
 
