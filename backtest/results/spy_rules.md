@@ -1,138 +1,138 @@
 # S&P 500: hold vs get-out rules
 
-Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the next day's open, 0.05% cost per switch. $1,000 at the start of each period.
+Data: SPY with dividends, 1993-01-29 to 2026-11-20. Out = T-bills. Trades at the next day's open, 0.05% cost per switch. $1,000 at the start of each period.
 
 ## Since 1993 (33 years)
 
 | Rule | $1,000 became | Per year | Worst drop | Switches | Time in S&P |
 |---|---|---|---|---|---|
-| Just hold the S&P 500 | $29,762 | +10.56% | -55.2% | 0 | 100% |
-| Your idea: out at -4.5% from the high, back in at +4.5% from the low | $3,535 | +3.81% | -45.7% | 275 | 78% |
-| Out at -4.5% from the high, back in at +3% from the low | $4,786 | +4.74% | -54.8% | 326 | 85% |
-| Out at -4.5% from the high, back in after 3 up days in a row | $5,863 | +5.37% | -43.6% | 279 | 82% |
-| Out after 3 down days totalling -3%, back after 3 up days | $10,686 | +7.26% | -54.6% | 225 | 86% |
-| Bot's storm switch: 2 closes below / above the 200-day average | $21,358 | +9.48% | -19.8% | 118 | 78% |
-| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $24,150 | +9.88% | -26.7% | 32 | 84% |
-| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $19,901 | +9.25% | -24.2% | 48 | 82% |
-| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $22,514 | +9.65% | -23.2% | 52 | 81% |
-| Out after 2 closes below the 200-day, back after 3 closes above it | $20,246 | +9.31% | -20.6% | 104 | 77% |
-| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $13,433 | +7.99% | -17.3% | 52 | 68% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $20,492 | +9.35% | -18.0% | 72 | 74% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $20,351 | +9.32% | -18.6% | 90 | 76% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $18,830 | +9.07% | -17.7% | 58 | 72% |
-| Out at -10% from the high, back in at +10% from the low | $29,130 | +10.49% | -38.0% | 52 | 87% |
-| Out at -15% from the high, back in at +15% from the low | $16,271 | +8.60% | -47.3% | 30 | 91% |
-| Out at -20% from the high, back in at +20% from the low | $30,621 | +10.65% | -48.3% | 12 | 93% |
-| Out at -10% from the high, back in above the 200-day average | $22,510 | +9.65% | -23.9% | 42 | 84% |
-| Out at -15% from the high, back in above the 200-day average | $20,355 | +9.32% | -36.5% | 22 | 87% |
-| Out at -20% from the high, back in above the 200-day average | $31,752 | +10.77% | -37.7% | 10 | 91% |
-| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $46,192 | +12.01% | -27.5% | 72 | 74% |
-| Half S&P + half 2x S&P, just hold (no switch) | $58,733 | +12.80% | -75.6% | 0 | 100% |
-| 2x S&P, just hold (no switch) | $87,705 | +14.15% | -87.8% | 0 | 100% |
-| 2x S&P + 200-day switch (2 closes below / above) | $98,296 | +14.54% | -38.8% | 118 | 78% |
-| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $92,007 | +14.31% | -35.8% | 72 | 74% |
-| 3x S&P, just hold (no switch) | $107,455 | +14.84% | -98.0% | 0 | 100% |
-| 3x S&P + 200-day switch (2 closes below / above) | $346,791 | +18.89% | -53.9% | 118 | 78% |
-| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $320,708 | +18.61% | -53.0% | 72 | 74% |
+| Just hold the S&P 500 | $28,678 | +10.44% | -55.2% | 0 | 100% |
+| Your idea: out at -4.5% from the high, back in at +4.5% from the low | $3,536 | +3.81% | -45.7% | 275 | 78% |
+| Out at -4.5% from the high, back in at +3% from the low | $4,769 | +4.73% | -54.8% | 327 | 85% |
+| Out at -4.5% from the high, back in after 3 up days in a row | $5,864 | +5.37% | -43.6% | 279 | 82% |
+| Out after 3 down days totalling -3%, back after 3 up days | $10,688 | +7.26% | -54.6% | 225 | 86% |
+| Bot's storm switch: 2 closes below / above the 200-day average | $20,581 | +9.36% | -19.8% | 118 | 78% |
+| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $23,271 | +9.76% | -26.7% | 32 | 84% |
+| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $19,177 | +9.13% | -24.2% | 48 | 82% |
+| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $21,695 | +9.53% | -23.2% | 52 | 81% |
+| Out after 2 closes below the 200-day, back after 3 closes above it | $19,509 | +9.19% | -20.6% | 104 | 77% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $12,944 | +7.87% | -17.3% | 52 | 68% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $19,747 | +9.22% | -18.0% | 72 | 74% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $19,610 | +9.20% | -18.6% | 90 | 76% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $18,145 | +8.95% | -17.7% | 58 | 72% |
+| Out at -10% from the high, back in at +10% from the low | $28,069 | +10.37% | -38.0% | 52 | 87% |
+| Out at -15% from the high, back in at +15% from the low | $15,679 | +8.48% | -47.3% | 30 | 91% |
+| Out at -20% from the high, back in at +20% from the low | $29,506 | +10.53% | -48.3% | 12 | 93% |
+| Out at -10% from the high, back in above the 200-day average | $21,691 | +9.53% | -23.9% | 42 | 84% |
+| Out at -15% from the high, back in above the 200-day average | $19,614 | +9.20% | -36.5% | 22 | 87% |
+| Out at -20% from the high, back in above the 200-day average | $30,596 | +10.65% | -37.7% | 10 | 91% |
+| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $43,660 | +11.82% | -27.5% | 72 | 74% |
+| Half S&P + half 2x S&P, just hold (no switch) | $54,990 | +12.58% | -75.6% | 0 | 100% |
+| 2x S&P, just hold (no switch) | $81,302 | +13.89% | -87.8% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $91,120 | +14.28% | -38.8% | 118 | 78% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $85,290 | +14.06% | -35.8% | 72 | 74% |
+| 3x S&P, just hold (no switch) | $95,681 | +14.44% | -98.0% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $308,795 | +18.48% | -53.9% | 118 | 78% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $285,569 | +18.21% | -53.0% | 72 | 74% |
 
 ## Last 10 years
 
 | Rule | $1,000 became | Per year | Worst drop | Switches | Time in S&P |
 |---|---|---|---|---|---|
-| Just hold the S&P 500 | $3,973 | +14.72% | -33.7% | 0 | 100% |
+| Just hold the S&P 500 | $3,828 | +14.29% | -33.7% | 0 | 100% |
 | Your idea: out at -4.5% from the high, back in at +4.5% from the low | $2,348 | +8.87% | -23.0% | 73 | 82% |
-| Out at -4.5% from the high, back in at +3% from the low | $2,477 | +9.45% | -25.3% | 86 | 88% |
-| Out at -4.5% from the high, back in after 3 up days in a row | $2,504 | +9.57% | -24.6% | 73 | 85% |
-| Out after 3 down days totalling -3%, back after 3 up days | $3,122 | +12.00% | -28.2% | 65 | 88% |
-| Bot's storm switch: 2 closes below / above the 200-day average | $2,978 | +11.47% | -17.9% | 34 | 84% |
-| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $2,714 | +10.45% | -26.7% | 10 | 89% |
-| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $2,571 | +9.85% | -20.6% | 16 | 87% |
-| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $2,836 | +10.93% | -23.2% | 16 | 86% |
-| Out after 2 closes below the 200-day, back after 3 closes above it | $3,115 | +11.97% | -17.4% | 28 | 83% |
-| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $2,578 | +9.88% | -17.3% | 16 | 78% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $2,990 | +11.52% | -17.1% | 22 | 82% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $3,061 | +11.78% | -18.4% | 26 | 83% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $2,939 | +11.33% | -14.9% | 18 | 81% |
-| Out at -10% from the high, back in at +10% from the low | $4,133 | +15.17% | -25.7% | 14 | 89% |
-| Out at -15% from the high, back in at +15% from the low | $2,889 | +11.14% | -30.6% | 10 | 91% |
-| Out at -20% from the high, back in at +20% from the low | $3,356 | +12.80% | -26.7% | 4 | 90% |
-| Out at -10% from the high, back in above the 200-day average | $2,809 | +10.83% | -23.7% | 14 | 88% |
-| Out at -15% from the high, back in above the 200-day average | $2,822 | +10.88% | -20.9% | 8 | 90% |
-| Out at -20% from the high, back in above the 200-day average | $3,208 | +12.30% | -26.7% | 4 | 93% |
-| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $4,214 | +15.39% | -26.5% | 22 | 82% |
-| Half S&P + half 2x S&P, just hold (no switch) | $6,035 | +19.59% | -48.8% | 0 | 100% |
-| 2x S&P, just hold (no switch) | $8,098 | +23.14% | -58.8% | 0 | 100% |
-| 2x S&P + 200-day switch (2 closes below / above) | $5,607 | +18.72% | -35.0% | 34 | 84% |
-| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $5,665 | +18.84% | -33.8% | 22 | 82% |
-| 3x S&P, just hold (no switch) | $12,884 | +28.97% | -76.2% | 0 | 100% |
-| 3x S&P + 200-day switch (2 closes below / above) | $9,810 | +25.51% | -49.0% | 34 | 84% |
-| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $10,003 | +25.76% | -47.4% | 22 | 82% |
+| Out at -4.5% from the high, back in at +3% from the low | $2,468 | +9.41% | -25.3% | 87 | 88% |
+| Out at -4.5% from the high, back in after 3 up days in a row | $2,505 | +9.57% | -24.6% | 73 | 85% |
+| Out after 3 down days totalling -3%, back after 3 up days | $3,123 | +12.00% | -28.2% | 65 | 88% |
+| Bot's storm switch: 2 closes below / above the 200-day average | $2,869 | +11.06% | -17.9% | 34 | 84% |
+| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $2,615 | +10.04% | -26.7% | 10 | 89% |
+| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $2,477 | +9.45% | -20.6% | 16 | 87% |
+| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $2,733 | +10.52% | -23.2% | 16 | 86% |
+| Out after 2 closes below the 200-day, back after 3 closes above it | $3,002 | +11.56% | -17.4% | 28 | 83% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $2,484 | +9.47% | -17.3% | 16 | 78% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $2,881 | +11.10% | -17.1% | 22 | 82% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $2,949 | +11.36% | -18.4% | 26 | 83% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $2,832 | +10.91% | -14.9% | 18 | 81% |
+| Out at -10% from the high, back in at +10% from the low | $3,983 | +14.74% | -25.7% | 14 | 89% |
+| Out at -15% from the high, back in at +15% from the low | $2,784 | +10.72% | -30.6% | 10 | 91% |
+| Out at -20% from the high, back in at +20% from the low | $3,234 | +12.39% | -26.7% | 4 | 90% |
+| Out at -10% from the high, back in above the 200-day average | $2,707 | +10.41% | -23.7% | 14 | 88% |
+| Out at -15% from the high, back in above the 200-day average | $2,720 | +10.47% | -20.9% | 8 | 90% |
+| Out at -20% from the high, back in above the 200-day average | $3,091 | +11.88% | -26.7% | 4 | 93% |
+| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $3,983 | +14.74% | -26.5% | 22 | 82% |
+| Half S&P + half 2x S&P, just hold (no switch) | $5,667 | +18.84% | -48.8% | 0 | 100% |
+| 2x S&P, just hold (no switch) | $7,506 | +22.21% | -58.8% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $5,198 | +17.82% | -35.0% | 34 | 84% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $5,252 | +17.94% | -33.8% | 22 | 82% |
+| 3x S&P, just hold (no switch) | $11,472 | +27.48% | -76.2% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $8,735 | +24.07% | -49.0% | 34 | 84% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $8,907 | +24.31% | -47.4% | 22 | 82% |
 
 ## Last 5 years
 
 | Rule | $1,000 became | Per year | Worst drop | Switches | Time in S&P |
 |---|---|---|---|---|---|
-| Just hold the S&P 500 | $1,664 | +10.61% | -24.5% | 0 | 100% |
+| Just hold the S&P 500 | $1,603 | +9.79% | -24.5% | 0 | 100% |
 | Your idea: out at -4.5% from the high, back in at +4.5% from the low | $1,384 | +6.65% | -23.0% | 37 | 78% |
-| Out at -4.5% from the high, back in at +3% from the low | $1,280 | +5.01% | -25.3% | 48 | 84% |
+| Out at -4.5% from the high, back in at +3% from the low | $1,276 | +4.94% | -25.3% | 49 | 84% |
 | Out at -4.5% from the high, back in after 3 up days in a row | $1,324 | +5.71% | -24.6% | 41 | 80% |
 | Out after 3 down days totalling -3%, back after 3 up days | $1,340 | +5.97% | -28.2% | 35 | 85% |
-| Bot's storm switch: 2 closes below / above the 200-day average | $1,431 | +7.35% | -17.9% | 22 | 78% |
-| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $1,391 | +6.75% | -20.5% | 6 | 85% |
-| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,275 | +4.93% | -20.6% | 10 | 82% |
-| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,407 | +7.00% | -23.2% | 10 | 82% |
-| Out after 2 closes below the 200-day, back after 3 closes above it | $1,448 | +7.61% | -17.4% | 18 | 77% |
-| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,344 | +6.03% | -11.9% | 10 | 70% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,415 | +7.11% | -17.1% | 14 | 76% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $1,417 | +7.14% | -18.4% | 18 | 77% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $1,435 | +7.41% | -14.3% | 12 | 74% |
-| Out at -10% from the high, back in at +10% from the low | $1,610 | +9.89% | -25.7% | 8 | 89% |
-| Out at -15% from the high, back in at +15% from the low | $1,185 | +3.42% | -30.6% | 6 | 86% |
-| Out at -20% from the high, back in at +20% from the low | $1,493 | +8.26% | -21.3% | 2 | 81% |
-| Out at -10% from the high, back in above the 200-day average | $1,335 | +5.89% | -23.7% | 8 | 84% |
-| Out at -15% from the high, back in above the 200-day average | $1,405 | +6.97% | -20.9% | 4 | 87% |
-| Out at -20% from the high, back in above the 200-day average | $1,566 | +9.29% | -24.6% | 2 | 91% |
-| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $1,465 | +7.85% | -25.9% | 14 | 76% |
-| Half S&P + half 2x S&P, just hold (no switch) | $1,770 | +11.98% | -35.7% | 0 | 100% |
-| 2x S&P, just hold (no switch) | $1,877 | +13.28% | -46.5% | 0 | 100% |
-| 2x S&P + 200-day switch (2 closes below / above) | $1,532 | +8.82% | -35.0% | 22 | 78% |
-| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,501 | +8.37% | -33.8% | 14 | 76% |
-| 3x S&P, just hold (no switch) | $1,907 | +13.64% | -63.6% | 0 | 100% |
-| 3x S&P + 200-day switch (2 closes below / above) | $1,587 | +9.58% | -49.0% | 22 | 78% |
-| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,543 | +8.97% | -47.4% | 14 | 76% |
+| Bot's storm switch: 2 closes below / above the 200-day average | $1,379 | +6.56% | -17.9% | 22 | 78% |
+| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $1,340 | +5.96% | -20.5% | 6 | 85% |
+| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,229 | +4.16% | -20.6% | 10 | 82% |
+| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,356 | +6.21% | -23.2% | 10 | 82% |
+| Out after 2 closes below the 200-day, back after 3 closes above it | $1,395 | +6.82% | -17.4% | 18 | 77% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,295 | +5.25% | -11.9% | 10 | 70% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,363 | +6.33% | -17.1% | 14 | 76% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $1,365 | +6.35% | -18.4% | 18 | 77% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $1,383 | +6.62% | -14.3% | 12 | 74% |
+| Out at -10% from the high, back in at +10% from the low | $1,551 | +9.08% | -25.7% | 8 | 89% |
+| Out at -15% from the high, back in at +15% from the low | $1,142 | +2.66% | -30.6% | 6 | 86% |
+| Out at -20% from the high, back in at +20% from the low | $1,439 | +7.46% | -21.3% | 2 | 81% |
+| Out at -10% from the high, back in above the 200-day average | $1,286 | +5.11% | -23.7% | 8 | 84% |
+| Out at -15% from the high, back in above the 200-day average | $1,354 | +6.19% | -20.9% | 4 | 87% |
+| Out at -20% from the high, back in above the 200-day average | $1,509 | +8.49% | -24.6% | 2 | 91% |
+| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $1,384 | +6.65% | -25.9% | 14 | 76% |
+| Half S&P + half 2x S&P, just hold (no switch) | $1,672 | +10.71% | -35.7% | 0 | 100% |
+| 2x S&P, just hold (no switch) | $1,740 | +11.59% | -46.5% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,420 | +7.19% | -35.0% | 22 | 78% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,391 | +6.75% | -33.8% | 14 | 76% |
+| 3x S&P, just hold (no switch) | $1,698 | +11.05% | -63.6% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,413 | +7.09% | -49.0% | 22 | 78% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,374 | +6.49% | -47.4% | 14 | 76% |
 
 ## Last 2 years
 
 | Rule | $1,000 became | Per year | Worst drop | Switches | Time in S&P |
 |---|---|---|---|---|---|
-| Just hold the S&P 500 | $1,283 | +12.92% | -18.8% | 0 | 100% |
+| Just hold the S&P 500 | $1,236 | +10.88% | -18.8% | 0 | 100% |
 | Your idea: out at -4.5% from the high, back in at +4.5% from the low | $1,198 | +9.20% | -15.8% | 11 | 89% |
-| Out at -4.5% from the high, back in at +3% from the low | $1,208 | +9.66% | -15.9% | 12 | 92% |
-| Out at -4.5% from the high, back in after 3 up days in a row | $1,265 | +12.14% | -12.9% | 9 | 89% |
+| Out at -4.5% from the high, back in at +3% from the low | $1,204 | +9.45% | -15.9% | 13 | 91% |
+| Out at -4.5% from the high, back in after 3 up days in a row | $1,265 | +12.14% | -12.9% | 9 | 88% |
 | Out after 3 down days totalling -3%, back after 3 up days | $1,233 | +10.76% | -18.3% | 9 | 94% |
-| Bot's storm switch: 2 closes below / above the 200-day average | $1,157 | +7.36% | -10.7% | 6 | 89% |
-| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $1,075 | +3.61% | -20.5% | 2 | 95% |
-| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $1,015 | +0.71% | -20.5% | 4 | 93% |
-| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,157 | +7.38% | -10.0% | 4 | 92% |
-| Out after 2 closes below the 200-day, back after 3 closes above it | $1,189 | +8.84% | -9.3% | 4 | 89% |
-| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,100 | +4.75% | -9.3% | 4 | 82% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,178 | +8.32% | -9.3% | 4 | 89% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $1,178 | +8.32% | -9.3% | 4 | 89% |
-| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $1,155 | +7.27% | -9.3% | 4 | 88% |
-| Out at -10% from the high, back in at +10% from the low | $1,339 | +15.33% | -12.2% | 2 | 96% |
-| Out at -15% from the high, back in at +15% from the low | $1,079 | +3.78% | -20.3% | 2 | 95% |
-| Out at -20% from the high, back in at +20% from the low | $1,283 | +12.92% | -18.8% | 0 | 100% |
-| Out at -10% from the high, back in above the 200-day average | $1,033 | +1.60% | -23.7% | 4 | 93% |
-| Out at -15% from the high, back in above the 200-day average | $1,071 | +3.41% | -20.9% | 2 | 95% |
-| Out at -20% from the high, back in above the 200-day average | $1,283 | +12.92% | -18.8% | 0 | 100% |
-| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $1,201 | +9.34% | -13.9% | 4 | 89% |
-| Half S&P + half 2x S&P, just hold (no switch) | $1,345 | +15.57% | -27.2% | 0 | 100% |
-| 2x S&P, just hold (no switch) | $1,407 | +18.16% | -35.2% | 0 | 100% |
-| 2x S&P + 200-day switch (2 closes below / above) | $1,179 | +8.39% | -21.3% | 6 | 89% |
-| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,222 | +10.31% | -18.5% | 4 | 89% |
-| 3x S&P, just hold (no switch) | $1,486 | +21.32% | -48.9% | 0 | 100% |
-| 3x S&P + 200-day switch (2 closes below / above) | $1,185 | +8.64% | -30.9% | 6 | 89% |
-| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,250 | +11.52% | -27.1% | 4 | 89% |
+| Bot's storm switch: 2 closes below / above the 200-day average | $1,114 | +5.43% | -11.5% | 6 | 90% |
+| Your new idea: out after 2 closes 5% below the 200-day, back after 3 closes above it | $1,036 | +1.75% | -20.5% | 2 | 95% |
+| Out after 2 closes 3% below the 200-day, back after 3 closes above it | $978 | -1.09% | -20.5% | 4 | 93% |
+| Out after 2 closes 2% below the 200-day, back after 3 closes above it | $1,115 | +5.45% | -11.5% | 4 | 92% |
+| Out after 2 closes below the 200-day, back after 3 closes above it | $1,146 | +6.88% | -11.5% | 4 | 89% |
+| YOUR RULE: out after 2 closes at/below the 200-day, back in after 2 closes 5%+ above it | $1,060 | +2.87% | -11.5% | 4 | 83% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 2%+ above it | $1,135 | +6.36% | -11.5% | 4 | 89% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 1%+ above it | $1,135 | +6.36% | -11.5% | 4 | 89% |
+| Out after 2 closes at/below the 200-day, back in after 2 closes 3%+ above it | $1,113 | +5.34% | -11.5% | 4 | 88% |
+| Out at -10% from the high, back in at +10% from the low | $1,291 | +13.25% | -12.2% | 2 | 96% |
+| Out at -15% from the high, back in at +15% from the low | $1,040 | +1.92% | -20.3% | 2 | 95% |
+| Out at -20% from the high, back in at +20% from the low | $1,236 | +10.88% | -18.8% | 0 | 100% |
+| Out at -10% from the high, back in above the 200-day average | $995 | -0.22% | -23.7% | 4 | 93% |
+| Out at -15% from the high, back in above the 200-day average | $1,032 | +1.55% | -20.9% | 2 | 95% |
+| Out at -20% from the high, back in above the 200-day average | $1,236 | +10.88% | -18.8% | 0 | 100% |
+| HALF S&P + HALF 2x S&P + switch (out at/below the 200-day, back in 2%+ above) | $1,135 | +6.36% | -17.3% | 4 | 89% |
+| Half S&P + half 2x S&P, just hold (no switch) | $1,270 | +12.37% | -27.2% | 0 | 100% |
+| 2x S&P, just hold (no switch) | $1,305 | +13.85% | -35.2% | 0 | 100% |
+| 2x S&P + 200-day switch (2 closes below / above) | $1,093 | +4.45% | -22.6% | 6 | 90% |
+| 2x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,133 | +6.29% | -22.6% | 4 | 89% |
+| 3x S&P, just hold (no switch) | $1,323 | +14.62% | -48.9% | 0 | 100% |
+| 3x S&P + 200-day switch (2 closes below / above) | $1,055 | +2.65% | -33.1% | 6 | 90% |
+| 3x S&P + switch: out at/below the 200-day, back in 2%+ above | $1,113 | +5.36% | -33.1% | 4 | 89% |
 
 ## 2008 crash (Oct 2007 - Mar 2013)
 
@@ -235,5 +235,5 @@ Data: SPY with dividends, 1993-01-29 to 2026-11-19. Out = T-bills. Trades at the
 
 ## Check: simulated 2x vs the real SSO fund
 
-$1,000 from 2006-06-21: real SSO $16,584, simulated 2x $18,940.
+$1,000 from 2006-06-21: real SSO $15,410, simulated 2x $17,558.
 
