@@ -23,6 +23,7 @@ jobs:
           python-version: "3.12"
       - run: pip install yfinance pandas
       - run: python backtest/spy_rules.py
+      - run: python backtest/sector_rotation.py
       - name: Save the results
         run: |
           git config user.name "backtest"
