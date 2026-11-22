@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 22, 2026 00:01 UTC · Bitcoin $60,139.61 · US stock market closed
+Last update: Nov 22, 2026 00:31 UTC · Bitcoin $60,143.90 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -76,7 +76,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | SpaceX | $91.08 | $100.00 | trading |
 | Anthropic | $84.13 | $100.00 | trading |
 
-**All together:** $2,374.14 from $2,600 (-225.86)
+**All together:** $2,374.15 from $2,600 (-225.85)
 
 ## What each one is doing
 
@@ -118,7 +118,7 @@ Guessing if each 15-minute candle closes up or down. A win pays 0.8x the bet, so
 | Method | Type | Bets | Win rate | $100 is now | Worst drop |
 |---|---|---:|---:|---:|---:|
 | Reversal: bet against unusually big moves | Static (one fixed method) | 251 | 55.0% | $68.13 | -50% |
-| Learning: copies whichever method has been winning lately | Learning (switches methods) | 420 | 48.6% | $4.60 | -96% |
+| Learning: copies whichever method has been winning lately | Learning (switches methods) | 422 | 48.8% | $4.98 | -96% |
 | Coin flip (luck benchmark) | Luck benchmark | 531 | 47.1% | $1.00 (ran out) | -99% |
 | Session momentum: follow the busiest hour's direction | Static (one fixed method) | 757 | 49.9% | $0.99 (ran out) | -99% |
 | Trend: bet with the 1-hour trend when the last candle agrees | Static (one fixed method) | 496 | 46.4% | $0.98 (ran out) | -99% |
