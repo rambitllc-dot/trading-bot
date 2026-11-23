@@ -27,6 +27,7 @@ jobs:
       - run: python backtest/etf_returns.py
       - run: python backtest/staples_switch.py
       - run: python backtest/fund_screen.py
+      - run: python backtest/theme_screen.py
       - name: Save the results
         run: |
           git config user.name "backtest"
