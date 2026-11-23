@@ -22,6 +22,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install yfinance pandas
+      - run: python backtest/quotes.py
       - run: python backtest/spy_rules.py
       - run: python backtest/sector_rotation.py
       - run: python backtest/etf_returns.py
