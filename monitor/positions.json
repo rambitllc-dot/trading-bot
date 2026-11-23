@@ -2,8 +2,8 @@
   {
     "asset_type": "shares",
     "ticker": "AIQ",
-    "contracts": 1,
-    "entry_price": 55.41,
+    "contracts": 2,
+    "entry_price": 55.405,
     "entry_date": "2026-11-23",
     "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
   },
@@ -26,8 +26,8 @@
   {
     "asset_type": "shares",
     "ticker": "PAVE",
-    "contracts": 1,
-    "entry_price": 51.69,
+    "contracts": 2,
+    "entry_price": 51.685,
     "entry_date": "2026-11-23",
     "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
   },
@@ -65,7 +65,7 @@
   },
   {
     "asset_type": "cash",
-    "amount": 121.55,
-    "note": "IB cash, Nov 23 9:39 AM (from your IB screenshot)"
+    "amount": 14.75,
+    "note": "IB cash, Nov 23 9:44 AM (from your IB screenshot)"
   }
 ]
