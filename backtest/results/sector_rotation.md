@@ -6,104 +6,104 @@ Data: 9 SPDR sector funds + SPY with dividends, 1998-12-22 to 2026-11-23. Monthl
 
 | Strategy | $1,000 became | Per year | Worst drop | Rebalances |
 |---|---|---|---|---|
-| Just hold the S&P 500 (SPY) | $9,693 | +8.48% | -55.2% | 0 |
+| Just hold the S&P 500 (SPY) | $9,664 | +8.46% | -55.2% | 0 |
 | S&P 500 + your switch | $8,455 | +7.95% | -18.0% | 62 |
-| All 9 sectors equally, held | $9,649 | +8.46% | -52.6% | 0 |
-| Top 1 sector(s) by 3-month gain, monthly | $4,887 | +5.85% | -58.3% | 193 |
+| All 9 sectors equally, held | $9,629 | +8.45% | -52.6% | 0 |
+| Top 1 sector(s) by 3-month gain, monthly | $4,878 | +5.84% | -58.3% | 193 |
 | Top 1 sector(s) by 3-month gain, monthly + your switch | $6,199 | +6.75% | -32.2% | 190 |
-| Top 2 sector(s) by 3-month gain, monthly | $6,457 | +6.91% | -52.9% | 332 |
+| Top 2 sector(s) by 3-month gain, monthly | $6,446 | +6.90% | -52.9% | 332 |
 | Top 2 sector(s) by 3-month gain, monthly + your switch | $4,899 | +5.86% | -26.4% | 294 |
-| Top 3 sector(s) by 3-month gain, monthly | $7,923 | +7.69% | -52.7% | 332 |
+| Top 3 sector(s) by 3-month gain, monthly | $7,913 | +7.69% | -52.7% | 332 |
 | Top 3 sector(s) by 3-month gain, monthly + your switch | $6,339 | +6.84% | -22.0% | 294 |
-| Top 1 sector(s) by 6-month gain, monthly | $10,718 | +8.87% | -49.2% | 138 |
+| Top 1 sector(s) by 6-month gain, monthly | $10,703 | +8.86% | -49.2% | 138 |
 | Top 1 sector(s) by 6-month gain, monthly + your switch | $4,288 | +5.35% | -33.5% | 156 |
-| Top 2 sector(s) by 6-month gain, monthly | $7,942 | +7.70% | -49.0% | 329 |
+| Top 2 sector(s) by 6-month gain, monthly | $7,929 | +7.70% | -49.0% | 329 |
 | Top 2 sector(s) by 6-month gain, monthly + your switch | $5,590 | +6.36% | -26.0% | 291 |
-| Top 3 sector(s) by 6-month gain, monthly | $8,368 | +7.91% | -50.5% | 329 |
+| Top 3 sector(s) by 6-month gain, monthly | $8,345 | +7.90% | -50.5% | 329 |
 | Top 3 sector(s) by 6-month gain, monthly + your switch | $5,923 | +6.58% | -22.8% | 291 |
-| Top 1 sector(s) by 12-month gain, monthly | $7,235 | +7.35% | -52.9% | 106 |
+| Top 1 sector(s) by 12-month gain, monthly | $7,221 | +7.34% | -52.9% | 106 |
 | Top 1 sector(s) by 12-month gain, monthly + your switch | $4,910 | +5.87% | -29.6% | 134 |
-| Top 2 sector(s) by 12-month gain, monthly | $9,933 | +8.57% | -46.0% | 323 |
+| Top 2 sector(s) by 12-month gain, monthly | $9,916 | +8.56% | -46.0% | 323 |
 | Top 2 sector(s) by 12-month gain, monthly + your switch | $6,785 | +7.10% | -21.0% | 284 |
-| Top 3 sector(s) by 12-month gain, monthly | $9,102 | +8.23% | -45.5% | 323 |
+| Top 3 sector(s) by 12-month gain, monthly | $9,088 | +8.23% | -45.5% | 323 |
 | Top 3 sector(s) by 12-month gain, monthly + your switch | $7,202 | +7.33% | -18.9% | 284 |
 
 ## Last 10 years
 
 | Strategy | $1,000 became | Per year | Worst drop | Rebalances |
 |---|---|---|---|---|
-| Just hold the S&P 500 (SPY) | $4,015 | +14.82% | -33.7% |  |
+| Just hold the S&P 500 (SPY) | $4,002 | +14.78% | -33.7% |  |
 | S&P 500 + your switch | $3,020 | +11.62% | -17.1% |  |
-| All 9 sectors equally, held | $3,201 | +12.26% | -35.8% |  |
-| Top 1 sector(s) by 3-month gain, monthly | $2,983 | +11.48% | -31.2% |  |
+| All 9 sectors equally, held | $3,194 | +12.24% | -35.8% |  |
+| Top 1 sector(s) by 3-month gain, monthly | $2,977 | +11.46% | -31.2% |  |
 | Top 1 sector(s) by 3-month gain, monthly + your switch | $3,000 | +11.54% | -21.6% |  |
-| Top 2 sector(s) by 3-month gain, monthly | $3,924 | +14.56% | -33.3% |  |
+| Top 2 sector(s) by 3-month gain, monthly | $3,918 | +14.54% | -33.3% |  |
 | Top 2 sector(s) by 3-month gain, monthly + your switch | $3,054 | +11.74% | -15.0% |  |
-| Top 3 sector(s) by 3-month gain, monthly | $3,850 | +14.34% | -33.1% |  |
+| Top 3 sector(s) by 3-month gain, monthly | $3,845 | +14.33% | -33.1% |  |
 | Top 3 sector(s) by 3-month gain, monthly + your switch | $2,959 | +11.39% | -14.1% |  |
-| Top 1 sector(s) by 6-month gain, monthly | $3,348 | +12.76% | -31.2% |  |
+| Top 1 sector(s) by 6-month gain, monthly | $3,344 | +12.75% | -31.2% |  |
 | Top 1 sector(s) by 6-month gain, monthly + your switch | $1,751 | +5.73% | -27.5% |  |
-| Top 2 sector(s) by 6-month gain, monthly | $2,724 | +10.48% | -29.6% |  |
+| Top 2 sector(s) by 6-month gain, monthly | $2,720 | +10.46% | -29.6% |  |
 | Top 2 sector(s) by 6-month gain, monthly + your switch | $2,107 | +7.69% | -16.4% |  |
-| Top 3 sector(s) by 6-month gain, monthly | $3,006 | +11.56% | -31.5% |  |
+| Top 3 sector(s) by 6-month gain, monthly | $2,998 | +11.53% | -31.5% |  |
 | Top 3 sector(s) by 6-month gain, monthly + your switch | $2,121 | +7.76% | -15.9% |  |
-| Top 1 sector(s) by 12-month gain, monthly | $3,743 | +14.02% | -31.2% |  |
+| Top 1 sector(s) by 12-month gain, monthly | $3,735 | +14.00% | -31.2% |  |
 | Top 1 sector(s) by 12-month gain, monthly + your switch | $2,227 | +8.29% | -26.1% |  |
-| Top 2 sector(s) by 12-month gain, monthly | $3,709 | +13.92% | -33.3% |  |
+| Top 2 sector(s) by 12-month gain, monthly | $3,703 | +13.90% | -33.3% |  |
 | Top 2 sector(s) by 12-month gain, monthly + your switch | $2,784 | +10.71% | -14.0% |  |
-| Top 3 sector(s) by 12-month gain, monthly | $3,986 | +14.74% | -30.3% |  |
+| Top 3 sector(s) by 12-month gain, monthly | $3,980 | +14.72% | -30.3% |  |
 | Top 3 sector(s) by 12-month gain, monthly + your switch | $2,913 | +11.21% | -13.1% |  |
 
 ## Last 5 years
 
 | Strategy | $1,000 became | Per year | Worst drop | Rebalances |
 |---|---|---|---|---|
-| Just hold the S&P 500 (SPY) | $1,681 | +10.82% | -24.5% |  |
+| Just hold the S&P 500 (SPY) | $1,676 | +10.75% | -24.5% |  |
 | S&P 500 + your switch | $1,430 | +7.32% | -17.1% |  |
-| All 9 sectors equally, held | $1,572 | +9.35% | -17.8% |  |
-| Top 1 sector(s) by 3-month gain, monthly | $1,336 | +5.90% | -28.1% |  |
+| All 9 sectors equally, held | $1,569 | +9.30% | -17.8% |  |
+| Top 1 sector(s) by 3-month gain, monthly | $1,334 | +5.86% | -28.1% |  |
 | Top 1 sector(s) by 3-month gain, monthly + your switch | $1,395 | +6.81% | -21.0% |  |
-| Top 2 sector(s) by 3-month gain, monthly | $1,607 | +9.83% | -18.9% |  |
+| Top 2 sector(s) by 3-month gain, monthly | $1,604 | +9.79% | -18.9% |  |
 | Top 2 sector(s) by 3-month gain, monthly + your switch | $1,385 | +6.64% | -15.0% |  |
-| Top 3 sector(s) by 3-month gain, monthly | $1,522 | +8.66% | -18.8% |  |
+| Top 3 sector(s) by 3-month gain, monthly | $1,520 | +8.63% | -18.8% |  |
 | Top 3 sector(s) by 3-month gain, monthly + your switch | $1,334 | +5.87% | -14.1% |  |
-| Top 1 sector(s) by 6-month gain, monthly | $1,646 | +10.35% | -26.0% |  |
+| Top 1 sector(s) by 6-month gain, monthly | $1,644 | +10.32% | -26.0% |  |
 | Top 1 sector(s) by 6-month gain, monthly + your switch | $1,087 | +1.66% | -25.0% |  |
-| Top 2 sector(s) by 6-month gain, monthly | $1,312 | +5.51% | -23.1% |  |
+| Top 2 sector(s) by 6-month gain, monthly | $1,310 | +5.48% | -23.1% |  |
 | Top 2 sector(s) by 6-month gain, monthly + your switch | $1,199 | +3.65% | -15.2% |  |
-| Top 3 sector(s) by 6-month gain, monthly | $1,334 | +5.86% | -18.3% |  |
+| Top 3 sector(s) by 6-month gain, monthly | $1,330 | +5.81% | -18.3% |  |
 | Top 3 sector(s) by 6-month gain, monthly + your switch | $1,125 | +2.35% | -15.9% |  |
-| Top 1 sector(s) by 12-month gain, monthly | $1,659 | +10.52% | -26.1% |  |
+| Top 1 sector(s) by 12-month gain, monthly | $1,656 | +10.48% | -26.2% |  |
 | Top 1 sector(s) by 12-month gain, monthly + your switch | $1,171 | +3.18% | -26.1% |  |
-| Top 2 sector(s) by 12-month gain, monthly | $1,839 | +12.80% | -17.0% |  |
+| Top 2 sector(s) by 12-month gain, monthly | $1,836 | +12.76% | -17.0% |  |
 | Top 2 sector(s) by 12-month gain, monthly + your switch | $1,477 | +8.01% | -12.8% |  |
-| Top 3 sector(s) by 12-month gain, monthly | $2,015 | +14.85% | -16.1% |  |
+| Top 3 sector(s) by 12-month gain, monthly | $2,011 | +14.81% | -16.1% |  |
 | Top 3 sector(s) by 12-month gain, monthly + your switch | $1,622 | +10.03% | -10.7% |  |
 
 ## Last 2 years
 
 | Strategy | $1,000 became | Per year | Worst drop | Rebalances |
 |---|---|---|---|---|
-| Just hold the S&P 500 (SPY) | $1,296 | +13.43% | -18.8% |  |
+| Just hold the S&P 500 (SPY) | $1,292 | +13.26% | -18.8% |  |
 | S&P 500 + your switch | $1,191 | +8.85% | -11.5% |  |
-| All 9 sectors equally, held | $1,264 | +12.04% | -16.6% |  |
-| Top 1 sector(s) by 3-month gain, monthly | $1,115 | +5.41% | -27.3% |  |
+| All 9 sectors equally, held | $1,261 | +11.92% | -16.6% |  |
+| Top 1 sector(s) by 3-month gain, monthly | $1,112 | +5.31% | -27.3% |  |
 | Top 1 sector(s) by 3-month gain, monthly + your switch | $1,369 | +16.46% | -19.4% |  |
-| Top 2 sector(s) by 3-month gain, monthly | $1,091 | +4.32% | -18.9% |  |
+| Top 2 sector(s) by 3-month gain, monthly | $1,089 | +4.24% | -18.9% |  |
 | Top 2 sector(s) by 3-month gain, monthly + your switch | $1,159 | +7.41% | -15.0% |  |
-| Top 3 sector(s) by 3-month gain, monthly | $1,204 | +9.43% | -16.6% |  |
+| Top 3 sector(s) by 3-month gain, monthly | $1,202 | +9.36% | -16.6% |  |
 | Top 3 sector(s) by 3-month gain, monthly + your switch | $1,254 | +11.64% | -7.7% |  |
-| Top 1 sector(s) by 6-month gain, monthly | $1,049 | +2.36% | -23.5% |  |
+| Top 1 sector(s) by 6-month gain, monthly | $1,048 | +2.29% | -23.5% |  |
 | Top 1 sector(s) by 6-month gain, monthly + your switch | $1,023 | +1.09% | -19.4% |  |
-| Top 2 sector(s) by 6-month gain, monthly | $1,056 | +2.67% | -23.1% |  |
+| Top 2 sector(s) by 6-month gain, monthly | $1,054 | +2.59% | -23.1% |  |
 | Top 2 sector(s) by 6-month gain, monthly + your switch | $1,113 | +5.33% | -11.9% |  |
-| Top 3 sector(s) by 6-month gain, monthly | $1,016 | +0.75% | -18.3% |  |
+| Top 3 sector(s) by 6-month gain, monthly | $1,013 | +0.62% | -18.3% |  |
 | Top 3 sector(s) by 6-month gain, monthly + your switch | $1,019 | +0.93% | -14.0% |  |
-| Top 1 sector(s) by 12-month gain, monthly | $931 | -3.42% | -26.1% |  |
+| Top 1 sector(s) by 12-month gain, monthly | $929 | -3.51% | -26.2% |  |
 | Top 1 sector(s) by 12-month gain, monthly + your switch | $986 | -0.69% | -26.1% |  |
-| Top 2 sector(s) by 12-month gain, monthly | $1,266 | +12.14% | -15.2% |  |
+| Top 2 sector(s) by 12-month gain, monthly | $1,264 | +12.05% | -15.2% |  |
 | Top 2 sector(s) by 12-month gain, monthly + your switch | $1,164 | +7.64% | -12.8% |  |
-| Top 3 sector(s) by 12-month gain, monthly | $1,341 | +15.31% | -16.1% |  |
+| Top 3 sector(s) by 12-month gain, monthly | $1,339 | +15.22% | -16.1% |  |
 | Top 3 sector(s) by 12-month gain, monthly + your switch | $1,225 | +10.37% | -10.7% |  |
 
 ## 2000-2002 dot-com crash

@@ -6,27 +6,27 @@ Data: SPY and XLP with dividends, 1998-12-22 to 2026-11-23. Switch: out after 2 
 
 | Strategy | $1,000 became | Per year | Worst drop |
 |---|---|---|---|
-| Just hold the S&P 500 | $9,652 | +8.46% | -55.2% |
-| Just hold consumer staples (XLP) | $6,479 | +6.92% | -35.9% |
+| Just hold the S&P 500 | $9,624 | +8.45% | -55.2% |
+| Just hold consumer staples (XLP) | $6,478 | +6.92% | -35.9% |
 | S&P + switch, T-bills when out (YOUR PLAN) | $8,455 | +7.95% | -18.0% |
-| S&P + switch, staples (XLP) when out | $10,406 | +8.75% | -39.7% |
-| S&P + switch, staples when out only if staples are in an uptrend, else T-bills | $5,684 | +6.42% | -32.8% |
+| S&P + switch, staples (XLP) when out | $10,404 | +8.75% | -39.7% |
+| S&P + switch, staples when out only if staples are in an uptrend, else T-bills | $5,683 | +6.42% | -32.8% |
 
 ## Last 10 years
 
 | Strategy | $1,000 became | Per year | Worst drop |
 |---|---|---|---|
-| Just hold the S&P 500 | $4,015 | +14.82% | -33.7% |
+| Just hold the S&P 500 | $4,004 | +14.79% | -33.7% |
 | Just hold consumer staples (XLP) | $2,251 | +8.40% | -24.5% |
 | S&P + switch, T-bills when out (YOUR PLAN) | $3,020 | +11.62% | -17.1% |
-| S&P + switch, staples (XLP) when out | $3,298 | +12.59% | -25.9% |
+| S&P + switch, staples (XLP) when out | $3,297 | +12.59% | -25.9% |
 | S&P + switch, staples when out only if staples are in an uptrend, else T-bills | $2,082 | +7.56% | -32.8% |
 
 ## Last 5 years
 
 | Strategy | $1,000 became | Per year | Worst drop |
 |---|---|---|---|
-| Just hold the S&P 500 | $1,682 | +10.82% | -24.5% |
+| Just hold the S&P 500 | $1,677 | +10.76% | -24.5% |
 | Just hold consumer staples (XLP) | $1,447 | +7.57% | -16.3% |
 | S&P + switch, T-bills when out (YOUR PLAN) | $1,430 | +7.32% | -17.1% |
 | S&P + switch, staples (XLP) when out | $1,477 | +8.01% | -25.3% |
@@ -36,11 +36,11 @@ Data: SPY and XLP with dividends, 1998-12-22 to 2026-11-23. Switch: out after 2 
 
 | Strategy | $1,000 became | Per year | Worst drop |
 |---|---|---|---|
-| Just hold the S&P 500 | $1,296 | +13.43% | -18.8% |
-| Just hold consumer staples (XLP) | $1,191 | +8.84% | -9.7% |
+| Just hold the S&P 500 | $1,293 | +13.28% | -18.8% |
+| Just hold consumer staples (XLP) | $1,190 | +8.83% | -9.7% |
 | S&P + switch, T-bills when out (YOUR PLAN) | $1,191 | +8.85% | -11.5% |
-| S&P + switch, staples (XLP) when out | $1,221 | +10.16% | -12.8% |
-| S&P + switch, staples when out only if staples are in an uptrend, else T-bills | $1,143 | +6.73% | -16.0% |
+| S&P + switch, staples (XLP) when out | $1,220 | +10.15% | -12.8% |
+| S&P + switch, staples when out only if staples are in an uptrend, else T-bills | $1,143 | +6.72% | -16.0% |
 
 ## 2000-2002 dot-com crash
 
