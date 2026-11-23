@@ -10,7 +10,15 @@ A plain-English guide to how your trading system works, how to turn it on and of
 
 Every rule below serves these three goals, in this order.
 
-## Current strategy: the index plan (since Nov 20, 2026)
+## Current strategy: the 8-fund plan (since Nov 23, 2026)
+
+- The account is split **equally across 8 funds**: SPYM (S&P 500), SMH (chips), CIBR (cybersecurity), AIQ (AI), PAVE (power & infrastructure), PPA (defense), XLV (health care), NLR (nuclear). Whole shares; each fund is bought once and then left alone (no rebalancing).
+- **Each fund has its own 200-day switch**, which turns on the first time that fund closes above its 200-day average. Until then the fund is simply held. Once on: after 2 closes at/below its average, the Mac sells it the next morning and its share goes to **SGOV**; after 2 closes 2%+ above, it's bought back.
+- A fund whose single share costs more than 35% of the account (SMH at about $460 today) isn't bought; its share waits in SGOV until the account is big enough.
+- Spare cash goes to SGOV. Settings: `STRATEGY = "themes"`, `THEME_FUNDS` in `monitor/config.py`; the switch logic is in `monitor/funds.py`.
+- `STRATEGY = "index"` brings back the S&P + switch plan below.
+
+## Previous strategy: the index plan (Nov 20 - 23, 2026)
 
 After a 33-year test on real prices (`backtest/results/spy_rules.md`), the account no longer picks stocks:
 

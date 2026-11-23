@@ -96,7 +96,12 @@ ATR_STOP_MULT = 3.0         # used for the profit target only: target = 2 x (3 x
 # back to SPYM. No stock picking, no stops on SPYM. New money is invested the same day.
 # Chosen Nov 19 2026 after the 33-year backtest (backtest/results/spy_rules.md): about the S&P's return with a worst
 # drop of about -20% instead of -55%. "stocks" = the stock-picking bot (rules below).
-STRATEGY = "index"
+STRATEGY = "themes"
+# THEMES plan (your choice, Nov 23 2026): the account split equally across these 8 funds, bought right away. Each
+# fund gets its own 200-day switch (monitor/funds.py), armed once that fund has closed above its 200-day average;
+# then it moves to SGOV after 2 closes at/below the average and back after 2 closes 2%+ above it.
+THEME_FUNDS = {"SPYM": "S&P 500", "SMH": "Chips (semiconductors)", "CIBR": "Cybersecurity", "AIQ": "AI",
+               "PAVE": "Power & infrastructure", "PPA": "Defense", "XLV": "Health care", "NLR": "Nuclear"}
 # The fund the index plan holds when the switch is "in". Nov 19 2026, your choice after the test: SSO (2x the S&P 500's
 # daily move): +14.3% a year since 1993 in the test (real fund ~0.7%/yr less) vs +10.6% for holding the S&P, worst
 # drop about -36% (S&P alone: -55%); it can lag the S&P for a year or more in choppy markets (2022: -9%/yr).
@@ -183,4 +188,4 @@ VOL_SIZING = True           # steadier stocks get more money, jumpy ones less (0
 VOL_SIZE_MIN, VOL_SIZE_MAX = 0.5, 1.5
 MAX_POSITION_PCT = 35       # no single buy larger than this share of the account
 
-PARKING = {PARK_FUND, "SGOV", INDEX_FUND}  # funds that hold idle money: not one of the 5 stock slots, no stop, never ranked
+PARKING = {PARK_FUND, "SGOV", INDEX_FUND} | set(THEME_FUNDS)  # funds that hold idle money: not one of the 5 stock slots, no stop, never ranked

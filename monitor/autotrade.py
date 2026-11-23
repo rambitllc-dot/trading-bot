@@ -222,6 +222,22 @@ def build_plan(asof, rows, rot, con, equity, cash, state=None, holdings=None):
         {"ticker": t, "rank": rk, "score": sc, "size": sz, "sector": sectors.sector_of(t),
          "reason": f"rank #{rk} of {len(rows_ranked)}, score {sc:.0f}"}
         for t, rk, sc, sz in ranked if sc >= config.ROTATION_MIN_SCORE and t not in sold_recently and t not in soon][:40]
+    if config.STRATEGY == "themes":  # 8 funds in equal parts, each with its own 200-day switch
+        fs = rot.get("funds") or {}
+        in_funds = [t for t in config.THEME_FUNDS if (fs.get(t) or {}).get("in", True)]
+        out_funds = [t for t in config.THEME_FUNDS if t not in in_funds]
+        keep = set(in_funds) | {safe}
+        why_out = {t: f"{t} broke below its 200-day average: its share waits in {safe}" for t in out_funds}
+        sells = [{"ticker": t, "reason": why_out.get(t, "not part of the 8-fund plan")} for t in held_all if t not in keep]
+        buys = [{"ticker": t, "reason": f"8-fund plan: {config.THEME_FUNDS[t]}, 1/{len(config.THEME_FUNDS)} of the account"}
+                for t in in_funds]
+        return {"id": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "asof": asof,
+                "strategy": "themes", "funds": fs, "in_funds": in_funds, "out_funds": out_funds, "fallback": safe,
+                "equity": equity, "cash": cash, "sells": sells, "buys": buys, "reserve": [], "stops": {},
+                "deposit_candidates": [], "earnings_soon": {}, "storm": storm,
+                "weather": (rot.get("weather") or {}).get("text"),
+                "holdings": [{k: r.get(k) for k in ("ticker", "value", "pnl", "pnl_pct", "entry_price", "mark",
+                                                    "entry_date")} for r in rows]}
     if config.STRATEGY == "index":  # everything in the S&P 500 fund; Treasury bills only in a market storm
         target = safe if storm else config.INDEX_FUND
         why = (f"market storm (S&P 500 at/below its 200-day average): everything waits in {safe}" if storm else
@@ -303,6 +319,89 @@ def _price(o):
         return float(o.get("filled_avg_price") or 0) or None
     except (TypeError, ValueError):
         return None
+
+
+def themes_round(client, p, state, today):
+    """8-fund plan, every round: hold each fund whose switch is "in" (1/8 of the account each, whole shares, bought
+    once and then left alone), park the shares of "out" funds and any spare cash in SGOV. Never sells what was
+    bought today. Quiet when there's nothing to do."""
+    safe = config.SAFE_FUND
+    fs = p.get("funds") or {}
+    in_funds = [t for t in config.THEME_FUNDS if (fs.get(t) or {}).get("in", True)]
+    keep = set(in_funds) | {safe}
+    lines, skip = [], state.setdefault("themes_skip", {})
+    positions = client.positions()
+    for x in positions:  # 1) sell what the plan doesn't hold (funds switched out, old stocks)
+        t = x["symbol"]
+        if t in keep or float(x["qty"]) <= 0 or state["bought"].get(t) == today or skip.get("sell-" + t) == today:
+            continue
+        try:
+            o = wait_filled(client, client.close(t))
+        except AlpacaError as e:
+            skip["sell-" + t] = today
+            lines.append(f"✋ Please SELL {t} yourself in the IB app ({str(e)[:120]}).")
+            continue
+        fill = _price(o)
+        val = fill * abs(float(x["qty"])) if fill else float(x["market_value"])
+        state["sold"][t] = today
+        why = (f"its switch is out (below its 200-day average); its share goes to {safe}" if t in config.THEME_FUNDS
+               else "not part of the 8-fund plan")
+        log("SELL", t, val, fill, why)
+        lines.append(f"🔴 SELL {t} (~${val:,.2f}): {why}")
+    held = {x["symbol"]: x for x in client.positions()}
+    acct = client.account()
+    equity, cash = float(acct["equity"]), float(acct["cash"])
+    share = equity / len(config.THEME_FUNDS)
+    missing = [t for t in in_funds if t not in held and skip.get(t) != today]
+    need = share * len(missing)
+    if missing and need > cash - 1 and safe in held and state["bought"].get(safe) != today:
+        px = float(held[safe]["current_price"]) or 100.0  # 2) free money from SGOV for the funds to buy
+        qty = min(int(float(held[safe]["qty"])), math.ceil((need - (cash - 1)) / px))
+        if qty >= 1:
+            try:
+                o = wait_filled(client, client.sell(safe, qty))
+                log("SELL", safe, qty * px, _price(o), "money for the 8-fund plan")
+                lines.append(f"🔴 SELL {qty} {safe} (~${qty * px:,.2f}) to buy the plan's funds")
+            except AlpacaError as e:
+                lines.append(f"⚠️ Couldn't sell {safe} to fund the plan: {str(e)[:120]}")
+    for t in missing:  # 3) buy each missing fund: 1/8 of the account, whole shares
+        cash = float(client.account()["cash"])
+        dollars = round(min(share, cash - 1), 2)
+        if dollars < 5:
+            break
+        try:
+            try:
+                o = wait_filled(client, client.buy(t, dollars))
+            except AlpacaError as e:
+                one = one_share_dollars(client, t, dollars) if "whole share" in str(e) else None
+                if not one:
+                    raise
+                o = wait_filled(client, client.buy(t, one))
+                dollars = one
+        except AlpacaError as e:
+            skip[t] = today
+            lines.append(f"⚠️ {t} ({config.THEME_FUNDS[t]}) not bought today: {str(e)[:140]}")
+            continue
+        state["bought"][t] = today
+        fill = _price(o)
+        log("BUY", t, dollars, fill, f"8-fund plan: {config.THEME_FUNDS[t]}")
+        lines.append(f"🟢 BUY {t} ({config.THEME_FUNDS[t]}) with ~${dollars:,.2f}" + (f" at {fill:,.2f}" if fill else ""))
+    cash = float(client.account()["cash"])  # 4) spare cash -> SGOV (whole shares)
+    price = getattr(client, "price", None)
+    px = price(safe) if callable(price) else None
+    if px and cash - 1 >= px and skip.get("park") != today and not [t for t in in_funds if t not in
+                                                                    {x["symbol"] for x in client.positions()}
+                                                                    and skip.get(t) != today]:
+        try:
+            o = wait_filled(client, client.buy(safe, round(cash - 1, 2)))
+            state["bought"][safe] = today
+            log("BUY", safe, cash - 1, _price(o), "spare cash / switched-out funds")
+            lines.append(f"🟢 BUY {safe} with ~${cash - 1:,.2f}: spare cash and the shares of funds that are out")
+        except AlpacaError as e:
+            skip["park"] = today
+            if "whole share" not in str(e):
+                lines.append(f"⚠️ Couldn't park cash in {safe}: {str(e)[:120]}")
+    return "\n".join(lines) if lines else None
 
 
 def index_round(client, p, state, today):
@@ -468,6 +567,12 @@ def execute(client=None):
         return "no plan yet (made by the evening monitor run)"
     state = load_state()
     today = (clock.get("timestamp") or "")[:10] or dt.date.today().isoformat()
+    if config.STRATEGY == "themes":
+        m = themes_round(client, p, state, today)
+        save_json(STATE_FILE, state)
+        if m:
+            notify(m)
+        return m or "8-fund plan: nothing to do"
     if config.STRATEGY == "index":
         m = index_round(client, p, state, today)
         save_json(STATE_FILE, state)

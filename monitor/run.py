@@ -12,7 +12,7 @@ import json
 import os
 import sys
 
-from . import alerts, analytics, autotrade, earnings, regime, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
+from . import funds, alerts, analytics, autotrade, earnings, regime, config, data, levels, macro, news, notifier, performance, positions, rotation, scanner, storage, valuation
 
 
 def market_today():
@@ -51,7 +51,7 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
         scan, bars = scanner.run(con, asof, provider, macro_result.get("label"), news_caller,
                                  extra_tickers=[p["ticker"] for p in book if p["asset_type"] != "cash"]
                                  + performance.tracked_tickers(con, asof=asof)
-                                 + performance.traded_tickers(con) + ["SPY"])
+                                 + performance.traded_tickers(con) + ["SPY"] + list(config.THEME_FUNDS))
     else:
         scan, bars = {"screens": {}, "watchlist": [], "alerts": [], "news": [], "error": "scanner skipped (no bulk data)"}, {}
     sentiment = {n["ticker"]: n.get("sentiment") for n in news_result + scan.get("news", []) if n.get("status") == "ok"}
@@ -63,6 +63,10 @@ def run(asof=None, positions_file=None, rate=config.RISK_FREE_RATE, provider=Non
     rot = rotation.run(con, asof, rows, bars, sentiment, blocker, weather["storm"]) if bars else {"status": "no market data", "holdings": [],
                                                                          "top": [], "suggestions": []}
     rot["weather"] = weather
+    if config.STRATEGY == "themes":  # 8 funds, each with its own 200-day switch
+        rot["funds"] = funds.check(con, asof, bars) if bars else {}
+        rot["suggestions"] = []
+        rot["status"] = "8-fund plan: " + funds.text(rot["funds"])
     if config.STRATEGY == "index":  # no stock picking: the account holds the S&P 500 fund (or T-bills in a storm)
         rot["suggestions"] = []
         rot["status"] = (f"index plan: everything in {config.SAFE_FUND if weather['storm'] else config.INDEX_FUND}")

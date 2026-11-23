@@ -81,15 +81,15 @@ class IBTraderTest(unittest.TestCase):
         self.assertFalse(ib_trader.market_open(dt.datetime(2026, 11, 14, 11, 0, tzinfo=NY))[0])  # Saturday
 
     def test_swap_buys_with_the_sale_money(self):
-        ib = FakeIB({"CNC": 70.0, "TXN": 280.0, "XLV": 150.0}, cash=5.0,
+        ib = FakeIB({"CNC": 70.0, "TXN": 280.0, "JNJ": 150.0}, cash=5.0,
                     holdings={"CNC": [5, 70.59], "TXN": [2, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "CNC", "reason": "swap"}],
-            buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
+            buys=[{"ticker": "JNJ", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("CNC", ib.pos)
         # CNC's $350 goes to XLV, capped at 35% of the account ($320): 2 whole shares ($300)
-        self.assertEqual(ib.pos["XLV"][0], 2)
+        self.assertEqual(ib.pos["JNJ"][0], 2)
         self.assertIn("TXN", ib.pos)
 
     def test_pick_pricier_than_the_sale_still_bought_when_cash_allows(self):
@@ -112,29 +112,29 @@ class IBTraderTest(unittest.TestCase):
         self.assertNotIn("HUM", ib.pos)
 
     def test_already_sold_by_hand_then_cash_buys_the_planned_replacement(self):
-        ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=500.0, holdings={"TXN": [1, 273.6]})
+        ib = FakeIB({"TXN": 280.0, "JNJ": 150.0}, cash=500.0, holdings={"TXN": [1, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "CNC", "reason": "swap"}],                      # CNC already sold in the app
-            buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
+            buys=[{"ticker": "JNJ", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
-        self.assertIn("XLV", ib.pos)                                          # the cash goes to the planned pick
+        self.assertIn("JNJ", ib.pos)                                          # the cash goes to the planned pick
 
     def test_no_cash_no_replacement(self):
-        ib = FakeIB({"TXN": 280.0, "XLV": 150.0}, cash=10.0, holdings={"TXN": [1, 273.6]})
+        ib = FakeIB({"TXN": 280.0, "JNJ": 150.0}, cash=10.0, holdings={"TXN": [1, 273.6]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             sells=[{"ticker": "CNC", "reason": "swap"}],
-            buys=[{"ticker": "XLV", "replaces": "CNC", "reason": "replaces CNC"}]))
+            buys=[{"ticker": "JNJ", "replaces": "CNC", "reason": "replaces CNC"}]))
         autotrade.execute(client=self.client(ib))
-        self.assertNotIn("XLV", ib.pos)                                       # no money from CNC -> no buy
+        self.assertNotIn("JNJ", ib.pos)                                       # no money from CNC -> no buy
 
     def test_stop_hit_sells_and_replaces(self):
-        ib = FakeIB({"MRNA": 240.0, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
+        ib = FakeIB({"MRNA": 240.0, "JNJ": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
             stops={"MRNA": {"stop": 244.6, "target": 397.0, "rule": "6% max-loss stop"}},
-            reserve=[{"ticker": "XLV", "reason": "rank #1"}]))
+            reserve=[{"ticker": "JNJ", "reason": "rank #1"}]))
         autotrade.execute(client=self.client(ib))
         self.assertNotIn("MRNA", ib.pos)
-        self.assertIn("XLV", ib.pos)
+        self.assertIn("JNJ", ib.pos)
 
     def test_fractional_quantity_and_paper_live_guard(self):
         ib = FakeIB({"MRK": 147.0}, cash=1000.0, holdings={"CNC": [4.9, 70.0]})
@@ -218,9 +218,9 @@ class CodeVersionTest(unittest.TestCase):
 
 class IntradayTrailTest(IBTraderTest):
     def test_stop_trails_the_days_high(self):
-        ib = FakeIB({"MRNA": 280.0, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
+        ib = FakeIB({"MRNA": 280.0, "JNJ": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
-            stops={"MRNA": {"stop": 248.5, "target": 397.0}}, reserve=[{"ticker": "XLV", "reason": "rank #1"}]))
+            stops={"MRNA": {"stop": 248.5, "target": 397.0}}, reserve=[{"ticker": "JNJ", "reason": "rank #1"}]))
         autotrade.execute(client=self.client(ib))           # sees 280: new high, stop moves to 267.40
         self.assertIn("MRNA", ib.pos)
         ib.prices["MRNA"] = 268.0
@@ -229,17 +229,17 @@ class IntradayTrailTest(IBTraderTest):
         ib.prices["MRNA"] = 267.0
         autotrade.execute(client=self.client(ib))           # 4.5% below the 280 high: sell, still a profit
         self.assertNotIn("MRNA", ib.pos)
-        self.assertIn("XLV", ib.pos)
+        self.assertIn("JNJ", ib.pos)
 
 
 class PeakFromPlanTest(IBTraderTest):
     def test_daytime_stop_starts_from_the_evening_high(self):
-        ib = FakeIB({"MRNA": 250.4, "XLV": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
+        ib = FakeIB({"MRNA": 250.4, "JNJ": 150.0}, cash=300.0, holdings={"MRNA": [1, 260.21]})
         autotrade.save_json(autotrade.PLAN_FILE, plan(
-            stops={"MRNA": {"stop": 244.6, "target": 397.0, "peak": 269.0}}, reserve=[{"ticker": "XLV", "reason": "#1"}]))
+            stops={"MRNA": {"stop": 244.6, "target": 397.0, "peak": 269.0}}, reserve=[{"ticker": "JNJ", "reason": "#1"}]))
         autotrade.execute(client=self.client(ib))           # 250.40 is 6.9% below the 269 high: sold
         self.assertNotIn("MRNA", ib.pos)
-        self.assertIn("XLV", ib.pos)
+        self.assertIn("JNJ", ib.pos)
 
 
 class FractionalTest(IBTraderTest):
@@ -410,3 +410,49 @@ class IndexPlanTest(unittest.TestCase):
         autotrade.save_json(autotrade.PLAN_FILE, plan(id="p3", storm=True))
         autotrade.execute(client=self.client(ib))
         self.assertEqual(ib.pos["SSO"][0], 10)                # waits until tomorrow
+
+
+class ThemesPlanTest(unittest.TestCase):
+    """STRATEGY = "themes": 8 funds in equal parts; switched-out funds and spare cash in SGOV."""
+    PRICES = {"SPYM": 78.0, "SMH": 90.0, "CIBR": 75.0, "AIQ": 48.0, "PAVE": 45.0, "PPA": 110.0, "XLV": 100.0,
+              "NLR": 70.0, "SGOV": 100.6}
+
+    def setUp(self):
+        IBTraderTest.setUp(self)
+        config.STRATEGY = "themes"
+        self.addCleanup(setattr, config, "STRATEGY", "stocks")
+
+    tearDown = IBTraderTest.tearDown
+    client = IBTraderTest.client
+
+    def test_builds_all_8_from_sgov_and_cash(self):
+        ib = FakeIB(dict(self.PRICES), cash=420.0, holdings={"SGOV": [5, 100.6]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan(storm=True))       # an old plan without fund info: all "in"
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertEqual(set(ib.pos) - {"SGOV"}, set(config.THEME_FUNDS))
+        self.assertIn("BUY SMH", msg)
+        self.assertLess(ib.cash, 101)                                       # leftovers parked, < 1 SGOV share left
+
+    def test_switched_out_fund_sold_and_skipped(self):
+        held = {t: [1, p] for t, p in self.PRICES.items() if t != "SGOV"}
+        ib = FakeIB(dict(self.PRICES), cash=5.0, holdings=held)
+        funds_state = {t: {"armed": True, "in": t != "NLR"} for t in config.THEME_FUNDS}
+        autotrade.save_json(autotrade.PLAN_FILE, plan(funds=funds_state))
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertNotIn("NLR", ib.pos)
+        self.assertIn("SELL NLR", msg)
+        self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")
+
+
+class FundSwitchTest(unittest.TestCase):
+    def test_held_until_armed_then_protected(self):
+        from monitor import funds
+        down = [100.0] * 220 + [90.0] * 5                                   # below the average, never armed
+        self.assertEqual(funds.decide(down, False, True)[:2], (False, True))  # held anyway
+        up = [100.0] * 220 + [103.0, 103.0]                                  # crosses above: armed, in
+        armed, inn = funds.decide(up, False, True)[:2]
+        self.assertTrue(armed and inn)
+        fall = up + [95.0, 95.0]                                             # 2 closes at/below: out
+        self.assertEqual(funds.decide(fall, True, True)[:2], (True, False))
+        back = fall + [106.0, 106.0]                                         # 2 closes 2%+ above: back in
+        self.assertEqual(funds.decide(back, True, False)[:2], (True, True))
