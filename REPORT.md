@@ -1,16 +1,16 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 23, 2026 13:01 UTC · Bitcoin $61,297.35 · US stock market closed
+Last update: Nov 23, 2026 13:31 UTC · Bitcoin $61,172.77 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
-**$129.09** · today +0.9% · 1 week -6.0% · 1 month -12.5%
+**$131.75** · today +3.0% · 1 week -4.1% · 1 month -10.7%
 
 | | |
 |---|---|
-| Since the IPO at $135 (Jun 12) | -4.4% (S&P 500 in the same time: -5.9%) |
-| Highest / lowest since IPO | $225.56 / $104.91 · now -42.8% from the high |
+| Since the IPO at $135 (Jun 12) | -2.4% (S&P 500 in the same time: -4.0%) |
+| Highest / lowest since IPO | $225.56 / $104.91 · now -41.6% from the high |
 | 50-day average | $147.73 · price is **below** it (downtrend) |
 | Typical daily move (last 20 days) | ±3.2% (the S&P 500 is usually under ±1%) |
 
@@ -26,7 +26,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 
 ## Anthropic watch (ANT)
 
-**$88.48** · -16.1% since the bot first saw it trading on 2026-11-19 ($105.52) · 2 days of price history
+**$88.91** · -15.7% since the bot first saw it trading on 2026-11-19 ($105.52) · 2 days of price history
 
 
 ## All strategies
@@ -35,77 +35,77 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 
 | Rank | Strategy | Type | Market | Worth now | Profit | Trades |
 |---|---|---|---|---:|---:|---:|
-| 1 | Apple buy & hold | Hold | Stock | $102.08 | +$2.08 (+2.1%) | 1 |
-| 2 | Apple trend (200 day) | Static rule | Stock | $102.08 | +$2.08 (+2.1%) | 1 |
-| 3 | Bitcoin trend bot (5/20 day) | Static rule | Bitcoin | $100.00 | +$0.00 (+0.0%) | 0 |
-| 4 | SpaceX trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
-| 5 | Anthropic trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
-| 6 | Amazon trend (200 day) | Static rule | Stock | $99.58 | -$0.42 (-0.4%) | 1 |
-| 7 | Amazon buy & hold | Hold | Stock | $99.21 | -$0.79 (-0.8%) | 1 |
-| 8 | Anthropic gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $95.99 | -$4.01 (-4.0%) | 1 |
-| 9 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
-| 10 | RSI dip-buying (S&P 500) | Static rule | ETF | $94.81 | -$5.19 (-5.2%) | 3 |
-| 11 | S&P 500 equal weight (RSP) buy & hold | Hold | ETF | $94.51 | -$5.49 (-5.5%) | 1 |
-| 12 | SpaceX gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $94.31 | -$5.69 (-5.7%) | 3 |
-| 13 | S&P 500 trend (200 day) | Static rule | ETF | $93.95 | -$6.05 (-6.0%) | 2 |
-| 14 | Microsoft buy & hold | Hold | Stock | $93.51 | -$6.49 (-6.5%) | 1 |
-| 15 | Microsoft trend (200 day) | Static rule | Stock | $93.51 | -$6.49 (-6.5%) | 1 |
-| 16 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $91.59 | -$8.41 (-8.4%) | 1 |
-| 17 | S&P 500 buy & hold | Hold | ETF | $91.58 | -$8.42 (-8.4%) | 1 |
-| 18 | SpaceX buy & hold | Hold | Stock | $91.08 | -$8.92 (-8.9%) | 1 |
-| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $90.78 | -$9.22 (-9.2%) | 3 |
+| 1 | Apple buy & hold | Hold | Stock | $103.30 | +$3.30 (+3.3%) | 1 |
+| 2 | Apple trend (200 day) | Static rule | Stock | $103.30 | +$3.30 (+3.3%) | 1 |
+| 3 | Amazon trend (200 day) | Static rule | Stock | $102.53 | +$2.53 (+2.5%) | 1 |
+| 4 | Amazon buy & hold | Hold | Stock | $102.14 | +$2.14 (+2.1%) | 1 |
+| 5 | Bitcoin trend bot (5/20 day) | Static rule | Bitcoin | $100.00 | +$0.00 (+0.0%) | 0 |
+| 6 | SpaceX trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
+| 7 | Anthropic trend (50 day) | Static rule | Stock | $100.00 | +$0.00 (+0.0%) | 0 |
+| 8 | RSI dip-buying (S&P 500) | Static rule | ETF | $96.66 | -$3.34 (-3.3%) | 3 |
+| 9 | Microsoft buy & hold | Hold | Stock | $96.13 | -$3.87 (-3.9%) | 1 |
+| 10 | Microsoft trend (200 day) | Static rule | Stock | $96.13 | -$3.87 (-3.9%) | 1 |
+| 11 | Anthropic gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $96.10 | -$3.90 (-3.9%) | 1 |
+| 12 | Nvidia trend (200 day) | Static rule | Stock | $95.80 | -$4.20 (-4.2%) | 4 |
+| 13 | SpaceX gradual buy ($25 a week for 4 weeks) | Gradual buy | Stock | $95.74 | -$4.26 (-4.3%) | 3 |
+| 14 | S&P 500 equal weight (RSP) buy & hold | Hold | ETF | $94.51 | -$5.49 (-5.5%) | 1 |
+| 15 | S&P 500 trend (200 day) | Static rule | ETF | $93.95 | -$6.05 (-6.0%) | 2 |
+| 16 | Momentum rotation (SPY/QQQ/GLD/BND) | Monthly pick | ETF | $93.38 | -$6.62 (-6.6%) | 1 |
+| 17 | S&P 500 buy & hold | Hold | ETF | $93.37 | -$6.63 (-6.6%) | 1 |
+| 18 | SpaceX buy & hold | Hold | Stock | $92.95 | -$7.05 (-7.0%) | 1 |
+| 19 | Mix 60% stocks / 20% gold / 10% BTC / 10% cash | Static rule (rebalance) | Mixed | $91.84 | -$8.16 (-8.2%) | 3 |
 | 20 | Wide momentum (10 ETFs) | Monthly pick | ETF | $89.57 | -$10.43 (-10.4%) | 1 |
-| 21 | Tesla buy & hold | Hold | Stock | $85.76 | -$14.24 (-14.2%) | 1 |
-| 22 | Anthropic buy & hold | Hold | Stock | $84.13 | -$15.87 (-15.9%) | 1 |
+| 21 | Tesla buy & hold | Hold | Stock | $89.05 | -$10.95 (-10.9%) | 1 |
+| 22 | Anthropic buy & hold | Hold | Stock | $84.54 | -$15.46 (-15.5%) | 1 |
 | 23 | Tesla trend (200 day) | Static rule | Stock | $78.67 | -$21.33 (-21.3%) | 6 |
-| 24 | Bitcoin buy & hold | Hold | Bitcoin | $78.52 | -$21.48 (-21.5%) | 1 |
-| 25 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $71.82 | -$28.18 (-28.2%) | 10 |
-| 26 | Nvidia buy & hold | Hold | Stock | $62.86 | -$37.14 (-37.1%) | 1 |
+| 24 | Bitcoin buy & hold | Hold | Bitcoin | $78.36 | -$21.64 (-21.6%) | 1 |
+| 25 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $72.08 | -$27.92 (-27.9%) | 10 |
+| 26 | Nvidia buy & hold | Hold | Stock | $66.16 | -$33.84 (-33.8%) | 1 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $78.52 | $100.00 | trading |
-| S&P 500 | $91.58 | $93.95 | trading |
-| Apple | $102.08 | $102.08 | about even |
-| Microsoft | $93.51 | $93.51 | about even |
-| Nvidia | $62.86 | $95.80 | trading |
-| Amazon | $99.21 | $99.58 | about even |
-| Tesla | $85.76 | $78.67 | holding |
-| SpaceX | $91.08 | $100.00 | trading |
-| Anthropic | $84.13 | $100.00 | trading |
+| Bitcoin | $78.36 | $100.00 | trading |
+| S&P 500 | $93.37 | $93.95 | trading |
+| Apple | $103.30 | $103.30 | about even |
+| Microsoft | $96.13 | $96.13 | about even |
+| Nvidia | $66.16 | $95.80 | trading |
+| Amazon | $102.14 | $102.53 | about even |
+| Tesla | $89.05 | $78.67 | holding |
+| SpaceX | $92.95 | $100.00 | trading |
+| Anthropic | $84.54 | $100.00 | trading |
 
-**All together:** $2,375.72 from $2,600 (-224.28)
+**All together:** $2,406.25 from $2,600 (-193.75)
 
 ## What each one is doing
 
-- **Apple buy & hold:** AAPL $101.57, cash $0.51. Holding.
-- **Apple trend (200 day):** AAPL $101.57, cash $0.51. Signal: in the market (price $343.40 vs 200d avg $302.78).
+- **Apple buy & hold:** AAPL $102.79, cash $0.51. Holding.
+- **Apple trend (200 day):** AAPL $102.79, cash $0.51. Signal: in the market (price $343.40 vs 200d avg $302.78).
+- **Amazon trend (200 day):** AMZN $102.02, cash $0.51. Signal: in the market (price $247.12 vs 200d avg $245.14).
+- **Amazon buy & hold:** AMZN $101.63, cash $0.51. Holding.
 - **Bitcoin trend bot (5/20 day):** cash $100.00. Signal: in cash (5d avg $60,995.76 vs 20d avg $69,330.71).
 - **SpaceX trend (50 day):** cash $100.00. Signal: in cash (price $127.97 vs 50d avg $147.73).
 - **Anthropic trend (50 day):** cash $100.00. Not enough price history (2/50 days).
-- **Amazon trend (200 day):** AMZN $99.07, cash $0.51. Signal: in the market (price $247.12 vs 200d avg $245.14).
-- **Amazon buy & hold:** AMZN $98.70, cash $0.51. Holding.
-- **Anthropic gradual buy ($25 a week for 4 weeks):** ANT $20.98, cash $75.01. Bought 1 of 4 times; next buy on or after 2026-11-26.
+- **RSI dip-buying (S&P 500):** SPY $96.14, cash $0.52. Holding, waiting for a bounce above the 5-day average (RSI-2 0, buys below 10).
+- **Microsoft buy & hold:** MSFT $95.62, cash $0.51. Holding.
+- **Microsoft trend (200 day):** MSFT $95.62, cash $0.51. Signal: in the market (price $485.34 vs 200d avg $441.93).
+- **Anthropic gradual buy ($25 a week for 4 weeks):** ANT $21.09, cash $75.01. Bought 1 of 4 times; next buy on or after 2026-11-26.
 - **Nvidia trend (200 day):** cash $95.80. Signal: in cash (price $125.65 vs 200d avg $203.08).
-- **RSI dip-buying (S&P 500):** SPY $94.29, cash $0.52. Holding, waiting for a bounce above the 5-day average (RSI-2 0, buys below 10).
+- **SpaceX gradual buy ($25 a week for 4 weeks):** SPCX $70.71, cash $25.03. Bought 3 of 4 times; next buy on or after 2026-11-24.
 - **S&P 500 equal weight (RSP) buy & hold:** RSP $94.00, cash $0.51. Holding.
-- **SpaceX gradual buy ($25 a week for 4 weeks):** SPCX $69.28, cash $25.03. Bought 3 of 4 times; next buy on or after 2026-11-24.
 - **S&P 500 trend (200 day):** cash $93.95. Signal: in cash (price $690.68 vs 200d avg $730.26).
-- **Microsoft buy & hold:** MSFT $93.00, cash $0.51. Holding.
-- **Microsoft trend (200 day):** MSFT $93.00, cash $0.51. Signal: in the market (price $485.34 vs 200d avg $441.93).
-- **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $91.08, cash $0.51. Holding SPY until next month's check.
-- **S&P 500 buy & hold:** SPY $91.07, cash $0.51. Holding.
-- **SpaceX buy & hold:** SPCX $90.57, cash $0.51. Holding.
-- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $54.64, GLD $17.72, BTC/USD $7.80, cash $10.62. Rebalanced 2026-11, next rebalance next month.
+- **Momentum rotation (SPY/QQQ/GLD/BND):** SPY $92.87, cash $0.51. Holding SPY until next month's check.
+- **S&P 500 buy & hold:** SPY $92.86, cash $0.51. Holding.
+- **SpaceX buy & hold:** SPCX $92.44, cash $0.51. Holding.
+- **Mix 60% stocks / 20% gold / 10% BTC / 10% cash:** SPY $55.72, GLD $17.72, BTC/USD $7.78, cash $10.62. Rebalanced 2026-11, next rebalance next month.
 - **Wide momentum (10 ETFs):** XLE $89.06, cash $0.51. Holding XLE until next month's check.
-- **Tesla buy & hold:** TSLA $85.25, cash $0.51. Holding.
-- **Anthropic buy & hold:** ANT $83.62, cash $0.51. Holding.
+- **Tesla buy & hold:** TSLA $88.54, cash $0.51. Holding.
+- **Anthropic buy & hold:** ANT $84.03, cash $0.51. Holding.
 - **Tesla trend (200 day):** cash $78.67. Signal: in cash (price $346.23 vs 200d avg $381.64).
-- **Bitcoin buy & hold:** BTC/USD $76.13, cash $2.39. Holding.
-- **Stock momentum (top 10 of the S&P 500):** MRNA $8.34, SNDK $0.72, LITE $6.80, MU $7.04, DELL $6.77, STX $7.55, WDC $7.57, VLO $8.52, APA $9.29, MPC $8.53, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
-- **Nvidia buy & hold:** NVDA $62.35, cash $0.51. Holding.
+- **Bitcoin buy & hold:** BTC/USD $75.97, cash $2.39. Holding.
+- **Stock momentum (top 10 of the S&P 500):** MRNA $8.34, SNDK $0.74, LITE $6.80, MU $7.28, DELL $6.77, STX $7.55, WDC $7.57, VLO $8.52, APA $9.29, MPC $8.53, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
+- **Nvidia buy & hold:** NVDA $65.65, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
 
