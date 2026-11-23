@@ -1,17 +1,71 @@
 [
   {
     "asset_type": "shares",
+    "ticker": "AIQ",
+    "contracts": 1,
+    "entry_price": 55.41,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "CIBR",
+    "contracts": 1,
+    "entry_price": 95.46,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "NLR",
+    "contracts": 1,
+    "entry_price": 80.74,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "PAVE",
+    "contracts": 1,
+    "entry_price": 51.69,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "PPA",
+    "contracts": 1,
+    "entry_price": 152.3,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
     "ticker": "SGOV",
-    "contracts": 5.0,
-    "entry_price": 100.7723,
-    "note": "Interactive Brokers (live from the Mac)",
-    "entry_date": "2026-11-19",
-    "target_price": null,
-    "stop_price": null
+    "contracts": 1,
+    "entry_price": 100.88,
+    "entry_date": "2026-11-20",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "SPYM",
+    "contracts": 1,
+    "entry_price": 85.51,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "XLV",
+    "contracts": 1,
+    "entry_price": 179.62,
+    "entry_date": "2026-11-23",
+    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
   },
   {
     "asset_type": "cash",
-    "amount": 420.06,
-    "note": "IB cash, live from the Mac (2026-11-20)"
+    "amount": 121.55,
+    "note": "IB cash, Nov 23 9:39 AM (from your IB screenshot)"
   }
 ]
