@@ -1,0 +1,83 @@
+IB sync waiting: IB's report is from 2026-11-20, but positions.json has a buy from 2026-11-23; it will sync once IB's report includes it; 6 new trade(s) saved
+Portfolio as of 2026-11-23
+Value $918.93 · cost $923.44 · P&L -$4.51 (-0.5%) · net delta 10 shares · theta $0.00/day · 9/9 positions priced
+
+- AIQ shares x2: mark $54.88, value $109.76, P&L -$1.05 (-0.9%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- CIBR shares x1: mark $94.88, value $94.88, P&L -$0.58 (-0.6%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- NLR shares x1: mark $80.02, value $80.02, P&L -$0.72 (-0.9%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- PAVE shares x2: mark $51.39, value $102.78, P&L -$0.59 (-0.6%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- PPA shares x1: mark $151.64, value $151.64, P&L -$0.66 (-0.4%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- SGOV shares x1: mark $100.64, value $100.64, P&L -$0.24 (-0.2%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- SPYM shares x1: mark $85.04, value $85.04, P&L -$0.47 (-0.5%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- XLV shares x1: mark $179.42, value $179.42, P&L -$0.20 (-0.1%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- CASH shares x14.75: mark $1.00, value $14.75, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 10 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: XLV 20%, PPA 17%, AIQ 12%, PAVE 11%, SGOV 11%, CIBR 10%, SPYM 9%, NLR 9%, CASH 2%
+By sector: Technology (ETF) 22%, Health (ETF) 20%, Industrials (ETF) 17%, Infrastructure (ETF) 11%, Ultrashort Bond (ETF) 11%, Large Blend (ETF) 9%, Fund (ETF) 9%, Cash 2%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+37/100 · Stressed (vix level 48, vix percentile 5, term structure 19, breadth 46, credit 58)
+
+NEWS (Claude summaries, facts only)
+- AIQ [neutral]: No headlines in the last 3 days.
+- CIBR [neutral]: No headlines in the last 3 days.
+- NLR [neutral]: No headlines in the last 3 days.
+- PAVE [neutral]: A Zacks article published 2026-11-23 says AI data center expansion is driving a surge in infrastructure investment, with roughly $100B flowing into private funds. It frames infrastructure ETFs as positioned to benefit from this trend. The headline does not report any company-specific event for PAVE.
+  Drivers: AI data center expansion; Growth in infrastructure investment; Roughly $100B in private funds; Sector-level coverage, not PAVE-specific news
+- PPA [neutral]: No headlines in the last 3 days.
+- SGOV [neutral]: Two 24/7 Wall St. articles discussed Treasury bill ETFs in the context of the Fed holding rates steady. One reported that T-bills have outperformed the Nasdaq, S&P 500 and Dow this year, including dividends, based on the outlet's own calculations. Neither headline names SGOV's specific yield, fees or holdings.
+  Drivers: Fed holding rates steady; T-bill returns versus major stock indexes this year; Yield and fee comparisons among ultra-short Treasury ETFs; Commentary on cash versus stocks from Jeffrey Gundlach
+- SPYM [neutral]: A GuruFocus article reports that the State Street SPDR Portfolio S&P 500 ETF (SPYM) added $668.1 million in new exposure on Nov. 19. The largest single purchase was $55.2 million of Apple, and the article says all 501 changed positions increased.
+  Drivers: Fund added $668.1 million in new exposure; Apple purchase of $55.2 million led the buying; All 501 changed positions increased
+- XLV [neutral]: Healthcare stocks rose late on Monday, with the NYSE Healthcare Index up 1.1%. A GuruFocus report said the State Street Health Care SPDR (XLV) sold $275.1 million of stock on Nov. 19, trimming all 60 holdings and buying nothing. Separately, a Stocktwits item said biotech funds slid into Thanksgiving week after the FDA rejected Capricor's Duchenne therapy.
+  Drivers: NYSE Healthcare Index up 1.1% late Monday; Reported fund-level selling of $275.1M in XLV holdings on Nov. 19; Biotech sector slide and FDA rejection of Capricor's therapy; Mixed analyst views on individual holdings such as Vertex and Agilent
+Claude cost this run: $0.0015
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 529 of 531 stocks.
+- Watchlist SPCX 133.35: 21.2% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 159.36: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+795% over 12 months), SNDK (+413% over 12 months), MU (+336% over 12 months), DELL (+293% over 12 months), LITE (+224% over 12 months)
+Pullbacks in uptrends: PFE (+4% above its 200-day average, RSI-2 1 after a sharp drop), PM (+1% above its 200-day average, RSI-2 1 after a sharp drop), MPC (+17% above its 200-day average, RSI-2 1 after a sharp drop), EOG (+5% above its 200-day average, RSI-2 2 after a sharp drop), PSX (+15% above its 200-day average, RSI-2 2 after a sharp drop)
+New 52-week highs: BIIB (new 52-week high at 256.71), DGX (new 52-week high at 263.12), LH (new 52-week high at 372.56)
+Unusual volume: CRWD (volume 4.6x normal, -9% on the day), TPL (volume 3.7x normal, -4% on the day)
+  MRNA [positive]: Moderna reported positive Phase 3 results for its personalized melanoma vaccine, intismeran autogene, given with Merck's Keytruda, which cut the risk of recurrence or death. The company also secured a March 2027 PBAC agenda slot for its mRNA flu vaccines in Australia. Separately, the Invesco S&P 500 Equal Weight Health Care ETF (RSPH) bought Moderna shares on Nov. 19.
+  SNDK [positive]: Sandisk (SNDK) shares rose sharply on November 23, 2026, as AI hardware stocks rallied after Nvidia said it would reinstate Jensen Huang as CEO; a Meta-related article notes Sandisk jumped far more than Meta's 6% gain. Simply Wall St reports the stock has returned 179.3% over the past year and has recently shifted from a sharp rally to a steep pullback.
+  MU [positive]: Micron shares rose about 18% on Monday, as reported by Barron's, amid a broad tech rally after Nvidia's board reinstated Jensen Huang as CEO. Micron's president Scott DeBoer publicly criticized rival 4F2 DRAM designs and said 3D DRAM will win. Headlines describe the move as tied largely to the broader AI and Nvidia-related rally rather than a Micron-specific event.
+  DELL [positive]: Dell shares rose 20.4% on Monday, Nov. 23, as AI hardware stocks rallied after Nvidia reinstated Jensen Huang as CEO. Separately, the Financial Times reported that Dell, HPE, Lenovo and Supermicro are seeking up to 45% more for AI servers already under contract.
+  LITE [positive]: Lumentum (LITE) rose sharply on Monday, November 23, 2026, alongside AI optics peers, after NVIDIA CEO Jensen Huang's announced return to NVIDIA lifted chip stocks. A 24/7 Wall St. headline reports Lumentum soared 22% in that session, following a brutal month of selling in the group. Recent coverage also notes Marvell's all-stock deal involving Lumentum and a fund that opened a new Lumentum position.
+  SPCX [neutral]: Jefferies issued a bullish rating on SpaceX, citing its AI prospects over rockets, and Stanley Druckenmiller reportedly started a position in SpaceX in Q3. Jim Chanos argued a SpaceX-Tesla merger would have no synergies and cut SpaceX's 2027 EPS by almost 40%, while a Motley Fool piece noted that SpaceX stock fell sharply after its early strong trading days.
+  PLTR [positive]: Palantir shares rose about 10.6% to 11.7% on Monday, Nov. 23, as AI software and chip stocks rallied after Nvidia reinstated Jensen Huang as CEO. Headlines also cite 2026 revenue guidance of about $8.53 billion, a planned CEO share sale, ETF purchases of $57.2 million on Nov. 19, and a Q3 new position by Stanley Druckenmiller.
+
+ROTATION (follow the money)
+Strongest stocks you don't own: TGT (91), EG (83), MSI (83), BDX (82), LYV (82)
+Status: 8-fund plan: SPYM held (switch not armed yet), -1.1% vs 200-day; SMH held (switch not armed yet), -12.4% vs 200-day; CIBR IN, +11.4% vs 200-day; AIQ held (switch not armed yet), -7.0% vs 200-day; PAVE held (switch not armed yet), -6.2% vs 200-day; PPA held (switch not armed yet), -10.1% vs 200-day; XLV IN, +12.0% vs 200-day; NLR held (switch not armed yet), -33.6% vs 200-day
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -129.03 from 7 win(s) / 21 loss(es), win rate 25%; fees 29.60
+Open (not locked in) -4.51 · total -133.54
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -9.8 pts after 18 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -14.8 pts after 18 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -8.6 pts after 18 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -15.2 pts after 18 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +19.4 pts after 13 day(s)
+- 2026-11-12 CNC -> BEN [yes]: +3.4 pts after 11 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +2.9 pts after 11 day(s)
+- 2026-11-16 TGT -> HUM [partly]: -21.7 pts after 7 day(s)
+- 2026-11-18 VTRS -> CPAY [partly]: -0.3 pts after 5 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-03-27): your stocks 923.26 vs 1,028.84 -> -105.58
+3 of 9 swap ideas are ahead; average edge -5.0 pts
+
+ALERTS (0)
+Notifier: sent

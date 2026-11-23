@@ -1,16 +1,112 @@
 {
- "id": "2026-11-20T21:32:42Z",
- "asof": "2026-11-20",
+ "id": "2026-11-23T21:32:42Z",
+ "asof": "2026-11-23",
+ "strategy": "themes",
+ "funds": {
+  "SPYM": {
+   "armed": false,
+   "in": true,
+   "close": 85.04000091552734,
+   "ma200": 85.9584215927124,
+   "gap": -1.0684475821772343
+  },
+  "SMH": {
+   "armed": false,
+   "in": true,
+   "close": 460.17999267578125,
+   "ma200": 525.4631005859375,
+   "gap": -12.423918603867678
+  },
+  "CIBR": {
+   "armed": true,
+   "in": true,
+   "close": 94.87999725341797,
+   "ma200": 85.14294151306153,
+   "gap": 11.43612796001734
+  },
+  "AIQ": {
+   "armed": false,
+   "in": true,
+   "close": 54.880001068115234,
+   "ma200": 59.030575122833255,
+   "gap": -7.0312275394256885
+  },
+  "PAVE": {
+   "armed": false,
+   "in": true,
+   "close": 51.38999938964844,
+   "ma200": 54.77607978820801,
+   "gap": -6.181677132886964
+  },
+  "PPA": {
+   "armed": false,
+   "in": true,
+   "close": 151.63999938964844,
+   "ma200": 168.61572189331054,
+   "gap": -10.06769849990814
+  },
+  "XLV": {
+   "armed": true,
+   "in": true,
+   "close": 179.4199981689453,
+   "ma200": 160.13400985717774,
+   "gap": 12.04365539148653
+  },
+  "NLR": {
+   "armed": false,
+   "in": true,
+   "close": 80.0199966430664,
+   "ma200": 120.56329978942871,
+   "gap": -33.62822950033194
+  }
+ },
+ "in_funds": [
+  "SPYM",
+  "SMH",
+  "CIBR",
+  "AIQ",
+  "PAVE",
+  "PPA",
+  "XLV",
+  "NLR"
+ ],
+ "out_funds": [],
  "fallback": "SGOV",
- "strategy": "index",
- "target": "SGOV",
- "equity": 923.2599969482421,
- "cash": 420.06,
+ "equity": 918.9299926757812,
+ "cash": 14.75,
  "sells": [],
  "buys": [
   {
-   "ticker": "SGOV",
-   "reason": "market storm (S&P 500 at/below its 200-day average): everything waits in SGOV"
+   "ticker": "SPYM",
+   "reason": "8-fund plan: S&P 500, 1/8 of the account"
+  },
+  {
+   "ticker": "SMH",
+   "reason": "8-fund plan: Chips (semiconductors), 1/8 of the account"
+  },
+  {
+   "ticker": "CIBR",
+   "reason": "8-fund plan: Cybersecurity, 1/8 of the account"
+  },
+  {
+   "ticker": "AIQ",
+   "reason": "8-fund plan: AI, 1/8 of the account"
+  },
+  {
+   "ticker": "PAVE",
+   "reason": "8-fund plan: Power & infrastructure, 1/8 of the account"
+  },
+  {
+   "ticker": "PPA",
+   "reason": "8-fund plan: Defense, 1/8 of the account"
+  },
+  {
+   "ticker": "XLV",
+   "reason": "8-fund plan: Health care, 1/8 of the account"
+  },
+  {
+   "ticker": "NLR",
+   "reason": "8-fund plan: Nuclear, 1/8 of the account"
   }
  ],
  "reserve": [],
@@ -18,22 +114,79 @@
  "deposit_candidates": [],
  "earnings_soon": {},
  "storm": true,
- "weather": "STORM: S&P 500 (SPY 689.81) is -5.5% vs its 200-day average (730.29). Money waits in SGOV until SPY closes 2%+ above the average (744.89) 2 days in a row.",
+ "weather": "STORM: S&P 500 (SPY 722.29) is -1.1% vs its 200-day average (730.47). Money waits in SGOV until SPY closes 2%+ above the average (745.08) 2 days in a row.",
  "holdings": [
   {
+   "ticker": "AIQ",
+   "value": 109.76000213623047,
+   "pnl": -1.0499978637695335,
+   "pnl_pct": -0.9475659812016366,
+   "entry_price": 55.405,
+   "mark": 54.880001068115234,
+   "entry_date": "2026-11-23"
+  },
+  {
+   "ticker": "CIBR",
+   "value": 94.87999725341797,
+   "pnl": -0.580002746582025,
+   "pnl_pct": -0.6075872057217945,
+   "entry_price": 95.46,
+   "mark": 94.87999725341797,
+   "entry_date": "2026-11-23"
+  },
+  {
+   "ticker": "NLR",
+   "value": 80.0199966430664,
+   "pnl": -0.7200033569335886,
+   "pnl_pct": -0.8917554581788316,
+   "entry_price": 80.74,
+   "mark": 80.0199966430664,
+   "entry_date": "2026-11-23"
+  },
+  {
+   "ticker": "PAVE",
+   "value": 102.77999877929688,
+   "pnl": -0.5900012207031295,
+   "pnl_pct": -0.5707663932505849,
+   "entry_price": 51.685,
+   "mark": 51.38999938964844,
+   "entry_date": "2026-11-23"
+  },
+  {
+   "ticker": "PPA",
+   "value": 151.63999938964844,
+   "pnl": -0.6600006103515739,
+   "pnl_pct": -0.43335562071672606,
+   "entry_price": 152.3,
+   "mark": 151.63999938964844,
+   "entry_date": "2026-11-23"
+  },
+  {
    "ticker": "SGOV",
-   "value": 503.1999969482422,
-   "pnl": -0.6615030517577907,
-   "pnl_pct": -0.13128668329645957,
-   "entry_price": 100.7723,
+   "value": 100.63999938964844,
+   "pnl": -0.24000061035155795,
+   "pnl_pct": -0.23790702850075132,
+   "entry_price": 100.88,
    "mark": 100.63999938964844,
-   "stop_price": null,
-   "target_price": null,
-   "stop_rule": null,
-   "weak": null,
-   "action": "HOLD",
-   "entry_date": "2026-11-19",
-   "prev_stop": null
+   "entry_date": "2026-11-20"
+  },
+  {
+   "ticker": "SPYM",
+   "value": 85.04000091552734,
+   "pnl": -0.46999908447266137,
+   "pnl_pct": -0.5496422459041765,
+   "entry_price": 85.51,
+   "mark": 85.04000091552734,
+   "entry_date": "2026-11-23"
+  },
+  {
+   "ticker": "XLV",
+   "value": 179.4199981689453,
+   "pnl": -0.20000183105469205,
+   "pnl_pct": -0.1113471946635631,
+   "entry_price": 179.62,
+   "mark": 179.4199981689453,
+   "entry_date": "2026-11-23"
   }
  ],
  "source": "positions.json (synced from IB)"
