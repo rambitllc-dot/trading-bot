@@ -3,68 +3,8 @@
     "asset_type": "shares",
     "ticker": "AIQ",
     "contracts": 2.0,
-    "entry_price": 55.3305,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-23",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "CIBR",
-    "contracts": 1.0,
-    "entry_price": 95.4605,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-23",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "NLR",
-    "contracts": 1.0,
-    "entry_price": 80.7405,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-23",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "PAVE",
-    "contracts": 2.0,
-    "entry_price": 51.6177,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-23",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "PPA",
-    "contracts": 1.0,
-    "entry_price": 152.2955,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-23",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "SGOV",
-    "contracts": 1.0,
-    "entry_price": 101.1752,
-    "note": "Interactive Brokers (synced)",
-    "entry_date": "2026-11-20",
-    "target_price": null,
-    "stop_price": null
-  },
-  {
-    "asset_type": "shares",
-    "ticker": "SPYM",
-    "contracts": 1.0,
-    "entry_price": 85.5085,
-    "note": "Interactive Brokers (synced)",
+    "entry_price": 55.3304,
+    "note": "Interactive Brokers (live from the Mac)",
     "entry_date": "2026-11-23",
     "target_price": null,
     "stop_price": null
@@ -74,7 +14,57 @@
     "ticker": "XLV",
     "contracts": 1.0,
     "entry_price": 179.6155,
-    "note": "Interactive Brokers (synced)",
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-23",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "SPYM",
+    "contracts": 1.0,
+    "entry_price": 85.5085,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-23",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "NLR",
+    "contracts": 1.0,
+    "entry_price": 80.7405,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-23",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "CIBR",
+    "contracts": 1.0,
+    "entry_price": 95.4605,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-23",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "PPA",
+    "contracts": 1.0,
+    "entry_price": 152.2955,
+    "note": "Interactive Brokers (live from the Mac)",
+    "entry_date": "2026-11-23",
+    "target_price": null,
+    "stop_price": null
+  },
+  {
+    "asset_type": "shares",
+    "ticker": "PAVE",
+    "contracts": 2.0,
+    "entry_price": 51.6177,
+    "note": "Interactive Brokers (live from the Mac)",
     "entry_date": "2026-11-23",
     "target_price": null,
     "stop_price": null
@@ -82,6 +72,6 @@
   {
     "asset_type": "cash",
     "amount": 14.75,
-    "note": "IB cash as of 2026-11-23 (synced)"
+    "note": "IB cash, live from the Mac (2026-11-24)"
   }
 ]
