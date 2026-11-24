@@ -46,3 +46,6 @@ time_utc,strategy,side,symbol,qty,price,strategy_cash_after
 2026-11-19 17:01,Anthropic gradual buy ($25 a week for 4 weeks),BUY,ANT,0.23716428,105.37,75.01
 2026-11-20 14:31,S&P 500 trend (200 day),SELL,SPY,0.13125191,711.92,93.95
 2026-11-20 14:31,Tesla trend (200 day),SELL,TSLA,0.21371331,366.10,78.67
+2026-11-24 14:31,RSI dip-buying (S&P 500),SELL,SPY,0.13588848,714.32,97.59
+2026-11-24 14:31,Tesla trend (200 day),BUY,TSLA,0.20372144,384.15,0.41
+2026-11-24 14:31,SpaceX gradual buy ($25 a week for 4 weeks),BUY,SPCX,0.18844640,132.08,0.14
