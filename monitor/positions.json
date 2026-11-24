@@ -2,70 +2,86 @@
   {
     "asset_type": "shares",
     "ticker": "AIQ",
-    "contracts": 2,
-    "entry_price": 55.405,
+    "contracts": 2.0,
+    "entry_price": 55.3305,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "CIBR",
-    "contracts": 1,
-    "entry_price": 95.46,
+    "contracts": 1.0,
+    "entry_price": 95.4605,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "NLR",
-    "contracts": 1,
-    "entry_price": 80.74,
+    "contracts": 1.0,
+    "entry_price": 80.7405,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "PAVE",
-    "contracts": 2,
-    "entry_price": 51.685,
+    "contracts": 2.0,
+    "entry_price": 51.6177,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "PPA",
-    "contracts": 1,
-    "entry_price": 152.3,
+    "contracts": 1.0,
+    "entry_price": 152.2955,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "SGOV",
-    "contracts": 1,
-    "entry_price": 100.88,
+    "contracts": 1.0,
+    "entry_price": 101.1752,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-20",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "SPYM",
-    "contracts": 1,
-    "entry_price": 85.51,
+    "contracts": 1.0,
+    "entry_price": 85.5085,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "shares",
     "ticker": "XLV",
-    "contracts": 1,
-    "entry_price": 179.62,
+    "contracts": 1.0,
+    "entry_price": 179.6155,
+    "note": "Interactive Brokers (synced)",
     "entry_date": "2026-11-23",
-    "note": "8-fund plan, bought by hand Nov 23 (from your IB screenshot)"
+    "target_price": null,
+    "stop_price": null
   },
   {
     "asset_type": "cash",
     "amount": 14.75,
-    "note": "IB cash, Nov 23 9:44 AM (from your IB screenshot)"
+    "note": "IB cash as of 2026-11-23 (synced)"
   }
 ]
