@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 24, 2026 00:31 UTC · Bitcoin $61,252.32 · US stock market closed
+Last update: Nov 24, 2026 01:01 UTC · Bitcoin $61,227.43 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -59,14 +59,14 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 22 | Anthropic buy & hold | Hold | Stock | $83.21 | -$16.79 (-16.8%) | 1 |
 | 23 | Nvidia buy & hold | Hold | Stock | $80.08 | -$19.92 (-19.9%) | 1 |
 | 24 | Tesla trend (200 day) | Static rule | Stock | $78.67 | -$21.33 (-21.3%) | 6 |
-| 25 | Bitcoin buy & hold | Hold | Bitcoin | $78.46 | -$21.54 (-21.5%) | 1 |
+| 25 | Bitcoin buy & hold | Hold | Bitcoin | $78.43 | -$21.57 (-21.6%) | 1 |
 | 26 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $77.83 | -$22.17 (-22.2%) | 10 |
 
 ## Holding vs trading, same asset
 
 | Asset | Buy & hold | With trading rule | Better so far |
 |---|---:|---:|---|
-| Bitcoin | $78.46 | $100.00 | trading |
+| Bitcoin | $78.43 | $100.00 | trading |
 | S&P 500 | $95.46 | $93.95 | holding |
 | Apple | $103.96 | $103.96 | about even |
 | Microsoft | $94.97 | $94.97 | about even |
@@ -76,7 +76,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | SpaceX | $94.05 | $100.00 | trading |
 | Anthropic | $83.21 | $100.00 | trading |
 
-**All together:** $2,440.74 from $2,600 (-159.26)
+**All together:** $2,440.71 from $2,600 (-159.29)
 
 ## What each one is doing
 
@@ -104,7 +104,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **Anthropic buy & hold:** ANT $82.70, cash $0.51. Holding.
 - **Nvidia buy & hold:** NVDA $79.57, cash $0.51. Holding.
 - **Tesla trend (200 day):** cash $78.67. Signal: in the market (price $385.19 vs 200d avg $381.52).
-- **Bitcoin buy & hold:** BTC/USD $76.07, cash $2.39. Holding.
+- **Bitcoin buy & hold:** BTC/USD $76.04, cash $2.39. Holding.
 - **Stock momentum (top 10 of the S&P 500):** MRNA $9.05, SNDK $0.78, LITE $8.09, MU $8.24, DELL $8.17, STX $8.51, WDC $8.49, VLO $8.40, APA $9.09, MPC $8.31, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 
 ## 15-minute Bitcoin betting test (paper)
