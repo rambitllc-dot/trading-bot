@@ -1,7 +1,7 @@
 # Paper trading scoreboard
 
 Each strategy started with **$100** of paper money on 2026-11-02.
-Last update: Nov 25, 2026 12:31 UTC · Bitcoin $58,601.00 · US stock market closed
+Last update: Nov 25, 2026 13:01 UTC · Bitcoin $58,600.00 · US stock market closed
 
 ## SpaceX watch (SPCX)
 
@@ -60,7 +60,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 23 | Anthropic buy & hold | Hold | Stock | $77.92 | -$22.08 (-22.1%) | 1 |
 | 24 | Bitcoin buy & hold | Hold | Bitcoin | $75.17 | -$24.83 (-24.8%) | 1 |
 | 25 | Nvidia buy & hold | Hold | Stock | $74.68 | -$25.32 (-25.3%) | 1 |
-| 26 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $74.38 | -$25.62 (-25.6%) | 10 |
+| 26 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $74.34 | -$25.66 (-25.7%) | 10 |
 
 ## Holding vs trading, same asset
 
@@ -76,7 +76,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | SpaceX | $88.84 | $100.00 | trading |
 | Anthropic | $77.92 | $100.00 | trading |
 
-**All together:** $2,410.26 from $2,600 (-189.74)
+**All together:** $2,410.22 from $2,600 (-189.78)
 
 ## What each one is doing
 
@@ -105,7 +105,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **Anthropic buy & hold:** ANT $77.41, cash $0.51. Holding.
 - **Bitcoin buy & hold:** BTC/USD $72.78, cash $2.39. Holding.
 - **Nvidia buy & hold:** NVDA $74.17, cash $0.51. Holding.
-- **Stock momentum (top 10 of the S&P 500):** MRNA $9.72, SNDK $0.69, LITE $7.17, MU $7.29, DELL $7.33, STX $7.87, WDC $7.82, VLO $8.27, APA $9.27, MPC $8.25, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
+- **Stock momentum (top 10 of the S&P 500):** MRNA $9.72, SNDK $0.64, LITE $7.17, MU $7.29, DELL $7.33, STX $7.87, WDC $7.82, VLO $8.27, APA $9.27, MPC $8.25, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 
 ## 15-minute Bitcoin betting test (paper)
 
