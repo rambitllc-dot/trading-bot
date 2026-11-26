@@ -352,8 +352,30 @@ def themes_round(client, p, state, today):
     acct = client.account()
     equity, cash = float(acct["equity"]), float(acct["cash"])
     share = equity / len(config.THEME_FUNDS)
-    missing = [t for t in in_funds if t not in held and skip.get(t) != today]
-    need = share * len(missing)
+    sgov_val = float(held[safe]["market_value"]) if safe in held and state["bought"].get(safe) != today else 0.0
+    price = getattr(client, "price", None)
+    missing, cost, waiting = [], {}, []
+    for t in in_funds:  # only funds the money can really buy (whole shares, max 35% of the account per share)
+        if t in held or skip.get(t) == today:
+            continue
+        px = price(t) if callable(price) else None
+        if px is None:
+            missing.append(t)
+            cost[t] = share
+        elif px <= share:
+            missing.append(t)
+            cost[t] = share
+        elif px <= equity * config.MAX_POSITION_PCT / 100 and px * 1.01 <= cash - 1 + sgov_val:
+            missing.append(t)
+            cost[t] = px * 1.01
+        else:
+            waiting.append((t, px))
+    if waiting and state.get("themes_waiting_note") != [t for t, _ in waiting]:
+        state["themes_waiting_note"] = [t for t, _ in waiting]  # said once, not every day
+        lines.append("⏳ " + ", ".join(f"{t} (1 share ${px:,.2f})" for t, px in waiting)
+                     + f" can't be bought yet: one share is more than {config.MAX_POSITION_PCT}% of the account. "
+                     f"Its share stays in {safe}; it's bought automatically once the account is big enough.")
+    need = sum(cost.values())
     if missing and need > cash - 1 and safe in held and state["bought"].get(safe) != today:
         px = float(held[safe]["current_price"]) or 100.0  # 2) free money from SGOV for the funds to buy
         qty = min(int(float(held[safe]["qty"])), math.ceil((need - (cash - 1)) / px))
@@ -366,7 +388,7 @@ def themes_round(client, p, state, today):
                 lines.append(f"⚠️ Couldn't sell {safe} to fund the plan: {str(e)[:120]}")
     for t in missing:  # 3) buy each missing fund: 1/8 of the account, whole shares
         cash = float(client.account()["cash"])
-        dollars = round(min(share, cash - 1), 2)
+        dollars = round(min(cost.get(t, share), cash - 1), 2)
         if dollars < 5:
             break
         try:
@@ -386,12 +408,10 @@ def themes_round(client, p, state, today):
         fill = _price(o)
         log("BUY", t, dollars, fill, f"8-fund plan: {config.THEME_FUNDS[t]}")
         lines.append(f"🟢 BUY {t} ({config.THEME_FUNDS[t]}) with ~${dollars:,.2f}" + (f" at {fill:,.2f}" if fill else ""))
-    cash = float(client.account()["cash"])  # 4) spare cash -> SGOV (whole shares)
-    price = getattr(client, "price", None)
+    cash = float(client.account()["cash"])  # 4) spare cash -> SGOV (whole shares); never a fund it can't buy
     px = price(safe) if callable(price) else None
-    if px and cash - 1 >= px and skip.get("park") != today and not [t for t in in_funds if t not in
-                                                                    {x["symbol"] for x in client.positions()}
-                                                                    and skip.get(t) != today]:
+    still = [t for t in missing if t not in {x["symbol"] for x in client.positions()} and skip.get(t) != today]
+    if px and cash - 1 >= px and skip.get("park") != today and not still:
         try:
             o = wait_filled(client, client.buy(safe, round(cash - 1, 2)))
             state["bought"][safe] = today

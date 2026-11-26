@@ -456,3 +456,29 @@ class FundSwitchTest(unittest.TestCase):
         self.assertEqual(funds.decide(fall, True, True)[:2], (True, False))
         back = fall + [106.0, 106.0]                                         # 2 closes 2%+ above: back in
         self.assertEqual(funds.decide(back, True, False)[:2], (True, True))
+
+
+class ThemesNoChurnTest(unittest.TestCase):
+    """A fund too expensive to buy (SMH) must not make the bot sell and rebuy SGOV every day."""
+    def setUp(self):
+        IBTraderTest.setUp(self)
+        config.STRATEGY = "themes"
+        self.addCleanup(setattr, config, "STRATEGY", "stocks")
+
+    tearDown = IBTraderTest.tearDown
+    client = IBTraderTest.client
+
+    def test_unaffordable_fund_leaves_sgov_alone(self):
+        prices = dict(ThemesPlanTest.PRICES, SMH=460.0)
+        held = {t: [1, p] for t, p in prices.items() if t != "SMH"}
+        held["AIQ"], held["PAVE"] = [2, 48.0], [2, 45.0]
+        ib = FakeIB(prices, cash=14.0, holdings=held)
+        autotrade.save_json(autotrade.PLAN_FILE, plan())
+        st = autotrade.load_state()
+        st["bought"]["SGOV"] = "2026-11-02"
+        autotrade.save_json(autotrade.STATE_FILE, st)
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["SGOV"][0], 1)                     # not sold
+        self.assertNotIn("SELL", msg or "")
+        self.assertIn("SMH", msg)                                    # explained once
+        self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")
