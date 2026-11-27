@@ -10,7 +10,14 @@ A plain-English guide to how your trading system works, how to turn it on and of
 
 Every rule below serves these three goals, in this order.
 
-## Current strategy: the 8-fund plan (since Nov 23, 2026)
+## Current strategy: all in Google (since Nov 27, 2026)
+
+- Your choice on Nov 27: sell everything (the 7 funds and SGOV) at the next open and buy as many whole shares of **Alphabet (GOOGL)** as the money allows. Leftover cash stays as cash.
+- **No protection:** no stop, no 200-day switch, no 3-day rule. Google is held whatever happens until you change the plan.
+- New deposits buy more GOOGL when they're enough for a whole share.
+- Settings: `THEME_FUNDS = {"GOOGL": ...}`, `FUND_SWITCH = False`, `PARK_SPARE_CASH = False` in `monitor/config.py`.
+
+## Previous strategy: the 8-fund plan (Nov 23 - 27, 2026)
 
 - The account is split **equally across 8 funds**: SPYM (S&P 500), SMH (chips), CIBR (cybersecurity), AIQ (AI), PAVE (power & infrastructure), PPA (defense), XLV (health care), NLR (nuclear). Whole shares; each fund is bought once and then left alone (no rebalancing).
 - **Each fund has its own 200-day switch**, which turns on the first time that fund closes above its 200-day average. Until then the fund is simply held. Once on: after 2 closes at/below its average, the Mac sells it the next morning and its share goes to **SGOV**; after 2 closes 2%+ above, it's bought back.

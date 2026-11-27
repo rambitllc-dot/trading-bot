@@ -421,6 +421,10 @@ class ThemesPlanTest(unittest.TestCase):
         IBTraderTest.setUp(self)
         config.STRATEGY = "themes"
         self.addCleanup(setattr, config, "STRATEGY", "stocks")
+        self.addCleanup(setattr, config, "THEME_FUNDS", config.THEME_FUNDS)
+        config.THEME_FUNDS = {"SPYM": "S&P 500", "SMH": "Chips", "CIBR": "Cyber", "AIQ": "AI", "PAVE": "Power", "PPA": "Defense", "XLV": "Health", "NLR": "Nuclear"}
+        self.addCleanup(setattr, config, "PARK_SPARE_CASH", config.PARK_SPARE_CASH)
+        config.PARK_SPARE_CASH = True
 
     tearDown = IBTraderTest.tearDown
     client = IBTraderTest.client
@@ -464,6 +468,10 @@ class ThemesNoChurnTest(unittest.TestCase):
         IBTraderTest.setUp(self)
         config.STRATEGY = "themes"
         self.addCleanup(setattr, config, "STRATEGY", "stocks")
+        self.addCleanup(setattr, config, "THEME_FUNDS", config.THEME_FUNDS)
+        config.THEME_FUNDS = {"SPYM": "S&P 500", "SMH": "Chips", "CIBR": "Cyber", "AIQ": "AI", "PAVE": "Power", "PPA": "Defense", "XLV": "Health", "NLR": "Nuclear"}
+        self.addCleanup(setattr, config, "PARK_SPARE_CASH", config.PARK_SPARE_CASH)
+        config.PARK_SPARE_CASH = True
 
     tearDown = IBTraderTest.tearDown
     client = IBTraderTest.client
@@ -481,4 +489,32 @@ class ThemesNoChurnTest(unittest.TestCase):
         self.assertEqual(ib.pos["SGOV"][0], 1)                     # not sold
         self.assertNotIn("SELL", msg or "")
         self.assertIn("SMH", msg)                                    # explained once
+        self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")
+
+
+class SingleStockPlanTest(unittest.TestCase):
+    """THEME_FUNDS = {"GOOGL"}: sell everything else, put it all in GOOGL (whole shares); then hold."""
+    def setUp(self):
+        IBTraderTest.setUp(self)
+        config.STRATEGY = "themes"
+        self.addCleanup(setattr, config, "STRATEGY", "stocks")
+        self.addCleanup(setattr, config, "THEME_FUNDS", config.THEME_FUNDS)
+        config.THEME_FUNDS = {"GOOGL": "Alphabet (Google)"}
+
+    tearDown = IBTraderTest.tearDown
+    client = IBTraderTest.client
+
+    def test_everything_into_googl(self):
+        prices = dict(ThemesPlanTest.PRICES, GOOGL=300.0)
+        held = {t: [1, p] for t, p in prices.items() if t not in ("SMH", "GOOGL")}
+        held["AIQ"], held["PAVE"] = [2, 48.0], [2, 45.0]
+        ib = FakeIB(prices, cash=14.0, holdings=held)
+        st = autotrade.load_state()
+        st["bought"]["SGOV"] = "2026-11-02"
+        autotrade.save_json(autotrade.STATE_FILE, st)
+        autotrade.save_json(autotrade.PLAN_FILE, plan())
+        msg = autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["GOOGL"][0], 2)          # ~$734 of funds + cash -> 2 whole shares at $300
+        self.assertEqual(set(ib.pos), {"GOOGL"})
+        self.assertIn("BUY GOOGL", msg)
         self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")

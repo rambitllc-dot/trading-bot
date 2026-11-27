@@ -411,7 +411,7 @@ def themes_round(client, p, state, today):
     cash = float(client.account()["cash"])  # 4) spare cash -> SGOV (whole shares); never a fund it can't buy
     px = price(safe) if callable(price) else None
     still = [t for t in missing if t not in {x["symbol"] for x in client.positions()} and skip.get(t) != today]
-    if px and cash - 1 >= px and skip.get("park") != today and not still:
+    if getattr(config, "PARK_SPARE_CASH", True) and px and cash - 1 >= px and skip.get("park") != today and not still:
         try:
             o = wait_filled(client, client.buy(safe, round(cash - 1, 2)))
             state["bought"][safe] = today

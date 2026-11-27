@@ -41,6 +41,8 @@ def check(con, asof, bars):
         prev_armed, prev_in = (bool(prev[0]), bool(prev[1])) if prev else (False, True)
         closes = [b[1] for b in (bars or {}).get(t) or []]
         armed, inn, close, ma, gap = decide(closes, prev_armed, prev_in)
+        if not getattr(config, "FUND_SWITCH", True):
+            armed, inn = False, True  # no protection: always held
         con.execute("INSERT OR REPLACE INTO fund_switch VALUES (?,?,?,?,?,?)", (asof, t, int(armed), int(inn), close, ma))
         out[t] = {"armed": armed, "in": inn, "close": close, "ma200": ma, "gap": gap}
     con.commit()

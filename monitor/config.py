@@ -100,8 +100,12 @@ STRATEGY = "themes"
 # THEMES plan (your choice, Nov 23 2026): the account split equally across these 8 funds, bought right away. Each
 # fund gets its own 200-day switch (monitor/funds.py), armed once that fund has closed above its 200-day average;
 # then it moves to SGOV after 2 closes at/below the average and back after 2 closes 2%+ above it.
-THEME_FUNDS = {"SPYM": "S&P 500", "SMH": "Chips (semiconductors)", "CIBR": "Cybersecurity", "AIQ": "AI",
-               "PAVE": "Power & infrastructure", "PPA": "Defense", "XLV": "Health care", "NLR": "Nuclear"}
+# Nov 27 2026, your choice: the whole account in Alphabet (Google), held with no protection (no switch).
+# The 8-fund plan (Nov 23-27) was: {"SPYM": "S&P 500", "SMH": "Chips (semiconductors)", "CIBR": "Cybersecurity",
+#   "AIQ": "AI", "PAVE": "Power & infrastructure", "PPA": "Defense", "XLV": "Health care", "NLR": "Nuclear"}
+THEME_FUNDS = {"GOOGL": "Alphabet (Google)"}
+FUND_SWITCH = False  # True = each holding gets its own 200-day switch (monitor/funds.py); False = just hold
+PARK_SPARE_CASH = False  # True = spare cash goes into SGOV; False = it stays as cash (all-in Google, Nov 27)
 # The fund the index plan holds when the switch is "in". Nov 19 2026, your choice after the test: SSO (2x the S&P 500's
 # daily move): +14.3% a year since 1993 in the test (real fund ~0.7%/yr less) vs +10.6% for holding the S&P, worst
 # drop about -36% (S&P alone: -55%); it can lag the S&P for a year or more in choppy markets (2022: -9%/yr).
