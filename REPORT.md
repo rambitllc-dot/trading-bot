@@ -60,7 +60,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | 23 | Tesla trend (200 day) | Static rule | Stock | $80.52 | -$19.48 (-19.5%) | 8 |
 | 24 | Stock momentum (top 10 of the S&P 500) | Monthly pick | Stock | $76.96 | -$23.04 (-23.0%) | 10 |
 | 25 | Bitcoin buy & hold | Hold | Bitcoin | $76.41 | -$23.59 (-23.6%) | 1 |
-| 26 | Nvidia buy & hold | Hold | Stock | $73.20 | -$26.80 (-26.8%) | 1 |
+| 26 | Nvidia buy & hold | Hold | Stock | $73.12 | -$26.88 (-26.9%) | 1 |
 
 ## Holding vs trading, same asset
 
@@ -70,13 +70,13 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 | S&P 500 | $96.17 | $93.95 | holding |
 | Apple | $106.60 | $106.60 | about even |
 | Microsoft | $94.92 | $94.92 | about even |
-| Nvidia | $73.20 | $95.80 | trading |
+| Nvidia | $73.12 | $95.80 | trading |
 | Amazon | $101.81 | $100.33 | holding |
 | Tesla | $98.22 | $80.52 | holding |
 | SpaceX | $93.95 | $100.00 | trading |
 | Anthropic | $87.28 | $100.00 | trading |
 
-**All together:** $2,451.10 from $2,600 (-148.90)
+**All together:** $2,451.01 from $2,600 (-148.99)
 
 ## What each one is doing
 
@@ -105,7 +105,7 @@ You'll get a GitHub notification for: a move of 5% or more in a day, crossing th
 - **Tesla trend (200 day):** cash $80.52. Signal: in cash (price $380.20 vs 200d avg $381.13).
 - **Stock momentum (top 10 of the S&P 500):** MRNA $9.77, SNDK $0.75, LITE $7.58, MU $7.54, DELL $7.70, STX $8.32, WDC $8.34, VLO $8.39, APA $9.52, MPC $8.36, cash $0.70. Holding APA, DELL, LITE, MPC, MRNA, MU, SNDK, STX, VLO, WDC until next month's scan.
 - **Bitcoin buy & hold:** BTC/USD $74.02, cash $2.39. Holding.
-- **Nvidia buy & hold:** NVDA $72.69, cash $0.51. Holding.
+- **Nvidia buy & hold:** NVDA $72.61, cash $0.51. Holding.
 
 ## 15-minute Bitcoin betting test (paper)
 
