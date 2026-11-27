@@ -518,3 +518,11 @@ class SingleStockPlanTest(unittest.TestCase):
         self.assertEqual(set(ib.pos), {"GOOGL"})
         self.assertIn("BUY GOOGL", msg)
         self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")
+
+
+    def test_new_deposit_buys_more_googl(self):
+        ib = FakeIB({"GOOGL": 300.0, "SGOV": 100.6}, cash=350.0, holdings={"GOOGL": [3, 290.0]})
+        autotrade.save_json(autotrade.PLAN_FILE, plan())
+        autotrade.execute(client=self.client(ib))
+        self.assertEqual(ib.pos["GOOGL"][0], 4)
+        self.assertEqual(autotrade.execute(client=self.client(ib)), "8-fund plan: nothing to do")

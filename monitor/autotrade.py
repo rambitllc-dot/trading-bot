@@ -408,6 +408,20 @@ def themes_round(client, p, state, today):
         fill = _price(o)
         log("BUY", t, dollars, fill, f"8-fund plan: {config.THEME_FUNDS[t]}")
         lines.append(f"🟢 BUY {t} ({config.THEME_FUNDS[t]}) with ~${dollars:,.2f}" + (f" at {fill:,.2f}" if fill else ""))
+    if len(config.THEME_FUNDS) == 1 and in_funds:  # single holding: new money buys more of it (whole shares)
+        t = in_funds[0]
+        cash = float(client.account()["cash"])
+        px = price(t) if callable(price) else None
+        if t in {x["symbol"] for x in client.positions()} and px and cash - 1 >= px and skip.get("more-" + t) != today:
+            try:
+                o = wait_filled(client, client.buy(t, round(cash - 1, 2)))
+                state["bought"][t] = today
+                log("BUY", t, cash - 1, _price(o), "new money: more of the single holding")
+                lines.append(f"🟢 BUY more {t} with ~${cash - 1:,.2f} (new money)")
+            except AlpacaError as e:
+                skip["more-" + t] = today
+                if "whole share" not in str(e):
+                    lines.append(f"⚠️ Couldn't buy more {t}: {str(e)[:120]}")
     cash = float(client.account()["cash"])  # 4) spare cash -> SGOV (whole shares); never a fund it can't buy
     px = price(safe) if callable(price) else None
     still = [t for t in missing if t not in {x["symbol"] for x in client.positions()} and skip.get(t) != today]
