@@ -1,22 +1,16 @@
 {
- "asof": "2026-11-18",
+ "asof": "2026-11-27",
  "dates": {
-  "AIZ": null,
-  "BDX": null,
-  "BEN": "2027-01-29",
-  "CAH": "2027-02-04",
+  "AIQ": null,
+  "AIZ": "2027-02-09",
+  "BIIB": "2027-02-05",
+  "CIBR": null,
   "CPAY": "2027-02-03",
-  "CRL": null,
-  "CSX": "2027-01-28",
-  "DGX": null,
-  "DRI": "2026-12-18",
-  "FAST": "2027-01-19",
-  "GWW": "2027-02-02",
-  "JNJ": "2027-01-26",
-  "KO": null,
-  "MAR": null,
-  "MSI": null,
-  "TRGP": null,
-  "VTRS": null
+  "EG": "2027-02-03",
+  "GILD": "2027-02-09",
+  "MSI": "2027-02-09",
+  "NLR": null,
+  "PAVE": null,
+  "PPA": null
  }
 }

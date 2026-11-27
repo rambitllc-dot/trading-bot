@@ -1,0 +1,108 @@
+IB sync: 8 position(s) as of 2026-11-26 (AIQ, CIBR, NLR, PAVE, PPA, SGOV, SPYM, XLV), cash 13.33; 0 new trade(s) saved
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"No fundamentals data found for symbol: AIQ"}}}
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"No fundamentals data found for symbol: CIBR"}}}
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"No fundamentals data found for symbol: NLR"}}}
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"No fundamentals data found for symbol: PAVE"}}}
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"No fundamentals data found for symbol: PPA"}}}
+Portfolio as of 2026-11-27
+Value $934.22 · cost $923.08 · P&L $11.14 (+1.2%) · net delta 10 shares · theta $0.00/day · 9/9 positions priced
+
+- AIQ shares x2: mark $55.48, value $110.96, P&L $0.30 (+0.3%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's only up +0.3% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- CIBR shares x1: mark $97.69, value $97.69, P&L $2.23 (+2.3%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's only up +2.3% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- NLR shares x1: mark $80.60, value $80.60, P&L -$0.14 (-0.2%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's losing -0.2% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- PAVE shares x2: mark $52.30, value $104.60, P&L $1.36 (+1.3%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's only up +1.3% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- PPA shares x1: mark $156.38, value $156.38, P&L $4.08 (+2.7%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's only up +2.7% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- SGOV shares x1: mark $100.71, value $100.71, P&L -$1.52 (-1.5%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- SPYM shares x1: mark $85.75, value $85.75, P&L $0.24 (+0.3%). No target or stop set. YOUR PLAN: HOLD (no target or stop set).
+- XLV shares x1: mark $184.20, value $184.20, P&L $4.58 (+2.6%). No target or stop set. YOUR PLAN: SELL (STALLED: 4 business days since you bought it and it's only up +2.6% (needs more than +3% after 3 days); the money moves to a stock that is rising).
+- CASH shares x13.33: mark $1.00, value $13.33, P&L $0.00 (+0.0%). Cash. YOUR PLAN: HOLD (cash).
+
+ANALYTICS
+Net delta 10 shares-equivalent · daily theta $0.00 (what the book loses per day if nothing moves) · net vega $0.00 per IV point
+
+By ticker: XLV 20%, PPA 17%, AIQ 12%, PAVE 11%, SGOV 11%, CIBR 10%, SPYM 9%, NLR 9%, CASH 1%
+By sector: Technology (ETF) 22%, Health (ETF) 20%, Industrials (ETF) 17%, Infrastructure (ETF) 11%, Ultrashort Bond (ETF) 11%, Large Blend (ETF) 9%, Fund (ETF) 9%, Cash 1%
+
+Flags: none
+
+MARKET ENVIRONMENT (macro gate)
+48/100 · Mixed (vix level 58, vix percentile 12, term structure 34, breadth 64, credit 62)
+
+NEWS (Claude summaries, facts only)
+- AIQ [neutral]: No headlines in the last 3 days.
+- CIBR [neutral]: Headlines from GuruFocus report that ETFs bought about $87.4 million of Cisco stock on Nov. 25 (50 buyers vs. 19 sellers) and $63.9 million on Nov. 24, and about $17.9 million of Accenture stock on Nov. 26. A 24/7 Wall St. article notes that three cybersecurity ETFs beat the S&P 500 last year, though one fell behind over five years because of differences in how funds define security companies. None of the headlines mention CIBR's price, holdings changes, or any scheduled event.
+  Drivers: ETF buying of Cisco stock; ETF buying of Accenture stock; Cited security spending growth; Differences in how cybersecurity funds define eligible companies
+- NLR [neutral]: A Zacks article dated 2026-11-25 argues that nuclear energy ETFs remain worth considering despite a challenging 2026. It attributes a strengthened long-term growth outlook to energy security concerns and emerging military and maritime applications for nuclear energy. The headline reports analysis and commentary rather than a specific company event.
+  Drivers: energy security concerns; emerging military and maritime applications; long-term growth outlook for nuclear energy; challenging 2026 performance
+- PAVE [neutral]: No headlines in the last 3 days.
+- PPA [neutral]: A Simply Wall St. article discusses Boeing following a new jet order and notes that its debt is not well covered by operating cash flow. It argues that owning a fund holding several businesses, rather than Boeing alone, reduces single-company concentration. The headline does not mention PPA or report any PPA-specific event.
+  Drivers: Boeing new jet order; Boeing debt not well covered by operating cash flow; Single-stock concentration versus diversified fund holdings
+- SGOV [neutral]: The headlines are general market commentary rather than company news about SGOV. One reports that new U.S. tariff proposals could fuel inflation and keep interest rates elevated in 2027, and another asks whether ultra-short-term Treasury ETFs are attractive amid persistent inflation, elevated rates, and stock market volatility. None reports a specific event for SGOV or its holding.
+  Drivers: proposed U.S. tariffs; persistent inflation; elevated interest rates; stock market volatility
+- SPYM [neutral]: A GuruFocus report dated 2026-11-25 says the State Street SPDR Portfolio S&P 500 ETF (SPYM) bought $14.2 million more of Apple on Monday. The report says the fund added $174.1 million across 502 positions, led by Apple, Nvidia and Microsoft, with no sales.
+  Drivers: Fund added $174.1M across 502 positions; Apple, Nvidia and Microsoft led the buying; No sales reported; Mixed overall market environment
+- XLV [neutral]: Healthcare stocks edged higher on Friday, Nov. 27, in both pre-bell and afternoon trading, while the broad market rallied on a technology rebound. Recent reports show the State Street Health Care Select Sector SPDR (XLV) sold $627.4 million of stock on Nov. 24, cutting all 60 positions, and ETFs were net sellers of Eli Lilly and AbbVie that day.
+  Drivers: slight gains in healthcare stocks on Friday; XLV fund sold holdings on Nov. 24; ETF net selling of LLY and ABBV on Nov. 24; GLP-1 coverage discussion in a Simply Wall St. article
+Claude cost this run: $0.0019
+
+OPPORTUNITIES (candidates to research, not recommendations)
+Scanned 529 of 531 stocks.
+- Watchlist SPCX 133.59: 21.4% above your buy level -> YOUR PLAN: WAIT
+- Watchlist ANT -: no price data (not trading yet?)
+- Watchlist PLTR 172.17: watching (no buy level set) -> YOUR PLAN: WAIT
+Momentum leaders: MRNA (+765% over 12 months), SNDK (+413% over 12 months), MU (+338% over 12 months), DELL (+296% over 12 months), LITE (+214% over 12 months)
+Pullbacks in uptrends: SJM (+13% above its 200-day average, RSI-2 4 after a sharp drop), MDT (+10% above its 200-day average, RSI-2 5 after a sharp drop), HAS (+17% above its 200-day average, RSI-2 5 after a sharp drop), WST (+12% above its 200-day average, RSI-2 6 after a sharp drop)
+New 52-week highs: MSI (new 52-week high at 544.83), AIZ (new 52-week high at 328.18), EG (new 52-week high at 436.00), DRI (new 52-week high at 243.26), AAPL (new 52-week high at 358.54)
+Unusual volume: none today
+  MRNA [neutral]: Moderna began a landmark early-stage trial in Uganda of its experimental Ebola vaccine, the first evaluation in children from age 1. Stocktwits reports MRNA is on track for a fourth straight monthly gain, and Simply Wall St cites significant insider selling over the past three months. Invesco S&P 500 Equal Weight (RSP) reported buying $2.7 million more Moderna on Nov. 25.
+  SNDK [positive]: SanDisk (SNDK) shares rose roughly 13% to 16% on November 27, 2026, as memory stocks rebounded after losing nearly half their value over the prior month. The move followed a Kioxia and Nvidia proof of concept that used 144 Kioxia SSDs in an Nvidia GB200 rack to reach about 1.1 petabytes of extended memory. Broader U.S. indexes also rose in the post-Thanksgiving session.
+  MU [neutral]: Micron (MU) shares rose 4.29% on November 27, 2026, in a broader chip-sector rebound after a volatile stretch in which the Nasdaq-100 briefly fell about 20% below its October 6 record close. Headlines cite 26 take-or-pay customer deals worth $32 billion in cash and commitments, and a CEO view that memory shortages could worsen in 2028, while TrendForce expects memory prices to start falling in early 2028.
+  DELL [positive]: Dell Technologies stock rose after strong fiscal Q3 results, with revenue doubling to $54.9 billion and a raised fiscal 2027 outlook of $202 billion alongside a new $25 billion buyback. The company cited a $132.3 billion AI backlog, while UBS said the results did not ease concerns about the durability of AI spending. Reports also flagged new U.S. semiconductor export controls on Nvidia chips in Asia as a regulatory uncertainty for AI server makers like Dell.
+  LITE [neutral]: Lumentum (LITE) rose along with other optical stocks after a broad AI-related selloff on Wednesday, with Applied Optoelectronics and Lumentum up 7% in a rebound. Coverage notes the stock is up about 55% over the past year on AI-driven optical networking demand, while also citing rising costs, a premium valuation, and uncertainty tied to an acquisition, including a reference to a $115 billion all-stock bet on Lumentum by Marvell.
+  SPCX [positive]: SpaceX (SPCX) shares rose on November 27, 2026, after the FCC approved the Starmind plan for one million AI satellites, which opens a regulatory path to orbital data centers with a first launch targeted for Q3 2027. Shares also climbed after Elon Musk expanded his pledge to give two shares to each American child with an active Trump Account. A Yahoo Finance report noted the stock was still trading below its $135 IPO price.
+  PLTR [positive]: Palantir shares rose about 3.72% after reports of a five-year, roughly $300 million software contract with Poland's defense ministry, which would give Poland's armed forces access to Palantir's Maven Smart System. Other coverage noted the company's raised 2026 growth outlook of 91% and a $122M sale of PLTR shares by Peter Thiel.
+
+AUTO LEVELS (3 x ATR trailing stop, 2:1 target, from the first tracked day)
+- AIQ: stop 52.98 · target 68.34 · typical daily move 2.14
+- CIBR: stop 93.29 · target 121.82 · typical daily move 4.02
+- NLR: stop 77.11 · target 103.06 · typical daily move 3.74
+- PAVE: stop 49.95 · target 61.14 · typical daily move 1.47
+- PPA: stop 149.34 · target 181.39 · typical daily move 4.17
+- XLV: stop 176.41 · target 207.03 · typical daily move 3.80
+
+ROTATION (follow the money)
+- #1 in swap line: NLR, rank #515 of 522, score 12, WEAKENING, LOSING -0.2%
+- #2 in swap line: AIQ, rank #428 of 522, score 39, WEAKENING
+- #3 in swap line: PAVE, rank #432 of 522, score 38, WEAKENING
+- #4 in swap line: CIBR, rank #138 of 522, score 62, WEAKENING
+- #5 in swap line: PPA, rank #391 of 522, score 42
+- #6 in swap line: XLV, rank #162 of 522, score 60
+Strongest stocks you don't own: TGT (92), MSI (83), AIZ (81), CPAY (81), GILD (81)
+Status: 8-fund plan: GOOGL held (switch not armed yet), -18.1% vs 200-day
+
+AUTOPILOT (practice account): off (add ALPACA_AUTO_KEY / ALPACA_AUTO_SECRET to turn on the practice autopilot)
+
+WINS & LOSSES
+Locked-in (realized) -132.26 from 9 win(s) / 25 loss(es), win rate 26%; fees 34.52
+Open (not locked in) +11.14 · total -121.12
+
+SWAP SCORECARD (bought stock vs sold stock since the idea; + means the swap helped)
+- 2026-11-05 ASML -> MRK [yes]: -1.6 pts after 22 day(s)
+- 2026-11-05 DIS -> MRNA [yes]: -13.9 pts after 22 day(s)
+- 2026-11-05 LRCX -> TXN [yes]: -2.7 pts after 22 day(s)
+- 2026-11-05 QQQ -> CNC [yes]: -11.9 pts after 22 day(s)
+- 2026-11-10 MRNA -> TGT [yes]: +15.1 pts after 17 day(s)
+- 2026-11-12 CNC -> BEN [yes]: +1.7 pts after 15 day(s)
+- 2026-11-12 MRK -> VTRS [yes]: +2.2 pts after 15 day(s)
+- 2026-11-16 TGT -> HUM [partly]: -19.4 pts after 11 day(s)
+- 2026-11-18 VTRS -> CPAY [partly]: +0.5 pts after 9 day(s)
+
+YOU vs S&P 500 (same buys and sells made in SPY, since 2026-03-27): your stocks 934.22 vs 1,037.43 -> -103.21
+4 of 9 swap ideas are ahead; average edge -3.3 pts
+
+ALERTS (4)
+- [warn] NEW AIQ WEAKENING: closed 55.48, below its 50-day average 61.67. Often a top-ranked stock rolling over; it's #2 in line for the next swap. -> YOUR PLAN: WEAK
+- [warn] NEW CIBR WEAKENING: closed 97.69, below its 50-day average 100.65. Often a top-ranked stock rolling over; it's #4 in line for the next swap. -> YOUR PLAN: WEAK
+- [warn] NEW NLR WEAKENING: closed 80.60, below its 50-day average 94.61. Often a top-ranked stock rolling over; it's #1 in line for the next swap. -> YOUR PLAN: WEAK
+- [warn] NEW PAVE WEAKENING: closed 52.30, below its 50-day average 52.84. Often a top-ranked stock rolling over; it's #3 in line for the next swap. -> YOUR PLAN: WEAK
+Notifier: sent

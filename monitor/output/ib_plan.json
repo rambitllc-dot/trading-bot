@@ -1,112 +1,57 @@
 {
- "id": "2026-11-26T21:32:56Z",
- "asof": "2026-11-26",
+ "id": "2026-11-27T21:32:44Z",
+ "asof": "2026-11-27",
  "strategy": "themes",
  "funds": {
-  "SPYM": {
+  "GOOGL": {
    "armed": false,
    "in": true,
-   "close": 84.37000274658203,
-   "ma200": 85.99435165405274,
-   "gap": -1.888901859514347
-  },
-  "SMH": {
-   "armed": false,
-   "in": true,
-   "close": 422.4599914550781,
-   "ma200": 525.6521005249024,
-   "gap": -19.63125591370781
-  },
-  "CIBR": {
-   "armed": true,
-   "in": true,
-   "close": 94.83000183105469,
-   "ma200": 85.4048399925232,
-   "gap": 11.035863821484382
-  },
-  "AIQ": {
-   "armed": false,
-   "in": true,
-   "close": 53.47999954223633,
-   "ma200": 59.058675117492676,
-   "gap": -9.445988356762157
-  },
-  "PAVE": {
-   "armed": false,
-   "in": true,
-   "close": 51.380001068115234,
-   "ma200": 54.73714391708374,
-   "gap": -6.133207925597894
-  },
-  "PPA": {
-   "armed": false,
-   "in": true,
-   "close": 152.97000122070312,
-   "ma200": 168.38179290771484,
-   "gap": -9.152884893830816
-  },
-  "XLV": {
-   "armed": true,
-   "in": true,
-   "close": 183.67999267578125,
-   "ma200": 160.4368441772461,
-   "gap": 14.487413173533126
-  },
-  "NLR": {
-   "armed": false,
-   "in": true,
-   "close": 77.68000030517578,
-   "ma200": 119.86969978332519,
-   "gap": -35.19630027806103
+   "close": 274.9599914550781,
+   "ma200": 335.8841963195801,
+   "gap": -18.138455316467194
   }
  },
  "in_funds": [
-  "SPYM",
-  "SMH",
-  "CIBR",
-  "AIQ",
-  "PAVE",
-  "PPA",
-  "XLV",
-  "NLR"
+  "GOOGL"
  ],
  "out_funds": [],
  "fallback": "SGOV",
- "equity": 917.2600003051758,
+ "equity": 934.2199993896485,
  "cash": 13.33,
- "sells": [],
- "buys": [
-  {
-   "ticker": "SPYM",
-   "reason": "8-fund plan: S&P 500, 1/8 of the account"
-  },
-  {
-   "ticker": "SMH",
-   "reason": "8-fund plan: Chips (semiconductors), 1/8 of the account"
-  },
-  {
-   "ticker": "CIBR",
-   "reason": "8-fund plan: Cybersecurity, 1/8 of the account"
-  },
-  {
-   "ticker": "AIQ",
-   "reason": "8-fund plan: AI, 1/8 of the account"
-  },
+ "sells": [
   {
    "ticker": "PAVE",
-   "reason": "8-fund plan: Power & infrastructure, 1/8 of the account"
+   "reason": "not part of the 8-fund plan"
+  },
+  {
+   "ticker": "SPYM",
+   "reason": "not part of the 8-fund plan"
   },
   {
    "ticker": "PPA",
-   "reason": "8-fund plan: Defense, 1/8 of the account"
+   "reason": "not part of the 8-fund plan"
   },
   {
-   "ticker": "XLV",
-   "reason": "8-fund plan: Health care, 1/8 of the account"
+   "ticker": "AIQ",
+   "reason": "not part of the 8-fund plan"
   },
   {
    "ticker": "NLR",
-   "reason": "8-fund plan: Nuclear, 1/8 of the account"
+   "reason": "not part of the 8-fund plan"
+  },
+  {
+   "ticker": "XLV",
+   "reason": "not part of the 8-fund plan"
+  },
+  {
+   "ticker": "CIBR",
+   "reason": "not part of the 8-fund plan"
+  }
+ ],
+ "buys": [
+  {
+   "ticker": "GOOGL",
+   "reason": "8-fund plan: Alphabet (Google), 1/1 of the account"
   }
  ],
  "reserve": [],
@@ -114,78 +59,78 @@
  "deposit_candidates": [],
  "earnings_soon": {},
  "storm": true,
- "weather": "STORM: S&P 500 (SPY 716.70) is -1.9% vs its 200-day average (730.77). Money waits in SGOV until SPY closes 2%+ above the average (745.39) 2 days in a row.",
+ "weather": "STORM: S&P 500 (SPY 728.32) is -0.4% vs its 200-day average (730.98). Money waits in SGOV until SPY closes 2%+ above the average (745.60) 2 days in a row.",
  "holdings": [
   {
    "ticker": "AIQ",
-   "value": 106.95999908447266,
-   "pnl": -3.701000915527345,
-   "pnl_pct": -3.344449187633715,
+   "value": 110.95999908447266,
+   "pnl": 0.2989990844726549,
+   "pnl_pct": 0.2701937308289776,
    "entry_price": 55.3305,
-   "mark": 53.47999954223633,
+   "mark": 55.47999954223633,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "CIBR",
-   "value": 94.83000183105469,
-   "pnl": -0.6304981689453086,
-   "pnl_pct": -0.6604806898615748,
+   "value": 97.69000244140625,
+   "pnl": 2.229502441406254,
+   "pnl_pct": 2.335523532148118,
    "entry_price": 95.4605,
-   "mark": 94.83000183105469,
+   "mark": 97.69000244140625,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "NLR",
-   "value": 77.68000030517578,
-   "pnl": -3.060499694824216,
-   "pnl_pct": -3.7905384470299492,
+   "value": 80.5999984741211,
+   "pnl": -0.14050152587890352,
+   "pnl_pct": -0.1740161701734613,
    "entry_price": 80.7405,
-   "mark": 77.68000030517578,
+   "mark": 80.5999984741211,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "PAVE",
-   "value": 102.76000213623047,
-   "pnl": -0.47539786376952975,
-   "pnl_pct": -0.4604988829118013,
+   "value": 104.5999984741211,
+   "pnl": 1.3645984741210953,
+   "pnl_pct": 1.3218319240503695,
    "entry_price": 51.6177,
-   "mark": 51.380001068115234,
+   "mark": 52.29999923706055,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "PPA",
-   "value": 152.97000122070312,
-   "pnl": 0.6745012207031209,
-   "pnl_pct": 0.44288979037668275,
+   "value": 156.3800048828125,
+   "pnl": 4.084504882812496,
+   "pnl_pct": 2.681960322407751,
    "entry_price": 152.2955,
-   "mark": 152.97000122070312,
+   "mark": 156.3800048828125,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "SGOV",
-   "value": 100.68000030517578,
-   "pnl": -1.5532996948242186,
-   "pnl_pct": -1.5193676569417387,
+   "value": 100.70999908447266,
+   "pnl": -1.5233009155273436,
+   "pnl_pct": -1.4900242049580161,
    "entry_price": 102.2333,
-   "mark": 100.68000030517578,
+   "mark": 100.70999908447266,
    "entry_date": "2026-11-25"
   },
   {
    "ticker": "SPYM",
-   "value": 84.37000274658203,
-   "pnl": -1.1384972534179667,
-   "pnl_pct": -1.3314433692766996,
+   "value": 85.75,
+   "pnl": 0.24150000000000205,
+   "pnl_pct": 0.28242806270721865,
    "entry_price": 85.5085,
-   "mark": 84.37000274658203,
+   "mark": 85.75,
    "entry_date": "2026-11-23"
   },
   {
    "ticker": "XLV",
-   "value": 183.67999267578125,
-   "pnl": 4.064492675781253,
-   "pnl_pct": 2.2628852608941057,
+   "value": 184.1999969482422,
+   "pnl": 4.58449694824219,
+   "pnl_pct": 2.552394948232302,
    "entry_price": 179.6155,
-   "mark": 183.67999267578125,
+   "mark": 184.1999969482422,
    "entry_date": "2026-11-23"
   }
  ],
